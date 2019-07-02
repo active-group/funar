@@ -1,0 +1,21 @@
+Name:		BASIC
+Version:	0.1.5.0
+License:	BSD3
+Author:		Lennart Augustsson
+Maintainer:	Lennart Augustsson
+Category:	Language
+Synopsis:	Embedded BASIC
+Description:	A simplified version of the original BASIC embedded in Haskell.
+Build-type:	Simple
+Build-Depends:	base, containers, random, timeit
+Exposed-modules:	Language.BASIC
+Other-modules:
+	Language.BASIC.Interp
+	Language.BASIC.Parser
+	Language.BASIC.Types
+Extra-source-files:
+	examples/Func.hs
+	examples/Hello.hs
+	examples/HiLo.hs
+	examples/Infinity.hs
+	examples/Makefile
