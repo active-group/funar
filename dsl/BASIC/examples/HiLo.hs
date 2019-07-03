@@ -2,9 +2,10 @@
 {-# LANGUAGE ExtendedDefaultRules, OverloadedStrings #-}
 module HiLo where
 import Language.BASIC
+import Prelude hiding ((==),(<),(>),(<=),(>=),(^),(<>))
 
 main :: IO ()
-main = runBASIC' $ do
+main = runBASIC $ do
     10 GOSUB 1000
     20 PRINT "* Welcome to HiLo *"
     30 GOSUB 1000
