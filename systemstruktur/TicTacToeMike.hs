@@ -106,3 +106,8 @@ gameTree position =
   Node position
     (map gameTree (moves position))
 
+putAt :: Position -> Int -> NoCro -> Position
+putAt position index nocro =
+  let lis = positionToList position
+  in listToPosition ((take index lis) ++ [nocro] ++ (drop (index + 1) lis))
+
