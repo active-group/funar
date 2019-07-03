@@ -21,6 +21,14 @@ showNoCro X = "X"
 showNoCro O = "O"
 showNoCro Empty = " "
 
+showPosition :: Position -> String
+showPosition (Position ul um ur ml mm  mr ll lm lr) =
+  (showNoCro ul) ++ " | " ++ (showNoCro um) ++ " | " ++ (showNoCro ur) ++
+  "\n----------\n" ++
+  (showNoCro ml) ++ " | " ++ (showNoCro mm) ++ " | " ++ (showNoCro mr) ++
+  "\n----------\n" ++
+  (showNoCro ll) ++ " | " ++ (showNoCro lm) ++ " | " ++ (showNoCro lr)
+
 data Player = PX | PO
 
 -- find nocros along winning axes of TTT
