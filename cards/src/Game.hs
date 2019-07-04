@@ -101,3 +101,139 @@ rotateTo y [] = undefined
 
 -- * Spiellogik
 
+type PlayerHands = Map Player Hand
+-- eingezogene Karten
+type PlayerStacks = Map Player Stack
+
+type Stack = Set Card
+
+data GameState =
+  GameState { 
+    gameStatePlayers :: [Player],
+    gameStateHands :: PlayerHands,
+    gameStateStacks :: PlayerStacks,
+    gameStateTrick :: Trick
+  }
+
+emptyGameState :: [Player] -> GameState
+emptyGameState players =
+  GameState players
+            Map.empty 
+            (Map.fromList (map (\ player -> (player, Set.empty)) players))
+            emptyTrick
+
+-- ist das Spiel noch am Anfang?
+gameAtBeginning :: GameState -> Bool
+gameAtBeginning gameState =
+  trickEmpty (gameStateTrick gameState)
+    && all null (Map.elems (gameStateStacks gameState))
+
+-- wer ist als nächstes dran?
+nextPlayer :: GameState -> Player
+nextPlayer gameState =
+  head (gameStatePlayers gameState)
+
+-- ist es zulässig eine Karte zu spielen?
+playValid :: GameState -> Player -> Card -> Bool
+playValid gameState player card =
+  let hand = gameStateHands gameState ! player
+      trick = gameStateTrick gameState
+  in legalCard card hand trick
+      && if gameAtBeginning gameState
+         then card == twoOfClubs
+         else nextPlayer gameState == player
+
+-- ist das Spiel vorbei?
+gameOver :: GameState -> Bool
+gameOver state = all isHandEmpty (Map.elems (gameStateHands state))
+
+-- ist die Runde vorbei?
+turnOver :: GameState -> Bool
+turnOver state = length (gameStatePlayers state) == trickSize (gameStateTrick state)
+
+-- Wert eines Stapels
+stackScore :: Stack -> Integer
+stackScore stack = sum (map cardScore (Set.toList stack))
+
+-- Wer hat gewonnen?
+gameWinner :: GameState -> Player
+gameWinner state =
+  let playerScores = fmap stackScore (gameStateStacks state)
+      cmp (_, score1) (_, score2) = compare score1 score2
+  in fst (Foldable.minimumBy cmp (Map.toList playerScores))
+
+data GameCommand =
+    -- kann jeder Spieler! :-(
+    DealHands PlayerHands
+  | PlayCard Player Card
+  deriving Show
+
+data GameEvent =
+     LegalCardPlayed Player Card
+   | IllegalCardPlayed Player Card
+   -- bekommt jeder Spieler! :-(
+   | HandDealt Player Hand
+   | TrickTaken Player Trick
+   | PlayerTurnChanged Player -- zweifelhaft
+   | GameEnded Player
+   deriving Show
+
+-- Karte ausspielen
+takeCard :: PlayerHands -> Player -> Card -> PlayerHands
+takeCard playerHand player card =
+  Map.alter (fmap (removeCard card)) player playerHand
+
+-- Karte zum Stapel hinzufügen
+addToStack :: PlayerStacks -> Player -> [Card] -> PlayerStacks
+addToStack playerStacks player cards =
+  Map.alter (fmap (Set.union (Set.fromList cards))) player playerStacks
+
+-- Ereignis in den Zustand einarbeiten
+processGameEvent :: GameEvent -> GameState -> GameState
+-- processGameEvent event state | trace ("processGameEvent " ++ show state ++ " " ++ show event) False = undefined
+processGameEvent (HandDealt player hand) state =
+  state { gameStateHands = Map.insert player hand (gameStateHands state),
+          gameStateTrick = emptyTrick }
+processGameEvent (PlayerTurnChanged player) state =
+  state { gameStatePlayers = rotateTo player (gameStatePlayers state) }
+processGameEvent (LegalCardPlayed player card) state =
+  GameState { gameStatePlayers = rotate (rotateTo player (gameStatePlayers state)),
+              gameStateHands = takeCard (gameStateHands state) player card,
+              gameStateStacks = gameStateStacks state,
+              gameStateTrick = addToTrick player card (gameStateTrick state) }
+processGameEvent (TrickTaken player trick) state =
+  state { gameStateStacks = addToStack (gameStateStacks state) player (cardsOfTrick trick),
+          gameStateTrick = emptyTrick }
+processGameEvent (IllegalCardPlayed player card) state = state
+processGameEvent (GameEnded player) state = state
+
+-- Ereignisse eines Befehls ermitteln
+processGameCommand :: GameCommand -> GameState -> (GameState, [GameEvent])
+-- processGameCommand command state | trace ("processGameCommand " ++ show (gameAtBeginning state) ++ " " ++ show command ++ " " ++ show state) False = undefined
+processGameCommand (DealHands hands) state =
+  let events = map (uncurry HandDealt) (Map.toList hands)
+  in (foldl (flip processGameEvent) state events, events)
+processGameCommand (PlayCard player card) state =
+  if playValid state player card
+  then
+    let event1 = LegalCardPlayed player card
+        state1 = processGameEvent event1 state
+    in  if turnOver state1 then
+          let trick = gameStateTrick state1
+              trickTaker = whoTakesTrick trick
+              event2 = TrickTaken trickTaker trick
+              state2 = processGameEvent event2 state1
+              event3 = if gameOver state2
+                       then (GameEnded (gameWinner state2))
+                       else PlayerTurnChanged trickTaker
+              state3 = processGameEvent event3 state2
+          in (state3, [event1, event2, event3])
+        else
+          let event2 = PlayerTurnChanged (nextPlayer state1)
+              state2 = processGameEvent event2 state1
+          in (state2, [event1, event2])
+  else
+    (state, [IllegalCardPlayed player card, PlayerTurnChanged player])
+
+
+
