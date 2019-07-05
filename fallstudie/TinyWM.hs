@@ -11,8 +11,8 @@ import qualified Data.List as L
 --
 
 data StackSet a = StackSet
-    { current :: Int           -- the current workspace
-    , stacks  :: Map Int [a] } -- map workspaces to window stacks
+    { current :: Int, -- aktueller Stack
+      stacks :: Map Int [a] } -- map workspaces to window stacks
     deriving (Eq, Show, Read)
 
 -- | /O(n)/. Create a new empty stackset of 'n' workspaces
@@ -24,14 +24,19 @@ empty n = StackSet { current = 0, stacks  = ws }
 -- | /O(log n)/. Set the given stack as being visible. If the index is out of
 -- bounds, the stack is returned unmodified.
 view :: Int -> StackSet a -> StackSet a
-view n w | M.member n (stacks w) = w { current = n }
-         | otherwise             = w
+view index stackSet =
+  if M.member index (stacks stackSet)
+  then stackSet { current = index }
+  else stackSet
 
 -- | /O(log s)/. Extract the element on the top of the current stack.
 -- If no such element exists, Nothing is returned.
 peek :: Ord a => StackSet a -> Maybe a
-peek w | Just (x:_) <- M.lookup (current w) (stacks w) = Just x
-       | otherwise                                     = Nothing
+peek stackSet =
+  case M.lookup (current stackSet) (stacks stackSet) of
+    Nothing -> Nothing
+    Just [] -> Nothing
+    Just (window:_) -> Just window
 
 -- | /O(log n)/. rotate. cycle the current window list up or down.
 -- Has the effect of rotating focus. In fullscreen mode this will cause
@@ -62,13 +67,6 @@ rotate o w = w { stacks = M.adjust rot (current w) (stacks w) }
 push :: Ord a => a -> StackSet a -> StackSet a
 push k w = insert k (current w) w
 
--- | /O(log n)/. shift. move the client on top of the current stack to
--- the top of stack 'n'. If the stack to move to is not valid, and
--- exception is thrown. If there's no client on the current stack, the
--- stack set is returned unchanged.
-shift :: (Ord a) => Int -> StackSet a -> StackSet a
-shift n w = maybe w (\k -> insert k n w) (peek w)
-
 -- | /O(log n)/. Insert an element onto the top of stack 'n'.
 -- If the element is already in the stack 'n', it is moved to the top.
 -- If the element exists on another stack, it is removed from that stack.
@@ -84,6 +82,13 @@ delete :: Ord a => a -> StackSet a -> StackSet a
 delete k w = maybe w del $ L.find ((k `elem`) . snd) (M.assocs (stacks w))
   where
     del (i,_) = w { stacks = M.adjust (L.delete k) i (stacks w) }
+
+-- | /O(log n)/. shift. move the client on top of the current stack to
+-- the top of stack 'n'. If the stack to move to is not valid, an
+-- exception is thrown. If there's no client on the current stack, the
+-- stack set is returned unchanged.
+shift :: (Ord a) => Int -> StackSet a -> StackSet a
+shift n w = maybe w (\k -> insert k n w) (peek w)
 
 -- | /O(log n)/. Index. Extract the stack at workspace 'n'.
 -- If the index is invalid, an exception is thrown.
