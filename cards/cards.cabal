@@ -42,7 +42,7 @@ extra-source-files:  CHANGELOG.md
 
 library
   -- Modules exported by the library.
-  exposed-modules: Cards, Game, Sync, EventSourcing, Player
+  exposed-modules: Cards, Game, EventSourcing, Player, Sync
 
   -- Modules included in this library but not exported.
   other-modules: Concurrency, RWT, Shuffle
@@ -68,7 +68,8 @@ library
 
 executable server
 
-  Buildable: False
+  -- einkommentieren, wenn cabal repl gehen soll
+  -- Buildable: False
   
   -- .hs or .lhs file containing the Main module.
   main-is:             Main.hs
