@@ -68,7 +68,7 @@ library
 
 executable server
 
-  -- Buildable: False
+  Buildable: False
   
   -- .hs or .lhs file containing the Main module.
   main-is:             Main.hs
