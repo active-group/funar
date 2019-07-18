@@ -56,7 +56,7 @@ playEvent players gameEvent =
 
 -- Befehle ausführen bis zum bitteren Ende
 playCommand :: Monad monad => Players monad -> GameCommand -> GameEventSourcingT monad ()
-playCommand players gameCommand | trace ("playCommand " ++ show gameCommand) False = undefined
+-- playCommand players gameCommand | trace ("playCommand " ++ show gameCommand) False = undefined
 playCommand players gameCommand =
   do events <- gameCommandEventsM gameCommand
      gameOver <- gameOverM

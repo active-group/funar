@@ -171,11 +171,13 @@ data GameEvent =
   | IllegalCardPlayed Player Card
   | TrickTaken Player Trick -- "Stich"
   | GameEnded Player
+  deriving Show
 
 data GameCommand =
     DealHands PlayerHands
   | PlayCard Player Card
-
+  deriving Show
+  
   -- Karte ausspielen
 takeCard :: PlayerHands -> Player -> Card -> PlayerHands
 takeCard playerHand player card =
