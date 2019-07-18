@@ -1,7 +1,12 @@
+{-# LANGUAGE OverloadedStrings #-}
 module DB where
 
 import qualified Data.Map as Map
 import Data.Map (Map)
+
+import Control.Applicative
+import Database.SQLite.Simple
+import Database.SQLite.Simple.FromRow
 
 {-
 put "Mike" 48
@@ -103,3 +108,30 @@ p1'' =
     put "Mike" (x + 1)
     return (show (x * 2))
 
+data Entry = Entry String Integer
+
+instance FromRow Entry where
+    fromRow = (fmap Entry field) <*> field
+  
+instance ToRow Entry where
+    toRow (Entry key value) = toRow (key, value)
+
+runDBSQLite :: DBProg a -> Connection -> IO a
+runDBSQLite (Put key value next) conn =
+    -- INSERT müßte UPDATE sein
+    do execute conn "INSERT INTO test (key, value) VALUES (?,?)" (Entry key value)
+       runDBSQLite next conn
+runDBSQLite (Get key cont) conn =
+    do [Entry _ result] <-
+         queryNamed conn "SELECT * from test WHERE key = :key" [":key" := key] :: IO [Entry]
+       runDBSQLite (cont result) conn
+runDBSQLite (Done result) conn = return result
+
+execDB :: DBProg a -> IO a
+execDB command =
+    do conn <- open "test.db"
+       execute_ conn
+         "CREATE TABLE IF NOT EXISTS test (key TEXT PRIMARY KEY, value INTEGER)"
+       result <- runDBSQLite command conn
+       close conn
+       return result
