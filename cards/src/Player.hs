@@ -69,7 +69,7 @@ playerProcessGameEvent player (LegalCardPlayed player' card) state
     state { playerStateHand = removeCard card (playerStateHand state),
             playerStateTrick = addToTrick player' card (playerStateTrick state) }
   | otherwise =
-    state { playerStateTrick = addToTrick player card (playerStateTrick state) }
+    state { playerStateTrick = addToTrick player' card (playerStateTrick state) }
 playerProcessGameEvent player (TrickTaken player' trick) state
   | player' == player =
     state { playerStateTrick = emptyTrick,
