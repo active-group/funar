@@ -1,0 +1,19 @@
+cabal-version:       >=1.10
+
+name:                funar
+version:             0.1.0.0
+license-file:        NONE
+author:              Mike Sperber
+maintainer:          michael.sperber@active-group.de
+build-type:          Simple
+extra-source-files:  CHANGELOG.md
+
+library
+  build-depends:       base >=4.12.0.0,
+                       QuickCheck >= 2.12.6.1,
+                       containers >= 0.6.0.1,
+                       parallel >= 3.2.2.0,
+                       sqlite-simple >= 0.4.16.0,
+                       text >= 1.2.3.1
+  default-language:    Haskell2010
+  exposed-modules: Intro
