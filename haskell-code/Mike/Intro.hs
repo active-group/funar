@@ -1,5 +1,9 @@
 {-# OPTIONS_GHC -fwarn-incomplete-patterns #-}
+{-# LANGUAGE KindSignatures #-}
+
 module Intro where
+
+import Prelude hiding (Functor, Semigroup, Monoid)
 
 x = 5
 
@@ -26,31 +30,51 @@ data Liveness = Dead | Alive
  deriving (Show, Eq)
 
 -- algebraischer Datentyp: Gemischte Daten von zusammengesetzten Daten 
-data Animal = 
+data Animal weight = 
       Dillo { -- Record
                 dilloLiveness :: Liveness,
-                dilloWeight :: Int
+                dilloWeight :: weight
             }
-    | Parrot String Int
+    | Parrot String weight
     deriving Show
 
 dillo1 = Dillo { dilloLiveness = Alive, dilloWeight = 10 } -- lebt noch, 10kg
 dillo2 = Dillo Dead 12 -- totes Gürteltier, 12kg
 
+data Weight = Kg Int deriving Show
+
+dillo3 = Dillo Alive (Kg 10)
+
 -- Gürteltier überfahren
-runOverDillo :: Animal -> Animal
+runOverDillo :: Animal weight -> Animal weight
 -- runOverDillo dillo =
 --    Dillo { dilloLiveness = Dead, dilloWeight = dilloWeight dillo }
 -- runOverDillo (Dillo _ weight) =
 --     Dillo Dead weight
 runOverDillo dillo = dillo { dilloLiveness = Dead }
 
+class Additive a where
+    plus :: a -> a -> a
+
 -- Gürteltier füttern
-feedAnimal :: Int -> (Animal -> Animal)
-feedAnimal amount (Dillo Alive weight) = Dillo Alive (weight + amount)
+-- Typinferenz:
+feedAnimal :: Additive weight => weight -> Animal weight -> Animal weight
+-- feedAnimal :: Int -> (Animal Int -> Animal Int)
+feedAnimal amount (Dillo Alive weight) =
+    Dillo Alive (weight `plus` amount)
 -- feedAnimal amount (Dillo Dead weight) = Dillo Dead weight
 feedAnimal amount dillo@(Dillo Dead weight) = dillo -- Alias-Pattern
-feedAnimal amount (Parrot sentence weight) = Parrot sentence (weight + amount)
+feedAnimal amount (Parrot sentence weight) =
+    Parrot sentence (weight `plus` amount)
+
+dillo4 = feedAnimal (Kg 1) dillo3
+
+instance Num Weight where
+    (Kg weight1) + (Kg weight2) = Kg (weight1 + weight2)
+
+instance Additive Weight where
+    (Kg weight1) `plus` (Kg weight2) = Kg (weight1 + weight2)
+
 
 -- feedDillo' :: (Integer, Dillo) -> Dillo
 -- feedDillo' (amount, Dillo Alive weight) = Dillo Alive (weight + amount)
@@ -65,9 +89,9 @@ uncurry f (x, y) = f x y
 flip :: (a -> b -> c) -> (b -> a -> c)
 flip f = \ b -> \ a -> f a b
 
-feedDillo' = Intro.uncurry feedAnimal
-feedDillo'' = Intro.flip feedAnimal
-feedDillo''' = Intro.uncurry (Intro.flip (Intro.curry feedDillo'))
+--- feedDillo' = Intro.uncurry feedAnimal
+-- feedDillo'' = Intro.flip feedAnimal
+-- feedDillo''' = Intro.uncurry (Intro.flip (Intro.curry feedDillo'))
 
 -- tupleFlip = Intro.uncurry . Intro.flip . Intro.curry
 tupleFlip f = Intro.uncurry (Intro.flip (Intro.curry f))
@@ -127,7 +151,21 @@ sieve (first:rest) = first : (sieve (strikeMultiples first rest))
 -- data Map key value = Map [(key, value)]
 -- kein Speicheroverhead für Wrapper-Dings o.ä.
 -- geht nur bei 1 Konstruktor, 1 Attribut
+-- Map :: * -> (* -> *)
 data Map key value = Map [(key, value)]
+
+unMap (Map list) = list
+
+mapMap :: (a -> b) -> (Map key) a -> (Map key) b
+mapMap f (Map []) = Map []
+mapMap f (Map ((key, a):rest)) =
+--    let Map frest = mapMap f (Map rest)
+--    in Map ((key, f a):frest)
+    Map ((key, f a):unMap (mapMap f (Map rest)))
+
+foo = let x = 5
+          y = 7
+      in x + y
 
 map1 :: Map String String
 map1 = Map [("Mike", "Sperber"), ("Angela", "Merkel")]
@@ -160,7 +198,7 @@ mapGet key' (Map ((key, value):rest)) =
 
 -- Typklassen
 
-instance Eq Animal where
+instance Eq weight => Eq (Animal weight) where
    -- (==) :: Animal -> Animal -> Bool 
    (==) (Dillo liveness1 weight1) (Dillo liveness2 weight2) =
             (liveness1 == liveness2) && (weight1 == weight2)
@@ -177,7 +215,7 @@ instance Eq Animal where
 -- (l1 ++ l2) ++ l3 = l1 ++ (l2 ++ l3)
 -- Halbgruppe / Semigroup: Menge + Kombinator + Assoziativgesetz
 
-class Semigroup a where
+class Semigroup (a :: *) where
     combine :: a -> a -> a
     -- (a `combine` b) `combine` c = a `combine (b `combine` c)
 
@@ -210,11 +248,26 @@ instance Intro.Monoid Integer where
 -- listMap ::     (a -> b) -> List a     -> List b
 -- optionalMap :: (a -> b) -> Optional a -> Optional b
 
-class Functor constructor where
+class Functor (constructor :: * -> *) where
     mmap :: (a -> b) -> constructor a -> constructor b
+    -- mmap identity collection = collection
+    -- oder: mmap identity = identity
+    -- mmap (f . g) collection = mmap f (mmap g collection)
+    -- oder: mmap (f . g) = (mmap f) . (mmap g)
+
+-- (f . g) x = f (g x)
+identity :: a -> a
+identity a = a
+
+instance Functor (Map key) where
+    mmap = mapMap
 
 instance Intro.Functor [] where
     mmap = map 
+
+optionalMap :: (a -> b) -> Optional a -> Optional b
+optionalMap f NotThere  = NotThere
+optionalMap f (There a) = There (f a)
 
 instance Intro.Functor Optional where
     mmap = optionalMap
