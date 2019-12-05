@@ -67,12 +67,7 @@ instance Monad monad => Applicative (EventSourcingT state event monad) where
                         return (f a, aevents ++ fevents, state2))
 
 instance Monad monad => Monad (EventSourcingT state event monad) where
-  (EventSourcingT fm) >>= f =
-    EventSourcingT (\ state0 ->
-                      do (r, mevents, state1) <- fm state0
-                         let EventSourcingT ffr = f r
-                         (result, fevents, state2) <- ffr state1
-                         return (result, fevents ++ mevents, state2))
+  (EventSourcingT fm) >>= f = undefined
 
 instance MonadTrans (EventSourcingT state event) where
   lift action = EventSourcingT (\ state ->
@@ -80,14 +75,9 @@ instance MonadTrans (EventSourcingT state event) where
                                      return (result, [], state))
 
 instance Monad monad => MonadEventSourcing state event (EventSourcingT state event monad) where
-  tellEvent event transformState =
-    EventSourcingT (\ state ->
-                      return ((), [event], transformState event state))
-  bracketEvents (EventSourcingT faction) =
-    EventSourcingT (\ state0 ->
-                      do (result, events, state1) <- faction state0
-                         return ((result, reverse events), events, state1))
-  eventState = EventSourcingT (\ state -> return (state, [], state))
+  tellEvent event transformState = undefined
+  bracketEvents (EventSourcingT faction) = undefined
+  eventState = undefined
 
 type GameEventSourcingT = EventSourcingT GameState GameEvent
 
