@@ -34,7 +34,10 @@ zcb date amount currency =
     Later date (Multiple amount (One currency))
 
 and = And
-give = Give
+
+-- "smart constructor"
+give Zero = Zero
+give contract' = Give contract'
 
 currencySwap :: Date -> Amount -> Currency -> Amount -> Currency -> Contract
 currencySwap date amount1 currency1 amount2 currency2 =
@@ -69,8 +72,14 @@ step (One currency) date =
 step (Multiple factor contract') date =
     let (payouts, contractAfter) = step contract' date
     in (map (scalePayout factor) payouts, Multiple factor contractAfter)
-step (Later date' contract') date = undefined
-step (And contract1 contract2) date = undefined
+step contract@(Later date' contract') date =
+    if date' <= date -- Datum erreicht
+    then step contract' date
+    else ([], contract)
+step (And contract1 contract2) date =
+    let (payouts1, contractAfter1) = step contract1 date
+        (payouts2, contractAfter2) = step contract2 date
+    in (payouts1 ++ payouts2, And contractAfter1 contractAfter2)
 step (Give contract') date =
     let (payouts, contractAfter) = step contract' date
-    in (map invertPayout payouts, Give contractAfter)
+    in (map invertPayout payouts, give contractAfter)
