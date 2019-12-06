@@ -67,7 +67,12 @@ instance Monad monad => Applicative (EventSourcingT state event monad) where
                         return (f a, aevents ++ fevents, state2))
 
 instance Monad monad => Monad (EventSourcingT state event monad) where
-  (EventSourcingT fm) >>= f = undefined
+  (EventSourcingT fm) >>= f =
+    EventSourcingT (\ state0 ->
+                      do (r, mevents, state1) <- fm state0
+                         let EventSourcingT ffr = f r
+                         (result, fevents, state2) <- ffr state1
+                         return (result, fevents ++ mevents, state2))
 
 instance MonadTrans (EventSourcingT state event) where
   lift action = EventSourcingT (\ state ->
@@ -75,14 +80,21 @@ instance MonadTrans (EventSourcingT state event) where
                                      return (result, [], state))
 
 instance Monad monad => MonadEventSourcing state event (EventSourcingT state event monad) where
-  tellEvent event transformState = undefined
-  bracketEvents (EventSourcingT faction) = undefined
-  eventState = undefined
+  tellEvent event transformState =
+    EventSourcingT (\ state ->
+                      return ((), [event], transformState event state))
+  bracketEvents (EventSourcingT faction) =
+    EventSourcingT (\ state0 ->
+                      do (result, events, state1) <- faction state0
+                         return ((result, reverse events), events, state1))
+  eventState = EventSourcingT (\ state -> return (state, [], state))
 
 type GameEventSourcingT = EventSourcingT GameState GameEvent
 
 -- Event-Sourcing laufenlassen
-runEventSourcingT :: Monad monad => EventSourcingT state event monad a -> state -> monad (a, [event], state)
+runEventSourcingT ::
+ Monad monad => 
+   EventSourcingT state event monad a -> state -> monad (a, [event], state)
 runEventSourcingT (EventSourcingT faction) initialState =
   do (result, events, state) <- faction initialState
      return (result, reverse events, state)
@@ -187,39 +199,18 @@ playValidM player card  =
 currentTrickM :: MonadGameEventSourcing monad => monad Trick
 currentTrickM = fmap gameStateTrick eventState
 
-nextPlayerM :: MonadGameEventSourcing monad => monad (Player)
-nextPlayerM = fmap nextPlayer eventState
-
 gameWinnerM :: MonadGameEventSourcing monad => monad (Player)
 gameWinnerM = fmap gameWinner eventState
 
 processGameCommandM :: MonadGameEventSourcing monad => GameCommand -> monad ()
-processGameCommandM (DealHands playerHands) =
-   mapM_ processGameEventM (map (uncurry HandDealt) (Map.toList playerHands))
-processGameCommandM (PlayCard player card) =
-   do playIsValid <- playValidM player card
-      if playIsValid then
-        do processGameEventM (LegalCardPlayed player card)
-           turnIsOver <- turnOverM
-           if turnIsOver then
-             do trick <- currentTrickM
-                let trickTaker = whoTakesTrick trick
-                processGameEventM (TrickTaken trickTaker trick)
-                gameIsOver <- gameOverM
-                if gameIsOver
-                then
-                  do winner <- gameWinnerM
-                     processGameEventM (GameEnded winner)
-                else processGameEventM (PlayerTurnChanged trickTaker)
-           else
-             do nextPlayer <- nextPlayerM
-                processGameEventM (PlayerTurnChanged nextPlayer)
-      else
-        do nextPlayer <- nextPlayerM
-           processGameEventM (IllegalCardPlayed nextPlayer card)
-           processGameEventM (PlayerTurnChanged nextPlayer)
+processGameCommandM command =
+  do state <- eventState
+     let events = processGameCommand command state
+     mapM_ processGameEventM events
 
-gameCommandEventsM :: MonadGameEventSourcing monad => GameCommand -> monad [GameEvent]
+
+gameCommandEventsM ::
+  MonadGameEventSourcing monad => GameCommand -> monad [GameEvent]
 -- gameCommandEventsM gameCommand | trace ("gameCommandsEventsM " ++ show gameCommand) False = undefined
 gameCommandEventsM gameCommand =
   do gameState <- eventState
