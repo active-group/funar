@@ -7,7 +7,7 @@ maintainer:          michael.sperber@active-group.de
 
 library
   build-depends:       QuickCheck >= 2.12.6.1,
-                       base ^>=4.12.0.0,
+                       base >=4.12.0.0,
                        containers >= 0.6.0.1,
                        parallel >= 3.2.2.0,
                        sqlite-simple >= 0.4.16.0,
