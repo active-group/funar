@@ -27,6 +27,8 @@ cabal install --dependencies-only
 ### Falls nicht:
 
 - [Docker](https://www.docker.com/) installieren
+- im Verzeichnis `docker-ghcide` den Befehl `docker build -t ghcide .`
+  absetzen (dauert eine Weile)
 - [Visual Studio Code](https://code.visualstudio.com/download) installieren
 - die Extension "Remote - Containers" installieren:
   Auf das Extensions-Icon links klicken, nach "Containers" suchen,
@@ -37,7 +39,7 @@ cabal install --dependencies-only
 - das Verzeichnis `haskell-code` selektieren
 
 Da sollte jetzt eine Meldung erscheinen, dass ein Docker-Image gebaut
-wird, das kann eine Weile dauern.
+wird.  Das sollte ohne Fehlermeldung vonstatten gehen.
 
 # Bei Problemen:
 
