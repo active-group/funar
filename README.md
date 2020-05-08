@@ -44,3 +44,10 @@ wird.  Das sollte ohne Fehlermeldung vonstatten gehen.
 # Bei Problemen:
 
 ... bitte Mike Sperber kontaktieren.
+
+## Elm
+
+Falls Model-View-Update drankommt, werden wir Elm brauchen.  Anleitung
+hier:
+
+https://guide.elm-lang.org/install/
