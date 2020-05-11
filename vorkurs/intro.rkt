@@ -402,12 +402,25 @@ class Snake implements Animal {
 ; (: list-aggregate (number (number number -> number) (list-of number) -> number))
 (: list-aggregate (%b (%a %b -> %b) (list-of %a) -> %b))
 
+; (: + (number number -> number))
+; (: * (number number -> number))
+; fold
 (define list-aggregate
-  (lambda (neutral-element aggf list)
+  (lambda (for-empty for-cons list)
     (cond
-      ((empty? list) neutral-element)
+      ((empty? list) for-empty)
       ((cons? list)
-       (aggf (first list)
-             (list-aggregate neutral-element aggf (rest list)))))))
+       (for-cons (first list)
+                 (list-aggregate for-empty for-cons (rest list)))))))
 
+(define list-map2
+  (lambda (f list0)
+    (list-aggregate empty
+                    ; for-cons
+                    (lambda (first-list recursive-result)
+                      (cons
+                       (f ; %b
+                        first-list) ; %a
+                       recursive-result))
+                    list0)))
               
