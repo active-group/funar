@@ -78,7 +78,7 @@ C.m(5);
 
 ; Tiere auf dem texanischen Highway
 
-; Ein Gürteltiere hat folgende Eigenschaften: ("besteht aus")
+; Ein Gürteltier hat folgende Eigenschaften: ("besteht aus")
 ; - lebendig oder tot
 ; - Gewicht
 ; zusammengesetzte Daten
@@ -88,9 +88,44 @@ C.m(5);
   (dillo-weight rational))
 
 (: make-dillo (boolean rational -> dillo))
+(: dillo-alive? (dillo -> boolean))
+(: dillo-weight (dillo -> rational))
 
-   
+; Signaturverletzung:
+; (make-dillo 10 #t)
+
 (define dillo1 (make-dillo #t 10)) ; lebendiges Gürteltier, 10kg schwer
 (define dillo2 (make-dillo #f 12)) ; Gürteltier tot, 12kg schwer
+
+
+#|
+class Dillo {
+  bool isAlive;
+  double weight;
+  void runOver() {
+    this.isAlive = false;
+  }
+}
+|#
+
+; Gürteltier überfahren
+(: run-over-dillo (dillo -> dillo))
+
+(check-expect (dillo-alive? (run-over-dillo dillo1))
+              #f)
+(check-expect (dillo-weight (run-over-dillo dillo1))
+              10)
+
+(check-expect (run-over-dillo dillo1)
+              (make-dillo #f 10))
+(check-expect (run-over-dillo dillo2)
+              dillo2)
+
+(define run-over-dillo
+  (lambda (dillo)
+    (make-dillo #f (dillo-weight dillo))))
+
+
+              
 
 
