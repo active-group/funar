@@ -376,3 +376,28 @@ class Snake implements Animal {
        (if (p? (first list))
            (cons (first list) rest-x)           
            rest-x)))))
+
+; Funktion auf alle Elemente einer Liste anwenden
+; (: list-map ((%element -> %result) (list-of %element) -> (list-of %result)))
+
+(: list-map ((%a -> %b) (list-of %a) -> (list-of %b)))
+
+(check-expect (list-map run-over-animal (list dillo1 parrot1 dillo2 parrot2))
+              (list (run-over-animal dillo1)
+                    (run-over-animal parrot1)
+                    (run-over-animal dillo2)
+                    (run-over-animal parrot2)))
+
+(define list-map
+  (lambda (f list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cons
+        (f ; %b
+         (first list)) ; %a
+        (list-map f (rest list))))))) ; (list-of %b)
+       
+
+              
+
