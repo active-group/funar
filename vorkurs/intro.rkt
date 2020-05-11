@@ -257,4 +257,23 @@ class Snake implements Animal {
   make-empty
   empty?)
 
+(define empty (make-empty))
 
+; Eine Cons-Liste besteht aus:
+; - erstes Element
+; - Rest-Liste
+(define-record cons-list
+  cons
+  cons?
+  (first number)
+  (rest list-of-numbers))
+
+(define list0 empty)
+; Liste mit 1 Element: 17
+(define list1 (cons 17 empty))
+; Liste mit 2 Elementen: 1 2
+(define list2 (cons 1 (cons 2 empty)))
+; Liste mit drei Elementen: 2 3 5
+(define list3 (cons 2 (cons 3 (cons 5 empty))))
+; Liste mit vier Elementen: 1 2 3 5
+(define list4 (cons 1 list3))
