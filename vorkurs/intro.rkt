@@ -290,4 +290,25 @@ class Snake implements Animal {
       ((cons? list)
        (+ (first list)
           (list-sum (rest list)))))))
-      
+
+; neutrales Element n: n + x = x + n = x, n = 0
+
+; Produkt der Listenelemente berechnen
+(: list-product (list-of-numbers -> number))
+
+(check-expect (list-product list3) 30)
+
+; neutrales Element n: n * x = x * n = x, n = 1
+(define list-product
+  (lambda (list)
+    (cond
+      ((empty? list) 1)
+      ((cons? list)
+       (* (first list)
+          (list-product (rest list)))))))
+
+; Alle geraden Zahlen aus einer Liste extrahieren
+(: list-evens (list-of-number -> list-of-number))
+
+(check-expect (list-evens (cons 1 (cons 2 (cons 3 (cons 4 (cons 5 empty))))))
+              (cons 2 (cons 4 empty)))
