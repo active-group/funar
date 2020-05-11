@@ -277,3 +277,17 @@ class Snake implements Animal {
 (define list3 (cons 2 (cons 3 (cons 5 empty))))
 ; Liste mit vier Elementen: 1 2 3 5
 (define list4 (cons 1 list3))
+
+; Summe der Listenelementen berechnen
+(: list-sum (list-of-numbers -> number))
+
+(check-expect (list-sum list3) 10)
+
+(define list-sum
+  (lambda (list)
+    (cond
+      ((empty? list) 0)
+      ((cons? list)
+       (+ (first list)
+          (list-sum (rest list)))))))
+      
