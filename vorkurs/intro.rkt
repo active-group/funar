@@ -423,4 +423,6 @@ class Snake implements Animal {
                         first-list) ; %a
                        recursive-result))
                     list0)))
+
+(list-map feed-dillo (list dillo1 dillo2))
               
