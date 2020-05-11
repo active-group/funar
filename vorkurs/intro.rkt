@@ -1,6 +1,6 @@
 ;; Die ersten drei Zeilen dieser Datei wurden von DrRacket eingefügt. Sie enthalten Metadaten
 ;; über die Sprachebene dieser Datei in einer Form, die DrRacket verarbeiten kann.
-#reader(lib "beginner-reader.rkt" "deinprogramm" "sdp")((modname intro) (read-case-sensitive #f) (teachpacks ((lib "image.rkt" "teachpack" "deinprogramm" "sdp"))) (deinprogramm-settings #(#f write repeating-decimal #f #t none explicit #f ((lib "image.rkt" "teachpack" "deinprogramm" "sdp")))))
+#reader(lib "vanilla-reader.rkt" "deinprogramm" "sdp")((modname intro) (read-case-sensitive #f) (teachpacks ((lib "image.rkt" "teachpack" "deinprogramm" "sdp"))) (deinprogramm-settings #(#f write repeating-decimal #f #t none explicit #f ((lib "image.rkt" "teachpack" "deinprogramm" "sdp")))))
 (define mike "sperber")
 (define pi 3.14159265)
 
@@ -253,18 +253,18 @@ class Snake implements Animal {
 
 ; vorher: list-of-numbers
 ; hinterher: (list-of number)
-(define list-of
+#;(define list-of
   (lambda (element)
     (signature
      (mixed empty-list
             (cons-list-of element)))))
 
 ; Die leere Liste hat keine Eigenschaften
-(define-record empty-list
+#;(define-record empty-list
   make-empty
   empty?)
 
-(define empty (make-empty))
+#;(define empty (make-empty))
 
 ; Eine Cons-Liste besteht aus:
 ; - erstes Element
@@ -277,7 +277,7 @@ class Snake implements Animal {
 
 ; vorher: cons-list
 ; hinterher: (cons-list-of number)
-(define-record (cons-list-of element)
+#;(define-record (cons-list-of element)
   cons
   cons?
   (first element)
