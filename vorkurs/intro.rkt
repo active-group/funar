@@ -308,7 +308,7 @@ class Snake implements Animal {
           (list-product (rest list)))))))
 
 ; Alle geraden Zahlen aus einer Liste extrahieren
-(: list-evens (list-of-number -> list-of-number))
+(: list-evens (list-of-numbers -> list-of-numbers))
 
 (check-expect (list-evens (cons 1 (cons 2 (cons 3 (cons 4 (cons 5 empty))))))
               (cons 2 (cons 4 empty)))
@@ -323,9 +323,18 @@ class Snake implements Animal {
            (cons (first list) rest-evens)
            rest-evens)))))
 
+; Alle positiven Zahlen aus einer Liste extrahieren
+(: list-positives (list-of-numbers -> list-of-numbers))
 
+(define list-positives
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (define rest-positives (list-positives (rest list)))
+       (if (positive? (first list))
+           (cons (first list) rest-positives)           
+           rest-positives)))))
 
-
-       
     
     
