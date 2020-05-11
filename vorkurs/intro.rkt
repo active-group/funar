@@ -135,6 +135,16 @@ class Snake implements Animal {
 (check-expect (dillo-weight (run-over-dillo dillo1))
               10)
 
+(check-property
+ (for-all ((d dillo))
+   (not (dillo-alive?
+         (run-over-dillo d)))))
+ 
+(check-property
+ (for-all ((d dillo))
+   (not (> (dillo-weight d) 
+           (dillo-weight (run-over-dillo d))))))
+
 (check-expect (run-over-dillo dillo1)
               (make-dillo #f 10))
 (check-expect (run-over-dillo dillo2)
@@ -152,6 +162,11 @@ class Snake implements Animal {
 
 (check-expect (feed-dillo 5 dillo2)
               dillo2)
+
+#;(check-property
+ (for-all ((d dillo))
+   (< (dillo-weight d)
+      (dillo-weight (feed-dillo 1 d)))))
 
 #;(define feed-dillo
   (lambda (amount dillo)
