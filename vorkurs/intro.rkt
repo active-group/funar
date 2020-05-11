@@ -7,3 +7,22 @@
 (define s1 (star 50 "solid" "red"))
 (define r1 (rectangle 200 100 "outline" "yellow"))
 (define c1 (circle 50 "solid" "gold"))
+
+(define b1 (beside s1 c1))
+
+; (beside b1 (above s1 r1))
+
+#;(above ; ganzen Ausdruck auskommentieren
+ (beside s1 c1)
+ (beside c1 s1))
+
+(define sq1 (square 100 "solid" "green"))
+
+#;(above
+ (beside c1 sq1)
+ (beside sq1 c1))
+
+(lambda (image1 image2)
+  (above
+   (beside image1 image2)
+   (beside image2 image1)))
