@@ -64,3 +64,22 @@
 ; JVM: Stack ist i.d.R. klein
 ; => StackOverflow bei langen Listen
 
+; 2 Listen aneinanderhängen
+(: concat ((list-of %a) (list-of %a) -> (list-of %a)))
+
+(check-expect (concat (list 1 2 3)
+                      (list 4 5 6))
+              (list 1 2 3 4 5 6))
+
+(define concat
+  (lambda (list1 list2)
+    (concat* (rev list1) list2)))
+
+(define concat*
+  ; acc enthält hinten list2 und vorn die Elemente vor list in list1
+  (lambda (list acc)
+    (cond
+      ((empty? list) acc)
+      ((cons? list)
+       (concat* (rest list) (cons (first list) acc))))))
+    
