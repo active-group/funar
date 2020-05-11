@@ -22,7 +22,16 @@
  (beside c1 sq1)
  (beside sq1 c1))
 
-(lambda (image1 image2)
-  (above
-   (beside image1 image2)
-   (beside image2 image1)))
+; Kachelmuster aus zwei Bildern machen
+; 2stellige Funktion, 2 Images rein, 1 Image raus
+(: tile (image image -> image))
+
+(check-expect (tile s1 c1) (above
+                            (beside s1 c1)
+                            (beside c1 s1)))
+
+(define tile
+  (lambda (image1 image2)
+    (above
+     (beside image1 image2)
+     (beside image2 image1))))
