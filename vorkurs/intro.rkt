@@ -35,3 +35,39 @@
     (above
      (beside image1 image2)
      (beside image2 image1))))
+
+#|
+class C {
+  static T m(int x) {
+     ... x ...
+     ++x;
+     ... x ...
+  }
+}
+
+C.m(5);
+
+|#
+
+; Ein Haustier ist eins der folgenden:
+; - Hund
+; - Katze
+; - Schlange
+; Fallunterscheidung / speziell: Aufzählung
+(define pet
+  (signature (enum "Hund" "Katze" "Schlange")))
+  
+; Ist Haustier niedlich?
+(: cute? (pet -> boolean))
+
+(check-expect (cute? "Hund") #t)
+(check-expect (cute? "Katze") #t)
+(check-expect (cute? "Schlange") #f)
+
+#;(define cute?
+  (lambda (pet)
+    ...)) ; Gerüst
+
+(define cute?
+  (lambda (pet)
+    ...)) ; Gerüst
