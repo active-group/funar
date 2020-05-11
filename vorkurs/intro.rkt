@@ -312,3 +312,20 @@ class Snake implements Animal {
 
 (check-expect (list-evens (cons 1 (cons 2 (cons 3 (cons 4 (cons 5 empty))))))
               (cons 2 (cons 4 empty)))
+
+(define list-evens
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (define rest-evens (list-evens (rest list)))
+       (if (even? (first list))
+           (cons (first list) rest-evens)
+           rest-evens)))))
+
+
+
+
+       
+    
+    
