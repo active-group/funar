@@ -357,9 +357,15 @@ class Snake implements Animal {
            (cons (first list) rest-positives)           
            rest-positives)))))
 
-(: list-extract ((number -> boolean) list-of-numbers -> list-of-numbers))
+; %element: Signaturvariable
+; Funktion, die Funktionen als Eingabe akzeptiert
+; Higher-Order-Funktion
+(: list-extract ((%element -> boolean) (list-of %element) -> (list-of %element)))
 
 (define dillo-list1 (cons dillo1 (cons dillo2 empty)))
+
+(check-expect (list-extract dillo-alive? dillo-list1)
+              (cons dillo1 empty))
 
 (define list-extract
   (lambda (p? list)
