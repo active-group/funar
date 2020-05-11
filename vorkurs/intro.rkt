@@ -125,7 +125,40 @@ class Dillo {
   (lambda (dillo)
     (make-dillo #f (dillo-weight dillo))))
 
+; Gürteltier füttern
+(: feed-dillo (rational dillo -> dillo))
 
-              
+(check-expect (feed-dillo 1 dillo1)
+              (make-dillo #t 11))
+
+(check-expect (feed-dillo 5 dillo2)
+              dillo2)
+
+#;(define feed-dillo
+  (lambda (amount dillo)
+    (if (dillo-alive? dillo)
+        (make-dillo (dillo-alive? dillo)
+                    (+ (dillo-weight dillo)
+                       amount))
+        dillo)))
+
+#;(define feed-dillo
+  (lambda (amount dillo)
+    (if (dillo-alive? dillo)
+        (make-dillo (dillo-alive? dillo)
+                    (+ (dillo-weight dillo)
+                       amount))
+        (make-dillo (dillo-alive? dillo)
+                    (dillo-weight dillo)))))
+
+
+(define feed-dillo
+  (lambda (amount dillo)
+    (make-dillo (dillo-alive? dillo)
+                (if (dillo-alive? dillo)
+                    (+ (dillo-weight dillo)
+                       amount)
+                    (dillo-weight dillo)))))
+
 
 
