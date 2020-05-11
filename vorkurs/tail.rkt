@@ -49,10 +49,18 @@
     (rev* list0 empty)))
 
 (define rev*
+  ; acc enthält - umgedreht - alle Element aus list0 vor list
   (lambda (list acc) ; acc: "alle schon gesehenen Element, umgredreht"
     (cond
       ((empty? list) acc)
       ((cons? list)
+       ; Funktionsaufruf ohne Kontext, "tail call", "endrekursiver Aufruf"
        (rev* (rest list)
              (cons (first list) acc))))))
-  
+
+
+; tail call benötigt keinen Platz zum Speichern des Kontext (auf dem "Stack")
+; Allerdings: Auf der JVM benötigt auch ein "tail call" Speicherplatz
+; JVM: Stack ist i.d.R. klein
+; => StackOverflow bei langen Listen
+
