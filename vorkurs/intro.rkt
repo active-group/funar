@@ -246,11 +246,18 @@ class Snake implements Animal {
 ; - die leere Liste
 ; - eine Cons-Liste aus: erstes Element und Rest-Liste
 ;                                                ^^^^^ Selbstbezug
+#;(define list-of-numbers
+    (signature
+     (mixed empty-list
+            cons-list)))
 
-(define list-of-numbers
-  (signature
-   (mixed empty-list
-          cons-list)))
+; vorher: list-of-numbers
+; hinterher: (list-of number)
+(define list-of
+  (lambda (element)
+    (signature
+     (mixed empty-list
+            (cons-list-of element)))))
 
 ; Die leere Liste hat keine Eigenschaften
 (define-record empty-list
@@ -262,11 +269,19 @@ class Snake implements Animal {
 ; Eine Cons-Liste besteht aus:
 ; - erstes Element
 ; - Rest-Liste
-(define-record cons-list
+#;(define-record cons-list
   cons
   cons?
   (first number)
   (rest list-of-numbers))
+
+; vorher: cons-list
+; hinterher: (cons-list-of number)
+(define-record (cons-list-of element)
+  cons
+  cons?
+  (first element)
+  (rest (list-of element)))
 
 (define list0 empty)
 ; Liste mit 1 Element: 17
@@ -277,6 +292,9 @@ class Snake implements Animal {
 (define list3 (cons 2 (cons 3 (cons 5 empty))))
 ; Liste mit vier Elementen: 1 2 3 5
 (define list4 (cons 1 list3))
+
+(define list-of-numbers
+  (signature (list-of number)))
 
 ; Summe der Listenelementen berechnen
 (: list-sum (list-of-numbers -> number))
@@ -326,6 +344,9 @@ class Snake implements Animal {
 ; Alle positiven Zahlen aus einer Liste extrahieren
 (: list-positives (list-of-numbers -> list-of-numbers))
 
+(check-expect (list-positives (cons -1 (cons 1 (cons 3 (cons 4 (cons -5 empty))))))
+              (cons 1 (cons 3 (cons 4 empty))))
+
 (define list-positives
   (lambda (list)
     (cond
@@ -336,5 +357,16 @@ class Snake implements Animal {
            (cons (first list) rest-positives)           
            rest-positives)))))
 
-    
-    
+(: list-extract ((number -> boolean) list-of-numbers -> list-of-numbers))
+
+(define dillo-list1 (cons dillo1 (cons dillo2 empty)))
+
+(define list-extract
+  (lambda (p? list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (define rest-x (list-extract p? (rest list)))
+       (if (p? (first list))
+           (cons (first list) rest-x)           
+           rest-x)))))
