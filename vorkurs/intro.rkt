@@ -70,4 +70,27 @@ C.m(5);
 
 (define cute?
   (lambda (pet)
-    ...)) ; Gerüst
+    (cond ; 3 Fälle => 3 Zweige, Schablone
+      ; Zweig: (Bedingung Ergebnis)
+      ((string=? pet "Hund") #t)
+      ((string=? pet "Katze") #t)
+      ((string=? pet "Schlange") #f))))
+
+; Tiere auf dem texanischen Highway
+
+; Ein Gürteltiere hat folgende Eigenschaften: ("besteht aus")
+; - lebendig oder tot
+; - Gewicht
+; zusammengesetzte Daten
+(define-record dillo ; Signatur
+  make-dillo ; Konstruktor
+  (dillo-alive? boolean) ; Selektor ("Getter")
+  (dillo-weight rational))
+
+(: make-dillo (boolean rational -> dillo))
+
+   
+(define dillo1 (make-dillo #t 10)) ; lebendiges Gürteltier, 10kg schwer
+(define dillo2 (make-dillo #f 12)) ; Gürteltier tot, 12kg schwer
+
+
