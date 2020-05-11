@@ -424,5 +424,43 @@ class Snake implements Animal {
                        recursive-result))
                     list0)))
 
-(list-map feed-dillo (list dillo1 dillo2))
-              
+; Anzahl der Parameter stimmt nicht
+; (list-map feed-dillo (list dillo1 dillo2))
+
+(: feed-dillo-fixed (rational -> (dillo -> dillo)))
+                              
+(define feed-dillo-fixed
+  (lambda (amount)
+    (lambda (dillo)
+      (feed-dillo amount dillo))))
+
+; aus 2stellig 1stellig machen:
+; Moses Schönfinkel
+; Haskell B. Curry
+
+; Was nicht passt, wird passend gemacht.
+(: curry ((%a %b -> %c) -> (%a -> (%b -> %c))))
+;        ^^^^^^^^^^^^^ f
+
+(define curry
+  (lambda (f)
+    (lambda (a) ; %a
+      (lambda (b) ; %b
+        ; müssen %c liefern
+        (f a b)))))
+
+
+(define feed-dillo-fixed2 (curry feed-dillo))
+
+(list-map (lambda (dillo)
+            (feed-dillo 2 dillo))
+          (list dillo1 dillo2))
+
+(list-map (feed-dillo-fixed 2)
+          (list dillo1 dillo2))
+
+(list-map (lambda (dillo)
+            (feed-dillo 1 dillo))
+          (list dillo1 dillo2))
+
+
