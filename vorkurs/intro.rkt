@@ -84,12 +84,14 @@ C.m(5);
 ; zusammengesetzte Daten
 (define-record dillo ; Signatur
   make-dillo ; Konstruktor
+  dillo?
   (dillo-alive? boolean) ; Selektor ("Getter")
   (dillo-weight rational))
 
 (: make-dillo (boolean rational -> dillo))
 (: dillo-alive? (dillo -> boolean))
 (: dillo-weight (dillo -> rational))
+(: dillo? (any -> boolean)) ; Prädikat
 
 ; Signaturverletzung:
 ; (make-dillo 10 #t)
@@ -99,12 +101,29 @@ C.m(5);
 
 
 #|
-class Dillo {
+interface Animal {
+  void runOver();
+  void feed();
+}
+
+class Dillo implements Animal {
   bool isAlive;
   double weight;
+  @Override
   void runOver() {
     this.isAlive = false;
   }
+}
+
+class Parrot implements Animal {
+  @Override
+  void runOver() {
+    ...
+  }
+}
+
+class Snake implements Animal {
+  ...
 }
 |#
 
@@ -165,6 +184,7 @@ class Dillo {
 ; - Gewicht
 (define-record parrot
   make-parrot
+  parrot?
   (parrot-sentence string)
   (parrot-weight rational))
 
@@ -197,13 +217,44 @@ class Dillo {
                  (+ (parrot-weight parrot)
                     amount))))
     
+; Ein Tier auf dem texanischen Highway ist eins folgenden:
+; - ein Gürteltier
+; - ein Papagei
+; Fallunterscheidung, hier: gemischte Daten
+(define animal
+  (signature
+   (mixed dillo parrot)))
 
+; Tier überfahren
+(: run-over-animal (animal -> animal))
 
+(check-expect (run-over-animal dillo1)
+              (run-over-dillo dillo1))
+(check-expect (run-over-animal parrot1)
+              (run-over-parrot parrot1))
 
+(define run-over-animal
+  (lambda (animal)
+    (cond
+      ((dillo? animal) (run-over-dillo animal))
+      ((parrot? animal) (run-over-parrot animal)))))
+    
+; zusammengesetzte Daten "UND"
+; Fallunterscheidung / gemischte Daten "ODER"
 
+; Eine Liste ist eins der folgenden:
+; - die leere Liste
+; - eine Cons-Liste aus: erstes Element und Rest-Liste
+;                                                ^^^^^ Selbstbezug
 
-  
+(define list-of-numbers
+  (signature
+   (mixed empty-list
+          cons-list)))
 
-
+; Die leere Liste hat keine Eigenschaften
+(define-record empty-list
+  make-empty
+  empty?)
 
 
