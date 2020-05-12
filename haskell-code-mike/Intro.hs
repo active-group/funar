@@ -3,7 +3,7 @@
 {-# LANGUAGE KindSignatures #-}
 module Intro where
 
-import Prelude hiding (Monoid, Semigroup)
+import Prelude hiding (Monoid, Semigroup, Functor)
 
 x :: Integer
 x = 5
@@ -220,7 +220,11 @@ unMap :: Map key value -> [(key, value)]
 unMap (Map list) = list
 
 class Functor (f :: * -> *) where
-  universalMap :: (a -> b) -> f a -> f b
+  universalMap :: (a -> b) -> f a -> f b -- a :: *, b :: *, f a :: *
+
+instance Functor Optional where
+  universalMap = optionalMap
+
 
 data Optional a =
     NotThere
