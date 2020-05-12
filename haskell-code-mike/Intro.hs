@@ -222,3 +222,18 @@ mapGet (Map ((key', value'):rest)) key =
   then There value'
   else mapGet (Map rest) key
 
+-- neutrales Element bezüglich der Addition über den natürlichen Zahlen
+-- Menge M, Operation o : M x M -> M
+
+-- Assoziativgesetz (a + b) + c = a + (b + c)
+--                  (a * b) * c = a * (b * c)
+--                  (a && b) && c = a && (b && c)
+
+-- Monoid
+
+class Monoid t where
+  -- combine (combine a b) c == combine a (combine b c)
+  combine :: t -> t -> t
+
+instance Monoid Integer where
+  combine = (+)
