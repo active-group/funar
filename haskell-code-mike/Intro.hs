@@ -1,4 +1,5 @@
 {-# OPTIONS_GHC -fwarn-incomplete-patterns #-}
+{-# LANGUAGE RankNTypes #-}
 module Intro where
 
 x :: Integer
@@ -181,7 +182,7 @@ data Optional a =
   | There a
 
 -- Eintrag in der Map nachschauen
--- mapGet :: Map key value -> key -> Optional value
+mapGet :: forall key value . Eq key => Map key value -> key -> Optional value
 mapGet (Map []) key = NotThere
 mapGet (Map ((key', value'):rest)) key =
   if key == key'
