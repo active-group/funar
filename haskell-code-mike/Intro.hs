@@ -207,6 +207,10 @@ data Optional a =
   | There a
   deriving (Eq, Show)
 
+{-
+data Maybe a = Nothing | Just a
+-}
+
 -- Eintrag in der Map nachschauen
 -- Eq key : Einschränkung, Constraint
 -- "vergleichbar"
