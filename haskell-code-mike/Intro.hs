@@ -248,8 +248,9 @@ instance Functor [] where
 instance Functor (Map key) where
   universalMap = mapMap
 
--- instance Functor Animal where
---   universalMap = undefined
+instance Functor Animal where
+   universalMap f (Dillo liveness weight) = Dillo liveness (f weight) 
+   universalMap f (Parrot sentence weight) = Parrot sentence (f weight)
 
 data Optional a =
     NotThere
