@@ -76,6 +76,7 @@ dillo1 = Dillo { dilloAlive = Alive, dilloWeight = 10 }
 dillo2 = Dillo Dead 12
 
 data Weight = Kg Integer
+  deriving Show
 
 kg quantity
   | quantity >= 0 = Kg quantity
