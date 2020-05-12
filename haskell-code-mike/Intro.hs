@@ -99,8 +99,9 @@ runOverAnimal (Parrot sentence weight) = Parrot "" weight
 -- feedAnimal :: Integer -> (Animal -> Animal)
 -- geschönfinkelte/currifizierte Funktion
 feedAnimal :: Num weight => weight -> Animal weight -> Animal weight
-feedAnimal amount (Dillo liveness weight) = Dillo liveness (weight + amount)
-feedAnimal amount (Parrot sentence weight) = Parrot sentence (weight + amount)
+-- feedAnimal amount (Dillo liveness weight) = Dillo liveness (weight + amount)
+-- feedAnimal amount (Parrot sentence weight) = Parrot sentence (weight + amount)
+feedAnimal amount = universalMap ((+) amount)
 
 -- feedAnimal = \ amount -> \ (Parrot sentence weight) = Parrot sentence (weight + amount)
 
