@@ -169,3 +169,8 @@ primes :: [Integer]
 primes = sieve (natsFrom 2)
 
 y = if 1 > 2 then 5 else 7 -- 1 > 2 ? 5 : 7
+
+z = let x = 5
+        y = 7
+    in x + y
+
