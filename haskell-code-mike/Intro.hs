@@ -70,6 +70,7 @@ data Liveness = Dead | Alive
 data Animal weight =
     Dillo { dilloAlive :: Liveness, dilloWeight :: weight }
   | Parrot String weight
+  | Snake Integer Integer
   deriving (Show, Eq)
 
 dillo1 = Dillo { dilloAlive = Alive, dilloWeight = (kg 10) }
