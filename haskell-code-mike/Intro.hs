@@ -179,14 +179,7 @@ data Map key value = Map [(key, value)]
   -- deriving Eq
 
 instance (Eq key, Eq value) => Eq (Map key value) where
-  Map [] == Map [] = True
-  Map (x1:xs1) == Map [] = False
-  Map [] == Map (x2:xs2) = False
-  Map ((key1, value1):xs1) == map2 =
-    case mapGet map2 key1 of
-      NotThere -> False
-      There value2 -> 
-        (value1 == value2) && (Map xs1 == map2)
+  map1 == map2 = (mapSubset map1 map2) && (mapSubset map2 map1)
 
 mapSubset :: (Eq key, Eq value) => Map key value -> Map key value -> Bool
 mapSubset (Map []) (Map []) = True
