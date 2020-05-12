@@ -143,5 +143,18 @@ listMap f [] = []
 listMap f (x:xs) = (f x) : (listMap f xs)
 
 -- natürliche Zahlen ab ...
+-- lazy evaluation, nicht-strikt
+-- strikt: bei einem Funktionsaufruf werden die Argumente ausgewertet,
+-- bevor die Funktion aufgerufen wird.
+-- nicht-strikt: ein Wert wird erst ermittelt, wenn er gebraucht
 natsFrom :: Integer -> [Integer]
 natsFrom n = n : natsFrom (n + 1)
+
+-- Primzahlen ermitteln
+strikeMultiples :: Integer -> [Integer] -> [Integer]
+strikeMultiples n [] = []
+strikeMultiples n (first:rest) =
+  if rem first n == 0
+  then strikeMultiples n rest
+  else first : (strikeMultiples n rest)
+
