@@ -79,6 +79,7 @@ data Weight = Kg Integer
 
 kg quantity
   | quantity >= 0 = Kg quantity
+  | otherwise = undefined
 
 -- Tier überfahren
 -- runOverAnimal dillo@(Dillo False weight) = dillo
