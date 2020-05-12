@@ -42,7 +42,7 @@ isCute :: Pet -> Bool
 
 isCute Hund = True
 isCute Katze = True
--- isCute Schlange = False
+isCute Schlange = False
 
 -- Tiere auf dem texanischen Highway
 
@@ -136,3 +136,9 @@ list2' = [1, 2]
 listSum :: [Integer] -> Integer
 listSum [] = 0
 listSum (first:rest) = first + (listSum rest)
+
+-- Funktion auf alle Elemente einer Liste anwenden
+listMap :: (a -> b) -> [a] -> [b]
+listMap f [] = []
+listMap f (x:xs) = (f x) : (listMap f xs)
+
