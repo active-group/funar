@@ -60,13 +60,16 @@ data Parrot = Parrot String Integer
 -}
 -- funktioniert nicht: data Animal = Dillo | Parrot
 
+data Liveness = Dead | Alive
+  deriving (Show, Eq)
+
 data Animal =
-    Dillo { dilloAlive :: Bool, dilloWeight :: Integer }
+    Dillo { dilloAlive :: Liveness, dilloWeight :: Integer }
   | Parrot String Integer
   deriving (Show, Eq)
 
-dillo1 = Dillo { dilloAlive = True, dilloWeight = 10 }
-dillo2 = Dillo False 12
+dillo1 = Dillo { dilloAlive = Alive, dilloWeight = 10 }
+dillo2 = Dillo Dead 12
 
 -- Tier überfahren
 runOverAnimal :: Animal -> Animal
@@ -74,5 +77,10 @@ runOverAnimal :: Animal -> Animal
 -- runOverAnimal (Dillo _ weight) = Dillo False weight
 -- runOverAnimal (Dillo { dilloAlive = alive, dilloweight = weight}) = undefined
 -- runOverAnimal dillo@(Dillo {}) = Dillo False (dilloWeight dillo)
-runOverAnimal dillo@(Dillo {}) = dillo { dilloAlive = False }
+runOverAnimal dillo@(Dillo {}) = dillo { dilloAlive = Dead }
 runOverAnimal (Parrot sentence weight) = Parrot "" weight
+
+-- Tier füttern
+feedAnimal :: Integer -> Animal -> Animal
+feedAnimal amount (Dillo liveness weight) = Dillo liveness (weight + amount)
+feedAnimal amount (Parrot sentence weight) = Parrot sentence (weight + amount)
