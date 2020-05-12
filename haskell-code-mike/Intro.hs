@@ -67,32 +67,39 @@ data Parrot = Parrot String Integer
 data Liveness = Dead | Alive
   deriving (Show, Eq)
 
-data Animal =
-    Dillo { dilloAlive :: Liveness, dilloWeight :: Integer }
-  | Parrot String Integer
+data Animal weight =
+    Dillo { dilloAlive :: Liveness, dilloWeight :: weight }
+  | Parrot String weight
   deriving (Show, Eq)
 
 dillo1 = Dillo { dilloAlive = Alive, dilloWeight = 10 }
 dillo2 = Dillo Dead 12
 
+data Weight = Kg Integer
+
+kg quantity
+  | quantity >= 0 = Kg quantity
+
 -- Tier überfahren
-runOverAnimal :: Animal -> Animal
 -- runOverAnimal dillo@(Dillo False weight) = dillo
 -- runOverAnimal (Dillo _ weight) = Dillo False weight
 -- runOverAnimal (Dillo { dilloAlive = alive, dilloweight = weight}) = undefined
 -- runOverAnimal dillo@(Dillo {}) = Dillo False (dilloWeight dillo)
+runOverAnimal :: Animal weight -> Animal weight
 runOverAnimal dillo@(Dillo {}) = dillo { dilloAlive = Dead }
 runOverAnimal (Parrot sentence weight) = Parrot "" weight
 
 -- Tier füttern
-feedAnimal :: Integer -> (Animal -> Animal)
+-- feedAnimal :: Integer -> (Animal -> Animal)
 -- geschönfinkelte/currifizierte Funktion
+feedAnimal :: Num weight => weight -> Animal weight -> Animal weight
 feedAnimal amount (Dillo liveness weight) = Dillo liveness (weight + amount)
 feedAnimal amount (Parrot sentence weight) = Parrot sentence (weight + amount)
 
 -- feedAnimal = \ amount -> \ (Parrot sentence weight) = Parrot sentence (weight + amount)
 
-feedAnimal' :: (Integer, Animal) -> Animal
+-- feedAnimal' :: (Integer, Animal) -> Animal
+feedAnimal' :: Num weight => (weight, Animal weight) -> Animal weight
 feedAnimal' (amount, (Dillo liveness weight)) = Dillo liveness (weight + amount)
 feedAnimal' (amount, (Parrot sentence weight)) = Parrot sentence (weight + amount)
 
@@ -230,6 +237,9 @@ instance Functor [] where
 
 instance Functor (Map key) where
   universalMap = mapMap
+
+-- instance Functor Animal where
+--   universalMap = undefined
 
 data Optional a =
     NotThere
