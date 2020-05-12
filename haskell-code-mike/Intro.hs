@@ -72,12 +72,13 @@ data Animal weight =
   | Parrot String weight
   deriving (Show, Eq)
 
-dillo1 = Dillo { dilloAlive = Alive, dilloWeight = 10 }
-dillo2 = Dillo Dead 12
+dillo1 = Dillo { dilloAlive = Alive, dilloWeight = (kg 10) }
+dillo2 = Dillo Dead (kg 12)
 
 data Weight = Kg Integer
   deriving Show
 
+kg :: Integer -> Weight
 kg quantity
   | quantity >= 0 = Kg quantity
   | otherwise = undefined
