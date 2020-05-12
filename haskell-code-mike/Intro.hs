@@ -105,6 +105,9 @@ curryA :: ((a, b) -> c) -> (a -> b -> c)
 -- curryA f weight animal = f (weight, animal)
 curryA f a b = f (a, b)
 
+-- inverse curryA
 uncurryA :: (a -> b -> c) -> ((a, b) -> c)
 uncurryA f =
   \ (a, b) -> f a b
+
+flipA :: (a -> b -> c) -> (b -> a -> c)
