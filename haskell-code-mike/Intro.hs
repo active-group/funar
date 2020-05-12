@@ -184,7 +184,7 @@ instance (Eq key, Eq value) => Eq (Map key value) where
 mapSubset :: (Eq key, Eq value) => Map key value -> Map key value -> Bool
 mapSubset (Map []) (Map []) = True
 mapSubset (Map (x1:xs1)) (Map []) = False
-mapSubset (Map []) (Map (x2:xs2)) = False
+mapSubset (Map []) (Map (x2:xs2)) = True
 mapSubset (Map ((key1, value1):xs1))  map2 =
   case mapGet map2 key1 of
     NotThere -> False
