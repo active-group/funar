@@ -195,7 +195,7 @@ mapSubset (Map ((key1, value1):xs1))  map2 =
 map1 = Map [(1, "Mike"), (2, "Marcello")]
 map2 = Map [(2, "Marcello"), (1, "Mike")]
 
-map3 = Map [(2, "Marcello"), (2, "Nathan"), (1, "Mike")]
+map3 = Map [(2, "Marcello"), (2, "Marcello"), (1, "Mike")]
 
 {-
 class Eq a where
