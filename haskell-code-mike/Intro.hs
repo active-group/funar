@@ -112,3 +112,22 @@ uncurryA f =
 
 flipA :: (a -> b -> c) -> (b -> a -> c)
 flipA f a b = f b a
+
+flipT :: ((a, b) -> c) -> ((b, a) -> c)
+-- flipT f (b, a) = f (a, b)
+-- flipT f = uncurryA (flipA (curryA f))
+flipT = uncurryA . flipA . curryA
+-- Funktionskomposition o
+-- (.) :: (b -> c) -> (a -> b) -> (a -> c)
+
+-- (>>) :: (a -> b) -> (b -> c) -> (a -> c)
+
+data IntList =
+    EmptyIntList
+  | ConsIntList Integer IntList
+
+list0 = []
+list1 = 1:[] -- : gesprochen "cons", 1elementige Liste mit 1
+list1' = [1] -- gleiche Liste
+list2 = 1:2:[]
+list2' = [1, 2]
