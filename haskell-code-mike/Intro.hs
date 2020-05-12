@@ -176,12 +176,19 @@ z = let x = 5
     in x + y
 
 data Map key value = Map [(key, value)]
+  deriving Eq
+
+map1 = Map [(1, "Mike"), (2, "Marcello")]
+map2 = Map [(2, "Marcello"), (1, "Mike")]
 
 data Optional a =
     NotThere
   | There a
+  deriving (Eq, Show)
 
 -- Eintrag in der Map nachschauen
+-- Eq key : Einschränkung, Constraint
+-- "vergleichbar"
 mapGet :: forall key value . Eq key => Map key value -> key -> Optional value
 mapGet (Map []) key = NotThere
 mapGet (Map ((key', value'):rest)) key =
