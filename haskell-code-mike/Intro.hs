@@ -90,3 +90,12 @@ feedAnimal' :: (Integer, Animal) -> Animal
 feedAnimal' (amount, (Dillo liveness weight)) = Dillo liveness (weight + amount)
 feedAnimal' (amount, (Parrot sentence weight)) = Parrot sentence (weight + amount)
 
+-- feedAnimal' -> feedAnimal
+curryA :: ((Integer, Animal) -> Animal) -> (Integer -> (Animal -> Animal))
+{-
+curryA f =
+  \ weight ->
+    \ animal ->
+      f (weight, animal)
+-}
+curryA f weight animal = f (weight, animal)
