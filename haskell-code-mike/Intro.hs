@@ -2,7 +2,7 @@
 {-# LANGUAGE RankNTypes #-}
 module Intro where
 
-import Prelude hiding (Monoid)
+import Prelude hiding (Monoid, Semigroup)
 
 x :: Integer
 x = 5
@@ -231,11 +231,17 @@ mapGet (Map ((key', value'):rest)) key =
 --                  (a * b) * c = a * (b * c)
 --                  (a && b) && c = a && (b && c)
 
--- Monoid
+-- Halbgruppe
 
-class Monoid t where
+class Semigroup t where
   -- combine (combine a b) c == combine a (combine b c)
   combine :: t -> t -> t
 
-instance Monoid Integer where
+instance Semigroup Integer where
   combine = (+)
+
+-- Semigroup + neutrales Element
+class Semigroup t => Monoid t where
+  -- combine neutral x == combine x neutral == x
+  neutral :: t
+
