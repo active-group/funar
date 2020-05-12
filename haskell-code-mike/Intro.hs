@@ -210,6 +210,10 @@ data Optional a =
   | There a
   deriving (Eq, Show)
 
+optionalMap :: (a -> b) -> Optional a -> Optional Bool
+optionalMap f NotThere = NotThere
+optionalMap f (There a) = There (f a)
+
 {-
 data Maybe a = Nothing | Just a
 -}
@@ -237,11 +241,23 @@ class Semigroup t where
   -- combine (combine a b) c == combine a (combine b c)
   combine :: t -> t -> t
 
+-- ungünstig:
 instance Semigroup Integer where
   combine = (+)
 
--- Semigroup + neutrales Element
+data Additive = Additive Integer
+
+instance Semigroup Additive where
+  combine (Additive a) (Additive b) = Additive (a + b)
+
+data Multiplicative = Multiplicative Integer
+
+instance Semigroup Multiplicative where
+  combine (Multiplicative a) (Multiplicative b) = Multiplicative (a * b)
+
+-- Monoid: Semigroup + neutrales Element
 class Semigroup t => Monoid t where
   -- combine neutral x == combine x neutral == x
   neutral :: t
 
+-- Gruppe ... Ring ...
