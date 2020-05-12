@@ -2,6 +2,8 @@
 {-# LANGUAGE RankNTypes #-}
 module Intro where
 
+import Prelude hiding (Monoid)
+
 x :: Integer
 x = 5
 
