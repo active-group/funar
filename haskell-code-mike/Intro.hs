@@ -164,3 +164,8 @@ strikeMultiples' n list = filter (\ x -> rem x n /= 0) list
 sieve :: [Integer] -> [Integer]
 sieve [] = []
 sieve (first:rest) = first : (sieve (strikeMultiples first rest))
+
+primes :: [Integer]
+primes = sieve (natsFrom 2)
+
+y = if 1 > 2 then 5 else 7 -- 1 > 2 ? 5 : 7
