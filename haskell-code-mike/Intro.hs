@@ -131,3 +131,8 @@ list1 = 1:[] -- : gesprochen "cons", 1elementige Liste mit 1
 list1' = [1] -- gleiche Liste
 list2 = 1:2:[]
 list2' = [1, 2]
+
+-- Summe aller Listenelemente
+listSum :: [Integer] -> Integer
+listSum [] = 0
+listSum (first:rest) = first + (listSum rest)
