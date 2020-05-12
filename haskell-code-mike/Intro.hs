@@ -1,5 +1,6 @@
 {-# OPTIONS_GHC -fwarn-incomplete-patterns #-}
 {-# LANGUAGE RankNTypes #-}
+{-# LANGUAGE KindSignatures #-}
 module Intro where
 
 import Prelude hiding (Monoid, Semigroup)
@@ -218,9 +219,8 @@ mapMap f (Map ((key1, value1):rest)) =
 unMap :: Map key value -> [(key, value)]
 unMap (Map list) = list
 
-class Functor f where
+class Functor (f :: * -> *) where
   universalMap :: (a -> b) -> f a -> f b
-
 
 data Optional a =
     NotThere
