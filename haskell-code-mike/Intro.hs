@@ -205,12 +205,29 @@ class Eq a where
   (==) :: a -> a -> Bool
 -}
 
+-- optionalMap :: (a -> b) -> Optional a -> Optional b
+-- listMap     :: (a -> b) -> [a]        -> [b]
+-- listMap     :: (a -> b) -> List a     -> List b
+-- suggeriert Abstraktion über Optional / List / Map key
+-- universalMap :: (a -> b) -> f a -> f b
+mapMap :: (a -> b) -> (Map key) a -> (Map key) b
+mapMap f (Map []) = Map []
+mapMap f (Map ((key1, value1):rest)) =
+  Map ((key1, f value1) : unMap (mapMap f (Map rest)))
+
+unMap :: Map key value -> [(key, value)]
+unMap (Map list) = list
+
+class Functor f where
+  universalMap :: (a -> b) -> f a -> f b
+
+
 data Optional a =
     NotThere
   | There a
   deriving (Eq, Show)
 
-optionalMap :: (a -> b) -> Optional a -> Optional Bool
+optionalMap :: (a -> b) -> Optional a -> Optional b
 optionalMap f NotThere = NotThere
 optionalMap f (There a) = There (f a)
 
