@@ -158,3 +158,9 @@ strikeMultiples n (first:rest) =
   then strikeMultiples n rest
   else first : (strikeMultiples n rest)
 
+strikeMultiples' n list = filter (\ x -> rem x n /= 0) list
+
+-- Vorbedingung: erstes Element ist Primzahl
+sieve :: [Integer] -> [Integer]
+sieve [] = []
+sieve (first:rest) = first : (sieve (strikeMultiples first rest))
