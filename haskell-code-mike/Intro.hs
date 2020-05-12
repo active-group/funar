@@ -233,7 +233,11 @@ unMap :: Map key value -> [(key, value)]
 unMap (Map list) = list
 
 class Functor (f :: * -> *) where
+  -- universalMap identity x = x
+  -- universalMap f (universalMap g x) = universalMap (f . g) x 
   universalMap :: (a -> b) -> f a -> f b -- a :: *, b :: *, f a :: *
+
+identity x = x
 
 instance Functor Optional where
   universalMap = optionalMap
