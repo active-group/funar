@@ -111,3 +111,4 @@ uncurryA f =
   \ (a, b) -> f a b
 
 flipA :: (a -> b -> c) -> (b -> a -> c)
+flipA f a b = f b a
