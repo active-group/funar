@@ -78,6 +78,9 @@ dillo2 = Dillo Dead (kg 12)
 data Weight = Kg Integer
   deriving Show
 
+instance Num Weight where
+  (Kg w1) + (Kg w2) = Kg (w1 + w2)
+
 kg :: Integer -> Weight
 kg quantity
   | quantity >= 0 = Kg quantity
