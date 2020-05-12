@@ -174,3 +174,17 @@ z = let x = 5
         y = 7
     in x + y
 
+data Map key value = Map [(key, value)]
+
+data Optional a =
+    NotThere
+  | There a
+
+-- Eintrag in der Map nachschauen
+-- mapGet :: Map key value -> key -> Optional value
+mapGet (Map []) key = NotThere
+mapGet (Map ((key', value'):rest)) key =
+  if key == key'
+  then There value'
+  else mapGet (Map rest) key
+
