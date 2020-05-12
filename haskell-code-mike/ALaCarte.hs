@@ -38,5 +38,9 @@ instance Functor Add where
     fmap f (Add e1 e2) = Add (f e1) (f e2)
 
 instance (Functor f, Functor g) => Functor (f :+: g) where
-    fmap f (Inl e1) = Inl (fmap f e1)
-    fmap f (Inr e1) = Inr (fmap f e2)
+    fmap function (Inl e1) = Inl (fmap function e1)
+    fmap function (Inr e2) = Inr (fmap function e2)
+
+foldExpr ::  (f a -> a) -> Expr f -> a
+foldExpr combine (In t) =
+    foldExpr combine t
