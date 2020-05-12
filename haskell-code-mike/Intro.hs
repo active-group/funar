@@ -189,7 +189,7 @@ mapSubset (Map ((key1, value1):xs1))  map2 =
   case mapGet map2 key1 of
     NotThere -> False
     There value2 -> 
-      let xs1' = filter (\ (key1', value1') -> key1 /= key1') xs1'
+      let xs1' = filter (\ (key1', value1') -> key1 /= key1') xs1
       in (value1 == value2) && (mapSubset (Map xs1') map2)
 
 
