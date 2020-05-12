@@ -142,3 +142,6 @@ listMap :: (a -> b) -> [a] -> [b]
 listMap f [] = []
 listMap f (x:xs) = (f x) : (listMap f xs)
 
+-- natürliche Zahlen ab ...
+natsFrom :: Integer -> [Integer]
+natsFrom n = n : natsFrom (n + 1)
