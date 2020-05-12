@@ -225,6 +225,11 @@ class Functor (f :: * -> *) where
 instance Functor Optional where
   universalMap = optionalMap
 
+instance Functor [] where
+  universalMap = listMap
+
+instance Functor (Map key) where
+  universalMap = mapMap
 
 data Optional a =
     NotThere
