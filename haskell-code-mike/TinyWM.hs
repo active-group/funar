@@ -30,7 +30,7 @@ view stackIndex stackSet =
 
 -- | /O(log s)/. Extract the element on the top of the current stack.
 -- If no such element exists, Nothing is returned.
-peek :: Ord window => StackSet window -> Maybe window
+peek :: StackSet window -> Maybe window
 peek stackSet =
   case Map.lookup (current stackSet) (stacks stackSet) of
     Nothing -> Nothing
