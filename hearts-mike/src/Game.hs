@@ -206,4 +206,21 @@ data GameEvent =
   | GameEnded Player
   deriving Show
 
+  -- Event: was passiert ist
+  -- Command: was passieren soll / was sich jemand wünscht
+
+data GameCommand =
+    DealHands PlayerHands
+  | PlayCard Player Card
+
+-- type ProcessGameEvent = GameEvent -> GameState -> GameState
+-- processGameEvent :: ProcessGameEvent
+
+processGameCommand :: GameCommand -> GameState -> [GameEvent]
+processGameCommand (DealHands hands) state = undefined
+processGameCommand (PlayCard player card) = undefined
+
+
+
+
 
