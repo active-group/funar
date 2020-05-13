@@ -174,7 +174,7 @@ gameOver state = all isHandEmpty (Map.elems (gameStateHands state))
 -- ist diese Runde vorbei?
 turnOver :: GameState -> Bool
 turnOver state =
-  length (gameStatePlayers state) == trickSize (gameStateTrick state)
+  Zipper.length (gameStatePlayers state) == trickSize (gameStateTrick state)
 
 -- Wert eines Stapels
 stackScore :: Stack -> Integer
