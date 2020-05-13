@@ -213,9 +213,34 @@ data GameCommand =
     DealHands PlayerHands
   | PlayCard Player Card
 
--- type ProcessGameEvent = GameEvent -> GameState -> GameState
--- processGameEvent :: ProcessGameEvent
-processGameEvent = undefined
+-- Ereignis in den Zustand einarbeiten
+processGameEvent :: GameEvent -> GameState -> GameState
+processGameEvent (HandDealt player hand) state =
+  state {
+    gameStateHands = Map.insert player hand (gameStateHands state),
+    gameStateTrick = emptyTrick
+  }
+processGameEvent (PlayerTurnChanged player) state =
+  state {
+    gameStatePlayers  = rotateTo player (gameStatePlayers state)
+  }
+processGameEvent (LegalCardPlayed player card) state =
+  state {
+    gameStateHands = Map.alter (fmap (removeCard card))
+                               player
+                               (gameStateHands state),
+    gameStateTrick = addToTrick player card (gameStateTrick state)
+  }
+processGameEvent (TrickTaken player trick) state =
+  state {
+    gameStateStacks =
+      Map.alter (fmap (Set.union (Set.fromList (cardsOfTrick trick))))
+                player      
+                (gameStateStacks state),
+    gameStateTrick = emptyTrick
+  }
+processGameEvent (IllegalCardPlayed player card) state = state
+processGameEvent (GameEnded player) state = state
 
 processGameCommand :: GameCommand -> GameState -> [GameEvent]
 processGameCommand (DealHands hands) state =
