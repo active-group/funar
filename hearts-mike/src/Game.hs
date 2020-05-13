@@ -107,6 +107,10 @@ type PlayerStacks = Map Player Stack
 -- Hände der Spieler
 type PlayerHands  = Map Player Hand
 
+-- "make illegal states unrepresentable"
+-- Reihenfolge der Spieler kann sich ändern
+-- Menge der Spieler in gameStatePlayers, gameStateHands und gameStateStacks
+-- könnte differieren
 data GameState =
   GameState
   { gameStatePlayers :: [Player], -- wer dran ist, steht vorn
@@ -120,7 +124,9 @@ data GameState =
 emptyGameState :: [Player] -> GameState
 emptyGameState players =
   GameState {
+    -- bißchen Inkonsistenz:
     gameStatePlayers = players,
+    -- warum nicht auch eine Map mit allen Spielern?
     gameStateHands = Map.empty,
     gameStateStacks = Map.fromList (map (\ player -> (player, Set.empty)) players),
     gameStateTrick = emptyTrick
@@ -171,3 +177,33 @@ gameWinner state =
   let playerScores = fmap stackScore (gameStateStacks state)
       cmp (_, score1) (_, score2) = compare score1 score2
   in fst (Foldable.minimumBy cmp (Map.toList playerScores))
+
+{-
+Events:
+
+Event Storming:
+Für Rekonstruktion wichtig:
+- Karten werden ausgeteilt
+- Karte wird auf den Tisch gelegt
+
+ergibt sich aus der Entwicklung des Codes:
+Für Spielablauf hilfreich:
+- war die ausgespielte Karte zulässig oder nicht
+- Stich wird genommen
+- Auswertung des Stich
+- Letzte Stich wird genommen / Spiel ist vorbei
+- Gewinner ermittelt
+
+- (Tauschen der Karten)
+
+-}
+data GameEvent =
+    HandDealt Player Hand
+  | PlayerTurnChanged Player
+  | LegalCardPlayed Player Card
+  | TrickTaken Player Trick
+  | IllegalCardPlayed Player Card
+  | GameEnded Player
+  deriving Show
+
+
