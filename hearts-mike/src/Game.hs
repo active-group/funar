@@ -97,12 +97,13 @@ rotateTo element zipper =
     Nothing -> rotateTo' Zipper.right element zipper
     Just zipper -> zipper
   
-rotateToLeft move element zipper =
+rotateTo' :: t -> t -> Maybe (Zipper t)
+rotateTo' move element zipper =
   if element == Zipper.cursor zipper
   then Just zipper
   else case move zipper of
         Nothing -> Nothing
-        Just zipper' rotateToLeft element zipper'
+        Just zipper' -> rotateToLeft element zipper'
 
 -- * Spiellogik
 
