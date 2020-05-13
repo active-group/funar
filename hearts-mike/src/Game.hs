@@ -93,17 +93,19 @@ cardScore _ = 0
 -- Liste zu einem bestimmten Element rotieren
 rotateTo :: Eq a => a -> Zipper a -> Zipper a
 rotateTo element zipper =
-  case rotateTo' Zipper.left element zipper of
-    Nothing -> rotateTo' Zipper.right element zipper
+  case rotateTo' Zipper.safeLeft element zipper of
+    Nothing -> 
+      let Just zipper' = (rotateTo' Zipper.safeRight element zipper)
+      in zipper'
     Just zipper -> zipper
   
-rotateTo' :: t -> t -> Maybe (Zipper t)
+rotateTo' :: Eq t => (Zipper t -> Maybe (Zipper t)) -> t -> Zipper t -> Maybe (Zipper t)
 rotateTo' move element zipper =
   if element == Zipper.cursor zipper
   then Just zipper
   else case move zipper of
         Nothing -> Nothing
-        Just zipper' -> rotateToLeft element zipper'
+        Just zipper' -> rotateTo' move element zipper'
 
 -- * Spiellogik
 
