@@ -59,8 +59,7 @@ leadingCardOfTrick trick = snd (last trick)
 
 -- wer muß den Stich einziehen?
 whoTakesTrick :: Trick -> Player
-whoTakesTrick [] = undefined
-whoTakesTrick trick =
+whoTakesTrick trick@[_, _, _, _] =
   let loop player _ [] = player
       loop player card ((player', card') : rest) =
         if cardBeats card' card
