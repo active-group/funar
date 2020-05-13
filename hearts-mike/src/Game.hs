@@ -116,7 +116,7 @@ type PlayerHands  = Map Player Hand
 -- könnte differieren
 data GameState =
   GameState
-  { gameStatePlayers :: [Player], -- wer dran ist, steht vorn
+  { gameStatePlayers :: Zipper Player, -- wer dran ist, steht vorn
     gameStateHands   :: PlayerHands,
     gameStateStacks  :: PlayerStacks,
     gameStateTrick   :: Trick
