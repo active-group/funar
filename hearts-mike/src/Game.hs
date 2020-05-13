@@ -215,10 +215,33 @@ data GameCommand =
 
 -- type ProcessGameEvent = GameEvent -> GameState -> GameState
 -- processGameEvent :: ProcessGameEvent
+processGameEvent = undefined
 
 processGameCommand :: GameCommand -> GameState -> [GameEvent]
-processGameCommand (DealHands hands) state = undefined
-processGameCommand (PlayCard player card) = undefined
+processGameCommand (DealHands hands) state =
+  map (uncurry HandDealt) (Map.toList hands)
+processGameCommand (PlayCard player card) state =
+  if playValid state player card
+  then
+    let event1 = LegalCardPlayed player card
+        state1 = processGameEvent event1 state
+    in
+      if turnOver state1
+      then
+        let trick = gameStateTrick state1
+            trickTaker = whoTakesTrick trick
+            event2 = TrickTaken trickTaker trick 
+            state2 = processGameEvent event2 state1
+            event3 = if gameOver state2
+                     then GameEnded (gameWinner state2)
+                     else PlayerTurnChanged trickTaker
+        in [event1, event2, event3]
+      else
+        let event2 = PlayerTurnChanged (playerAfter state1 player)
+        in [event1, event2]
+  else
+    [IllegalCardPlayed player card]
+
 
 
 
