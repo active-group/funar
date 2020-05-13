@@ -90,16 +90,19 @@ cardScore _ = 0
 
 -- * 
 
--- Liste rotieren
-rotate :: [a] -> [a]
-rotate (x : xs) = xs ++ [x]
-rotate [] = undefined
-
 -- Liste zu einem bestimmten Element rotieren
-rotateTo :: Eq a => a -> [a] -> [a]
-rotateTo y xs@(x : xs') | x == y = xs
-                        | otherwise = rotateTo y (xs' ++ [x])
-rotateTo y [] = undefined
+rotateTo :: Eq a => a -> Zipper a -> Zipper a
+rotateTo element zipper =
+  case rotateTo' Zipper.left element zipper of
+    Nothing -> rotateTo' Zipper.right element zipper
+    Just zipper -> zipper
+  
+rotateToLeft move element zipper =
+  if element == Zipper.cursor zipper
+  then Just zipper
+  else case move zipper of
+        Nothing -> Nothing
+        Just zipper' rotateToLeft element zipper'
 
 -- * Spiellogik
 
@@ -128,7 +131,7 @@ emptyGameState :: [Player] -> GameState
 emptyGameState players =
   GameState {
     -- bißchen Inkonsistenz:
-    gameStatePlayers = players,
+    gameStatePlayers = Zipper.fromList players,
     -- warum nicht auch eine Map mit allen Spielern?
     gameStateHands = Map.empty,
     gameStateStacks = Map.fromList (map (\ player -> (player, Set.empty)) players),
@@ -144,11 +147,11 @@ gameAtBeginning gameState =
 -- wer ist als nächstes dran?
 playerAfter :: GameState -> Player -> Player
 playerAfter state player =
-   head (rotate (rotateTo player (gameStatePlayers state)))
+   Zipper.cursor (Zipper.left (rotateTo player (gameStatePlayers state)))
 
 -- wer ist gerade dran?
 currentPlayer state =
-  head (gameStatePlayers state)
+  Zipper.cursor (gameStatePlayers state)
 
 -- ist es zulässig, diese Karte auszuspielen?
 playValid :: GameState -> Player -> Card -> Bool
