@@ -30,9 +30,17 @@ left :: Zipper a -> Zipper a
 left  (Zip (a:reverseFront) back) = Zip reverseFront (a:back)
 left  zipper = zipper
 
+safeLeft :: Zipper a -> Maybe (Zipper a)
+safeLeft  (Zip (a:reverseFront) back) = Just (Zip reverseFront (a:back))
+safeLeft  _ = Nothing
+
 right :: Zipper a -> Zipper a
 right (Zip reverseFront (a:back)) = Zip (a:reverseFront) back
 right zipper = zipper
+
+safeRight :: Zipper a -> Maybe (Zipper a)
+safeRight (Zip reverseFront (a:back)) = Just (Zip (a:reverseFront) back)
+safeRight _ = Nothing
 
 length :: Zipper a -> Int
 length (Zip reverseFront back) = (Prelude.length reverseFront) + (Prelude.length back)
