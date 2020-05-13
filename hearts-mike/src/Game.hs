@@ -9,6 +9,9 @@ import qualified Data.Map.Strict as Map
 
 import Data.Map.Strict (Map, (!))
 
+import qualified Zipper as Zipper
+import Zipper (Zipper)
+
 import Cards
 
 import Debug.Trace (trace)
