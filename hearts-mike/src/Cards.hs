@@ -3,6 +3,7 @@ module Cards where
 import qualified Data.Set as Set
 import Data.Set (Set)
 
+-- Farbe
 data Suit = Diamonds | Clubs | Spades | Hearts
   deriving (Show, Eq, Ord)
 
@@ -36,7 +37,7 @@ deck :: [Card]
 deck = [Card suit' rank' | rank' <- allRanks, suit' <- allSuits]
 
 -- |during the game, a hand contains at least one card
-type Hand = Set Card
+type Hand = Set Card -- sollte vielleicht neuer Typ sein
 
 -- |does a hand contain zero cards?
 isHandEmpty :: Hand -> Bool
