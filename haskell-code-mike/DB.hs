@@ -1,4 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE GADTs, DeriveFunctor, DeriveAnyClass #-}
+
 
 module DB where
 
@@ -39,12 +41,29 @@ data DBCommand a =
 data Free f a = -- freie Monade
    Pure a -- Done
  | Impure (f (Free f a))
+ deriving Applicative
 
-data DBCommand' x =
-    Put' String Integer (() -> x)
-  | Get' String (Integer -> x)
+{-
+type DBCommand'' =
+Free DBCommand' a =
+    Pure a
+  | Impure (DBCommand' (Free DBCommand' a))
 
--- data DBCommand'' a = Free DBCommand' a
+
+-}
+
+data DBCommand' self =
+    Put' String Integer (() -> self)
+  | Get' String (Integer -> self)
+
+type DBCommand'' a = Free DBCommand' a
+
+instance Functor f => Monad (Free f) where
+  return = Pure
+
+  (Pure result) >>= cont = cont result
+  (Impure f) >>= cont =
+    Impure (fmap (>>= cont) f)
 
 -- put :: String Integer DB -> DB
 
