@@ -34,6 +34,16 @@ data Payment = Payment Date Double Currency
 scalePayment :: Double -> Payment -> Payment
 scalePayment factor (Payment date amount currency) = Payment date (factor * amount) currency
 
+both :: Contract -> Contract -> Contract
+both Zero c = c
+both c Zero = c
+both c1 c2 = Both c1 c2
+
+multiple :: Double -> Contract -> Contract
+multiple 0 c = Zero
+multiple f Zero = Zero
+multiple f c = Multiple f c
+
 -- Zahlungen bis zu einem bestimmten Zeitpunkt
 step :: Contract -> Date -> ([Payment], Contract)
 step Zero date = ([], Zero)
@@ -41,7 +51,7 @@ step (One currency) date =
     ([Payment date 1.0 currency], Zero)
 step (Multiple factor contract') date =
     let (payments', residualContract) = step contract' date
-    in (fmap (scalePayment factor) payments', Multiple factor residualContract)
+    in (fmap (scalePayment factor) payments', multiple factor residualContract)
 step contract@(Later date' contract') date =
     if date >= date'
     then step contract' date
@@ -49,7 +59,7 @@ step contract@(Later date' contract') date =
 step (Both contract1 contract2) date =
     let (payments1, residualContract1) = step contract1 date
         (payments2, residualContract2) = step contract2 date
-    in (payments1 ++ payments2, Both residualContract1 residualContract2)
+    in (payments1 ++ payments2, both residualContract1 residualContract2)
 step (Give contract') date =
     let (payments', residualContract) = step contract' date
     in (fmap (scalePayment (-1)) payments', Give residualContract)
