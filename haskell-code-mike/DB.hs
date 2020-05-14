@@ -125,6 +125,10 @@ dbToSQLite connection (Get key cont) =
      dbToSQLite connection (cont value)
 dbToSQLite connection (Done result) = return result
 
+p2 = do put "Mike" 15
+        x <- get "Mike"
+        return x
+
 execDB :: DBCommand a -> IO a
 execDB command =
   do connection <- open ":memory"
