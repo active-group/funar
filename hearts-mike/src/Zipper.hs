@@ -42,6 +42,7 @@ right (Zip reverseFront (a:back)) = Zip (a:reverseFront) back
 right zipper = zipper
 
 safeRight :: Zipper a -> Maybe (Zipper a)
+safeRight (Zip _ [_]) = Nothing
 safeRight (Zip reverseFront (a:back)) = Just (Zip (a:reverseFront) back)
 safeRight _ = Nothing
 
