@@ -118,7 +118,7 @@ instance ToRow Entry where
 
 dbToSQLite :: Connection -> DBCommand a -> IO a
 dbToSQLite connection (Put key value cont) =
-  do execute connection "INSERT INTO test (key, value) VALUES (?, ?)" (Entry key value)
+  do execute connection "UPDATE test (key, value) VALUES (?, ?)" (Entry key value)
      dbToSQLite connection (cont ())
 dbToSQLite connection (Get key cont) =
   do [Entry _ value] <- queryNamed connection "SELECT * from test WHERE key = :key" [":key" := key]
