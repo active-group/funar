@@ -29,6 +29,7 @@ zcb date amount currency = Later date (Multiple amount (One currency))
 
 
 data Payment = Payment Date Double Currency
+  deriving Show
 
 scalePayment :: Double -> Payment -> Payment
 scalePayment factor (Payment date amount currency) = Payment date (factor * amount) currency
