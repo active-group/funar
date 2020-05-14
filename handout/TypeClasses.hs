@@ -44,5 +44,5 @@ class Applicative m => Monad m where
 {-
 return a >>= k  =  k a
 m >>= return =  m
-m >>= (\\x -> k x >>= h)  =  (m >>= k) >>= h
+m >>= (\x -> k x >>= h)  =  (m >>= k) >>= h
 -}
