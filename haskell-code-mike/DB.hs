@@ -43,7 +43,7 @@ p1 = Put "Mike" 15 (\() ->
      Put "Mike" (x + 1) (\() ->
      Done ("Mike ist " ++ show x))))
 
-p1' = (put "Mike" 15) `splice` (\() ->
+p1' = (put "Mike" 15) >>= (\() ->
       (get "Mike") `splice` (\x ->
       (put "Mike" (x + 1)) `splice` (\() ->
       return' ("Mike ist " ++ show x))))
@@ -55,6 +55,8 @@ put key value = Put key value Done
 get :: String -> DBCommand Integer
 get key = Get key Done
 
+-- (.) :: (b -> c) -> (a -> b) -> (a -> c)
+
 splice :: DBCommand a -> (a -> DBCommand b) -> DBCommand b
 splice (Put key value cont) next =
   Put key value (\ () ->
@@ -64,7 +66,30 @@ splice (Get key cont) next =
     (cont value) `splice` next)
 splice (Done result) next = next result
 
-return' x = Done x
+-- Kleisli arrow
+composeDBCommand :: (a -> DBCommand b) -> (b -> DBCommand c) -> (a -> DBCommand c)
+composeDBCommand f g =
+  \ a ->
+    (f a) `splice` g
+
+instance Functor DBCommand where
+  -- fmap
+
+instance Applicative DBCommand where
+
+instance Monad DBCommand where
+  (>>=) = splice
+  return = Done
+
+p1'' = do put "Mike" 15
+          x <- get "Mike"
+          put "Mike" (x + 1)
+          return ("Mike ist " ++ show x)
+
+return' :: a -> DBCommand a
+return' = Done
+
+
 
 evalDB :: Map String Integer -> DBCommand a -> a
 evalDB db (Put key value cont) =
