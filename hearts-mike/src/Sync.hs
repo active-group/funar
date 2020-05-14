@@ -77,7 +77,7 @@ playEvent players gameEvent =
 
 -- Befehle ausführen bis zum bitteren Ende
 playCommand :: Players effects -> GameCommand -> Sem (GameEventSourcing ': effects) ()
-playCommand players gameCommand | trace ("playCommand " ++ show gameCommand) False = undefined
+-- playCommand players gameCommand | trace ("playCommand " ++ show gameCommand) False = undefined
 playCommand players gameCommand =
   do events <- gameCommandEventsM gameCommand
      gameOver <- gameOverM

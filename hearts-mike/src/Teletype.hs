@@ -11,7 +11,14 @@ data Teletype m a where
   ReadTTY  :: Teletype m String
   WriteTTY :: String -> Teletype m ()
 
-makeSem ''Teletype
+makeSem ''Teletype -- generiert readTTY, writeTTY
+
+-- Sem: die "freie" Monade
+-- r-Parameter '[Teletype] : welche Features, als Liste auf Typebene
+p1 :: Sem '[Teletype] Integer
+p1 = do x <- readTTY
+        writeTTY x
+        return 5
 
 teletypeToIO :: Member (Embed IO) r => Sem (Teletype ': r) a -> Sem r a
 teletypeToIO = interpret $ \case

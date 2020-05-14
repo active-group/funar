@@ -90,6 +90,12 @@ cardScore _ = 0
 
 -- * 
 
+rotate :: Zipper a -> Zipper a
+rotate zipper =
+  case Zipper.safeRight zipper of
+    Just zipper' -> zipper'
+    Nothing -> Zipper.farLeft zipper
+
 -- Liste zu einem bestimmten Element rotieren
 rotateTo :: Eq a => a -> Zipper a -> Zipper a
 rotateTo element zipper =
@@ -150,7 +156,7 @@ gameAtBeginning gameState =
 -- wer ist als nächstes dran?
 playerAfter :: GameState -> Player -> Player
 playerAfter state player =
-   Zipper.cursor (Zipper.left (rotateTo player (gameStatePlayers state)))
+   Zipper.cursor (rotate (rotateTo player (gameStatePlayers state)))
 
 -- wer ist gerade dran?
 currentPlayer state =

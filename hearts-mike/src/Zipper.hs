@@ -34,6 +34,9 @@ safeLeft :: Zipper a -> Maybe (Zipper a)
 safeLeft  (Zip (a:reverseFront) back) = Just (Zip reverseFront (a:back))
 safeLeft  _ = Nothing
 
+farLeft :: Zipper a -> Zipper a
+farLeft zipper = fromList (toList zipper)
+
 right :: Zipper a -> Zipper a
 right (Zip reverseFront (a:back)) = Zip (a:reverseFront) back
 right zipper = zipper
