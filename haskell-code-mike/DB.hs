@@ -41,7 +41,7 @@ data DBCommand a =
 data Free f a = -- freie Monade
    Pure a -- Done
  | Impure (f (Free f a))
- deriving Applicative
+ deriving (Functor, Applicative)
 
 {-
 type DBCommand'' =
@@ -56,6 +56,15 @@ data DBCommand' self =
     Put' String Integer (() -> self)
   | Get' String (Integer -> self)
 
+{-
+data DBNetwork self =
+     Put
+   | Get
+   
+   | OpenSocket
+   | Send
+   | Receive
+-}
 type DBCommand'' a = Free DBCommand' a
 
 instance Functor f => Monad (Free f) where
