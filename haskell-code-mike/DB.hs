@@ -125,4 +125,15 @@ dbToSQLite connection (Get key cont) =
      dbToSQLite connection (cont value)
 dbToSQLite connection (Done result) = return result
 
+execDB :: DBCommand a -> IO a
+execDB command =
+  do connection <- open ":memory"
+     execute_ connection "CREATE TABLE IF NOT EXISTS test (key TEXT PRIMARY KEY, value INTEGER)"
+     result <- dbToSQLite connection command 
+     close connection 
+     return result
+
+     
+
+
 -- main :: IO ()
