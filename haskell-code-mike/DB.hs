@@ -35,6 +35,17 @@ data DBCommand a =
   | Get String (Integer -> DBCommand a) -- "Callback"
   | Done a
 
+-- über die konkreten Aspekte von DBCommand
+data Free f a = -- freie Monade
+   Pure a -- Done
+ | Impure (f (Free f a))
+
+data DBCommand' x =
+    Put' String Integer (() -> x)
+  | Get' String (Integer -> x)
+
+-- data DBCommand'' a = Free DBCommand' a
+
 -- put :: String Integer DB -> DB
 
 -- Lambda-Term:
