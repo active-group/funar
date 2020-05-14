@@ -23,34 +23,50 @@ data DBCommand =
 -}
 
 -- Datenbankprogramm mit Resultat vom Typ a
-data DB a =
-    Put String Integer (() -> DB a)
-  | Get String (Integer -> DB a) -- "Callback"
+data DBCommand a =
+    Put String Integer (() -> DBCommand a)
+  | Get String (Integer -> DBCommand a) -- "Callback"
   | Done a
 
-p1 :: DB String -- Datenbankprogramm, das eine Zeichenkette als Ergebnis liefert
+-- put :: String Integer DB -> DB
+
+-- Lambda-Term:
+-- \ x -> e
+-- e1 e2 Beispiel: "f x"
+-- x
+
+-- \ x -> x x
+
+p1 :: DBCommand String -- Datenbankprogramm, das eine Zeichenkette als Ergebnis liefert
 p1 = Put "Mike" 15 (\() ->
      Get "Mike" (\x ->
      Put "Mike" (x + 1) (\() ->
      Done ("Mike ist " ++ show x))))
 
-p1' = put "Mike" 15 `splice` (\() ->
-      get "Mike" `splice` (\x ->
-      put "Mike" (x + 1) `splice` (\() ->
+p1' = (put "Mike" 15) `splice` (\() ->
+      (get "Mike") `splice` (\x ->
+      (put "Mike" (x + 1)) `splice` (\() ->
       return' ("Mike ist " ++ show x))))
 
-put :: String -> Integer -> DB ()
+-- kann *nur* auf die Datenbank zugreifen
+put :: String -> Integer -> DBCommand ()
 put key value = Put key value Done
 
-get :: String -> DB Integer
+get :: String -> DBCommand Integer
 get key = Get key Done
 
-splice :: DB a -> (a -> DB b) -> DB b
-splice = undefined
+splice :: DBCommand a -> (a -> DBCommand b) -> DBCommand b
+splice (Put key value cont) next =
+  Put key value (\ () ->
+    (cont ()) `splice` next)
+splice (Get key cont) next =
+  Get key (\ value ->
+    (cont value) `splice` next)
+splice (Done result) next = next result
 
 return' x = Done x
 
-evalDB :: Map String Integer -> DB a -> a
+evalDB :: Map String Integer -> DBCommand a -> a
 evalDB db (Put key value cont) =
     evalDB (Map.insert key value db ) (cont ())
 evalDB db (Get key cont) =
