@@ -108,4 +108,11 @@ evalDB db (Done result) = result
 
 -- DBCommand a -> IO a
 
+data Entry = Entry String Integer
+
+instance FromRow Entry where
+--  fromRow ::
+
+-- dbToSQLite :: Connection -> DBCommand a -> IO a
+
 -- main :: IO ()
