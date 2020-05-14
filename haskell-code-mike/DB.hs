@@ -111,8 +111,18 @@ evalDB db (Done result) = result
 data Entry = Entry String Integer
 
 instance FromRow Entry where
---  fromRow ::
+  fromRow = Entry <$> field <*> field -- <$> == fmap
 
--- dbToSQLite :: Connection -> DBCommand a -> IO a
+instance ToRow Entry where
+  toRow (Entry key value) = toRow (key, value)
+
+dbToSQLite :: Connection -> DBCommand a -> IO a
+dbToSQLite connection (Put key value cont) =
+  do execute connection "INSERT INTO test (key, value) VALUES (?, ?)" (Entry key value)
+     dbToSQLite connection (cont ())
+dbToSQLite connection (Get key cont) =
+  do [Entry _ value] <- queryNamed connection "SELECT * from test WHERE key = :key" [":key" := key]
+     dbToSQLite connection (cont value)
+dbToSQLite connection (Done result) = return result
 
 -- main :: IO ()
