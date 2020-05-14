@@ -1,7 +1,14 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module DB where
 
 import qualified Data.Map as Map 
 import Data.Map (Map)
+
+import           Control.Applicative
+import qualified Data.Text as T
+import           Database.SQLite.Simple
+import           Database.SQLite.Simple.FromRow
 
 -- getDB :: key -> value
 
@@ -89,8 +96,6 @@ p1'' = do put "Mike" 15
 return' :: a -> DBCommand a
 return' = Done
 
-
-
 evalDB :: Map String Integer -> DBCommand a -> a
 evalDB db (Put key value cont) =
     evalDB (Map.insert key value db ) (cont ())
@@ -100,3 +105,7 @@ evalDB db (Get key cont) =
         Just value ->
             evalDB db (cont value)
 evalDB db (Done result) = result
+
+-- DBCommand a -> IO a
+
+-- main :: IO ()
