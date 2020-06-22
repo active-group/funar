@@ -231,4 +231,12 @@
       ((cons? list)
        (* (first list)
           (list-product (rest list)))))))
+
+; Geraden Elemente aus einer Liste von Zahlen herausextrahieren
+(: extract-evens (list-of-numbers -> list-of-numbers))
+
+(check-expect (extract-events (cons 2 (cons 3 (cons 7 (cons 6 (cons 10 empty))))))
+              (cons 2 (cons 6 (cons 10 empty))))
+
+
        
