@@ -317,3 +317,29 @@
       ((cons? list)
        (cons (f (first list))
              (list-map f (rest list)))))))
+
+
+;(: reduce (%a (%a %a -> %a) (list-of %a) -> %a))
+(: reduce (%b (%a %b -> %b) (list-of %a) -> %b))
+
+(check-expect (reduce 0 + (list 1 2 3 4 5)) 15)
+(check-expect (reduce 1 * (list 1 2 3 4 5)) 120)
+
+(define reduce
+  (lambda (for-empty for-cons list)
+    (cond
+      ((empty? list) for-empty)
+      ((cons? list)
+       (for-cons (first list)
+                 (reduce for-empty for-cons (rest list)))))))
+
+; reduce abstrahiert über die Konstruktionsanleitung
+; reduce leitet sich systematisch aus der Datendefinition her
+
+(define list-map-with-reduce
+  (lambda (f list)
+    (reduce empty
+            (lambda (first-list rec-result)
+              (cons (f first-list)
+                    rec-result))
+            list)))
