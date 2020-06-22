@@ -217,3 +217,18 @@
        (+ (first list)
           (list-sum (rest list)))))))
 
+; Produkt der Elemente einer Liste
+(: list-product (list-of-numbers -> number))
+
+(check-expect (list-product list1) 7)
+(check-expect (list-product list2) 35)
+(check-expect (list-product list3) 105)
+
+(define list-product
+  (lambda (list)
+    (cond
+      ((empty? list) 1)
+      ((cons? list)
+       (* (first list)
+          (list-product (rest list)))))))
+       
