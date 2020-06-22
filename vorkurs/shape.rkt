@@ -235,13 +235,13 @@
 ; Geraden Elemente aus einer Liste von Zahlen herausextrahieren
 (: extract-evens (list-of-numbers -> list-of-numbers))
 
-(check-expect (extract-events (cons 2 (cons 3 (cons 7 (cons 6 (cons 10 empty))))))
+(check-expect (extract-evens (cons 2 (cons 3 (cons 7 (cons 6 (cons 10 empty))))))
               (cons 2 (cons 6 (cons 10 empty))))
 
 (define extract-evens
   (lambda (list)
     (cond
-      ((empty? list) ...)
+      ((empty? list) empty)
       ((cons? list)
        (cond
          ((even? (first list))
@@ -249,4 +249,20 @@
                 (extract-evens (rest list))))
          (else (extract-evens (rest list))))))))
        
-       
+
+; Positive Elemente aus einer Liste von Zahlen herausextrahieren
+(: extract-positives (list-of-numbers -> list-of-numbers))
+
+(check-expect (extract-positives (cons -2 (cons 3 (cons -7 (cons -6 (cons 10 empty))))))
+              (cons 3 (cons 10 empty)))
+
+(define extract-positives
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cond
+         ((positive? (first list))
+          (cons (first list)
+                (extract-positives (rest list))))
+         (else (extract-positives (rest list))))))))
