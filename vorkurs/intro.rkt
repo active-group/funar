@@ -37,3 +37,35 @@
     (above
      (beside image1 image2)
      (beside image2 image1))))
+
+; Datendefinition:
+; Ein Haustier ist eins der folgenden: <- Fallunterscheidung
+; - Hund
+; - Katze
+; - Schlange
+; Spezialfall: Aufzählung
+(define pet
+  (signature (enum "Hund" "Katze" "Schlange")))
+
+; ...
+; Ist ein Haustier niedlich?
+(: cute? (pet -> boolean))
+
+(check-expect (cute? "Hund") #t)
+(check-expect (cute? "Katze") #t)
+(check-expect (cute? "Schlange") #f)
+
+; Gerüst
+#;(define cute?
+  (lambda (pet)
+    ...))
+
+(define cute?
+  (lambda (pet)
+    (cond
+      ; Hund
+      ((string=? pet "Hund") #t)
+      ; Katze
+      ((string=? pet "Katze") #t)
+      ; Schlange
+      ((string=? pet "Schlange") #f))))
