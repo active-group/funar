@@ -177,8 +177,9 @@
 ; Eine Liste ist eins der folgenden:
 ; - die leere Liste
 ; - eine Cons-Liste aus erstem Element und Rest-Liste
-(define list-of-numbers
-  (signature (mixed empty-list cons-list)))
+(define list-of
+  (lambda (element)
+    (signature (mixed empty-list (cons-list-of element)))))
 
 ; Die leere Liste
 (define-record empty-list
@@ -191,11 +192,14 @@
 ; Eine Cons-Liste besteht aus:
 ; - erstes Element
 ; - Rest-Liste
-(define-record cons-list
+(define-record (cons-list-of element) ; cons-list-of jetzt Funktion
   cons
   cons?
-  (first number)
-  (rest list-of-numbers))
+  (first element)
+  (rest (list-of element)))
+
+(define list-of-numbers
+  (signature (list-of number)))
 
 (define list1 (cons 7 empty)) ; 1elementige Liste: 7
 (define list2 (cons 5 (cons 7 empty))) ; 2elementige Liste: 5 7
@@ -203,7 +207,7 @@
 (define list4 (cons 2 list3)) ; 4elementige Liste: 2 3 5 7
 
 ; Summe der Elemente einer Liste
-(: list-sum (list-of-numbers -> number))
+(: list-sum ((list-of number) -> number))
 
 (check-expect (list-sum list1) 7)
 (check-expect (list-sum list2) 12)
@@ -269,6 +273,7 @@
 
 
 ; Die Elemente einer Liste extrahieren, für die ein Prädikat #t liefert
+; häufig eingebaut: filter
 (: extract-list ((number -> boolean) list-of-numbers -> list-of-numbers))
 
 (check-expect (extract-list positive? (cons -2 (cons 3 (cons -7 (cons -6 (cons 10 empty))))))
@@ -284,3 +289,6 @@
           (cons (first list)
                 (extract-list p? (rest list))))
          (else (extract-list p? (rest list))))))))
+
+(define points-list (cons point1 (cons point2 empty)))
+(define shapes-list1 (cons square1 (cons circle1 empty)))
