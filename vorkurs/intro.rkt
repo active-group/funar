@@ -98,3 +98,5 @@ class C {
 
 ; (: image-height (image -> natural))
 ; (: image-width (image -> natural))
+
+; (rectangle 200 50 "solid" "red")
