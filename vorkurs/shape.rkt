@@ -202,5 +202,13 @@
 (define list3 (cons 3 (cons 5 (cons 7 empty)))) ; 3elementige Liste: 3 5 7
 (define list4 (cons 2 list3)) ; 4elementige Liste: 2 3 5 7
 
+; Summe der Elemente einer Liste
+(: list-sum (list-of-numbers -> number))
 
+(check-expect (list-sum list1) 7)
+(check-expect (list-sum list2) 12)
+(check-expect (list-sum list3) 15)
 
+(define list-sum
+  (lambda (list)
+    ...))
