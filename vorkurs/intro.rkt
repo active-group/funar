@@ -69,3 +69,7 @@
       ((string=? pet "Katze") #t)
       ; Schlange
       ((string=? pet "Schlange") #f))))
+
+; Signaturverletzung und Fehler
+; (cute? "Fisch")
+
