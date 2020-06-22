@@ -238,5 +238,15 @@
 (check-expect (extract-events (cons 2 (cons 3 (cons 7 (cons 6 (cons 10 empty))))))
               (cons 2 (cons 6 (cons 10 empty))))
 
-
+(define extract-evens
+  (lambda (list)
+    (cond
+      ((empty? list) ...)
+      ((cons? list)
+       (cond
+         ((even? (first list))
+          (cons (first list)
+                (extract-evens (rest list))))
+         (else (extract-evens (rest list))))))))
+       
        
