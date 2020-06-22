@@ -173,3 +173,34 @@
        (or
         (in-shape? point (overlay-shape-1 shape))
         (in-shape? point (overlay-shape-2 shape)))))))
+
+; Eine Liste ist eins der folgenden:
+; - die leere Liste
+; - eine Cons-Liste aus erstem Element und Rest-Liste
+(define list-of-numbers
+  (signature (mixed empty-list cons-list)))
+
+; Die leere Liste
+(define-record empty-list
+  make-empty
+  empty?)
+
+; gibt nur die eine
+(define empty (make-empty))
+
+; Eine Cons-Liste besteht aus:
+; - erstes Element
+; - Rest-Liste
+(define-record cons-list
+  cons
+  cons?
+  (first number)
+  (rest list-of-numbers))
+
+(define list1 (cons 7 empty)) ; 1elementige Liste: 7
+(define list2 (cons 5 (cons 7 empty))) ; 2elementige Liste: 5 7
+(define list3 (cons 3 (cons 5 (cons 7 empty)))) ; 3elementige Liste: 3 5 7
+(define list4 (cons 2 list3)) ; 4elementige Liste: 2 3 5 7
+
+
+
