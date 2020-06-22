@@ -65,7 +65,7 @@ imperative Sprachen:
 Variable steht für eine Speicherzelle, deren Inhalt kann sich ändern.
 
 class C {
-  ... m(int x) {
+  ... m(final int x) {
      y = x + 1;
      x = x - 1;
      z = x * 2;
@@ -90,3 +90,11 @@ class C {
 ; Signaturverletzung und Fehler
 ; (cute? "Fisch")
 
+(define f
+  (lambda (x)
+    (+ x
+       ((lambda (x)
+         (+ 1 x))))))
+
+; (: image-height (image -> natural))
+; (: image-width (image -> natural))
