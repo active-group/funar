@@ -60,6 +60,22 @@
   (lambda (pet)
     ...))
 
+#|
+imperative Sprachen:
+Variable steht für eine Speicherzelle, deren Inhalt kann sich ändern.
+
+class C {
+  ... m(int x) {
+     y = x + 1;
+     x = x - 1;
+     z = x * 2;
+  }
+
+  ... m(5) ...
+}
+
+|#
+
 (define cute?
   (lambda (pet)
     (cond
@@ -68,7 +84,8 @@
       ; Katze
       ((string=? pet "Katze") #t)
       ; Schlange
-      ((string=? pet "Schlange") #f))))
+      ((string=? pet "Schlange") #f)
+      (else (violation "unbekanntes Haustier")))))
 
 ; Signaturverletzung und Fehler
 ; (cute? "Fisch")
