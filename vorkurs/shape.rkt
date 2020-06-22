@@ -1,6 +1,6 @@
 ;; Die ersten drei Zeilen dieser Datei wurden von DrRacket eingefügt. Sie enthalten Metadaten
 ;; über die Sprachebene dieser Datei in einer Form, die DrRacket verarbeiten kann.
-#reader(lib "beginner-reader.rkt" "deinprogramm" "sdp")((modname shape) (read-case-sensitive #f) (teachpacks ()) (deinprogramm-settings #(#f write repeating-decimal #f #t none explicit #f ())))
+#reader(lib "vanilla-reader.rkt" "deinprogramm" "sdp")((modname shape) (read-case-sensitive #f) (teachpacks ()) (deinprogramm-settings #(#f write repeating-decimal #f #t none explicit #f ())))
 ; Zusammengesetzte Daten
 
 ; Ein Kreis hat folgende Eigenschaften:
@@ -177,22 +177,22 @@
 ; Eine Liste ist eins der folgenden:
 ; - die leere Liste
 ; - eine Cons-Liste aus erstem Element und Rest-Liste
-(define list-of
+#;(define list-of
   (lambda (element)
     (signature (mixed empty-list (cons-list-of element)))))
 
 ; Die leere Liste
-(define-record empty-list
+#;(define-record empty-list
   make-empty
   empty?)
 
 ; gibt nur die eine
-(define empty (make-empty))
+#;(define empty (make-empty))
 
 ; Eine Cons-Liste besteht aus:
 ; - erstes Element
 ; - Rest-Liste
-(define-record (cons-list-of element) ; cons-list-of jetzt Funktion
+#;(define-record (cons-list-of element) ; cons-list-of jetzt Funktion
   cons
   cons?
   (first element)
@@ -292,3 +292,9 @@
 
 (define points-list (cons point1 (cons point2 empty)))
 (define shapes-list1 (cons square1 (cons circle1 empty)))
+
+(define in-square1?
+  (lambda (point)
+    (in-square? point square1)))
+
+(extract-list in-square1? points-list)
