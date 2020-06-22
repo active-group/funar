@@ -8,8 +8,13 @@
 ; - Radius
 (define-record circle
   make-circle
+  circle? ; Prädikat
   (circle-center point)
   (circle-radius real))
+
+; Prädikat
+; Liefert #t bei circle, sonst #f
+(: circle? (any -> boolean))
 
 ; Ein Punkt hat folgende Eigenschaften:
 ; Ein Punkt besteht aus:
@@ -88,6 +93,7 @@
 ; - Seitenlänge
 (define-record square
   make-square
+  square?
   (square-ll-corner point)
   (square-side-length real))
 
@@ -123,5 +129,47 @@
          (<= px (+ llx side-length))
          (>= py lly)
          (<= py (+ lly side-length)))))
-    
 
+; Eine geometrische Figur ist eins der folgenden:
+; - ein Kreis
+; - ein Quadrat
+; - eine Überlappung zweier geometrischer Figuren
+;                           ^^^^^^^^^^^^^^^^^^^^^ <- Selbstbezug
+; Fallunterscheidung: gemischten Daten - Signaturen für die Alternativen vorhanden
+(define shape
+  (signature (mixed circle square overlay)))
+
+; Eine Überlappung besteht aus:
+; - geometrische Figur
+; - noch eine geometrische Figur
+(define-record overlay
+  make-overlay
+  overlay?
+  (overlay-shape-1 shape)
+  (overlay-shape-2 shape))
+
+(define overlay1 (make-overlay circle1 square1))
+(define overlay2 (make-overlay overlay1 square2))
+
+
+; Ist ein Punkt in einer geometrischen Figur?
+(: in-shape? (point shape -> boolean))
+
+(check-expect (in-shape? point1 circle1) #t)
+(check-expect (in-shape? point2 circle2) #t)
+(check-expect (in-shape? (make-point 20 20) circle1) #f)
+(check-expect (in-shape? point1 square1) #t)
+(check-expect (in-shape? point2 square2) #t)
+(check-expect (in-shape? (make-point 100 100) square2) #f)
+(check-expect (in-shape? point1 overlay1) #t)
+(check-expect (in-shape? point2 overlay2) #t)
+
+(define in-shape?
+  (lambda (point shape)
+    (cond
+      ((circle? shape) (in-circle? point shape))
+      ((square? shape) (in-square? point shape))
+      ((overlay? shape)
+       (or
+        (in-shape? point (overlay-shape-1 shape))
+        (in-shape? point (overlay-shape-2 shape)))))))
