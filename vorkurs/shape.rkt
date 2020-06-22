@@ -82,3 +82,46 @@
                   (point-y point2)))
 
     (sqrt (+ (* dx dx) (* dy dy)))))
+
+; Ein Quadrat hat folgende Eigenschaften:
+; - eine untere linke Ecke
+; - Seitenlänge
+(define-record square
+  make-square
+  (square-ll-corner point)
+  (square-side-length real))
+
+(define square1 (make-square point1 5))
+(define square2 (make-square point2 3))
+
+(: in-square? (point square -> boolean))
+
+(check-expect (in-square? point1 square1) #t)
+(check-expect (in-square? point2 square2) #t)
+(check-expect (in-square? (make-point 100 100) square2) #f)
+
+#;(define in-square?
+  (lambda (point square)
+    (define ll-corner (square-ll-corner square))
+    (and (>= (point-x point) (point-x ll-corner))
+         (<= (point-x point) (+ (point-x ll-corner)
+                                (square-side-length square)))
+         (>= (point-y point) (point-y ll-corner))
+         (<= (point-y point) (+ (point-y ll-corner)
+                                (square-side-length square))))))
+    
+    
+(define in-square?
+  (lambda (point square)
+    (define ll-corner (square-ll-corner square))
+    (define px (point-x point))
+    (define py (point-y point))
+    (define llx (point-x ll-corner))
+    (define lly (point-y ll-corner))
+    (define side-length (square-side-length square))
+    (and (>= px (point-x ll-corner))
+         (<= px (+ llx side-length))
+         (>= py lly)
+         (<= py (+ lly side-length)))))
+    
+
