@@ -4,7 +4,7 @@
 ; Liste umdrehen
 (: rev ((list-of %a) -> (list-of %a)))
 
-(check-expect (rev (list 1 2 3))
+#;(check-expect (rev (list 1 2 3))
               (list 3 2 1))
 
 (define rev
@@ -23,4 +23,21 @@
       ((cons? list)
        (cons(first list)
             (add-to-end (rest list) element))))))
-       
+
+; 5 + 4 + 3 + 2 + 1
+; n/2 * (n-1) = n^2 ...
+
+
+(check-expect (rev* (list 1 2 3))
+              (list 3 2 1))
+
+(define rev*
+  (lambda (list)
+    (rev-helper list empty)))
+
+(define rev-helper
+  (lambda (list rev-so-far)
+    (cond
+      ((empty? list) rev-so-far)
+      ((cons? list)       
+       (rev-helper (rest list) (cons (first list) rev-so-far))))))
