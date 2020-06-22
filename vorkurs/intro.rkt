@@ -7,3 +7,5 @@
 
 (define circle1 (circle 50 "solid" "red"))
 (define star1 (star 50 "outline" "blue"))
+
+(define overlay1 (overlay star1 circle1))
