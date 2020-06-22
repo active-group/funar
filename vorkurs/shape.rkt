@@ -211,4 +211,9 @@
 
 (define list-sum
   (lambda (list)
-    ...))
+    (cond
+      ((empty? list) 0)
+      ((cons? list)
+       (+ (first list)
+          (list-sum (rest list)))))))
+
