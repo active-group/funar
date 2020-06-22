@@ -266,3 +266,21 @@
           (cons (first list)
                 (extract-positives (rest list))))
          (else (extract-positives (rest list))))))))
+
+
+; Die Elemente einer Liste extrahieren, für die ein Prädikat #t liefert
+(: extract-list ((number -> boolean) list-of-numbers -> list-of-numbers))
+
+(check-expect (extract-list positive? (cons -2 (cons 3 (cons -7 (cons -6 (cons 10 empty))))))
+              (cons 3 (cons 10 empty)))
+
+(define extract-list
+  (lambda (p? list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cond
+         ((p? (first list))
+          (cons (first list)
+                (extract-list p? (rest list))))
+         (else (extract-list p? (rest list))))))))
