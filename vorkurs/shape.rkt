@@ -274,7 +274,8 @@
 
 ; Die Elemente einer Liste extrahieren, für die ein Prädikat #t liefert
 ; häufig eingebaut: filter
-(: extract-list ((number -> boolean) list-of-numbers -> list-of-numbers))
+; %element: Signaturvariable
+(: extract-list ((%element -> boolean) (list-of %element) -> (list-of %element)))
 
 (check-expect (extract-list positive? (cons -2 (cons 3 (cons -7 (cons -6 (cons 10 empty))))))
               (cons 3 (cons 10 empty)))
@@ -293,8 +294,26 @@
 (define points-list (cons point1 (cons point2 empty)))
 (define shapes-list1 (cons square1 (cons circle1 empty)))
 
-(define in-square1?
+#;(define in-square1?
   (lambda (point)
     (in-square? point square1)))
 
-(extract-list in-square1? points-list)
+#;(extract-list (lambda (point)
+                  (in-square? point square1))
+                points-list)
+
+; Funktion auf jedes Element einer Liste anwenden
+;(: list-map ((%element1 -> %element2) (list-of %element1) -> (list-of %element2)))
+
+(: list-map ((%a -> %b) (list-of %a) -> (list-of %b)))
+
+(check-expect (list-map even? (list 1 2 3 4 5 6))
+              (list #f #t #f #t #f #t))
+
+(define list-map
+  (lambda (f list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cons (f (first list))
+             (list-map f (rest list)))))))
