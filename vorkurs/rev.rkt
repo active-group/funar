@@ -12,7 +12,7 @@
     (cond
       ((empty? list) empty)
       ((cons? list)
-       (add-to-end
+       (add-to-end ; Kontext von (rev (rest list))
         (rev (rest list)) ; 3 2
         (first list)))))) ; 1
 
@@ -39,5 +39,6 @@
   (lambda (list rev-so-far)
     (cond
       ((empty? list) rev-so-far)
-      ((cons? list)       
+      ((cons? list)
+       ; kein Kontext
        (rev-helper (rest list) (cons (first list) rev-so-far))))))
