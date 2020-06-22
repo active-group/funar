@@ -9,3 +9,5 @@
 (define star1 (star 50 "outline" "blue"))
 
 (define overlay1 (overlay star1 circle1))
+
+(define square1 (square 100 "solid" "gold"))
