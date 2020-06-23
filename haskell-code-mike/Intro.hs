@@ -144,4 +144,8 @@ exchange :: (a -> b -> c) -> (b -> a -> c)
 -- exchange = \ f -> \ b -> \ a -> f a b
 exchange f b a = f a b
 
-xxx :: ((a, b) -> c) -> (a -> b -> c)
+schönfinkeln :: ((a, b) -> c) -> (a -> b -> c)
+schönfinkeln f =
+  \ a b -> f (a, b)
+
+entschönfinkeln :: (a -> b -> c) -> ((a, b) -> c)
