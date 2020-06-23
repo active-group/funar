@@ -200,6 +200,8 @@ data Optional a =
 class Eq a where
   (==) :: a -> a -> Bool
 
+Äquivalenzrelation
+
 Transitivität
 (a == b) && (b == c) => a == c
 
