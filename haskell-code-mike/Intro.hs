@@ -203,7 +203,7 @@ class Eq a where
 Transitivität
 (a == b) && (b == c) => a == c
 
-
+Symmetrie
 a == b => b == a
 
 Kommutativität
