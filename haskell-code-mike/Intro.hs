@@ -80,6 +80,10 @@ parrot2 = Parrot "Goodbye!" 1
 
 data Weight = Kg Integer
 
+instance Functor Animal where
+  universalMap f (Dillo alive weight) = Dillo alive (f weight)
+  universalMap f (Parrot sentence weight) = Parrot sentence (f weight)
+
 dillo1' = Dillo { alive = Alive, weight = Kg 10}
 
 -- Tier überfahren
