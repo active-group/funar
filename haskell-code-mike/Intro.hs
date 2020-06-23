@@ -78,7 +78,7 @@ parrot1 = Parrot "Hallo!" 2
 parrot2 :: Animal Integer
 parrot2 = Parrot "Goodbye!" 1
 
-data Weight = Kg Integer
+data Weight = Kg Integer deriving Show
 
 instance Num Weight where
   (Kg a) + (Kg b) = Kg (a + b)
