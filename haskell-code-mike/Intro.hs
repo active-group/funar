@@ -182,3 +182,16 @@ sieve :: [Integer] -> [Integer]
 sieve [] = []
 sieve (x:xs) =
   x : (sieve (strikeMultiples x xs))
+
+data Map key value = Map [(key, value)]
+
+data Optional a =
+    There a
+  | NotThere
+
+mapGet :: Map key value -> key -> Optional value
+mapGet (Map []) key = NotThere
+mapGet (Map ((key', value'):rest)) key =
+  if key == key'
+  then There value'
+  else mapGet (Map rest) key
