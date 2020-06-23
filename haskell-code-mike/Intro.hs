@@ -202,6 +202,8 @@ data Optional a =
   | NotThere
 
 optionalMap :: (a -> b) -> Optional a -> Optional b
+optionalMap f (There a) = There (f a)
+optionalMap f NotThere = NotThere
 
 {-
 class Eq a where
