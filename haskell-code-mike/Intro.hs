@@ -261,4 +261,15 @@ class Semigroup a where
   -- combine a (combine b c) == combine (combine a b) c
   combine :: a -> a -> a
 
+-- Monoid
+class Semigroup a => Monoid a where
+  -- combine x neutral == combine neutral x == x
+  neutral :: a
+
+
+-- instance Semigroup Integer where
+--   combine = (+)
+
+instance Monoid Integer where
+  neutral = 0
 
