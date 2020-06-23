@@ -125,12 +125,12 @@ rev xs0 = revHelper xs0 []
 fold :: b -> ((a, b) -> b) -> [a] -> b
 fold empty _ [] = empty
 fold empty reducer (x:xs) = (reducer (x, (fold empty reducer xs)))
--- reduce :: b -> (a -> b -> b) -> [a] -> b
 
 foldLeft :: b -> (b -> a -> b) -> [a] -> b 
 foldLeft init reducer xs = helper xs init
   where helper [] result = result 
         helper (x:xs) result = helper xs (reducer result x)
 
-listMap' :: (a -> b) -> [a] ->   [b]
+listMap' :: (a -> b) -> [a] -> [b]
 listMap' f xs =
+  fold [] (\ (listElement, acc) -> (f listElement) : acc)
