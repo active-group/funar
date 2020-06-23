@@ -142,7 +142,10 @@ listMap' :: (a -> b) -> [a] -> [b]
 listMap' f xs =
   fold [] (\ (listElement, acc) -> (f listElement) : acc) xs
 
-listMap'' :: (a -> b) -> [a] -> [b]
+-- Typsynonym
+type List a = [a]
+
+listMap'' :: (a -> b) -> List a -> List b
 listMap'' f xs =
   rev (foldLeft [] (\ acc listElement -> (f listElement) : acc) xs)
 
