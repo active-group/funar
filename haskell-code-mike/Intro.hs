@@ -190,8 +190,14 @@ data Optional a =
   | NotThere
 
 {-
-
+class Eq a where
+  (==) :: a -> a -> Bool
 -}
+
+instance Eq Pet where
+  
+
+
 mapGet :: Eq key => Map key value -> key -> Optional value
 mapGet (Map []) key = NotThere
 mapGet (Map ((key', value'):rest)) key =
