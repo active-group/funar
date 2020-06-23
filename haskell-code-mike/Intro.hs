@@ -172,3 +172,8 @@ exchange' = entschönfinkeln . exchange . schönfinkeln
 
 natsFrom :: Integer -> [Integer]
 natsFrom n = n : (natsFrom (n + 1))
+
+strikeMultiples :: Integer -> [Integer] -> [Integer]
+strikeMultiples n xs =
+  filter (\ x -> x `mod` n /= 0) xs
+
