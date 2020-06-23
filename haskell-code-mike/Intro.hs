@@ -246,4 +246,13 @@ data Maybe a =
 {-
 Algebra: Menge + Operationen + Gleichungen
 Programmieren: Typ + Operationen + Gleichungen
+
+Beispiel:
+Assoziativität
+(a + b) + c = a + (b + c)
+(a * b) * c = a * (b * c)
 -}
+
+
+
+
