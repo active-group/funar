@@ -195,7 +195,10 @@ class Eq a where
 -}
 
 instance Eq Pet where
-  
+  Katze == Katze = True
+  Hund == Hund = True
+  Schlange == Schlange = True
+  _ == _ = False
 
 
 mapGet :: Eq key => Map key value -> key -> Optional value
