@@ -208,6 +208,7 @@ Transitivität
 Symmetrie
 a == b => b == a
 
+Reflexität
 a == a
 
 Kommutativität
