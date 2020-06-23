@@ -140,12 +140,13 @@ listMap'' f xs =
   rev (foldLeft [] (\ acc listElement -> (f listElement) : acc) xs)
 
 exchange :: (a -> b -> c) -> (b -> a -> c)
--- exchange f = \ b a -> f a b
+-- f :: (a -> b -> c)
+exchange    f =             \ xb  xa -> f xa xb
 -- exchange = \ f -> \ b -> \ a -> f a b
-exchange f b a = f a b
+-- exchange f b a = f a b
 
 schönfinkeln :: ((a, b) -> c) -> (a -> b -> c)
-schönfinkeln f =
+schönfinkeln    f =
   \ a b -> f (a, b)
 
 entschönfinkeln :: (a -> b -> c) -> ((a, b) -> c)
