@@ -41,4 +41,6 @@
       ((empty? list) rev-so-far)
       ((cons? list)
        ; kein Kontext
+       ; tail call
+       ; endrekursiver Aufruf
        (rev-helper (rest list) (cons (first list) rev-so-far))))))
