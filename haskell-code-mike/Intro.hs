@@ -185,6 +185,9 @@ sieve (x:xs) =
 
 data Eq key => Map key value = Map [(key, value)]
 
+map1 = [(Hund, "niedlich")]
+map2 = [(Hund, "niedlich"), (Hund, "niedlich")]
+
 data Optional a =
     There a
   | NotThere
@@ -192,6 +195,8 @@ data Optional a =
 {-
 class Eq a where
   (==) :: a -> a -> Bool
+
+
 -}
 
 instance Eq Pet where
@@ -199,7 +204,6 @@ instance Eq Pet where
   Hund == Hund = True
   Schlange == Schlange = True
   _ == _ = False
-
 
 mapGet :: Eq key => Map key value -> key -> Optional value
 mapGet (Map []) key = NotThere
