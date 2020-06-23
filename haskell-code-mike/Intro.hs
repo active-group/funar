@@ -95,6 +95,11 @@ feedAnimal = \ amount -> \ animal ->
     Dillo alive weight -> Dillo alive (weight + amount)
     Parrot sentence weight -> Parrot sentence (weight + amount)
 
+highway = [dillo1, parrot1, dillo2, parrot2]
+deadHighway = map runOverAnimal highway
+fedHighway = map (feedAnimal 1) highway
+
+
 -- Tupel
 
 feedAnimal' :: (Integer, Animal) -> Animal
