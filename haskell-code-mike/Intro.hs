@@ -206,6 +206,8 @@ Transitivität
 Symmetrie
 a == b => b == a
 
+a == a
+
 Kommutativität
 a + b = b + a
 
