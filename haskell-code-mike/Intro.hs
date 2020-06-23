@@ -30,7 +30,7 @@ isCute' pet =
 
 -- Zustand eines Gürteltiers zu einem bestimmten Zeitpunkt
 data Liveness = Dead | Alive
-  deriving Show
+  deriving (Show, Eq)
 
 {-
 data Dillo = Dillo { alive :: Liveness, weight :: Integer}
@@ -65,7 +65,7 @@ parrot1 = Parrot "Hallo!" 2
 data Animal = 
     Dillo { alive :: Liveness, weight :: Integer}
   | Parrot String Integer
-  deriving Show
+  deriving (Show, Eq)
 
 dillo1 :: Animal
 dillo1 = Dillo { alive = Alive, weight = 10}
