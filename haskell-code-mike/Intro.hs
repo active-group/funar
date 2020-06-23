@@ -177,3 +177,8 @@ strikeMultiples :: Integer -> [Integer] -> [Integer]
 strikeMultiples n xs =
   filter (\ x -> x `mod` n /= 0) xs
 
+-- erste Zahl ist eine Primzahl
+sieve :: [Integer] -> [Integer]
+sieve [] = []
+sieve (x:xs) =
+  x : (sieve (strikeMultiples x xs))
