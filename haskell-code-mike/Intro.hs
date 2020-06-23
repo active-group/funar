@@ -64,29 +64,36 @@ parrot1 = Parrot "Hallo!" 2
 
 -- Algebraischer Datentyp:
 -- gemischte Daten aus zusammengesetzte Daten
-data Animal = 
-    Dillo { alive :: Liveness, weight :: Integer}
-  | Parrot String Integer
+data Animal weight = 
+    Dillo { alive :: Liveness, weight :: weight}
+  | Parrot String weight
   deriving (Show, Eq)
 
-dillo1 :: Animal
+dillo1 :: Animal Integer
 dillo1 = Dillo { alive = Alive, weight = 10}
-dillo2 :: Animal
+dillo2 :: Animal Integer
 dillo2 = Dillo Dead 12
-parrot1 :: Animal
+parrot1 :: Animal Integer
 parrot1 = Parrot "Hallo!" 2
-parrot2 :: Animal
+parrot2 :: Animal Integer
 parrot2 = Parrot "Goodbye!" 1
 
+data Weight = Kg Integer
+
+dillo1' = Dillo { alive = Alive, weight = Kg 10}
+
 -- Tier überfahren
-runOverAnimal :: Animal -> Animal
+-- runOverAnimal :: Animal -> Animal
+runOverAnimal :: Animal weight -> Animal weight
+-- "runOverAnimal weiß nichts über weight =>
+--  runOverAnimal beeinflußt das Gewicht nicht"
 runOverAnimal (Dillo _ weight) = Dillo Dead weight
 runOverAnimal (Parrot _ weight) = Parrot "" weight
 
 -- Es gibt nur 1stellige Funktionen
 
 -- Tier füttern
-feedAnimal :: Integer -> (Animal -> Animal)
+-- feedAnimal :: Integer -> (Animal -> Animal)
 {-
 feedAnimal amount (Dillo alive weight) = Dillo alive (weight + amount)
 feedAnimal amount (Parrot sentence weight) = Parrot sentence (weight + amount)
@@ -104,7 +111,8 @@ fedHighway = map (feedAnimal 1) highway
 
 -- Tupel
 
-feedAnimal' :: (Integer, Animal) -> Animal
+-- feedAnimal' :: (Integer, Animal) -> Animal
+feedAnimal' :: Num weight => (weight, Animal weight) -> Animal weight
 feedAnimal' (amount, Dillo alive weight) = Dillo alive (weight + amount)
 feedAnimal' (amount, Parrot sentence weight) = Parrot sentence (weight + amount)
 
@@ -298,6 +306,8 @@ instance Monoid Additive where
 
 identity x = x
 
+-- f Typkonstruktor
+-- f :: * -> *
 class Functor f where
   -- universalMap identity x == x
   -- universalMap identity = identity
