@@ -139,3 +139,9 @@ listMap'' :: (a -> b) -> [a] -> [b]
 listMap'' f xs =
   rev (foldLeft [] (\ acc listElement -> (f listElement) : acc) xs)
 
+exchange :: (a -> b -> c) -> (b -> a -> c)
+-- exchange f = \ b a -> f a b
+-- exchange = \ f -> \ b -> \ a -> f a b
+exchange f b a = f a b
+
+xxx :: ((a, b) -> c) -> (a -> b -> c)
