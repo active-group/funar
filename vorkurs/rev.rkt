@@ -7,7 +7,7 @@
 #;(check-expect (rev (list 1 2 3))
               (list 3 2 1))
 
-(define rev
+(define revU
   (lambda (list)
     (cond
       ((empty? list) empty)
