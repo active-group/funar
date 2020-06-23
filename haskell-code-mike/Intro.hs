@@ -255,7 +255,8 @@ Assoziativität
 (a * b) * c = a * (b * c)
 -}
 
-class Monoid a where
+-- Halbgruppe
+class Semigroup a where
   -- Kombinator
   -- combine a (combine b c) == combine (combine a b) c
   combine :: a -> a -> a
