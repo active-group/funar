@@ -200,6 +200,15 @@ data Optional a =
 class Eq a where
   (==) :: a -> a -> Bool
 
+Transitivität
+(a == b) && (b == c) => a == c
+
+
+a == b => b == a
+
+Kommutativität
+a + b = b + a
+
 instance Eq a => Eq [a] where
   [] == [] = True
   (x:xs) == (y:ys) =
@@ -222,3 +231,14 @@ mapGet (Map ((key', value'):rest)) key =
   if key == key'
   then There value'
   else mapGet (Map rest) key
+
+{-
+data Maybe a =
+    Nothing
+  | Just a
+-}
+
+{-
+Algebra: Menge + Operationen + Gleichungen
+Programmieren: Typ + Operationen + Gleichungen
+-}
