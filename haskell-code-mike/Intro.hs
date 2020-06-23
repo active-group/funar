@@ -114,3 +114,11 @@ listMap :: (a -> b) -> [a] ->   [b]
 listMap    f           []     = []
 listMap    f           (x:xs) = (f x) : (listMap f xs)
 
+rev :: [a] -> [a]
+rev xs0 = revHelper xs0 []
+  where
+    -- reversed: alle Elemente aus xs0 vor xs, in umgekehrter Reihenfolge
+    revHelper :: [a] -> [a] -> [a]
+    revHelper [] reversed = reversed
+    revHelper (x:xs) reversed = revHelper xs (x:reversed)
+
