@@ -167,3 +167,8 @@ o g f = \ a -> g (f a)
 -- exchange' f = entschönfinkeln (exchange (schönfinkeln f))
 -- exchange' f = (entschönfinkeln `o` exchange `o` schönfinkeln) f
 exchange' = entschönfinkeln . exchange . schönfinkeln
+
+-- nicht-strikte Auswertung / lazy evaluation
+
+natsFrom :: Integer -> [Integer]
+natsFrom n = n : (natsFrom (n + 1))
