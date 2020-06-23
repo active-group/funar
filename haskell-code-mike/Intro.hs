@@ -134,3 +134,5 @@ foldLeft init reducer xs = helper xs init
 listMap' :: (a -> b) -> [a] -> [b]
 listMap' f xs =
   fold [] (\ (listElement, acc) -> (f listElement) : acc) xs
+
+
