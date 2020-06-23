@@ -135,4 +135,7 @@ listMap' :: (a -> b) -> [a] -> [b]
 listMap' f xs =
   fold [] (\ (listElement, acc) -> (f listElement) : acc) xs
 
+listMap'' :: (a -> b) -> [a] -> [b]
+listMap'' f xs =
+  foldLeft [] (\ acc listElement -> (f listElement) : acc) xs
 
