@@ -282,3 +282,7 @@ instance Semigroup Additive where
 instance Monoid Additive where
   neutral = Additive 0
 
+
+-- Monoid für Listen
+-- Monoid für 2-Tupel
+
