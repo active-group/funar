@@ -189,6 +189,9 @@ data Optional a =
     There a
   | NotThere
 
+{-
+
+-}
 mapGet :: Eq key => Map key value -> key -> Optional value
 mapGet (Map []) key = NotThere
 mapGet (Map ((key', value'):rest)) key =
