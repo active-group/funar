@@ -154,4 +154,11 @@ entschönfinkeln f (a, b) = f a b
 
 exchange' :: ((a, b) -> c) -> ((b, a) -> c)
 -- exchange' f = \ (b, a) -> f (a, b)
-exchange' f = entschönfinkeln (exchange (schönfinkeln f))
+
+-- Funktionskomposition
+o :: (b -> c) -> (a -> b) -> (a -> c)
+o g f = \ a -> g (f a)
+
+-- exchange' f = entschönfinkeln (exchange (schönfinkeln f))
+-- exchange' f = (entschönfinkeln `o` exchange `o` schönfinkeln) f
+exchange' = entschönfinkeln . exchange . schönfinkeln
