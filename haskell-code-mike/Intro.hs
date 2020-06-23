@@ -188,9 +188,10 @@ sieve [] = []
 sieve (x:xs) =
   x : (sieve (strikeMultiples x xs))
 
-data Eq key => Map key value = Map [(key, value)]
+data Map key value = Map [(key, value)]
 
 mapMap :: (a -> b) -> (Map key) a -> (Map key) b
+mapMap f (Map xs) = Map (map (\ (key, value) -> (key, f value)) xs)
 
 -- Typklasse
 -- class (Eq key, Eq value) => Eq (Map key value) where ...
