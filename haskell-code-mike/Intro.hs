@@ -185,6 +185,10 @@ sieve (x:xs) =
 
 data Eq key => Map key value = Map [(key, value)]
 
+-- Typklasse
+-- class (Eq key, Eq value) => Eq (Map key value) where ...
+
+
 map1 = [(Hund, "niedlich")]
 map2 = [(Hund, "niedlich"), (Hund, "niedlich")]
 
@@ -196,7 +200,14 @@ data Optional a =
 class Eq a where
   (==) :: a -> a -> Bool
 
+instance Eq a => Eq [a] where
+  [] == [] = True
+  (x:xs) == (y:ys) =
+    (x == y) && (xs == ys)
+  _ == _ = False
 
+instance (Eq a, Eq b) => Eq (a, b) where
+  (a, b) == (a', b') = (a == a') && (b == b')
 -}
 
 instance Eq Pet where
