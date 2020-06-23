@@ -190,6 +190,8 @@ sieve (x:xs) =
 
 data Eq key => Map key value = Map [(key, value)]
 
+mapMap :: (a -> b) -> Map key a -> Map key b
+
 -- Typklasse
 -- class (Eq key, Eq value) => Eq (Map key value) where ...
 
