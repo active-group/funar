@@ -267,9 +267,18 @@ class Semigroup a => Monoid a where
   neutral :: a
 
 
--- instance Semigroup Integer where
---   combine = (+)
+{-
+class    - Typklasse ~~~~ Interface
+instance - Instanz   ~~~~ Implementierung 
+data     - Datentyp  ~~~~ Interface + Klassen
+-}
 
-instance Monoid Integer where
-  neutral = 0
+data Additive = Additive Integer
+data Multiplicative = Multiplicative Integer
+
+instance Semigroup Additive where
+  combine (Additive a) (Additive b) = Additive (a + b)
+
+instance Monoid Additive where
+  neutral = Additive 0
 
