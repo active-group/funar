@@ -296,8 +296,13 @@ instance Monoid Additive where
 -- Monoid für Listen
 -- Monoid für 2-Tupel
 
+identity x = x
+
 class Functor f where
-   universalMap :: (a -> b) -> f a -> f b
+  -- universalMap identity x == x
+  -- universalMap identity = identity
+  -- (universalMap f) . (universalMap g) == universalMap (f . g)
+  universalMap :: (a -> b) -> f a -> f b
 
 instance Functor [] where
   universalMap = listMap
@@ -305,5 +310,6 @@ instance Functor [] where
 instance Functor Optional where
   universalMap = optionalMap
 
-instance Functor ()
+instance Functor (Map key) where
+  universalMap = mapMap
 
