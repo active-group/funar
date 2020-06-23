@@ -150,3 +150,8 @@ schönfinkeln    f =
   \ a b -> f (a, b)
 
 entschönfinkeln :: (a -> b -> c) -> ((a, b) -> c)
+entschönfinkeln f (a, b) = f a b
+
+exchange' :: ((a, b) -> c) -> ((b, a) -> c)
+-- exchange' f = \ (b, a) -> f (a, b)
+exchange' f = entschönfinkeln (exchange (schönfinkeln f))
