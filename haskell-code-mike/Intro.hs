@@ -122,3 +122,13 @@ rev xs0 = revHelper xs0 []
     revHelper [] reversed = reversed
     revHelper (x:xs) reversed = revHelper xs (x:reversed)
 
+-- reduce :: b -> (a -> b -> b) -> [a] -> b
+
+foldLeft :: b -> (b -> a -> b) -> [a] -> b 
+foldLeft init reducer xs = helper xs init
+  where helper [] result = result 
+        helper (x:xs) result = helper xs (reducer result x)
+
+listMap' :: (a -> b) -> [a] ->   [b]
+listMap' f xs =
+  
