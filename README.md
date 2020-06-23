@@ -27,6 +27,7 @@ cabal install --dependencies-only
 ### Falls nicht:
 
 - [Docker](https://www.docker.com/) installieren
+- der Docker-VM ggf. mindestens 6DB Speicher geben
 - im Verzeichnis `docker-ghcide` den Befehl `docker build -t ghcide .`
   absetzen (dauert eine Weile)
 - [Visual Studio Code](https://code.visualstudio.com/download) installieren
