@@ -198,6 +198,8 @@ data Optional a =
     There a
   | NotThere
 
+optionalMap :: (a -> b) -> Optional a -> Optional b
+
 {-
 class Eq a where
   (==) :: a -> a -> Bool
