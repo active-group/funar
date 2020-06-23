@@ -1,6 +1,8 @@
 {-# OPTIONS_GHC -fwarn-incomplete-patterns #-}
 module Intro where
 
+import Prelude hiding (Monoid, Semigroup, Functor)
+
 -- Typ
 x :: Integer
 x = 5
