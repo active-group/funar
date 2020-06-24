@@ -174,6 +174,9 @@ gameWinner state =
 -- - Vergangenheit / Fakt -> bleibt immer wahr
 -- - kompletter "Replay" nur anhand der Events möglich
 
+-- Häufig: Zusammenfassung/Zustand etc. wird mitgeführt, 
+-- das sich aus den Events ergibt: GameState
+
 {-
 data GameEvent =
     ShuffledDeck [Card]
