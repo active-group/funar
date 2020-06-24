@@ -196,4 +196,8 @@ data GameEvent =
   deriving Show
 
 -- Wunsch: Muß nicht passieren!
+-- Empfehlung: separater Typ!
 data GameCommand =
+    DealHands PlayerHands
+  | PlayCard Player Card
+  deriving Show
