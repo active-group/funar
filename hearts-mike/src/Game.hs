@@ -176,7 +176,7 @@ gameWinner state =
 
 -- Häufig: Zusammenfassung/Zustand etc. wird mitgeführt, 
 -- das sich aus den Events ergibt: GameState
--- Projektion
+-- Projektion/Query-Modell ... CQRS
 
 {-
 data GameEvent =
