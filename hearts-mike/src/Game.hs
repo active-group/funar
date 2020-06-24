@@ -202,4 +202,6 @@ data GameCommand =
   | PlayCard Player Card
   deriving Show
 
-processGameEvent :: Game
+processGameEvent :: GameEvent -> GameState -> GameState
+
+processGameCommand :: GameCommand -> GameState -> [GameEvent]
