@@ -204,4 +204,4 @@ data GameCommand =
 
 processGameEvent :: GameEvent -> GameState -> GameState
 
-processGameCommand :: GameCommand -> GameState -> [GameEvent]
+-- processGameCommand :: GameCommand -> GameState -> [GameEvent]
