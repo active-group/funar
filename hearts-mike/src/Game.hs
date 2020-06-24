@@ -13,6 +13,9 @@ import Cards
 
 import Debug.Trace (trace)
 
+import qualified Zipper -- Zipper.left, Zipper.Zipper
+import Zipper (Zipper)
+
 -- start card
 twoOfClubs = Card Clubs (Numeric 2)
 
