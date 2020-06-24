@@ -89,19 +89,6 @@ cardScore (Card Spades Queen) = 13
 cardScore (Card Hearts _) = 1
 cardScore _ = 0
 
--- * 
-
--- Liste rotieren
-rotate :: [a] -> [a]
-rotate (x : xs) = xs ++ [x]
-rotate [] = undefined
-
--- Liste zu einem bestimmten Element rotieren
-rotateTo :: Eq a => a -> [a] -> [a]
-rotateTo y xs@(x : xs') | x == y = xs
-                        | otherwise = rotateTo y (xs' ++ [x])
-rotateTo y [] = undefined
-
 -- * Spiellogik
 
 type Stack = Set Card
@@ -167,7 +154,7 @@ gameOver state = all isHandEmpty (Map.elems (gameStateHands state))
 -- ist diese Runde vorbei?
 turnOver :: GameState -> Bool
 turnOver state =
-  length (gameStatePlayers state) == trickSize (gameStateTrick state)
+  Zipper.length (gameStatePlayers state) == trickSize (gameStateTrick state)
 
 -- Wert eines Stapels
 stackScore :: Stack -> Integer
