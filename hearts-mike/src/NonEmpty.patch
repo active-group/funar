@@ -1,0 +1,84 @@
+diff --git a/cards/cards.cabal b/cards/cards.cabal
+index 994bdc0..2736b0c 100644
+--- a/cards/cards.cabal
++++ b/cards/cards.cabal
+@@ -68,7 +68,7 @@ library
+ 
+ executable server
+ 
+-  -- Buildable: False
++  Buildable: False
+   
+   -- .hs or .lhs file containing the Main module.
+   main-is:             Main.hs
+diff --git a/cards/src/Game.hs b/cards/src/Game.hs
+index eb50e17..2cce3d5 100644
+--- a/cards/src/Game.hs
++++ b/cards/src/Game.hs
+@@ -7,6 +7,9 @@ import Data.Set (Set)
+ 
+ import qualified Data.Map.Strict as Map
+ 
++import qualified Data.List.NonEmpty as NonEmptyList
++import Data.List.NonEmpty (NonEmpty, NonEmpty((:|)))
++
+ import Data.Map.Strict (Map, (!))
+ 
+ import Cards
+@@ -89,15 +92,16 @@ cardScore _ = 0
+ -- * 
+ 
+ -- Liste rotieren
+-rotate :: [a] -> [a]
+-rotate (x : xs) = xs ++ [x]
+-rotate [] = undefined
++rotate :: NonEmpty a -> NonEmpty a
++rotate (x :| xs) =
++  case xs of
++    [] -> x :| []
++    (x':xs') -> x' :| (xs' ++ [x])
+ 
+ -- Liste zu einem bestimmten Element rotieren
+-rotateTo :: Eq a => a -> [a] -> [a]
+-rotateTo y xs@(x : xs') | x == y = xs
+-                        | otherwise = rotateTo y (xs' ++ [x])
+-rotateTo y [] = undefined
++rotateTo :: Eq a => a -> NonEmpty a -> NonEmpty a
++rotateTo y xs@(x :| xs') | x == y = xs
++                         | otherwise = rotateTo y (rotate xs)
+ 
+ -- * Spiellogik
+ 
+@@ -110,7 +114,7 @@ type PlayerHands  = Map Player Hand
+ 
+ data GameState =
+   GameState
+-  { gameStatePlayers :: [Player],
++  { gameStatePlayers :: NonEmpty Player,
+     gameStateHands   :: PlayerHands,
+     gameStateStacks  :: PlayerStacks,
+     gameStateTrick   :: Trick
+@@ -118,12 +122,12 @@ data GameState =
+   deriving Show
+ 
+ -- Anfangszustand herstellen
+-emptyGameState :: [Player] -> GameState
++emptyGameState :: NonEmpty Player -> GameState
+ emptyGameState players =
+   GameState {
+     gameStatePlayers = players,
+     gameStateHands = Map.empty,
+-    gameStateStacks = Map.fromList (map (\ player -> (player, Set.empty)) players),
++    gameStateStacks = Map.fromList (NonEmptyList.toList (fmap (\ player -> (player, Set.empty)) players)),
+     gameStateTrick = emptyTrick
+   }
+ 
+@@ -135,7 +139,7 @@ gameAtBeginning gameState =
+ -- wer ist als nächstes dran?
+ nextPlayer :: GameState -> Player
+ nextPlayer state =
+-  head (gameStatePlayers state)
++  NonEmptyList.head (gameStatePlayers state)
+ 
+ -- ist es zulässig, diese Karte auszuspielen?
+ playValid :: GameState -> Player -> Card -> Bool
