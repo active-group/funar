@@ -201,3 +201,5 @@ data GameCommand =
     DealHands PlayerHands
   | PlayCard Player Card
   deriving Show
+
+processGameEvent :: Game
