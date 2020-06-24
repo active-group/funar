@@ -59,7 +59,7 @@ leadingCardOfTrick trick = snd (last trick)
 
 -- wer muß den Stich einziehen?
 whoTakesTrick :: Trick -> Player
-whoTakesTrick [] = undefined
+whoTakesTrick [] = error "Bug im Programm"
 whoTakesTrick trick =
   let loop player _ [] = player
       loop player card ((player', card') : rest) =
@@ -110,7 +110,11 @@ type PlayerHands  = Map Player Hand
 
 data GameState =
   GameState
-  { gameStatePlayers :: [Player], -- wer dran ist, steht vorn
+  { gameStatePlayers :: Zipper Player, -- wer dran ist, steht vorn
+    -- verworfen:
+    -- gameStateCurrentPlayer :: Player,
+    -- gameStateCurrentPlayerIndex :: Integer,
+    -- interessantes Experiment: alles 4-Tupel
     gameStateHands   :: PlayerHands,
     gameStateStacks  :: PlayerStacks,
     gameStateTrick   :: Trick
