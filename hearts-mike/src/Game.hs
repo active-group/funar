@@ -185,3 +185,15 @@ data GameEvent =
   | GameFinished PlayerStacks
   | PlayerWon Player
 -}
+
+data GameEvent =
+    HandDealt Player Hand
+  | PlayerTurnChanged Player
+  | LegalCardPlayed Player Card
+  | TrickTaken Player Trick
+  | IllegalCardPlayed Player Card
+  | GameEnded Player
+  deriving Show
+
+-- Wunsch: Muß nicht passieren!
+data GameCommand =
