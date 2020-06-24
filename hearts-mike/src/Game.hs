@@ -166,3 +166,22 @@ gameWinner state =
   let playerScores = fmap stackScore (gameStateStacks state)
       cmp (_, score1) (_, score2) = compare score1 score2
   in fst (Foldable.minimumBy cmp (Map.toList playerScores))
+
+-- Event Sourcing
+-- Alles was passiert ist, wird als Objekt repräsentiert.
+
+-- Brauchen Datentyp für Events
+-- - Vergangenheit / Fakt -> bleibt immer wahr
+-- - kompletter "Replay" nur anhand der Events möglich
+
+{-
+data GameEvent =
+    ShuffledDeck [Card]
+  -- Alternative:
+  | CardsDealt PlayerHands
+  | PlayerPlayedCard Player Card
+
+  | TrickCompleted Trick Player
+  | GameFinished PlayerStacks
+  | PlayerWon Player
+-}
