@@ -128,7 +128,7 @@ data GameState =
 emptyGameState :: [Player] -> GameState
 emptyGameState players =
   GameState {
-    gameStatePlayers = players,
+    gameStatePlayers = Zipper.fromList players,
     gameStateHands = Map.empty,
     gameStateStacks = Map.fromList (map (\ player -> (player, Set.empty)) players),
     gameStateTrick = emptyTrick
@@ -143,11 +143,11 @@ gameAtBeginning gameState =
 -- wer ist als nächstes dran?
 playerAfter :: GameState -> Player -> Player
 playerAfter state player =
-   head (rotate (rotateTo player (gameStatePlayers state)))
+   Zipper.focus (Zipper.cycleRight (Zipper.focusTo player (gameStatePlayers state)))
 
 -- wer ist gerade dran?
 currentPlayer state =
-  head (gameStatePlayers state)
+  Zipper.focus (gameStatePlayers state)
 
 -- ist es zulässig, diese Karte auszuspielen?
 playValid :: GameState -> Player -> Card -> Bool
