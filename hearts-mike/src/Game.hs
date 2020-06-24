@@ -202,6 +202,68 @@ data GameCommand =
   | PlayCard Player Card
   deriving Show
 
-processGameEvent :: GameEvent -> GameState -> GameState
+-- Karte ausspielen
+takeCard :: PlayerHands -> Player -> Card -> PlayerHands
+takeCard playerHand player card =
+  Map.alter (fmap (removeCard card)) player playerHand
 
--- processGameCommand :: GameCommand -> GameState -> [GameEvent]
+-- Karten zum Stapel hinzufügen
+addToStack :: PlayerStacks -> Player -> [Card] -> PlayerStacks
+addToStack playerStacks player cards =
+  Map.alter (fmap (Set.union (Set.fromList cards))) player playerStacks
+
+-- Ereignis in den Zustand einarbeiten
+processGameEvent :: GameEvent -> GameState -> GameState
+-- processGameEvent event state | trace ("processGameEvent " ++ show state ++ " " ++ show event) False = undefined
+processGameEvent (HandDealt player hand) state =
+  state {
+    gameStateHands = Map.insert player hand (gameStateHands state),
+    gameStateTrick = emptyTrick
+  }
+processGameEvent (PlayerTurnChanged player) state =
+  state {
+    gameStatePlayers  = Zipper.focusTo player (gameStatePlayers state)
+  }
+processGameEvent (LegalCardPlayed player card) state =
+  state {
+    gameStateHands = takeCard (gameStateHands state) player card,
+    gameStateTrick = addToTrick player card (gameStateTrick state)
+  }
+processGameEvent (TrickTaken player trick) state =
+  state {
+    gameStateStacks =
+      addToStack (gameStateStacks state) player (cardsOfTrick trick),
+    gameStateTrick = emptyTrick
+  }
+processGameEvent (IllegalCardPlayed player card) state = state
+processGameEvent (GameEnded player) state = state
+
+-- Ereignisse eines Befehls ermitteln
+processGameCommand :: GameCommand -> GameState -> [GameEvent]
+-- processGameCommand command state | trace ("processGameCommand " ++ show (gameAtBeginning state) ++ " " ++ show command ++ " " ++ show state) False = undefined
+processGameCommand (DealHands hands) state =
+  map (uncurry HandDealt) (Map.toList hands) -- :: [(Player, Hand)]
+processGameCommand (PlayCard player card) state =
+  if playValid state player card
+  then
+    let event1 = LegalCardPlayed player card
+        state1 = processGameEvent event1 state
+    in 
+      if turnOver state1
+      then
+        let trick1 = gameStateTrick state1
+            trickTaker = whoTakesTrick trick1
+            event2 = TrickTaken trickTaker trick1
+            state2 = processGameEvent event2 state1
+            event3 = if gameOver state2
+                     then
+                        GameEnded (gameWinner state2)
+                     else
+                        PlayerTurnChanged trickTaker
+        in [event1, event2, event3]
+      else
+        let event2 = PlayerTurnChanged (playerAfter state1 player)
+        in [event1, event2]
+  else
+    [IllegalCardPlayed player card] 
+
