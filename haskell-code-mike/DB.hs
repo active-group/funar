@@ -55,6 +55,11 @@ splice (Put key value cont) next =
         in splice dba next)
 splice (Done result)        next = next result
 
+compose :: (a -> DB b) -> (b -> DB c) -> (a -> DB c)
+compose f g =
+  \ a ->
+    (f a) >>= g
+
 {-
 class Monad (m :: * -> *) where
   (>>=) :: m a -> (a -> m b) -> m b
