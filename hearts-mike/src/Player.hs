@@ -59,7 +59,7 @@ chooserStrategy choose =
 chooseAlong :: Chooser player effects
 chooseAlong _ playerState =
   case playerStateTrick playerState of
-    [] -> return (Set.findMin (playerStateHand playerState))       -- leine erste Karte
+    [] -> return (Set.findMin (playerStateHand playerState))       -- eine erste Karte
     trick ->
       let hand = playerStateHand playerState
           (_, firstCard) = last trick
