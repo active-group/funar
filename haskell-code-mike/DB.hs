@@ -28,6 +28,27 @@ data DB result =
   | Put String Integer  (()      -> DB result)
   | Done result
 
+data DBCommand self = -- Selbstbezug ... "DB result"
+    Get' String         (Integer -> self)
+  | Put' String Integer (() -> self)
+-- kein Done!
+
+-- freie Monade: Free f
+data Free f result =
+    Pure result
+  | Impure (f (Free f result))
+           -- ^^^^^^^^^^^^^^^ self, Selbstbezug
+
+instance Functor f => Functor (Free f) where
+
+instance Functor f => Applicative (Free f) where
+
+instance Functor f => Monad (Free f) where
+  return = Pure
+  (Pure result) >>= next = next result
+  (Impure effect) >>= next =
+    Impure (fmap (>>= next) effect)
+
 p1 = Put "Mike" 42 (\() ->
      Get "Mike" (\ x ->
      Put "Mike" (x + 42) (\() ->
