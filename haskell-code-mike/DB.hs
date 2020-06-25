@@ -40,6 +40,9 @@ data Free f result =
            -- ^^^^^^^^^^^^^^^ self, Selbstbezug
 
 instance Functor f => Functor (Free f) where
+  fmap g (Pure result) = Pure (g result)
+  fmap g (Impure effect) =
+    Impure (fmap (fmap g) effect)
 
 instance Functor f => Applicative (Free f) where
 
