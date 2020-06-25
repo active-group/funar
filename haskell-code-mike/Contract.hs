@@ -15,7 +15,9 @@ module Contract where
 
 -- Swap: Ich bekomme 100EUR und zahle 100GBP.
 
-data Date = Date String
+-- 4. Semantik
+
+newtype Date = Date String
     deriving (Eq, Ord, Show)
 
 type Amount = Double
@@ -54,12 +56,46 @@ data Direction = Long | Short
 data Payment = Payment Direction Amount Currency
   deriving Show
 
+scalePayment factor (Payment direction amount currency) =
+    Payment direction (factor * amount) currency
+
+invertPayment (Payment direction amount currency) =
+    Payment (invertDirection direction) amount currency
+
+invertDirection Long = Short
+invertDirection Short = Long
+
+-- smart constructor
+and :: Contract -> Contract -> Contract
+and Zero contract = contract
+and contract Zero = contract
+and contract1 contract2 = And contract1 contract2 
+
+multiple factor contract =
+    if factor == 0.0
+    then Zero
+    else if factor == 1.0
+    then contract
+    else Multiple factor contract
+
 step :: Contract -> Date -> ([Payment], Contract) 
                                     --  "Residualvertrag"
-step Zero date = undefined
+step Zero date = ([], Zero)
 step (One currency) date =
     ([Payment Long 1 currency], Zero)
-step (Multiple amount contract) date = undefined
-step (Later amount contract) date = undefined
-step (Give contract) date = undefined
-step (And contract1 contract2) date = undefined
+step (Multiple amount contract) date =
+    let (payments, residual) = step contract date
+    in (map (scalePayment amount) payments, multiple amount residual)
+step env@(Later date' contract) date =
+    if date >= date'
+    then step contract date
+    else ([], env)
+step (Give contract) date =
+    let (payments, residual) = step contract date
+    in (map invertPayment payments, Give residual)
+step (And contract1 contract2) date =
+    let (payments1, residual1) = step contract1 date
+        (payments2, residual2) = step contract2 date
+    in (payments1 ++ payments2, Contract.and residual1 residual2)
+
+
