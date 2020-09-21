@@ -1,6 +1,6 @@
 ;; Die ersten drei Zeilen dieser Datei wurden von DrRacket eingefügt. Sie enthalten Metadaten
 ;; über die Sprachebene dieser Datei in einer Form, die DrRacket verarbeiten kann.
-#reader(lib "beginner-reader.rkt" "deinprogramm" "sdp")((modname intro) (read-case-sensitive #f) (teachpacks ()) (deinprogramm-settings #(#f write repeating-decimal #f #t none explicit #f ())))
+#reader(lib "vanilla-reader.rkt" "deinprogramm" "sdp")((modname intro) (read-case-sensitive #f) (teachpacks ()) (deinprogramm-settings #(#f write repeating-decimal #f #t none explicit #f ())))
 ; Ein Haustier ist eins der folgenden:
 ; - Hund
 ; - Katze
@@ -143,24 +143,30 @@
 ; - eine Cons-Liste bestehend aus
 ;   einem ersten Element und einer Rest-Liste
 ;                                       ^^^^^ Selbstbezug
-(define list-of-numbers
-  (signature (mixed empty-list cons-list)))
+#;(define list-of
+  (lambda (element)
+    (signature (mixed empty-list
+                      (cons-list-of element)))))
 
 ; Die leere Liste ... es gibt nur eine.
-(define-record empty-list
+#;(define-record empty-list
   make-empty-list
   empty?)
 
-(define empty (make-empty-list))
+#;(define empty (make-empty-list))
 
 ; Eine Cons-Liste besteht aus:
 ; - erstes Element
 ; - Rest
-(define-record cons-list
+; (: cons-list signature)
+#;(: cons-list-of (signature -> signature))
+#;(define-record (cons-list-of element) ; implizites (define cons-list-of (lambda (element) ...))
   cons
   cons?
-  (first number)
-  (rest list-of-numbers)) ; Selbstreferenz
+  (first element)
+  (rest (list-of element))) ; Selbstreferenz
+
+(define list-of-numbers (signature (list-of number)))
 
 ; 1elementige Liste: 5
 (define list1 (cons 5 empty))
@@ -193,6 +199,29 @@
        (* (first list)
           (list-product (rest list)))))))
 
+(: reduce (%b (%a %b -> %b) (list-of %a) -> %b))
+
+; fold
+(define reduce
+  (lambda (for-empty for-cons list)
+    (cond
+      ((empty? list) for-empty)
+      ((cons? list)
+       (for-cons (first list)
+                 (reduce for-empty for-cons (rest list)))))))
+
+; Längste Zeichenkette
+(: longest-string ((list-of string) -> number))
+
+(define longest-string
+  (lambda (strings)
+    (reduce 0
+     (lambda (string longest-length-so-far)
+       (if (> (string-length string)
+              longest-length-so-far)
+           (string-length string)
+           longest-length-so-far))
+     strings)))
 
 ; Alle positiven Zahlen aus einer Liste extrahieren
 (: extract-positive (list-of-numbers -> list-of-numbers))
@@ -216,6 +245,10 @@
                  rest-positives)
            rest-positives)))))
 
+(define dillo-list1 (cons dillo1 (cons dillo2 empty)))
+
+; Alle Elemente, die ein Kriterium erfüllen, extrahieren
+(: extract ((%element -> boolean) (list-of %element) -> (list-of %element)))
 
 (check-expect (extract
                positive?
@@ -236,3 +269,17 @@
            (cons (first list)
                  rest-p)
            rest-p)))))
+
+; Alle Zahlen einer Liste inkrementieren
+(: inc-list ((list-of number) -> (list-of number)))
+
+(check-expect (inc-list (cons 1 (cons 2 (cons 3 empty))))
+              (cons 2 (cons 3 (cons 4 empty))))
+
+(define inc-list
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cons ((lambda (n) (+ 1 n)) (first list))
+             (inc-list (rest list)))))))
