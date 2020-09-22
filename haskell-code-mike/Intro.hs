@@ -9,4 +9,5 @@ f :: Integer -> Integer
 f n = n + 1
 
 data Pet = Hund | Katze | Schlange
+    deriving Show
 
