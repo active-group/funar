@@ -123,5 +123,11 @@ y = let x = 5
 natsFrom :: Integer -> [Integer]
 natsFrom n = n : (natsFrom (n + 1))
 
+-- Vielfache einer Zahl aus einer Liste streichen
 strikeMultiples :: Integer -> [Integer] -> [Integer]
-strikeMultiples n xs = filter (\ n' -> mod n' n /= 0) xs
+strikeMultiples n xs = filter (\ n' -> n' `mod` n /= 0) xs
+
+-- Mache aus Liste von Zahlen Liste von Primzahlen
+-- Annahme: erste Zahl der Liste ist schon Primzahl
+sieve :: [Integer] -> [Integer]
+sieve (first : rest) = first : sieve (strikeMultiples first rest)
