@@ -204,3 +204,7 @@ a + b = b + a
 Zutaten:
 Menge + Operationen + Eigenschaften
 -}
+
+class Semigroup t where
+  -- combine ist assoziativ
+  combine :: t -> t -> t
