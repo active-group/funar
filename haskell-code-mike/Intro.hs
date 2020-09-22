@@ -225,6 +225,8 @@ data Additive = Additive Integer
 instance Semigroup Additive where
   combine (Additive n1) (Additive n2) = Additive (n1 + n2)
 
+maxStringLength strings = map 
+
 class Functor f where
   -- universalMap id f == f
   universalMap :: (a -> b) -> f a -> f b
