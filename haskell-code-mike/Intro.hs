@@ -66,7 +66,7 @@ data Animal =
   | Parrot String Weight
   deriving Show
 
-dillo1 = Dillo Alive 12
+dillo1 = Dillo { dilloLiveness = Alive, dilloWeight = 12 }
 dillo2 = Dillo Dead 10
 parrot1 :: Animal
 parrot1 = Parrot "Hallo!" 10
@@ -76,5 +76,10 @@ parrot2 = Parrot "Der Schatz ist auf der Osterinsel!" 2
 parrotSentence :: Animal -> String
 parrotSentence (Parrot sentence _) = sentence
 
-runOverAnimal (Dillo {}) = undefined 
-runOverAnimal (Parrot {}) = undefined
+-- Tier überfahren
+runOverAnimal :: Animal -> Animal
+runOverAnimal (Dillo { dilloWeight = weight }) = Dillo Dead weight
+runOverAnimal (Parrot _ weight) = Parrot "" weight
+
+feedAnimal amount (Dillo liveness weight) = Dillo liveness (weight + amount)
+feedAnimal amount (Parrot sentence weight) = Parrot sentence (weight + amount)
