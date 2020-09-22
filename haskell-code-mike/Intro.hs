@@ -75,6 +75,7 @@ instance Functor Animal where
 dillo1 :: Animal Integer
 dillo1 = Dillo { dilloLiveness = Alive, dilloWeight = 12 }
 dillo2 = Dillo Dead 10
+dillo3 :: Animal Weight
 dillo3 = Dillo Alive (Kg 9)
 parrot1 :: Animal Integer
 parrot1 = Parrot "Hallo!" 10
