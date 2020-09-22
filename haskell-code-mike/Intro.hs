@@ -20,4 +20,8 @@ isCute Hund = True
 isCute Katze = True
 isCute Schlange = False
 
-
+-- Ein Gürteltier hat folgende Eigenschaften:
+-- - tot oder lebendig
+-- - Gewicht
+data Dillo = Dillo { dilloAlive :: Bool, 
+                     dilloWeight :: Integer }
