@@ -94,7 +94,8 @@ feedAnimal' (amount, Parrot sentence weight) = Parrot sentence (weight + amount)
 -- Currifizieren
 -- currify :: ((Weight, Animal) -> Animal) -> (Weight -> (Animal -> Animal))
 currify :: ((a, b) -> c) -> (a -> b -> c)
-currify f = \ a -> \ b -> f (a, b)
+-- currify f = \ a -> \ b -> f (a, b)
+currify f a b = f (a, b)
 
 feedAnimal :: Weight -> Animal -> Animal
 feedAnimal = currify feedAnimal'
