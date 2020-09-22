@@ -27,6 +27,9 @@ isCute Schlange = False
 data Weight = Kg Integer 
   deriving Show
 
+instance Num Weight where
+  (+) (Kg a) (Kg b) = Kg (a + b)
+
 data Liveness = Dead | Alive
   deriving Show 
 
