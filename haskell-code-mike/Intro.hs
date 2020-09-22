@@ -132,4 +132,6 @@ strikeMultiples n xs = filter (\ n' -> n' `mod` n /= 0) xs
 sieve :: [Integer] -> [Integer]
 sieve (first : rest) = first : sieve (strikeMultiples first rest)
 
-primes = 
+primes :: [Integer]
+primes = sieve (natsFrom 2)
+
