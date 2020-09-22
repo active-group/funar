@@ -62,24 +62,24 @@ parrot2 = Parrot "Der Schatz ist auf der Osterinsel!" 2
 
 -- Algebraischer Datentyp
 -- Gemischte Daten aus zusammengesetzten Daten
-data Animal =
+data Animal weight =
     Dillo { dilloLiveness :: Liveness, 
-            dilloWeight :: Weight }
-  | Parrot String Weight
+            dilloWeight :: weight }
+  | Parrot String weight
   deriving Show
 
 dillo1 = Dillo { dilloLiveness = Alive, dilloWeight = 12 }
 dillo2 = Dillo Dead 10
-parrot1 :: Animal
+parrot1 :: Animal Integer
 parrot1 = Parrot "Hallo!" 10
-parrot2 :: Animal
+parrot2 :: Animal Integer
 parrot2 = Parrot "Der Schatz ist auf der Osterinsel!" 2
 
-parrotSentence :: Animal -> String
+-- parrotSentence :: Animal Integer -> String
 parrotSentence (Parrot sentence _) = sentence
 
 -- Tier überfahren
-runOverAnimal :: Animal -> Animal
+-- runOverAnimal :: Animal -> Animal
 runOverAnimal (Dillo { dilloWeight = weight }) = Dillo Dead weight
 runOverAnimal (Parrot _ weight) = Parrot "" weight
 
