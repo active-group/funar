@@ -131,3 +131,5 @@ strikeMultiples n xs = filter (\ n' -> n' `mod` n /= 0) xs
 -- Annahme: erste Zahl der Liste ist schon Primzahl
 sieve :: [Integer] -> [Integer]
 sieve (first : rest) = first : sieve (strikeMultiples first rest)
+
+primes = 
