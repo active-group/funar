@@ -1,4 +1,8 @@
 module Intro where
 
+-- ghcide
+
 x :: Integer
-x = 5
+x = 7
+
+f n = n + 1
