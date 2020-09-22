@@ -25,6 +25,7 @@ isCute Schlange = False
 
 -- Typsynonym
 data Weight = Kg Integer 
+  deriving Show
 
 data Liveness = Dead | Alive
   deriving Show 
