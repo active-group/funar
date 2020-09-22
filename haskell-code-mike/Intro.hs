@@ -89,4 +89,7 @@ feedAnimal' :: (Weight, Animal) -> Animal -- Tupel
 feedAnimal' (amount, Dillo liveness weight) = Dillo liveness (weight + amount)
 feedAnimal' (amount, Parrot sentence weight) = Parrot sentence (weight + amount)
 
-curry ::
+-- Currifizieren
+-- currify :: ((Weight, Animal) -> Animal) -> (Weight -> (Animal -> Animal))
+currify :: ((a, b) -> c) -> (a -> b -> c)
+currify f = \ weight -> \ animal -> f (weight, animal)
