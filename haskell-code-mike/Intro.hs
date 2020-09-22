@@ -46,5 +46,7 @@ runOverDillo (Dillo _ weight) = Dillo { dilloLiveness = Dead, dilloWeight = weig
 -- - Gewicht
 data Parrot = Parrot String Integer
 
+parrot1 :: Parrot
 parrot1 = Parrot "Hallo!" 10
+parror2 :: Parrot
 parror2 = Parrot "Der Schatz ist auf der Osterinsel!" 2
