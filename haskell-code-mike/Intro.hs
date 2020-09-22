@@ -135,3 +135,18 @@ sieve (first : rest) = first : sieve (strikeMultiples first rest)
 primes :: [Integer]
 primes = sieve (natsFrom 2)
 
+data Map key value = Map [(key, value)]
+
+map1 :: Map Pet String
+map1 = Map [(Hund, "niedlich")]
+
+data Optional a =
+    Result a
+  | NoResult
+
+mapGet :: Eq key => Map key value -> key -> Optional value
+mapGet (Map []) key = NoResult
+mapGet (Map ((key', value') : rest)) key =
+  if key == key'
+  then Result value'
+  else mapGet (Map rest) key
