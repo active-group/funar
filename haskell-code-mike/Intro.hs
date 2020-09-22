@@ -20,13 +20,16 @@ isCute Hund = True
 isCute Katze = True
 isCute Schlange = False
 
+-- Typsynonym
+type Weight = Integer 
+
 data Liveness = Dead | Alive 
 
 -- Ein Gürteltier hat folgende Eigenschaften:
 -- - tot oder lebendig
 -- - Gewicht
 data Dillo = Dillo { dilloLiveness :: Liveness, 
-                     dilloWeight :: Integer }
+                     dilloWeight :: Weight }
 
 -- GÜrteltier, lebendig, 12kg
 dillo1 :: Dillo
@@ -44,9 +47,10 @@ runOverDillo (Dillo _ weight) = Dillo { dilloLiveness = Dead, dilloWeight = weig
 -- Papagei hat folgende Eigenschaften:
 -- - Satz
 -- - Gewicht
-data Parrot = Parrot String Integer
+data Parrot = Parrot String Weight
 
 parrot1 :: Parrot
 parrot1 = Parrot "Hallo!" 10
 parror2 :: Parrot
 parror2 = Parrot "Der Schatz ist auf der Osterinsel!" 2
+
