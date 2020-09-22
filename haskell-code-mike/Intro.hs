@@ -213,5 +213,3 @@ class Semigroup t => Monoid t where
   -- neutral ist neutrales Element
   neutral :: t
 
-instance Monoid (a, b) where
-  ...
