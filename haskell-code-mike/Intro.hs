@@ -99,3 +99,13 @@ currify f a b = f (a, b)
 
 feedAnimal :: Weight -> Animal -> Animal
 feedAnimal = currify feedAnimal'
+
+data ListOfIntegers =
+      EmptyList
+    | Cons Integer ListOfIntegers
+
+data ListOf element =
+    EmptyList'
+  | Cons' element (ListOf element)
+
+listSum :: [Integer] -> Integer
