@@ -85,6 +85,8 @@ feedAnimal :: Weight -> (Animal -> Animal)
 feedAnimal amount (Dillo liveness weight) = Dillo liveness (weight + amount)
 feedAnimal amount (Parrot sentence weight) = Parrot sentence (weight + amount)
 
-feedAnimal' :: (Weight, Animal) -> Animal
+feedAnimal' :: (Weight, Animal) -> Animal -- Tupel
 feedAnimal' (amount, Dillo liveness weight) = Dillo liveness (weight + amount)
 feedAnimal' (amount, Parrot sentence weight) = Parrot sentence (weight + amount)
+
+curry ::
