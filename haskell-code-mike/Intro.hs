@@ -10,7 +10,7 @@ f :: Integer -> Integer
 f n = n + 1
 
 data Pet = Hund | Katze | Schlange 
-  deriving Show
+  deriving (Show, Eq)
 
 pet1 :: Pet
 pet1 = Hund
@@ -154,8 +154,8 @@ instance HasEquality Pet where
   equals Schlange Schlange = True
   equals _ _ = False
 
-instance HasEquality (a, b) where
-  equals (a1, b1) (a2, b2) ==
+instance (HasEquality a, HasEquality b) => HasEquality (a, b) where
+  equals (a1, b1) (a2, b2) =
     (a1 `equals` a2) && (b1 `equals` b2)
 
 -- Eq key : Constraint / Eigenschaft / Typklasse
