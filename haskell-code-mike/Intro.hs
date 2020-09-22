@@ -25,3 +25,7 @@ isCute Schlange = False
 -- - Gewicht
 data Dillo = Dillo { dilloAlive :: Bool, 
                      dilloWeight :: Integer }
+
+-- GÜrteltier, lebendig, 12kg
+dillo1 :: Dillo
+dillo1 = Dillo { dilloAlive = True, dilloWeight = 12 }
