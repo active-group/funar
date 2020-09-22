@@ -68,6 +68,10 @@ data Animal weight =
   | Parrot String weight
   deriving Show
 
+instance Functor Animal where
+  
+
+dillo1 :: Animal Integer
 dillo1 = Dillo { dilloLiveness = Alive, dilloWeight = 12 }
 dillo2 = Dillo Dead 10
 parrot1 :: Animal Integer
