@@ -28,6 +28,7 @@ data Liveness = Dead | Alive
 -- Ein Gürteltier hat folgende Eigenschaften:
 -- - tot oder lebendig
 -- - Gewicht
+{-
 data Dillo = Dillo { dilloLiveness :: Liveness, 
                      dilloWeight :: Weight }
 
@@ -51,6 +52,14 @@ data Parrot = Parrot String Weight
 
 parrot1 :: Parrot
 parrot1 = Parrot "Hallo!" 10
-parror2 :: Parrot
-parror2 = Parrot "Der Schatz ist auf der Osterinsel!" 2
+parrot2 :: Parrot
+parrot2 = Parrot "Der Schatz ist auf der Osterinsel!" 2
+-}
+data Animal =
+    Dillo { dilloLiveness :: Liveness, 
+                     dilloWeight :: Weight }
+  | Parrot String Weight
 
+parrot1 :: Animal
+parrot1 = Parrot "Hallo!" 10
+parrot2 = Parrot "Der Schatz ist auf der Osterinsel!" 2
