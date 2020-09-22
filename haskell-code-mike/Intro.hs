@@ -17,4 +17,4 @@ pet1 = Hund
 isCute :: Pet -> Bool
 isCute Hund = True
 isCute Katze = True
-isCute Schlange = True
+isCute Schlange = False
