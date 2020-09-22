@@ -14,7 +14,10 @@ data Pet = Hund | Katze | Schlange
 pet1 :: Pet
 pet1 = Hund
 
+-- Ist Haustier niedlich?
 isCute :: Pet -> Bool
 isCute Hund = True
 isCute Katze = True
 isCute Schlange = False
+
+
