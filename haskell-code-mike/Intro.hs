@@ -225,7 +225,6 @@ data Additive = Additive Integer
 instance Semigroup Additive where
   combine (Additive n1) (Additive n2) = Additive (n1 + n2)
 
-
 class Functor f where
   -- universalMap id f = id
   universalMap :: (a -> b) -> f a -> f b
