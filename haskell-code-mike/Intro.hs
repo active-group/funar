@@ -144,7 +144,7 @@ data Optional a =
     Result a
   | NoResult
 
--- Eq key : Constraint / Eigenschaft
+-- Eq key : Constraint / Eigenschaft / Typklasse
 mapGet :: Eq key => Map key value -> key -> Optional value
 mapGet (Map []) key = NoResult
 mapGet (Map ((key', value') : rest)) key =
