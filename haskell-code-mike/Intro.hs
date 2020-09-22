@@ -144,6 +144,20 @@ data Optional a =
     Result a
   | NoResult
 
+-- "Es gibt eine Eigenschaft"
+class HasEquality t where
+  equals :: t -> t -> Bool
+
+instance HasEquality Pet where
+  equals Katze Katze = True
+  equals Hund Hund = True
+  equals Schlange Schlange = True
+  equals _ _ = False
+
+instance HasEquality (a, b) where
+  equals (a1, b1) (a2, b2) ==
+    (a1 `equals` a2) && (b1 `equals` b2)
+
 -- Eq key : Constraint / Eigenschaft / Typklasse
 mapGet :: Eq key => Map key value -> key -> Optional value
 mapGet (Map []) key = NoResult
