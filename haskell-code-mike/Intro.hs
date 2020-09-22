@@ -227,7 +227,7 @@ instance Semigroup Additive where
 
 
 class Functor f where
-  --  
+  -- universalMap id f = id
   universalMap :: (a -> b) -> f a -> f b
 
 instance Functor Optional where
