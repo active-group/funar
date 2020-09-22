@@ -226,4 +226,12 @@ instance Semigroup Additive where
   combine (Additive n1) (Additive n2) = Additive (n1 + n2)
 
 
-class Functor 
+class Functor f where
+  --  
+  universalMap :: (a -> b) -> f a -> f b
+
+instance Functor Optional where
+  universalMap = optionalMap
+
+instance Functor [] where
+  universalMap = listMap
