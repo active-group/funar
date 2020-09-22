@@ -72,3 +72,5 @@ parrot2 = Parrot "Der Schatz ist auf der Osterinsel!" 2
 
 parrotSentence :: Animal -> String
 parrotSentence (Parrot sentence _) = sentence
+
+runOverAnimal (Dillo { dilloLiveness = liveness, dilloWeight = weight }) = undefined 
