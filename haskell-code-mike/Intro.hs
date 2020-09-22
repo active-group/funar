@@ -25,11 +25,26 @@ data Liveness = Dead | Alive
 -- Ein Gürteltier hat folgende Eigenschaften:
 -- - tot oder lebendig
 -- - Gewicht
-data Dillo = Dillo { dilloAlive :: Bool, 
+data Dillo = Dillo { dilloLiveness :: Liveness, 
                      dilloWeight :: Integer }
 
 -- GÜrteltier, lebendig, 12kg
 dillo1 :: Dillo
-dillo1 = Dillo { dilloAlive = True, dilloWeight = 12 }
+dillo1 = Dillo { dilloLiveness = Alive, dilloWeight = 12 }
 dillo2 :: Dillo
-dillo2 = Dillo False 10 -- totes Gürteltier, 10kg
+dillo2 = Dillo Dead 10 -- totes Gürteltier, 10kg
+
+-- Gürteltier überfahren
+runOverDillo :: Dillo -> Dillo
+-- Schreibweise 1:
+runOverDillo dillo = Dillo { dilloLiveness = Dead, dilloWeight = dilloWeight dillo }
+-- Schreibweise 2:
+runOverDillo (Dillo _ weight) = Dillo { dilloLiveness = Dead, dilloWeight = weight }
+
+-- Papagei hat folgende Eigenschaften:
+-- - Satz
+-- - Gewicht
+data Parrot = Parrot String Integer
+
+parrot1 = Parrot "Hallo!" 10
+parror2 = Parrot "Der Schatz ist auf der Osterinsel!" 2
