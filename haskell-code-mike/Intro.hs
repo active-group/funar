@@ -146,6 +146,11 @@ data Optional a =
     Result a
   | NoResult
 
+optionalMap :: (a -> b) -> Optional a -> Optional b
+optionalMap f (Result a) = Result (f a)
+optionalMap f NoResult = NoResult
+
+
 -- "Es gibt eine Eigenschaft"
 class HasEquality t where
   equals :: t -> t -> Bool
@@ -213,3 +218,7 @@ class Semigroup t => Monoid t where
   -- neutral ist neutrales Element
   neutral :: t
 
+data Additive = Additive Integer
+
+instance Semigroup Additive where
+  combine (Additive n1) (Additive n2) = Additive (n1 + n2)
