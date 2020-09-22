@@ -23,7 +23,8 @@ isCute Schlange = False
 -- Typsynonym
 type Weight = Integer 
 
-data Liveness = Dead | Alive 
+data Liveness = Dead | Alive
+  deriving Show 
 
 -- Ein Gürteltier hat folgende Eigenschaften:
 -- - tot oder lebendig
