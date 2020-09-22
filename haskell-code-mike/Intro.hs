@@ -55,11 +55,20 @@ parrot1 = Parrot "Hallo!" 10
 parrot2 :: Parrot
 parrot2 = Parrot "Der Schatz ist auf der Osterinsel!" 2
 -}
+
+-- Algebraischer Datentyp
+-- Gemischte Daten aus zusammengesetzten Daten
 data Animal =
     Dillo { dilloLiveness :: Liveness, 
-                     dilloWeight :: Weight }
+            dilloWeight :: Weight }
   | Parrot String Weight
 
+dillo1 = Dillo Alive 12
+dillo2 = Dillo Dead 10
 parrot1 :: Animal
 parrot1 = Parrot "Hallo!" 10
+parrot2 :: Animal
 parrot2 = Parrot "Der Schatz ist auf der Osterinsel!" 2
+
+parrotSentence :: Animal -> String
+parrotSentence (Parrot sentence _) = sentence
