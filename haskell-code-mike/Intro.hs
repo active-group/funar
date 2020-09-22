@@ -37,7 +37,7 @@ dillo2 = Dillo Dead 10 -- totes Gürteltier, 10kg
 -- Gürteltier überfahren
 runOverDillo :: Dillo -> Dillo
 -- Schreibweise 1:
-runOverDillo dillo = Dillo { dilloLiveness = Dead, dilloWeight = dilloWeight dillo }
+-- runOverDillo dillo = Dillo { dilloLiveness = Dead, dilloWeight = dilloWeight dillo }
 -- Schreibweise 2:
 runOverDillo (Dillo _ weight) = Dillo { dilloLiveness = Dead, dilloWeight = weight }
 
