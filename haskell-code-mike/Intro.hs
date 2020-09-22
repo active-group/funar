@@ -81,6 +81,7 @@ parrotSentence (Parrot sentence _) = sentence
 
 -- Tier überfahren
 -- runOverAnimal :: Animal -> Animal
+runOverAnimal :: Animal weight -> Animal weight
 runOverAnimal (Dillo { dilloWeight = weight }) = Dillo Dead weight
 runOverAnimal (Parrot _ weight) = Parrot "" weight
 
@@ -91,6 +92,7 @@ feedAnimal amount (Parrot sentence weight) = Parrot sentence (weight + amount)
 -}
 
 -- feedAnimal' :: (Weight, Animal) -> Animal -- Tupel
+feedAnimal' :: Num weight => (weight, Animal weight) -> Animal weight
 feedAnimal' (amount, Dillo liveness weight) = Dillo liveness (weight + amount)
 feedAnimal' (amount, Parrot sentence weight) = Parrot sentence (weight + amount)
 
