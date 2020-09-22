@@ -116,3 +116,10 @@ listMap :: (a -> b) -> [a] -> [b]
 listMap f [] = []
 listMap f (x:xs) = (f x) : (listMap f xs)
 
+y = let x = 5
+        g y = y + 7
+    in g (x + 1)
+
+natsFrom :: Integer -> [Integer]
+natsFrom n = n : (natsFrom (n + 1))
+
