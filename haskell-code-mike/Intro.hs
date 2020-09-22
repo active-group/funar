@@ -208,3 +208,7 @@ Menge + Operationen + Eigenschaften
 class Semigroup t where
   -- combine ist assoziativ
   combine :: t -> t -> t
+
+class Semigroup t => Monoid t where
+  -- neutral ist neutrales Element
+  neutral :: t
