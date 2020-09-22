@@ -148,6 +148,23 @@ data Optional a =
 class HasEquality t where
   equals :: t -> t -> Bool
 
+{-
+Äquivalenzrelation:
+
+"Menge" t
+equals :: t -> t -> Bool
+ 
+Transitivität
+a `equals` b && b `equals` c => a `equals` c
+
+Symmetrie
+a `equals` b == b `equals` a 
+
+Reflexivität
+a `equals` a == True
+
+-}
+
 instance HasEquality Pet where
   equals Katze Katze = True
   equals Hund Hund = True
@@ -165,3 +182,23 @@ mapGet (Map ((key', value') : rest)) key =
   if key == key'
   then Result value'
   else mapGet (Map rest) key
+
+{-
+- Injektivität / Bijektivität
+
++ :: a -> a -> a
+
+Assoziativität
+(a + b) + c = a + (b + c)
+^^^ Halbgruppe
+
+neutrales Element:
+a + n = n + a = a
+^^^ Monoid
+
+Kommutativität
+a + b = b + a
+
+Zutaten:
+Menge + Operationen + Eigenschaften
+-}
