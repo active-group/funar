@@ -81,9 +81,11 @@ runOverAnimal :: Animal -> Animal
 runOverAnimal (Dillo { dilloWeight = weight }) = Dillo Dead weight
 runOverAnimal (Parrot _ weight) = Parrot "" weight
 
+{-
 feedAnimal :: Weight -> (Animal -> Animal)
 feedAnimal amount (Dillo liveness weight) = Dillo liveness (weight + amount)
 feedAnimal amount (Parrot sentence weight) = Parrot sentence (weight + amount)
+-}
 
 feedAnimal' :: (Weight, Animal) -> Animal -- Tupel
 feedAnimal' (amount, Dillo liveness weight) = Dillo liveness (weight + amount)
@@ -92,4 +94,7 @@ feedAnimal' (amount, Parrot sentence weight) = Parrot sentence (weight + amount)
 -- Currifizieren
 -- currify :: ((Weight, Animal) -> Animal) -> (Weight -> (Animal -> Animal))
 currify :: ((a, b) -> c) -> (a -> b -> c)
-currify f = \ weight -> \ animal -> f (weight, animal)
+currify f = \ a -> \ b -> f (a, b)
+
+feedAnimal :: Weight -> Animal -> Animal
+feedAnimal = currify feedAnimal'
