@@ -123,3 +123,5 @@ y = let x = 5
 natsFrom :: Integer -> [Integer]
 natsFrom n = n : (natsFrom (n + 1))
 
+strikeMultiples :: Integer -> [Integer] -> [Integer]
+strikeMultiples n xs = filter (\ n' -> mod n' n /= 0) xs
