@@ -24,7 +24,7 @@ isCute Katze = True
 isCute Schlange = False
 
 -- Typsynonym
-type Weight = Integer 
+data Weight = Kg Integer 
 
 data Liveness = Dead | Alive
   deriving Show 
@@ -69,7 +69,8 @@ data Animal weight =
   deriving Show
 
 instance Functor Animal where
-  
+  universalMap f (Dillo liveness weight) = Dillo liveness (f weight)
+  universalMap f (Parrot sentence weight) = Parrot sentence (f weight)
 
 dillo1 :: Animal Integer
 dillo1 = Dillo { dilloLiveness = Alive, dilloWeight = 12 }
