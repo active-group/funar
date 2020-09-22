@@ -1,3 +1,4 @@
+{-# OPTIONS_GHC -fwarn-Wno-incomplete-patterns #-}
 module Intro where
 
 -- ghcide
