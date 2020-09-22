@@ -225,7 +225,7 @@ data Additive = Additive Integer
 instance Semigroup Additive where
   combine (Additive n1) (Additive n2) = Additive (n1 + n2)
 
-maxStringLength = maximum `o` (map length)
+maxStringLength = maximum `o` (map (length :: [a] -> Int))
 
 -- Funktionskomposition
 o :: (b -> c) -> (a -> b) -> a -> c
