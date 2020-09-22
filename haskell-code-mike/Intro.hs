@@ -29,3 +29,5 @@ data Dillo = Dillo { dilloAlive :: Bool,
 -- GÜrteltier, lebendig, 12kg
 dillo1 :: Dillo
 dillo1 = Dillo { dilloAlive = True, dilloWeight = 12 }
+dillo2 :: Dillo
+dillo2 = Dillo False 10 -- totes Gürteltier, 10kg
