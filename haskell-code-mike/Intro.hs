@@ -75,7 +75,8 @@ parrot1 = Parrot "Hallo!" 10
 parrot2 :: Animal Integer
 parrot2 = Parrot "Der Schatz ist auf der Osterinsel!" 2
 
--- parrotSentence :: Animal Integer -> String
+-- parrotSentence :: Animal -> String
+parrotSentence :: Animal weight -> String
 parrotSentence (Parrot sentence _) = sentence
 
 -- Tier überfahren
@@ -89,7 +90,7 @@ feedAnimal amount (Dillo liveness weight) = Dillo liveness (weight + amount)
 feedAnimal amount (Parrot sentence weight) = Parrot sentence (weight + amount)
 -}
 
-feedAnimal' :: (Weight, Animal) -> Animal -- Tupel
+-- feedAnimal' :: (Weight, Animal) -> Animal -- Tupel
 feedAnimal' (amount, Dillo liveness weight) = Dillo liveness (weight + amount)
 feedAnimal' (amount, Parrot sentence weight) = Parrot sentence (weight + amount)
 
@@ -99,7 +100,7 @@ currify :: ((a, b) -> c) -> (a -> (b -> c))
 -- currify f = \ a -> (\ b -> f (a, b)) 
 currify f a b = f (a, b)
 
-feedAnimal :: Weight -> Animal -> Animal
+-- feedAnimal :: Weight -> Animal -> Animal
 feedAnimal = currify feedAnimal'
 
 data ListOfIntegers =
