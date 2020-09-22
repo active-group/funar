@@ -233,6 +233,7 @@ o f g = \ x -> f (g x)
 
 class Functor f where
   -- universalMap id f == f
+  -- universalMap (f . g) == (universalMap f) . (universalMap g)
   universalMap :: (a -> b) -> f a -> f b
 
 instance Functor Optional where
