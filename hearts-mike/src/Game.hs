@@ -123,7 +123,7 @@ emptyGameState players =
   GameState {
     gameStatePlayers = players,
     gameStateHands = Map.empty,
-    gameStateStacks = Map.empty,
+    gameStateStacks = Map.fromList (map (\ player -> (player, Set.empty)) players),
     gameStateTrick = emptyTrick
   }
 
