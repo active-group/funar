@@ -8,7 +8,7 @@ author:              Mike Sperber
 maintainer:          michael.sperber@active-group.de
 
 library
-  exposed-modules: Cards, Game
+  exposed-modules: Cards
   other-modules: Teletype, Concurrency, Shuffle, MVar, PolysemyUtil, Zipper
   
   build-depends:       base
