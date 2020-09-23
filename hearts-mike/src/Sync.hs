@@ -47,7 +47,7 @@ mike = Player "1" "Mike"
 bianca = Player "2" "Bianca"
 
 strategy1 :: Strategy '[State (PlayerState "Mike"), State (PlayerState "Bianca"), State (PlayerState "Fredo"), State (PlayerState "Connie"), Teletype]
-strategy1 = interactiveStrategy @"Mike"
+strategy1 = interactiveStrategy @"Mike" -- player
 strategy2 :: Strategy '[State (PlayerState "Mike"), State (PlayerState "Bianca"), State (PlayerState "Fredo"), State (PlayerState "Connie"), Teletype]
 strategy2 = interactiveStrategy @"Bianca"
 strategy3 :: Strategy '[State (PlayerState "Mike"), State (PlayerState "Bianca"), State (PlayerState "Fredo"), State (PlayerState "Connie"), Teletype]

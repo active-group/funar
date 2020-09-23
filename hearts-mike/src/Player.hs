@@ -27,6 +27,7 @@ type EventProcessor effects event command = event -> Sem effects [command]
 
 type Strategy effects = Player -> EventProcessor effects GameEvent GameCommand
 
+-- langweiliger Spießerspieler
 type Chooser player effects =
   Player -> PlayerState player -> Sem effects Card
 
@@ -105,7 +106,8 @@ getNumber (lo, hi) = do
     do Teletype.writeTTY ("Input must be between " ++ (show lo) ++ " and " ++ (show hi) ++ ". Try again")
        getNumber (lo, hi)
 
-interactiveStrategy :: forall player effects . (Member Teletype effects, Member (State (PlayerState player)) effects) => Strategy effects
+interactiveStrategy :: forall player effects . 
+   (Member Teletype effects, Member (State (PlayerState player)) effects) => Strategy effects
 interactiveStrategy player event =
   chooserStrategy chooseInteractive player event
 
