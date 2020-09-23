@@ -73,4 +73,40 @@ prettyCards [] = ""
 prettyCards [x] = prettyCard x
 prettyCards (x:xs) = prettyCard x ++ " and\n" ++ prettyCards xs
 
+{-
+-- Eine Karte hat folgende Eigenschaften:
+-- - Farbe (suit)
+-- - Wert (rank)
+data Card = Card { suit :: Suit, rank :: Rank }
+  deriving (Ord, Eq, Show)
 
+-- Eine Farbe ist eine der folgenden:
+-- Pik Karo Herz Kreuz
+data Suit = Diamonds | Clubs | Spades | Hearts
+  deriving (Ord, Eq, Show)
+
+-- alle Farben
+suits :: [Suit]
+suits = [Diamonds, Clubs, Spades, Hearts]
+
+-- Ein Wert ist eins der folgenden:
+-- 2 .. 10
+-- Bube Dame König As
+-- bessere Modell:
+data Rank = Two | Three | Four | Five | Six | Seven | Eight | Nine | Ten | Jack | Queen | King | Ace
+  deriving (Show, Eq, Ord)
+-- Int: nicht beschränkt auf 2-10
+-- data Rank = Numeric Int | Jack | Queen | King | Ace
+
+-- alle Werte
+ranks :: [Rank]
+ranks = [Two, Three, Four, Five , Six , Seven , Eight , Nine , Ten , Jack , Queen , King , Ace]
+
+-- Wert höher als ein anderer
+rankHigher :: Rank -> Rank -> Bool
+rankHigher rank1 rank2 = rank1 > rank2
+
+deck :: Set Card
+deck = Set.map (uncurry Card)
+               (Set.cartesianProduct (Set.fromList suits) (Set.fromList ranks))
+-}
