@@ -90,3 +90,4 @@ step (Combine contract1 contract2) now =
     let (payments1, residual1) = step contract1 now
         (payments2, residual2) = step contract2 now
     in (payments1 ++ payments2, Combine residual1 residual2)
+    
