@@ -134,7 +134,7 @@ playerHandM player =
      return (gameStateHands state ! player)
 
 
-playerStackM :: Member GameEventSourcing effects => Player -> Sem effects (Set Card)
+playerStackM :: Member GameEventSourcing effects => Player -> Sem effects Stack
 playerStackM player =
   do state <- eventState
      return (gameStateStacks state ! player)
@@ -167,7 +167,7 @@ currentTrickM :: Member GameEventSourcing effects => Sem effects Trick
 currentTrickM = fmap gameStateTrick eventState
 
 gameWinnerM :: Member GameEventSourcing effects => Sem effects Player
-gameWinnerM = fmap gameWinner eventState
+gameWinnerM = fmap gameWinner' eventState
 
 processGameCommandM :: Member GameEventSourcing effects => GameCommand -> Sem effects ()
 processGameCommandM command =

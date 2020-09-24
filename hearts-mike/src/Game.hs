@@ -9,6 +9,10 @@ import qualified Data.Map.Strict as Map
 
 import Data.Map.Strict (Map, (!))
 
+import Control.Monad.State.Strict as State
+import Control.Monad.State.Strict (State)
+import Control.Conditional
+
 import Cards
 
 import Debug.Trace (trace)
@@ -101,7 +105,23 @@ rotateTo y [] = undefined
 
 -- * Spiellogik
 
-type Stack = Set Card
+-- wie data, aber ohne Laufzeit-Overhead
+newtype Stack = Stack (Set Card)
+  deriving Show
+
+emptyStack :: Stack
+emptyStack = Stack Set.empty
+
+stackEmpty :: Stack -> Bool
+stackEmpty (Stack cards) = null cards
+
+stackAddCards :: Stack -> [Card] -> Stack
+stackAddCards (Stack cards) moreCards =
+  Stack (Set.union cards (Set.fromList moreCards))
+
+-- Wert eines Stapels
+stackScore :: Stack -> Integer
+stackScore (Stack cards) = sum (map cardScore (Set.toList cards))
 
 -- eingezogene Karten, pro Spieler
 type PlayerStacks = Map Player Stack
@@ -123,7 +143,7 @@ emptyGameState players =
   GameState {
     gameStatePlayers = players,
     gameStateHands = Map.empty,
-    gameStateStacks = Map.fromList (map (\ player -> (player, Set.empty)) players),
+    gameStateStacks = Map.fromList (map (\ player -> (player, emptyStack)) players),
     gameStateTrick = emptyTrick
   }
 
@@ -131,7 +151,7 @@ emptyGameState players =
 gameAtBeginning :: GameState -> Bool
 gameAtBeginning gameState =
   (trickEmpty (gameStateTrick gameState)) && 
-    (all null (Map.elems (gameStateStacks gameState)))
+    (all stackEmpty (Map.elems (gameStateStacks gameState)))
 
 -- wer ist als nächstes dran?
 playerAfter :: GameState -> Player -> Player
@@ -162,13 +182,18 @@ turnOver :: GameState -> Bool
 turnOver state =
   length (gameStatePlayers state) == trickSize (gameStateTrick state)
 
--- Wert eines Stapels
-stackScore :: Stack -> Integer
-stackScore hand = sum (map cardScore (Set.toList hand))
 
 -- Wer hat gewonnen?
-gameWinner :: GameState -> Player
+gameWinner :: GameState -> Maybe Player
 gameWinner state =
+  let playerScores = fmap stackScore (gameStateStacks state)
+      cmp (_, score1) (_, score2) = compare score1 score2
+  in if not (gameOver state) || Map.null playerScores
+     then Nothing
+     else Just (fst (Foldable.minimumBy cmp (Map.toList playerScores)))
+
+gameWinner' :: GameState -> Player
+gameWinner' state =
   let playerScores = fmap stackScore (gameStateStacks state)
       cmp (_, score1) (_, score2) = compare score1 score2
   in fst (Foldable.minimumBy cmp (Map.toList playerScores))
@@ -229,8 +254,8 @@ takeCard playerHands player card =
 -- Karten zum Stapel hinzufügen
 addToStack :: PlayerStacks -> Player -> [Card] -> PlayerStacks
 addToStack playerStacks player cards =
-  let playerStack = Map.findWithDefault Set.empty player playerStacks
-  in Map.insert player (Set.union playerStack (Set.fromList cards)) playerStacks
+  let playerStack = Map.findWithDefault emptyStack player playerStacks
+  in Map.insert player (stackAddCards playerStack cards) playerStacks
 
 -- Ereignis in den Zustand einarbeiten
 processGameEvent :: GameEvent -> GameState -> GameState
@@ -273,14 +298,45 @@ processGameCommand (PlayCard player card) state =
              trickTaker = whoTakesTrick trick
              event2 = TrickTaken trickTaker trick
              state2 = processGameEvent event2 state1
-             event3 = if gameOver state2
-                      then
-                        GameEnded (gameWinner state2)
-                      else
-                        PlayerTurnChanged trickTaker
+             event3 = case gameWinner state2 of
+                        Nothing -> PlayerTurnChanged trickTaker
+                        Just winner -> GameEnded winner
          in [event1, event2, event3]
        else 
          let event2 = PlayerTurnChanged (playerAfter state1 player)
          in [event1, event2]
   else
     [IllegalCardPlayed player card]
+
+-- State state a
+-- ^^^^^^^^^^^ die Monade
+-- State.get :: State state state
+-- State.put :: state -> State state ()
+
+processGameEventM' :: GameEvent -> State GameState ()
+processGameEventM' event =
+  do gameState <- State.get
+     let gameState' = processGameEvent event gameState
+     State.put gameState'      
+
+processGameCommandM' :: GameCommand -> State GameState [GameEvent]
+processGameCommandM' (DealHands hands) =
+  return (map (uncurry HandDealt) (Map.toList hands))
+processGameCommandM' (PlayCard player card) =
+  do let playValid' player card state = playValid state player card
+     ifM (playValid' player card <$> State.get)
+       (do let event1 = LegalCardPlayed player card
+           processGameEventM' event1
+           ifM (turnOver <$> State.get) -- State GameState Bool
+             (do trick <- gameStateTrick <$> State.get
+                 let trickTaker = whoTakesTrick trick
+                     event2 = TrickTaken trickTaker trick
+                 processGameEventM' event2
+                 event3 <- ifM (gameOver <$> State.get)
+                            (GameEnded <$> (gameWinner' <$> State.get))
+                            (return (PlayerTurnChanged trickTaker))
+                 return [event1, event2, event3])
+             (do event2 <- PlayerTurnChanged <$> ((flip playerAfter player) <$> State.get)
+                 return [event1, event2]))
+       (return [IllegalCardPlayed player card])
+
