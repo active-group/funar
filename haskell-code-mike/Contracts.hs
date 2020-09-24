@@ -52,7 +52,11 @@ multiple amount Zero = Zero
 multiple amount contract = Multiple amount contract
 
 later :: Date -> Contract -> Contract
-later = Later
+later date contract = Later date contract
+
+combine = Combine
+
+c1 = later (Date "2020-12-24") (combine zcb1 zcb2)
 
 -- Zero-Coupon-Bond konstruieren
 zcb :: Date -> Amount -> Currency -> Contract
@@ -90,4 +94,3 @@ step (Combine contract1 contract2) now =
     let (payments1, residual1) = step contract1 now
         (payments2, residual2) = step contract2 now
     in (payments1 ++ payments2, Combine residual1 residual2)
-    
