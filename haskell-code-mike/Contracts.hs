@@ -54,7 +54,11 @@ multiple amount contract = Multiple amount contract
 later :: Date -> Contract -> Contract
 later date contract = Later date contract
 
-combine = Combine
+combine Zero contract2 = contract2
+combine contract1 Zero = contract1
+combine (Combine contract1 contract2) contract3 =
+    combine contract1 (combine contract2 contract3)
+combine contract1 contract2 = Combine contract1 contract2
 
 -- Zero-Coupon-Bond konstruieren
 zcb :: Date -> Amount -> Currency -> Contract
