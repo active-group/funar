@@ -56,7 +56,7 @@ later date contract = Later date contract
 
 combine = Combine
 
-c1 = later (Date "2020-12-24") (combine zcb1 zcb2)
+c1 = later (Date "2021-12-24") (combine zcb1 zcb2)
 
 -- Zero-Coupon-Bond konstruieren
 zcb :: Date -> Amount -> Currency -> Contract
