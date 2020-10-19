@@ -51,7 +51,7 @@
 ; Ein Tier (auf dem texanischen Highway) ist eins der folgenden:
 ; - Gürteltier
 ; - Papagei
-; gemischte Daten
+; gemischte Daten: Spezialfall von Fallunterscheidung
 (define animal
   (signature
    (mixed dillo
@@ -152,5 +152,7 @@
 (check-expect (run-over-animal parrot1)
               (run-over-parrot parrot1))
 
-
+(define run-over-animal
+  (lambda (animal)
+    ...))
     
