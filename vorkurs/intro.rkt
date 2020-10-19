@@ -48,6 +48,11 @@
       ((string=? pet "cat") #t)
       ((string=? pet "snake") #f))))
 
+; Ein Tier (auf dem texanischen Highway) ist eins der folgenden:
+; - Gürteltier
+; - Papagei
+
+
 ; Ein Gürteltier hat folgende Eigenschaften: / besteht aus:
 ; - tot oder lebendig UND
 ; - Gewicht
