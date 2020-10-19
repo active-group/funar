@@ -218,7 +218,10 @@
        (* (first list)
           (list-product (rest list)))))))
 
-(: list-xxx (%b (%a %b -> %b) (list-of %a) -> %b))
+; (cons 1 (cons 2 (cons 3 empty)))
+; (*    1 (*    2 (*    3 1)))
+
+(: list-fold (%b (%a %b -> %b) (list-of %a) -> %b))
 
 (define list-fold
   (lambda (x f list)
@@ -227,8 +230,6 @@
       ((cons? list)
        (f (first list)
           (list-fold x f (rest list)))))))
-
-
 
 ; Liste inkrementieren
 (: inc-list (list-of-numbers -> list-of-numbers))
@@ -249,6 +250,19 @@
   (lambda (n)
     (+ 1 n)))
 
+(define inc-helper
+  (lambda (first-list rec-rest)
+    (cons (inc first-list)
+          rec-rest)))
+
+(define inc-list2
+  (lambda (list)
+    (list-fold empty
+               (lambda (first-list rec-rest)
+                 (cons (inc first-list)
+                       rec-rest))
+               list)))
+
 ; Liste "verdoppeln"
 (: double-list (list-of-numbers -> list-of-numbers))
 
@@ -266,6 +280,14 @@
 (define double
   (lambda (n)
     (* n 2)))
+
+(define double-list2
+  (lambda (list0)
+    (list-fold empty
+               (lambda (a b)
+                 (cons (double a)
+                       b))
+               list0)))
 
 ; Funktion auf jedes Element einer Liste anwenden
 ; %element: Signaturvariable, wird bei jedem Aufruf "automatisch belegt"
