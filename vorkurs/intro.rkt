@@ -203,3 +203,12 @@
       ((cons? list)
        (+ (first list)
           (list-sum (rest list)))))))
+
+(define list-product
+  (lambda (list)
+    (cond
+      ((empty? list) 1)
+      ((cons? list)
+       (* (first list)
+          (list-product (rest list)))))))
+
