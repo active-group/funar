@@ -166,10 +166,11 @@
 ; - die leere Liste - ODER -
 ; - eine Cons-Liste bestehend aus erstem Element und Rest-Liste
 ;                                             Selbstbezug ^^^^^
-(define list-of-numbers
-  (signature
-   (mixed empty-list
-          cons-list-of-numbers)))
+(define list-of
+ (lambda (element)
+   (signature
+    (mixed empty-list
+           (cons-list-of element)))))
 
 (define-record empty-list
   make-empty-list
@@ -180,11 +181,14 @@
 ; Eine Cons-Liste besteht aus:
 ; - erstes Element
 ; - Rest - auch wieder eine Liste
-(define-record cons-list-of-numbers
+(define-record (cons-list-of element) ; (lambda (element) ...)
   cons
   cons?
-  (first number)
-  (rest list-of-numbers))
+  (first element)
+  (rest (list-of element)))
+
+(define list-of-numbers (signature (list-of number)))
+
 
 (define list1 (cons 5 empty)) ; 1elementige Liste: 5
 (define list2 (cons 3 (cons 5 empty))) ; 2elementige Liste: 3 5
@@ -249,6 +253,7 @@
   (lambda (n)
     (* n 2)))
 
+; Funktion auf jedes Element einer Liste anwenden
 (: map-list ((number -> number) list-of-numbers -> list-of-numbers))
 
 (check-expect (map-list double list3)
