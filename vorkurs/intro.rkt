@@ -45,7 +45,7 @@
   (lambda (pet)
     (cond
       ((string=? pet "dog") #t)
-      ((string=? pet "dog") #t)
+      ((string=? pet "cat") #t)
       ((string=? pet "snake") #f))))
 
 
