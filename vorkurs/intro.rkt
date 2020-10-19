@@ -65,3 +65,12 @@
 
 (define dillo1 (make-dillo #t 12)) ; Gürteltier, lebendig, 12kg
 (define dillo2 (make-dillo #f 10)) ; Gürteltier, tot, 10kg
+
+; Gürteltier überfahren
+(: run-over-dillo (dillo -> dillo))
+
+(check-expect (run-over-dillo dillo1)
+              (make-dillo #f 12))
+(check-expect (run-over-dillo dillo2)
+              #;(make-dillo #f 10) dillo2)
+
