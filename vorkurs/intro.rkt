@@ -224,8 +224,12 @@
     (cond
       ((empty? list) empty)
       ((cons? list)
-       (cons (+ 1 (first list))
+       (cons (inc (first list))
              (inc-list (rest list)))))))
+
+(define inc
+  (lambda (n)
+    (+ 1 n)))
 
 ; Liste "verdoppeln"
 (: double-list (list-of-numbers -> list-of-numbers))
@@ -238,6 +242,22 @@
     (cond
       ((empty? list) empty)
       ((cons? list)
-       (cons (* (first list) 2)
+       (cons (double (first list))
              (double-list (rest list)))))))
-       
+
+(define double
+  (lambda (n)
+    (* n 2)))
+
+(: map-list ((number -> number) list-of-numbers -> list-of-numbers))
+
+(check-expect (map-list double list3)
+              (cons 14 (cons 6 (cons 10 empty))))
+
+(define map-list
+  (lambda (f list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cons (f (first list))
+             (map-list f (rest list)))))))
