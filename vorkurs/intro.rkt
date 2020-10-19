@@ -121,3 +121,6 @@
   (parrot-sentence string)
   (parrot-weight number))
 
+(define parrot1 (make-parrot "Hallo!" 2)) ; Begrüßungspapagei, 2kg
+(define parrot2 (make-parrot "Tschüss!" 1)) ; andere Richtung, 1kg
+
