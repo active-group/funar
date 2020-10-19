@@ -218,6 +218,18 @@
        (* (first list)
           (list-product (rest list)))))))
 
+(: list-xxx (%b (%a %b -> %b) (list-of %a) -> %b))
+
+(define list-fold
+  (lambda (x f list)
+    (cond
+      ((empty? list) x)
+      ((cons? list)
+       (f (first list)
+          (list-fold x f (rest list)))))))
+
+
+
 ; Liste inkrementieren
 (: inc-list (list-of-numbers -> list-of-numbers))
 
