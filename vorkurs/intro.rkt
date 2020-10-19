@@ -256,7 +256,10 @@
     (* n 2)))
 
 ; Funktion auf jedes Element einer Liste anwenden
-(: map-list ((number -> number) list-of-numbers -> list-of-numbers))
+; %element: Signaturvariable, wird bei jedem Aufruf "automatisch belegt"
+(: map-list ((%a -> %b) (list-of %a) -> (list-of %b)))
+
+;(: map-list ((number -> number) (list-of number) -> (list-of number)))
 
 (check-expect (map-list double list3)
               (cons 14 (cons 6 (cons 10 empty))))
