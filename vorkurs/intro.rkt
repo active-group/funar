@@ -212,3 +212,32 @@
        (* (first list)
           (list-product (rest list)))))))
 
+; Liste inkrementieren
+(: inc-list (list-of-numbers -> list-of-numbers))
+
+(check-expect (inc-list list3)
+              (cons 8 (cons 4 (cons 6 empty))))
+
+
+(define inc-list
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cons (+ 1 (first list))
+             (inc-list (rest list)))))))
+
+; Liste "verdoppeln"
+(: double-list (list-of-numbers -> list-of-numbers))
+
+(check-expect (double-list list3)
+              (cons 14 (cons 6 (cons 10 empty))))
+
+(define double-list
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cons (* (first list) 2)
+             (double-list (rest list)))))))
+       
