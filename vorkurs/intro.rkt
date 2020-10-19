@@ -57,4 +57,11 @@
   (dillo-alive? boolean)
   (dillo-weight number))
 
-  
+; Konstruktor
+(: make-dillo (boolean number -> dillo))
+; Selektoren
+(: dillo-alive? (dillo -> boolean))
+(: dillo-weight (dillo -> number))
+
+(define dillo1 (make-dillo #t 12)) ; Gürteltier, lebendig, 12kg
+(define dillo2 (make-dillo #f 10)) ; Gürteltier, tot, 10kg
