@@ -166,3 +166,19 @@
 ; - die leere Liste - ODER -
 ; - eine Cons-Liste bestehend aus erstem Element und Rest-Liste
 ;                                             Selbstbezug ^^^^^
+(define list-of-numbers
+  (signature
+   (mixed empty-list
+          cons-list-of-numbers)))
+
+(define-record empty-list
+  make-empty-list
+  empty?) ; keine Felder
+
+; Eine Cons-Liste besteht aus:
+; - erstes Element
+; - Rest - auch wieder eine Liste
+
+
+
+  
