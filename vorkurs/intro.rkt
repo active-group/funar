@@ -2,3 +2,50 @@
 ;; über die Sprachebene dieser Datei in einer Form, die DrRacket verarbeiten kann.
 #reader(lib "beginner-reader.rkt" "deinprogramm" "sdp")((modname intro) (read-case-sensitive #f) (teachpacks ()) (deinprogramm-settings #(#f write repeating-decimal #f #t none explicit #f ())))
 ; Vorkurs
+
+; Pro Entität/Domänenobjekt gibt es Signatur
+
+; Datenanalyse
+; 1. Datendefinition: natürlichsprachige Beschreibung
+; 2. Übersetzung in Code
+
+; Ein Haustier ist eins der folgenden:
+; - Hund ODER
+; - Katze ODER
+; - Schlange
+; Fallunterscheidung
+; Spezialfall: Aufzählung
+(define pet
+  (signature
+   (enum "dog"
+         "cat"
+         "snake")))
+
+; Ist ein Haustier niedlich?
+(: cute? (pet -> boolean))
+
+(check-expect (cute? "dog") #t)
+(check-expect (cute? "cat") #t)
+(check-expect (cute? "snake") #f)
+
+; Gerüst
+#;(define cute?
+  (lambda (pet)
+    ...))
+
+; Schablone <- hängt ab von den Daten
+#;(define cute?
+  (lambda (pet)
+    (cond
+      (... ...)
+      (... ...)
+      (... ...))))
+
+(define cute?
+  (lambda (pet)
+    (cond
+      ((string=? pet "dog") #t)
+      ((string=? pet "dog") #t)
+      ((string=? pet "snake") #f))))
+
+
