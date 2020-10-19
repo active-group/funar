@@ -175,10 +175,31 @@
   make-empty-list
   empty?) ; keine Felder
 
+(define empty (make-empty-list))
+
 ; Eine Cons-Liste besteht aus:
 ; - erstes Element
 ; - Rest - auch wieder eine Liste
+(define-record cons-list-of-numbers
+  cons
+  cons?
+  (first number)
+  (rest list-of-numbers))
 
+(define list1 (cons 5 empty)) ; 1elementige Liste: 5
+(define list2 (cons 3 (cons 5 empty))) ; 2elementige Liste: 3 5
+(define list3 (cons 7 (cons 3 (cons 5 empty)))) ; 3elementige Liste: 7 3 5
+(define list4 (cons 17 list3)) ; 4elementig: 17 7 3 5
 
+; Elemente einer Liste addieren
+(: list-sum (list-of-numbers -> number))
 
-  
+(check-expect (list-sum list3) 15)
+
+(define list-sum
+  (lambda (list)
+    (cond
+      ((empty? list) 0)
+      ((cons? list)
+       (+ (first list)
+          (list-sum (rest list)))))))
