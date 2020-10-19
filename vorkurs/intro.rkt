@@ -86,6 +86,12 @@
 (check-expect (run-over-dillo dillo2)
               #;(make-dillo #f 10) dillo2)
 
+; QuickCheck
+(check-property
+ (for-all ((d dillo))
+   (boolean=? (dillo-alive? (run-over-dillo d))
+              #f)))
+
 #;(define run-over-dillo
   (lambda (dillo)
     (make-dillo ... ...)
