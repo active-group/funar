@@ -187,6 +187,8 @@
   (first element)
   (rest (list-of element)))
 
+(: cons-list-of (signature -> signature))
+
 (define list-of-numbers (signature (list-of number)))
 
 
