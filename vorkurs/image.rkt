@@ -23,9 +23,30 @@
  (beside square1 star1)
  (beside star1 square1))
 
+; Konstruktionsanleitungen
+; Feste Schrittfolge
+
+; Kurzbeschreibung
+; Quadratisches Kachelmuster bilden
+; Signatur
+(: tile (image image -> image))
 
 (define tile
   (lambda (image1 image2)
     (above
      (beside image1 image2)
      (beside image2 image1))))
+
+#;(tile circle1 star1)
+
+#|
+
+void m(...) {
+  int x = 780;
+
+  x = 781;
+
+  ... x ...
+}
+
+|#
