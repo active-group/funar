@@ -131,5 +131,5 @@ l1 = Cons 1 (Cons 2 (Cons 3 Empty))
 
 -- Elemente einer Liste addieren
 listSum :: ListOfIntegers -> Integer
-listSum Empty = undefined
-listSum (Cons first rest) = undefined
+listSum Empty = 0
+listSum (Cons first rest) = first + (listSum rest)
