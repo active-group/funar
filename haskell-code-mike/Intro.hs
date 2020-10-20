@@ -75,5 +75,9 @@ data Animal =
     Dillo { dilloLiveness :: Liveness,
             dilloWeight :: Weight }
   | Parrot Sentence Weight 
+  deriving Show
 
+dillo1 :: Animal
 dillo1 = Dillo { dilloLiveness = Alive, dilloWeight = 12}
+
+dillo2 = Dillo Dead 10
