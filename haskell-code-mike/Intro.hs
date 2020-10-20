@@ -1,4 +1,5 @@
 {-# OPTIONS_GHC -fwarn-incomplete-patterns #-}
+{-# LANGUAGE UnicodeSyntax #-}
 module Intro where
 
 x :: Integer
