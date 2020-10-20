@@ -28,6 +28,16 @@ isCute Snake = False
 -- - Gewicht
 data Liveness = Dead | Alive 
 
+-- Typsyonym
+type Weight = Integer
 
+-- Konstruktor heißt genau wie der Typ
+data Dillo = Dillo { dilloLiveness :: Liveness,
+                     dilloWeight :: Weight }
+
+
+dillo1 :: Dillo
+dillo1 = Dillo { dilloLiveness = Alive, dilloWeight = 12 } -- Gürteltier, lebendig, 12kg
+dillo2 = Dillo Dead 10 -- Gürteltier, tot, 10kg
 
 
