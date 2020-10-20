@@ -250,4 +250,10 @@ mapGet (Map ((key', value'):rest)) key =
 class HasEquality a where
   equals :: a -> a -> Bool
 
+-- Implementierung einer Typklasse
+instance HasEquality Pet where
+  equals Dog Dog = True
+  equals Cat Cat = True
+  equals Snake Snake = True
+  equals _ _ = False 
 
