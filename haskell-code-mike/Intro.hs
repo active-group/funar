@@ -257,3 +257,8 @@ instance HasEquality Pet where
   equals Snake Snake = True
   equals _ _ = False 
 
+instance Eq Pet where
+  Dog == Dog = True
+  Cat == Cat = True
+  Snake == Snake = True
+  _ == _ = False
