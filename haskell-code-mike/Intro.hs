@@ -143,4 +143,12 @@ listSum :: ListOfIntegers -> Integer
 listSum Empty = 0
 listSum (Cons first rest) = first + (listSum rest)
 
--- 
+-- Eine geometrische Figur ist eins der folgenden:
+-- - Kreis
+-- - Quadrat
+-- - eine Überlagerung zweier geometrischer Figuren
+
+-- 1. Aufgabe: Entwickle eine Repräsentation
+-- 2. Aufgabe: Funktion, die feststellt, ob ein Punkt
+--             innerhalb oder außerhalb einer geometrischen
+--             Figur liegt
