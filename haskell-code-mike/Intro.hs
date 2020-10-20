@@ -207,3 +207,11 @@ distance (x1, y1) (x2, y2) =
 
 natsFrom :: Integer -> [Integer]
 natsFrom n = n : (natsFrom (n + 1))
+
+strikeMultiples :: Integer -> [Integer] -> [Integer]
+strikeMultiples n [] = []
+strikeMultiples n (first:rest) = -- Annahme: first ist Primzahl
+  if mod first n == 0
+  then strikeMultiples n rest
+  else first : (strikeMultiples n rest)
+
