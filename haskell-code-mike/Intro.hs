@@ -78,6 +78,13 @@ data Animal =
   deriving Show
 
 dillo1 :: Animal
-dillo1 = Dillo { dilloLiveness = Alive, dilloWeight = 12}
+dillo1 = (Dillo { dilloLiveness = Alive, dilloWeight = 12}) :: Animal
 
+dillo2 :: Animal
 dillo2 = Dillo Dead 10
+
+-- Tier überfahren
+runOverAnimal :: Animal -> Animal
+runOverAnimal (Dillo _ weight) = Dillo Dead weight
+runOverAnimal (Parrot _ weight) = Parrot "" weight
+
