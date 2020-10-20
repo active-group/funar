@@ -182,3 +182,5 @@ distance :: Point -> Point -> Double
 distance (x1, y1) (x2, y2) =
   let sqr x = x * x
   in  sqrt (sqr (x1 - x2) + sqr (y1 - y2))
+
+
