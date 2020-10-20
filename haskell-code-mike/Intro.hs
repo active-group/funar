@@ -157,6 +157,13 @@ listMap _ [] = []
 listMap f (first:rest) =
   (f first) : (listMap f rest)
 
+listFold :: b -> (a -> b -> b) -> [a] -> b
+listFold x f [] = x
+-- listFold x f (first:rest) =
+--   f first
+--    (listFold x f rest)
+listFold x f (first:rest) = first `f` (listFold x f rest)
+
 -- Eine geometrische Figur ist eins der folgenden:
 -- - Kreis
 -- - Quadrat
