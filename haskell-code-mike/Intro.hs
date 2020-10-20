@@ -147,8 +147,38 @@ listSum (Cons first rest) = first + (listSum rest)
 -- - Kreis
 -- - Quadrat
 -- - eine Überlagerung zweier geometrischer Figuren
+--                            ^^^^^^^^^^^^^^^^^^^ Selbstbezug
+
+-- Eine Überlagerung besteht aus:
+-- - geometrische Figur
+-- - noch 'ne geometrische Figur
 
 -- 1. Aufgabe: Entwickle eine Repräsentation
 -- 2. Aufgabe: Funktion, die feststellt, ob ein Punkt
 --             innerhalb oder außerhalb einer geometrischen
 --             Figur liegt
+type Point = (Double, Double)
+
+-- algebraischer Datentyp
+data Shape =
+    Circle Point Double -- Mittelpunkt, Radius
+  | Square Point Double -- Point ist die u.l. Ecke
+  | Overlay Shape Shape
+
+-- Ist ein Punkt in einer geometrischen Figur?
+pointIsInShape :: Point -> Shape -> Bool
+pointIsInShape point (Circle center radius) =
+  (distance point center) <= radius
+pointIsInShape (px, py) (Square (llCornerX, llCornerY) sideLength) =
+  (px >= llCornerX) &&
+  (px <= llCornerX + sideLength) &&
+  (py >= llCornerY) &&
+  (py <= llCornerY + sideLength)
+pointIsInShape point (Overlay shape1 shape2) =
+  (pointIsInShape point shape1) || (pointIsInShape point shape2)
+
+-- Abstand zwischen zwei Punkten
+distance :: Point -> Point -> Double
+distance (x1, y1) (x2, y2) =
+  let sqr x = x * x
+  in  sqrt (sqr (x1 - x2) + sqr (y1 - y2))
