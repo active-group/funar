@@ -143,6 +143,15 @@ listSum :: ListOfIntegers -> Integer
 listSum Empty = 0
 listSum (Cons first rest) = first + (listSum rest)
 
+l1' :: [Integer]
+l1' = [1,2,3]
+l1'' :: [Integer]
+l1'' = 1:(2:(3:[]))
+
+listSum' :: [Integer] -> Integer
+listSum' [] = 0
+listSum' (first:rest) = first + (listSum' rest)
+
 -- Eine geometrische Figur ist eins der folgenden:
 -- - Kreis
 -- - Quadrat
