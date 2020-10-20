@@ -115,5 +115,21 @@ uncurrify :: (a -> b -> c) -> ((a, b) -> c)
 uncurrify f = \ (a, b) -> f a b
 
 currify :: ((a, b) -> c) -> (a -> (b -> c))
-currify f = \ a -> \ b -> f (a, b)
+-- currify f = \ a -> \ b -> f (a, b)
+currify = \ f -> \ a -> \ b -> f (a, b)
+-- currify f a b = f (a, b)
 
+-- Eine Liste ist eins der folgenden:
+-- - die leere Liste
+-- - eine Cons-Liste aus erstem Element und Rest-Liste
+data ListOfIntegers =
+    Empty
+  | Cons Integer ListOfIntegers
+
+l1 :: ListOfIntegers
+l1 = Cons 1 (Cons 2 (Cons 3 Empty))
+
+-- Elemente einer Liste addieren
+listSum :: ListOfIntegers -> Integer
+listSum Empty = undefined
+listSum (Cons first rest) = undefined
