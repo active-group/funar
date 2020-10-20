@@ -43,4 +43,13 @@ dillo1 = Dillo { dilloLiveness = Alive, dilloWeight = 12 } -- Gürteltier, leben
 dillo2 :: Dillo
 dillo2 = Dillo Dead 10 -- Gürteltier, tot, 10kg
 
+-- Gürteltier überfahren
+-- (: run-over-dillo (dillo -> dillo))
+runOverDillo :: Dillo -> Dillo
+-- (define run-over-dillo
+--   (lambda (dillo)
+--     (make-dillo #f (dillo-weight dillo))))
+-- runOverDillo = \ dillo -> Dillo { dilloLiveness = Dead, dilloWeight = dilloWeight dillo}
+runOverDillo dillo = Dillo Dead (dilloWeight dillo)
+-- runOverDillo (Dillo l w) = Dillo Dead w
 
