@@ -205,3 +205,5 @@ distance (x1, y1) (x2, y2) =
   in  sqrt (sqr (x1 - x2) + sqr (y1 - y2))
 
 
+natsFrom :: Integer -> [Integer]
+natsFrom n = n : (natsFrom (n + 1))
