@@ -245,3 +245,4 @@ mapGet (Map ((key', value'):rest)) key =
   if key == key'
   then Present value'
   else mapGet (Map rest) key
+
