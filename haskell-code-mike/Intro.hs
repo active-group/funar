@@ -110,4 +110,5 @@ tuplify :: (Weight -> Animal -> Animal) -> ((Weight, Animal) -> Animal)
 tuplify f = \ (weight, animal) -> f weight animal
 -}
 
-tuplify f = \(weight, animal) -> f weight animal
+tuplify :: (a -> b -> c) -> ((a, b) -> c)
+tuplify f = \ (a, b) -> f a b
