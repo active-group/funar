@@ -110,7 +110,8 @@ tuplify :: (Weight -> Animal -> Animal) -> ((Weight, Animal) -> Animal)
 tuplify f = \ (weight, animal) -> f weight animal
 -}
 
-tuplify :: (a -> b -> c) -> ((a, b) -> c)
-tuplify f = \ (a, b) -> f a b
+uncurrify :: (a -> b -> c) -> ((a, b) -> c)
+uncurrify f = \ (a, b) -> f a b
 
-curry :: 
+currify :: ((a, b) -> c) -> (a -> (b -> c))
+currify f = \ a -> \ b -> f (a, b)
