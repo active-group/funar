@@ -229,6 +229,7 @@ map2 = Map [(Cat, "Katze"), (Dog, "Hund")]
 data Optional a =
     Absent
   | Present a
+  deriving Show
 
 {-
 data Maybe a =
