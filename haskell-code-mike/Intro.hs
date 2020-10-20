@@ -33,6 +33,9 @@ data Liveness = Dead | Alive
 -- Typsyonym
 type Weight = Integer
 
+type Sentence = String
+
+{-
 -- Konstruktor heißt genau wie der Typ
 data Dillo = Dillo { dilloLiveness :: Liveness,
                      dilloWeight :: Weight }
@@ -51,6 +54,26 @@ runOverDillo :: Dillo -> Dillo
 --   (lambda (dillo)
 --     (make-dillo #f (dillo-weight dillo))))
 -- runOverDillo = \ dillo -> Dillo { dilloLiveness = Dead, dilloWeight = dilloWeight dillo}
-runOverDillo dillo = Dillo Dead (dilloWeight dillo)
--- runOverDillo (Dillo l w) = Dillo Dead w
+-- runOverDillo dillo = Dillo Dead (dilloWeight dillo)
+runOverDillo (Dillo _ w) = Dillo Dead w
 
+-- Ein Papagei hat folgende Eigenschaft:
+-- - Satz
+-- - Gewicht
+type Sentence = String
+
+data Parrot = Parrot Sentence Weight
+  deriving Show
+
+-- Ein Tier ist eins der folgenden:
+-- - Gürteltier
+-- - Papagei
+
+-}
+
+data Animal = 
+    Dillo { dilloLiveness :: Liveness,
+            dilloWeight :: Weight }
+  | Parrot Sentence Weight 
+
+dillo1 = Dillo { dilloLiveness = Alive, dilloWeight = 12}
