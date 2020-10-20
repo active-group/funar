@@ -224,11 +224,23 @@ data Map key value = Map [(key, value)]
 
 map1 :: Map String String
 map1 = Map [("Mike", "Sperber"), ("Markus", "Spanier")]
+map2 = Map [(Cat, "Katze"), (Dog, "Hund")]
 
 data Optional a =
     Absent
   | Present a
 
-mapGet :: Map key value -> key -> value
-mapGet (Map []) key = undefined
-mapGet (Map (first:rest)) key = undefined
+{-
+data Maybe a =
+    Nothing
+  | Just a
+-}
+
+-- Eq key: Constraint / Einschränkung
+--         Eigenschaft
+mapGet :: Eq key => Map key value -> key -> Optional value
+mapGet (Map []) _key = Absent
+mapGet (Map ((key', value'):rest)) key =
+  if key == key'
+  then Present value'
+  else mapGet (Map rest) key
