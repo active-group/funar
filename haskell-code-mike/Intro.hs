@@ -87,7 +87,7 @@ dillo2 = Dillo Dead 10
 runOverAnimal :: Animal -> Animal
 -- runOverAnimal (Dillo _ weight) = Dillo Dead weight
 runOverAnimal (Dillo { dilloWeight = weight }) = Dillo Dead weight
--- runOverAnimal dillo@(Dillo {}) = dillo { dilloLiveness = Dead } - funktionales Update
+-- runOverAnimal dillo@(Dillo {}) = dillo { dilloLiveness = Dead } -- funktionales Update
 runOverAnimal (Parrot _ weight) = Parrot "" weight
 {-
 runOverAnimal animal =
@@ -95,3 +95,7 @@ runOverAnimal animal =
     (Dillo _ weight) -> Dillo Dead weight
     (Parrot _ weight) -> Parrot "" weight
 -}
+
+-- Tier füttern
+feedAnimal amount (Dillo liveness weight) = Dillo liveness (weight + amount)
+feedAnimal amount (Parrot sentence weight) = Parrot sentence (weight + amount)
