@@ -246,3 +246,8 @@ mapGet (Map ((key', value'):rest)) key =
   then Present value'
   else mapGet (Map rest) key
 
+-- Typklasse
+class HasEquality a where
+  equals :: a -> a -> Bool
+
+
