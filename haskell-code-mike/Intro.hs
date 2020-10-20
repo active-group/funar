@@ -110,8 +110,10 @@ tuplify :: (Weight -> Animal -> Animal) -> ((Weight, Animal) -> Animal)
 tuplify f = \ (weight, animal) -> f weight animal
 -}
 
+-- "Was nicht paßt, wird passend gemacht!"
 uncurrify :: (a -> b -> c) -> ((a, b) -> c)
 uncurrify f = \ (a, b) -> f a b
 
 currify :: ((a, b) -> c) -> (a -> (b -> c))
 currify f = \ a -> \ b -> f (a, b)
+
