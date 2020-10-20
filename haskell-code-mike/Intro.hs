@@ -51,7 +51,6 @@ runOverDillo :: Dillo -> Dillo
 --   (lambda (dillo)
 --     (make-dillo #f (dillo-weight dillo))))
 -- runOverDillo = \ dillo -> Dillo { dilloLiveness = Dead, dilloWeight = dilloWeight dillo}
-runOverDillo = λ dillo -> Dillo { dilloLiveness = Dead, dilloWeight = dilloWeight dillo}
--- runOverDillo dillo = Dillo Dead (dilloWeight dillo)
+runOverDillo dillo = Dillo Dead (dilloWeight dillo)
 -- runOverDillo (Dillo l w) = Dillo Dead w
 
