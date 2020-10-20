@@ -34,6 +34,7 @@ type Weight = Integer
 -- Konstruktor heißt genau wie der Typ
 data Dillo = Dillo { dilloLiveness :: Liveness,
                      dilloWeight :: Weight }
+  deriving Show
 
 
 dillo1 :: Dillo
