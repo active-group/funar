@@ -27,6 +27,7 @@ isCute Snake = False
 -- - tot oder lebendig
 -- - Gewicht
 data Liveness = Dead | Alive 
+  deriving Show
 
 -- Typsyonym
 type Weight = Integer
@@ -39,6 +40,7 @@ data Dillo = Dillo { dilloLiveness :: Liveness,
 
 dillo1 :: Dillo
 dillo1 = Dillo { dilloLiveness = Alive, dilloWeight = 12 } -- Gürteltier, lebendig, 12kg
+dillo2 :: Dillo
 dillo2 = Dillo Dead 10 -- Gürteltier, tot, 10kg
 
 
