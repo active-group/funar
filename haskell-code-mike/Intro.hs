@@ -210,8 +210,12 @@ natsFrom n = n : (natsFrom (n + 1))
 
 strikeMultiples :: Integer -> [Integer] -> [Integer]
 strikeMultiples n [] = []
-strikeMultiples n (first:rest) = -- Annahme: first ist Primzahl
+strikeMultiples n (first:rest) = -- Annahme: n ist Primzahl
   if mod first n == 0
   then strikeMultiples n rest
   else first : (strikeMultiples n rest)
 
+sieve :: [Integer] -> [Integer]
+sieve [] = []
+sieve (first:rest) = -- Annahme: first Primzahl
+  first : (sieve (strikeMultiples first rest))
