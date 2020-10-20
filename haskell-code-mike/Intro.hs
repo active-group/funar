@@ -153,10 +153,9 @@ listSum' [] = 0
 listSum' (first:rest) = first + (listSum' rest)
 
 listMap :: (a -> b) -> [a] -> [b]
-listMap f [] = []
+listMap _ [] = []
 listMap f (first:rest) =
-  first
-  rest 
+  (f first) : (listMap f rest)
 
 -- Eine geometrische Figur ist eins der folgenden:
 -- - Kreis
