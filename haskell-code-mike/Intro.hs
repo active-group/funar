@@ -85,6 +85,13 @@ dillo2 = Dillo Dead 10
 
 -- Tier überfahren
 runOverAnimal :: Animal -> Animal
-runOverAnimal (Dillo _ weight) = Dillo Dead weight
+-- runOverAnimal (Dillo _ weight) = Dillo Dead weight
+runOverAnimal (Dillo { dilloWeight = weight }) = Dillo Dead weight
+-- runOverAnimal dillo@(Dillo {}) = dillo { dilloLiveness = Dead } - funktionales Update
 runOverAnimal (Parrot _ weight) = Parrot "" weight
-
+{-
+runOverAnimal animal =
+  case animal of
+    (Dillo _ weight) -> Dillo Dead weight
+    (Parrot _ weight) -> Parrot "" weight
+-}
