@@ -219,3 +219,16 @@ sieve :: [Integer] -> [Integer]
 sieve [] = []
 sieve (first:rest) = -- Annahme: first Primzahl
   first : (sieve (strikeMultiples first rest))
+
+data Map key value = Map [(key, value)]
+
+map1 :: Map String String
+map1 = Map [("Mike", "Sperber"), ("Markus", "Spanier")]
+
+data Optional a =
+    Absent
+  | Present a
+
+mapGet :: Map key value -> key -> value
+mapGet (Map []) key = undefined
+mapGet (Map (first:rest)) key = undefined
