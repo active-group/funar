@@ -153,9 +153,16 @@ playValid gameState player card =
       then card == twoOfClubs
       else currentPlayer gameState == player
 
+{-
+data Maybe a =
+  Nothing | Just a
+-}
 -- ist das Spiel vorbei?
-gameOver :: GameState -> Bool
-gameOver state = all isHandEmpty (Map.elems (gameStateHands state))
+gameOver :: GameState -> Maybe Player
+gameOver state = 
+  if all isHandEmpty (Map.elems (gameStateHands state))
+  then Just (gameWinner state)
+  else Nothing
 
 -- ist diese Runde vorbei?
 turnOver :: GameState -> Bool
@@ -250,13 +257,13 @@ processGameCommand (PlayCard player card) gameState =
             event2 = TrickTaken trickTaker trick
             gameState2 = processGameEvent event2 gameState1
         in
-          if gameOver gameState2
-          then
-            let event3 = GameEnded (gameWinner gameState2)
-            in [event1, event2, event3]
-          else
-            let event3 = PlayerTurnChanged trickTaker
-            in [event1, event2, event3]
+          case gameOver gameState2 of
+            Nothing ->
+              let event3 = PlayerTurnChanged trickTaker
+              in [event1, event2, event3]
+            Just winner ->
+              let event3 = GameEnded winner
+              in [event1, event2, event3]
       else 
         let event2 = PlayerTurnChanged (playerAfter gameState1 player)
         in [event1, event2]
