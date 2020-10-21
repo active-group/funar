@@ -224,6 +224,7 @@ data Map key value = Map [(key, value)]
 
 map1 :: Map String String
 map1 = Map [("Mike", "Sperber"), ("Markus", "Spanier")]
+map2 :: Map Pet String
 map2 = Map [(Cat, "Katze"), (Dog, "Hund")]
 
 data Optional a =
