@@ -59,9 +59,9 @@ leadingCardOfTrick trick = snd (last trick)
 
 -- wer muß den Stich einziehen?
 whoTakesTrick :: Trick -> Player
-whoTakesTrick [] = undefined
+whoTakesTrick [] = error "trick is empty"
 whoTakesTrick trick =
-  let loop player _ [] = player
+  let loop player _    [] = player
       loop player card ((player', card') : rest) =
         if cardBeats card' card
         then loop player' card' rest
@@ -109,7 +109,7 @@ type PlayerStacks = Map Player Stack
 type PlayerHands  = Map Player Hand
 
 data GameState =
-  GameState
+  MakeGameState
   { gameStatePlayers :: [Player], -- wer dran ist, steht vorn
     gameStateHands   :: PlayerHands,
     gameStateStacks  :: PlayerStacks,
@@ -120,7 +120,7 @@ data GameState =
 -- Anfangszustand herstellen
 emptyGameState :: [Player] -> GameState
 emptyGameState players =
-  GameState {
+  MakeGameState {
     gameStatePlayers = players,
     gameStateHands = Map.empty,
     gameStateStacks = Map.empty,
@@ -148,10 +148,10 @@ playValid gameState player card =
   let hand = gameStateHands gameState ! player
       trick = gameStateTrick gameState
   in
-  legalCard card hand trick &&
-  if gameAtBeginning gameState
-  then card == twoOfClubs
-  else currentPlayer gameState == player
+      legalCard card hand trick &&
+      if gameAtBeginning gameState
+      then card == twoOfClubs
+      else currentPlayer gameState == player
 
 -- ist das Spiel vorbei?
 gameOver :: GameState -> Bool
@@ -172,3 +172,51 @@ gameWinner state =
   let playerScores = fmap stackScore (gameStateStacks state)
       cmp (_, score1) (_, score2) = compare score1 score2
   in fst (Foldable.minimumBy cmp (Map.toList playerScores))
+
+-- Event-Sourcing:
+-- Log-Buch aller Ereignisse, Ereignis repräsentiert durch Datenobjekt
+
+-- 1. in der Vergangenheit
+-- 2. "vollständig"
+-- Redundanz OK
+
+{- 
+data GameEvent =
+    GameBegun
+  | CardsShuffled [Card]
+  | CardsDealt PlayerHands
+  | CardPlayed Player Card
+  | TrickTaken Player Trick
+  | PlayerTurnChanged Player
+  | GameWon Player
+-}
+
+data GameEvent
+  = HandDealt Player Hand
+  | PlayerTurnChanged Player
+  | LegalCardPlayed Player Card
+  | TrickTaken Player Trick
+  | IllegalCardPlayed Player Card
+  | GameEnded Player
+  deriving (Show)
+
+-- Command: Wunsch, das etwas in der Zukunft passiert
+-- !!!!!!! != Event
+
+data GameCommand =
+    DealHands PlayerHands
+  | PlayCard Player Card
+  deriving Show
+
+-- Ereignis in den Zustand einarbeiten
+processGameEvent :: GameEvent -> (GameState -> GameState)
+processGameEvent (HandDealt player hand) gameState = undefined
+processGameEvent (PlayerTurnChanged player) gameState = undefined
+processGameEvent (LegalCardPlayed player card) gameState = undefined
+processGameEvent (TrickTaken player trick) gameState = undefined
+processGameEvent (IllegalCardPlayed player card) gameState = gameState
+processGameEvent (GameEnded player) gameState = gameState
+
+-- processGameCommand :: GameCommand -> GameState -> ([GameEvent], GameState)
+
+
