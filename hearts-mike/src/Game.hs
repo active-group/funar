@@ -88,16 +88,6 @@ cardScore _ = 0
 
 -- * 
 
--- Liste rotieren
-rotate :: [a] -> [a]
-rotate (x : xs) = xs ++ [x]
-rotate [] = undefined
-
--- Liste zu einem bestimmten Element rotieren
-rotateTo :: Eq a => a -> [a] -> [a]
-rotateTo y xs@(x : xs') | x == y = xs
-                        | otherwise = rotateTo y (xs' ++ [x])
-rotateTo y [] = undefined
 
 -- * Spiellogik
 
@@ -110,7 +100,8 @@ type PlayerHands  = Map Player Hand
 
 data GameState =
   MakeGameState
-  { gameStatePlayers :: [Player], -- wer dran ist, steht vorn
+  { gameStatePlayers :: [Player],
+    gameStateNextPlayer :: [Player], -- unendliche Liste, nächste Spieler ist vorn
     gameStateHands   :: PlayerHands,
     gameStateStacks  :: PlayerStacks,
     gameStateTrick   :: Trick
@@ -122,6 +113,7 @@ emptyGameState :: [Player] -> GameState
 emptyGameState players =
   MakeGameState {
     gameStatePlayers = players,
+    gameStateNextPlayer = cycle players,
     gameStateHands = Map.empty,
     gameStateStacks = Map.empty,
     gameStateTrick = emptyTrick
@@ -136,7 +128,7 @@ gameAtBeginning gameState =
 -- wer ist als nächstes dran?
 playerAfter :: GameState -> Player -> Player
 playerAfter state player =
-   head (rotate (rotateTo player (gameStatePlayers state)))
+   head (tail (dropTo player (gameStateNextPlayer state)))
 
 -- wer ist gerade dran?
 currentPlayer state =
