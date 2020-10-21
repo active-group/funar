@@ -27,7 +27,7 @@ isCute Snake = False
 -- Ein Gürteltier hat folgende Eigenschaften:
 -- - tot oder lebendig
 -- - Gewicht
-data Liveness = Dead | Alive 
+data Liveness = Alive | Dead
   deriving (Show, Eq, Ord)
 
 -- Typsyonym
