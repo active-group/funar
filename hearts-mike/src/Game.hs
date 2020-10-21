@@ -235,7 +235,7 @@ processGameEvent (GameEnded player) gameState = gameState
 
 processGameCommand :: GameCommand -> GameState -> [GameEvent]
 processGameCommand (DealHands hands) gameState =
-  map (\ player -> HandDealt player ((gameStateHands gameState) ! player))  -- Vorsicht: !
+  map (\ player -> HandDealt player (hands ! player))  -- Vorsicht: !
       (gameStatePlayers gameState)
 processGameCommand (PlayCard player card) gameState = undefined
 
