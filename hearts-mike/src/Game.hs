@@ -211,7 +211,9 @@ data GameCommand =
 -- Ereignis in den Zustand einarbeiten
 processGameEvent :: GameEvent -> (GameState -> GameState)
 processGameEvent (HandDealt player hand) gameState = 
-  
+  gameState {
+    gameStateHands = gameStateHands
+  }
 processGameEvent (PlayerTurnChanged player) gameState = undefined
 processGameEvent (LegalCardPlayed player card) gameState = undefined
 processGameEvent (TrickTaken player trick) gameState = undefined
