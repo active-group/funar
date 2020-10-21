@@ -140,7 +140,7 @@ dropTo el list@(x:xs) =
 
 -- wer ist gerade dran?
 currentPlayer state =
-  head (gameStatePlayers state)
+  head (gameStateNextPlayer state)
 
 -- ist es zulässig, diese Karte auszuspielen?
 playValid :: GameState -> Player -> Card -> Bool
@@ -216,7 +216,7 @@ processGameEvent (HandDealt player hand) gameState =
   }
 processGameEvent (PlayerTurnChanged player) state =
   state {
-    gameStatePlayers = dropTo player (gameStatePlayers state)
+    gameStatePlayers = dropTo player (gameStateNextPlayer state)
   }
 processGameEvent (LegalCardPlayed player card) gameState =
   gameState {
