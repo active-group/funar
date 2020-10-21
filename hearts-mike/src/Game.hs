@@ -212,7 +212,7 @@ data GameCommand =
 processGameEvent :: GameEvent -> (GameState -> GameState)
 processGameEvent (HandDealt player hand) gameState = 
   gameState {
-    gameStateHands = (gameStateHands gameState)
+    gameStateHands = Map.insert player hand (gameStateHands gameState)
   }
 processGameEvent (PlayerTurnChanged player) gameState = undefined
 processGameEvent (LegalCardPlayed player card) gameState = undefined
