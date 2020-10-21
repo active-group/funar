@@ -233,6 +233,10 @@ processGameEvent (TrickTaken player trick) gameState =
 processGameEvent (IllegalCardPlayed player card) gameState = gameState
 processGameEvent (GameEnded player) gameState = gameState
 
--- processGameCommand :: GameCommand -> GameState -> ([GameEvent], GameState)
+processGameCommand :: GameCommand -> GameState -> [GameEvent]
+processGameCommand (DealHands hands) gameState =
+  map (\ player -> HandDealt player ((gameStateHands gameState) ! player))  -- Vorsicht: !
+      (gameStatePlayers gameState)
+processGameCommand (PlayCard player card) gameState = undefined
 
 
