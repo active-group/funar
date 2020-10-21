@@ -238,6 +238,17 @@ processGameCommand (DealHands hands) gameState =
   map (\ player -> HandDealt player (hands ! player))  -- Vorsicht: !
       (gameStatePlayers gameState)
 processGameCommand (PlayCard player card) gameState = 
-  
+  if playValid gameState player card
+  then
+    let event1 = LegalCardPlayed player card
+        gameState1 = processGameEvent event1 gameState
+    in 
+      if turnOver gameState1
+      then 
+        TrickTaken
+      else 
+        let event2 = PlayerTurnChanged (playerAfter gameState1 player)
+        in [event1, event2]
+  else [IllegalCardPlayed player card]
 
 
