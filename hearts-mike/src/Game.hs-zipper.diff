@@ -1,0 +1,82 @@
+diff --git a/hearts/src/Game.hs b/hearts/src/Game.hs
+index e7c9c51..3c00c08 100644
+--- a/hearts/src/Game.hs
++++ b/hearts/src/Game.hs
+@@ -13,6 +13,9 @@ import Cards
+ 
+ import Debug.Trace (trace)
+ 
++import qualified Zipper as Zipper
++import Zipper (Zipper)
++
+ -- start card
+ twoOfClubs = Card Clubs (Numeric 2)
+ 
+@@ -88,17 +91,6 @@ cardScore _ = 0
+ 
+ -- * 
+ 
+--- Liste rotieren
+-rotate :: [a] -> [a]
+-rotate (x : xs) = xs ++ [x]
+-rotate [] = undefined
+-
+--- Liste zu einem bestimmten Element rotieren
+-rotateTo :: Eq a => a -> [a] -> [a]
+-rotateTo y xs@(x : xs') | x == y = xs
+-                        | otherwise = rotateTo y (xs' ++ [x])
+-rotateTo y [] = undefined
+-
+ -- * Spiellogik
+ 
+ type Stack = Set Card
+@@ -110,7 +102,7 @@ type PlayerHands  = Map Player Hand
+ 
+ data GameState =
+   GameState
+-  { gameStatePlayers :: [Player], -- wer dran ist, steht vorn
++  { gameStatePlayers :: Zipper Player,
+     gameStateHands   :: PlayerHands,
+     gameStateStacks  :: PlayerStacks,
+     gameStateTrick   :: Trick
+@@ -121,7 +113,7 @@ data GameState =
+ emptyGameState :: [Player] -> GameState
+ emptyGameState players =
+   GameState {
+-    gameStatePlayers = players,
++    gameStatePlayers = Zipper.fromList players,
+     gameStateHands = Map.empty,
+     gameStateStacks = Map.fromList (map (\ player -> (player, Set.empty)) players),
+     gameStateTrick = emptyTrick
+@@ -136,11 +128,11 @@ gameAtBeginning gameState =
+ -- wer ist als nächstes dran?
+ playerAfter :: GameState -> Player -> Player
+ playerAfter state player =
+-   head (rotate (rotateTo player (gameStatePlayers state)))
++   Zipper.focus (Zipper.cycleRight (Zipper.focusTo player (gameStatePlayers state)))
+ 
+ -- wer ist gerade dran?
+ currentPlayer state =
+-  head (gameStatePlayers state)
++  Zipper.focus (gameStatePlayers state)
+ 
+ -- ist es zulässig, diese Karte auszuspielen?
+ playValid :: GameState -> Player -> Card -> Bool
+@@ -160,7 +152,7 @@ gameOver state = all isHandEmpty (Map.elems (gameStateHands state))
+ -- ist diese Runde vorbei?
+ turnOver :: GameState -> Bool
+ turnOver state =
+-  length (gameStatePlayers state) == trickSize (gameStateTrick state)
++  Zipper.length (gameStatePlayers state) == trickSize (gameStateTrick state)
+ 
+ -- Wert eines Stapels
+ stackScore :: Stack -> Integer
+@@ -207,7 +199,7 @@ processGameEvent (HandDealt player hand) state =
+   }
+ processGameEvent (PlayerTurnChanged player) state =
+   state {
+-    gameStatePlayers  = rotateTo player (gameStatePlayers state)
++    gameStatePlayers  = Zipper.focusTo player (gameStatePlayers state)
+   }
+ processGameEvent (LegalCardPlayed player card) state =
+   state {

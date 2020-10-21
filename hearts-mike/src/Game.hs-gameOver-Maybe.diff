@@ -1,0 +1,174 @@
+diff --git a/hearts/src/Concurrency.hs b/hearts/src/Concurrency.hs
+index 5cfcb54..f03542e 100644
+--- a/hearts/src/Concurrency.hs
++++ b/hearts/src/Concurrency.hs
+@@ -59,13 +59,13 @@ playCommandC :: Members '[MVar.MVarConcurrency, GameEventSourcing] effects => [C
+ playCommandC concurrentPlayers gameCommand =
+   do events <- gameCommandEventsM gameCommand
+      gameOver <- gameOverM -- FIXME: should be GameOver in events
+-     if gameOver
+-     then return ()
+-     else
+-       -- FIXME: do playEvent in GameEventSourcingT?
+-       do commandss <- mapM (\ event -> playEventC concurrentPlayers event) events
+-          mapM_ (playCommandC concurrentPlayers) (concat commandss)
+-          return ()
++     case gameOver of
++       Just _ -> return ()
++       Nothing ->
++         -- FIXME: do playEvent in GameEventSourcingT?
++         do commandss <- mapM (\ event -> playEventC concurrentPlayers event) events
++            mapM_ (playCommandC concurrentPlayers) (concat commandss)
++            return ()
+ 
+ -- playGameC :: 
+ playGameC :: Members '[MVar.MVarConcurrency, GameEventSourcing] effects => [ConcurrentPlayer] -> [Card] -> Sem effects ()
+diff --git a/hearts/src/EventSourcing.hs b/hearts/src/EventSourcing.hs
+index 6093bf7..24aac09 100644
+--- a/hearts/src/EventSourcing.hs
++++ b/hearts/src/EventSourcing.hs
+@@ -155,7 +155,7 @@ whoTakesTrickM = do
+ turnOverM :: Member GameEventSourcing effects => Sem effects Bool
+ turnOverM = fmap turnOver eventState 
+ 
+-gameOverM :: Member GameEventSourcing effects => Sem effects Bool
++gameOverM :: Member GameEventSourcing effects => Sem effects (Maybe Player)
+ gameOverM = fmap gameOver eventState
+ 
+ playValidM :: Member GameEventSourcing effects => Player -> Card -> Sem effects Bool
+@@ -166,9 +166,6 @@ playValidM player card  =
+ currentTrickM :: Member GameEventSourcing effects => Sem effects Trick
+ currentTrickM = fmap gameStateTrick eventState
+ 
+-gameWinnerM :: Member GameEventSourcing effects => Sem effects Player
+-gameWinnerM = fmap gameWinner eventState
+-
+ processGameCommandM :: Member GameEventSourcing effects => GameCommand -> Sem effects ()
+ processGameCommandM command =
+   do state <- eventState
+diff --git a/hearts/src/Game.hs b/hearts/src/Game.hs
+index e7c9c51..ae9d4d2 100644
+--- a/hearts/src/Game.hs
++++ b/hearts/src/Game.hs
+@@ -154,9 +154,16 @@ playValid gameState player card =
+   else currentPlayer gameState == player
+ 
+ -- ist das Spiel vorbei?
+-gameOver :: GameState -> Bool
+-gameOver state = all isHandEmpty (Map.elems (gameStateHands state))
+-
++gameOver :: GameState -> Maybe Player
++gameOver state =
++  if all isHandEmpty (Map.elems (gameStateHands state))
++  then
++    let playerScores = fmap stackScore (gameStateStacks state)
++        cmp (_, score1) (_, score2) = compare score1 score2
++    in Just (fst (Foldable.minimumBy cmp (Map.toList playerScores)))
++  else
++    Nothing
++   
+ -- ist diese Runde vorbei?
+ turnOver :: GameState -> Bool
+ turnOver state =
+@@ -166,13 +173,6 @@ turnOver state =
+ stackScore :: Stack -> Integer
+ stackScore hand = sum (map cardScore (Set.toList hand))
+ 
+--- Wer hat gewonnen?
+-gameWinner :: GameState -> Player
+-gameWinner state =
+-  let playerScores = fmap stackScore (gameStateStacks state)
+-      cmp (_, score1) (_, score2) = compare score1 score2
+-  in fst (Foldable.minimumBy cmp (Map.toList playerScores))
+-
+ data GameEvent =
+     HandDealt Player Hand
+   | PlayerTurnChanged Player
+@@ -240,10 +240,9 @@ processGameCommand (PlayCard player card) state =
+             trickTaker = whoTakesTrick trick1
+             event2 = TrickTaken trickTaker trick1
+             state2 = processGameEvent event2 state1
+-            event3 = if gameOver state2
+-                     then
+-                        GameEnded (gameWinner state2)
+-                     else
++            event3 = case gameOver state2 of
++                       Just winner -> GameEnded winner
++                       Nothing ->
+                         PlayerTurnChanged trickTaker
+         in [event1, event2, event3]
+       else
+diff --git a/hearts/src/Game.hs-gameOver-Maybe.diff b/hearts/src/Game.hs-gameOver-Maybe.diff
+index 98de93c..e69de29 100644
+--- a/hearts/src/Game.hs-gameOver-Maybe.diff
++++ b/hearts/src/Game.hs-gameOver-Maybe.diff
+@@ -1,52 +0,0 @@
+-diff --git a/hearts/src/Game.hs b/hearts/src/Game.hs
+-index e7c9c51..ae9d4d2 100644
+---- a/hearts/src/Game.hs
+-+++ b/hearts/src/Game.hs
+-@@ -154,9 +154,16 @@ playValid gameState player card =
+-   else currentPlayer gameState == player
+- 
+- -- ist das Spiel vorbei?
+--gameOver :: GameState -> Bool
+--gameOver state = all isHandEmpty (Map.elems (gameStateHands state))
+--
+-+gameOver :: GameState -> Maybe Player
+-+gameOver state =
+-+  if all isHandEmpty (Map.elems (gameStateHands state))
+-+  then
+-+    let playerScores = fmap stackScore (gameStateStacks state)
+-+        cmp (_, score1) (_, score2) = compare score1 score2
+-+    in Just (fst (Foldable.minimumBy cmp (Map.toList playerScores)))
+-+  else
+-+    Nothing
+-+   
+- -- ist diese Runde vorbei?
+- turnOver :: GameState -> Bool
+- turnOver state =
+-@@ -166,13 +173,6 @@ turnOver state =
+- stackScore :: Stack -> Integer
+- stackScore hand = sum (map cardScore (Set.toList hand))
+- 
+---- Wer hat gewonnen?
+--gameWinner :: GameState -> Player
+--gameWinner state =
+--  let playerScores = fmap stackScore (gameStateStacks state)
+--      cmp (_, score1) (_, score2) = compare score1 score2
+--  in fst (Foldable.minimumBy cmp (Map.toList playerScores))
+--
+- data GameEvent =
+-     HandDealt Player Hand
+-   | PlayerTurnChanged Player
+-@@ -240,10 +240,9 @@ processGameCommand (PlayCard player card) state =
+-             trickTaker = whoTakesTrick trick1
+-             event2 = TrickTaken trickTaker trick1
+-             state2 = processGameEvent event2 state1
+--            event3 = if gameOver state2
+--                     then
+--                        GameEnded (gameWinner state2)
+--                     else
+-+            event3 = case gameOver state2 of
+-+                       Just winner -> GameEnded winner
+-+                       Nothing ->
+-                         PlayerTurnChanged trickTaker
+-         in [event1, event2, event3]
+-       else
+diff --git a/hearts/src/Sync.hs b/hearts/src/Sync.hs
+index f25f51f..544c423 100644
+--- a/hearts/src/Sync.hs
++++ b/hearts/src/Sync.hs
+@@ -91,9 +91,9 @@ playCommand players gameCommand | trace ("playCommand " ++ show gameCommand) Fal
+ playCommand players gameCommand =
+   do events <- gameCommandEventsM gameCommand
+      gameOver <- gameOverM
+-     if gameOver
+-     then return ()
+-     else
++     case gameOver of
++      Just _ -> return ()
++      Nothing ->
+        do gameCommandss <- raise (mapM (\ gameEvent -> playEvent players gameEvent) events)
+           let gameCommands = Monad.join gameCommandss
+           mapM_ (playCommand players) gameCommands

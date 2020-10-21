@@ -1,0 +1,62 @@
+diff --git a/hearts/src/Game.hs b/hearts/src/Game.hs
+index 8409135..f74284f 100644
+--- a/hearts/src/Game.hs
++++ b/hearts/src/Game.hs
+@@ -88,16 +88,8 @@ cardScore _ = 0
+ 
+ -- * 
+ 
+--- Liste rotieren
+-rotate :: [a] -> [a]
+-rotate (x : xs) = xs ++ [x]
+-rotate [] = undefined
+-
+--- Liste zu einem bestimmten Element rotieren
+-rotateTo :: Eq a => a -> [a] -> [a]
+-rotateTo y xs@(x : xs') | x == y = xs
+-                        | otherwise = rotateTo y (xs' ++ [x])
+-rotateTo y [] = undefined
++dropTo :: Eq a => a -> [a] -> [a]
++dropTo x list = dropWhile (\ x' -> x /= x') list
+ 
+ -- * Spiellogik
+ 
+@@ -111,6 +103,7 @@ type PlayerHands  = Map Player Hand
+ data GameState =
+   GameState
+   { gameStatePlayers :: [Player], -- wer dran ist, steht vorn
++    gameStateNextPlayers :: [Player], -- unendliche Liste
+     gameStateHands   :: PlayerHands,
+     gameStateStacks  :: PlayerStacks,
+     gameStateTrick   :: Trick
+@@ -122,6 +115,7 @@ emptyGameState :: [Player] -> GameState
+ emptyGameState players =
+   GameState {
+     gameStatePlayers = players,
++    gameStateNextPlayers = cycle players,
+     gameStateHands = Map.empty,
+     gameStateStacks = Map.empty,
+     gameStateTrick = emptyTrick
+@@ -136,11 +130,11 @@ gameAtBeginning gameState =
+ -- wer ist als nächstes dran?
+ playerAfter :: GameState -> Player -> Player
+ playerAfter state player =
+-   head (rotate (rotateTo player (gameStatePlayers state)))
++   head (tail (dropTo player (gameStateNextPlayers state)))
+ 
+ -- wer ist gerade dran?
+ currentPlayer state =
+-  head (gameStatePlayers state)
++  head (gameStateNextPlayers state)
+ 
+ -- ist es zulässig, diese Karte auszuspielen?
+ playValid :: GameState -> Player -> Card -> Bool
+@@ -208,7 +202,7 @@ processGameEvent (HandDealt player hand) state =
+   }
+ processGameEvent (PlayerTurnChanged player) state =
+   state {
+-    gameStatePlayers  = rotateTo player (gameStatePlayers state)
++    gameStateNextPlayers  = dropTo player (gameStateNextPlayers state)
+   }
+ processGameEvent (LegalCardPlayed player card) state =
+   state {
