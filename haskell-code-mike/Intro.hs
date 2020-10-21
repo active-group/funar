@@ -262,3 +262,5 @@ instance Eq Pet where
   Cat == Cat = True
   Snake == Snake = True
   _ == _ = False
+
+data Foo = Foo
