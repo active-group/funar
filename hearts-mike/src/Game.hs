@@ -130,6 +130,14 @@ playerAfter :: GameState -> Player -> Player
 playerAfter state player =
    head (tail (dropTo player (gameStateNextPlayer state)))
 
+-- Elemente überspringen bis das gewünschte das erste ist
+dropTo :: Eq a => a -> [a] -> [a]
+dropTo _ [] = error "element not found"
+dropTo el list@(x:xs) =
+  if el == x
+  then list
+  else dropTo el xs
+
 -- wer ist gerade dran?
 currentPlayer state =
   head (gameStatePlayers state)
@@ -208,7 +216,7 @@ processGameEvent (HandDealt player hand) gameState =
   }
 processGameEvent (PlayerTurnChanged player) state =
   state {
-    gameStatePlayers = rotateTo player (gameStatePlayers state)
+    gameStatePlayers = dropTo player (gameStatePlayers state)
   }
 processGameEvent (LegalCardPlayed player card) gameState =
   gameState {
