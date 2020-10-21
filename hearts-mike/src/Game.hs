@@ -219,7 +219,9 @@ processGameEvent (LegalCardPlayed player card) gameState = undefined
 processGameEvent (TrickTaken player trick) gameState = 
   gameState {
     gameStateStacks = 
-      gameStateStacks gameState
+      let stack = (gameStateStacks gameState) ! player
+          newStack = Set.union stack trick
+      in undefined,
     gameStateTrick = emptyTrick
   }
 processGameEvent (IllegalCardPlayed player card) gameState = gameState
