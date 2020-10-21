@@ -264,3 +264,6 @@ instance Eq Pet where
   _ == _ = False
 
 data Foo = Foo
+
+instance Show Foo where
+  show Foo = "Mike"
