@@ -214,7 +214,10 @@ processGameEvent (HandDealt player hand) gameState =
   gameState {
     gameStateHands = Map.insert player hand (gameStateHands gameState)
   }
-processGameEvent (PlayerTurnChanged player) gameState = undefined
+processGameEvent (PlayerTurnChanged player) state =
+  state {
+    gameStatePlayers = rotateTo player (gameStatePlayers state)
+  }
 processGameEvent (LegalCardPlayed player card) gameState =
   gameState {
     gameStateTrick = addToTrick player card (gameStateTrick gameState)
