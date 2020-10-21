@@ -218,6 +218,8 @@ processGameEvent (PlayerTurnChanged player) gameState = undefined
 processGameEvent (LegalCardPlayed player card) gameState = undefined
 processGameEvent (TrickTaken player trick) gameState = 
   gameState {
+    gameStateStacks = 
+      gameStateStacks gameState
     gameStateTrick = emptyTrick
   }
 processGameEvent (IllegalCardPlayed player card) gameState = gameState
