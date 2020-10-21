@@ -216,7 +216,10 @@ processGameEvent (HandDealt player hand) gameState =
   }
 processGameEvent (PlayerTurnChanged player) gameState = undefined
 processGameEvent (LegalCardPlayed player card) gameState = undefined
-processGameEvent (TrickTaken player trick) gameState = undefined
+processGameEvent (TrickTaken player trick) gameState = 
+  gameState {
+    gameStateTrick = emptyTrick
+  }
 processGameEvent (IllegalCardPlayed player card) gameState = gameState
 processGameEvent (GameEnded player) gameState = gameState
 
