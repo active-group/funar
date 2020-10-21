@@ -219,7 +219,7 @@ processGameEvent (LegalCardPlayed player card) gameState = undefined
 processGameEvent (TrickTaken player trick) gameState = 
   gameState {
     gameStateStacks = 
-      let stack = Map.findWithDefault player Set.empty (gameStateStacks gameState)
+      let stack = Map.findWithDefault Set.empty player (gameStateStacks gameState)
           newStack = Set.union stack (Set.fromList (cardsOfTrick trick))
       in Map.insert player newStack (gameStateStacks gameState),
     gameStateTrick = emptyTrick
