@@ -303,9 +303,11 @@ instance Monoid [a] where
   neutral = []
 
 class Functor c where
+  -- universalMap identity x == x
+  -- universalMap (f . g) == (universalMap f) . (universalMap g)
   universalMap :: (a -> b) -> c a -> c b
 
-instance Functor Optional where
+instance Functor Optional where  
   universalMap = optionalMap
 
 instance Functor [] where
