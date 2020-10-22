@@ -242,7 +242,7 @@ processGameEvent (GameEnded player) gameState = gameState
 
 processGameCommand :: GameCommand -> GameState -> [GameEvent]
 -- processGameCommand command state | trace ("processGameCommand " ++ show (gameAtBeginning state) ++ " " ++ show command ++ " " ++ show state) False = undefined
--- processGameCommand command state | trace ("processGameCommand " ++ show (gameAtBeginning state) ++ " " ++ show command ++ " " ++ show state) False = undefined
+processGameCommand command state | trace ("processGameCommand " ++ show (gameAtBeginning state) ++ " " ++ show command ++ " " ++ show state) False = undefined
 processGameCommand (DealHands hands) gameState =
   map (\ player -> HandDealt player (hands ! player))  -- Vorsicht: !
       (gameStatePlayers gameState)
