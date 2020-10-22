@@ -73,20 +73,20 @@ data Parrot = Parrot Sentence Weight
 
 -}
 
-data Animal = 
+data Animal weight = 
     Dillo { dilloLiveness :: Liveness,
-            dilloWeight :: Weight }
-  | Parrot Sentence Weight 
+            dilloWeight :: weight }
+  | Parrot Sentence weight 
   deriving Show
 
-dillo1 :: Animal
-dillo1 = (Dillo { dilloLiveness = Alive, dilloWeight = 12}) :: Animal
+dillo1 :: Animal Weight
+dillo1 = (Dillo { dilloLiveness = Alive, dilloWeight = 12}) :: Animal Weight
 
-dillo2 :: Animal
+dillo2 :: Animal Weight
 dillo2 = Dillo Dead 10
 
 -- Tier überfahren
-runOverAnimal :: Animal -> Animal
+runOverAnimal :: Animal Weight -> Animal Weight
 -- runOverAnimal (Dillo _ weight) = Dillo Dead weight
 runOverAnimal (Dillo { dilloWeight = weight }) = Dillo Dead weight
 -- runOverAnimal dillo@(Dillo {}) = dillo { dilloLiveness = Dead } -- funktionales Update
@@ -99,11 +99,11 @@ runOverAnimal animal =
 -}
 
 -- Tier füttern
-feedAnimal :: Weight -> (Animal -> Animal)
+feedAnimal :: Weight -> (Animal Weight -> Animal Weight)
 feedAnimal amount (Dillo liveness weight) = Dillo liveness (weight + amount)
 feedAnimal amount (Parrot sentence weight) = Parrot sentence (weight + amount)
 
-feedAnimal' :: (Weight, Animal) -> Animal
+feedAnimal' :: (Weight, Animal Weight) -> Animal
 feedAnimal' (amount, Dillo liveness weight) = Dillo liveness (weight + amount)
 feedAnimal' (amount, Parrot sentence weight) = Parrot sentence (weight + amount)
 
