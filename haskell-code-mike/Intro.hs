@@ -2,6 +2,8 @@
 {-# LANGUAGE UnicodeSyntax #-}
 module Intro where
 
+import Prelude hiding (Semigroup, Monoid)
+
 x :: Integer
 x = 15 + 22
 
@@ -152,7 +154,9 @@ listSum' :: [Integer] -> Integer
 listSum' [] = 0
 listSum' (first:rest) = first + (listSum' rest)
 
-listMap :: (a -> b) -> [a] -> [b]
+type List a = [a]
+
+listMap :: (a -> b) -> List a -> List b
 listMap _ [] = []
 listMap f (first:rest) =
   (f first) : (listMap f rest)
@@ -232,6 +236,10 @@ data Optional a =
   | Present a
   deriving Show
 
+optionalMap :: (a -> b) -> Optional a -> Optional b
+optionalMap f Absent = Absent
+optionalMap f (Present a) = Present (f a)
+
 {-
 data Maybe a =
     Nothing
@@ -268,3 +276,29 @@ data Foo = Foo
 
 instance Show Foo where
   show Foo = "Mike"
+
+-- Kombinator:
+-- a -> a -> a
+-- Beispiele: +, *, overlay, beside, above
+-- Assoziativgesetz: (a + b) + c = a + (b + c)
+--                   (a * b) * c = a * (b * c)
+--                   (overlay (overlay a b) c) = (overlay a (overlay b c))
+-- Halbgruppe
+class Semigroup a where
+  -- Assoziativgesetz:
+  -- combine (combine a b) c == combine a (combine b c)
+  combine :: a -> a -> a
+
+instance Semigroup Integer where
+  combine a b = a + b
+
+instance Semigroup [a] where
+  combine = (++)
+
+class Semigroup a => Monoid a where
+  -- combine a neutral == combine neutral a == a
+  neutral :: a
+
+instance Monoid [a] where
+  neutral = []
+
