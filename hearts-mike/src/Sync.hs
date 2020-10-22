@@ -102,7 +102,7 @@ gameAlong :: IO [GameEvent]
 gameAlong =
   do let player1 = Player "1" "Mike"
          strategy1 :: Strategy '[State (PlayerState "Mike"), State (PlayerState "Peter"), State (PlayerState "Nicole"), State (PlayerState "Annette")]
-         strategy1 = alongStrategy @"Mike"
+         strategy1 = alongStrategy @"Mike" -- Typparameter player
          player2 = Player "2" "Peter"
          strategy2 :: Strategy '[State (PlayerState "Mike"), State (PlayerState "Peter"), State (PlayerState "Nicole"), State (PlayerState "Annette")]
          strategy2 = alongStrategy @"Peter"

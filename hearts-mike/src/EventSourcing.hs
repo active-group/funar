@@ -130,8 +130,8 @@ type GameEventSourcing = EventSourcing GameState GameEvent
 
 playerHandM :: Member GameEventSourcing effects => Player -> Sem effects Hand
 playerHandM player =
-  do state <- eventState
-     return (gameStateHands state ! player)
+  do gameState <- eventState
+     return (gameStateHands gameState ! player)
 
 
 playerStackM :: Member GameEventSourcing effects => Player -> Sem effects (Set Card)
@@ -155,8 +155,13 @@ whoTakesTrickM = do
 turnOverM :: Member GameEventSourcing effects => Sem effects Bool
 turnOverM = fmap turnOver eventState 
 
+gameOver' gameState =
+  case gameOver gameState of
+    Nothing -> False
+    Just _ -> True
+
 gameOverM :: Member GameEventSourcing effects => Sem effects Bool
-gameOverM = fmap gameOver eventState
+gameOverM = fmap gameOver' eventState
 
 playValidM :: Member GameEventSourcing effects => Player -> Card -> Sem effects Bool
 playValidM player card  =

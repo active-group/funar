@@ -6,12 +6,19 @@ module Teletype where
 import Polysemy
 import Polysemy.Input
 import Polysemy.Output
+import Polysemy.Internal (send)
 
-data Teletype m a where
+-- GADTs: Generalized Abstract Datatypes
+data Teletype m result where
   ReadTTY  :: Teletype m String
   WriteTTY :: String -> Teletype m ()
 
-makeSem ''Teletype
+readTTY :: Member Teletype r => Sem r String
+-- readTTY :: Sem [Teletype] String
+readTTY = send ReadTTY
+
+writeTTY :: Member Teletype effects => String -> Sem effects ()
+writeTTY string = send (WriteTTY string)
 
 teletypeToIO :: Member (Embed IO) r => Sem (Teletype ': r) a -> Sem r a
 teletypeToIO = interpret $ \case
@@ -37,10 +44,11 @@ runTeletypePure i
 
 echo :: Member Teletype r => Sem r ()
 echo = do
-  i <- readTTY
-  case i of
-    "" -> pure ()
-    _  -> writeTTY i >> echo
+  input <- readTTY
+  case input of
+    "" -> return ()
+    _  -> do writeTTY input
+             echo
 
 
 -- Let's pretend
