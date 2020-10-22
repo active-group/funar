@@ -90,6 +90,9 @@ data KWeight = Kg Integer
 dillo3 :: Animal KWeight
 dillo3 = Dillo Dead (Kg 10)
 
+instance Num KWeight where
+  (+) (Kg a) (Kg b) = Kg (a + b)
+
 -- Tier überfahren
 -- runOverAnimal (Dillo _ weight) = Dillo Dead weight
 runOverAnimal :: Animal weight -> Animal weight
