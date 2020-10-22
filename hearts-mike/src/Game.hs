@@ -108,6 +108,9 @@ data GameState =
   }
   deriving Show
 
+displayGameState gs =
+  (head (gameStateNextPlayer gs), gameStateHands gs, gameStateTrick gs)
+
 -- Anfangszustand herstellen
 emptyGameState :: [Player] -> GameState
 emptyGameState players =
@@ -223,7 +226,7 @@ processGameEvent (HandDealt player hand) gameState =
   }
 processGameEvent (PlayerTurnChanged player) state =
   state {
-    gameStatePlayers = dropTo player (gameStateNextPlayer state)
+    gameStateNextPlayer = dropTo player (gameStateNextPlayer state)
   }
 processGameEvent (LegalCardPlayed player card) gameState =
   gameState {
@@ -241,7 +244,7 @@ processGameEvent (IllegalCardPlayed player card) gameState = gameState
 processGameEvent (GameEnded player) gameState = gameState
 
 processGameCommand :: GameCommand -> GameState -> [GameEvent]
-processGameCommand command state | trace ("processGameCommand " ++ show (gameAtBeginning state) ++ " " ++ show command ++ " " ++ (show (processGameCommand' command state))) False = undefined
+processGameCommand command state | trace ("processGameCommand " ++ show (gameAtBeginning state) ++ " " ++ show command ++ " " ++ (show (processGameCommand' command state)) ++ (show (displayGameState state))) False = undefined
 processGameCommand command state = processGameCommand' command state
 
 processGameCommand' (DealHands hands) gameState =
