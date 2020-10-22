@@ -77,3 +77,5 @@ step (Give contract) date =
     in (map flipPayment payments, Give residualContract)
 step Zero date = ([], Zero)
 
+c1 = Both (zcb (Date "2020-12-31") 100 EUR)
+          (zcb (Date "2021-12-31") 100 EUR)
