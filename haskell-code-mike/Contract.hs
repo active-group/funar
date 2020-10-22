@@ -33,6 +33,14 @@ data Contract =
   | Zero
   deriving Show
 
+one :: Currency -> Contract
+one currency = One currency
+
+-- smart constructor
+multiple :: Amount -> Contract -> Contract
+multiple amount Zero = Zero
+multiple amount contract = Multiple amount contract
+
 -- "100 GBP jetzt bekommen"
 pounds100 = Multiple 100 (One GBP)
 
