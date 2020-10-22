@@ -241,7 +241,7 @@ processGameEvent (IllegalCardPlayed player card) gameState = gameState
 processGameEvent (GameEnded player) gameState = gameState
 
 processGameCommand :: GameCommand -> GameState -> [GameEvent]
-processGameCommand command state | trace ("processGameCommand " ++ show (gameAtBeginning state) ++ " " ++ show command ++ " " ++ (processGameCommand' command state)) False = undefined
+processGameCommand command state | trace ("processGameCommand " ++ show (gameAtBeginning state) ++ " " ++ show command ++ " " ++ (show (processGameCommand' command state))) False = undefined
 processGameCommand command state = processGameCommand' command state
 
 processGameCommand' (DealHands hands) gameState =
