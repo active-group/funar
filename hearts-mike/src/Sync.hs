@@ -85,7 +85,7 @@ playCommand players gameCommand =
      then return ()
      else
        do gameCommandss <- raise (mapM (\ gameEvent -> playEvent players gameEvent) events)
-          let gameCommands = Monad.join gameCommandss
+          let gameCommands = concat gameCommandss
           mapM_ (playCommand players) gameCommands
           return ()
 
