@@ -56,12 +56,24 @@ data Payment = Payment Direction Date Amount Currency
 scalePayment factor (Payment direction date amount currency) =
     Payment direction date (factor * amount) currency
 
+flipPayment (Payment Long date amount currency) = (Payment Short date amount currency)
+flipPayment (Payment Short date amount currency) = (Payment Long date amount currency)
+
 step :: Contract -> Date -> ([Payment], Contract)
 step (One currency) date = ([Payment Long date 1 currency], Zero)
 step (Multiple amount contract) date =
     let (payments, residualContract) = step contract date
-    in ()
-step (Later date' contract) date = undefined
-step (Both contract1 contract2) date = undefined
-step (Give contract) date = undefined
+    in (map (scalePayment amount) payments, Multiple amount residualContract)
+step inputContract@(Later date' contract) date =
+    if date >= date' 
+    then step contract date
+    else ([], inputContract)
+step (Both contract1 contract2) date =
+    let (payments1, residual1) = step contract1 date
+        (payments2, residual2) = step contract2 date
+    in (payments1 ++ payments2, Both residual1 residual2)
+step (Give contract) date =
+    let (payments, residualContract) = step contract date 
+    in (map flipPayment payments, Give residualContract)
 step Zero date = ([], Zero)
+
