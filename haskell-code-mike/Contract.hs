@@ -41,6 +41,18 @@ multiple :: Amount -> Contract -> Contract
 multiple amount Zero = Zero
 multiple amount contract = Multiple amount contract
 
+later _ Zero = Zero
+later date contract = Later date contract
+
+give Zero = Zero
+give contract = Give contract
+
+both Zero contract = contract
+both contract Zero = contract
+both contract1 contract2 = Both contract1 contract2
+
+zero = Zero
+
 -- "100 GBP jetzt bekommen"
 pounds100 = Multiple 100 (One GBP)
 
