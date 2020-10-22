@@ -86,6 +86,7 @@ dillo2 :: Animal Weight
 dillo2 = Dillo Dead 10
 
 data KWeight = Kg Integer
+  deriving Show
 
 dillo3 :: Animal KWeight
 dillo3 = Dillo Dead (Kg 10)
