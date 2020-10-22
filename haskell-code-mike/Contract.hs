@@ -84,7 +84,7 @@ step :: Contract -> Date -> ([Payment], Contract)
 step (One currency) date = ([Payment Long date 1 currency], Zero)
 step (Multiple amount contract) date =
     let (payments, residualContract) = step contract date
-    in (map (scalePayment amount) payments, Multiple amount residualContract)
+    in (map (scalePayment amount) payments, multiple amount residualContract)
 step inputContract@(Later date' contract) date =
     if date >= date' 
     then step contract date
@@ -92,10 +92,10 @@ step inputContract@(Later date' contract) date =
 step (Both contract1 contract2) date =
     let (payments1, residual1) = step contract1 date
         (payments2, residual2) = step contract2 date
-    in (payments1 ++ payments2, Both residual1 residual2)
+    in (payments1 ++ payments2, both residual1 residual2)
 step (Give contract) date =
     let (payments, residualContract) = step contract date 
-    in (map flipPayment payments, Give residualContract)
+    in (map flipPayment payments, give residualContract)
 step Zero date = ([], Zero)
 
 c1 = Both (zcb (Date "2020-12-31") 100 EUR)
