@@ -31,6 +31,7 @@ data Contract =
   | Give Contract
   | Both Contract Contract
   | Zero
+  deriving Show
 
 -- "100 GBP jetzt bekommen"
 pounds100 = Multiple 100 (One GBP)
