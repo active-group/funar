@@ -302,5 +302,11 @@ class Semigroup a => Monoid a where
 instance Monoid [a] where
   neutral = []
 
-class Functor 
+class Functor c where
+  universalMap :: (a -> b) -> c a -> c b
 
+instance Functor Optional where
+  universalMap = optionalMap
+
+instance Functor [] where
+  universalMap = listMap
