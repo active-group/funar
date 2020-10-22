@@ -61,7 +61,6 @@ step (One currency) date = ([Payment Long date 1 currency], Zero)
 step (Multiple amount contract) date =
     let (payments, residualContract) = step contract date
     in ()
-step inputContract@(Later date' contract) date =   if date' <= date     then step contract date     else ([], inputContract) step (Give contract) date =   let (payments, residualContract) = step contract date    in (map flipDirection payments, Give residualContract) step (Both contract1 contract2) date =   let (payments1, residualContract1) = step contract1 date       (payments2, residualContract2) = step contract2 date    in (payments1 ++ payments2, Both residualContract1 residualContract2) step (Zero) date = ([], Zero) 
 step (Later date' contract) date = undefined
 step (Both contract1 contract2) date = undefined
 step (Give contract) date = undefined
