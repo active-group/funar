@@ -302,5 +302,5 @@ class Semigroup a => Monoid a where
 instance Monoid [a] where
   neutral = []
 
-class 
+class Functor 
 
