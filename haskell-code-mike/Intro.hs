@@ -2,7 +2,7 @@
 {-# LANGUAGE UnicodeSyntax #-}
 module Intro where
 
-import Prelude hiding (Semigroup, Monoid)
+import Prelude hiding (Semigroup, Monoid, Functor)
 
 x :: Integer
 x = 15 + 22
