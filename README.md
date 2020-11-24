@@ -13,17 +13,6 @@ https://download.racket-lang.org/
 
 ## Hauptteil
 
-Für die Vorbereitung gibt es zwei Optionen:
-
-### Falls Sie schon Haskell-erfahren sind und Cabal installiert ist:
-
-```
-cd haskell-code
-cabal install --dependencies-only
-```
-
-### Falls nicht:
-
 - [Docker](https://www.docker.com/) installieren
 - der Docker-VM ggf. mindestens 6DB Speicher geben
 - im Verzeichnis `docker-ghcide` den Befehl `docker build -t ghcide .`
