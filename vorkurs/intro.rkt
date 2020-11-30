@@ -133,6 +133,7 @@ class Dillo {
   (lambda (parrot)
     (make-parrot "" (parrot-weight parrot))))
 
+; Papagei füttern
 (: feed-parrot (parrot number -> parrot))
 
 (check-expect (feed-parrot parrot1 3)
@@ -142,3 +143,26 @@ class Dillo {
   (lambda (parrot amount)
     (make-parrot (parrot-sentence parrot)
                  (+ (parrot-weight parrot) amount))))
+
+; Ein Tier ist eins der folgenden:
+; - Gürteltier
+; - Papagei
+; Fallunterscheidung
+; hier speziell: gemischte Daten (aus unterschiedlichen Signaturen)
+(define animal
+  (signature (mixed dillo parrot)))
+
+; Tier überfahren
+(: run-over-animal (animal -> animal))
+
+(check-expect (run-over-animal dillo1)
+              (run-over-dillo dillo1))
+(check-expect (run-over-animal parrot1)
+              (run-over-parrot parrot1))
+
+(define run-over-animal
+  (lambda (animal)
+    (cond
+      (... ...)
+      (... ...))))
+     
