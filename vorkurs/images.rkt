@@ -27,3 +27,5 @@
     (above
      (beside image1 image2)
      (beside image2 image1))))
+
+(tile star1 circl1)
