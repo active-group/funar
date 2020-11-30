@@ -218,6 +218,8 @@ class Sloth implements Animal {
   (first element)
   (rest (list-of element)))
 
+(define list-of-numbers (signature (list-of number)))
+
 (define list1 (cons 5 empty)) ; 1elementige Liste: 5
 (define list2 (cons 8 (cons 5 empty))) ; 2elementige Liste: 8 5
 (define list3 (cons 13 list2)) ; 3elementige Liste: 13 8 5
