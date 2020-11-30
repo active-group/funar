@@ -301,3 +301,8 @@ class Sloth implements Animal {
            (cons (first list)
                  (extract p? (rest list)))
            (extract p? (rest list)))))))
+
+
+
+(check-expect (list-map even? (list 1 (cons 2 (cons 3 (cons 4 (cons 5 empty))))))
+              (cons #f (cons #t (cons #f (cons #t (cons #f empty))))))
