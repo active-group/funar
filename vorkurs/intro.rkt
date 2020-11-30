@@ -155,6 +155,24 @@ class Dillo {
 (define animal
   (signature (mixed dillo parrot)))
 
+#|
+interface Animal {
+  void runOver();
+  // Neue Funktion hinzufügen: schwer in OOP, einfach in FP
+  void feed(double amount);
+}
+class Dillo implements Animal {
+  void runOver() { ... }
+}
+class Parrot implements Animal {
+  ...
+}
+// Neue Klasse hinzufügen: einfach in OOP, schwer in FP
+class Sloth implements Animal {
+  void runOver() { ... }
+}
+|#
+
 ; Tier überfahren
 (: run-over-animal (animal -> animal))
 
