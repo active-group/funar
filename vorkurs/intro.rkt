@@ -284,6 +284,7 @@ class Sloth implements Animal {
 ; Listenelemente extrahieren, die ein Kriterium erfüllen
 ; %element: Signaturvariable
 ; i.d.R. filter
+; (: extract ((number -> boolean) (list-of number  ) -> (list-of number)))
 (: extract ((%element -> boolean) (list-of %element) -> (list-of %element)))
 
 (check-expect (extract even? (cons 2 (cons 3 (cons 4 (cons 5 empty)))))
