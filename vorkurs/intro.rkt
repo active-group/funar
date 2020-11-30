@@ -1,6 +1,6 @@
 ;; Die ersten drei Zeilen dieser Datei wurden von DrRacket eingefügt. Sie enthalten Metadaten
 ;; über die Sprachebene dieser Datei in einer Form, die DrRacket verarbeiten kann.
-#reader(lib "beginner-reader.rkt" "deinprogramm" "sdp")((modname intro) (read-case-sensitive #f) (teachpacks ((lib "image.rkt" "teachpack" "deinprogramm" "sdp"))) (deinprogramm-settings #(#f write repeating-decimal #f #t none explicit #f ((lib "image.rkt" "teachpack" "deinprogramm" "sdp")))))
+#reader(lib "beginner-reader.rkt" "deinprogramm" "sdp")((modname intro) (read-case-sensitive #f) (teachpacks ()) (deinprogramm-settings #(#f write repeating-decimal #f #t none explicit #f ())))
 ; Datenanalyse
 ; Datendefinition:
 ; stilisierte, natürlichsprachliche Beschreibung der Daten
@@ -83,6 +83,15 @@
               dillo2)
 
 ; obj1 == obj2
+
+; Massenerhaltungssatz
+
+(check-property
+ (for-all ((d dillo)
+           (amount number))
+   (==> (>= amount 0)
+        (>= (dillo-weight (feed-dillo d amount))
+            (dillo-weight d)))))
 
 (define feed-dillo
   (lambda (dillo amount)
