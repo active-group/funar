@@ -192,12 +192,14 @@ class Sloth implements Animal {
       ((parrot? animal) (run-over-parrot animal)))))
      
 
+; Java: List<E>
 
 ; Eine Liste ist eins der folgenden:
 ; - die leere Liste
 ; - eine Cons-Liste aus erstem Element und Rest-Liste
 ;                                               ^^^^^ Selbstbezug
 ; ^^^ gemischte Daten
+(: list-of (signature -> signature))
 (define list-of
   (lambda (element)
     (signature (mixed empty-list
