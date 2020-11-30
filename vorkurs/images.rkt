@@ -14,11 +14,11 @@
 (define circle1 (circle 50 "outline" "red"))
 (define square1 (square 100 "solid" "gold"))
 
-(above
+#;(above
  (beside star1 circle1)
  (beside circle1 star1))
 
-(above
+#;(above
  (beside square1 star1)
  (beside star1 square1))
 
