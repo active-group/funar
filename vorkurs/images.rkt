@@ -28,4 +28,21 @@
      (beside image1 image2)
      (beside image2 image1))))
 
-(tile star1 circle1)
+;(tile star1 circle1)
+
+#|
+
+Variable steht für eine Speicherzelle,
+in der ein Wert steht.
+
+class C {
+  m(int x) {
+    x = 10;
+    ... x ...;
+    x = 7;
+    ... x ...;
+  }
+  ... m(5) ...
+}
+
+|#
