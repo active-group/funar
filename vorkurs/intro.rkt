@@ -173,6 +173,26 @@ class Sloth implements Animal {
 }
 |#
 
+
+
+
+
+; Tier überfahren
+(: run-over-animal (animal -> animal))
+
+(check-expect (run-over-animal dillo1)
+              (run-over-dillo dillo1))
+(check-expect (run-over-animal parrot1)
+              (run-over-parrot parrot1))
+
+(define run-over-animal
+  (lambda (animal)
+    (cond
+      ((dillo? animal) (run-over-dillo animal))
+      ((parrot? animal) (run-over-parrot animal)))))
+     
+
+
 ; Eine Liste ist eins der folgenden:
 ; - die leere Liste
 ; - eine Cons-Liste aus erstem Element und Rest-Liste
@@ -210,25 +230,7 @@ class Sloth implements Animal {
 (define list-sum
   (lambda (list)
     (cond
-      ((empty? list) ...)
+      ((empty? list) 0)
       ((cons? list)
        (+ (first list)
           (list-sum (rest list)))))))
-
-
-
-
-; Tier überfahren
-(: run-over-animal (animal -> animal))
-
-(check-expect (run-over-animal dillo1)
-              (run-over-dillo dillo1))
-(check-expect (run-over-animal parrot1)
-              (run-over-parrot parrot1))
-
-(define run-over-animal
-  (lambda (animal)
-    (cond
-      ((dillo? animal) (run-over-dillo animal))
-      ((parrot? animal) (run-over-parrot animal)))))
-     
