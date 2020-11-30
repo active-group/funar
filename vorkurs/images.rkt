@@ -14,4 +14,16 @@
 (define circle1 (circle 50 "outline" "red"))
 (define square1 (square 100 "solid" "gold"))
 
+(above
+ (beside star1 circle1)
+ (beside circle1 star1))
 
+(above
+ (beside square1 star1)
+ (beside star1 square1))
+
+(define tile
+  (lambda (image1 image2)
+    (above
+     (beside image1 image2)
+     (beside image2 image1))))
