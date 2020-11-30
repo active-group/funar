@@ -22,6 +22,14 @@
  (beside square1 star1)
  (beside star1 square1))
 
+; Kurzbeschreibung
+; Quadratisches Kachelmuster erzeugen
+; Signatur
+(: tile (image image -> image))
+
+; Beispiele/Tests
+; (grafischer Test weggelassen)
+
 (define tile
   (lambda (image1 image2)
     (above
