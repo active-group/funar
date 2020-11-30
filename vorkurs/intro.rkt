@@ -279,8 +279,12 @@ class Sloth implements Animal {
 
 ; Higher-Order-Funktion: mehrere Pfeile in der Signatur
 
+; (: even? (number -> boolean))
+
 ; Listenelemente extrahieren, die ein Kriterium erfüllen
-(: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
+; %element: Signaturvariable
+; i.d.R. filter
+(: extract ((%element -> boolean) (list-of %element) -> (list-of %element)))
 
 (check-expect (extract even? (cons 2 (cons 3 (cons 4 (cons 5 empty)))))
               (cons 2 (cons 4 empty)))
