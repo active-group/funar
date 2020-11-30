@@ -173,6 +173,29 @@ class Sloth implements Animal {
 }
 |#
 
+; Eine Liste ist eins der folgenden:
+; - die leere Liste
+; - eine Cons-Liste aus erstem Element und Rest-Liste
+;                                               ^^^^^ Selbstbezug
+; ^^^ gemischte Daten
+
+(define-record empty-list
+  make-empty
+  empty?)
+
+(define empty (make-empty))
+
+; Eine Cons-Liste besteht aus:
+; - erstes Element
+; - Rest-Liste
+(define-record cons-list
+  cons
+  cons?
+  (first ...)
+  (rest ...))
+
+
+
 ; Tier überfahren
 (: run-over-animal (animal -> animal))
 
