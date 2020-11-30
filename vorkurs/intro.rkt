@@ -211,10 +211,10 @@ class Sloth implements Animal {
 ; Eine Cons-Liste besteht aus:
 ; - erstes Element
 ; - Rest-Liste
-(define-record cons-list
+(define-record (cons-list-of element) ; Klammern drum -> (lambda (element) ...)
   cons
   cons?
-  (first number)
+  (first element)
   (rest list-of-numbers))
 
 (define list1 (cons 5 empty)) ; 1elementige Liste: 5
