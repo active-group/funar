@@ -241,10 +241,27 @@ class Sloth implements Animal {
 (define list-sum
   (lambda (list)
     (cond
+      ; 0 ist das neutrale Element bezüglich der Addition
+      ; n + 0 = 0 + n = n
       ((empty? list) 0)
       ((cons? list)
        (+ (first list)
           (list-sum (rest list)))))))
+
+; Produkt der Listenelemente berechnen
+(: list-product (list-of-numbers -> number))
+
+(check-expect (list-product list3) 520)
+
+(define list-product
+  (lambda (list)
+    (cond
+      ; 1 ist das neutrale Element bezüglich der Multiplikation
+      ((empty? list) 1)
+      ((cons? list)
+       (* (first list)
+          (list-product (rest list)))))))
+       
 
 #|
 ; Gerade Zahlen aus einer Liste extrahieren
