@@ -42,3 +42,12 @@
       ((string=? pet "dog") #t)
       ((string=? pet "cat") #t)
       ((string=? pet "snake") #f))))
+
+; Ein Gürteltier hat folgende Eigenschaften: ("besteht aus")
+; - lebendig oder tot
+; - Gewicht
+; zusammengesetzte Daten
+(define-record dillo
+  make-dillo
+  (dillo-alive? boolean)
+  (dillo-weight number))
