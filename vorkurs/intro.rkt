@@ -261,7 +261,17 @@ class Sloth implements Animal {
       ((cons? list)
        (* (first list)
           (list-product (rest list)))))))
-       
+
+(: xxx (%b (%a %b -> %b) (list-of %a) -> %b))
+
+(define xxx
+  (lambda (x f list)
+    (cond
+      ((empty? list) x)
+      ((cons? list)
+       (f (first list)
+          (xxx x f (rest list)))))))
+
 
 #|
 ; Gerade Zahlen aus einer Liste extrahieren
