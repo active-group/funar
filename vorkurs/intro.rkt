@@ -302,7 +302,15 @@ class Sloth implements Animal {
                  (extract p? (rest list)))
            (extract p? (rest list)))))))
 
-
+; Funktion auf alle Elemente einer Liste anwenden
 
 (check-expect (list-map even? (cons 1 (cons 2 (cons 3 (cons 4 (cons 5 empty))))))
               (cons #f (cons #t (cons #f (cons #t (cons #f empty))))))
+
+(define list-map
+  (lambda (f list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cons (f (first list))
+             (list-map f (rest list)))))))
