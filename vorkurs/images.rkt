@@ -11,5 +11,7 @@
      (* 23 42)))
 
 (define star1 (star 50 "solid" "green"))
+(define circle1 (circle 50 "outline" "red"))
+(define square1 (square 100 "solid" "gold"))
 
 
