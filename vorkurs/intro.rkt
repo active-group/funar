@@ -234,3 +234,9 @@ class Sloth implements Animal {
       ((cons? list)
        (+ (first list)
           (list-sum (rest list)))))))
+
+; Gerade Zahlen aus einer Liste extrahieren
+(: extract-evens (list-of-number -> list-of-number))
+
+(check-expect (extract-evens list3)
+              (cons 8 empty))
