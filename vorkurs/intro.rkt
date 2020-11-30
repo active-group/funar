@@ -226,6 +226,12 @@ class Sloth implements Animal {
 (define list2 (cons 8 (cons 5 empty))) ; 2elementige Liste: 8 5
 (define list3 (cons 13 list2)) ; 3elementige Liste: 13 8 5
 
+(: list4 (list-of string))
+(define list4 (cons "foo" (cons "bar" (cons "baz" (cons "bla" empty)))))
+
+(define highway
+  (cons dillo1 (cons parrot1 (cons dillo2 (cons parrot2 empty)))))
+
 ; Summe der Listenelemente berechnen
 (: list-sum (list-of-numbers -> number))
 
