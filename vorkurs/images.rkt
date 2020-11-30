@@ -5,3 +5,11 @@
 ; Menü: Language/Sprache -> Choose Language
 ; Schreibe Dein Programm! - Anfänger
 ; Language -> Add Teachpack -> image.rkt -> OK
+(define x 23)
+(define y
+  (+ 1
+     (* 23 42)))
+
+(define star1 (star 50 "solid" "green"))
+
+
