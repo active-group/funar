@@ -266,6 +266,8 @@ class Sloth implements Animal {
                  (extract-positives (rest list)))
            (extract-positives (rest list)))))))
 
+; Higher-Order-Funktion: mehrere Pfeile in der Signatur
+
 ; Listenelemente extrahieren, die ein Kriterium erfüllen
 (: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
 
