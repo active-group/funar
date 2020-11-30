@@ -305,6 +305,11 @@ class Sloth implements Animal {
 ; Funktion auf alle Elemente einer Liste anwenden
 (: list-map ((%a -> %b) (list-of %a) -> (list-of %b)))
 
+; Java:
+; in Stream<T>:
+; <R> Stream<R> map(Function<? super T,? extends R> mapper)
+; <R> Stream<R> map(Function<T, R> mapper)
+
 (check-expect (list-map even? (cons 1 (cons 2 (cons 3 (cons 4 (cons 5 empty))))))
               (cons #f (cons #t (cons #f (cons #t (cons #f empty))))))
 (check-expect (list-map run-over-animal highway)
