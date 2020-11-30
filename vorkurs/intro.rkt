@@ -250,3 +250,36 @@ class Sloth implements Animal {
 
 |#
 
+; Positive Zahlen aus einer Liste extrahieren
+(: extract-positives (list-of-numbers -> list-of-numbers))
+
+(check-expect (extract-positives (cons -1 (cons 3 (cons -5 (cons 4 empty)))))
+              (cons 3 (cons 4 empty)))
+
+(define extract-positives
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (if (positive? (first list))
+           (cons (first list)
+                 (extract-positives (rest list)))
+           (extract-positives (rest list)))))))
+
+; Listenelemente extrahieren, die ein Kriterium erfüllen
+(: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
+
+(check-expect (extract even? (cons 2 (cons 3 (cons 4 (cons 5 empty)))))
+              (cons 2 (cons 4 empty)))
+(check-expect (extract positive? (cons -1 (cons 3 (cons -5 (cons 4 empty)))))
+              (cons 3 (cons 4 empty)))
+
+(define extract
+  (lambda (p? list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (if (p? (first list))
+           (cons (first list)
+                 (extract p? (rest list)))
+           (extract p? (rest list)))))))
