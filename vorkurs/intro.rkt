@@ -240,3 +240,9 @@ class Sloth implements Animal {
 
 (check-expect (extract-evens list3)
               (cons 8 empty))
+
+
+#;(cond
+  (... ...)
+  (... ...)
+  (else ...))
