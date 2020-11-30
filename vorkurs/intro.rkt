@@ -198,9 +198,10 @@ class Sloth implements Animal {
 ; - eine Cons-Liste aus erstem Element und Rest-Liste
 ;                                               ^^^^^ Selbstbezug
 ; ^^^ gemischte Daten
-(define list-of-numbers
-  (signature (mixed empty-list
-                    cons-list)))
+(define list-of
+  (lambda (element)
+    (signature (mixed empty-list
+                      (cons-list-of element)))))
 
 (define-record empty-list
   make-empty
@@ -215,7 +216,7 @@ class Sloth implements Animal {
   cons
   cons?
   (first element)
-  (rest list-of-numbers))
+  (rest (list-of element)))
 
 (define list1 (cons 5 empty)) ; 1elementige Liste: 5
 (define list2 (cons 8 (cons 5 empty))) ; 2elementige Liste: 8 5
