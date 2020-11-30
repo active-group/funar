@@ -59,3 +59,13 @@
 ; Gürteltier, lebendig, 10kg
 (define dillo1 (make-dillo #t 10))
 (define dillo2 (make-dillo #f 9)) ; totes Gürteltier, 9kg
+
+; Gürteltier überfahren
+#|
+class Dillo {
+  bool alive;
+  void runOver() {
+     this.alive = false;
+  }
+}
+|#
