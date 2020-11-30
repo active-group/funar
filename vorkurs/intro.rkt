@@ -49,10 +49,12 @@
 ; zusammengesetzte Daten
 (define-record dillo
   make-dillo ; Konstruktor
-  (dillo-alive? boolean)
+  (dillo-alive? boolean) ; Selektor
   (dillo-weight number))
 
 (: make-dillo (boolean number -> dillo))
+(: dillo-alive? (dillo -> boolean))
+(: dillo-weight (dillo -> number))
 
 ; Gürteltier, lebendig, 10kg
 (define dillo1 (make-dillo #t 10))
