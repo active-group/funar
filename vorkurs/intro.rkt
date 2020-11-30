@@ -262,15 +262,24 @@ class Sloth implements Animal {
        (* (first list)
           (list-product (rest list)))))))
 
-(: xxx (%b (%a %b -> %b) (list-of %a) -> %b))
+; (: + (number number -> number))
+(: list-fold (%b (%a %b -> %b) (list-of %a) -> %b))
 
-(define xxx
+(define list-fold
   (lambda (x f list)
     (cond
       ((empty? list) x)
       ((cons? list)
        (f (first list)
-          (xxx x f (rest list)))))))
+          (list-fold x f (rest list)))))))
+
+#;(define xxx
+  (lambda (x f list)
+    (cond
+      ((empty? list) ...)
+      ((cons? list)
+       ... (first list)
+           (xxx x f (rest list))))))
 
 
 #|
@@ -353,3 +362,12 @@ class Sloth implements Animal {
       ((cons? list)
        (cons (f (first list))
              (list-map f (rest list)))))))
+
+(define list-map2
+  (lambda (fun list0)
+    (list-fold empty
+               (lambda (first-of-list result-recursive)
+                 (cons (fun first-of-list)
+                       result-recursive))
+               list0)))
+
