@@ -82,6 +82,8 @@
 (check-expect (feed-dillo dillo2 5)
               dillo2)
 
+; obj1 == obj2
+
 (define feed-dillo
   (lambda (dillo amount)
     (make-dillo (dillo-alive? dillo)
@@ -89,7 +91,7 @@
                   ((dillo-alive? dillo)
                    (+ (dillo-weight dillo) amount))
                   (else (dillo-weight dillo))))))
-    
+
 
 #|
 class Dillo {
