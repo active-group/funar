@@ -23,6 +23,7 @@ data Liveness = Dead | Alive
 -- Typsynonym
 type Weight = Double
 
+{-
 -- Ein Gürteltier hat folgende Eigenschaften:
 -- - lebendig oder tot
 -- - Gewicht
@@ -44,6 +45,18 @@ runOverDillo :: Dillo -> Dillo
 -- runOverDillo (Dillo { dilloLiveness = liveness, dilloWeight = weight }) =
 --     Dillo Dead weight
 -- runOverDillo (Dillo _ weight) = Dillo Dead weight
-runOverDillo dillo = dillo { dilloLiveness = Dead }
+runOverDillo d = d { dilloLiveness = Dead }
+--                   ^^^^^^^ Kopie von dillo, aber dilloLiveness anders
 
--- dilloLiveness dillo  dilloWeight dillo
+-}
+
+-- Alle Fälle eines Datentyps müssen in eine data-Definition
+
+-- Ein Datentyp, zwei Klassen
+-- algebraischer Datentyp
+data Animal = Dillo { dilloLiveness :: Liveness,
+                     dilloWeight :: Weight }
+            | Parrot String Weight
+
+dillo1 = Dillo { dilloLiveness = Alive, dilloWeight = 10}
+
