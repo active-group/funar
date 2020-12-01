@@ -70,6 +70,7 @@ data Animal weight =
   deriving Show
 
 data MWeight = Kg Double
+  deriving Show
 
 instance Num MWeight where
   (Kg a) + (Kg b) = Kg (a + b)
