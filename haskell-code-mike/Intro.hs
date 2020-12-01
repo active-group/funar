@@ -203,6 +203,12 @@ data Optional result =
     Present result
   | Absent 
 
+{-
+data Maybe a =    
+    Just a
+  | Nothing
+-}
+
 -- Eintrag in einer Map finden
 mapGet :: Eq key => Map key value -> key -> Optional value
 --        ^^^^^^ Constraint "keys müssen vergleichbar sein"
