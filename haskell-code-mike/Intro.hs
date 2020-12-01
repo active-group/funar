@@ -90,10 +90,14 @@ feedAnimal (Parrot sentence weight) amount = Parrot sentence (weight + amount)
 -- feedAnimal' :: (Animal, Weight) -> Animal
 -- feedAnimal' (Dillo Alive weight, amount) = Dillo Alive (weight + amount)
 
-tuplify :: (Animal -> Weight -> Animal) -> ((Animal, Weight) -> Animal)
+-- tuplify :: (Animal -> Weight -> Animal) -> ((Animal, Weight) -> Animal)
+tuplify :: (t1 -> t2 -> t3) -> ((t1, t2) -> t3)
+--          ^^ Typvariable
 tuplify f =
     \ (animal, weight) -> f animal weight
 
+-- Moses Schönfinkel
+-- Haskell Curry
 
 feedAnimal' :: (Animal, Weight) -> Animal
 feedAnimal' = tuplify feedAnimal
