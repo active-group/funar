@@ -211,6 +211,10 @@ optionalMap :: (a -> b) -> Optional a -> Optional b
 optionalMap f (Present x) = Present (f x)
 optionalMap f Absent = Absent 
 
+{-
+Zutaten: Typkonstruktor f, Funktion mit Signatur wie map
+-}
+
 class Functor f where
     universalMap :: (a -> b) -> f a -> f b
 
