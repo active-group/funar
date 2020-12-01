@@ -205,6 +205,10 @@ data Optional result =
     Present result
   | Absent 
 
+optionalMap :: (a -> b) -> Optional a -> Optional b
+optionalMap f (Present x) = Present (f x)
+optionalMap f Absent = Absent 
+
 {-
 data Maybe a =    
     Just a
