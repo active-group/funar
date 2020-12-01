@@ -114,5 +114,13 @@ f = \ a -> \ b -> a + b
 feedAnimal' :: (Animal, Weight) -> Animal
 feedAnimal' = tuplify feedAnimal
 
+-- 2dimensionale Ebene
+
 -- Eine geometrische Figur (Shape) ist:
 -- - ein Quadrat
+-- - ein Kreis
+-- - eine Überlappung zweier geometrischer Figuren
+
+-- 1. Aufgabe: Datendefinition -> Code
+-- 2. Aufgabe: Funktion, die feststellt, 
+--             ob ein Punkt innerhalb einer geometrischen Figur ist
