@@ -158,7 +158,8 @@ data List element =
 -- list1 = Cons 1 (Cons 2 (Cons 3 Empty))
 
 list1 :: [Integer]
-list1 = 1 : 2 : 3 : []
+list1 =    1 : (2 : (3 : []))
+list1Sum = 1 + (2 + (3 + 0)) 
 list1' = [1,2,3]
 
 listSum' :: List Integer -> Integer
@@ -177,3 +178,6 @@ listMap f [] = []
 listMap f (x:xs) =
     (f x) : (listMap f xs)
 
+listFold empty cons [] = empty 
+listFold empty cons (first :                           rest) = 
+                     first `cons` (listFold empty cons rest)
