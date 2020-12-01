@@ -99,5 +99,9 @@ tuplify f =
 -- Moses Schönfinkel
 -- Haskell Curry
 
+currify :: ((a, b) -> c) -> (a -> b -> c)
+currify f =
+    \ a -> \ b -> f (a, b)
+
 feedAnimal' :: (Animal, Weight) -> Animal
 feedAnimal' = tuplify feedAnimal
