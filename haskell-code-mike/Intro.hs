@@ -9,7 +9,9 @@ x = 10
 data Pet = Dog | Cat | Snake
   deriving Show
 
--- "Eq Pet 
+-- "Eq Pet" bedeutet: Der Typ Pet hat die Eigenschaft Eq
+-- => Es gibt eine Implementierung der Typklasse Eq für den Typ Pet-
+-- => Die Funktion == ist definiert auf dem Typ Pet.
 
 -- Implementierung einer Typklasse
 instance Eq Pet where -- "Pet hat die Eigenschaft Eq, Pets sind vergleichbar"
