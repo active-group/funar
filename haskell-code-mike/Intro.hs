@@ -199,13 +199,17 @@ map1 = Map [("Mike", "Sperber"), ("Smadar", "Klopshtok")]
 map2 :: Map Pet String
 map2 = Map [(Cat, "Katze"), (Dog, "Hund"), (Snake, "Schlange")]
 
+data Optional result =
+    Present result
+  | Absent 
+
 -- Eintrag in einer Map finden
-mapGet :: Eq key => Map key value -> key -> value
+mapGet :: Eq key => Map key value -> key -> Optional value
 --        ^^^^^^ Constraint "keys müssen vergleichbar sein"
-mapGet (Map []) key = undefined
+mapGet (Map []) key = Absent
 mapGet (Map ((key', value') : rest)) key =
     if key == key'
-    then value'
+    then Present value'
     else mapGet (Map rest) key
 
 {-
