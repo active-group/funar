@@ -215,11 +215,14 @@ optionalMap f Absent = Absent
 Zutaten: Typkonstruktor f, Funktion mit Signatur wie map
 
 universalMap identity x == x
-
-
+universalMap (f . g) x == universalMap f (universalMap g x)
 -}
 
 identity x = x
+
+-- Funktion wie .
+o :: (b -> c) -> (a -> b) -> (a -> c)
+o f g = \ a -> f (g a)
 
 class Functor f where
     universalMap :: (a -> b) -> f a -> f b
