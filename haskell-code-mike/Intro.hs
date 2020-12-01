@@ -225,3 +225,28 @@ class Eq a where
   (==) :: a -> a -> Bool
 
 -}
+
+{-
+Assoziativität
+(a + b) + c = a + (b + c)
+(a * b) * c = a * (b * c)
+
+Zutaten:
+Typ t
+Operation: combine :: t -> t -> t
+
+Beispiele:
+Images - overlay, beside, above
+Shapes - overlap / overlay
+
+Halbgruppe:
+Typ t, Operation combine wie oben, Assoziativät
+-}
+
+class Semigroup t where
+    -- combine a (combine b c) == combine (combine a b) c
+    -- a `combine` (b `combine` c) == (a `combine` b) `combine` c
+    combine :: t -> t -> t
+
+instance Semigroup [a] where
+    
