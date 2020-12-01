@@ -161,9 +161,15 @@ list1 :: [Integer]
 list1 = 1 : 2 : 3 : []
 list1' = [1,2,3]
 
+listSum' :: List Integer -> Integer
+listSum' Empty = undefined
+listSum' (Cons first rest) = first + (listSum' rest)
+
 -- Elemente einer Liste addieren
 listSum :: [Integer] -> Integer
 listSum [] = 0
 listSum (first:rest) = first + (listSum rest)
 
 highway = [dillo1, parrot1, dillo2, parrot2]
+
+
