@@ -7,6 +7,13 @@ x = 10
 data Pet = Dog | Cat | Snake
   deriving Show
 
+-- Implementierung einer Typklasse
+instance Eq Pet where -- "Pet hat die Eigenschaft Eq, Pets sind vergleichbar"
+  (==) Dog Dog = True
+  (==) Cat Cat = True
+  (==) Snake Snake = True
+  (==) _ _ = False
+
 -- Faustregel: Großbuchstaben - Konstante, Kleinbuchstaben - Variable
 
 -- Ist Haustier niedlich?
