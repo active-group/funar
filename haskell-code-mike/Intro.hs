@@ -145,3 +145,4 @@ g a b =
     let x = a + b
         y = a - b
     in x * y
+
