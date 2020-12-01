@@ -115,7 +115,6 @@ uncurrify f (a, b) = f a b
 f :: Integer -> Integer -> Integer
 f = \ a -> \ b -> a + b
 
-feedAnimal' :: (Animal, Weight) -> Animal
 feedAnimal' = tuplify feedAnimal
 
 -- 2dimensionale Ebene
