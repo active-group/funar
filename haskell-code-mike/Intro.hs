@@ -211,6 +211,15 @@ optionalMap :: (a -> b) -> Optional a -> Optional b
 optionalMap f (Present x) = Present (f x)
 optionalMap f Absent = Absent 
 
+class Functor f where
+    universalMap :: (a -> b) -> f a -> f b
+
+instance Functor Optional where
+    universalMap = optionalMap
+
+instance Functor [] where
+    universalMap = listMap
+
 {-
 data Maybe a =    
     Just a
