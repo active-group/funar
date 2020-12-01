@@ -159,3 +159,9 @@ data List element =
 
 list1 :: [Integer]
 list1 = 1 : 2 : 3 : []
+list1' = [1,2,3]
+
+-- Elemente einer Liste addieren
+listSum :: [Integer] -> Integer
+listSum [] = 0
+listSum (first:rest) = first + (listSum rest)
