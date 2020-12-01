@@ -290,6 +290,10 @@ combine x n = x
 Monoid
 -}
 
+-- grob: Haskell class -> Java interface
+--       Haskell instance -> Java class implements
+
+-- Neue Eigenschaft namens "Semigroup"
 class Semigroup t where
     -- combine a (combine b c) == combine (combine a b) c
     -- a `combine` (b `combine` c) == (a `combine` b) `combine` c
