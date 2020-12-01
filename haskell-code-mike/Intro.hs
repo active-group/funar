@@ -182,3 +182,21 @@ listFold :: b -> (a -> b -> b) -> [a] -> b
 listFold forEmpty forCons [] = forEmpty 
 listFold forEmpty forCons (first :                                    rest) = 
                            first `forCons` (listFold forEmpty forCons rest)
+
+
+data Map key value = Map [(key, value)]
+
+map1 :: Map String String
+map1 = Map [("Mike", "Sperber"), ("Smadar", "Klopshtok")]
+
+map2 :: Map Pet String
+map2 = Map [(Cat, "Katze"), (Dog, "Hund"), (Snake, "Schlange")]
+
+-- Eintrag in einer Map finden
+mapGet :: Eq key => Map key value -> key -> value
+--        ^^^^^^ Constraint "keys müssen vergleichbar sein"
+mapGet (Map []) key = undefined
+mapGet (Map ((key', value') : rest)) key =
+    if key == key'
+    then value'
+    else mapGet (Map rest) key
