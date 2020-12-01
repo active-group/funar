@@ -69,3 +69,9 @@ parrot1 = Parrot "Der Schatz ist Silbersee!" 1
 parrot2 :: Animal
 parrot2 = Parrot "Tschüss!" 2
 
+-- Tier überfahren
+runOverAnimal :: Animal -> Animal
+runOverAnimal (Dillo liveness weight) = undefined
+runOverAnimal (Parrot sentence weight) = undefined
+
+
