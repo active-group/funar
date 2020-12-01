@@ -58,7 +58,7 @@ data Animal = Dillo { dilloLiveness :: Liveness,
                       dilloWeight :: Weight }
             | Parrot String Weight
   deriving Show
-  
+
 dillo1 :: Animal
 dillo1 = Dillo { dilloLiveness = Alive, dilloWeight = 10}
 
@@ -75,6 +75,11 @@ runOverAnimal :: Animal -> Animal
 runOverAnimal (Dillo liveness weight) = Dillo Dead weight
 runOverAnimal (Parrot sentence weight) = Parrot "" weight
 
+-- Tier füttern
 
+-- Haskell kennt nur 1stellige Funktionen!
+
+feedAnimal :: Animal -> (Weight -> Animal)
+feedAnimal (Dillo Alive weight) amount = Dillo Alive (weight + amount)
 
 
