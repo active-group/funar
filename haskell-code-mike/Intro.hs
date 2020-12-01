@@ -87,9 +87,13 @@ feedAnimal (Dillo Dead weight) amount = Dillo Dead weight
 feedAnimal (Parrot sentence weight) amount = Parrot sentence (weight + amount)
 
 -- 1stellige Funktion, die ein 2-Tupel aus Animal und Weight als Argument akzeptiert
-feedAnimal' :: (Animal, Weight) -> Animal
-feedAnimal' (Dillo Alive weight, amount) = Dillo Alive (weight + amount)
+-- feedAnimal' :: (Animal, Weight) -> Animal
+-- feedAnimal' (Dillo Alive weight, amount) = Dillo Alive (weight + amount)
 
 tuplify :: (Animal -> Weight -> Animal) -> ((Animal, Weight) -> Animal)
 tuplify f =
     \ (animal, weight) -> f animal weight
+
+
+feedAnimal' :: (Animal, Weight) -> Animal
+feedAnimal' = tuplify feedAnimal
