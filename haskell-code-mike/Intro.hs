@@ -9,6 +9,8 @@ x = 10
 data Pet = Dog | Cat | Snake
   deriving Show
 
+-- "Eq Pet 
+
 -- Implementierung einer Typklasse
 instance Eq Pet where -- "Pet hat die Eigenschaft Eq, Pets sind vergleichbar"
   (==) Dog Dog = True
