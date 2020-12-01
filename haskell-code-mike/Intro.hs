@@ -200,3 +200,11 @@ mapGet (Map ((key', value') : rest)) key =
     if key == key'
     then value'
     else mapGet (Map rest) key
+
+{-
+Eq ist eine Typklasse.  (Am ehestens: Java-Interface)
+
+
+
+
+-}
