@@ -243,6 +243,11 @@ Shapes - overlap / overlay
 
 Halbgruppe:
 Typ t, Operation combine wie oben, Assoziativät
+
+Halbgruppe + neutrales Element n:
+combine n x = x
+combine x n = x
+Monoid
 -}
 
 class Semigroup t where
