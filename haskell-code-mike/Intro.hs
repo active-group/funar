@@ -86,7 +86,6 @@ runOverAnimal (Parrot sentence weight) = Parrot "" weight
 -- Haskell kennt nur 1stellige Funktionen!
 -- Hindley-Milner-Typsystem, 1stellige Funktionen, algebraische Datentypen: ML
 
-feedAnimal :: Animal -> (Weight -> Animal)
 feedAnimal (Dillo Alive weight) amount = Dillo Alive (weight + amount)
 feedAnimal (Dillo Dead weight) amount = Dillo Dead weight 
 feedAnimal (Parrot sentence weight) amount = Parrot sentence (weight + amount)
