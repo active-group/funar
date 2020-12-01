@@ -58,5 +58,11 @@ data Animal = Dillo { dilloLiveness :: Liveness,
                      dilloWeight :: Weight }
             | Parrot String Weight
 
+dillo1 :: Animal
 dillo1 = Dillo { dilloLiveness = Alive, dilloWeight = 10}
+
+dillo2 = Dillo Dead 8
+
+parrot1 = Parrot "Der Schatz ist Silbersee!" 1
+parrot2 = Parrot "Tschüss!" 2
 
