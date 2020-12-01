@@ -165,3 +165,5 @@ list1' = [1,2,3]
 listSum :: [Integer] -> Integer
 listSum [] = 0
 listSum (first:rest) = first + (listSum rest)
+
+highway = [dillo1, parrot1, dillo2, parrot2]
