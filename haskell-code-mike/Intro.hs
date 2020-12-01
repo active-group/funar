@@ -146,3 +146,9 @@ g a b =
         y = a - b
     in x * y
 
+-- Eine Liste ist eins der folgenden:
+-- - leere Liste
+-- - Cons-Liste aus erstem Element und Rest
+data List =
+     Empty
+   | Cons Integer List
