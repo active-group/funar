@@ -55,7 +55,7 @@ runOverDillo d = d { dilloLiveness = Dead }
 -- Ein Datentyp, zwei Klassen
 -- algebraischer Datentyp
 data Animal = Dillo { dilloLiveness :: Liveness,
-                     dilloWeight :: Weight }
+                      dilloWeight :: Weight }
             | Parrot String Weight
 
 dillo1 :: Animal
