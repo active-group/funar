@@ -22,3 +22,11 @@ isCute Snake = False
 -- - Gewicht
 data Dillo = Dillo { dilloAlive :: Bool,
                      dilloWeight :: Double }
+
+-- lebendiges Gürteltier, 10kg
+dillo1 :: Dillo
+dillo1 = Dillo { dilloAlive = True, dilloWeight = 10}
+
+-- totes Gürteltier, 8kg
+dillo2 :: Dillo
+dillo2 = Dillo False 8
