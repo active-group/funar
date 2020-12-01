@@ -257,3 +257,11 @@ class Semigroup t where
 
 instance Semigroup [a] where
     combine a b = a ++ b
+
+class Semigroup t => Monoid t where
+    -- combine neutral x == x
+    -- combine x neutral == x
+    neutral :: t
+
+instance Monoid [a] where
+    neutral = []
