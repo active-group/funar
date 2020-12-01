@@ -121,6 +121,8 @@ feedAnimal' = tuplify feedAnimal
 -- - ein Kreis
 -- - eine Überlappung zweier geometrischer Figuren
 
+
+
 -- 1. Aufgabe: Datendefinition -> Code
 -- 2. Aufgabe: Funktion, die feststellt, 
 --             ob ein Punkt innerhalb einer geometrischen Figur ist
