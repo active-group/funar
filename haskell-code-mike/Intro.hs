@@ -69,11 +69,15 @@ data Animal weight =
   | Parrot String weight
   deriving Show
 
+dillo1 :: Animal Integer
 dillo1 = Dillo { dilloLiveness = Alive, dilloWeight = 10}
 
+dillo2 :: Animal Integer
 dillo2 = Dillo Dead 8
 
+parrot1 :: Animal Integer
 parrot1 = Parrot "Der Schatz ist Silbersee!" 1
+parrot2 :: Animal Integer
 parrot2 = Parrot "Tschüss!" 2
 
 -- Tier überfahren
