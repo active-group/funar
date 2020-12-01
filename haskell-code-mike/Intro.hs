@@ -71,6 +71,9 @@ data Animal weight =
 
 data MWeight = Kg Double
 
+instance Num MWeight where
+  (Kg a) + (Kg b) = Kg (a + b)
+
 dillo1' = Dillo Alive (Kg 10)
 
 dillo1 :: Animal Weight
