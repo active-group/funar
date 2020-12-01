@@ -1,5 +1,7 @@
 module Intro where
 
+import Prelude hiding (Semigroup, Monoid, Functor)
+
 x :: Integer
 x = 10
 
