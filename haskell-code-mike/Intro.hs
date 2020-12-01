@@ -154,4 +154,8 @@ data List element =
    | Cons element (List element)
    deriving Show
 
-list1 = Cons 1 (Cons 2 (Cons 3 Empty))
+-- list1 :: List Integer
+-- list1 = Cons 1 (Cons 2 (Cons 3 Empty))
+
+list1 :: [Integer]
+list1 = 1 : 2 : 3 : []
