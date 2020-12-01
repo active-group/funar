@@ -149,9 +149,9 @@ g a b =
 -- Eine Liste ist eins der folgenden:
 -- - leere Liste
 -- - Cons-Liste aus erstem Element und Rest
-data List =
+data List element =
      Empty
-   | Cons Integer List
+   | Cons element (List element)
    deriving Show
 
 list1 = Cons 1 (Cons 2 (Cons 3 Empty))
