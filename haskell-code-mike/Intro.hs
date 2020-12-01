@@ -17,16 +17,18 @@ isCute Snake = False
 
 -- Typen und Werte haben unterschiedliche Namensräume
 
+data Liveness = Dead | Alive
+
 -- Ein Gürteltier hat folgende Eigenschaften:
 -- - lebendig oder tot
 -- - Gewicht
-data Dillo = Dillo { dilloAlive :: Bool,
+data Dillo = Dillo { dilloLiveness :: Liveness,
                      dilloWeight :: Double }
   deriving Show
 
 -- lebendiges Gürteltier, 10kg
 dillo1 :: Dillo
-dillo1 = Dillo { dilloAlive = True, dilloWeight = 10}
+dillo1 = Dillo { dilloLiveness = True, dilloWeight = 10}
 
 -- totes Gürteltier, 8kg
 dillo2 :: Dillo
