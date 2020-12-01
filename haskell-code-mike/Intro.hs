@@ -113,3 +113,6 @@ f = \ a -> \ b -> a + b
 
 feedAnimal' :: (Animal, Weight) -> Animal
 feedAnimal' = tuplify feedAnimal
+
+-- Eine geometrische Figur (Shape) ist:
+-- - ein Quadrat
