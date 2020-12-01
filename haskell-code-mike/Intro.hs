@@ -71,7 +71,9 @@ parrot2 = Parrot "Tschüss!" 2
 
 -- Tier überfahren
 runOverAnimal :: Animal -> Animal
-runOverAnimal (Dillo liveness weight) = undefined
-runOverAnimal (Parrot sentence weight) = undefined
+runOverAnimal (Dillo liveness weight) = Dillo Dead weight
+runOverAnimal (Parrot sentence weight) = Parrot "" weight
+
+
 
 
