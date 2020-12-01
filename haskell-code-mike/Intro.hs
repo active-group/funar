@@ -206,6 +206,5 @@ Eq ist eine Typklasse.  (Am ehestens: Java-Interface)
 
 class Eq a where
   (==) :: a -> a -> Bool
-  (/=) :: a -> a -> Bool
 
 -}
