@@ -63,24 +63,20 @@ runOverDillo d = d { dilloLiveness = Dead }
 
 -- Ein Datentyp, zwei Klassen
 -- algebraischer Datentyp
-data Animal = Dillo { dilloLiveness :: Liveness,
-                      dilloWeight :: Weight }
-            | Parrot String Weight
+data Animal weight = 
+    Dillo { dilloLiveness :: Liveness,
+            dilloWeight :: weight }
+  | Parrot String weight
   deriving Show
 
-dillo1 :: Animal
 dillo1 = Dillo { dilloLiveness = Alive, dilloWeight = 10}
 
-dillo2 :: Animal
 dillo2 = Dillo Dead 8
 
-parrot1 :: Animal
 parrot1 = Parrot "Der Schatz ist Silbersee!" 1
-parrot2 :: Animal
 parrot2 = Parrot "Tschüss!" 2
 
 -- Tier überfahren
-runOverAnimal :: Animal -> Animal
 -- runOverAnimal (Dillo liveness weight) = Dillo Dead weight
 runOverAnimal (Dillo { dilloWeight = weight}) = Dillo Dead weight
 runOverAnimal (Parrot sentence weight) = Parrot "" weight
