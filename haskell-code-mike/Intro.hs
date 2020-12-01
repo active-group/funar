@@ -85,4 +85,7 @@ feedAnimal (Dillo Alive weight) amount = Dillo Alive (weight + amount)
 feedAnimal (Dillo Dead weight) amount = Dillo Dead weight 
 feedAnimal (Parrot sentence weight) amount = Parrot sentence (weight + amount)
 
+feedAnimal' :: (Animal, Weight) -> Animal
+feedAnimal'(Dillo Alive weight, amount) = Dillo Alive (weight + amount)
+
 
