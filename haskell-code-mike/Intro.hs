@@ -213,7 +213,13 @@ optionalMap f Absent = Absent
 
 {-
 Zutaten: Typkonstruktor f, Funktion mit Signatur wie map
+
+universalMap identity x == x
+
+
 -}
+
+identity x = x
 
 class Functor f where
     universalMap :: (a -> b) -> f a -> f b
