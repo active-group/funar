@@ -179,6 +179,6 @@ listMap f (x:xs) =
     (f x) : (listMap f xs)
 
 listFold :: b -> (a -> b -> b) -> [a] -> b
-listFold empty f [] = empty 
-listFold empty f (first :                           rest) = 
-                     first `f` (listFold empty f rest)
+listFold forEmpty forCons [] = forEmpty 
+listFold forEmpty forCons (first :                                    rest) = 
+                           first `forCons` (listFold forEmpty forCons rest)
