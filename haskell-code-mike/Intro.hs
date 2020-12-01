@@ -178,6 +178,7 @@ listMap f [] = []
 listMap f (x:xs) =
     (f x) : (listMap f xs)
 
+listFold :: b -> (a -> b -> b) -> [a] -> b
 listFold empty cons [] = empty 
 listFold empty cons (first :                           rest) = 
                      first `cons` (listFold empty cons rest)
