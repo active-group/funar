@@ -7,3 +7,4 @@ x = 10
 data Pet = Dog | Cat | Snake
 
 
+
