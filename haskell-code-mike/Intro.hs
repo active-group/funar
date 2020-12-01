@@ -20,11 +20,14 @@ isCute Snake = False
 data Liveness = Dead | Alive
   deriving Show
 
+-- Typsynonym
+type Weight = Double
+
 -- Ein Gürteltier hat folgende Eigenschaften:
 -- - lebendig oder tot
 -- - Gewicht
 data Dillo = Dillo { dilloLiveness :: Liveness,
-                     dilloWeight :: Double }
+                     dilloWeight :: Weight }
   deriving Show
 
 -- lebendiges Gürteltier, 10kg
