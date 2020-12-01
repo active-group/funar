@@ -116,12 +116,26 @@ feedAnimal' = tuplify feedAnimal
 
 -- 2dimensionale Ebene
 
--- Eine geometrische Figur (Shape) ist:
+-- Eine geometrische Figur (Shape) ist eins der folgenden:
 -- - ein Quadrat
 -- - ein Kreis
 -- - eine Überlappung zweier geometrischer Figuren
 
+-- Eine Überlappung besteht aus:
+-- - geometrische Figur
+-- - noch 'ne geometrische Figur
 
+data Shape = Square
+           | Circle
+           | Overlay Shape Shape
+
+type Point = (Double, Double)
+
+pointInShape :: Point -> Shape -> Bool
+pointInShape p Square = undefined
+pointInShape p Circle = undefined
+pointInShape p (Overlay shape1 shape2) =
+    (pointInShape p shape1) || (pointInShape p shape2)
 
 -- 1. Aufgabe: Datendefinition -> Code
 -- 2. Aufgabe: Funktion, die feststellt, 
