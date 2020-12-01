@@ -153,3 +153,5 @@ data List =
      Empty
    | Cons Integer List
    deriving Show
+
+list1 = Cons 1 (Cons 2 (Cons 3 Empty))
