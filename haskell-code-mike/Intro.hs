@@ -124,3 +124,8 @@ feedAnimal' = tuplify feedAnimal
 -- 1. Aufgabe: Datendefinition -> Code
 -- 2. Aufgabe: Funktion, die feststellt, 
 --             ob ein Punkt innerhalb einer geometrischen Figur ist
+
+g a b =
+    let x = a + b
+        y = a - b
+    in x * y
