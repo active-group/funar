@@ -172,4 +172,8 @@ listSum (first:rest) = first + (listSum rest)
 
 highway = [dillo1, parrot1, dillo2, parrot2]
 
+listMap :: (a -> b) -> [a] -> [b]
+listMap f [] = []
+listMap f (x:xs) =
+    (f x) : (listMap f xs)
 
