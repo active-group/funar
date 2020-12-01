@@ -69,19 +69,24 @@ data Animal weight =
   | Parrot String weight
   deriving Show
 
-dillo1 :: Animal Integer
+data MWeight = Kg Double
+
+dillo1' = Dillo Alive (Kg 10)
+
+dillo1 :: Animal Weight
 dillo1 = Dillo { dilloLiveness = Alive, dilloWeight = 10}
 
-dillo2 :: Animal Integer
+dillo2 :: Animal Weight
 dillo2 = Dillo Dead 8
 
-parrot1 :: Animal Integer
+parrot1 :: Animal Weight
 parrot1 = Parrot "Der Schatz ist Silbersee!" 1
-parrot2 :: Animal Integer
+parrot2 :: Animal Weight
 parrot2 = Parrot "Tschüss!" 2
 
 -- Tier überfahren
 -- runOverAnimal (Dillo liveness weight) = Dillo Dead weight
+runOverAnimal :: Animal weight -> Animal weight
 runOverAnimal (Dillo { dilloWeight = weight}) = Dillo Dead weight
 runOverAnimal (Parrot sentence weight) = Parrot "" weight
 
@@ -90,6 +95,7 @@ runOverAnimal (Parrot sentence weight) = Parrot "" weight
 -- Haskell kennt nur 1stellige Funktionen!
 -- Hindley-Milner-Typsystem, 1stellige Funktionen, algebraische Datentypen: ML
 
+feedAnimal :: Num weight => Animal weight -> weight -> Animal weight
 feedAnimal (Dillo Alive weight) amount = Dillo Alive (weight + amount)
 feedAnimal (Dillo Dead weight) amount = Dillo Dead weight 
 feedAnimal (Parrot sentence weight) amount = Parrot sentence (weight + amount)
