@@ -63,3 +63,5 @@ p1' = put "Mike" 15 `splice` (\ () ->
       Done y))))
 
 -- return :: a -> DB a
+
+class 
