@@ -61,3 +61,5 @@ p1' = put "Mike" 15 `splice` (\ () ->
       put "Mike" (x + 1) `splice` (\ () ->
       get "Mike" `splice` (\ y ->
       Done y))))
+
+-- return :: a -> DB a
