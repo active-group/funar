@@ -77,28 +77,7 @@ emptyGameState players =
 
 -- ist das Spiel noch am Anfang?
 gameAtBeginning :: TableState -> Bool
-gameAtBeginning gameState tableProcessEvent (HandDealt player hand) state =
-  state {
-    tableStateHands = Map.insert player hand (tableStateHands state),
-    tableStateTrick = emptyTrick
-  }
-tableProcessEvent (PlayerTurnChanged player) state =
-  state {
-    tableStatePlayers  = rotateTo player (tableStatePlayers state)
-  }
-tableProcessEvent (LegalCardPlayed player card) state =
-  state {
-    tableStateHands = takeCard (tableStateHands state) player card,
-    tableStateTrick = addToTrick player card (tableStateTrick state)
-  }
-tableProcessEvent (TrickTaken player trick) state =
-  state {
-    tableStateStacks =
-      addToStack (tableStateStacks state) player (cardsOfTrick trick),
-    tableStateTrick = emptyTrick
-  }
-tableProcessEvent (IllegalCardPlayed player card) state = state
-tableProcessEvent (GameEnded player) state = state =
+gameAtBeginning gameState =
   (trickEmpty (tableStateTrick gameState)) && 
     (all null (Map.elems (tableStateStacks gameState)))
 
