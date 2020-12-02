@@ -71,3 +71,10 @@ instance Applicative DB where
 instance Monad DB where
     (>>=) = splice
     return = Done
+
+-- Monaden-Syntax
+p1'' = do put "Mike" 15
+          x <- get "Mike"
+          put "Mike" (x + 1)
+          y <- get "Mike"
+          return y
