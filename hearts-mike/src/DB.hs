@@ -99,8 +99,10 @@ in Stream<a>:
 -}
 
 run :: DB a -> Map String Int -> a
-run (Put key value callback) db = undefined
+run (Put key value callback) db =
+    let db' = Map.insert key value db
+    in run (callback ()) db'
 run (Get key callback) db = 
     let value = db ! key
-    in run () db
+    in run (callback value) db
 run (Done result) db = result
