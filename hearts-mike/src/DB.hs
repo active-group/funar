@@ -64,6 +64,10 @@ p1' = put "Mike" 15 `splice` (\ () ->
 
 -- return :: a -> DB a
 
+instance Functor DB where
+
+instance Applicative DB where
+
 instance Monad DB where
     (>>=) = splice
     return = Done
