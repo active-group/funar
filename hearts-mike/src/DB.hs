@@ -94,3 +94,5 @@ p1'' = do put "Mike" 15
 in Stream<a>:
 <b> Stream<b> flatMap(a -> Stream<b>)
 -}
+
+run :: DB a -> a
