@@ -44,7 +44,14 @@ cardScore _ = 0
 
 -- * Spiellogik
 
-type Stack = Set Card
+-- wie data für diesen Spezialfall: 1 Konstruktor, 1 Attribut
+-- keinen Repräsentationsoverhead 
+newtype Stack = Stack (Set Card)
+  deriving Show
+
+emptyStack :: Stack
+emptyStack = Stack Set.empty
+
 
 -- eingezogene Karten, pro Spieler
 type PlayerStacks = Map Player Stack
@@ -64,13 +71,35 @@ emptyGameState players =
   TableState {
     tableStatePlayers = players,
     tableStateHands = Map.fromList (map (\ player -> (player, emptyHand)) players),
-    tableStateStacks = Map.fromList (map (\ player -> (player, Set.empty)) players),
+    tableStateStacks = Map.fromList (map (\ player -> (player, emptyStack)) players),
     tableStateTrick = emptyTrick
   }
 
 -- ist das Spiel noch am Anfang?
 gameAtBeginning :: TableState -> Bool
-gameAtBeginning gameState =
+gameAtBeginning gameState tableProcessEvent (HandDealt player hand) state =
+  state {
+    tableStateHands = Map.insert player hand (tableStateHands state),
+    tableStateTrick = emptyTrick
+  }
+tableProcessEvent (PlayerTurnChanged player) state =
+  state {
+    tableStatePlayers  = rotateTo player (tableStatePlayers state)
+  }
+tableProcessEvent (LegalCardPlayed player card) state =
+  state {
+    tableStateHands = takeCard (tableStateHands state) player card,
+    tableStateTrick = addToTrick player card (tableStateTrick state)
+  }
+tableProcessEvent (TrickTaken player trick) state =
+  state {
+    tableStateStacks =
+      addToStack (tableStateStacks state) player (cardsOfTrick trick),
+    tableStateTrick = emptyTrick
+  }
+tableProcessEvent (IllegalCardPlayed player card) state = state
+tableProcessEvent (GameEnded player) state = state
+=
   (trickEmpty (tableStateTrick gameState)) && 
     (all null (Map.elems (tableStateStacks gameState)))
 
