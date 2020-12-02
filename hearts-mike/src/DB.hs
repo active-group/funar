@@ -95,4 +95,4 @@ in Stream<a>:
 <b> Stream<b> flatMap(a -> Stream<b>)
 -}
 
-run :: DB a -> a
+run :: DB a -> Map String Integer -> a
