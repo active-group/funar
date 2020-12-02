@@ -55,3 +55,5 @@ splice (Put key value callback) next =
 splice (Get key callback) next =
     Get key (\ value -> splice (callback value) next)
 splice (Done result) next = next result
+
+p1' = 
