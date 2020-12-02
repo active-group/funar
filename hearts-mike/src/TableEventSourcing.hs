@@ -35,7 +35,7 @@ playerHandM player =
      return (tableStateHands state ! player)
 
 
-playerStackM :: Member GameEventSourcing effects => Player -> Sem effects (Set Card)
+playerStackM :: Member GameEventSourcing effects => Player -> Sem effects Stack
 playerStackM player =
   do state <- eventState
      return (tableStateStacks state ! player)
