@@ -2,6 +2,7 @@ module GameEvent where
 
 import Cards
 
+{-
 -- Event: etwas, das in der Vergangenheit passiert ist
 -- Die Events beschreiben, alles, was passiert ist.
 -- Sie sollten aus der Domäne kommen.
@@ -25,3 +26,4 @@ data GameCommand =
       EnterGame Player
     | StartGame PlayerHands
     | PlayCard Player Card
+-}
