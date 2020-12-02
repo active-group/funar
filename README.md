@@ -40,3 +40,12 @@ Falls Model-View-Update drankommt, werden wir Elm brauchen.  Anleitung
 hier:
 
 https://guide.elm-lang.org/install/
+
+# Weiterführende Literatur
+
+[Functional Programming in Scala](https://www.manning.com/books/functional-programming-in-scala)
+
+[Algebra-Driven Design](https://leanpub.com/algebra-driven-design)
+
+[Monoids: Theme and Variations](https://repository.upenn.edu/cis_papers/762/)
+
