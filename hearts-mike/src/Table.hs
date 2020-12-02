@@ -82,7 +82,7 @@ emptyGameState players =
 gameAtBeginning :: TableState -> Bool
 gameAtBeginning gameState =
   (trickEmpty (tableStateTrick gameState)) && 
-    (all null (Map.elems (tableStateStacks gameState)))
+    (all isStackEmpty (Map.elems (tableStateStacks gameState)))
 
 -- wer ist als nächstes dran?
 playerAfter :: TableState -> Player -> Player
@@ -122,10 +122,6 @@ playValid gameState player card =
 turnOver :: TableState -> Bool
 turnOver state =
   length (tableStatePlayers state) == trickSize (tableStateTrick state)
-
--- Wert eines Stapels
-stackScore :: Stack -> Integer
-stackScore hand = sum (map cardScore (Set.toList hand))
 
 -- Ist das Spiel vorbei und wenn ja wer hat gewonnen?
 gameOver :: TableState -> Maybe Player
