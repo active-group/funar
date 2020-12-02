@@ -40,3 +40,11 @@ p1 = Put "Mike" 15 (\ () ->
      Put "Mike" (x + 1) (\ () ->
      Get "Mike" (\ y ->
      Done y))))
+
+put :: String -> Int -> DB ()
+put key value = Put key value (\ () -> Done ())
+
+c1 = put "Mike" 15
+
+get :: String -> DB Int
+get key = Get key Done -- (\ value -> Done value)
