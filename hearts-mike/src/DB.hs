@@ -34,7 +34,7 @@ data DB result =
   | Get String (Int -> DB result) -- Callback
   | Done result
 
-p1 :: DB Int
+-- p1 :: DB Int
 p1 = Put "Mike" 15 (\ () ->
      Get "Mike" (\ x ->
      Put "Mike" (x + 1) (\ () ->
