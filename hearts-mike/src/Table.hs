@@ -52,6 +52,9 @@ newtype Stack = Stack (Set Card)
 emptyStack :: Stack
 emptyStack = Stack Set.empty
 
+isStackEmpty :: Stack -> Bool
+isStackEmpty (Stack set) = Set.null set
+
 
 -- eingezogene Karten, pro Spieler
 type PlayerStacks = Map Player Stack
