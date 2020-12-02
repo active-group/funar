@@ -89,3 +89,8 @@ p1'' = do put "Mike" 15
           put "Mike" (x + 1)
           y <- get "Mike"
           return y
+
+{-
+in Stream<a>:
+<b> Stream<b> flatMap(a -> Stream<b>)
+-}
