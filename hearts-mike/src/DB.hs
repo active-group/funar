@@ -56,4 +56,8 @@ splice (Get key callback) next =
     Get key (\ value -> splice (callback value) next)
 splice (Done result) next = next result
 
-p1' = 
+p1' = put "Mike" 15 `splice` (\ () ->
+      get "Mike" `splice` (\ x ->
+      put "Mike" (x + 1) `splice` (\ () ->
+      get "Mike" `splice` (\ y ->
+      Done y))))
