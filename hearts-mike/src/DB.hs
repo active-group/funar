@@ -50,6 +50,8 @@ get :: String -> DB Int
 get key = Get key Done -- (\ value -> Done value)
 
 splice :: DB a -> (a -> DB b) -> DB b
-splice (Put key value callback) next = undefined
-splice (Get key calblack) next = undefined
-splice (Done result) next = undefined
+splice (Put key value callback) next =
+    Put key value (\ () -> splice (callback ()) next)
+splice (Get key callback) next =
+    Get key (\ value -> splice (callback value) next)
+splice (Done result) next = next result
