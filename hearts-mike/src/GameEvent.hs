@@ -8,13 +8,20 @@ import Cards
 -- Sie dürfen redundant sein.
 data GameEvent =
       PlayerArrived Player
-    | CardsDealt
     | GameStarted [Player]
-    | CardPlayed Player Card
-    | TrickDone Trick Player
-    | InvalidMove Player Card
-    | GameOver Player -- Gewinner
 
+    | CardsDealt PlayerHands
+    | CardPlayed Player Card
+
+    | TrickDone Trick Player
+    | PlayerTurnChanged Player
+    | GameOver Player -- Gewinner
+    | InvalidMove Player Card
+ 
 
 -- Command: Beschreibung von etwas, das passieren soll.
 -- != Events
+data GameCommand =
+      EnterGame Player
+    | StartGame PlayerHands
+    | PlayCard Player Card
