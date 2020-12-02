@@ -48,3 +48,8 @@ c1 = put "Mike" 15
 
 get :: String -> DB Int
 get key = Get key Done -- (\ value -> Done value)
+
+splice :: DB a -> (a -> DB b) -> DB b
+splice (Put key value callback) next = undefined
+splice (Get key calblack) next = undefined
+splice (Done result) next = undefined
