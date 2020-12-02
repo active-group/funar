@@ -98,4 +98,9 @@ in Stream<a>:
 <b> Stream<b> flatMap(a -> Stream<b>)
 -}
 
-run :: DB a -> Map String Integer -> a
+run :: DB a -> Map String Int -> a
+run (Put key value callback) db = undefined
+run (Get key callback) db = 
+    let value = db ! key
+    in value
+run (Done result) db = result
