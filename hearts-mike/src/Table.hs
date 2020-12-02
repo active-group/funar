@@ -146,7 +146,7 @@ takeCard playerHands player card =
 -- Karten zum Stapel hinzufügen
 addToStack :: PlayerStacks -> Player -> [Card] -> PlayerStacks
 addToStack playerStacks player cards =
-  let playerStack = Map.findWithDefault Set.empty player playerStacks
+  let playerStack = Map.findWithDefault emptyStack player playerStacks
   in Map.insert player (Set.union playerStack (Set.fromList cards)) playerStacks
 
 -- Verbindung zwischen TableState und GameEvent / GameCommand
