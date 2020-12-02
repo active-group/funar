@@ -102,5 +102,5 @@ run :: DB a -> Map String Int -> a
 run (Put key value callback) db = undefined
 run (Get key callback) db = 
     let value = db ! key
-    in value
+    in run () db
 run (Done result) db = result
