@@ -32,10 +32,10 @@ p1 = [put "Mike" 15,
 
 -- \ x -> put "Mike" (x + 1)
 
-data DB result =
-    Put String Int (() -> DB result)
-  | Get String (Int -> DB result) -- Callback
-  | Done result
+data DB a =
+    Put String Int (() -> DB a)
+  | Get String (Int -> DB a) -- Callback
+  | Done a
 
 -- p1 :: DB Int
 p1 = Put "Mike" 15 (\ () ->
