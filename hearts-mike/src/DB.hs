@@ -64,4 +64,6 @@ p1' = put "Mike" 15 `splice` (\ () ->
 
 -- return :: a -> DB a
 
-class 
+instance Monad DB where
+    (>>=) = splice
+    return = Done
