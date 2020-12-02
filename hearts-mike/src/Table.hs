@@ -55,6 +55,10 @@ emptyStack = Stack Set.empty
 isStackEmpty :: Stack -> Bool
 isStackEmpty (Stack set) = Set.null set
 
+-- Wert eines Stapels
+stackScore :: Stack -> Integer
+stackScore (Stack set) = sum (map cardScore (Set.toList set))
+
 
 -- eingezogene Karten, pro Spieler
 type PlayerStacks = Map Player Stack
