@@ -98,8 +98,7 @@ tableProcessEvent (TrickTaken player trick) state =
     tableStateTrick = emptyTrick
   }
 tableProcessEvent (IllegalCardPlayed player card) state = state
-tableProcessEvent (GameEnded player) state = state
-=
+tableProcessEvent (GameEnded player) state = state =
   (trickEmpty (tableStateTrick gameState)) && 
     (all null (Map.elems (tableStateStacks gameState)))
 
