@@ -106,3 +106,6 @@ run (Get key callback) db =
     let value = db ! key
     in run (callback value) db
 run (Done result) db = result
+
+-- SQLite:
+-- runSQLite :: DB a -> Connection -> IO a
