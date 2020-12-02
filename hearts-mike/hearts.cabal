@@ -8,8 +8,7 @@ author:              Mike Sperber
 maintainer:          michael.sperber@active-group.de
 
 library
-  exposed-modules: Cards, GameEvent, Table
-                 -- Sync, EventSourcing, TableEventSourcing, Player
+  exposed-modules: Cards, GameEvent, Table, Sync, EventSourcing, TableEventSourcing, Player
   other-modules: Teletype, Concurrency, Shuffle, MVar, PolysemyUtil
   
   build-depends:       base
@@ -24,6 +23,7 @@ library
 
 
 executable server
+  buildable:           False
   main-is:             Main.hs
 
   other-modules: Args, Serialization, PlayerServer, TableServer
