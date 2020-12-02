@@ -202,3 +202,8 @@ tableProcessCommand (PlayCard player card) state =
          in [event1, event2]
   else 
     [IllegalCardPlayed player card]
+
+{-
+main :: IO ()
+
+-}
