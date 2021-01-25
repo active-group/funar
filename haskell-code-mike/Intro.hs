@@ -333,3 +333,4 @@ instance Monoid [a] where
 -- instance Monoid m => Monoid (a -> m) where
 -- instance Monoid a => Monoid (Maybe a) where
 
+data Dual a = Dual a
