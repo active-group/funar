@@ -35,6 +35,7 @@ validateAge' age = if age <= 120
 data Validation error result =
     Success result
   | Failure [error]
+  deriving Show
 
 validateAge age = if age <= 120
                   then Success age
@@ -56,7 +57,7 @@ class Functor (f :: Type -> Type) where
 -- akzeptiert noch Typvariable result
 instance Functor (Validation error) where
     -- fmap :: (a - > b) -> Validation error a -> Validation error b
-    fmap f (Success result) = Success (f result)
+    fmap f (Success a) = Success (f a)
     fmap f (Failure errors) = Failure errors
 
 -- nur E-Mail!
@@ -66,6 +67,17 @@ data Person' = Person' String
 validatePerson' :: String -> Validation String Person'
 validatePerson' email = fmap Person' (validateEmail email)
 
+-- Funktor nicht stark genug für mehrere Attribute!
+-- Idee: 
+-- applicate :: f (a -> b) -> f a -> f b
+
+applicate :: Validation error (a -> b) -> Validation error a -> Validation error b 
+applicate (Failure errors1) (Failure errors2) =
+    Failure (errors1 ++ errors2)
+applicate (Failure errors) success = Failure errors
+applicate success (Failure errors) = Failure errors
+applicate (Success f) (Success a) =
+    Success (f a)
 
 {-
 validatePerson :: String -> String -> Int -> Validation String Person
