@@ -25,7 +25,9 @@ data Prim = Square | Circle | Triangle | Smiley
 
 -- deswegen nächster Schritt:
 
-type Diagram = [Prim]
+data Diagram = Diagram [Prim]
 
 instance Semigroup Diagram where
-    (prims1) <> (prims2) =  (prims2 ++ prims1)
+    (Diagram prims1) <> (Diagram prims2) =  Diagram (prims2 ++ prims1)
+
+
