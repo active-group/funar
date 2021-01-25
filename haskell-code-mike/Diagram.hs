@@ -1,5 +1,6 @@
 {-# LANGUAGE TypeSynonymInstances #-}
 {-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralisedNewtypeDeriving #-}
 
 module Diagram where
 
@@ -35,5 +36,6 @@ instance Semigroup Diagram where
 
 -- Geht auch einfacher:
 
-type Diagram = Dual [Prim]
+newtype Diagram = Diagram (Dual [Prim])
+  deriving (Semigroup, Monoid)
 
