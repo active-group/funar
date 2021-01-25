@@ -346,5 +346,9 @@ data Mult = Mult Integer
 instance Semigroup Mult where
   combine (Mult n) (Mult m) = Mult (n * m)
 
-data Dual a = Dual a
+-- data Dual a = Dual a
+newtype Dual a = Dual a
+-- garantiert kein Laufzeit-Overhead
 
+instance Semigroup m => Semigroup (Dual m) where
+  combine (Dual a) (Dual b) = Dual (combine b a)
