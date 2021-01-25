@@ -41,9 +41,10 @@ Fehlt: zahlen statt bekommen
 type Amount = Double
 
 data Currency = EUR | GBP | CHF
+  deriving Show
 
 data Date = Date String -- ISO-Notation
-  deriving (Ord, Eq)
+  deriving (Ord, Eq, Show)
 
 {-
 data Contract =
@@ -70,6 +71,7 @@ data Contract =
   -- vertauscht Rechte und Pflichten
   | Pay Contract
   | Two Contract Contract
+  deriving Show
 
 zcb1 = Later (Date "2001-01-29") (Multiple 100 (One GBP))
 
