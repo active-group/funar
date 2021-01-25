@@ -73,6 +73,8 @@ validatePerson' email = fmap Person' (validateEmail email)
 -- applikativer Funktor / "applicative"
 -- braucht außerdem Funktion pure :: a -> f a
 
+-- (>>=)
+
 applicate :: Validation error (a -> b) -> Validation error a -> Validation error b 
 applicate (Failure errors1) (Failure errors2) =
     Failure (errors1 ++ errors2)
@@ -83,9 +85,16 @@ applicate (Success f) (Success a) =
 
 validatePerson name email age =
     -- applicate (applicate (fmap Person (validateName name)) (validateEmail email)) (validateAge age)
-    Person `fmap` (validateName name) `applicate` (validateEmail email) `applicate` (validateAge age)
+--    Person `fmap` (validateName name) `applicate` (validateEmail email) `applicate` (validateAge age)
+    Person <$> (validateName name) <*> (validateEmail email) <*> (validateAge age)
+    -- Person name email age
+    -- "applicative style"
 
+instance Applicative (Validation error) where
+    pure = Success
+    (<*>) = applicate
 
+-- außerdem ist <$> ein Synonym für fmap
 
 {-
 validatePerson :: String -> String -> Int -> Validation String Person
