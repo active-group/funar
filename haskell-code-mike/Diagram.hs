@@ -1,5 +1,6 @@
 {-# LANGUAGE TypeSynonymInstances #-}
 {-# LANGUAGE FlexibleInstances #-}
+-- WICHTIG:
 {-# LANGUAGE GeneralisedNewtypeDeriving #-}
 
 module Diagram where
