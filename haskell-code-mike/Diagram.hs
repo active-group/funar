@@ -38,5 +38,10 @@ instance Semigroup Diagram where
 -- Geht auch einfacher:
 
 newtype Diagram = Diagram (Dual [Prim])
+  -- übernimmt Instanzen von Dual
   deriving (Semigroup, Monoid)
+
+-- Strategie:
+-- den Typ Diagram komplett mit schon vorhandenen
+-- Monoid-Instanzen programmieren
 
