@@ -31,4 +31,9 @@ validateAge' age = if age <= 120
 
 data Validation error result =
     Success result
-  | Failure error
+  | Failure [error]
+
+validateAge age = if age <= 120
+                  then Success age
+                  else Failure ["too old"]
+                  
