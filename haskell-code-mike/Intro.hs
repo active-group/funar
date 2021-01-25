@@ -346,5 +346,5 @@ data Mult = Mult Integer
 instance Semigroup Mult where
   combine (Mult n) (Mult m) = Mult (n * m)
 
--- data Dual a = Dual a
+data Dual a = Dual a
 
