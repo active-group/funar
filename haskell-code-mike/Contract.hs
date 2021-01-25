@@ -77,3 +77,5 @@ c2 = Pay (Pay (One EUR))
 
 -- Bekomme jetzt 100EUR
 -- Multiple 100 (One EUR) 
+
+fxSwap = ???
