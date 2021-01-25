@@ -75,7 +75,10 @@ data Contract =
 
 zcb1 = Later (Date "2001-01-29") (Multiple 100 (One GBP))
 
-zcb 
+one currency = One currency
+
+zcb amount currency date =
+    Later date (Multiple amount (One currency))
 
 -- Am 31.12.2021 zahle ich 100EUR
 c1 = Later (Date "2021-12-31") (Pay (Multiple 100 (One EUR)))
@@ -88,4 +91,6 @@ c2 = Pay (Pay (One EUR))
 -- Bekomme jetzt 100EUR
 -- Multiple 100 (One EUR) 
 
-fxSwap = Two zcb1 c1
+fxSwap date amount1 currency1 amount2 currency2 =
+   Two (zcb date amount1 currency1)
+       (Pay (zcb date amount2 currency2))
