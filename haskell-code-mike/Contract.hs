@@ -140,7 +140,7 @@ contractPayments (Pay contract) now =
     let (payments, residualContract) = contractPayments contract now
     in (map reversePayment payments, Pay residualContract)
 contractPayments c@(Later date contract) now =
-    if date >= now
+    if date <= now
     then contractPayments contract now
     else ([], c)
 contractPayments (Two contract1 contract2) now =
