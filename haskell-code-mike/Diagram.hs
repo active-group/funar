@@ -45,3 +45,8 @@ newtype Diagram = Diagram (Dual [Prim])
 -- den Typ Diagram komplett mit schon vorhandenen
 -- Monoid-Instanzen programmieren
 
+-- nächste Idee:
+-- wir berechnen für jedes Bild ein sogenanntes
+-- "Envelope": Um wieviel muß ich einen Vektor strecken,
+-- damit die Senkrechte dazu gerade das Bild streift?
+
