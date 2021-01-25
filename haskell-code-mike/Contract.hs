@@ -139,10 +139,10 @@ contractPayments (Multiple amount contract) now =
 contractPayments (Pay contract) now =
     let (payments, residualContract) = contractPayments contract now
     in (map reversePayment payments, Pay residualContract)
-contractPayments (Later date contract) now =
+contractPayments c@(Later date contract) now =
     if date >= now
     then contractPayments contract now
-    else ([], contract)
+    else ([], c)
 contractPayments (Two contract1 contract2) now =
     let (payments1, residualContract1) = contractPayments contract1 now
         (payments2, residualContract2) = contractPayments contract2 now
