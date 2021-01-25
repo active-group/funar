@@ -160,4 +160,4 @@ contractPayments (Two contract Zero) now =
 contractPayments (Two contract1 contract2) now =
     let (payments1, residualContract1) = contractPayments contract1 now
         (payments2, residualContract2) = contractPayments contract2 now
-    in (payments1 ++ payments2, Two residualContract1 residualContract2)
+    in (payments1 ++ payments2, two residualContract1 residualContract2)
