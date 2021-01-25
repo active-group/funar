@@ -86,6 +86,12 @@ zcb1 = Later (Date "2001-01-29") (Multiple 100 (One GBP))
 
 one currency = One currency
 
+-- smart constructor
+two :: Contract -> Contract -> Contract
+two Zero contract2 = contract2
+two contract1 Zero = contract1
+two contract1 contract2 = Two contract1 contract2
+
 zcb amount currency date =
     Later date (Multiple amount (One currency))
 
