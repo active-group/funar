@@ -52,7 +52,9 @@ class Functor f where
     fmap :: (a -> b) -> f a -> f b
 -}
 
+-- akzeptiert noch Typvariable result
 instance Functor (Validation error) where
+    fmap f 
 
 {-
 validatePerson :: String -> String -> Int -> Validation String Person
