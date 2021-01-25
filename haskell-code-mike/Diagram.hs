@@ -1,4 +1,5 @@
 {-# LANGUAGE TypeSynonymInstances #-}
+{-# LANGUAGE FlexibleInstances #-}
 
 module Diagram where
 
@@ -27,4 +28,4 @@ data Prim = Square | Circle | Triangle | Smiley
 type Diagram = [Prim]
 
 instance Semigroup Diagram where
-    (prims1) <> (prims2) = Diagram (prims2 ++ prims1)
+    (prims1) <> (prims2) =  (prims2 ++ prims1)
