@@ -48,7 +48,7 @@ validateEmail email = if elem '@' email
 -- Problem: Komposition
 
 {-
-class Functor f where
+class Functor (f :: Type -> Type) where
     fmap :: (a -> b) -> f a -> f b
 -}
 
