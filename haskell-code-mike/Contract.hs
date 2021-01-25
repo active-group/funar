@@ -19,6 +19,9 @@ Immer implizit 2 Vertragspartner.
 - "später"
 - Betrag / Vielfaches
 - Währung
+
+- Suche den Kombinator! (... die Selbst-Referenz!)
+  ... "die closure of operations"
 -}
 
 type Amount = Double
