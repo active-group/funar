@@ -22,6 +22,12 @@ Immer implizit 2 Vertragspartner.
 
 - Suche den Kombinator! (... die Selbst-Referenz!)
   ... "die closure of operations"
+
+- Weitere Beispiele ... wiederholen
+
+Am 31.12.2021:
+- Ich bekomme 100CHF UND
+- ich zahle 100EUR.
 -}
 
 type Amount = Double
