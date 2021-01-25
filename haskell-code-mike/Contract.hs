@@ -139,6 +139,8 @@ reversePayment (Payment direction amount currency date) =
 -- mögliche Datum contractPayments c1 date == contractPayments c2 date
 -- (modulo Listenreihenfolge)
 
+-- auf der Basis gilt dann: Assoziativität, neutrales Element
+
 contractPayments :: Contract -> Date -> ([Payment], Contract)
 contractPayments Zero now = ([], Zero)
 contractPayments (One currency) now = ([Payment Long 1 currency now], Zero)
