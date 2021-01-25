@@ -39,4 +39,6 @@ validateAge age = if age <= 120
 
 validateName name = Success name
 
-validateEmail email = if elem 
+validateEmail email = if elem '@' email 
+                      then Success (map toLower email)
+                      else Failure ["no at sign"]
