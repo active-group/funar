@@ -31,6 +31,7 @@ validateAge' age = if age <= 120
                    else Just "too old"
 -}
 
+-- Validation :: Type -> (Type -> Type)
 data Validation error result =
     Success result
   | Failure [error]
