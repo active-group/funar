@@ -80,9 +80,16 @@ instance Ord t => Semigroup (Max t) where
 -}
 
 -- a -> m, wobei a = V2, m = Max R
-newtype Envelope = Envelope (V2 -> Max R)
-  deriving (Semigroup)
+newtype Envelope = Envelope (Maybe (V2 -> Max R))
+  deriving (Semigroup, Monoid)
 
--- blöd: kein Monoid, weil Max kein Monoid ist
+-- ohne Maybe blöd: kein Monoid, weil Max kein Monoid ist
 -- R plus "minus unendlich" könnte man versuchen,
 -- aber häßlich
+
+-- Es GIBT EIN DIAGRAM OHNE ENVELOPE: Diagram (Dual [])
+-- DAS LEERE BILD!
+
+
+-- mathematische Repräsentation für ein Diagram
+-- denotationelle Semantik
