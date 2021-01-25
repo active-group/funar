@@ -129,6 +129,10 @@ reversePayment (Payment direction amount currency date) =
 
 -- es kommt raus: Zahlungen bis zu dem Datum, Residualvertrag
 
+-- Semantik: Zwei Verträge c1, c2 sind gleich(bedeutend), wenn für jedes
+-- mögliche Datum contractPayments c1 date == contractPayments c2 date
+-- (modulo Listenreihenfolge)
+
 contractPayments :: Contract -> Date -> ([Payment], Contract)
 contractPayments Zero now = ([], Zero)
 contractPayments (One currency) now = ([Payment Long 1 currency now], Zero)
@@ -143,6 +147,10 @@ contractPayments c@(Later date contract) now =
     if date <= now
     then contractPayments contract now
     else ([], c)
+contractPayments (Two Zero contract) now =
+    contractPayments contract now
+contractPayments (Two contract Zero) now =
+    contractPayments contract now
 contractPayments (Two contract1 contract2) now =
     let (payments1, residualContract1) = contractPayments contract1 now
         (payments2, residualContract2) = contractPayments contract2 now
