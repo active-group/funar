@@ -64,6 +64,7 @@ data Contract =
   -- dreht Zahlungsrichtungen um
   -- vertauscht Rechte und Pflichten
   | Pay Contract
+  | Two Contract Contract
 
 zcb1 = Later (Date "2001-01-29") (Multiple 100 (One GBP))
 
@@ -78,4 +79,4 @@ c2 = Pay (Pay (One EUR))
 -- Bekomme jetzt 100EUR
 -- Multiple 100 (One EUR) 
 
-fxSwap = ???
+fxSwap = Two zcb1 c1
