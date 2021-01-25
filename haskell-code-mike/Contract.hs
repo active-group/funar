@@ -15,11 +15,15 @@ Immer implizit 2 Vertragspartner.
 
 - Beispiel in kleinere Bausteine / "Ideen" zerlegen
 
+3 Ideen:
+- "später"
+- Betrag / Vielfaches
+- Währung
 -}
 
 type Amount = Double
 
-data Currency = EUR | GBP
+data Currency = EUR | GBP | CHF
 
 data Date = Date String -- ISO-Notation
   deriving (Ord, Eq)
