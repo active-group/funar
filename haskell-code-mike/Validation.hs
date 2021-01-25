@@ -1,5 +1,7 @@
 module Validation where
 
+import Data.Char
+
 data Person = Person {
     personName :: String,
     personEmail :: String,
