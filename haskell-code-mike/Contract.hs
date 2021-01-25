@@ -28,6 +28,9 @@ Immer implizit 2 Vertragspartner.
 Am 31.12.2021:
 - Ich bekomme 100CHF UND
 - ich zahle 100EUR.
+("FX Swap")
+
+Fehlt: zahlen statt bekommen
 -}
 
 type Amount = Double
