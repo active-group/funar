@@ -88,7 +88,7 @@ one currency = One currency
 
 -- smart constructor
 two :: Contract -> Contract -> Contract
-two Zero contract2 = contract2
+two Zero contract2 = contract2 -- basierend auf der Semantik
 two contract1 Zero = contract1
 two contract1 contract2 = Two contract1 contract2
 
