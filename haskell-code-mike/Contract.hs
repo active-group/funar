@@ -31,6 +31,11 @@ Am 31.12.2021:
 ("FX Swap")
 
 Fehlt: zahlen statt bekommen
+
+- Suche speziell einen binären Kombinator!
+  c :: d -> d -> d
+  (manchmal gibt's mehrere!)
+
 -}
 
 type Amount = Double
