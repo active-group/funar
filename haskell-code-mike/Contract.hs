@@ -103,3 +103,6 @@ c2 = Pay (Pay (One EUR))
 fxSwap date amount1 currency1 amount2 currency2 =
    Two (zcb date amount1 currency1)
        (Pay (zcb date amount2 currency2))
+
+-- Bedeutung / Semantik
+-- denotationelle Semantik: Domänenobjekt |-> mathematisches Objekt
