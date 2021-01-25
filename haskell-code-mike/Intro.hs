@@ -333,4 +333,18 @@ instance Monoid [a] where
 -- instance Monoid m => Monoid (a -> m) where
 -- instance Monoid a => Monoid (Maybe a) where
 
-data Dual a = Dual a
+-- instance Semigroup Integer where
+--   combine = ???
+
+data Additive = Additive Integer
+
+instance Semigroup Additive where
+  combine (Additive n) (Additive m) = Additive (n + m)
+
+data Mult = Mult Integer
+
+instance Semigroup Mult where
+  combine (Mult n) (Mult m) = Mult (n * m)
+
+-- data Dual a = Dual a
+
