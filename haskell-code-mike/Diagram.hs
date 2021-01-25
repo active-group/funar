@@ -4,4 +4,8 @@ import Data.Monoid
 import Data.Semigroup
 
 -- combine heißt jetzt <>
--- neutral heißt jetzt mempty
+-- neutral heißt jetzt 
+
+data Prim = Square | Circle | Triangle | Smiley
+
+type Diagram = [Prim]
