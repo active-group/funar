@@ -68,3 +68,15 @@ instance Semigroup Envelope ...
 -- => Das geht einfach, indem das Maximum des
 -- Ergebnisses der Envelope-Funktion gebildet wird.
 
+{-
+newtype Max t = Max t
+
+instance Ord t => Semigroup (Max t) where
+    combine a b =
+        if a > b
+        then a
+        else b
+
+-}
+
+newtype Envelope = Envelope (V2 -> Max R)
