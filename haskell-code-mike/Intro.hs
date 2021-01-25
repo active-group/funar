@@ -300,8 +300,21 @@ class Semigroup t where
     combine :: t -> t -> t
 
 instance (Semigroup m, Semigroup n) => Semigroup (m, n) where
-  combine (m1, n1) (m2, n2) = (combine m1 m2, combine n1 n2) -- "punktweise"
+  -- m1, m2 :: m
+  -- n1, n2 :: n
+--  combine (m1, n1) (m2, n2) = (combine m1 m2, combine n1 n2) -- "punktweise"
                           --   combine auf m, combine auf n
+  combine x y =
+    let (a, b) = x
+        (c, d) = y
+    in (combine a c, combine b d)
+-- combine (m1, n1) (combine (m2, n2) (m3, n3))
+-- == combine (m1, n1) (combine m2 m3, combine n2 n3)
+-- == (combine m1 (combine m2 m3), combine n1 (combine n2 n3))
+-- == (combine (combine m1 m2) m3, (combine (combine n1 n2) n3)) -- Assoziativität in m, n
+-- ...
+-- == combine (combine (m1, n2) (m2, n2)) (m3, n3)
+
 instance Semigroup [a] where
     combine a b = a ++ b
 
@@ -309,6 +322,9 @@ class Semigroup t => Monoid t where
     -- combine neutral x == x
     -- combine x neutral == x
     neutral :: t
+
+class (Monoid m, Monoid n) => Monoid (m, n) where
+  neutral = (neutral, neutral)
 
 instance Monoid [a] where
     neutral = []
