@@ -47,7 +47,12 @@ validateEmail email = if elem '@' email
 
 -- Problem: Komposition
 
+{-
+class Functor f where
+    fmap :: (a -> b) -> f a -> f b
+-}
 
+instance Functor (Validation error) where
 
 {-
 validatePerson :: String -> String -> Int -> Validation String Person
