@@ -50,6 +50,7 @@ Probleme:
 
 data Contract =
     One Currency -- "Bekomme jetzt 1 EUR"
-  | Multiple Amount Currency
+  | Multiple Amount Contract -- Currency
 
--- Multiple 1 EUR
+-- Bekomme jetzt 100EUR
+-- Multiple 100 (One EUR) 
