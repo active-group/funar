@@ -71,7 +71,8 @@ Probleme:
 -}
 
 data Contract =
-    One Currency -- "Bekomme jetzt 1 EUR"
+    Zero
+  | One Currency -- "Bekomme jetzt 1 EUR"
   | Multiple Amount Contract -- Currency
   | Later Date Contract
   -- dreht Zahlungsrichtungen um
@@ -80,6 +81,7 @@ data Contract =
   | Two Contract Contract
   deriving Show
 
+zcb1 :: Contract
 zcb1 = Later (Date "2001-01-29") (Multiple 100 (One GBP))
 
 one currency = One currency
