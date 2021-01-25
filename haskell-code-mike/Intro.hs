@@ -328,3 +328,4 @@ instance (Monoid m, Monoid n) => Monoid (m, n) where
 
 instance Monoid [a] where
     neutral = []
+
