@@ -36,6 +36,9 @@ Fehlt: zahlen statt bekommen
   c :: d -> d -> d
   (manchmal gibt's mehrere!)
 
+  ... und damit eine Halbgruppe! (Assoziativgesetz!)
+
+  Two a (Two b c) =~= Two (Two a b) c
 -}
 
 type Amount = Double
