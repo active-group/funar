@@ -329,6 +329,7 @@ instance (Monoid m, Monoid n) => Monoid (m, n) where
 instance Monoid [a] where
     neutral = []
 
+-- braucht wahrscheinlich auch Instanzen für Semigroup
 -- instance Monoid m => Monoid (a -> m) where
 -- instance Monoid a => Monoid (Maybe a) where
 
