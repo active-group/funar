@@ -44,3 +44,7 @@ Probleme:
 -}
 
 -}
+
+data Contract =
+    One Currency -- "Bekomme jetzt 1 EUR"
+  | 
