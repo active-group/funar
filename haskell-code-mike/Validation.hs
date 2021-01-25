@@ -39,4 +39,4 @@ validateAge age = if age <= 120
 
 validateName name = Success name
 
-validateEmail email = if
+validateEmail email = if elem 
