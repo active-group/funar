@@ -54,4 +54,17 @@ type R = Double -- reelle Zahlen
 type V2 = (R, R)
 
 -- 1. Entwurf:
-type Envelope = V2 -> R
+{-
+newtype Envelope = Envelope (V2 -> R)
+
+instance Semigroup Envelope ...
+-}
+-- envelope :: Diagram -> Envelope
+
+-- envelope (d1 <> d2) = envelope d1 <> envelope d2
+
+-- Da Diagramme einen Monoiden bilden,
+-- bilden auch die Envelopes einen Monoiden
+-- => Das geht einfach, indem das Maximum des
+-- Ergebnisses der Envelope-Funktion gebildet wird.
+
