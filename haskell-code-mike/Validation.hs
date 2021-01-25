@@ -70,6 +70,8 @@ validatePerson' email = fmap Person' (validateEmail email)
 -- Funktor nicht stark genug für mehrere Attribute!
 -- Idee: 
 -- applicate :: f (a -> b) -> f a -> f b
+-- applikativer Funktor / "applicative"
+-- braucht außerdem Funktion pure :: a -> f a
 
 applicate :: Validation error (a -> b) -> Validation error a -> Validation error b 
 applicate (Failure errors1) (Failure errors2) =
@@ -82,6 +84,8 @@ applicate (Success f) (Success a) =
 validatePerson name email age =
     -- applicate (applicate (fmap Person (validateName name)) (validateEmail email)) (validateAge age)
     Person `fmap` (validateName name) `applicate` (validateEmail email) `applicate` (validateAge age)
+
+
 
 {-
 validatePerson :: String -> String -> Int -> Validation String Person
