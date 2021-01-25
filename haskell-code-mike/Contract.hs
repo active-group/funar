@@ -61,8 +61,14 @@ data Contract =
     One Currency -- "Bekomme jetzt 1 EUR"
   | Multiple Amount Contract -- Currency
   | Later Date Contract
+  | Pay Contract
 
 zcb1 = Later (Date "2001-01-29") (Multiple 100 (One GBP))
+
+-- Am 31.12.2021 zahle ich 100EUR
+c1 = Later (Date "2021-12-31") (Pay (Multiple 100 (One EUR)))
+
+c2 = Pay (Pay (One EUR)) 
 
 -- Bekomme jetzt 100EUR
 -- Multiple 100 (One EUR) 
