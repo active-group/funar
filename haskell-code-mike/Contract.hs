@@ -75,6 +75,8 @@ data Contract =
 
 zcb1 = Later (Date "2001-01-29") (Multiple 100 (One GBP))
 
+zcb 
+
 -- Am 31.12.2021 zahle ich 100EUR
 c1 = Later (Date "2021-12-31") (Pay (Multiple 100 (One EUR)))
 
