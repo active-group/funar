@@ -44,3 +44,30 @@ validateName name = Success name
 validateEmail email = if elem '@' email 
                       then Success (map toLower email)
                       else Failure ["no at sign"]
+
+-- Problem: Komposition
+
+
+
+{-
+validatePerson :: String -> String -> Int -> Validation String Person
+validatePerson name email age =
+    case validateName name of
+        Success name ->
+            case validateEmail email of
+                Success email ->
+                    case validateAge age of
+                        Success age ->
+                            Success (Person name email age)
+                        Failure errors -> Failure errors
+                Failure errors ->
+                    case validateAge age of
+                        Success age -> Failure errors
+                        Failure errors' -> Failure (errors ++ errors')
+ -- ...
+
+ data PersonDraft = PersonDraft {
+    personDraftName :: Validation String String,
+
+
+-}
