@@ -330,4 +330,5 @@ instance Monoid [a] where
     neutral = []
 
 -- instance Monoid m => Monoid (a -> m) where
--- 
+-- instance Monoid a => Monoid (Maybe a) where
+
