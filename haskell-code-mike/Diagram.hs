@@ -50,3 +50,8 @@ newtype Diagram = Diagram (Dual [Prim])
 -- "Envelope": Um wieviel muß ich einen Vektor strecken,
 -- damit die Senkrechte dazu gerade das Bild streift?
 
+type R = Double -- reelle Zahlen
+type V2 = (R, R)
+
+-- 1. Entwurf:
+type Envelope = V2 -> R
