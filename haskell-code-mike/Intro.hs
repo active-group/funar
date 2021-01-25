@@ -299,6 +299,9 @@ class Semigroup t where
     -- a `combine` (b `combine` c) == (a `combine` b) `combine` c
     combine :: t -> t -> t
 
+instance (Semigroup m, Semigroup n) => Semigroup (m, n) where
+  combine (m1, n1) (m2, n2) = (combine m1 m2, combine n1 n2) -- "punktweise"
+                          --   combine auf m, combine auf n
 instance Semigroup [a] where
     combine a b = a ++ b
 
