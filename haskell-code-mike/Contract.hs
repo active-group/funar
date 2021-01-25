@@ -39,6 +39,10 @@ Fehlt: zahlen statt bekommen
   ... und damit eine Halbgruppe! (Assoziativgesetz!)
 
   Two a (Two b c) =~= Two (Two a b) c
+
+   ... und dann auch noch nach einem neutralen Element!
+
+   
 -}
 
 type Amount = Double
