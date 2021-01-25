@@ -79,4 +79,6 @@ instance Ord t => Semigroup (Max t) where
 
 -}
 
+-- a -> m, wobei a = V2, m = Max R
 newtype Envelope = Envelope (V2 -> Max R)
+  deriving (Semigroup)
