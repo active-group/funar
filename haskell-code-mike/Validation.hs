@@ -38,3 +38,5 @@ validateAge age = if age <= 120
                   else Failure ["too old"]
 
 validateName name = Success name
+
+validateEmail email = if
