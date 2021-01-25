@@ -96,6 +96,9 @@ instance Applicative (Validation error) where
 
 -- außerdem ist <$> ein Synonym für fmap
 
+-- Haxl:
+
+
 {-
 validatePerson :: String -> String -> Int -> Validation String Person
 validatePerson name email age =
