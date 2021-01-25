@@ -34,5 +34,5 @@ instance Semigroup Diagram where
 
 -- Geht auch einfacher:
 
-type Diagram = Dual ()
+type Diagram = Dual [Prim]
 
