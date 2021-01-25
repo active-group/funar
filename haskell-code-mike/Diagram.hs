@@ -82,3 +82,7 @@ instance Ord t => Semigroup (Max t) where
 -- a -> m, wobei a = V2, m = Max R
 newtype Envelope = Envelope (V2 -> Max R)
   deriving (Semigroup)
+
+-- blöd: kein Monoid, weil Max kein Monoid ist
+-- R plus "minus unendlich" könnte man versuchen,
+-- aber häßlich
