@@ -14,4 +14,6 @@ data Prim = Square | Circle | Triangle | Smiley
 type Diagram = [Prim]
 
 -- Brent Yorgey: Bilder müssen Monoid bilden
+-- Listen bilden einen Monoiden
 
+-- => Monoid Diagram
