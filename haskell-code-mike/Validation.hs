@@ -73,7 +73,7 @@ validatePerson' email = fmap Person' (validateEmail email)
 -- applikativer Funktor / "applicative"
 -- braucht außerdem Funktion pure :: a -> f a
 
--- (>>=)
+-- (>>=) :: m a -> (a -> m b) -> m b
 
 applicate :: Validation error (a -> b) -> Validation error a -> Validation error b 
 applicate (Failure errors1) (Failure errors2) =
