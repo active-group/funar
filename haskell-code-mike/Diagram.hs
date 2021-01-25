@@ -4,4 +4,4 @@ import Data.Monoid
 import Data.Semigroup
 
 -- combine heißt jetzt <>
--- neutral 
+-- neutral heißt jetzt mempty
