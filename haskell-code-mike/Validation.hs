@@ -79,6 +79,10 @@ applicate success (Failure errors) = Failure errors
 applicate (Success f) (Success a) =
     Success (f a)
 
+validatePerson name email age =
+    -- applicate (applicate (fmap Person (validateName name)) (validateEmail email)) (validateAge age)
+    Person `fmap` (validateName name) `applicate` (validateEmail email) `applicate` (validateAge age)
+
 {-
 validatePerson :: String -> String -> Int -> Validation String Person
 validatePerson name email age =
