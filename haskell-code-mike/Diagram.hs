@@ -11,11 +11,20 @@ data Prim = Square | Circle | Triangle | Smiley
 
 -- Idee: primitive Bilder übereinanderlegen
 -- oberstes Bild kommt zuletzt
-type Diagram = [Prim]
+-- type Diagram = [Prim]
 
 -- Brent Yorgey: Bilder müssen Monoid bilden
 -- Listen bilden einen Monoiden
--- hätte gern einen Monoiden, beim dem das oberste Bild zuerst kommt
+-- hätte gern eine Monoid-Operation, beim dem das oberste Bild zuerst kommt
 
--- => Monoid Diagram
+-- => Monoid Diagram, aber der falsche Monoid
 -- [p1, p2, p3] <> [p4, p5] = [p1, p2, p3, p4, p5]
+
+-- deswegen nächster Schritt:
+
+data Diagram = Diagram [Prim]
+
+{-
+instance Semigroup Diagram where
+    (Diagram prims1) <> (Diagram prims2) = Diagram (prims2 ++ prims1)
+-}
