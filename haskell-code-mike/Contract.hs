@@ -71,7 +71,7 @@ Probleme:
 -}
 
 data Contract =
-    Zero -- neutrales Element
+    Zero -- neutrales Element bzgl. Two
   | One Currency -- "Bekomme jetzt 1 EUR"
   | Multiple Amount Contract -- Currency
   | Later Date Contract
