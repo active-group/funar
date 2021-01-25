@@ -106,3 +106,12 @@ fxSwap date amount1 currency1 amount2 currency2 =
 
 -- Bedeutung / Semantik
 -- denotationelle Semantik: Domänenobjekt |-> mathematisches Objekt
+-- operationelle Semantik:  beschreibt das Verhalten
+
+data Direction = Long | Short
+
+data Payment = Payment Direction Amount Currency Date  
+
+-- es kommt raus: Zahlungen bis zu dem Datum, Residualvertrag
+
+contractPayments :: Contract -> Date -> ([Payment], Contract)
