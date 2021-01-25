@@ -109,9 +109,41 @@ fxSwap date amount1 currency1 amount2 currency2 =
 -- operationelle Semantik:  beschreibt das Verhalten
 
 data Direction = Long | Short
+  deriving Show
 
 data Payment = Payment Direction Amount Currency Date  
+  deriving Show
+
+scalePayment :: Amount -> (Payment -> Payment)
+scalePayment factor (Payment direction amount currency date) =
+    Payment direction (factor * amount) currency date
+
+r :: Direction -> Direction
+r Short = Long
+r Long = Short
+
+reversePayment (Payment direction amount currency date) =
+    let r Short = Long
+        r Long = Short
+    in Payment (r direction) amount currency date
 
 -- es kommt raus: Zahlungen bis zu dem Datum, Residualvertrag
 
 contractPayments :: Contract -> Date -> ([Payment], Contract)
+contractPayments Zero now = ([], Zero)
+contractPayments (One currency) now = ([Payment Long 1 currency now], Zero)
+contractPayments (Multiple amount contract) now =
+    let (payments, residualContract) = contractPayments contract now
+    in (map (scalePayment amount) payments, 
+        Multiple amount residualContract)
+contractPayments (Pay contract) now =
+    let (payments, residualContract) = contractPayments contract now
+    in (map reversePayment payments, Pay residualContract)
+contractPayments (Later date contract) now =
+    if date >= now
+    then contractPayments contract now
+    else ([], contract)
+contractPayments (Two contract1 contract2) now =
+    let (payments1, residualContract1) = contractPayments contract1 now
+        (payments2, residualContract2) = contractPayments contract2 now
+    in (payments1 ++ payments2, Two residualContract1 residualContract2)
