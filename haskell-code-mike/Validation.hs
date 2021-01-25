@@ -61,6 +61,7 @@ instance Functor (Validation error) where
 
 -- nur E-Mail!
 data Person' = Person' String
+  deriving Show
 
 validatePerson' :: String -> Validation String Person'
 validatePerson' email = fmap Person' (validateEmail email)
