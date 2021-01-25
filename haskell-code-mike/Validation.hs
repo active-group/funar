@@ -55,7 +55,8 @@ class Functor (f :: Type -> Type) where
 
 -- akzeptiert noch Typvariable result
 instance Functor (Validation error) where
-    fmap f 
+    fmap f (Success result) = undefined
+    fmap f (Failure errors) = undefined
 
 {-
 validatePerson :: String -> String -> Int -> Validation String Person
