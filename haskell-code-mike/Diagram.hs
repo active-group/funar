@@ -11,6 +11,7 @@ import Data.Semigroup
 
 -- Größe mit inbegriffen + Position
 data Prim = Square | Circle | Triangle | Smiley
+  deriving Show
 
 -- Idee: primitive Bilder übereinanderlegen
 -- oberstes Bild kommt zuletzt
