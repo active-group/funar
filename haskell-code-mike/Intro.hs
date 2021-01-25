@@ -323,7 +323,7 @@ class Semigroup t => Monoid t where
     -- combine x neutral == x
     neutral :: t
 
-class (Monoid m, Monoid n) => Monoid (m, n) where
+instance (Monoid m, Monoid n) => Monoid (m, n) where
   neutral = (neutral, neutral)
 
 instance Monoid [a] where
