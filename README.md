@@ -14,7 +14,7 @@ https://download.racket-lang.org/
 ## Hauptteil
 
 - [Docker](https://www.docker.com/) installieren
-- der Docker-VM ggf. mindestens 6DB Speicher geben
+- der Docker-VM ggf. mindestens 6GB Speicher geben
 - [Visual Studio Code](https://code.visualstudio.com/download) installieren
 - die Extension "Remote - Containers" installieren:
   Auf das Extensions-Icon links klicken, nach "Containers" suchen,
