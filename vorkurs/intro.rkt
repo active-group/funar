@@ -14,3 +14,51 @@
   (signature
    (enum "dog" "cat" "snake")))
 
+; Ist Haustier niedlich?
+(: cute? (pet -> boolean))
+
+(check-expect (cute? "dog") #t)
+(check-expect (cute? "cat") #t)
+(check-expect (cute? "snake") #f)
+
+; Gerüst
+#;(define cute?
+  (lambda (pet)
+    ...))
+
+; Schablone
+#;(define cute?
+  (lambda (pet)
+    (cond ; Verzweigung: 1 "Zeile"/Zweig pro Fall
+      ; Jeder Zweig: Bedingung Ergebnis
+      ((string=? pet "dog") ...)
+      ((string=? pet "cat") ...)
+      ((string=? pet "snake") ...)
+      )))
+
+(define cute?
+  (lambda (pet)
+    (cond ; Verzweigung: 1 "Zeile"/Zweig pro Fall
+      ; Jeder Zweig: Bedingung Ergebnis
+      ((string=? pet "dog") #t)
+      ((string=? pet "cat") #t)
+      ((string=? pet "snake") #f))))
+
+;(cute? "parakeet")
+
+; Uhrzeit besteht aus: / hat folgende Eigenschaften:
+; - Stunde
+; - Minute
+; zusammengesetzte Daten
+(define-record time ; Signatur
+  make-time ; Konstruktor, "make-" Konvention
+  (time-hour natural) ; Selektoren / "Getter-Funktion"
+  (time-minute natural))
+
+(: make-time (natural natural -> time))
+(: time-hour (time -> natural))
+(: time-minute (time -> natural))
+
+
+(define time1 (make-time 12 24)) ; 12 Uhr 24
+(define time2 (make-time 0 0)) ; Mitternacht
