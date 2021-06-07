@@ -103,7 +103,7 @@
 ; Zustand eines Gürteltiers zu einem bestimmten Zeitpunkt
 (define-record dillo
   make-dillo
-  (dillo-alive? boolean)
+  (dillo-alive? boolean) ; "code smell"
   (dillo-weight number))
 
 (: make-dillo (boolean number -> dillo))
