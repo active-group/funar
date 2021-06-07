@@ -256,6 +256,15 @@
        (* (first list)
           (list-product (rest list)))))))
 
+(define xxx
+  (lambda (neutral-element operation list)
+    (cond
+      ((empty? list) neutral-element)
+      ((cons? list)
+       (operation (first list)
+                  (xxx neutral-element operation (rest list)))))))
+
+
 ; Alle positiven Zahlen aus einer Liste extrahieren
 (: extract-positives (list-of-numbers -> list-of-numbers))
 
