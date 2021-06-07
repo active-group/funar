@@ -40,6 +40,7 @@
     (cond
       ((empty? list) acc)
       ((cons? list)
+       ; tail call, endrekursiver Aufruf
        (rev1 (rest list) (cons (first list) acc))))))
        
 
