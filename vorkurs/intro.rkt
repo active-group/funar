@@ -268,3 +268,18 @@
            (cons (first list)
                  (extract-positives (rest list)))
            (extract-positives (rest list)))))))
+
+(check-expect (extract even? list5)
+              (cons 6 (cons 2 empty)))
+(check-expect (extract positive? (cons 1 (cons -5 (cons 0 (cons 3 (cons -2 empty))))))
+              (cons 1 (cons 3 empty)))
+
+(define extract
+  (lambda (p? list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (if (p? (first list))
+           (cons (first list)
+                 (extract p? (rest list)))
+           (extract p? (rest list)))))))
