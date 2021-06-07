@@ -210,6 +210,7 @@
   (first element)
   (rest (list-of element)))
 
+(: list-of (signature -> signature))
 (define list-of
   (lambda (element)
     (signature (mixed empty-list
@@ -271,7 +272,7 @@
                  (extract-positives (rest list)))
            (extract-positives (rest list)))))))
 
-(: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
+(: extract ((%element -> boolean) (list-of %element) -> (list-of %element)))
 
 (check-expect (extract even? list5)
               (cons 6 (cons 2 empty)))
