@@ -103,12 +103,14 @@
 ; Zustand eines Gürteltiers zu einem bestimmten Zeitpunkt
 (define-record dillo
   make-dillo
+  dillo? ; Prädikat
   (dillo-alive? boolean) ; "code smell"
   (dillo-weight number)) ; auch
 
 (: make-dillo (boolean number -> dillo))
 (: dillo-alive? (dillo -> boolean))
 (: dillo-weight (dillo -> number))
+(: dillo? (any -> boolean))
 
 (define dillo1 (make-dillo #t 10)) ; Gürteltier, 10kg, lebendig
 (define dillo2 (make-dillo #f 12)) ; totes Gürteltier, 12kg
@@ -145,6 +147,7 @@
 ; - Dicke
 (define-record snake
   make-snake
+  snake?
   (snake-length number)
   (snake-thickness number))
 
