@@ -47,7 +47,7 @@
 ;(cute? "parakeet")
 
 ; Uhrzeit besteht aus: / hat folgende Eigenschaften:
-; - Stunde
+; - Stunde UND
 ; - Minute
 ; zusammengesetzte Daten
 (define-record time ; Signatur
@@ -62,3 +62,16 @@
 
 (define time1 (make-time 12 24)) ; 12 Uhr 24
 (define time2 (make-time 0 0)) ; Mitternacht
+
+; Minuten seit Mitternacht
+(: msm (time -> natural))
+
+(check-expect (msm time1) (+ (* 12 60) 24))
+(check-expect (msm time2) 0)
+
+(define msm
+  (lambda (time)
+    (+ (* 60 (time-hour time))
+       (time-minute time))))
+
+              
