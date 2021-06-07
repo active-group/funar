@@ -107,6 +107,8 @@
   (dillo-weight number)) ; auch
 
 (: make-dillo (boolean number -> dillo))
+(: dillo-alive? (dillo -> boolean))
+(: dillo-weight (dillo -> number))
 
 (define dillo1 (make-dillo #t 10)) ; Gürteltier, 10kg, lebendig
 (define dillo2 (make-dillo #f 12)) ; totes Gürteltier, 12kg
@@ -122,4 +124,42 @@
 (define run-over-dillo
   (lambda (dillo)
     (make-dillo #f (dillo-weight dillo))))
+
+; Gürteltier füttern
+(: feed-dillo (dillo number -> dillo))
+
+(check-expect (feed-dillo dillo1 5)
+              (make-dillo #t 15))
+(check-expect (feed-dillo dillo2 2)
+              dillo2)
+
+(define feed-dillo
+  (lambda (d amount)
+    (make-dillo (dillo-alive? d)
+                (if (dillo-alive? d) ; Bedingung
+                    (+ (dillo-weight d) amount) ; Konsequente 
+                    (dillo-weight d))))) ; Alternative
+
+; Eine Klapperschlange hat folgende Eigenschaften:
+; - Länge
+; - Dicke
+(define-record snake
+  make-snake
+  (snake-length number)
+  (snake-thickness number))
+
+(define snake1 (make-snake 300 10)) ; 300cm lang, 10cm dick
+(define snake2 (make-snake 200 5)) ; 2m lang, 5cm dick
+
+; Klapperschlange überfahren
+(: run-over-snake (snake -> snake))
+
+(check-expect (run-over-snake snake1)
+              (make-snake 300 0))
+
+(define run-over-snake
+  (lambda (snake)
+    (make-snake (snake-length snake) 0)))
+    
+    
 
