@@ -184,8 +184,8 @@
 (define run-over-animal
   (lambda (animal)
     (cond
-      (... ...)
-      (... ...))))
+      ((dillo? animal) (run-over-dillo animal))
+      ((snake? animal) (run-over-snake animal)))))
 
     
 
