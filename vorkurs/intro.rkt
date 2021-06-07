@@ -215,4 +215,8 @@
                     cons-list)))
 
 
+(define list1 (cons 7 empty)) ; 1elementige Liste: 7
+(define list2 (cons 7 (cons 5 empty))) ; 2elementige Liste: 7 5
+(define list3 (cons 2 (cons 7 (cons 5 empty)))) ; 3elementige Liste: 2 7 5
+(define list4 (cons 3 list3)) ; 4elementige Liste: 3 2 7 5
 
