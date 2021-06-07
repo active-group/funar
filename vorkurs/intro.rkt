@@ -256,13 +256,18 @@
        (* (first list)
           (list-product (rest list)))))))
 
-(define xxx
+
+
+(check-expect (list-fold 0 + list3) 14)
+(check-expect (list-fold 1 * list3) 70)
+
+(define list-fold
   (lambda (neutral-element operation list)
     (cond
       ((empty? list) neutral-element)
       ((cons? list)
        (operation (first list)
-                  (xxx neutral-element operation (rest list)))))))
+                  (list-fold neutral-element operation (rest list)))))))
 
 
 ; Alle positiven Zahlen aus einer Liste extrahieren
