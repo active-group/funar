@@ -160,6 +160,22 @@
 (define run-over-snake
   (lambda (snake)
     (make-snake (snake-length snake) 0)))
-    
+
+
+; Ein Tier ist eins der folgenden:
+; - Gürteltier
+; - Klapperschlange
+; Fallunterscheidung, jeder Fall hat eine eigene Signatur
+; gemischte Daten
+(define animal
+  (signature (mixed dillo snake)))
+
+; Tier überfahren
+(: run-over-animal (animal -> animal))
+
+(check-expect (run-over-animal dillo1)
+              (run-over-dillo dillo1))
+(check-expect (run-over-animal snake1)
+              (run-over-snake snake1))
     
 
