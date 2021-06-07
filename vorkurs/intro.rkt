@@ -275,6 +275,8 @@
               (cons 6 (cons 2 empty)))
 (check-expect (extract positive? (cons 1 (cons -5 (cons 0 (cons 3 (cons -2 empty))))))
               (cons 1 (cons 3 empty)))
+(check-expect (extract dillo-alive? (cons dillo1 (cons dillo2 empty)))
+              (cons dillo1 empty))
 
 (define extract
   (lambda (p? list)
