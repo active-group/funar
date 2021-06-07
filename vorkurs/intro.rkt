@@ -252,3 +252,19 @@
       ((cons? list)
        (* (first list)
           (list-product (rest list)))))))
+
+; Alle positiven Zahlen aus einer Liste extrahieren
+(: extract-positives (list-of-numbers -> list-of-numbers))
+
+(check-expect (extract-positives (cons 1 (cons -5 (cons 0 (cons 3 (cons -2 empty))))))
+              (cons 1 (cons 3 empty)))
+
+(define extract-positives
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (if (positive? (first list))
+           (cons (first list)
+                 (extract-positives (rest list)))
+           (extract-positives (rest list)))))))
