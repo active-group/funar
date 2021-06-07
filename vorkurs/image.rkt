@@ -12,3 +12,4 @@
 (define rect1 (rectangle 100 50 "outline" "blue"))
 (define square1 (square 100 "solid" "gold"))
 (define star1 (star 50 "solid" "green"))
+(define overlay1 (overlay star1 circle1))
