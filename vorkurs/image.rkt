@@ -14,11 +14,11 @@
 (define star1 (star 50 "solid" "green"))
 (define overlay1 (overlay star1 circle1))
 
-(above
+#;(above
  (beside circle1 square1)
  (beside square1 circle1))
 
-(above
+#;(above
  (beside square1 star1)
  (beside star1 square1))
 
@@ -26,6 +26,8 @@
 ; 1. ein letztes Mal kopieren
 ; 2. neue Namen für die Unterschiede
 ; 3. Namen in ein lambda übernehmen
+; 4. den alten Code löschen
+
 ; Thema verfehlt:
 ;(define image1 square1)
 ;(define image2 star1)
