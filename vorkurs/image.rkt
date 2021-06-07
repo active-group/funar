@@ -25,6 +25,13 @@
 ; Abstraktion
 ; 1. ein letztes Mal kopieren
 ; 2. neue Namen für die Unterschiede
-(above
- (beside image1 image2)
- (beside image2 image1))
+; 3. Namen in ein lambda übernehmen
+; Thema verfehlt:
+;(define image1 square1)
+;(define image2 star1)
+
+(define tile
+  (lambda (image1 image2)
+    (above
+     (beside image1 image2)
+     (beside image2 image1))))
