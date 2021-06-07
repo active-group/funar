@@ -263,12 +263,12 @@
 (check-expect (list-fold 1 * list3) 70)
 
 (define list-fold
-  (lambda (neutral-element operation list)
+  (lambda (for-empty for-cons list)
     (cond
-      ((empty? list) neutral-element)
+      ((empty? list) for-empty)
       ((cons? list)
-       (operation (first list)
-                  (list-fold neutral-element operation (rest list)))))))
+       (for-cons (first list)
+                  (list-fold for-empty for-cons (rest list)))))))
 
 
 ; Alle positiven Zahlen aus einer Liste extrahieren
