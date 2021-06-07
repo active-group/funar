@@ -187,5 +187,32 @@
       ((dillo? animal) (run-over-dillo animal))
       ((snake? animal) (run-over-snake animal)))))
 
-    
+
+; FP: Liste hat feste Bedeutung
+; Eine Liste ist eins der folgenden:
+; - die leere Liste
+; - eine Cons-Liste bestehend aus erstem Element und Liste der restlichen Elemente
+;                                                    ^^^^^ Selbstreferenz
+
+; Eine leere Liste ist ... leer, besteht aus ... nichts
+(define-record empty-list
+  make-empty-list
+  empty?)
+
+(define empty (make-empty-list))
+
+; Eine Cons-Liste besteht aus:
+; - erstes Element
+; - Rest-Liste
+(define-record cons-list
+  cons
+  cons?
+  (first number)
+  (rest list-of-numbers))
+
+(define list-of-numbers
+  (signature (mixed empty-list
+                    cons-list)))
+
+
 
