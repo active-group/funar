@@ -21,3 +21,10 @@
 (above
  (beside square1 star1)
  (beside star1 square1))
+
+; Abstraktion
+; 1. ein letztes Mal kopieren
+; 2. neue Namen für die Unterschiede
+(above
+ (beside image1 image2)
+ (beside image2 image1))
