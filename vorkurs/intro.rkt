@@ -257,6 +257,7 @@
           (list-product (rest list)))))))
 
 
+(: list-fold (%b (%a %b -> %b) (list-of %a) -> %b))
 
 (check-expect (list-fold 0 + list3) 14)
 (check-expect (list-fold 1 * list3) 70)
@@ -286,7 +287,7 @@
                  (extract-positives (rest list)))
            (extract-positives (rest list)))))))
 
-(: extract ((%element -> boolean) (list-of %element) -> (list-of %element)))
+(: extract ((%a -> boolean) (list-of %a) -> (list-of %a)))
 
 (check-expect (extract even? list5)
               (cons 6 (cons 2 empty)))
