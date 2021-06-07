@@ -13,3 +13,11 @@
 (define square1 (square 100 "solid" "gold"))
 (define star1 (star 50 "solid" "green"))
 (define overlay1 (overlay star1 circle1))
+
+(above
+ (beside circle1 square1)
+ (beside square1 circle1))
+
+(above
+ (beside square1 star1)
+ (beside star1 square1))
