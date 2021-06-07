@@ -204,16 +204,18 @@
 ; Eine Cons-Liste besteht aus:
 ; - erstes Element
 ; - Rest-Liste
-(define-record cons-list
+(define-record (cons-list-of element)
   cons
   cons?
-  (first number)
-  (rest list-of-numbers))
+  (first element)
+  (rest (list-of element)))
 
-(define list-of-numbers
-  (signature (mixed empty-list
-                    cons-list)))
+(define list-of
+  (lambda (element)
+    (signature (mixed empty-list
+                      (cons-list-of element)))))
 
+(define list-of-numbers (signature (list-of number)))
 
 (define list1 (cons 7 empty)) ; 1elementige Liste: 7
 (define list2 (cons 7 (cons 5 empty))) ; 2elementige Liste: 7 5
