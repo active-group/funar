@@ -269,6 +269,8 @@
                  (extract-positives (rest list)))
            (extract-positives (rest list)))))))
 
+(: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
+
 (check-expect (extract even? list5)
               (cons 6 (cons 2 empty)))
 (check-expect (extract positive? (cons 1 (cons -5 (cons 0 (cons 3 (cons -2 empty))))))
