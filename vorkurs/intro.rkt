@@ -104,7 +104,7 @@
 (define-record dillo
   make-dillo
   (dillo-alive? boolean) ; "code smell"
-  (dillo-weight number))
+  (dillo-weight number)) ; auch
 
 (: make-dillo (boolean number -> dillo))
 
