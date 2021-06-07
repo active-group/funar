@@ -234,3 +234,21 @@
        (+ (first list)
           (list-sum (rest list)))))))
 
+; Neutrales Element der Addition
+; für alle x: x + n = n + x = x
+
+; Neutrales Element der Multiplikation
+; für alle x: x * n = n * x = x
+
+; Produkt einer Liste von Zahlen berechnen
+(: list-product (list-of-numbers -> number))
+
+(check-expect (list-product list3) 70)
+
+(define list-product
+  (lambda (list)
+    (cond
+      ((empty? list) 1)
+      ((cons? list)
+       (* (first list)
+          (list-product (rest list)))))))
