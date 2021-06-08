@@ -48,6 +48,7 @@ data Liveness = Dead | Alive
 -- Typsynonym
 type Weight = Double
 
+{-
 -- 2 Dinge, die Dillo heißen: Typ, Konstruktor
 data Dillo = Dillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
   deriving Show
@@ -60,14 +61,29 @@ dillo2 = Dillo Dead 12 -- totes Gürteltier, 12kg
 -- Gürteltier überfahren
 runOverDillo :: Dillo -> Dillo
 -- runOverDillo dillo = Dillo { dilloLiveness = Dead, dilloWeight = dilloWeight dillo }
-runOverDillo Dillo { dilloLiveness = l, dilloWeight = w} =
-   Dillo { dilloLiveness = Dead, dilloWeight = w}
+-- runOverDillo Dillo { dilloLiveness = l, dilloWeight = w} =
+ --  Dillo { dilloLiveness = Dead, dilloWeight = w}
 -- runOverDillo (Dillo {dilloLiveness = _, dilloWeight = w}) =
 --  Dillo {dilloLiveness = Dead, dilloWeight = w}
 -- runOverDillo (Dillo {dilloWeight = w}) =
 --  Dillo {dilloLiveness = Dead, dilloWeight = w}
 -- runOverDillo (Dillo _ w) = Dillo Dead w
 -- runOverDillo dillo = dillo { dilloLiveness = Dead } -- Kopie von dillo, mit geänderten Feldern
+runOverDillo = \ (Dillo _ w) -> Dillo Dead w
+
 
 -- Gürteltier füttern
-feedDillo amount dillo = dillo { dilloWeight = dilloWeight dillo + amount }
+feedDillo :: Weight -> (Dillo -> Dillo)
+feedDillo = \ amount -> \ dillo -> dillo { dilloWeight = dilloWeight dillo + amount }
+
+data Parrot = Parrot String Weight
+
+parrot1 = Parrot "Der Schatz ist im Silbersee!" 2 -- Piratenpapagei, 2kg
+
+-}
+
+data Animal =
+    Dillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
+  | Parrot String Weight
+
+parrot1 = Parrot "Der Schatz ist im Silbersee!" 2 -- Piratenpapagei, 2kg
