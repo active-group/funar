@@ -232,3 +232,7 @@ mapLookup key (Map ((key', value'):rest)) =
 -- a * (b * c) = (a * c) * c
 -- a and (b and c) = (a and b) and c
 -- (overlay a (overlay b c)) = (overlay (overlay a b) c)
+
+-- Zutaten: Menge/Typ, binärer Kombinator, Assoziativgesetz
+-- Halbgruppe / Semigroup
+-- Menge/Typ + Operationen + Gesetze/Gleichungen
