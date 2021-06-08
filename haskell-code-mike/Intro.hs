@@ -49,3 +49,7 @@ type Weight = Double
 
 -- 2 Dinge, die Dillo heißen: Typ, Konstruktor
 data Dillo = Dillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
+
+dillo1 :: Dillo
+dillo1 = Dillo { dilloLiveness = Alive, dilloWeight = 10 } -- lebendiges Gürteltier, 10kg
+dillo2 = Dillo Dead 12 -- totes Gürteltier, 12kg
