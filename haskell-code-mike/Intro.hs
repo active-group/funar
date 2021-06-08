@@ -177,3 +177,8 @@ listFold :: b -> (a -> b -> b) -> [a] -> b
 listFold forEmpty forCons [] = forEmpty
 listFold forEmpty forCons (a:as) = 
    forCons a (listFold forEmpty forCons as)
+
+-- Dictionary / Key-/Value-Store
+data Map key value = Map [(key, value)]
+
+map1 = Map [("Mike", "Sperber"), ("Micha", "Riedlinger)"]
