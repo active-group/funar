@@ -170,4 +170,4 @@ listSum (first:rest) =
 listMap :: (a -> b) -> [a] -> [b]
 listMap f [] = []
 listMap f (x:xs) =
-    (f x) : (listMap f xs)
+    (f x) : (listMap f xs)  
