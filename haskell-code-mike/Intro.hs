@@ -186,3 +186,5 @@ map1 = Map [("Mike", "Sperber"), ("Micha", "Riedlinger")]
 
 map2 :: Map Pet String
 map2 = Map [(Dog, "Dog"), (Cat, "Cat"), (Snake, "Snake")]
+
+mapLookup :: key -> Map key value -> value
