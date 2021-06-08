@@ -140,3 +140,11 @@ entschönfinkeln f (a, b) = f a b
 -- curry
 schönfinkeln :: ((a, b) -> c) -> (a -> b -> c)
 schönfinkeln f a b = f (a, b)
+
+-- o / Funktionskomposition
+o :: (b -> c) -> (a -> b) -> (a -> c)
+-- o f g = \ a -> f (g a)
+o f g a = f (g a)
+
+-- eingebaut: .
+-- (f . g) a = f (g a)
