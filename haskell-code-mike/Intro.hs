@@ -121,9 +121,15 @@ feedAnimal5 = feedAnimal 5
 
 -- Tupel, Ad-hoc-zusammengesetzte Daten
 feedAnimal' :: (Weight, Animal) -> Animal
+{-
 feedAnimal' (amount, Dillo liveness weight) =
   case liveness of
     Alive -> Dillo Alive (weight + amount)
     Dead -> Dillo Dead weight
 feedAnimal' (amount, Parrot sentence weight) = Parrot sentence (weight + amount)
+-}
+feedAnimal' (amount, animal) = feedAnimal amount animal
 
+-- f' (amount, animal) = f amount animal
+
+tuplify f (amount, animal) = f amount animal
