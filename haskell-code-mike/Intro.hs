@@ -54,7 +54,7 @@ isCute Snake = False
 -- - tot oder lebendig
 -- - Gewicht
 data Liveness = Dead | Alive 
-  deriving Show
+  deriving (Show, Eq)
 
 -- Typsynonym
 type Weight = Double
