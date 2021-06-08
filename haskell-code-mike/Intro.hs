@@ -273,3 +273,5 @@ instance Monoid [e] where
 instance (Semigroup a, Semigroup b) => Semigroup (a, b) where
     combine (a1, b1) (a2, b2) = (a1 `combine` a2, b1 `combine` b2)
 
+instance Semigroup (Map key value) where
+    
