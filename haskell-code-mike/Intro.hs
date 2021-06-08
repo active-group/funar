@@ -161,3 +161,6 @@ list1' = Cons 4 (Cons 7 (Cons 3 Empty))
 
 -- leere Liste: []
 -- Cons: :
+
+listSum :: [Integer] -> Integer 
+listSum [] = undefined 
