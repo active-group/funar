@@ -252,3 +252,6 @@ instance Semigroup [e] where
 
 instance Monoid [e] where
     neutral = []
+
+instance (Semigroup a, Semigroup b) => Semigroup (a, b) where
+    combine (a1, b1) (a2, b2) = (a1 `combine` a2, b1 `combine` b2)
