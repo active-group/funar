@@ -59,4 +59,15 @@ dillo2 = Dillo Dead 12 -- totes Gürteltier, 12kg
 
 -- Gürteltier überfahren
 runOverDillo :: Dillo -> Dillo
-runOverDillo dillo = Dillo { dilloLiveness = Dead, dilloWeight = dilloWeight dillo }
+-- runOverDillo dillo = Dillo { dilloLiveness = Dead, dilloWeight = dilloWeight dillo }
+runOverDillo Dillo { dilloLiveness = l, dilloWeight = w} =
+   Dillo { dilloLiveness = Dead, dilloWeight = w}
+-- runOverDillo (Dillo {dilloLiveness = _, dilloWeight = w}) =
+--  Dillo {dilloLiveness = Dead, dilloWeight = w}
+-- runOverDillo (Dillo {dilloWeight = w}) =
+--  Dillo {dilloLiveness = Dead, dilloWeight = w}
+-- runOverDillo (Dillo _ w) = Dillo Dead w
+-- runOverDillo dillo = dillo { dilloLiveness = Dead } -- Kopie von dillo, mit geänderten Feldern
+
+-- Gürteltier füttern
+feedDillo amount dillo = dillo { dilloWeight = dilloWeight dillo + amount }
