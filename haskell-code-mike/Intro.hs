@@ -189,6 +189,7 @@ map2 = Map [(Dog, "Dog"), (Cat, "Cat"), (Snake, "Snake")]
 
 data Optional a =
     Absent | Present a
+    deriving Show
 
 -- Eq key: Constraint
 -- bedeutet: Werte des Typs keys sind vergleichbar mit ==
