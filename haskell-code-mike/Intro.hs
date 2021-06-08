@@ -164,3 +164,5 @@ list1' = Cons 4 (Cons 7 (Cons 3 Empty))
 
 listSum :: [Integer] -> Integer 
 listSum [] = undefined 
+listSum (first:rest) = 
+    first + (listSum rest)
