@@ -33,7 +33,11 @@ z = x * y
 data Pet = Dog | Cat | Snake
   deriving Show -- damit die Werte in der REPL angezeigt werden
 
-instance Eq Pet 
+instance Eq Pet where
+    (==) Dog Dog = True 
+    (==) Cat Cat = True 
+    (==) Snake Snake = True 
+    (==) _ _ = False
 
 -- Ist ein Haustier niedlich?
 isCute :: Pet -> Bool 
