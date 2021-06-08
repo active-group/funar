@@ -226,3 +226,9 @@ mapLookup key (Map ((key', value'):rest)) =
 -- (: and (boolean boolean -> boolean))
 -- (: overlay (image image -> image))
 -- binärer Kombinator
+
+-- Assoziativität
+-- a + (b + c) = (a + b) + c
+-- a * (b * c) = (a * c) * c
+-- a and (b and c) = (a and b) and c
+-- (overlay a (overlay b c)) = (overlay (overlay a b) c)
