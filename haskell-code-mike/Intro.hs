@@ -209,6 +209,8 @@ data Optional a =
 optionalMap :: (a -> b) -> Optional a -> Optional b
 optionalMap f Absent = Absent
 optionalMap f (Present a) = Present (f a)
+
+
 -- Eq key: Constraint
 -- Eq : Typklasse
 -- bedeutet: Werte des Typs keys sind vergleichbar mit ==
