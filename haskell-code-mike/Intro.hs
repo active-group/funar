@@ -35,6 +35,7 @@ data Pet = Dog | Cat | Snake
 
 -- Ist ein Haustier niedlich?
 isCute :: Pet -> Bool 
-isCute Dog = True
-isCute Cat = True 
+isCute Dog   = True
+isCute Cat   = True 
 isCute Snake = False
+
