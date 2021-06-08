@@ -221,3 +221,8 @@ mapLookup key (Map ((key', value'):rest)) =
     then Present value'
     else mapLookup key (Map rest)
     
+-- (: + (number number -> number))
+-- (: * (number number -> number))
+-- (: and (boolean boolean -> boolean))
+-- (: overlay (image image -> image))
+-- binärer Kombinator
