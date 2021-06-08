@@ -220,6 +220,14 @@ optionalMap :: (a -> b) -> Optional a -> Optional b
 optionalMap f Absent = Absent
 optionalMap f (Present a) = Present (f a)
 
+class Functor f where
+  universalMap :: (a -> b) -> f a -> f b
+
+instance Functor Optional where
+    universalMap = optionalMap
+
+instance Functor [] where
+    universalMap = listMap
 
 -- Eq key: Constraint
 -- Eq : Typklasse
