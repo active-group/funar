@@ -148,3 +148,16 @@ o f g a = f (g a)
 
 -- eingebaut: .
 -- (f . g) a = f (g a)
+
+-- Eine Liste ist eins der folgenden:
+-- - leere Liste
+-- - Cons-Liste bestehend aus erstem Element und Rest-Liste
+data ListOf element =
+    Empty
+  | Cons element (ListOf element)
+
+list1' :: ListOf Integer
+list1' = Cons 4 (Cons 7 (Cons 3 Empty))
+
+-- leere Liste: []
+-- Cons: :
