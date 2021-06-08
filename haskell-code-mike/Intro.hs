@@ -12,7 +12,9 @@ Haskell 2010 + viele Erweiterungen
 
 -}
 
+x :: Integer
 x = 10
+y :: Integer
 y = x + 11
-
+z :: Integer
 z = x * y
