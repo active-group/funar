@@ -1,5 +1,6 @@
 module Intro where
 
+import Prelude hiding (Semigroup, Monoid, Functor)
 {-
 Haskell: späte 80er Jahre
 getypt, lazy evaluation
