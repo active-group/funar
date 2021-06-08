@@ -99,5 +99,5 @@ parrot1 = Parrot "Der Schatz ist im Silbersee!" 2 -- Piratenpapagei, 2kg
 
 -- Tier überfahren
 runOverAnimal :: Animal -> Animal
-runOverAnimal (Dillo _ w) = Dillo Dead w 
-runOverAnimal (Parrot )
+runOverAnimal (Dillo _ weight) = Dillo Dead weight
+runOverAnimal (Parrot _ weight) = Parrot "" weight
