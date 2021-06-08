@@ -11,3 +11,6 @@ inzwischen gibt es nur ghc "Glasgow Haskell Compiler"
 Haskell 2010 + viele Erweiterungen
 
 -}
+
+x = 10
+y = x + 11
