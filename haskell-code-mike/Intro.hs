@@ -187,4 +187,15 @@ map1 = Map [("Mike", "Sperber"), ("Micha", "Riedlinger")]
 map2 :: Map Pet String
 map2 = Map [(Dog, "Dog"), (Cat, "Cat"), (Snake, "Snake")]
 
-mapLookup :: key -> Map key value -> value
+data Optional a =
+    Absent | Present a
+
+-- Eq key: Constraint
+-- bedeutet: Werte des Typs keys sind vergleichbar mit ==
+mapLookup :: Eq key => key -> Map key value -> Optional value
+mapLookup key (Map []) = Absent 
+mapLookup key (Map ((key', value'):rest)) = 
+    if key == key'
+    then Present value'
+    else mapLookup key (Map rest)
+    
