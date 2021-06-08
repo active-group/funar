@@ -207,6 +207,15 @@ data Optional a =
     Absent | Present a
     deriving Show
 
+instance Semigroup a => Semigroup (Optional a) where
+    combine Absent Absent = Absent 
+    combine (Present a) Absent = Present a 
+    combine Absent (Present b) = Present b 
+    combine (Present a1) (Present a2) = Present (a1 `combine` a2)
+
+instance Semigroup a => Monoid (Optional a) where
+    neutral = Absent
+
 optionalMap :: (a -> b) -> Optional a -> Optional b
 optionalMap f Absent = Absent
 optionalMap f (Present a) = Present (f a)
@@ -255,3 +264,4 @@ instance Monoid [e] where
 
 instance (Semigroup a, Semigroup b) => Semigroup (a, b) where
     combine (a1, b1) (a2, b2) = (a1 `combine` a2, b1 `combine` b2)
+
