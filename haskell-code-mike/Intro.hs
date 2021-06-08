@@ -103,7 +103,7 @@ runOverAnimal (Dillo _ weight) = Dillo Dead weight
 runOverAnimal (Parrot _ weight) = Parrot "" weight 
 
 -- Tier füttern
-feedAnimal :: Weight -> Animal -> Animal
+feedAnimal :: Weight -> (Animal -> Animal)
 -- feedAnimal amount (Dillo Alive weight) = Dillo Alive (weight + amount)
 -- feedAnimal amount (Dillo Dead weight) = Dillo Dead weight
 feedAnimal amount (Dillo liveness weight) =
@@ -111,3 +111,6 @@ feedAnimal amount (Dillo liveness weight) =
         Alive -> Dillo Alive (weight + amount)
         Dead -> Dillo Dead weight
 feedAnimal amount (Parrot sentence weight) = Parrot sentence (weight + amount)
+
+feedAnimal5 :: Animal -> Animal
+feedAnimal5 = feedAnimal 5
