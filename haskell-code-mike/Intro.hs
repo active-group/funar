@@ -192,6 +192,7 @@ data Optional a =
     deriving Show
 
 -- Eq key: Constraint
+-- Eq : Typklasse
 -- bedeutet: Werte des Typs keys sind vergleichbar mit ==
 mapLookup :: Eq key => key -> Map key value -> Optional value
 mapLookup key (Map []) = Absent 
