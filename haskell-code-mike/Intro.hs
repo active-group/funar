@@ -33,6 +33,11 @@ z = x * y
 data Pet = Dog | Cat | Snake
   deriving Show -- damit die Werte in der REPL angezeigt werden
 
+{-
+class Eq a where
+    (==) :: a -> a -> Bool
+-}
+
 instance Eq Pet where
     (==) Dog Dog = True 
     (==) Cat Cat = True 
