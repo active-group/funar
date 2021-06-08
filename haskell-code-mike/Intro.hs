@@ -163,12 +163,14 @@ o f g a = f (g a)
 -- Eine Liste ist eins der folgenden:
 -- - leere Liste
 -- - Cons-Liste bestehend aus erstem Element und Rest-Liste
+{-
 data ListOf element =
     Empty
   | Cons element (ListOf element)
+-}
 
-list1' :: ListOf Integer
-list1' = Cons 4 (Cons 7 (Cons 3 Empty))
+-- list1' :: ListOf Integer
+-- list1' = Cons 4 (Cons 7 (Cons 3 Empty))
 
 -- leere Liste: []
 -- Cons: :
@@ -178,7 +180,9 @@ listSum [] = 0
 listSum (first:rest) = 
     first + (listSum rest)
 
-listMap :: (a -> b) -> [a] -> [b]
+type ListOf a = [a]
+
+listMap :: (a -> b) -> ListOf a -> ListOf b
 listMap f [] = []
 listMap f (x:xs) =
     (f x) : (listMap f xs)  
