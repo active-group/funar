@@ -96,3 +96,6 @@ dillo2 = Dillo Dead 12 -- totes Gürteltier, 12kg
 
 parrot1 :: Animal
 parrot1 = Parrot "Der Schatz ist im Silbersee!" 2 -- Piratenpapagei, 2kg
+
+-- Tier überfahren
+runOverAnimal :: Animal -> Animal
