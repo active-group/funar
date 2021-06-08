@@ -31,6 +31,6 @@ z = x * y
 -- Pet: Typ
 -- Dog, Cat, Snake: Konstuktoren / Fälle / Klassen
 data Pet = Dog | Cat | Snake
---  deriving Show -- damit die Werte in der REPL angezeigt werden
+deriving Show -- damit die Werte in der REPL angezeigt werden
 
 -- Ist ein Haustier niedlich?
