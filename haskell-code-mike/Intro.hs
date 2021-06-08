@@ -44,3 +44,8 @@ isCute Snake = False
 -- - Gewicht
 data Liveness = Dead | Alive 
 
+-- Typsynonym
+type Weight = Double
+
+-- 2 Dinge, die Dillo heißen: Typ, Konstruktor
+data Dillo = Dillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
