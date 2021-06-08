@@ -82,8 +82,17 @@ parrot1 = Parrot "Der Schatz ist im Silbersee!" 2 -- Piratenpapagei, 2kg
 
 -}
 
+-- algebraischer Datentyp
 data Animal =
     Dillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
   | Parrot String Weight
+  deriving Show
 
+dillo1 :: Animal
+dillo1 = Dillo {dilloLiveness = Alive, dilloWeight = 10} -- lebendiges Gürteltier, 10kg
+
+dillo2 :: Animal
+dillo2 = Dillo Dead 12 -- totes Gürteltier, 12kg
+
+parrot1 :: Animal
 parrot1 = Parrot "Der Schatz ist im Silbersee!" 2 -- Piratenpapagei, 2kg
