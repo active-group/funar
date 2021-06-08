@@ -132,4 +132,5 @@ feedAnimal' (amount, animal) = feedAnimal amount animal
 
 -- f' (amount, animal) = f amount animal
 
+tuplify :: (a -> b -> c) -> (a, b) -> c
 tuplify f (amount, animal) = f amount animal
