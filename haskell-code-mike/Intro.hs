@@ -131,9 +131,12 @@ feedAnimal' (amount, Parrot sentence weight) = Parrot sentence (weight + amount)
 feedAnimal' (amount, animal) = feedAnimal amount animal
 
 -- f' (amount, animal) = f amount animal
+-- Haskell Curry
+-- Moses Schönfinkel
+-- uncurry
+entschönfinkeln :: (a -> b -> c) -> ((a, b) -> c)
+entschönfinkeln f (a, b) = f a b
 
-tuplify :: (a -> b -> c) -> ((a, b) -> c)
-tuplify f (a, b) = f a b
-
-detuplify :: ((a, b) -> c) -> (a -> b -> c)
-detuplify f a b = f (a, b)
+-- curry
+schönfinkeln :: ((a, b) -> c) -> (a -> b -> c)
+schönfinkeln f a b = f (a, b)
