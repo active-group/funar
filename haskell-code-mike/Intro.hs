@@ -237,3 +237,18 @@ mapLookup key (Map ((key', value'):rest)) =
 -- Zutaten: Menge/Typ, binärer Kombinator, Assoziativgesetz
 -- Halbgruppe / Semigroup
 -- Menge/Typ + Operationen + Gesetze/Gleichungen
+
+class Semigroup a where
+    -- a `combine` (b `combine` c) == (a `combine` b) `combine` c
+    combine :: a -> a -> a
+
+-- Monoid: Halbgruppe + neutrales Element
+class Semigroup a => Monoid a where
+    -- neutral `combine` a == a `combine` neutral == a
+    neutral :: a
+
+instance Semigroup [e] where
+    combine list1 list2 = list1 ++ list2
+
+instance Monoid [e] where
+    neutral = []
