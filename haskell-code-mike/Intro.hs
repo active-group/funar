@@ -14,3 +14,5 @@ Haskell 2010 + viele Erweiterungen
 
 x = 10
 y = x + 11
+
+z = x * y
