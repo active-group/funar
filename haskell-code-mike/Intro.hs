@@ -29,6 +29,6 @@ z = x * y
 
 -- data: eigener, neuer Datentyp
 data Pet = Dog | Cat | Snake
-  deriving Show
+  deriving Show -- damit die Werte in der REPL angezeigt werden
 
 -- Ist ein Haustier niedlich?
