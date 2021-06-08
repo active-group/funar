@@ -86,6 +86,10 @@ parrot1 = Parrot "Der Schatz ist im Silbersee!" 2 -- Piratenpapagei, 2kg
 data Animal =
     Dillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
   | Parrot String Weight
+--  | SpecificParrot Parrot
+  deriving Show
+
+data Parrot = Ara | NorwegianBlue -- ...
   deriving Show
 
 dillo1 :: Animal
@@ -122,3 +126,4 @@ feedAnimal' (amount, Dillo liveness weight) =
     Alive -> Dillo Alive (weight + amount)
     Dead -> Dillo Dead weight
 feedAnimal' (amount, Parrot sentence weight) = Parrot sentence (weight + amount)
+
