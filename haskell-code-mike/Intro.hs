@@ -115,6 +115,7 @@ feedAnimal amount (Parrot sentence weight) = Parrot sentence (weight + amount)
 feedAnimal5 :: Animal -> Animal
 feedAnimal5 = feedAnimal 5
 
+-- Tupel, Ad-hoc-zusammengesetzte Daten
 feedAnimal' :: (Weight, Animal) -> Animal
 feedAnimal' (amount, Dillo liveness weight) =
   case liveness of
