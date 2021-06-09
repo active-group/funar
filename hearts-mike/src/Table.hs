@@ -166,6 +166,8 @@ tableProcessEvent (TrickTaken player trick) state =
 tableProcessEvent (IllegalCardPlayed player card) state = state
 tableProcessEvent (GameEnded player) state = state
 
-tableProcessCommand :: GameCommand -> TableState -> [GameEvent]
-tableProcessCommand command state = 
+entschönfinkeln = uncurry
 
+tableProcessCommand :: GameCommand -> TableState -> [GameEvent]
+tableProcessCommand (DealHands playerHands) tableState =
+  map (entschönfinkeln HandDealt) (Map.toList playerHands)
