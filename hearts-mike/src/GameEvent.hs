@@ -11,6 +11,6 @@ data Event =
 --  | CardsDealt Hand Player
   | IllegalCardPlayed Player Card
   | GameEnded Player Int
-  | CardsShuffled 
-
+  | CardsShuffled [Card]
+  
 -- data Command =
