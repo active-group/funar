@@ -2,8 +2,11 @@ module GameEvent where
 
 import Cards
 
+{-
 data Event = 
-    CardPlayed Player Card 
+    CardsShuffled [Card]
+  | CardPlayed Player Card 
+  -- alles andere redundant:
   | PlayerTookCards Player [Card]
   | RoundOver       Player [Card] -- redundant zu PlayerTookCards
   | CardsDealt [(Hand, Player)]
@@ -11,6 +14,13 @@ data Event =
 --  | CardsDealt Hand Player
   | IllegalCardPlayed Player Card
   | GameEnded Player Int
-  | CardsShuffled [Card]
-  
--- data Command =
+  | GameStarted [Player]
+  | PlayerTurnChanged Player
+
+data Command =
+     ShuffleCards [Card]
+   | DealCards [(Player, Card)]
+   | PlayCard Player Card
+
+   -}
+
