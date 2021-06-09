@@ -171,3 +171,12 @@ entschönfinkeln = uncurry
 tableProcessCommand :: GameCommand -> TableState -> [GameEvent]
 tableProcessCommand (DealHands playerHands) tableState =
   map (entschönfinkeln HandDealt) (Map.toList playerHands)
+tableProcessCommand (PlayCard player card) tableState =
+  if playValid tableState player card 
+  then 
+    let event1 = LegalCardPlayed player card
+    in
+      if turnOver tableState
+      then undefined
+      else undefined
+  else [IllegalCardPlayed player card]
