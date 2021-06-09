@@ -96,3 +96,18 @@ runDB = undefined
 
 -- Aufgabe C:
 -- State-Monade
+
+-- Typ: State state a
+-- produziert Ergebnis vom Typ a
+-- führt dabei eine Zustandsvariable vom Type state mit
+
+data State state a = Foo 
+
+write :: state -> State state ()
+
+read :: State state state
+
+runState :: state -> State state a -> a
+
+
+
