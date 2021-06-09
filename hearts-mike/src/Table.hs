@@ -175,8 +175,18 @@ tableProcessCommand (PlayCard player card) tableState =
   if playValid tableState player card 
   then 
     let event1 = LegalCardPlayed player card
+        tableState1 = tableProcessEvent event1 tableState
     in
-      if turnOver tableState
-      then undefined
-      else undefined
+      if turnOver tableState1
+      then 
+        let trick = tableStateTrick tableState1
+            trickTaker = whoTakesTrick trick
+            event2 = TrickTaken trickTaker trick
+            tableState2 = tableProcessEvent event2 tableState1
+            event3 = case gameOver tableState2 of
+                        Just winner -> GameEnded winner
+                        Nothing -> 
+      else 
+        let event2 = PlayerTurnChanged (playerAfter tableState1 player)
+        in [event1, event2]
   else [IllegalCardPlayed player card]
