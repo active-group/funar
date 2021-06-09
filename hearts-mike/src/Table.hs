@@ -140,7 +140,31 @@ addToPile playerPiles player cards =
   let playerPile = Map.findWithDefault Set.empty player playerPiles
   in Map.insert player (Set.union playerPile (Set.fromList cards)) playerPiles
 
+-- Ereignis in den Zustand einarbeiten
 tableProcessEvent :: GameEvent -> TableState -> TableState
+-- processGameEvent event state | trace ("processGameEvent " ++ show state ++ " " ++ show event) False = undefined
+tableProcessEvent (HandDealt player hand) state =
+  state
+    { tableStateHands = Map.insert player hand (tableStateHands state),
+      tableStateTrick = emptyTrick
+    }
+tableProcessEvent (PlayerTurnChanged player) state =
+  state
+    { tableStatePlayers = rotateTo player (tableStatePlayers state)
+    }
+tableProcessEvent (LegalCardPlayed player card) state =
+  state
+    { tableStateHands = takeCard (tableStateHands state) player card,
+      tableStateTrick = addToTrick player card (tableStateTrick state)
+    }
+tableProcessEvent (TrickTaken player trick) state =
+  state
+    { tableStatePiles =
+        addToPile (tableStatePiles state) player (cardsOfTrick trick),
+      tableStateTrick = emptyTrick
+    }
+tableProcessEvent (IllegalCardPlayed player card) state = state
+tableProcessEvent (GameEnded player) state = state
 
 tableProcessCommand :: GameCommand -> TableState -> [GameEvent]
 tableProcessCommand command state = undefined
