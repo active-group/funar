@@ -74,3 +74,10 @@ p1'' = do put "Mike" 50
           put "Mike" (x+1)
           y <- get "Mike"
           return ("Mike ist " ++ show x)
+
+-- maybeAdd :: Maybe Int -> Maybe Int -> Maybe Int
+maybeAdd :: (Monad m, Num b) => m b -> m b -> m b
+maybeAdd x y = 
+    do xR <- x
+       yR <- y
+       return (xR + yR)
