@@ -120,10 +120,16 @@ runState :: state -> State state a -> a
 
 -- stattdessen: freie Monade
 
-data DB' a =
-    
+--data DB' =
+--    Get' String (Integer -> Free DB')
+
+data DB' self =
+    Get' String (Integer -> self)
+  | Put' String Integer (() -> self)
 
 -- brauchen einen Selbstbezug auf Free ops a
 data Free ops a =
       Pure a -- "return"
-    | Impure 
+    | Impure (ops (Free ops a))
+
+type DB'' a = Free DB' a
