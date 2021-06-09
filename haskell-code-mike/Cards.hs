@@ -10,6 +10,8 @@ data Maybe a = Nothing | Just a
 -}
 
 {-
+data Ordering = LT | EQ | GT
+
 class Eq a => Ord a where
   compare :: a -> a -> Ordering
   (<) :: a -> a -> Bool
