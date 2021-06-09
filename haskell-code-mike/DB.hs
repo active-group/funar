@@ -45,3 +45,11 @@ get key = Get key Return -- (\value -> Return value)
 
 put :: String -> Integer -> DB ()
 put key value = Put key value Return -- (\() -> Return ())
+
+splice :: DB a -> (a -> DB b) -> DB b
+splice (Get key cont) next =
+    Get key       (\value -> splice (cont value) next) 
+splice (Put key value cont) next = 
+    Put key value (\()    -> splice (cont ())    next)
+splice (Return result) next = next result 
+
