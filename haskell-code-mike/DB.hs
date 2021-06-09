@@ -32,9 +32,16 @@ data DB a =
   | Put String Integer (() -> DB a) 
   | Return a
 
+-- Beschreibung eines DB-Programms mit Ergebnis vom Typ String
 p1 :: DB String
 p1 = Put "Mike" 50 (\() ->
      Get "Mike" (\x ->
      Put "Mike" (x + 1) (\() ->
      Get "Mike" (\y ->
      Return ("Mike ist " ++ show x)))))
+
+get :: String -> DB Integer
+get key = Get key Return -- (\value -> Return value)
+
+put :: String -> Integer -> DB ()
+put key value = Put key value Return -- (\() -> Return ())
