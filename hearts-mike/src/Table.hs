@@ -167,5 +167,5 @@ tableProcessEvent (IllegalCardPlayed player card) state = state
 tableProcessEvent (GameEnded player) state = state
 
 tableProcessCommand :: GameCommand -> TableState -> [GameEvent]
-tableProcessCommand command state = undefined
+tableProcessCommand command state = 
 
