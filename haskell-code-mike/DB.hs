@@ -82,12 +82,12 @@ maybeAdd x y =
        yR <- y
        return (xR + yR)
 
--- Aufgabe #1:
+-- Aufgabe A:
 -- instance Functor DB where 
 --   fmap ... = ...
 
--- Aufgabe #2:
+-- Aufgabe B:
 -- Interpreter für DB
 
--- Aufgabe #3:
+-- Aufgabe C:
 -- State-Monade
