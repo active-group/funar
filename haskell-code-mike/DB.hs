@@ -117,3 +117,8 @@ runState :: state -> State state a -> a
 
 -- Mehrere Effekte: historisch Monadentransformatoren
 -- IRRWEG
+
+-- stattdessen: freie Monade
+
+data Free a =
+    Return' a
