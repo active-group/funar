@@ -101,13 +101,14 @@ runDB = undefined
 -- produziert Ergebnis vom Typ a
 -- führt dabei eine Zustandsvariable vom Type state mit
 
-data State state a = Foo 
+data State state a =
 
+{-
 write :: state -> State state ()
 
 read :: State state state
 
 runState :: state -> State state a -> a
-
+-}
 
 
