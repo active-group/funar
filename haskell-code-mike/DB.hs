@@ -101,7 +101,7 @@ runDB = undefined
 -- produziert Ergebnis vom Typ a
 -- führt dabei eine Zustandsvariable vom Type state mit
 
-data State state a =
+data State state a =#
 
 {-
 write :: state -> State state ()
