@@ -127,6 +127,10 @@ data DB' self =
     Get' String (Integer -> self)
   | Put' String Integer (() -> self)
 
+data State' state self =
+    Read' (state -> self)
+  | Write' state (() -> self)
+
 -- brauchen einen Selbstbezug auf Free ops a
 data Free ops a =
       Pure a -- "return"
