@@ -1,5 +1,8 @@
 module DB where
 
+import Data.Map (Map)
+import qualified Data.Map as Map 
+
 {-
 put "Mike" 50
 x = get "Mike"
@@ -88,6 +91,8 @@ maybeAdd x y =
 
 -- Aufgabe B:
 -- Interpreter für DB
+runDB :: Map String Integer -> DB a -> a
+runDB = undefined
 
 -- Aufgabe C:
 -- State-Monade
