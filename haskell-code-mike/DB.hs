@@ -56,7 +56,7 @@ splice (Return result) next = next result
 p1' :: DB String
 p1' = put "Mike" 50 `splice` (\() ->
       get "Mike" `splice` (\x ->
-      put "Mike" `splice` (\() ->
+      put "Mike" (x+1) `splice` (\() ->
       get "Mike" `splice` (\y ->
-      Return ("Mike ist " ++ show x)
+      Return ("Mike ist " ++ show x)))))
 
