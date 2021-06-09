@@ -140,3 +140,8 @@ addToPile playerPiles player cards =
   let playerPile = Map.findWithDefault Set.empty player playerPiles
   in Map.insert player (Set.union playerPile (Set.fromList cards)) playerPiles
 
+tableProcessEvent :: GameEvent -> TableState -> TableState
+
+tableProcessCommand :: GameCommand -> TableState -> [GameEvent]
+tableProcessCommand command state = undefined
+
