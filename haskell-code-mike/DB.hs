@@ -101,7 +101,10 @@ runDB = undefined
 -- produziert Ergebnis vom Typ a
 -- führt dabei eine Zustandsvariable vom Type state mit
 
-data State state a =#
+data State state a =
+    Read (state -> State state a)
+  | Write state (() -> State state a)
+  | ReturnState a
 
 {-
 write :: state -> State state ()
@@ -112,3 +115,5 @@ runState :: state -> State state a -> a
 -}
 
 
+-- Mehrere Effekte: historisch Monadentransformatoren
+-- IRRWEG
