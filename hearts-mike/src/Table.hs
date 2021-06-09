@@ -15,7 +15,7 @@ import Debug.Trace (trace)
 
 -- wer muß den Stich einziehen?
 whoTakesTrick :: Trick -> Player
-whoTakesTrick [] = undefined
+whoTakesTrick [] = error "trick is empty"
 whoTakesTrick trick =
   let loop player _ [] = player
       loop player card ((player', card') : rest) =
