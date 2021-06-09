@@ -60,3 +60,17 @@ p1' = put "Mike" 50 `splice` (\() ->
       get "Mike" `splice` (\y ->
       Return ("Mike ist " ++ show x)))))
 
+instance Functor DB where
+
+instance Applicative DB where
+
+instance Monad DB where
+    (>>=) = splice
+    return = Return
+
+p1'' :: DB String
+p1'' = do put "Mike" 50
+          x <- get "Mike"
+          put "Mike" (x+1)
+          y <- get "Mike"
+          return ("Mike ist " ++ show x)
