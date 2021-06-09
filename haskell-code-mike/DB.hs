@@ -53,3 +53,10 @@ splice (Put key value cont) next =
     Put key value (\()    -> splice (cont ())    next)
 splice (Return result) next = next result 
 
+p1' :: DB String
+p1' = put "Mike" 50 `splice` (\() ->
+      get "Mike" `splice` (\x ->
+      put "Mike" `splice` (\() ->
+      get "Mike" `splice` (\y ->
+      Return ("Mike ist " ++ show x)
+
