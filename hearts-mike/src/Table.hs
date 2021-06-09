@@ -44,6 +44,7 @@ cardScore _ = 0
 
 -- * Spiellogik
 
+-- Karten, die Spieler eingezogen hat
 type Pile = Set Card
 
 -- eingezogene Karten, pro Spieler
