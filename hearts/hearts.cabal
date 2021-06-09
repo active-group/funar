@@ -1,0 +1,74 @@
+cabal-version:       2.4
+name:                hearts
+version:             0.1.0.0
+author:              Mike Sperber
+maintainer:          michael.sperber@active-group.de
+
+library
+  exposed-modules:     Cards
+                     , GameEvent
+--                     , Table
+--                     , EventSourcing
+--                     , HeartsJson
+--                     , Json.Decode
+--                     , Player
+--                     , Sync
+--                     , TableEventSourcing
+                     -- , Concurrency
+  other-modules:       MVar
+                     , Shuffle
+                     , Teletype
+  build-depends:       base
+                     , aeson
+                     , cond
+                     , containers
+                     , either
+                     , polysemy
+                     , polysemy-plugin
+                     , random
+                     , scientific
+                     , text
+                     , unordered-containers
+                     , vector
+  hs-source-dirs:      src
+  default-language:    Haskell2010
+
+executable server
+  main-is:             Main.hs
+  buildable:           False
+  other-modules:       Args
+                     , PlayerServer
+                     , TableServer
+  build-depends:       base
+                     , aeson
+                     , containers
+                     , hearts
+                     , mtl
+                     , optparse-applicative
+                     , polysemy
+                     , polysemy-plugin
+                     , servant
+                     , servant-options
+                     , servant-server
+                     , wai
+                     , wai-cors
+                     , warp
+  hs-source-dirs:      app
+  default-language:    Haskell2010
+
+test-suite heart-spec
+  type:                exitcode-stdio-1.0
+  buildable:           False
+  main-is:             Spec.hs
+  other-modules:       HeartsJsonSpec
+                     , Json.DecodeSpec
+  hs-source-dirs:      test
+  build-depends:       base
+                     , QuickCheck
+                     , aeson
+                     , bytestring
+                     , containers
+                     , either
+                     , hearts
+                     , hspec
+  default-language:    Haskell2010
