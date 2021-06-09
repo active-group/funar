@@ -36,7 +36,7 @@ cardBeats c1 c2 =
 
 cartesianProduct :: [a] -> [b] -> [(a, b)]
 cartesianProduct list1 list2 =
-  concat (map (\ el1 -> map (\ el2 -> (el1, el2)) list2) list1)
+  concatMap (\ el1 -> map (\ el2 -> (el1, el2)) list2) list1
 
 -- |Das ganze Kartenspiel
 deck :: [Card]
