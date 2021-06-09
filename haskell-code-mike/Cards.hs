@@ -8,3 +8,7 @@ module Cards where
 {-
 data Maybe a = Nothing | Just a
 -}
+
+{-
+class
+-}
