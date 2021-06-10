@@ -95,3 +95,6 @@ meaning (Add contract1 contract2) now =
         (payments2, residualContract2) = meaning contract2 now
     in (payments1 ++ payments2, Add residualContract1 residualContract2)
 
+multiple :: Amount -> Contract -> Contract
+multiple amount Empty = Empty
+multiple amount contract = Multiple amount contract
