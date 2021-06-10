@@ -8,3 +8,7 @@
 {-# OPTIONS_GHC -fplugin=Polysemy.Plugin #-}
 
 module Effects where
+
+import Polysemy
+import Polysemy.Internal (send)
+
