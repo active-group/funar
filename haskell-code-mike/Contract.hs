@@ -61,8 +61,18 @@ c1 = Add zcb1 zcb2
 
 -- Welche Zahlungen in welcher Währung wann?
 
-data Payment = Payment Amount Currency Date
+data Direction = Long | Short
   deriving Show
 
+data Payment = Payment Direction Amount Currency Date
+  deriving Show
+
+scalePayment :: Amount -> Payment -> Payment
+scalePayment factor (Payment direction amount currency)
+
 meaning :: Contract -> Date -> ([Payment], Contract)
- 
+meaning Zero now = ([], Zero)
+meaning (One currency) now = ([Payment Long 1 currency now], Zero)
+meaning (Multiple amount contract) now =
+    let (payments, residualContract) = meaning contract now
+    in 
