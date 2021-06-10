@@ -72,10 +72,16 @@ scalePayment factor (Payment direction amount currency date) =
     Payment direction (factor * amount) currency date
 
 reverseDirection Long = Short 
+reverseDirection Short = Long
 
+reversePayment (Payment direction amount currency date) =
+    Payment (reverseDirection direction) amount currency date
 meaning :: Contract -> Date -> ([Payment], Contract)
 meaning Empty now = ([], Empty)
 meaning (One currency) now = ([Payment Long 1 currency now], Empty)
 meaning (Multiple amount contract) now =
     let (payments, residualContract) = meaning contract now
     in (map (scalePayment amount) payments, Multiple amount residualContract)
+meaning (Later date contract) now =
+    if date >= now
+    then meaning 
