@@ -14,4 +14,4 @@ import Polysemy.Internal (send)
 
 -- GADTs: Generalized Algebraic Datatypes
 
-data DB
+data DB monad a where -- nicht =, GADT
