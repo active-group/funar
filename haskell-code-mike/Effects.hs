@@ -14,3 +14,4 @@ import Polysemy.Internal (send)
 
 -- GADTs: Generalized Algebraic Datatypes
 
+data DB
