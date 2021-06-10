@@ -7,14 +7,14 @@ maintainer:          michael.sperber@active-group.de
 library
   exposed-modules:     Cards
                      , GameEvent
---                     , Table
---                     , EventSourcing
---                     , HeartsJson
---                     , Json.Decode
---                     , Player
---                     , Sync
---                     , TableEventSourcing
-                     -- , Concurrency
+                     , Table
+                     , EventSourcing
+                     , HeartsJson
+                     , Json.Decode
+                     , Player
+                     , Sync
+                     , TableEventSourcing
+                     , Concurrency
   other-modules:       MVar
                      , Shuffle
                      , Teletype
@@ -22,6 +22,7 @@ library
                      , aeson
                      , cond
                      , containers
+                     , transformers
                      , either
                      , polysemy
                      , polysemy-plugin
