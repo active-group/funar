@@ -5,6 +5,7 @@
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE GADTs, FlexibleContexts, TypeOperators, DataKinds, PolyKinds #-}
 {-# LANGUAGE LambdaCase, BlockArguments, TypeApplications, ScopedTypeVariables, ConstraintKinds #-}
+{-# LANGUAGE TemplateHaskell -#}
 {-# OPTIONS_GHC -fplugin=Polysemy.Plugin #-}
 
 module Effects where
