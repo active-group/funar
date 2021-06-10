@@ -31,22 +31,28 @@ import GameEvent (GameCommand (..), GameEvent (..))
 import Json.Decode (Decoder (..))
 import qualified Json.Decode as Decode
 
+-- (>>=) :: m a -> (a -> m b) -> m b
 tuple2Decoder :: Decoder a -> Decoder b -> Decoder (a, b)
 tuple2Decoder first second = do
   a <- Decode.index 0 first
   b <- Decode.index 1 second
-  pure (a, b)
+  pure (a, b) -- Synonym für return
 
 mapDecoder :: Ord key => Decoder key -> Decoder value -> Decoder (Map.Map key value)
 mapDecoder keyDecoder valueDecoder =
-  Map.fromList
-    <$> Decode.list (tuple2Decoder keyDecoder valueDecoder)
+  Map.fromList <$> -- fmap
+       (Decode.list (tuple2Decoder keyDecoder valueDecoder))
 
 playerDecoder :: Decoder Cards.Player
 playerDecoder =
+  do playerId <- Decode.field "playerId" Decode.string
+     playerName <- Decode.field "playerName" Decode.string 
+     return (Cards.Player playerId playerName)
+    {-
   Cards.Player
     <$> Decode.field "playerId" Decode.string
     <*> Decode.field "playerName" Decode.string
+-}
 
 stringToSuit :: String -> Cards.Suit
 stringToSuit name = case name of
@@ -86,6 +92,9 @@ cardDecoder =
   Cards.Card
     <$> Decode.field "suit" suitDecoder
     <*> Decode.field "rank" rankDecoder
+
+-- <$> ::   (a -> b) -> f a -> f b
+-- <*> :: f (a -> b) -> f a -> f b
 
 handDecoder :: Decoder Cards.Hand
 handDecoder = Set.fromList <$> Decode.list cardDecoder

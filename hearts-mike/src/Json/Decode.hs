@@ -15,25 +15,38 @@ data DecodeError
   | Failure String Json.Value
   deriving (Show, Eq)
 
+-- Json.Value -> Maybe a
+-- data Either a b = Left a | Right b
+-- "rechtslastig": Left ist für Fehler, Right für "Payload"
+-- Functor (Either a)
+-- Monad (Either a)
 newtype Decoder a = Decoder {runDecoder :: Json.Value -> Either DecodeError a}
 
 instance Functor Decoder where
-  fmap f (Decoder decode) = Decoder (\ json ->
-    fmap f (decode json))
+  fmap f (Decoder decode) =
+    Decoder
+      ( \json ->
+          fmap f (decode json)
+      )
 
 instance Applicative Decoder where
   pure = Decoder . const . Right
-  Decoder decodeF <*> Decoder decodeA = Decoder (\ json ->
-    case decodeA json of
-      Right a ->
-        case decodeF json of
-          Right f -> Right (f a)
-          Left err -> Left err
-      Left err -> Left err)
+  Decoder decodeF <*> Decoder decodeA =
+    Decoder
+      ( \json ->
+          case decodeA json of
+            Right a ->
+              case decodeF json of
+                Right f -> Right (f a)
+                Left err -> Left err
+            Left err -> Left err
+      )
 
 instance Monad Decoder where
-  Decoder decode >>= f = Decoder (\ json ->
-    decode json >>= (\a -> runDecoder (f a) json))
+  Decoder decode >>= f = Decoder (\json ->
+    do a <- decode json
+       b <- runDecoder (f a) json
+       return b)
 
 string :: Decoder String
 string = Decoder (\ json ->
