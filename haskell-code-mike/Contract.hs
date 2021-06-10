@@ -82,7 +82,7 @@ meaning Empty now = ([], Empty)
 meaning (One currency) now = ([Payment Long 1 currency now], Empty)
 meaning (Multiple amount contract) now =
     let (payments, residualContract) = meaning contract now
-    in (map (scalePayment amount) payments, Multiple amount residualContract)
+    in (map (scalePayment amount) payments, multiple amount residualContract)
 meaning original@(Later date contract) now =
     if date >= now
     then meaning contract now
