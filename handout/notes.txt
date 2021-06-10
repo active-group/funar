@@ -1,0 +1,49 @@
+Doku zum Image-Teachpack
+
+https://docs.racket-lang.org/teachpack/2htdpimage.html
+
+Vortrag über Dependent Types:
+    
+https://www.youtube.com/watch?v=CO95FShDySA&list=PL8KXT4WqRJi208H_YoE9y9zNWIwj-msND&index=13
+
+Lock-Step Simulation
+
+https://www.joachim-breitner.de/publications/CodeWorld-ICFP17.pdf
+
+CompCert - verifizierter C-Compiler
+
+https://compcert.org/
+
+- Vorkurs: Einführung in die funktionale Programmierung
+- Einführung in Haskell
+- funktionale Programmiertechnologien
+  - Komplettes Beispiel Kartenspiel “Hearts”
+  - DDD-Architektur vs. FP / Event Sourcing
+  - Model-View-Update (Elm)
+- Umgang mit Effekten - Monaden
+- Modellierung mit Kombinatoren / Monoiden
+- Finanzderivate
+- Diagramme
+- Fallstudie
+- eingebettete DSLs
+- Framework
+
+Literatur
+
+Michael Sperber, Herbert Klaeren: Schreibe Dein Programm!
+https://www.deinprogramm.de
+
+Sandy Maguire: Algebra-Driven Design
+https://algebradriven.design/
+
+Chiusano, Bjarnasson: Functional Programming in Scala
+https://www.manning.com/books/functional-programming-in-scala
+
+Podcasts
+
+Überblick hier:
+https://purelyfunctional.tv/functional-programming-podcasts/
+
+Functional Geekery
+https://www.functionalgeekery.com/
+
