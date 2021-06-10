@@ -69,3 +69,6 @@ runDBState =
                                 let db' = Map.insert key value db 
                                 State.put db'
     )
+
+runDBPure :: Map String Integer -> Sem (DB ': effects) a -> Sem r (Map String Integer, a)
+runDBPure db program = State.runState db (runDBState program)
