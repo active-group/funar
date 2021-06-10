@@ -39,6 +39,8 @@ get key = send (Get key)
 put :: Member DB effects => String -> Integer -> Sem effects ()
 put key value = send (Put key value)
 -}
+
+-- TemplateHaskell, erzeugt den obigen Code
 makeSem ''DB
 
 --p1 :: Member DB effects => Sem effects String
@@ -49,3 +51,5 @@ p1 = do put "Mike" 50
         put "Mike" (x+1)
         y <- get "Mike"
         return ("Mike ist " ++ show x)
+
+    
