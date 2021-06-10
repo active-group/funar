@@ -59,9 +59,13 @@ p1 = do put "Mike" 50
         return ("Mike ist " ++ show x)
 
 -- ': cons auf Typebene
-runDBState :: Sem (DB ': effects) a -> Sem (State (Map String Integer) ': r) a
+runDBState :: Sem (DB ': effects) a -> Sem (State (Map String Integer) ': effects) a
 runDBState =
     reinterpret (\ program ->
         case program of
             Get key -> do db <- State.get 
-                          return 
+                          return (db ! key)
+            Put key value -> do db <- State.get 
+                                let db' = Map.insert key value db 
+                                State.put db'
+    )
