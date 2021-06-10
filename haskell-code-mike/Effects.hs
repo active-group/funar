@@ -32,3 +32,13 @@ data DB monad a where -- nicht =, GADT
 
 get :: Member DB effects => String -> Sem effects Integer
 get key = send (Get key)
+
+put :: Member DB effects => String -> Integer -> Sem effects ()
+put key value = send (Put key value)
+
+p1 :: Member DB effects => Sem effects Integer
+p1 = do put "Mike" 50
+        x <- get "Mike"
+        put "Mike" (x+1)
+        y <- get "Mike"
+        return ("Mike ist " ++ show x)
