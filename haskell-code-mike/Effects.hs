@@ -31,4 +31,4 @@ data DB monad a where -- nicht =, GADT
 -- Sem ist die freie Monade in Polysemy
 
 get :: Member DB effects => String -> Sem effects Integer
-get key = send (DB key)
+get key = send (Get key)
