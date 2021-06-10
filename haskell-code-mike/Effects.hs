@@ -12,3 +12,5 @@ module Effects where
 import Polysemy
 import Polysemy.Internal (send)
 
+-- GADTs: Generalized Algebraic Datatypes
+
