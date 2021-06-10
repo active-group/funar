@@ -54,4 +54,5 @@ p1 = do put "Mike" 50
         y <- get "Mike"
         return ("Mike ist " ++ show x)
 
-
+-- ': cons auf Typebene
+runDBState :: Sem (DB ': effects) a -> Sem (State (Map String Integer) ': r) a
