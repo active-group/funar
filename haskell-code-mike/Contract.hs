@@ -76,6 +76,7 @@ reverseDirection Short = Long
 
 reversePayment (Payment direction amount currency date) =
     Payment (reverseDirection direction) amount currency date
+
 meaning :: Contract -> Date -> ([Payment], Contract)
 meaning Empty now = ([], Empty)
 meaning (One currency) now = ([Payment Long 1 currency now], Empty)
@@ -85,5 +86,12 @@ meaning (Multiple amount contract) now =
 meaning original@(Later date contract) now =
     if date >= now
     then meaning contract now
-    else original
+    else ([], original)
+meaning (Give contract) now =
+    let (payments, residualContract) = meaning contract now
+    in (map reversePayment payments, Give residualContract)
+meaning (Add contract1 contract2) now =
+    let (payments1, residualContract1) = meaning contract1 now
+        (payments2, residualContract2) = meaning contract2 now
+    in (payments1 ++ payments2, Add residualContract1 residualContract2)
 
