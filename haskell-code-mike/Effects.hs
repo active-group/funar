@@ -16,7 +16,7 @@ import qualified Polysemy.State as State
 import Polysemy.State (State)
 
 import qualified Data.Map.Strict as Map 
-import Data.Map.Strict (Map)
+import Data.Map.Strict (Map, (!))
 
 
 {-
