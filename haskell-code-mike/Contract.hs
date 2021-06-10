@@ -68,11 +68,13 @@ data Payment = Payment Direction Amount Currency Date
   deriving Show
 
 scalePayment :: Amount -> Payment -> Payment
-scalePayment factor (Payment direction amount currency)
+scalePayment factor (Payment direction amount currency) =
+    Payment direction (factor * amount) currency
 
 meaning :: Contract -> Date -> ([Payment], Contract)
-meaning Zero now = ([], Zero)
+meaning Empty now = ([], Zero)
 meaning (One currency) now = ([Payment Long 1 currency now], Zero)
 meaning (Multiple amount contract) now =
     let (payments, residualContract) = meaning contract now
-    in 
+    in (map (scalePayment amount) payments, Multiplee amount residualContract)
+
