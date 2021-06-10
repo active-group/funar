@@ -65,3 +65,4 @@ data Payment = Payment Amount Currency Date
   deriving Show
 
 meaning :: Contract -> Date -> ([Payment], Contract)
+ 
