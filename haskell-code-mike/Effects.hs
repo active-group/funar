@@ -60,3 +60,8 @@ p1 = do put "Mike" 50
 
 -- ': cons auf Typebene
 runDBState :: Sem (DB ': effects) a -> Sem (State (Map String Integer) ': r) a
+runDBState =
+    reinterpret (\ program ->
+        case program of
+            Get key -> do db <- State.get 
+                          return 
