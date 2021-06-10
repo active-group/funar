@@ -31,11 +31,14 @@ data DB monad a where -- nicht =, GADT
 -- Sem ist die freie Monade in Polysemy
 -- effects ist eine Liste von Effekten
 
+{-
 get :: Member DB effects => String -> Sem effects Integer
 get key = send (Get key)
 
 put :: Member DB effects => String -> Integer -> Sem effects ()
 put key value = send (Put key value)
+-}
+makeSem ''DB
 
 --p1 :: Member DB effects => Sem effects String
 -- '[]: Liste auf Typebene
