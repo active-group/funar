@@ -12,6 +12,8 @@ module Effects where
 
 import Polysemy
 import Polysemy.Internal (send)
+import qualified Polysemy.State as State 
+import Polysemy.State (State)
 
 {-
 data DB' self
@@ -53,4 +55,3 @@ p1 = do put "Mike" 50
         return ("Mike ist " ++ show x)
 
 
-    
