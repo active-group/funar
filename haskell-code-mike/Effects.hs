@@ -15,6 +15,10 @@ import Polysemy.Internal (send)
 import qualified Polysemy.State as State 
 import Polysemy.State (State)
 
+import qualified Data.Map.Strict as Map 
+import Data.Map.Strict (Map)
+
+
 {-
 data DB' self
   = Get' String (Integer -> self)
