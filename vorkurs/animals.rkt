@@ -158,6 +158,7 @@
 ; - a cons list consisting of first element and rest list
 ;                                                    ^^^^
 ;                                                    self-reference
+(: list-of (signature  -> signature))
 (define list-of
   (lambda (element)
     (signature (mixed empty-list
