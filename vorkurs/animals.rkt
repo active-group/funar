@@ -283,3 +283,20 @@
              (inc-list (rest list)))))))
 
 (define inc (lambda (x) (+ x 1)))
+(define dec (lambda (x) (- x 1)))
+
+(define dec-list
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cons (dec (first list))
+             (dec-list (rest list)))))))
+
+(define list-map
+  (lambda (f list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cons (f (first list))
+             (list-map f (rest list)))))))
