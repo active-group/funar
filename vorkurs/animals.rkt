@@ -123,3 +123,12 @@
 (define run-over-snake
   (lambda (snake)
     (make-snake (snake-length snake) 0)))
+
+; Ein Tier ist eins der folgenden:
+; - Gürteltier
+; - Klapperschlange
+; Fallunterscheidung
+; speziell: gemischten Daten
+(define animal
+  (signature
+   (mixed dillo snake)))
