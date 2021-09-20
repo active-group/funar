@@ -28,4 +28,25 @@
      (beside image1 image2)
      (beside image2 image1))))
 
-(tile star1 circle1)
+;(tile star1 circle1)
+
+#|
+class C {
+
+  static int m(int x) {
+     // x ist der Name für eine Speicherzelle
+     x = 5;
+     ... x ...
+  }
+
+  static int m2(final C2 x) {
+
+
+     x.die();
+
+     ... x ...
+  }
+
+  ... C.m(17) ...
+}
+|#
