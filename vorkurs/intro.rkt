@@ -22,6 +22,12 @@
  (beside star1 square1)
  (beside square1 star1))
 
+; 1. Schritt: Kurzbeschreibung
+; Quadratisches Kachelmuster herstellen
+; 2. Schritt: Signaturdeklaration
+(: tile (image image -> image))
+
+
 (define tile
   (lambda (image1 image2)
     (above
