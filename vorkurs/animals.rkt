@@ -243,6 +243,26 @@
          (else
           (extract-evens (rest list))))))))
 
+(define extract-odd
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (if (odd? (first list))
+           (cons (first list)
+                (extract-odd (rest list)))
+           (extract-odd (rest list)))))))
+
+(define extract
+  (lambda (p? list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (if (p? (first list))
+           (cons (first list)
+                (extract p? (rest list)))
+           (extract p? (rest list)))))))
+
 ; increment all the numbers in a list
 (: inc-list (list-of-numbers -> list-of-numbers))
 
