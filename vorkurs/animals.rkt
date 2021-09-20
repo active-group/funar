@@ -79,3 +79,16 @@
 ; 1. von innen nach außen nach lambda suchen
 ; 2. nach Definition suchen
 ; 3. muß eingebaut / importiert sein
+
+
+; Gürteltier füttern
+(: feed-dillo (dillo number -> dillo))
+
+(check-expect (feed-dillo dillo1 1)
+              (make-dillo "alive" 11))
+
+(define feed-dillo
+  (lambda (dillo amount)
+    (make-dillo (dillo-liveness dillo)
+                (+ (dillo-weight dillo) amount))))
+
