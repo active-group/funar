@@ -109,3 +109,17 @@
   (snake-length number)
   (snake-thickness number))
 
+; 200cm lange Schlange, 5cm dick
+(define snake1 (make-snake 200 5))
+; Anakonda
+(define snake2 (make-snake 500 10))
+
+; Klapperschlange überfahren
+(: run-over-snake (snake -> snake))
+
+(check-expect (run-over-snake snake1) (make-snake 200 0))
+(check-expect (run-over-snake snake2) (make-snake 500 0))
+
+(define run-over-snake
+  (lambda (snake)
+    (make-snake (snake-length snake) 0)))
