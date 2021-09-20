@@ -104,4 +104,8 @@
 ; Eine Klapperschlange hat folgende Eigenschaften:
 ; - Länge
 ; - Dicke
+(define-record snake
+  make-snake
+  (snake-length number)
+  (snake-thickness number))
 
