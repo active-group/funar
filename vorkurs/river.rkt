@@ -7,4 +7,19 @@
 
 ; Ein Fluss ist eins der folgenden:
 ; - ein Bach aus einer Quelle
-; - ein Zusammenfluss von Haupt- und Nebenfluss
+; - ein Zusammenfluss von Hauptfluss und Nebenfluss
+;                              ^^^^^          ^^^^^
+; Selbstbezug
+(define river
+  (signature (mixed creek confluence)))
+
+(define-record creek
+  make-creek
+  creek?
+  (creek-origin string))
+
+(define-record confluence
+  make-confluence
+  confluence?
+  (confluence-location string)
+  (confluence-main-stem 
