@@ -38,3 +38,12 @@
 (check-expect (flows-from? "Heimliswald" prim) #f)
 (check-expect (flows-from? "Heimliswald" neckar2) #t)
 
+(define flows-from?
+  (lambda (location river)
+    (cond
+      ((creek? river)
+       (string=? location (creek-origin river)))
+      ((confluence? river)
+       (or (string=? location (confluence-location river))
+           (flows-from? location (confluence-main-stem river))
+           (flows-from? location (confluence-tributary river)))))))
