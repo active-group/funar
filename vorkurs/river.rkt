@@ -22,4 +22,19 @@
   make-confluence
   confluence?
   (confluence-location string)
-  (confluence-main-stem 
+  (confluence-main-stem river) ; Selbstbezug
+  (confluence-tributary river))
+
+(define eschach (make-creek "Heimliswald"))
+(define prim (make-creek "Dreifaltigkeitsberg"))
+(define neckar1 (make-confluence "Rottweil" eschach prim))
+(define schlichem (make-creek "Tieringen"))
+(define neckar2 (make-confluence "Epfendorf" neckar1 schlichem))
+
+; Fließt Wasser aus diesem Ort in Fluss?
+(: flows-from? (string river -> boolean))
+
+(check-expect (flows-from? "Heimliswald" eschach) #t)
+(check-expect (flows-from? "Heimliswald" prim) #f)
+(check-expect (flows-from? "Heimliswald" neckar2) #t)
+
