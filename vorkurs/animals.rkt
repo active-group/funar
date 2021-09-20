@@ -16,3 +16,16 @@
   (dillo-liveness liveness)
   (dillo-weight number))
 
+; Eine "Lebendigkeit" ist eins der folgenden:
+; - tot - ODER -
+; - lebendig
+; Fallunterscheidung
+; hier Spezialfall: Aufzählung
+(define liveness
+  (signature (enum "dead" "alive")))
+
+; lebendiges Gürteltier, 10kg
+(define dillo1 (make-dillo "alive" 10))
+; totes Gürteltier, 12kg
+(define dillo2 (make-dillo "dead" 12))
+
