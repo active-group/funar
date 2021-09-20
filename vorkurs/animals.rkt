@@ -178,6 +178,8 @@
   (first element)
   (rest (list-of element))) ; <--- self-reference
 
+(define list-of-numbers (signature (list-of number)))
+
 ; 1-element list: 17
 (define list1 (cons 17 empty))
 ; 2-element list: 5 17
