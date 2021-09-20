@@ -158,9 +158,10 @@
 ; - a cons list consisting of first element and rest list
 ;                                                    ^^^^
 ;                                                    self-reference
-(define list-of-numbers
-  (signature (mixed empty-list
-                    cons-list)))
+(define list-of
+  (lambda (element)
+    (signature (mixed empty-list
+                      (cons-list-of element)))))
 
 (define-record empty-list
   make-empty
@@ -175,7 +176,7 @@
   cons
   cons?
   (first element)
-  (rest list-of-numbers)) ; <--- self-reference
+  (rest (list-of element))) ; <--- self-reference
 
 ; 1-element list: 17
 (define list1 (cons 17 empty))
