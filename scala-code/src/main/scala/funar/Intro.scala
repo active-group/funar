@@ -1,0 +1,4 @@
+package funar
+
+object Intro {
+}
