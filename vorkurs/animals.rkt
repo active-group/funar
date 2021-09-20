@@ -24,8 +24,57 @@
 (define liveness
   (signature (enum "dead" "alive")))
 
+; Konstruktor
+(: make-dillo (liveness number -> dillo))
+; Selektor
+(: dillo-liveness (dillo -> liveness))
+(: dillo-weight (dillo -> number))
+   
 ; lebendiges Gürteltier, 10kg
 (define dillo1 (make-dillo "alive" 10))
 ; totes Gürteltier, 12kg
 (define dillo2 (make-dillo "dead" 12))
 
+; Gürteltier überfahren
+(: run-over-dillo (dillo -> dillo))
+
+(check-expect (run-over-dillo dillo1)
+              (make-dillo "dead" 10))
+(check-expect (run-over-dillo dillo2)
+              dillo2)
+(check-expect (dillo-liveness (run-over-dillo dillo1))
+              "dead")
+
+
+(for-all ((d dillo))
+  (string=? (dillo-liveness (run-over-dillo d))
+            "dead"))
+
+; Gerüst
+#;(define run-over-dillo
+  (lambda (dillo)
+    ...))
+
+; Schablone: zusammengesetzte Daten als Eingabe
+#;(define run-over-dillo
+  (lambda (dillo)
+    ...
+    (dillo-liveness dillo) ; nicht verwendet
+    (dillo-weight dillo)
+    ...
+    ))
+
+; Schablone: zusammengesetzte Daten als Ausgabe
+#;(define run-over-dillo
+  (lambda (dillo)
+    (make-dillo ... ...)))
+
+(define run-over-dillo
+  (lambda (dillo)
+    (make-dillo "dead" (dillo-weight dillo)))) 
+
+; lexikalische Bindung
+; von einem Vorkommen aus nach Bindung suchen
+; 1. von innen nach außen nach lambda suchen
+; 2. nach Definition suchen
+; 3. muß eingebaut / importiert sein
