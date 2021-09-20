@@ -109,6 +109,7 @@
 ; - Dicke
 (define-record snake
   make-snake
+  snake?
   (snake-length number)
   (snake-thickness number))
 
