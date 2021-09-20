@@ -242,3 +242,6 @@
                 (extract-evens (rest list))))
          (else
           (extract-evens (rest list))))))))
+
+; increment all the numbers in a list
+
