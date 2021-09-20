@@ -13,8 +13,11 @@
 ; zusammengesetzte Daten
 (define-record dillo
   make-dillo
+  dillo? ; Prädikat
   (dillo-liveness liveness)
   (dillo-weight number))
+
+(: dillo? (any -> boolean))
 
 ; Eine "Lebendigkeit" ist eins der folgenden:
 ; - tot - ODER -
