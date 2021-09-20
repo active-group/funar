@@ -37,6 +37,7 @@
 (check-expect (flows-from? "Heimliswald" eschach) #t)
 (check-expect (flows-from? "Heimliswald" prim) #f)
 (check-expect (flows-from? "Heimliswald" neckar2) #t)
+(check-expect (flows-from? "Tieringen" neckar2) #t) 
 
 (define flows-from?
   (lambda (location river)
