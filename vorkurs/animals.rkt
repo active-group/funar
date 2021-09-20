@@ -183,4 +183,30 @@
 ; 4-element list: 3 5 17 4
 (define list4 (cons 3 list3))
 
+; sum of the elements of a list
+(: list-sum (list-of-numbers -> number))
 
+(check-expect (list-sum list3) 26)
+
+(define list-sum
+  (lambda (list)
+    (cond
+      ; 0 is the identity of +
+      ((empty? list) 0)
+      ((cons? list)
+       (+ (first list)
+          (list-sum (rest list)))))))
+
+; product of the elements of a list
+(: list-product (list-of-numbers -> number))
+
+(check-expect (list-product list3) 340)
+
+(define list-product
+  (lambda (list)
+    (cond
+      ; 1 is the identity of *
+      ((empty? list) 1)
+      ((cons? list)
+       (* (first list)
+          (list-product (rest list)))))))
