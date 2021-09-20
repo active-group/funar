@@ -244,4 +244,18 @@
           (extract-evens (rest list))))))))
 
 ; increment all the numbers in a list
+(: inc-list (list-of-numbers -> list-of-numbers))
 
+(check-expect (inc-list
+               (cons 2 (cons 3 (cons 4 (cons 5 empty)))))
+              (cons 3 (cons 4 (cons 5 (cons 6 empty)))))
+
+(define inc-list
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cons (inc (first list))
+             (inc-list (rest list)))))))
+
+(define inc (lambda (x) (+ x 1)))
