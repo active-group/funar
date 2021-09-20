@@ -210,3 +210,35 @@
       ((cons? list)
        (* (first list)
           (list-product (rest list)))))))
+
+; extract the even numbers from a list
+(: extract-evens (list-of-numbers -> list-of-numbers))
+
+(check-expect (extract-evens
+               (cons 2 (cons 3 (cons 4 (cons 5 (cons 6 empty))))))
+              (cons 2 (cons 4 (cons 6 empty))))
+
+#;(define extract-evens
+  (lambda (list)
+    (cond
+      ((empty? list) ...)
+      ((cons? list)
+       (first list)
+       (extract-evens (rest list))
+       ...))))
+
+(define extract-evens
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (if (even? (first list))
+           (cons (first list)
+                (extract-evens (rest list)))
+           (extract-evens (rest list)))
+       #;(cond
+         ((even? (first list))
+          (cons (first list)
+                (extract-evens (rest list))))
+         (else
+          (extract-evens (rest list))))))))
