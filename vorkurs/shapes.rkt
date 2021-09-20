@@ -10,3 +10,6 @@
 ; 1. Datenanalyse
 ; 2. Funktion, die feststellt, ob ein gegebener Punkt
 ;    innerhalb oder außerhalb der Figur liegt
+(define ^2
+  (lambda (x)
+    (* x x)))
