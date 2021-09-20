@@ -86,11 +86,14 @@
 
 (check-expect (feed-dillo dillo1 1)
               (make-dillo "alive" 11))
+(check-expect (feed-dillo dillo2 1)
+              dillo2)
 
 (define feed-dillo
   (lambda (dillo amount)
     (cond ; Verzweigung nach liveness
       ; Zweig: (<Bedingung> <Ergebnis>)
+      ; die erste Bedingung, die #t ergibt, wird gezogen
       ((string=? "alive" (dillo-liveness dillo))
        (make-dillo (dillo-liveness dillo)
                    (+ (dillo-weight dillo) amount)))
