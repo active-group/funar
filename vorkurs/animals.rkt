@@ -45,10 +45,11 @@
 (check-expect (dillo-liveness (run-over-dillo dillo1))
               "dead")
 
-
-(for-all ((d dillo))
-  (string=? (dillo-liveness (run-over-dillo d))
-            "dead"))
+; property-based testing
+(check-property
+ (for-all ((d dillo))
+   (string=? (dillo-liveness (run-over-dillo d))
+             "dead")))
 
 ; Gerüst
 #;(define run-over-dillo
