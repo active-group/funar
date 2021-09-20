@@ -261,7 +261,8 @@
            (extract-odd (rest list)))))))
 
 ; extract elements matching a predicate from list
-(: extract ((number -> boolean) (list-of number) -> (list-of number)))
+; %element: signature variable
+(: extract ((%element -> boolean) (list-of %element) -> (list-of %element)))
 
 ; filter
 (define extract
