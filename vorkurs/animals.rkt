@@ -300,3 +300,5 @@
       ((cons? list)
        (cons (f (first list))
              (list-map f (rest list)))))))
+
+(list-map run-over-animal (cons dillo1 (cons dillo2 (cons snake1 empty))))
