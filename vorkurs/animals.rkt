@@ -168,10 +168,13 @@
 
 (define empty (make-empty))
 
-(define-record cons-list
+(define-record (cons-list-of element) ; makes a lambda
+  ; (cons-list-of number)
+  ; (cons-list-of animal)
+  ; ...
   cons
   cons?
-  (first number)
+  (first element)
   (rest list-of-numbers)) ; <--- self-reference
 
 ; 1-element list: 17
