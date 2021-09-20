@@ -143,4 +143,8 @@
 (check-expect (run-over-animal snake1)
               (run-over-snake snake1))
 
-
+(define run-over-animal
+  (lambda (animal)
+    (cond
+      (... ...)
+      (... ...))))
