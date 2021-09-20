@@ -101,3 +101,7 @@
       ((string=? "dead" l)
        dillo))))
 
+; Eine Klapperschlange hat folgende Eigenschaften:
+; - Länge
+; - Dicke
+
