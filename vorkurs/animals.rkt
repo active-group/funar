@@ -91,12 +91,13 @@
 
 (define feed-dillo
   (lambda (dillo amount)
+    (define l (dillo-liveness dillo))
     (cond ; Verzweigung nach liveness
       ; Zweig: (<Bedingung> <Ergebnis>)
       ; die erste Bedingung, die #t ergibt, wird gezogen
-      ((string=? "alive" (dillo-liveness dillo))
-       (make-dillo (dillo-liveness dillo)
+      ((string=? "alive" l)
+       (make-dillo l
                    (+ (dillo-weight dillo) amount)))
-      ((string=? "dead" (dillo-liveness dillo))
+      ((string=? "dead" l)
        dillo))))
 
