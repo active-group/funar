@@ -254,7 +254,7 @@
            (extract-odd (rest list)))))))
 
 ; extract elements matching a predicate from list
-(: extract ((number -> boolean) list-of-number -> list-of-number))
+(: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
 
 ; filter
 (define extract
