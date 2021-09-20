@@ -152,3 +152,35 @@
     (cond
       ((dillo? animal) (run-over-dillo animal))
       ((snake? animal) (run-over-snake animal)))))
+
+; A list is one of the following:
+; - the empty list
+; - a cons list consisting of first element and rest list
+;                                                    ^^^^
+;                                                    self-reference
+(define list-of-numbers
+  (signature (mixed empty-list
+                    cons-list)))
+
+(define-record empty-list
+  make-empty
+  empty?)
+
+(define empty (make-empty))
+
+(define-record cons-list
+  cons
+  cons?
+  (first number)
+  (rest list-of-numbers)) ; <--- self-reference
+
+; 1-element list: 17
+(define list1 (cons 17 empty))
+; 2-element list: 5 17
+(define list2 (cons 5 (cons 17 empty)))
+; 3-element list: 5 17 4
+(define list3 (cons 5 (cons 17 (cons 4 empty))))
+; 4-element list: 3 5 17 4
+(define list4 (cons 3 list3))
+
+
