@@ -132,3 +132,15 @@
 (define animal
   (signature
    (mixed dillo snake)))
+
+; Tier überfahren
+(: run-over-animal (animal -> animal))
+
+(check-expect (run-over-animal dillo1)
+              (run-over-dillo dillo1))
+(check-expect (run-over-animal dillo2)
+              (run-over-dillo dillo2))
+(check-expect (run-over-animal snake1)
+              (run-over-snake snake1))
+
+
