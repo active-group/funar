@@ -89,6 +89,11 @@
 
 (define feed-dillo
   (lambda (dillo amount)
-    (make-dillo (dillo-liveness dillo)
-                (+ (dillo-weight dillo) amount))))
+    (cond ; Verzweigung nach liveness
+      ; Zweig: (<Bedingung> <Ergebnis>)
+      ((string=? "alive" (dillo-liveness dillo))
+       (make-dillo (dillo-liveness dillo)
+                   (+ (dillo-weight dillo) amount)))
+      ((string=? "dead" (dillo-liveness dillo))
+       dillo))))
 
