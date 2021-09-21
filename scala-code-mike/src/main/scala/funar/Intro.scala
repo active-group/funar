@@ -139,4 +139,13 @@ object Intro {
   case object None extends Option[A]
   case object Some[A](value: A) extends Option[A]
   */
+
+  case class IntWithRange(x: Int) {
+    def rangeUpTo(y: Int) = x.to(y)
+  }
+
+  implicit def toIntWithRange(x: Int): IntWithRange = IntWithRange(x)
+
+  val bar = 15.rangeUpTo(17)
+
 }
