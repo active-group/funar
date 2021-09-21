@@ -10,11 +10,20 @@ object Suit {
   val all = Seq(Diamonds, Clubs, Spades, Hearts)
 }
 
+/*
 sealed trait Rank {
   val value: Int
 }
 
 object Rank {
   case object Two extends Rank { override val value = 2 }
+}
+
+*/
+
+case class Rank(value: Int)
+
+object Rank {
+  case object Two extends Rank(2)
 }
 
