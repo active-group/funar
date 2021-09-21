@@ -10,7 +10,7 @@ object Suit {
   val all = Seq(Diamonds, Clubs, Spades, Hearts)
 }
 
-sealed trait Rank {
+sealed trait Rank extends Ordering[Rank] {
   val value: Int
 }
 
