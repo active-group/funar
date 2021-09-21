@@ -262,7 +262,12 @@
 
 ; extract elements matching a predicate from list
 ; %element: signature variable
+; Java <Element> ... m(...)
 (: extract ((%element -> boolean) (list-of %element) -> (list-of %element)))
+
+; Java: Stream<T> filter(Predicate<? super T> predicate)
+; https://docs.oracle.com/javase/8/docs/api/java/util/function/package-summary.html
+; Funtion<Integer, Bool>
 
 ; filter
 (define extract
@@ -301,6 +306,10 @@
        (cons (dec (first list))
              (dec-list (rest list)))))))
 
+;(: list-map ((number -> number) (list-of number) -> (list-of number)))
+
+(: list-map ((%a -> %b) (list-of %a) -> (list-of %b)))
+
 (define list-map
   (lambda (f list)
     (cond
@@ -309,4 +318,6 @@
        (cons (f (first list))
              (list-map f (rest list)))))))
 
-(list-map run-over-animal (cons dillo1 (cons dillo2 (cons snake1 empty))))
+;(list-map run-over-animal (cons dillo1 (cons dillo2 (cons snake1 empty))))
+
+; Dependent Types: Idris, Agda
