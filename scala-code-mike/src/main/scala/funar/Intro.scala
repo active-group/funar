@@ -17,7 +17,7 @@ object Intro {
   type Weight = Int
 
   // sealed: all subtypes in this file
-  sealed trait Animal {
+  sealed class Animal {
     def runOver: Animal // returns Animal
 
     def runOver2: Animal =
