@@ -14,6 +14,8 @@ object Intro {
     case object Dead extends Liveness
   }
 
-  case class Dillo(liveness: Liveness, weight: Int)
+  type Weight = Int
+
+  case class Dillo(liveness: Liveness, weight: Weight)
 
 }
