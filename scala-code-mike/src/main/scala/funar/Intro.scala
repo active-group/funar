@@ -16,7 +16,10 @@ object Intro {
 
   type Weight = Int
 
-  case class Dillo(liveness: Liveness, weight: Weight)
+  case class Dillo(liveness: Liveness, weight: Weight) {
+    def runOver: Dillo = // no arguments: empty parens
+      this.copy(liveness = Liveness.Dead)
+  }
 
   // values
   val dillo1 = Dillo(Liveness.Alive, 10)
@@ -31,5 +34,12 @@ object Intro {
       case Dillo(_, w) => Dillo(Liveness.Dead, w)
     }
 
+  case class Snake(length: Int, thickness: Int)
+
+  val snake1 = Snake(200, 5)
+  val snake2 = Snake(300, 10)
+
+  def runOverSnake(snake: Snake): Snake =
+    snake.copy(thickness = 0)
 
 }
