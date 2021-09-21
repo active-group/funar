@@ -133,4 +133,10 @@ object Intro {
   // tuple:
   val map1 = Map(("Mike", "Sperber"), "Lars" -> "Winterhalder")
 
+  /*
+  sealed trait Option[A]
+
+  case object None extends Option[A]
+  case object Some[A](value: A) extends Option[A]
+  */
 }
