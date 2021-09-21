@@ -14,7 +14,7 @@ sealed trait Rank extends Ordering[Rank] {
   val value: Int
 
   override def compare(rank1: Rank, rank2: Rank): Int =
-    this.value - other.value
+    rank1.value - rank2.value
 }
 
 object Rank {
