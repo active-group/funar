@@ -107,4 +107,6 @@ object Intro {
   def plus(x: Int, y: Int): Int = x + y
 
   def plus1(x: Int): Int => Int = { y => x + y}
+
+  def plus2(x: Int)(y: Int) = x + y
 }
