@@ -18,6 +18,13 @@ object Intro {
 
   case class Dillo(liveness: Liveness, weight: Weight)
 
+  // values
   val dillo1 = Dillo(Liveness.Alive, 10)
   val dillo2 = Dillo(Liveness.Dead, 11)
+
+  // function
+  def runOverDillo(dillo: Dillo): Dillo =
+    Dillo(Liveness.Dead, dillo.weight)
+
+
 }
