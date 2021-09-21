@@ -1,5 +1,7 @@
 package funar
 
+import scala.annotation.tailrec
+
 object Intro {
 
   // Scala 2 enumerations: design mistake
@@ -73,6 +75,7 @@ object Intro {
       case first :: rest => first.runOver :: runOverAnimals(rest)
     }
 
+  @tailrec  
   def runOverAnimals1(animals: List[Animal], acc: List[Animal]): List[Animal] =
     animals match {
       case Nil => acc.reverse
