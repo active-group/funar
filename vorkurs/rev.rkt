@@ -18,6 +18,8 @@
     (cond
       ((empty? list) acc)
       ((cons? list)
+       ; tail call: call without context
+       ; implementation doesn't need to allocate memory for the frame
        (list-product1 (rest list) (* acc (first list)))))))
 
 (list-product1 (list 1 2 3 4 5) 1)
