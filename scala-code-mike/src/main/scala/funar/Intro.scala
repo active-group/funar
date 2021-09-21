@@ -76,7 +76,7 @@ object Intro {
   def runOverAnimals1(animals: List[Animal], acc: List[Animal]): List[Animal] =
     animals match {
       case Nil => acc
-      case first :: rest => runOverAnimals(rest, runOverAnimals(first) :: acc)
+      case first :: rest => runOverAnimals(rest, runOverAnimal(first) :: acc)
     }
   
 }
