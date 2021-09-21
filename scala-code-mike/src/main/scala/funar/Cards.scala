@@ -14,5 +14,7 @@ sealed trait Rank {
   val value: Int
 }
 
-object
+object Rank {
+  case object Two extends Rank { val value = 2}
+}
 
