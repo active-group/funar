@@ -10,4 +10,9 @@ object Suit {
   val all = Seq(Diamonds, Clubs, Spades, Hearts)
 }
 
+sealed trait Rank {
+  val value: Int
+}
+
+object
 
