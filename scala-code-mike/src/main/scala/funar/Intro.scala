@@ -21,10 +21,15 @@ object Intro {
   // values
   val dillo1 = Dillo(Liveness.Alive, 10)
   val dillo2 = Dillo(Liveness.Dead, 11)
-
+  
   // function
   def runOverDillo(dillo: Dillo): Dillo =
-    Dillo(Liveness.Dead, dillo.weight)
+    // Dillo(Liveness.Dead, dillo.weight)
+    // dillo.copy(liveness = Liveness.Dead)
+    dillo match {
+      case Dillo(Liveness.Dead, _) => dillo
+      case Dillo(_, w) => Dillo(Liveness.Dead, w)
+    }
 
 
 }
