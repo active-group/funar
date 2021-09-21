@@ -17,7 +17,9 @@ object Intro {
   type Weight = Int
 
   // sealed: all subtypes in this file
-  sealed trait Animal
+  sealed trait Animal {
+    def runOver: Animal
+  }
 
   case class Dillo(liveness: Liveness, weight: Weight) extends Animal {
     def runOver: Dillo = // no arguments: empty parens
