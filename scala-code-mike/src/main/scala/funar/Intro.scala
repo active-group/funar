@@ -119,7 +119,13 @@ object Intro {
 
   // type inference fails:
   // val foo5 = foldRight(0, _ + _, list4)
-  
+
+  // unary functions are equivalent to n-ary functions:
+  // Haskell Curry 
+  // Moses Schönfinkel
+
+  def curry[A, B, C](f: (A, B) => C): A => (B => C) =
+    { a => { b => f(a, b) }}
 
 
 }
