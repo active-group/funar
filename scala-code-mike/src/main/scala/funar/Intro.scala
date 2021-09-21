@@ -69,6 +69,7 @@ object Intro {
 
   // Lisp: first = car / rest = cdr
 
+  @tailrec
   def runOverAnimals(animals: List[Animal]): List[Animal] =
     animals match {
       case Nil => Nil
