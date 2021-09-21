@@ -37,6 +37,11 @@ object Intro {
   }
 
   // automatically defines a companion object with apply method: constructor
+  /*
+  object Dillo {
+    def apply(liveness: Liveness, weight: Weight) = new Dillo(..., ...)
+  }
+  */
 
   // values
   val dillo1 = Dillo(Liveness.Alive, 10)
