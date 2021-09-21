@@ -151,4 +151,5 @@ object Intro {
 
   val bar = 15.rangeUpTo(17)
 
+  val baz = IntWithRange(5) + IntWithRange(7)
 }
