@@ -19,6 +19,12 @@ object Intro {
   // sealed: all subtypes in this file
   sealed trait Animal {
     def runOver: Animal // returns Animal
+
+    def runOver2: Animal =
+      this match {
+        case Dillo(liveness, weight) => Dillo(Liveness.Dead, weight)
+        case Snake(length, thickness) => Snake(length, 0)
+      }
   }
 
   case class Dillo(liveness: Liveness, weight: Weight) extends Animal {
