@@ -4,6 +4,8 @@ import scala.annotation.tailrec
 
 object Intro {
 
+  def apply(x: Int): Int = x + 1
+
   // Scala 2 enumerations: design mistake
 
   sealed trait Liveness // trait - think "interface"
