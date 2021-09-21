@@ -109,4 +109,12 @@ object Intro {
   def plus1(x: Int): Int => Int = { y => x + y}
 
   def plus2(x: Int)(y: Int) = x + y
+
+  def foldRight[A, B](forNil: B, forCons: (A, B) => B, list: List[A]): B =
+    list match {
+      case Nil => forNil
+      case first::rest =>
+        forCons(first, foldRight(forNil, forCons, rest))
+    }
+
 }
