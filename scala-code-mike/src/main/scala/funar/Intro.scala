@@ -79,12 +79,12 @@ object Intro {
 
   def runOverAnimals(animals: List[Animal]): List[Animal] = {
     @tailrec  
-    def runOverAnimals1(animals: List[Animal], acc: List[Animal]): List[Animal] =
+    def loop(animals: List[Animal], acc: List[Animal]): List[Animal] =
       animals match {
         case Nil => acc.reverse
-        case first :: rest => runOverAnimals1(rest, runOverAnimal(first) :: acc)
+        case first :: rest => loop(rest, runOverAnimal(first) :: acc)
       }
-    runOverAnimals1(animals, Nil)
+    loop(animals, Nil)
   }
   
 }
