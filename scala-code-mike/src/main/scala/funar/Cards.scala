@@ -29,7 +29,7 @@ object Rank {
   case object King extends Rank { override val value = 13 }
   case object Ace extends Rank { override val value = 14 }
 
-  val all: Seq[Rank] = Seq(Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten,
+  val all = Seq(Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten,
                            Jack, Queen, King, Ace)
 }
 
