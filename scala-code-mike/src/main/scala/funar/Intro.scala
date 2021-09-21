@@ -19,7 +19,7 @@ object Intro {
   // sealed: all subtypes in this file
   sealed trait Animal
 
-  case class Dillo(liveness: Liveness, weight: Weight) {
+  case class Dillo(liveness: Liveness, weight: Weight) extends Animal {
     def runOver: Dillo = // no arguments: empty parens
       this.copy(liveness = Liveness.Dead)
   }
@@ -37,7 +37,7 @@ object Intro {
       case Dillo(_, w) => Dillo(Liveness.Dead, w)
     }
 
-  case class Snake(length: Int, thickness: Int)
+  case class Snake(length: Int, thickness: Int) extends Animal
 
   val snake1 = Snake(200, 5)
   val snake2 = Snake(300, 10)
@@ -45,4 +45,10 @@ object Intro {
   def runOverSnake(snake: Snake): Snake =
     snake.copy(thickness = 0)
 
+
+  def runOverAnimal(animal: Animal): Animal =
+    animal match {
+      case Snake(length, thickness) => runOverSnake(animal) // Snake(length, 0)
+      case Dillo(_, weight) => Dillo(Liveness.Dead, weight)
+    }
 }
