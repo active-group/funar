@@ -131,6 +131,6 @@ object Intro {
     { (a, b) => f(a)(b) }
 
   // tuple:
-  val map1 = Map(("Mike", "Sperber"), ("Lars", "Winterhalder"))
+  val map1 = Map(("Mike", "Sperber"), "Lars" -> "Winterhalder")
 
 }
