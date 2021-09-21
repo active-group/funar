@@ -1,6 +1,7 @@
 package funar
 
 import scala.annotation.tailrec
+import scala.language.implicitConversions
 
 object Intro {
 
