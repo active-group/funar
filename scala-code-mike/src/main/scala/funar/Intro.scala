@@ -36,7 +36,7 @@ object Intro {
       this.copy(liveness = Liveness.Dead)
   }
 
-  // automatically defines a companion object with apply method
+  // automatically defines a companion object with apply method: constructor
 
   // values
   val dillo1 = Dillo(Liveness.Alive, 10)
