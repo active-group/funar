@@ -62,4 +62,7 @@ object Intro {
       case Snake(length, thickness) => runOverSnake(animal.asInstanceOf[Snake]) // Snake(length, 0)
       case Dillo(_, weight) => Dillo(Liveness.Dead, weight)
     }
+
+  val highway: List[Animal] = dillo1 :: (dillo2 :: (snake1 :: (snake2 :: Nil)))
+  
 }
