@@ -218,8 +218,13 @@
        (* (first list)
           (list-product (rest list)))))))
 
+; "neutrales Element" / "identity: group theory
+; (: op (%a %a -> %a))
+
 (: list-fold (%b (%a %b -> %b) (list-of %a) -> %b))
 
+; "materialized template"
+; "the fold of the list type"
 (define list-fold
   (lambda (for-empty for-cons list)
     (cond
