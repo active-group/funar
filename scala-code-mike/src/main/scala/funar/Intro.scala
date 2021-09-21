@@ -117,4 +117,6 @@ object Intro {
         forCons(first, foldRight(forNil, forCons, rest))
     }
 
+  val foo5 = foldRight(0, _ + _, list4)
+
 }
