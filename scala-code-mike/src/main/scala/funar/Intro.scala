@@ -98,5 +98,8 @@ object Intro {
 
   val list4 = List(5, 7, 12, 13)
 
-  val foo = list4.foldRight(0)( (a, b) => a + b)
+  // (list-fold 0 + (list 5 7 12 13) 
+  val foo1 = list4.foldRight(0)( (a, b) => a + b)
+  val foo2 = list4.foldRight(0) { (a, b) => a + b }
+  val foo3 = list4.foldRight(0)(_ + _)
 }
