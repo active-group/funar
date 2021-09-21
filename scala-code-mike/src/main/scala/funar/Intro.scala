@@ -48,7 +48,7 @@ object Intro {
 
   def runOverAnimal(animal: Animal): Animal =
     animal match {
-      case Snake(length, thickness) => runOverSnake(animal) // Snake(length, 0)
+      case Snake(length, thickness) => runOverSnake(animal.asInstanceOf[Snake]) // Snake(length, 0)
       case Dillo(_, weight) => Dillo(Liveness.Dead, weight)
     }
 }
