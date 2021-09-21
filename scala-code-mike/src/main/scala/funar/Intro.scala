@@ -16,6 +16,8 @@ object Intro {
 
   type Weight = Int
 
+  sealed trait Animal
+
   case class Dillo(liveness: Liveness, weight: Weight) {
     def runOver: Dillo = // no arguments: empty parens
       this.copy(liveness = Liveness.Dead)
