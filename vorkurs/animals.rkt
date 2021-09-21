@@ -218,6 +218,16 @@
        (* (first list)
           (list-product (rest list)))))))
 
+(: list-fold (%b (%a %b -> %b) (list-of %a) -> %b))
+
+(define list-fold
+  (lambda (for-empty for-cons list)
+    (cond
+      ((empty? list) for-empty)
+      ((cons? list)
+       (for-cons (first list)
+                 (list-fold for-empty for-cons (rest list)))))))
+
 ; extract the even numbers from a list
 (: extract-evens (list-of-numbers -> list-of-numbers))
 
