@@ -65,6 +65,8 @@ object Intro {
 
   val highway: List[Animal] = dillo1 :: (dillo2 :: (snake1 :: (snake2 :: Nil)))
 
+  // Lisp: first = car / rest = cdr
+
   def runOverAnimals(animals: List[Animal]): List[Animal] =
     animals match {
       case Nil => Nil
