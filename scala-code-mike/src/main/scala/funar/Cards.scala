@@ -12,6 +12,9 @@ object Suit {
 
 sealed trait Rank extends Ordering[Rank] {
   val value: Int
+
+  override def compare(other: Rank): Int =
+    this.value - other.value
 }
 
 object Rank {
