@@ -18,7 +18,7 @@
     (cond
       ((empty? list) acc)
       ((cons? list)
-       ; tail call: call without context
+       ; tail call: call without context ... Guy Steele
        ; implementation doesn't need to allocate memory for the frame
        ; unfortunately, not implemented on the JVM
        (list-product1 (rest list) (* acc (first list)))))))
