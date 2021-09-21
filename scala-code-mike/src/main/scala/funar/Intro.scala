@@ -130,4 +130,6 @@ object Intro {
   def uncurry[A, B, C](f: A => (B => C)): (A, B) => C =
     { (a, b) => f(a)(b) }
 
+  val map1 = Map(("Mike", "Sperber"))
+
 }
