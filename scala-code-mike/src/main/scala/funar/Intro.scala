@@ -102,4 +102,5 @@ object Intro {
   val foo1 = list4.foldRight(0)( (a, b) => a + b)
   val foo2 = list4.foldRight(0) { (a, b) => a + b }
   val foo3 = list4.foldRight(0)(_ + _)
+  val foo4 = list4.map { x => x+ 1 }
 }
