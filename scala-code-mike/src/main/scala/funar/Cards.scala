@@ -37,6 +37,7 @@ object Rank {
 
   val disordered: Seq[Rank] = Seq(Three, Jack, Six, Nine, Two, Ace)
 
+  // this is available for implicit parameters of type Ordering[Rank]
   implicit val rankOrdering: Ordering[Rank] = Ordering.by(_.value)
 
   val ordered = disordered.sorted
