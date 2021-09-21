@@ -39,7 +39,7 @@ object Rank {
 
   val rankOrdering: Ordering[Rank] = Ordering.by(_.value)
 
-  val ordered = disordered.sorted(rankOrdering)
+  val ordered = disordered.sorted
 }
 
 
