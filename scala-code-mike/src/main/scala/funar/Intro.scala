@@ -147,6 +147,8 @@ object Intro {
 
   implicit def toIntWithRange(x: Int): IntWithRange = IntWithRange(x)
 
+  implicit def fromIntWithRange(intgr: IntWithRange): Int = intgr.x
+
   val bar = 15.rangeUpTo(17)
 
 }
