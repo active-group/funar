@@ -105,4 +105,6 @@ object Intro {
   val foo4 = list4.map { x => x+ 1 }
 
   def plus(x: Int, y: Int): Int = x + y
+
+  def plus1(x: Int): Int => Int = { y => x + y}
 }
