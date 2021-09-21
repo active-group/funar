@@ -37,7 +37,9 @@ object Rank {
 
   val disordered: Seq[Rank] = Seq(Three, Jack, Six, Nine, Two, Ace)
 
-  val ordered = disordered.sorted
+  val rankOrdering: Ordering[Rank] = Ordering.by(_.value)
+
+  val ordered = disordered.sorted(rankOrdering)
 }
 
 
