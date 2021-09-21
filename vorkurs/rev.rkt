@@ -10,4 +10,14 @@
        (* (first list)
           (list-product (rest list)))))))
 
-(list-product (list 1 2 3 4))
+;(list-product (list 1 2 3 4))
+
+
+(define list-product1
+  (lambda (list acc) ; acc is the product of all the elements already seen
+    (cond
+      ((empty? list) acc)
+      ((cons? list)
+       (list-product1 (rest list) (* acc (first list)))))))
+
+(list-product1 (list 1 2 3 4 5) 1)
