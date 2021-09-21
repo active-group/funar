@@ -95,5 +95,8 @@ object Intro {
       }
     loop(animals, Nil)
   }
-  
+
+  val list4 = List(5, 7, 12, 13)
+
+  val foo = list4.foldRight(0)( (a, b) => a + b1)
 }
