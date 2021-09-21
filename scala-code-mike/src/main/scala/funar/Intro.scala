@@ -69,17 +69,22 @@ object Intro {
 
   // Lisp: first = car / rest = cdr
 
+  /*
   def runOverAnimals(animals: List[Animal]): List[Animal] =
     animals match {
       case Nil => Nil
       case first :: rest => first.runOver :: runOverAnimals(rest)
     }
+  */
 
-  @tailrec  
-  def runOverAnimals1(animals: List[Animal], acc: List[Animal]): List[Animal] =
-    animals match {
-      case Nil => acc.reverse
-      case first :: rest => runOverAnimals1(rest, runOverAnimal(first) :: acc)
-    }
+  def runOverAnimals(animals: List[Animal]): List[Animal] = {
+    @tailrec  
+    def runOverAnimals1(animals: List[Animal], acc: List[Animal]): List[Animal] =
+      animals match {
+        case Nil => acc.reverse
+        case first :: rest => runOverAnimals1(rest, runOverAnimal(first) :: acc)
+      }
+    runOverAnimals1(animals, Nil)
+  }
   
 }
