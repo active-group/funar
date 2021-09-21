@@ -8,5 +8,7 @@ object Suit {
   case object Hearts extends Suit
 
   val all = Seq(Diamonds, Clubs, Spades, Hearts)
+
+  
 }
 
