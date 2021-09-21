@@ -15,6 +15,6 @@ sealed trait Rank {
 }
 
 object Rank {
-  case object Two extends Rank { val value = 2 }
+  case object Two extends Rank { override val value = 2 }
 }
 
