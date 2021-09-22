@@ -53,10 +53,10 @@ object DB {
       case Return(result) => next(result)
     }
 
-  val p1a: DB[Int] = splice(put("Mike", 15), (_) =>
-                     splice(get("Mike"), x =>
-                     splice(put("Mike", x+1), (_) =>
-                     splice(get("Mike"), y =>
+  val p1a: DB[Int] = splice(put("Mike", 15))((_) =>
+                     splice(get("Mike"))(x =>
+                     splice(put("Mike", x+1))((_) =>
+                     splice(get("Mike"))(y =>
                      Return(x+y)))))
 
   @tailrec
