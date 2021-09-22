@@ -44,12 +44,12 @@ object DB {
   def get(key: String): DB[Int] =
     Get(key, Return(_))
 
-  def splice[A, B](pa: DB[A], next: A => DB[B]): DB[B] =
+  def splice[A, B](pa: DB[A])(next: A => DB[B]): DB[B] =
     pa match {
       case Get(key, callback) =>
-        Get(key, value => splice(callback(value), next))
+        Get(key, value => splice(callback(value)(next))
       case Put(key, value, callback) => 
-        Put(key, value, (_) => splice(callback(()), next))
+        Put(key, value, (_) => splice(callback(()))(next))
       case Return(result) => next(result)
     }
 
