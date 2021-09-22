@@ -81,6 +81,13 @@ object DB {
                      splice(get("Mike"))(y =>
                      Return(x+y)))))
 
+  val p1b: DB[Int] = for {
+                       _ <- put("Mike", 15)
+                       x <- get("Mike")
+                       _ <- put("Mike", x+1)
+                       y <- get("Mike")                       
+                     } yield (x+y)
+
   @tailrec
   def runDB[A](program: DB[A], db: Map[String, Int]): A =
     program match {
