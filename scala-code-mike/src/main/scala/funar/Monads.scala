@@ -1,5 +1,9 @@
 package funar
 
+trait Functor[F] {
+  def map[A, B](f: A => B, x: F[A]): F[B]
+}
+
 // listMap[A, B](f: A => B, list: List[A]): List[B]
 
 object Functor {
