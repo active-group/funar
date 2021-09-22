@@ -47,6 +47,12 @@ object DB {
   case class Ask[Env, A](callback: Env => Reader[Env, A]) extends Reader[Env, A]
   case class ReturnR[Env, A](result: A) extends Reader[Env, A]
 
+  def runReader[Env, A](reader: Reader[Env, A], env: Env): A =
+    reader match {
+      case Ask(callback) => runReader(callback(env), env)
+      case ReturnR(result) => result
+    }
+
   val p1: DB[Int] = Put("Mike", 15, (_) =>
                     Get("Mike", x =>
                     Put("Mike", x + 1, (_) =>
