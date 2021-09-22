@@ -37,7 +37,8 @@ object Monoid {
   }
 
   def listMonoid[A] = new Monoid[List[A]] {
-
+    def op(x: List[A], y: List[A]): List[A] =
+      x ++ y
   }
 
   // pattern: type class (cf. Haskell)
