@@ -134,7 +134,7 @@ object Table {
   def tableProcessCommand(command: GameCommand, tableState: TableState): Seq[GameEvent] =
     command match {
       case GameCommand.DealHands(hands) =>
-        hands.map(GameEvent.HandDealt.apply)
+        hands.map(GameEvent.HandDealt.tupled)
       case GameCommand.PlayCard(player, card) => ???
     }
 }
