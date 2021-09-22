@@ -20,8 +20,9 @@ object Free {
   sealed trait Free[F[_], A] {
     def flatMap[B](next: A => Free[F, B]): Free[F, B] =
       this match {
-        case Pure(result) => ???
-        case Impure(command) => ???
+        case Pure(result) => next(result)
+        case Impure(command) =>
+          Impure(command)
       }
   }
   case class Pure[F[_], A](result: A) extends Free[F, A]
