@@ -44,8 +44,17 @@ object DB {
   def get(key: String): DB[Int] =
     Get(key, Return(_))
 
-  // 
-  // <R> Stream<R> 	flatMap(Function<? super T,? extends Stream<? extends R>> mapper)
+  // interface Stream<A> {
+  //   <B> Stream<B> flatMap(Function<A, Stream<B>> mapper)
+  //   def flatMap[B](mapper: A => Stream[B]): Stream[B]
+  // }
+  
+  // Monad:
+  // - type constructor M
+  // - return: A => M[A]
+  // - flatMap: (M[A], A => M[B]) => M[B]
+  // + monad laws
+
   def splice[A, B](pa: DB[A])(next: A => DB[B]): DB[B] =
     pa match {
       case Get(key, callback) =>
