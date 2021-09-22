@@ -10,7 +10,12 @@ object Free {
   sealed trait ReaderF[Env, SelfReference]
   case class Ask[Env, SelfReference](callback: Env => SelfReference) extends ReaderF[Env, SelfReference]
 
-  
+  sealed trait DBF[SelfReference]
+  case class Get[SelfReference](key: String, callback: Int => SelfReference)
+    extends DBF[SelfReference]
+  case class Put[SelfReference](key: String, value: Int, callback: Unit => SelfReference) 
+    extends DBF[SelfReference]]
+
 
 
 }
