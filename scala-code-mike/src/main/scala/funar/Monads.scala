@@ -48,7 +48,8 @@ object DB {
     pa match {
       case Get(key, callback) =>
         Get(key, value => splice(callback(value), next))
-      case Put(key, value, callback) => ???
+      case Put(key, value, callback) => 
+        Put(key, value, (_) => splice(callback(()), next))
       case Return(result) => next(result)
     }
 
