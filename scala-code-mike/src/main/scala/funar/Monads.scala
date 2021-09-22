@@ -45,7 +45,7 @@ object DB {
   
   sealed trait Reader[Env, A]
   case class Ask[Env, A](callback: Env => Reader[Env, A]) extends Reader[Env, A]
-  case class ReturnR[A](result: A) extends Reader[A]
+  case class ReturnR[A](result: A) extends Reader[Env, A]
 
   val p1: DB[Int] = Put("Mike", 15, (_) =>
                     Get("Mike", x =>
