@@ -24,7 +24,8 @@ object DB {
 
   val p1 = List(Put("Mike", 15), Get("Mike"), Put("Mike", ???))
 */
-  // trick:
+  // trick: continuation
+  // continuation-passing style / CPS
   sealed trait DB[A]
   case class Get[A](key: String, callback: Int => DB[A]) extends DB[A]
   // Unit only has one single member ()
