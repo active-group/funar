@@ -7,8 +7,10 @@ object Free {
   case class ReturnR[Env, A](result: A) extends Reader[Env, A]
 */
 
-case class Ask
+  sealed trait ReaderF[Env, SelfReference]
+  case class Ask[Env, SelfReference](callback: Env => SelfReference) extends ReaderF[Env, SelfReference]
 
+  
 
 
 }
