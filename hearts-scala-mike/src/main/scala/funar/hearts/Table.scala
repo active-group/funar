@@ -144,7 +144,7 @@ object Table {
             val event2 = GameEvent.TrickTaken(trickTaker, tableState1.trick)
             val tableState2 = processGameEvent(tableState1, event2)
             gameOver(tableState2) match {
-              case None => Seq(event1, event2, GameEvent.PlayerTurnChanged(trickTaker)))
+              case None => Seq(event1, event2, GameEvent.PlayerTurnChanged(trickTaker))
               case Some(winner) => ???
             }
           } else
