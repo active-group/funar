@@ -42,7 +42,7 @@ object DB {
     Put(key, value, (_) => Return(()))
 
   def get(key: String): DB[Int] =
-    Get(key, result = Return(result))                
+    Get(key, result => Return(result))                
 
   @tailrec
   def runDB[A](program: DB[A], db: Map[String, Int]): A =
