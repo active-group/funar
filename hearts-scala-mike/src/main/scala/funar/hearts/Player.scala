@@ -9,3 +9,7 @@ case class Player(id: String, name: String) {
 
   override def hashCode: Int = this.id.hashCode
 }
+
+object Player {
+  
+}
