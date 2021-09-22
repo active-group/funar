@@ -60,7 +60,7 @@ object Teletype {
     interpretUnsafe(effects)(sideEffect)(m)
   }
 
-  // R is U + Teletype
+  // R is U + Teletype - IO
   def runTeletype[R, U, A](effects: Eff[R, A])
     (implicit m: Member.Aux[Teletype, R, U],
               io: _io[U]): Eff[U, A] = {
