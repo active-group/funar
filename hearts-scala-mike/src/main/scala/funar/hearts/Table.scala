@@ -43,7 +43,7 @@ object Table {
 
   type PlayerPiles = Map[Player, Pile]
 
-  case class TableState(players: List[Player],
+  case class TableState(players: List[Player],  // player whose turn it is is at the front
                         hands: PlayerHands,
                         piles: PlayerPiles,
                         trick: Trick)
@@ -89,6 +89,7 @@ object Table {
         currentPlayer(tableState) == player)
   }
 
+  // turn: 4 cards on the trick
   def turnOver(tableState: TableState): Boolean =
     tableState.players.length == tableState.trick.length
 
