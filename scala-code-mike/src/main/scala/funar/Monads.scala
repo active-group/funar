@@ -44,6 +44,8 @@ object DB {
   def get(key: String): DB[Int] =
     Get(key, Return(_))
 
+  // 
+  // <R> Stream<R> 	flatMap(Function<? super T,? extends Stream<? extends R>> mapper)
   def splice[A, B](pa: DB[A])(next: A => DB[B]): DB[B] =
     pa match {
       case Get(key, callback) =>
