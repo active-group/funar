@@ -146,7 +146,7 @@ object Table {
             gameOver(tableState2) match {
               case None => Seq(event1, event2, GameEvent.PlayerTurnChanged(trickTaker))
               case Some(winner) =>
-                Seq(event1, event2, GameEvent.GameWon(winner))
+                Seq(event1, event2, GameEvent.GameEnded(winner))
             }
           } else
             Seq(event1, GameEvent.PlayerTurnChanged(playerAfter(tableState1, player)))
