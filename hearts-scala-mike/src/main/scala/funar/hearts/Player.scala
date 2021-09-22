@@ -47,6 +47,9 @@ object Player {
       case GameEnded(winner) => state
     }
 
-    type EventProcessor[Event, Command] = Event => Seq[Command]
+    // Eff: free monad from the eff library
+    type EventProcessor[Effects, Event, Command] = Event => Eff[Effects, Seq[Command]]
+
+    type Strategy[Effects] = Player => EventProcessor[Effects, GameEvent, GameCommand]
 
 }
