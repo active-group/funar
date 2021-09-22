@@ -36,8 +36,8 @@ object Monoid {
     def identity = 0
   }
 
-  def listMonoid = new Monoid[List[A]] {
-    
+  def listMonoid[A] = new Monoid[List[A]] {
+
   }
 
   // pattern: type class (cf. Haskell)
