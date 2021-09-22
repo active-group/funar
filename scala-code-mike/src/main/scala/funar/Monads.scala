@@ -42,7 +42,9 @@ object DB {
     Put(key, value, (_) => Return(()))
 
   def get(key: String): DB[Int] =
-    Get(key, result => Return(result))                
+    Get(key, Return(_))
+
+  def splice[A](pa: DB[A], pb: DB[B]): 
 
   @tailrec
   def runDB[A](program: DB[A], db: Map[String, Int]): A =
