@@ -28,6 +28,10 @@ object DB {
   // continuation-passing style / CPS
   sealed trait DB[A] {
     def flatMap[B](next: A => DB[B]): DB[B] = splice(this)(next)
+    def     map[B](f:    A =>    B): DB[B] =
+      this match {
+        
+      }
 
   }
   case class Get[A](key: String, callback: Int => DB[A]) extends DB[A]
