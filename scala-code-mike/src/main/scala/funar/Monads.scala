@@ -38,7 +38,7 @@ object DB {
   def runDB[A](program: DB[A], db: Map[String, Int]): A =
     program match {
       case Get(key, callback) => 
-        callback(db(key))
+        runDB(callback(db(key)), db)
       case Put(key, value, callback) => ???
       case Return(result) => result
     }
