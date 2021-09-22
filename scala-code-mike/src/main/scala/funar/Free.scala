@@ -35,7 +35,7 @@ object Free {
   case class Pure[F[_], A](result: A) extends Free[F, A]
   case class Impure[F[_], A](command: F[Free[F, A]]) extends Free[F, A]
 
-  def freeMonad[F[_]](implicit fFunctor: Functor[F]) = new Monad[Free[F, *]] { // * says this is the type parameter for the monad
+  implicit def freeMonad[F[_]](implicit fFunctor: Functor[F]) = new Monad[Free[F, *]] { // * says this is the type parameter for the monad
     def pure[A](x: A): Free[F,A] = Pure(x)
     def flatMap[A, B](fa: Free[F,A])(next: A => Free[F,B]): Free[F,B] =
       fa match {
