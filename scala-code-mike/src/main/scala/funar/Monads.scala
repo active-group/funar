@@ -31,7 +31,7 @@ object DB {
     def     map[B](f:    A =>    B): DB[B] =
       this match {
         case Get(key, callback) =>
-          Get(key, f)
+          Get(key, 
         case Put(key, value, callback) => ???
         case Return(result) => Return(f(result))
       }
