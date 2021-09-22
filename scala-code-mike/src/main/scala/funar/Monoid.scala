@@ -39,6 +39,7 @@ object Monoid {
   def listMonoid[A] = new Monoid[List[A]] {
     def op(x: List[A], y: List[A]): List[A] =
       x ++ y
+    def identity = List.empty
   }
 
   // pattern: type class (cf. Haskell)
