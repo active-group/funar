@@ -1,5 +1,7 @@
 package funar
 
+import scala.annotation.tailrec
+
 /*
 DSL for database access / dependency injection
 key-value store: String |-> Int
