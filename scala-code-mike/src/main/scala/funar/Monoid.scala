@@ -36,6 +36,7 @@ object Monoid {
     def identity = 0
   }
 
+  def listMonoid 
 
   // pattern: type class (cf. Haskell)
   implicit def pack[A](x: A)(implicit monoid: Monoid[A]): MonoidPackage[A] =
