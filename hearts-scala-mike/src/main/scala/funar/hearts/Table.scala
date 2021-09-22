@@ -115,5 +115,5 @@ object Table {
 
   def tableProcessEvent(event: GameEvent, tableState: TableState): TableState = ???
 
-  def tableProcessCommand(command: GameCommand, tableState: TableState): Seq[Event] = ???
+  def tableProcessCommand(command: GameCommand, tableState: TableState): Seq[GameEvent] = ???
 }
