@@ -43,6 +43,7 @@ object Table {
 
   type PlayerPiles = Map[Player, Pile]
 
+  // projection / query model
   case class TableState(players: List[Player],  // player whose turn it is is at the front
                         hands: PlayerHands,
                         piles: PlayerPiles,
@@ -111,4 +112,8 @@ object Table {
     val playerPile = playerPiles.getOrElse(player, Set.empty)
     playerPiles + (player -> playerPile.union(Set.from(cards)))
   }
+
+  def tableProcessEvent(event: GameEvent, tableState: TableState): TableState = ???
+
+  def tableProcessCommand(command: GameCommand, tableState: TableState): Seq[Event] = ???
 }
