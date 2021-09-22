@@ -48,7 +48,7 @@ object DB {
     pa match {
       case Get(key, callback) => ???
       case Put(key, value, callback) => ???
-      case Return(result) => ???
+      case Return(result) => result
     }
 
   @tailrec
