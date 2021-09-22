@@ -22,8 +22,11 @@ object DB {
 
   val p1 = List(Put("Mike", 15), Get("Mike"), Put("Mike", ???))
 */
+  // trick:
   sealed trait DB
-  case class Get(key: String)
+  case class Get(key: String, callback: Int => DB) extends DB
+  // Unit only has one single member
+  case class Put(key: String, value: Int, callback: Unit => DB) extends DB
 
 }
 
