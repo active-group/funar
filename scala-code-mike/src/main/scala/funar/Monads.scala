@@ -32,7 +32,7 @@ object DB {
       this match {
         case Get(key, callback) => ???
         case Put(key, value, callback) => ???
-        case Return(result) => f(result)
+        case Return(result) => Return(f(result))
       }
 
   }
