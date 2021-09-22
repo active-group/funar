@@ -42,7 +42,7 @@ object Monoid {
     def identity = List.empty
   }
 
-  def optionMonoid[A](aMonoid: Monoid[A]) = new Monoid[Option[A]] {
+  def optionMonoid[A](aMonoid: Semigroup[A]) = new Monoid[Option[A]] {
     def op(x: Option[A], y: Option[A]): Option[A] =
       (x, y) match {
         case (None, None) => None
