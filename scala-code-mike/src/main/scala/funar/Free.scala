@@ -16,6 +16,11 @@ object Free {
   case class Put[SelfReference](key: String, value: Int, callback: Unit => SelfReference) 
     extends DBF[SelfReference]
 
+  // F is something like DBF, ReaderF[Env, _]
+  sealed trait Free[F[_], A]
+  case class Pure[F[_], A](result: A) extends Free[F, A]
+  case class Impure[F[_], A](command: F[Free[F, A]]) extends Free[F, A]
+
 
 
 }
