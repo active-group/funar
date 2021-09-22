@@ -42,6 +42,18 @@ object Monoid {
     def identity = List.empty
   }
 
+  def optionMonoid = new Monoid[Option[A]] {
+    def op(x: Option[A], y: Option[A]): Option[A] =
+      (x, y) match {
+        case (None, None) => None
+        case (Some(xx), None) => Some(xx)
+        case (None, Some(yy)) => Some(yy)
+        case (Some(xx), Some(yy)) => ???
+      }
+
+    def identity = None
+  }
+
   // pattern: type class (cf. Haskell)
   implicit def pack[A](x: A)(implicit monoid: Monoid[A]): MonoidPackage[A] =
     MonoidPackage(x, monoid)
