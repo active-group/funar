@@ -39,7 +39,8 @@ object DB {
     program match {
       case Get(key, callback) => 
         runDB(callback(db(key)), db)
-      case Put(key, value, callback) => ???
+      case Put(key, value, callback) =>
+        callback   db + (key -> value)
       case Return(result) => result
     }
 }
