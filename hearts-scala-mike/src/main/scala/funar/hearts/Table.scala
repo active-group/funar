@@ -145,10 +145,11 @@ object Table {
             val tableState2 = tableProcessEvent(event2, tableState1)
             gameOver(tableState2) match {
               case None => Seq(event1, event2, GameEvent.PlayerTurnChanged(trickTaker))
-              case Some(winner) => ???
+              case Some(winner) =>
+                Seq(event1, event2, GameEvent.GameWon(winner))
             }
           } else
-            ???
+            Seq(event1, GameEvent.PlayerTurnChanged(playerAfter(tableState1, player)))
         } else
           Seq(GameEvent.IllegalCardPlayed(player, card))
     }
