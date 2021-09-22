@@ -29,11 +29,18 @@ object DB {
   case class Put[A](key: String, value: Int, callback: Unit => DB[A]) extends DB[A]
   case class Return[A](result: A) extends DB[A]
 
-  val p1 = Put("Mike", 15, (_) =>
-           Get("Mike", x =>
-           Put("Mike", x + 1, (_) =>
-           Get("Mike", y =>
-           Return(x+y)))))
+  val p1: DB[Int] = Put("Mike", 15, (_) =>
+                    Get("Mike", x =>
+                    Put("Mike", x + 1, (_) =>
+                    Get("Mike", y =>
+                    Return(x+y)))))
+
+  def runDB(program: DB[A], db: Map[String, Int]): A =
+    program match {
+      case Get(key, callback) => ???
+      case Put(key, value, callback) => ???
+      case Return(result) => ???
+    }
 }
 
 trait Functor[F[_]] { // [_]: F is a type constructor
