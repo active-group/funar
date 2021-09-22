@@ -44,7 +44,12 @@ object DB {
   def get(key: String): DB[Int] =
     Get(key, Return(_))
 
-  def splice[A](pa: DB[A], pb: DB[B]): 
+  def splice[A, B](pa: DB[A], next: A => DB[B]): DB[B] =
+    pa match {
+      case Get(key, callback) => ???
+      case Put(key, value, callback) => ???
+      case Return(result) => ???
+    }
 
   @tailrec
   def runDB[A](program: DB[A], db: Map[String, Int]): A =
