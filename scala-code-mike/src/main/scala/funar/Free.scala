@@ -14,7 +14,7 @@ object Free {
   case class Get[SelfReference](key: String, callback: Int => SelfReference)
     extends DBF[SelfReference]
   case class Put[SelfReference](key: String, value: Int, callback: Unit => SelfReference) 
-    extends DBF[SelfReference]]
+    extends DBF[SelfReference]
 
 
 
