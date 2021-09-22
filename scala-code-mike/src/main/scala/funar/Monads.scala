@@ -32,7 +32,8 @@ object DB {
       this match {
         case Get(key, callback) =>
           Get(key, value => callback(value).map(f))
-        case Put(key, value, callback) => ???
+        case Put(key, value, callback) =>
+          Put(key, value, (_) => callback(()).map(f))
         case Return(result) => Return(f(result))
       }
 
