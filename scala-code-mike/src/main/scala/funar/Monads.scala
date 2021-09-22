@@ -23,11 +23,11 @@ object DB {
   val p1 = List(Put("Mike", 15), Get("Mike"), Put("Mike", ???))
 */
   // trick:
-  sealed trait DB
-  case class Get(key: String, callback: Int => DB) extends DB
+  sealed trait DB[A]
+  case class Get(key: String, callback: Int => DB[A]) extends DB[A]
   // Unit only has one single member ()
-  case class Put(key: String, value: Int, callback: Unit => DB) extends DB
-  case class Return(result: Int) extends DB
+  case class Put(key: String, value: Int, callback: Unit => DB[A]) extends DB[A]
+  case class Return(result: A) extends DB[A]
 
   val p1 = Put("Mike", 15, (_) =>
            Get("Mike", x =>
