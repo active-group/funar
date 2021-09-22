@@ -138,11 +138,11 @@ object Table {
       case GameCommand.PlayCard(player, card) =>
         if (playValid(tableState, player, card)) {
           val event1 = GameEvent.LegalCardPlayed(player, card)
-          val tableState1 = tableProcessEvent(tableState, event1)
+          val tableState1 = tableProcessEvent(event1, tableState)
           if (turnOver(tableState1)) {
             val trickTaker = whoTakesTrick(tableState1.trick)
             val event2 = GameEvent.TrickTaken(trickTaker, tableState1.trick)
-            val tableState2 = tableProcessEvent(tableState1, event2)
+            val tableState2 = tableProcessEvent(event2, tableState1)
             gameOver(tableState2) match {
               case None => Seq(event1, event2, GameEvent.PlayerTurnChanged(trickTaker))
               case Some(winner) => ???
