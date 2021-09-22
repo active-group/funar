@@ -11,12 +11,14 @@ y = get("Mike")
 return (x + y)
 */
 
-sealed trait DBCommand
-case class Put(key: String, value: Int) extends DBCommand
-case class Get(key: String) extends DBCommand
-case class Return(result: Int) extends DBCommand
+object DB {
+  sealed trait DBCommand
+  case class Put(key: String, value: Int) extends DBCommand
+  case class Get(key: String) extends DBCommand
+  case class Return(result: Int) extends DBCommand
 
-type DBProgram = List[DBCommand]
+  type DBProgram = List[DBCommand]
+}
 
 trait Functor[F[_]] { // [_]: F is a type constructor
   def map[A, B](f: A => B, x: F[A]): F[B]
