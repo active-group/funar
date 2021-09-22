@@ -1,0 +1,5 @@
+package funar
+
+object Free {
+  
+}
