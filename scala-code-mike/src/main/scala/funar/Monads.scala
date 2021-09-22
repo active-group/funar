@@ -12,12 +12,19 @@ return (x + y)
 */
 
 object DB {
+/* FAIL:
   sealed trait DBCommand
   case class Put(key: String, value: Int) extends DBCommand
   case class Get(key: String) extends DBCommand
   case class Return(result: Int) extends DBCommand
 
   type DBProgram = List[DBCommand]
+
+  val p1 = List(Put("Mike", 15), Get("Mike"), Put("Mike", ???))
+*/
+  sealed trait DB
+  case class Get(key: String)
+
 }
 
 trait Functor[F[_]] { // [_]: F is a type constructor
