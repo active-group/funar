@@ -1,6 +1,6 @@
 package funar
 
-trait Functor[F] {
+trait Functor[F[_]] {
   def map[A, B](f: A => B, x: F[A]): F[B]
 }
 
