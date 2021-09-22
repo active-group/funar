@@ -25,9 +25,15 @@ object DB {
   // trick:
   sealed trait DB
   case class Get(key: String, callback: Int => DB) extends DB
-  // Unit only has one single member
+  // Unit only has one single member ()
   case class Put(key: String, value: Int, callback: Unit => DB) extends DB
+  case class Return(result: Int) extends DB
 
+  val p1 = Put("Mike", 15, (_) =>
+           Get("Mike", x =>
+           Put("Mike", x + 1, (_) =>
+           Get("Mike", y =>
+           Return(x+y)))))
 }
 
 trait Functor[F[_]] { // [_]: F is a type constructor
