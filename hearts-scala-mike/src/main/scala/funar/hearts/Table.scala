@@ -115,10 +115,10 @@ object Table {
 
   def tableProcessEvent(event: GameEvent, tableState: TableState): TableState =
     event match {
-      case HandDealt(player, hand) => 
+      case GameEvent.HandDealt(player, hand) => 
         tableState.copy(hands = tableState.hands + (player -> hand),
                         trick = Trick.empty)
-      case PlayerTurnChanged(player) =>
+      case GameEvent.PlayerTurnChanged(player) =>
         tableState.copy(players = rotateTo(player, tableState.players))
       case GameEvent.LegalCardPlayed(player, card) =>
         tableState.copy(hands = takeCard(tableState.hands, player, card),
