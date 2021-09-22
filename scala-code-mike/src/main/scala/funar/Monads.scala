@@ -26,7 +26,9 @@ object DB {
 */
   // trick: continuation
   // continuation-passing style / CPS
-  sealed trait DB[A]
+  sealed trait DB[A] {
+    
+  }
   case class Get[A](key: String, callback: Int => DB[A]) extends DB[A]
   // Unit only has one single member ()
   case class Put[A](key: String, value: Int, callback: Unit => DB[A]) extends DB[A]
