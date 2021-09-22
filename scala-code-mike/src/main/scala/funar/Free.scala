@@ -33,9 +33,13 @@ object Free {
   case class Pure[F[_], A](result: A) extends Free[F, A]
   case class Impure[F[_], A](command: F[Free[F, A]]) extends Free[F, A]
 
-  def freeMonad[F[_]]() = new Monad[Free[F, *]] { // * says this is the type parameter for the monad
+  def freeMonad[F[_]](fFunctor: Functor[F]) = new Monad[Free[F, *]] { // * says this is the type parameter for the monad
     def pure[A](x: A): Free[F,A] = Pure(x)
-    def flatMap[A, B](fa: Free[F,A])(next: A => Free[F,B]): Free[F,B] = ???
+    def flatMap[A, B](fa: Free[F,A])(next: A => Free[F,B]): Free[F,B] =
+      fa match {
+        case Pure(result) => next(result)
+        case Impure(command) => ???
+      }
     def tailRecM[A, B](a: A)(f: A => Free[F,Either[A,B]]): Free[F,B] = ???
   } 
 
