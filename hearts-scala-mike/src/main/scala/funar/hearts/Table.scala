@@ -113,7 +113,23 @@ object Table {
     playerPiles + (player -> playerPile.union(Set.from(cards)))
   }
 
-  def tableProcessEvent(event: GameEvent, tableState: TableState): TableState = ???
+  def tableProcessEvent(event: GameEvent, tableState: TableState): TableState =
+    event match {
+      case HandDealt(player, hand) => 
+        tableState.copy(hands = tableState.hands + (player -> hand),
+                        trick = Trick.empty)
+      case PlayerTurnChanged(player) =>
+        tableState.copy(players = rotateTo(player, tableState.players))
+      case GameEvent.LegalCardPlayed(player, card) =>
+        tableState.copy(hands = takeCard(tableState.hands, player, card),
+                        trick = Trick.add(tableState.trick, player, card))
+      case GameEvent.IllegalCardPlayed(player, card) => tableState
+      case GameEvent.TrickTaken(player, trick) =>
+        tableState.copy(piles = addToPile(tableState.piles, player, Trick.cards(trick)),
+                        trick = Trick.empty)
+      case GameEvent.GameEnded(player) => tableState
+    }
+
 
   def tableProcessCommand(command: GameCommand, tableState: TableState): Seq[GameEvent] = ???
 }
