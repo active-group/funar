@@ -48,7 +48,7 @@ object Monoid {
         case (None, None) => None
         case (Some(xx), None) => Some(xx)
         case (None, Some(yy)) => Some(yy)
-        case (Some(xx), Some(yy)) => Some(aMonoid.op(x, y))
+        case (Some(xx), Some(yy)) => Some(aMonoid.op(xx, yy))
       }
 
     def identity = None
