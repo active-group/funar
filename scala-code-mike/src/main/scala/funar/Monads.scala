@@ -38,6 +38,9 @@ object DB {
                     Get("Mike", y =>
                     Return(x+y)))))
 
+  def put(key: String, value: Int): DB[Unit] =
+    Put(key, value, (_) => Return(()))                
+
   @tailrec
   def runDB[A](program: DB[A], db: Map[String, Int]): A =
     program match {
