@@ -34,7 +34,9 @@ object Free {
   case class Impure[F[_], A](command: F[Free[F, A]]) extends Free[F, A]
 
   def freeMonad[F[_]]() = new Monad[Free[F, *]] { // * says this is the type parameter for the monad
-    
+    def pure[A](x: A): funar.Free.Free[F,A] = ???
+    def flatMap[A, B](fa: funar.Free.Free[F,A])(f: A => funar.Free.Free[F,B]): funar.Free.Free[F,B] = ???
+    def tailRecM[A, B](a: A)(f: A => funar.Free.Free[F,Either[A,B]]): funar.Free.Free[F,B] = ???
   } 
 
 
