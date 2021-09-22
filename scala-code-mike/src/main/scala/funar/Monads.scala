@@ -35,6 +35,7 @@ object DB {
                     Get("Mike", y =>
                     Return(x+y)))))
 
+  @tailrec
   def runDB[A](program: DB[A], db: Map[String, Int]): A =
     program match {
       case Get(key, callback) => 
