@@ -42,6 +42,10 @@ object DB {
   // Unit only has one single member ()
   case class Put[A](key: String, value: Int, callback: Unit => DB[A]) extends DB[A]
   case class Return[A](result: A) extends DB[A]
+  
+  sealed trait Reader[Env, A]
+  case class Ask[Env, A](callback: Env => Reader[Env, A]) extends Reader[Env, A]
+  case class ReturnR[A](result: A) extends Reader[A]
 
   val p1: DB[Int] = Put("Mike", 15, (_) =>
                     Get("Mike", x =>
