@@ -135,6 +135,21 @@ object Table {
     command match {
       case GameCommand.DealHands(hands) =>
         hands.map(GameEvent.HandDealt.tupled).toSeq
-      case GameCommand.PlayCard(player, card) => ???
+      case GameCommand.PlayCard(player, card) =>
+        if (playValid(tableState, player, card)) {
+          val event1 = GameEvent.LegalCardPlayed(player, card)
+          val tableState1 = processGameEvent(tableState, event1)
+          if (turnOver(tableState1)) {
+            val trickTaker = whoTakesTrick(tableState1.trick)
+            val event2 = GameEvent.TrickTaken(trickTaker, tableState1.trick)
+            val tableState2 = processGameEvent(tableState1, event2)
+            gameOver(tableState2) match {
+              case None => Seq(event1, event2, GameEvent.PlayerTurnChanged(trickTaker)))
+              case Some(winner) => ???
+            }
+          } else
+            ???
+        } else
+          Seq(GameEvent.IllegalCardPlayed(player, card))
     }
 }
