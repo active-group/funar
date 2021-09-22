@@ -40,7 +40,7 @@ object DB {
       case Get(key, callback) => 
         runDB(callback(db(key)), db)
       case Put(key, value, callback) =>
-        callback   db + (key -> value)
+        runDB(callback(()), db + (key -> value))
       case Return(result) => result
     }
 }
