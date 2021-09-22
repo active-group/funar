@@ -17,4 +17,6 @@ object Functor {
     def map[A, B](f: A => B, x: List[A]): List[B] =
       x.map(f)
   }
+
+
 }
