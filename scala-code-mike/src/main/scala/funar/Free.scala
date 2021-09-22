@@ -38,7 +38,8 @@ object Free {
     def flatMap[A, B](fa: Free[F,A])(next: A => Free[F,B]): Free[F,B] =
       fa match {
         case Pure(result) => next(result)
-        case Impure(command) => ???
+        case Impure(command) =>
+          Impure(command.map(free => free.flatMap(next)))
       }
     def tailRecM[A, B](a: A)(f: A => Free[F,Either[A,B]]): Free[F,B] = ???
   } 
