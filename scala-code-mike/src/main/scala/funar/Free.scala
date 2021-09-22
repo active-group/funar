@@ -1,5 +1,9 @@
 package funar
 
+import cats._
+import cats.implicits._ 
+import cats.data._
+
 object Free {
 /*
   sealed trait Reader[Env, A]
@@ -29,7 +33,9 @@ object Free {
   case class Pure[F[_], A](result: A) extends Free[F, A]
   case class Impure[F[_], A](command: F[Free[F, A]]) extends Free[F, A]
 
-
+  def freeMonad[F[_]]() = new Monad[Free[F, *]] { // * says this is the type parameter for the monad
+    
+  } 
 
 
 
