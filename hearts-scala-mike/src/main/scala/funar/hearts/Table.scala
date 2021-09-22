@@ -3,6 +3,8 @@ package funar.hearts
 import scala.annotation.tailrec
 
 object Table {
+  // should only call this with 4 cards
+  // non-total function
   def whoTakesTrick(trick: Trick): Player = {
     assert(!trick.isEmpty)
     @tailrec
@@ -36,6 +38,7 @@ object Table {
       case _ => 0
     }
 
+  // cards taken from trick
   type Pile = Set[Card]
 
   type PlayerPiles = Map[Player, Pile]
