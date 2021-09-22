@@ -23,12 +23,14 @@ object Free {
   // F is something like DBF, ReaderF[Env, _]
   sealed trait Free[F[_], A] {
     // this would work if we could say that F is a functor
+    /*
     def flatMap[B](next: A => Free[F, B]): Free[F, B] =
       this match {
         case Pure(result) => next(result)
         case Impure(command) => ???
 //          Impure(command)
       }
+    */
   }
   case class Pure[F[_], A](result: A) extends Free[F, A]
   case class Impure[F[_], A](command: F[Free[F, A]]) extends Free[F, A]
