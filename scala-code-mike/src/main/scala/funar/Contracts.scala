@@ -64,6 +64,19 @@ object Contract {
   val zcb2 = zeroCouponBond(100, CHF, Date("2021-12-24"))
   val swap = And(zcb1, Pay(zcb2))
 
+  // smart constructor
+  def multiple(amount: Double, contract: Contract): Contract =
+    contract match {
+      case Zero => Zero
+      case _ => Multiple(amount, contract)
+    }
+
+  def and(contract1: Contract, contract2: Contract): Contract =
+    (contract1, contract2) match {
+      case (_, Zero) => contract1
+      case (Zero, _) => contract2
+      _ => And(contract1, contract2)
+    }
 
   sealed trait Direction {
     def flip: Direction
