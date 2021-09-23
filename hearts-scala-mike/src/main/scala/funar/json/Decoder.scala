@@ -97,7 +97,8 @@ object Decode {
 
   // parsing & validation
   // would like:
-  def map2[A, B, C](a: Decoder[A], b: Decoder[B])(f: (A, B) => C): Decoder[C] = ???
+  def map2[A, B, C](a: Decoder[A], b: Decoder[B])(f: (A, B) => C): Decoder[C] =
+    ???
   // Functor is too weak
 
   // applicative functor
