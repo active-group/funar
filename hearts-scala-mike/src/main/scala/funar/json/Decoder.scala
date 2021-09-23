@@ -94,6 +94,7 @@ object Decode {
     def map[A, B](fa: Decoder[A])(f: A => B): Decoder[B] = { json =>
       fa(json).map(f)
     }
+  }
 
   // parsing & validation
   // would like:
@@ -133,9 +134,6 @@ object Decode {
         }
       loop(a)
     }
-  }
-
-
   }
 
 
