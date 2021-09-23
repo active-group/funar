@@ -10,6 +10,9 @@ Zero-Coupon Bond
 - currency
 - later
 
+3. ask for another example
+   Either it's already possible; if not, repeat.
+
 */
 sealed trait Currency
 case object CHF extends Currency
@@ -34,7 +37,7 @@ sealed trait Contract
 case class One(currency: Currency) extends Contract
 case class Multiple(amount: Double, contract: Contract) extends Contract
 case class Later(date: Date, contract: Contract) extends Contract
-
+case class And(contract1: Contract, contract2: Contract) extends Contract
 
 object Contract {
   val oneeur = One(EUR)
@@ -43,5 +46,5 @@ object Contract {
 
   def zeroCouponBond(amount: Double, currency: Currency, date: Date): Contract =
     Later(date, Multiple(amount, One(currency)))
-    
+
 }
