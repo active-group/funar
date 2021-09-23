@@ -75,7 +75,7 @@ object Contract {
     (contract1, contract2) match {
       case (_, Zero) => contract1
       case (Zero, _) => contract2
-      _ => And(contract1, contract2)
+      case _ => And(contract1, contract2)
     }
 
   sealed trait Direction {
@@ -100,7 +100,7 @@ object Contract {
       case One(currency) => (Seq(Payment(today, Long, 1, currency)), Zero)
       case Multiple(amount, contract) => {
         val (ps, res) = payments(contract, today)
-        (ps.map(_.multiply(amount)), Multiple(amount, res)) 
+        (ps.map(_.multiply(amount)), multiple(amount, res)) 
       }
 
       case Later(date, contract) => 
@@ -111,7 +111,7 @@ object Contract {
       case And(contract1, contract2) => {
         val (ps1, res1) = payments(contract1, today)
         val (ps2, res2) = payments(contract2, today)
-        (ps1++ps2, And(res1, res2))
+        (ps1++ps2, and(res1, res2))
       }
       case Pay(contract) => {
         val (ps, res) = payments(contract, today)
