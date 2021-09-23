@@ -62,7 +62,12 @@ object Contract {
   val zcb2 = zeroCouponBond(100, CHF, Date("2021-12-24"))
   val swap = And(zcb1, Pay(zcb2))
 
-  
+
+  sealed trait Direction
+  case object Long extends Direction
+  case object Short extends Direction
+
+  case class Payment(date: Date, direction: Direction, amount: Double, currency: Currency)
 
   def payments(contract: Contract): Seq[Payment] = ???
 
