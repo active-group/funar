@@ -90,6 +90,8 @@ object Decode {
     }
   }
 
+  def fail[A](error: Error): Decoder[A] = {_ => Left(error)}
+
   implicit val decoderFunctor: Functor[Decoder] = new Functor[Decoder] {
     def map[A, B](fa: Decoder[A])(f: A => B): Decoder[B] = { json =>
       fa(json).map(f)
