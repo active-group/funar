@@ -6,5 +6,6 @@ Zero-Coupon Bond
 "receive 100EUR on Dec 24 2021"
 
 */
+sealed
 
 case class ZeroCouponBond(amount: Double, currency: Currency, date: Date)
