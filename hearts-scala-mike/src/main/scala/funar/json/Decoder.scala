@@ -102,7 +102,9 @@ object Decode {
 
   // applicative functor
   implicit val decoderApplicative: Applicative[Decoder] = new Applicative[Decoder] {
-      
+    
+    def pure[A](x: A): Decoder[A] = ???
+    def ap[A, B](ff: Decoder[A => B])(fa: Decoder[A]): Decoder[B] = ???
   }
 
 
