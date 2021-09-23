@@ -7,4 +7,4 @@ Zero-Coupon Bond
 
 */
 
-case class ZeroCouponBond()
+case class ZeroCouponBond(amount: Double, currency: Currency, date: Date)
