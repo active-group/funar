@@ -47,6 +47,12 @@ object Player {
       case GameEnded(winner) => state
     }
 
+  /*
+  sealed trait State[S, A] // manages a single, mutable variable of type S
+  case class Get[S]() extends State[S, S]
+  case class Put[S](newState: S) extends State[S, Unit]
+  */
+
   def playerProcessEventM[PlayerId, R](player: Player, event: GameEvent)
           (implicit member: State[PlayerState[PlayerId], *] |= R): Eff[R, Unit] =
     for {
