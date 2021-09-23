@@ -67,14 +67,20 @@ object Contract {
   case object Long extends Direction
   case object Short extends Direction
 
-  case class Payment(date: Date, direction: Direction, amount: Double, currency: Currency)
+  case class Payment(date: Date, direction: Direction, amount: Double, currency: Currency) {
+    
+  }
 
   // returns payments & residual contract
   def payments(contract: Contract, today: Date): (Seq[Payment], Contract) =
     contract match {
-      case Zero => ???
-      case One(currency) => ???
-      case Multiple(amount, contract) => ???
+      case Zero => (Seq.empty, Zero)
+      case One(currency) => (Seq(Payment(today, Long, 1, currency)), Zero)
+      case Multiple(amount, contract) => {
+        val (ps, res) = payments(contract, today)
+        
+      }
+
       case Later(date, contract) => ???
       case And(contract1, contract2) => ???
       case Pay(contract) => ???
