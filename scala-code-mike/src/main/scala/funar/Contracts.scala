@@ -66,11 +66,15 @@ object Contract {
   sealed trait Direction {
     def flip: Direction
   }
-  case object Long extends Direction
-  case object Short extends Direction
+  case object Long extends Direction {
+    def flip = Short
+  }
+  case object Short extends Direction {
+    def flip = Long
+  }
 
   case class Payment(date: Date, direction: Direction, amount: Double, currency: Currency) {
-    def multiply(factor: Double): Payment = this.copy(amount * factor)
+    def multiply(factor: Double): Payment = this.copy(amount = amount * factor)
   }
 
   // returns payments & residual contract
