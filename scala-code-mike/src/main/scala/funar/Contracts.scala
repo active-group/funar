@@ -75,6 +75,7 @@ object Contract {
 
   case class Payment(date: Date, direction: Direction, amount: Double, currency: Currency) {
     def multiply(factor: Double): Payment = this.copy(amount = amount * factor)
+    def flip: Payment = this.copy(direction = direction.flip)
   }
 
   // returns payments & residual contract
