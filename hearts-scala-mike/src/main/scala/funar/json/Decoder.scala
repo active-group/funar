@@ -99,7 +99,7 @@ object Decode {
     def flatMap[A, B](decoder: Decoder[A])(f: A => Decoder[B]): Decoder[B] = { Json =>
       decoder(Json).flatMap { valueA => f(valueA)(Json) }
     }
-    def pure[A](value: A) = succeed(value)
+    def pure[A](value: A) = {_ => Right(value)}
 
     def tailRecM[A, B](a: A)(f: A => Decoder[Either[A, B]]): Decoder[B] = { Json =>
       @tailrec def loop(a: A): Either[Error, B] =
