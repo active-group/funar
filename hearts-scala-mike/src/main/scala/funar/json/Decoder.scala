@@ -101,8 +101,8 @@ object Decode {
   // Functor is too weak
 
   // applicative functor
-  implicit val decoderApplicative: Applicative[Decoder] = new Applicative[Decoder] = {
-    
+  implicit val decoderApplicative: Applicative[Decoder] = new Applicative[Decoder] {
+      
   }
 
 
