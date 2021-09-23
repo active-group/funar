@@ -40,6 +40,7 @@ case class CurrencySwap(/* ... */) extends Contract
 
 sealed trait Contract
 // "one EUR now"
+case object Zero extends Contract
 case class One(currency: Currency) extends Contract
 case class Multiple(amount: Double, contract: Contract) extends Contract
 case class Later(date: Date, contract: Contract) extends Contract
