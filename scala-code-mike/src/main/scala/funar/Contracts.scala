@@ -7,4 +7,4 @@ Zero-Coupon Bond
 
 */
 
-case class 
+case class ZeroCouponBond()
