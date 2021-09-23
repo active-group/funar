@@ -33,9 +33,11 @@ sealed trait Contract
 // "one EUR now"
 case class One(currency: Currency) extends Contract
 case class Multiple(amount: Double, contract: Contract) extends Contract
+case class Later(date: Date, contract: Contract) extends Contract
 
 
 object Contract {
   val oneeur = One(EUR)
   val eur100 = Multiple(100, One(EUR))
+  val zcb1 = Later(Date("2021-12-24"), Multiple(100, One(EUR)))
 }
