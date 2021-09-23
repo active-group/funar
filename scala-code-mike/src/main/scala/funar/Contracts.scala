@@ -17,6 +17,9 @@ case class Date(desc: String) extends Ordered[Date] {
     this.desc.compare(that.desc)
 }
 
+// does not scale
+/*
 sealed trait Contract
 case class ZeroCouponBond(amount: Double, currency: Currency, date: Date) extends Contract
 case class CurrencySwap(/* ... */) extends Contract
+*/
