@@ -100,7 +100,8 @@ object Decode {
   def map2[A, B, C](a: Decoder[A], b: Decoder[B])(f: (A, B) => C): Decoder[C] = ???
   // Functor is too weak
 
-  
+  // applicative functor
+    
 
   implicit val decoderMonad: Monad[Decoder] = new Monad[Decoder] {
     def flatMap[A, B](decoder: Decoder[A])(f: A => Decoder[B]): Decoder[B] = { Json =>
