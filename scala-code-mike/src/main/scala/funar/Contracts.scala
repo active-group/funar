@@ -88,10 +88,10 @@ object Contract {
       }
 
       case Later(date, contract) => 
-        if (now >= date)
+        if (today >= date)
           payments(contract, today)
         else
-          (Seq.empty, contract)
+          (Seq.empty, Later(date, contract))
       case And(contract1, contract2) => ???
       case Pay(contract) => ???
     }
