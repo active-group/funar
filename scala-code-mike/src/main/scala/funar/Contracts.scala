@@ -10,8 +10,14 @@ Zero-Coupon Bond
 - currency
 - later
 
-3. ask for another example
+3. find combinators
+
+4. ask for another example
    Either it's already possible; if not, repeat.
+
+
+   currency swap:
+     on Dec 24 2021: receive 100EUR, pay 100CHF
 
 */
 sealed trait Currency
@@ -38,6 +44,10 @@ case class One(currency: Currency) extends Contract
 case class Multiple(amount: Double, contract: Contract) extends Contract
 case class Later(date: Date, contract: Contract) extends Contract
 case class And(contract1: Contract, contract2: Contract) extends Contract
+/// case class PayCurrency(currency: Currency) extends Contract
+// equivalently - inverts payment streams / swaps rights and obligations
+case class Pay(contract: Contract) extends Contract
+
 
 object Contract {
   val oneeur = One(EUR)
