@@ -84,7 +84,7 @@ object Contract {
       case One(currency) => (Seq(Payment(today, Long, 1, currency)), Zero)
       case Multiple(amount, contract) => {
         val (ps, res) = payments(contract, today)
-        
+        (ps.map(_.multiply(amount)), Multiple(amount, res)) 
       }
 
       case Later(date, contract) => ???
