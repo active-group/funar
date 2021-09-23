@@ -11,6 +11,7 @@ case object CHF extends Currency
 case object EUR extends Currency
 case object GBP extends Currency
 
+// Date("2021-12-24")
 case class Date(desc: String) extends Ordered[Date] {
   def compare(that: Date): Int =
     this.desc.compare(that.desc)
