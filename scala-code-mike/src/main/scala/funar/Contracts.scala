@@ -87,7 +87,11 @@ object Contract {
         (ps.map(_.multiply(amount)), Multiple(amount, res)) 
       }
 
-      case Later(date, contract) => ???
+      case Later(date, contract) => 
+        if (now >= date)
+          payments(contract, today)
+        else
+          (Seq.empty, contract)
       case And(contract1, contract2) => ???
       case Pay(contract) => ???
     }
