@@ -59,4 +59,7 @@ object Contract {
   def zeroCouponBond(amount: Double, currency: Currency, date: Date): Contract =
     Later(date, Multiple(amount, One(currency)))
 
+  val zcb2 = zeroCouponBond(100, CHF, Date("2021-12-24"))
+  val swap = And(zcb1, Pay(zcb2))
+
 }
