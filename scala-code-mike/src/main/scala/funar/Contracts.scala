@@ -37,4 +37,5 @@ case class Multiple(amount: Double, contract: Contract) extends Contract
 
 object Contract {
   val oneeur = One(EUR)
+  val eur100 = Multiple(100, One(EUR))
 }
