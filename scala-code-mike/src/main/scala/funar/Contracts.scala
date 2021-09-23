@@ -5,6 +5,11 @@ package funar
 Zero-Coupon Bond
 "receive 100EUR on Dec 24 2021"
 2. smash that into pieces / separate ideas
+
+- amount
+- currency
+- later
+
 */
 sealed trait Currency
 case object CHF extends Currency
@@ -23,3 +28,13 @@ sealed trait Contract
 case class ZeroCouponBond(amount: Double, currency: Currency, date: Date) extends Contract
 case class CurrencySwap(/* ... */) extends Contract
 */
+
+sealed trait Contract
+// "one EUR now"
+case class One(currency: Currency) extends Contract
+case class Multiple(amount: Double, contract: Contract) extends Contract
+
+
+object Contract {
+  val oneeur = One(EUR)
+}
