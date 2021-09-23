@@ -108,7 +108,7 @@ object Decode {
       fa(json) match {
         case Right(fav) =>
           ff(json) match {
-            case Right(ffv) => ffv(fav)
+            case Right(ffv) => Right(ffv(fav))
             case Left(error) => Left(error)
           }
         case Left(error) => Left(error)
