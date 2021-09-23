@@ -40,4 +40,8 @@ object Contract {
   val oneeur = One(EUR)
   val eur100 = Multiple(100, One(EUR))
   val zcb1 = Later(Date("2021-12-24"), Multiple(100, One(EUR)))
+
+  def zeroCouponBond(amount: Double, currency: Currency, date: Date): Contract =
+    Later(date, Multiple(amount, One(currency)))
+    
 }
