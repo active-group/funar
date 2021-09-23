@@ -91,7 +91,7 @@ object Player {
             case LegalCardPlayed(player1, card) => Eff.pure[Effects, Seq[GameCommand]](Seq.empty)
             case IllegalCardPlayed(player1, card) => Eff.pure[Effects, Seq[GameCommand]](Seq.empty)
             case TrickTaken(player1, trick) => Eff.pure[Effects, Seq[GameCommand]](Seq.empty)
-            case GameEnded(winner) => Eff.pure[Effects, Seq[GameCommand]](Seq.empty)
+ //           case GameEnded(winner) => Eff.pure[Effects, Seq[GameCommand]](Seq.empty)
           }
 
         } yield commands
