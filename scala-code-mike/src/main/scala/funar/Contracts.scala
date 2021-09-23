@@ -92,8 +92,16 @@ object Contract {
           payments(contract, today)
         else
           (Seq.empty, Later(date, contract))
-      case And(contract1, contract2) => ???
-      case Pay(contract) => ???
+      case And(contract1, contract2) => {
+        val (ps1, res1) = payments(contract1, today)
+        val (ps2, res2) = payments(contract2, today)
+        (ps1++ps2, And(res1, res2))
+      }
+      case Pay(contract) => {
+        val (ps, res) = payments(contract, today)
+        (ps.map(_.flip), Pay(res))
+      }
+        
     }
 
 }
