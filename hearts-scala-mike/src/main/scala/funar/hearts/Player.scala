@@ -47,6 +47,14 @@ object Player {
       case GameEnded(winner) => state
     }
 
+  def playerProcessEventM[PlayerId, R](player: Player, event: GameEvent)
+          (implicit member: State[PlayerState[PlayerId], *] |= R): Eff[R, Unit] =
+    for {
+      playerState <- get[R, PlayerState[PlayerId]]
+      playerState1 = playerProcessEvent(player, event, playerState)
+      _ <- put[R, PlayerState[PlayerId]](playerState1)
+    } yield ()
+
   // Eff: free monad from the eff library
   type EventProcessor[Effects, Event, Command] = Event => Eff[Effects, Seq[Command]]
 
