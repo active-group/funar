@@ -19,6 +19,13 @@ object Decode {
   }
   import Error._
 
+  /*
+  sealed trait Either[E,A]
+  // typically: error
+  case class Left[E, A](left: E) extends Either[E,A]
+  // typically: success
+  case class Right[E, A](right: A) extends Either[E,A] 
+  */
   type Decoder[A] = Json => Either[Error, A]
 
   def string: Decoder[String] = { json =>
@@ -82,5 +89,14 @@ object Decode {
       case _ => Left(Failure("not an object", json))       
     }
   }
+
+  implicit val decoderFunctor: Functor[Decoder] = new Functor[Decoder] {
+    def map[A, B](fa: Decoder[A])(f: A => B): Decoder[B] = { json =>
+      fa(json).map(f)
+    }
+
+  }
+
+  
  
 }
