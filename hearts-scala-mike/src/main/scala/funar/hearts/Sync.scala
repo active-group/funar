@@ -67,9 +67,6 @@ object Sync {
 
   type GameEventSourcing = Fx.fx2[State[TableState, *], EventSourcing[GameEvent, *]]
 
-  def foo[R](effects: Eff[R, Unit]): Eff[Fx.prepend[State[Int, *], R], Unit] =
-    effects.into[Fx.prepend[State[Int, *], R]]
-
   def playCommand[Effects : _tableState : _gameEventSourcing](players: Players[Effects], command: GameCommand): Eff[Effects, Unit] =
     for {
       events <- gameCommandEventsM[Effects](command)
