@@ -101,7 +101,10 @@ object Decode {
   // Functor is too weak
 
   // applicative functor
+  implicit val decoderApplicative: Applicative[Decoder] = new Applicative[Decoder] = {
     
+  }
+
 
   implicit val decoderMonad: Monad[Decoder] = new Monad[Decoder] {
     def flatMap[A, B](decoder: Decoder[A])(f: A => Decoder[B]): Decoder[B] = { Json =>
