@@ -62,4 +62,8 @@ object Contract {
   val zcb2 = zeroCouponBond(100, CHF, Date("2021-12-24"))
   val swap = And(zcb1, Pay(zcb2))
 
+  
+
+  def payments(contract: Contract): Seq[Payment] = ???
+
 }
