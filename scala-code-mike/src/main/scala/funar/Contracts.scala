@@ -63,12 +63,14 @@ object Contract {
   val swap = And(zcb1, Pay(zcb2))
 
 
-  sealed trait Direction
+  sealed trait Direction {
+    def flip: Direction
+  }
   case object Long extends Direction
   case object Short extends Direction
 
   case class Payment(date: Date, direction: Direction, amount: Double, currency: Currency) {
-    
+    def multiply(factor: Double): Payment = this.copy(amount * factor)
   }
 
   // returns payments & residual contract
