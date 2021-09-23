@@ -69,6 +69,7 @@ object Contract {
 
   case class Payment(date: Date, direction: Direction, amount: Double, currency: Currency)
 
-  def payments(contract: Contract): Seq[Payment] = ???
+  // returns payments & residual contract
+  def payments(contract: Contract, today: Date): (Seq[Payment], Contract) = ???
 
 }
