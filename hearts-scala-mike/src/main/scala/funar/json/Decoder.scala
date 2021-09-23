@@ -102,9 +102,18 @@ object Decode {
 
   // applicative functor
   implicit val decoderApplicative: Applicative[Decoder] = new Applicative[Decoder] {
-    
-    def pure[A](x: A): Decoder[A] = ???
-    def ap[A, B](ff: Decoder[A => B])(fa: Decoder[A]): Decoder[B] = ???
+    // same as in Monad
+    def pure[A](x: A): Decoder[A] = { _ => Right(x) }
+    def ap[A, B](ff: Decoder[A => B])(fa: Decoder[A]): Decoder[B] = { json =>
+      fa(json) match {
+        case Right(fav) =>
+          ff(json) match {
+            case Right(ffv) => ffv(fav)
+            case Left(error) => Left(error)
+          }
+        case Left(error) => Left(error)
+      }
+    }
   }
 
 
