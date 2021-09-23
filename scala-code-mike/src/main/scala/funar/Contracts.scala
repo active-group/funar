@@ -43,7 +43,7 @@ sealed trait Contract
 case class One(currency: Currency) extends Contract
 case class Multiple(amount: Double, contract: Contract) extends Contract
 case class Later(date: Date, contract: Contract) extends Contract
-// asssociative in meaning
+// asssociative in meaning: yay, semigroup
 case class And(contract1: Contract, contract2: Contract) extends Contract
 /// case class PayCurrency(currency: Currency) extends Contract
 // equivalently - inverts payment streams / swaps rights and obligations
