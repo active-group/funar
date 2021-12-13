@@ -36,6 +36,8 @@
  (beside overlay1 circle1)
  (beside circle1 overlay1))
 
+; Konstruktionsanleitung
+
 ; Kurzbeschreibung
 ; Quadratisches Kachelmuster erzeugen
 
@@ -47,6 +49,13 @@
               (above
                (beside circle1 star1)
                (beside star1 circle1)))
+
+; Funktionsdefinition
+
+; Gerüst:
+#;(define tile
+  (lambda (image1 image2)
+    ...))
 
 (define tile
   (lambda (image1 image2)
@@ -68,3 +77,12 @@ class C {
 }
 
 |#
+
+; Datenanalyse
+
+; Datendefinition
+
+; Haustier ist eins der folgenden:
+; - Hund - ODER -
+; - Katze - ODER -
+; - Schlange
