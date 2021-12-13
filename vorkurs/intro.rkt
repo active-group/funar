@@ -19,6 +19,7 @@
 ; - lambda mit Parameter
 ; - Definition
 ; - eingebaute / importierte Definition
+; lexikalische / statische Bindung
 
 (define circle1 (circle 50 "solid" "red"))
 (define square1 (square 100 "outline" "green"))
