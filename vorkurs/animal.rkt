@@ -107,3 +107,28 @@ class Dillo {
     (cond
       ((dillo? animal) (run-over-dillo animal))
       ((parrot? animal) (run-over-parrot animal)))))
+
+; Gemischte Daten von zusammengesetzten Daten
+
+; Eine Liste ist eins der folgenden:
+; - die leere Liste
+; - eine Cons-Liste aus erstem Element und Rest-Liste
+
+(define list-of-numbers
+  (signature (mixed empty-list
+                    cons-list)))
+
+(define-record empty-list
+  make-empty
+  empty?)
+
+(define empty (make-empty))
+
+; Eine Cons-Liste besteht aus:
+; - erstes Element
+; - Rest-Liste
+(define-record cons-list
+  cons
+  cons?
+  (first number)
+  (rest list-of-number))
