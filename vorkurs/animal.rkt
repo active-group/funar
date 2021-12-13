@@ -218,7 +218,7 @@ class Dillo {
                  (extract-odds (rest list)))
            (extract-odds (rest list)))))))
 
-(: list-filter ((number -> boolean) (list-of number) -> (list-of number)))
+(: list-filter ((%element -> boolean) (list-of %element) -> (list-of %element)))
 
 (check-expect (list-filter even? list4)
               (cons 8 (cons 4 empty)))
