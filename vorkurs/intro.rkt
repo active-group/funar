@@ -121,3 +121,33 @@ class C {
       ((string=? pet "cat") #t)
       ((string=? pet "dog") #t)
       ((string=? pet "snake") #f))))
+
+; Uhrzeit besteht aus / hat folgende Eigenschaften:
+; - Stunde
+; - Minute
+; zusammengesetzte Daten
+(define-record time
+  make-time ; Konstruktor
+  (time-hour natural) ; Selektor
+  (time-minute natural))
+
+(: make-time (natural natural -> time))
+(: time-hour (time -> natural))
+(: time-minute (time -> natural))
+
+; 12 Uhr 24 Minuten
+(define time1 (make-time 12 24))
+; 16:12 Uhr
+(define time2 (make-time 16 12))
+
+; Minuten seit Mitternacht ermitteln
+(: msm (time -> natural))
+
+(check-expect (msm time1)
+              744)
+(check-expect (msm time2)
+              972)
+
+(define msm
+  (lambda (time)
+    ...))
