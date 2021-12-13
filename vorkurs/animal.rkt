@@ -178,7 +178,7 @@ class Dillo {
 (define list-product
   (lambda (list)
     (cond
-      ((empty? list) 1)
+      ((empty? list) 1) ; neutrales Element bzgl. *
       ((cons? list)
        (* (first list)
           (list-product (rest list)))))))
