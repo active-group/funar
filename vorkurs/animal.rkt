@@ -145,3 +145,40 @@ class Dillo {
 
 ; 4elementige Liste: 8 4 7 3
 (define list4 (cons 8 list3))
+
+; Elemente einer Liste addieren
+(: list-sum (list-of-numbers -> number))
+
+(check-expect (list-sum list4) 22)
+
+; Schablone
+
+#;(define list-sum
+  (lambda (list)
+    (cond
+      ((empty? list) ...)
+      ((cons? list)
+       (first list)
+       (list-sum (rest list))
+       ...))))
+
+(define list-sum
+  (lambda (list)
+    (cond
+      ((empty? list) 0)
+      ((cons? list)
+       (+ (first list)
+          (list-sum (rest list)))))))
+
+; Alle Elemente einer Liste multiplizieren
+(: list-product (list-of-numbers -> number))
+
+(check-expect (list-product list4) 672)
+
+(define list-product
+  (lambda (list)
+    (cond
+      ((empty? list) 1)
+      ((cons? list)
+       (* (first list)
+          (list-product (rest list)))))))
