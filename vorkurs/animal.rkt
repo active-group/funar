@@ -131,4 +131,4 @@ class Dillo {
   cons
   cons?
   (first number)
-  (rest list-of-number))
+  (rest list-of-numbers))
