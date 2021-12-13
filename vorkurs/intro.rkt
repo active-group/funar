@@ -15,3 +15,21 @@
 (define square1 (square 100 "outline" "green"))
 (define star1 (star 50 "solid" "green"))
 (define overlay1 (overlay star1 circle1))
+
+; Zeilenkommentar
+
+#;(above
+ (beside circle1 star1)
+ (beside star1 circle1))
+
+#;(above
+ (beside overlay1 circle1)
+ (beside circle1 overlay1))
+
+(define tile
+  (lambda (image1 image2)
+    (above
+     (beside image1 image2)
+     (beside image2 image1))))
+
+(tile circle1 star1)
