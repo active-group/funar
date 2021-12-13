@@ -237,3 +237,30 @@ class Dillo {
 
 (: dillos (list-of dillo))
 (define dillos (cons dillo1 (cons dillo2 empty)))
+
+; Alle Zahlen einer Liste inkrementieren
+(: inc-list ((list-of number) -> (list-of number)))
+
+(check-expect (inc-list list4)
+              (cons 9 (cons 5 (cons 8 (cons 4 empty)))))
+
+(define inc-list
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cons (inc (first list))
+             (inc-list (rest list)))))))
+
+
+(define inc (lambda (x) (+ 1 x)))
+
+(: list-map ((%element -> %element2) (list-of %element) -> (list-of %element2)))
+
+(define list-map
+  (lambda (f list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cons (f (first list))
+             (list-map f (rest list)))))))
