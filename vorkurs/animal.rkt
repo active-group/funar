@@ -132,3 +132,15 @@ class Dillo {
   cons?
   (first number)
   (rest list-of-numbers))
+
+; 1elementige Liste: 5
+(define list1 (cons 5 empty))
+
+; 2elementige Liste: 7 5
+(define list2 (cons 7 (cons 5 empty)))
+
+; 3elementige Liste: 4 7 3
+(define list3 (cons 4 (cons 7 (cons 3 empty))))
+
+; 4elementige Liste: 8 4 7 3
+(define list4 (cons 8 list3))
