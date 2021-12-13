@@ -186,13 +186,15 @@ class Dillo {
        (* (first list)
           (list-product (rest list)))))))
 
-(define xxx
+(: list-fold (%b (%a %b -> %b) (list-of %a) -> %b))
+              
+(define list-fold
   (lambda (neutral op list)
     (cond
       ((empty? list) neutral)
       ((cons? list)
        (op (first list)
-          (xxx neutral op (rest list)))))))
+           (list-fold neutral op (rest list)))))))
 
 ; Gerade Zahlen aus einer Liste extrahieren
 (: extract-evens (list-of-numbers -> list-of-numbers))
