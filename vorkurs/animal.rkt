@@ -37,3 +37,24 @@ class Dillo {
 (define run-over-dillo
   (lambda (dillo)
     (make-dillo #f (dillo-weight dillo))))
+
+; Gürteltier füttern
+(: feed-dillo (dillo real -> dillo))
+
+(check-expect (feed-dillo dillo1 3)
+              (make-dillo #t 15))
+(check-expect (feed-dillo dillo2 10) dillo2)
+
+#;(define feed-dillo
+  (lambda (dillo amount)
+    (cond
+      ((dillo-alive? dillo)
+       (make-dillo #t (+ (dillo-weight dillo) amount)))
+      (else dillo))))
+
+(define feed-dillo
+  (lambda (dillo amount)
+    (make-dillo (dillo-alive? dillo)
+                (if (dillo-alive? dillo)
+                    (+ (dillo-weight dillo) amount)
+                    (dillo-weight dillo)))))
