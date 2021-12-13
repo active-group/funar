@@ -182,3 +182,19 @@ class Dillo {
       ((cons? list)
        (* (first list)
           (list-product (rest list)))))))
+
+; Gerade Zahlen aus einer Liste extrahieren
+(: extract-evens (list-of-numbers -> list-of-numbers))
+
+(check-expect (extract-evens list4)
+              (cons 8 (cons 4 empty)))
+
+(define extract-evens
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (if (even? (first list))
+           (cons (first list)
+                 (extract-evens (rest list)))   
+           (extract-evens (rest list)))))))
