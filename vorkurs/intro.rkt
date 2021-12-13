@@ -26,6 +26,15 @@
  (beside overlay1 circle1)
  (beside circle1 overlay1))
 
+; Kurzbeschreibung
+; Quadratisches Kachelmuster erzeugen
+
+; Signaturdeklaration
+(: tile (image image -> image))
+
+; Tests
+
+
 (define tile
   (lambda (image1 image2)
     (above
