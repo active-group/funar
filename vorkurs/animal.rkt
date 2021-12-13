@@ -9,10 +9,12 @@
 ; zusammengesetzte Daten
 (define-record dillo
   make-dillo
+  dillo? ; Prädikat
   (dillo-alive? boolean)
   (dillo-weight real))
 
 (: make-dillo (boolean real -> dillo))
+(: dillo? (any -> boolean))
 
 (define dillo1 (make-dillo #t 12)) ; lebendiges Gürteltier, 12kg
 (define dillo2 (make-dillo #f 10)) ; totes Gürteltier, 10kg
@@ -66,6 +68,7 @@ class Dillo {
 ; - Gewicht
 (define-record parrot
   make-parrot
+  parrot?
   (parrot-sentence string)
   (parrot-weight real))
 
@@ -102,5 +105,5 @@ class Dillo {
 (define run-over-animal
   (lambda (animal)
     (cond
-      (... ...)
-      (... ...))))
+      ((dillo? animal) (run-over-dillo animal))
+      ((parrot? animal) (run-over-parrot animal)))))
