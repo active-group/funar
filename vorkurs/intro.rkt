@@ -36,7 +36,7 @@
 (check-expect (tile circle1 star1)
               (above
                (beside circle1 star1)
-               (beside star1 circle1)))
+               (beside star1 circle1))
 
 (define tile
   (lambda (image1 image2)
