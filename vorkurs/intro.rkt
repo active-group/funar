@@ -3,7 +3,7 @@
 #reader(lib "beginner-reader.rkt" "deinprogramm" "sdp")((modname intro) (read-case-sensitive #f) (teachpacks ((lib "image.rkt" "teachpack" "deinprogramm" "sdp"))) (deinprogramm-settings #(#f write repeating-decimal #f #t none explicit #f ((lib "image.rkt" "teachpack" "deinprogramm" "sdp")))))
 
 
-
+(: x number)
 (define x (+ 12 23))
 (define y
   (* 12
@@ -20,7 +20,7 @@
 ; - Definition
 ; - eingebaute / importierte Definition
 ; lexikalische / statische Bindung
-
+(: circle1 image)
 (define circle1 (circle 50 "solid" "red"))
 (define square1 (square 100 "outline" "green"))
 (define star1 (star 50 "solid" "green"))
@@ -86,3 +86,38 @@ class C {
 ; - Hund - ODER -
 ; - Katze - ODER -
 ; - Schlange
+; Fallunterscheidung
+; speziell: Aufzählung
+(define pet (signature (enum "dog" "cat" "snake")))
+
+; Ist Haustier niedlich?
+(: cute? (pet -> boolean))
+
+(check-expect (cute? "cat") #t)
+(check-expect (cute? "dog") #t)
+(check-expect (cute? "snake") #f)
+
+; Gerüst
+#;(define cute?
+  (lambda (pet)
+    ...))
+
+; Schablone
+; wird aus der Signatur hergeleitet
+#;(define cute?
+  (lambda (pet)
+    ; Verzweigung, 1 Zweig pro Fall
+    ; Jeder Zweig besteht aus: (Bedingung Antwort)
+    (cond
+      ((string=? pet "cat") ...)
+      ((string=? pet "dog") ...)
+      ((string=? pet "snake") ...))))
+
+(define cute?
+  (lambda (pet)
+    ; Verzweigung, 1 Zweig pro Fall
+    ; Jeder Zweig besteht aus: (Bedingung Antwort)
+    (cond
+      ((string=? pet "cat") #t)
+      ((string=? pet "dog") #t)
+      ((string=? pet "snake") #f))))
