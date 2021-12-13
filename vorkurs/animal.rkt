@@ -214,3 +214,19 @@ class Dillo {
            (cons (first list)
                  (extract-odds (rest list)))
            (extract-odds (rest list)))))))
+
+(: list-filter ((number -> boolean) list-of-numbers -> list-of-numbers))
+
+(check-expect (list-filter even? list4)
+              (cons 8 (cons 4 empty)))
+(check-expect (list-filter odd? list4)
+              (cons 7 (cons 3 empty)))
+(define list-filter
+  (lambda (p? list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (if (p? (first list))
+           (cons (first list)
+                 (list-filter p? (rest list)))
+           (list-filter p? (rest list)))))))
