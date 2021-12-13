@@ -123,7 +123,7 @@ class C {
       ((string=? pet "snake") #f))))
 
 ; Uhrzeit besteht aus / hat folgende Eigenschaften:
-; - Stunde
+; - Stunde - UND -
 ; - Minute
 ; zusammengesetzte Daten
 (define-record time
@@ -148,6 +148,12 @@ class C {
 (check-expect (msm time2)
               972)
 
+; Schablone
+#;(define msm
+  (lambda (time)
+    ... (time-hour time) ... (time-minute time) ...))
+
 (define msm
   (lambda (time)
-    ...))
+    (+ (* 60 (time-hour time))
+       (time-minute time))))
