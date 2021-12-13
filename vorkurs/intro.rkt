@@ -10,6 +10,15 @@
      (* 23
         42)))
 
+(define f
+  (lambda (x)
+    (+ x y)))
+
+; Bindung zu einem Vorkommen einer Variable:
+; - innen nach außen suchen
+; - lambda mit Parameter
+; - Definition
+; - eingebaute / importierte Definition
 
 (define circle1 (circle 50 "solid" "red"))
 (define square1 (square 100 "outline" "green"))
