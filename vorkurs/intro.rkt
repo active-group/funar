@@ -46,3 +46,15 @@
 
 ; (tile circle1 star1)
 ;(tile "circle1" "star1")
+
+#|
+class C {
+  static int f(int x) {
+    x = x * 2;
+    return x + 1;
+  }
+
+  ... f(42) ...
+}
+
+|#
