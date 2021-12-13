@@ -60,3 +60,33 @@ class Dillo {
                 (if alive?
                     (+ weight amount)
                     weight))))
+
+; Ein Papagei hat folgende Eigenschaften:
+; - Satz
+; - Gewicht
+(define-record parrot
+  make-parrot
+  (parrot-sentence string)
+  (parrot-weight real))
+
+(: make-parrot (string real -> parrot))
+
+(define parrot1 (make-parrot "Hello!" 1))
+(define parrot2 (make-parrot "Goodbye!" 0.5))
+
+; Papagei überfahren
+(: run-over-parrot (parrot -> parrot))
+
+(check-expect (run-over-parrot parrot1)
+              (make-parrot "" 1))
+
+(define run-over-parrot
+  (lambda (parrot)
+    (make-parrot "" (parrot-weight parrot))))
+
+; Ein Tier ist eins der folgenden:
+; - Gürteltier
+; - Papagei
+; Fallunterscheidung
+; gemischte Daten
+(define animal (signature (mixed dillo parrot)))
