@@ -113,7 +113,7 @@ class Dillo {
 ; Eine Liste ist eins der folgenden:
 ; - die leere Liste
 ; - eine Cons-Liste aus erstem Element und Rest-Liste
-;                                               ^^^^^^ Selbstreferenz
+;                                               ^^^^^ Selbstreferenz
 
 (define list-of-numbers
   (signature (mixed empty-list
