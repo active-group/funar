@@ -86,3 +86,11 @@ Eine geometrische Figur ("shape") ist:
 2. Funktion schreiben, die für einen gegebenen Punkt sagt,
    ob dieser innerhalb der geometrischen Figur liegt oder nicht.
 -}
+
+data Position = Position Double Double
+
+data Shape = Square { llCorner :: Position, sideLength :: Double }
+
+isIn (Position px py) (Square (Position cx cy) length) =
+    px >= cx && py >= cy && px <= cx + length && py <= cy + length
+
