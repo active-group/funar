@@ -1,6 +1,4 @@
 module Intro where
-import GHC.Generics (Generic1(from1))
-import Data.Sequence (Seq(Empty))
 
 x :: Integer
 x = 10
