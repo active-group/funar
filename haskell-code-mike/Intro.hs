@@ -93,6 +93,12 @@ schönfinkeln f' a b = f' (a, b)
 entschönfinkeln :: (a -> b -> c) -> ((a, b) -> c)
 entschönfinkeln f (a, b) = f a b
 
+f1 = feedAnimal 1
+
+o :: (b -> c) -> (a -> b) -> (a -> c)
+o f g = \ a -> f (g a)
+
+
 {-
 Eine geometrische Figur ("shape") ist:
 - Kreis, hat Mittelpunkt und Radius - ODER -
