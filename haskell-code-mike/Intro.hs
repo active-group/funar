@@ -81,8 +81,9 @@ feedAnimal' (amount, Dillo Alive weight) = Dillo Alive (weight + amount)
 feedAnimal' (amount, dillo@(Dillo Dead _)) = dillo
 feedAnimal' (amount, Parrot sentence weight) = Parrot sentence (weight + amount)
 
-untuplify :: ((Weight, Animal) -> Animal) -> (Weight -> (Animal -> Animal))
-untuplify f' = \ weight -> \ animal -> f' (weight, animal)
+-- untuplify :: ((Weight, Animal) -> Animal) -> (Weight -> (Animal -> Animal))
+untuplify :: ((a, b) -> c) -> (a -> b -> c)
+untuplify f' = \ a -> \ b -> f' (a, b)
 
 {-
 Eine geometrische Figur ("shape") ist:
