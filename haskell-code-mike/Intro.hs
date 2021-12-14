@@ -172,9 +172,14 @@ listFold forEmpty forCons (first:rest) =
 data Map key value = Map [(key, value)]
   deriving Show
 
-mapLookup :: key -> Map key value -> value
-mapLookup key (Map []) = undefined 
+data Optional a =
+    Present a
+  | Absent
+  deriving Show
+
+mapLookup :: Eq key => key -> Map key value -> Optional value
+mapLookup key (Map []) = Absent
 mapLookup key (Map ((key', value'):rest)) =
     if key == key'
-    then value'
+    then Present value'
     else mapLookup key (Map rest) 
