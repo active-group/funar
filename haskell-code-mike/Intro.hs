@@ -71,6 +71,6 @@ runOverAnimal :: Animal -> Animal
 runOverAnimal (Dillo _ w) = Dillo Dead w
 runOverAnimal (Parrot _ w) = Parrot "" w
 
-feedAnimal :: Animal -> (Weight -> Animal)
-feedAnimal (Dillo liveness weight) amount = Dillo liveness (weight + amount)
-feedAnimal (Parrot sentence weight) amount = Parrot sentence (weight + amount)
+feedAnimal :: Weight -> (Animal -> Animal)
+feedAnimal amount (Dillo liveness weight) = Dillo liveness (weight + amount)
+feedAnimal amount (Parrot sentence weight) = Parrot sentence (weight + amount)
