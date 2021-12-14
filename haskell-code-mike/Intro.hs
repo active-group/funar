@@ -179,6 +179,8 @@ data Optional a =
   | Absent
   deriving Show
 
+optionalMap :: (a -> b) -> Optional a -> Optional b 
+
 {- Eingebaut:
 data Maybe a =
     Just a
