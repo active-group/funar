@@ -138,3 +138,4 @@ Eine Liste ist eins der folgenden:
 data List =
     Empty
   | Cons Integer List
+  deriving Show
