@@ -47,3 +47,4 @@ data Parrot = Parrot String Weight
 
 parrot1 = Parrot "Hello!" 1
 parrot2 = Parrot "Goodbye!" 2
+
