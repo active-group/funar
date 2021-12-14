@@ -180,7 +180,9 @@ data Optional a =
   | Absent
   deriving Show
 
-optionalMap :: (a -> b) -> Optional a -> Optional b 
+optionalMap :: (a -> b) -> Optional a -> Optional b
+optionalMap f Absent = Absent
+optionalMap f (Present x) = Present (f x)
 
 {- Eingebaut:
 data Maybe a =
