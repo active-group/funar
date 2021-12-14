@@ -80,7 +80,7 @@ feedAnimal amount (Parrot sentence weight) = Parrot sentence (weight + amount)
 Eine geometrische Figur ("shape") ist:
 - Kreis
 - Quadrat
-- eine Überlagerung zweiter geometrischer Figuren
+- eine Überlagerung zweier geometrischer Figuren
 
 1. Repräsentation programmieren
 2. Funktion schreiben, die für einen gegebenen Punkt sagt,
