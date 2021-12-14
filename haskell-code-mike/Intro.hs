@@ -95,3 +95,9 @@ data Shape = Square { llCorner :: Position, sideLength :: Double }
 isIn (Position px py) (Square (Position cx cy) length) =
     px >= cx && py >= cy && px <= cx + length && py <= cy + length
 -- isIn position Circle = ...
+
+distance :: Position -> Position -> Double
+distance (Position x1 y1) (Position x2 y2) =
+    sqrt ((sqr (x1 - x2) + sqr (y1 - y2)))
+
+sqr x = x * x
