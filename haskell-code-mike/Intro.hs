@@ -155,3 +155,7 @@ listSum :: [Integer] -> Integer
 listSum [] = 0
 listSum (first:rest) = first + (listSum rest)
 -- listSum list = (head list) + (listSum (tail list))
+
+-- (: list-map ((%a -> %b) (list-of %a) -> (list-of %b)))
+
+listMap :: (a -> b) -> [a] -> [b]
