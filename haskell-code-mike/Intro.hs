@@ -28,6 +28,7 @@ data Liveness = Dead | Alive
 type Weight = Integer
 
 data Dillo = Dillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
+  deriving Show
 
 dillo1 :: Dillo
 dillo1 = Dillo { dilloLiveness = Alive, dilloWeight = 10 }
