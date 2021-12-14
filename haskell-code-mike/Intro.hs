@@ -178,8 +178,10 @@ data Optional a =
   deriving Show
 
 {- Eingebaut:
-
-}
+data Maybe a =
+    Just a
+  | Nothing
+-}
 
 mapLookup :: Eq key => key -> Map key value -> Optional value
 mapLookup key (Map []) = Absent
