@@ -230,3 +230,9 @@ natsFrom n = n : natsFrom (n + 1)
 
 strikeMultiples :: Integer -> [Integer] -> [Integer]
 strikeMultiples n l = filter (\ x -> x `rem` n /= 0) l
+
+sieve :: [Integer] -> [Integer]
+sieve (first:rest) = first : sieve (strikeMultiples first rest)
+sieve [] = []
+
+primes = sieve (natsFrom 2)
