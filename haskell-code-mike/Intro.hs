@@ -41,3 +41,9 @@ runOverDillo :: Dillo -> Dillo
 -- runOverDillo (Dillo { dilloLiveness = l, dilloWeight = w}) = Dillo Dead w
 -- runOverDillo (Dillo _ w) = Dillo Dead w
 runOverDillo dillo = dillo { dilloLiveness = Dead }
+
+data Parrot = Parrot String Weight
+  deriving Show
+
+parrot1 = Parrot "Hello!" 1
+parrot2 = Parrot "Goodbye!" 2
