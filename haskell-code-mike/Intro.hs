@@ -1,3 +1,5 @@
+{-# LANGUAGE FlexibleInstances #-}
+
 module Intro where
 
 x :: Integer
@@ -203,3 +205,4 @@ instance Eq Bool where
 
 -}
 
+instance Eq (Optional Integer) where
