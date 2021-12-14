@@ -17,6 +17,6 @@ data Pet = Dog | Cat | Snake
 isCute :: Pet -> Bool 
 isCute Dog = True
 isCute Cat = True 
-isCute Snake = True 
+isCute Snake = False 
 
 
