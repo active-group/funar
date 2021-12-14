@@ -154,3 +154,4 @@ Cons:   :  in Infix-Notation
 listSum :: [Integer] -> Integer
 listSum [] = 0
 listSum (first:rest) = first + (listSum rest)
+-- listSum list = (head list) + (listSum (tail list))
