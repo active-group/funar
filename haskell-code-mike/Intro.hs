@@ -33,3 +33,10 @@ dillo1 :: Dillo
 dillo1 = Dillo { dilloLiveness = Alive, dilloWeight = 10 }
 dillo2 :: Dillo
 dillo2 = Dillo Dead 12
+
+-- Gürteltier überfahren
+runOverDillo :: Dillo -> Dillo
+-- runOverDillo dillo = Dillo Dead (dilloWeight dillo)
+-- runOverDillo (Dillo { dilloLiveness = l, dilloWeight = w}) = Dillo Dead w
+-- runOverDillo (Dillo _ w) = Dillo Dead w
+runOverDillo dillo = dillo { dilloLiveness = Dead }
