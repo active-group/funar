@@ -27,6 +27,7 @@ data Liveness = Dead | Alive
 
 type Weight = Integer
 
+{-
 data Dillo = Dillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
   deriving Show
 
@@ -48,3 +49,17 @@ data Parrot = Parrot String Weight
 parrot1 = Parrot "Hello!" 1
 parrot2 = Parrot "Goodbye!" 2
 
+runOverParrot :: Parrot -> Parrot
+runOverParrot (Parrot _ w) = Parrot "" w
+-}
+
+data Animal =
+    Dillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
+  | Parrot String Weight
+  deriving Show 
+
+dillo1 :: Animal
+dillo1 = Dillo { dilloLiveness = Alive, dilloWeight = 10 }
+dillo2 = Dillo Dead 12
+parrot1 = Parrot "Hello" 1
+parrot2 = Parrot "Goodbye" 2
