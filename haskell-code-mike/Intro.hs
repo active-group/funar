@@ -227,3 +227,6 @@ instance Eq a => Eq (Optional a) where
 
 natsFrom :: Integer -> [Integer]
 natsFrom n = n : natsFrom (n + 1)
+
+strikeMultiples :: Integer -> [Integer] -> [Integer]
+strikeMultiples n l = filter (\ x -> x `rem` n /= 0) l
