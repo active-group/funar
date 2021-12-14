@@ -225,3 +225,5 @@ instance Eq a => Eq (Optional a) where
     (==) _ _ = False
 
 
+natsFrom :: Integer -> [Integer]
+natsFrom n = n : natsFrom (n + 1)
