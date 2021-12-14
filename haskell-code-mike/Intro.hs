@@ -1,5 +1,6 @@
 module Intro where
 import GHC.Generics (Generic1(from1))
+import Data.Sequence (Seq(Empty))
 
 x :: Integer
 x = 10
@@ -129,3 +130,13 @@ distance (Position x1 y1) (Position x2 y2) =
     sqrt ((sqr (x1 - x2) + sqr (y1 - y2)))
 
 sqr = \ x -> x * x
+
+{-
+Eine Liste ist eins der folgenden:
+
+- leere Liste
+- Cons-Liste aus erstem Element und Rest-Liste
+-}
+data List =
+    Empty
+  | Cons Integer List
