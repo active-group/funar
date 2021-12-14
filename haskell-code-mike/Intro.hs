@@ -189,3 +189,16 @@ mapLookup key (Map ((key', value'):rest)) =
     if key == key'
     then Present value'
     else mapLookup key (Map rest) 
+
+{-
+--- "Interface"
+class Eq a where
+    (==) :: a -> a -> Bool
+
+-- "Implementation"
+instance Eq Bool where
+    (==) True True = True
+    (==) False False = True
+    (==) _ _ = False
+
+-}
