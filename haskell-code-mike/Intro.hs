@@ -60,6 +60,13 @@ data Animal =
 
 dillo1 :: Animal
 dillo1 = Dillo { dilloLiveness = Alive, dilloWeight = 10 }
+dillo2 :: Animal
 dillo2 = Dillo Dead 12
+parrot1 :: Animal
 parrot1 = Parrot "Hello" 1
+parrot2 :: Animal
 parrot2 = Parrot "Goodbye" 2
+
+runOverAnimal :: Animal -> Animal
+runOverAnimal (Dillo _ w) = Dillo Dead w
+runOverAnimal (Parrot _ w) = Parrot "" w
