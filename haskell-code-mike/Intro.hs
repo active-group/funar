@@ -82,6 +82,9 @@ feedAnimal' (amount, dillo@(Dillo Dead _)) = dillo
 feedAnimal' (amount, Parrot sentence weight) = Parrot sentence (weight + amount)
 
 -- untuplify :: ((Weight, Animal) -> Animal) -> (Weight -> (Animal -> Animal))
+-- Haskell B. Curry
+-- "currifzieren"
+
 untuplify :: ((a, b) -> c) -> (a -> b -> c)
 untuplify f' = \ a -> \ b -> f' (a, b)
 
