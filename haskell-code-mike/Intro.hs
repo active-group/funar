@@ -159,3 +159,6 @@ listSum (first:rest) = first + (listSum rest)
 -- (: list-map ((%a -> %b) (list-of %a) -> (list-of %b)))
 
 listMap :: (a -> b) -> [a] -> [b]
+listMap _ [] = []
+listMap f (first:rest) = 
+    (f first) : (listMap f rest)
