@@ -78,8 +78,8 @@ feedAnimal amount (Parrot sentence weight) = Parrot sentence (weight + amount)
 
 {-
 Eine geometrische Figur ("shape") ist:
-- Kreis
-- Quadrat
+- Kreis, hat Mittelpunkt und Radius - ODER -
+- Quadrat, hat Ecke und Seitenlänger - ODER -
 - eine Überlagerung zweier geometrischer Figuren
 
 1. Repräsentation programmieren
@@ -90,7 +90,8 @@ Eine geometrische Figur ("shape") ist:
 data Position = Position Double Double
 
 data Shape = Square { llCorner :: Position, sideLength :: Double }
+--           | Circle
 
 isIn (Position px py) (Square (Position cx cy) length) =
     px >= cx && py >= cy && px <= cx + length && py <= cy + length
-
+-- isIn position Circle = ...
