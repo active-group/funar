@@ -46,5 +46,6 @@
     (cond
       ((empty? list) acc)
       ((cons? list)
+       ; tail call / endrekursiv
        (rev1 (rest list) (cons (first list) acc))))))
                     
