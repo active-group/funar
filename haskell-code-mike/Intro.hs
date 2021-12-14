@@ -150,3 +150,7 @@ listSum (Cons first rest) = first + (listSum rest)
 leere Liste: []
 Cons:   :  in Infix-Notation
 -}
+
+listSum :: [Integer] -> Integer
+listSum [] = 0
+listSum (first:rest) = first + (listSum rest)
