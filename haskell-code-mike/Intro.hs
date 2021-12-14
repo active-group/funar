@@ -72,5 +72,17 @@ runOverAnimal (Dillo _ w) = Dillo Dead w
 runOverAnimal (Parrot _ w) = Parrot "" w
 
 feedAnimal :: Weight -> (Animal -> Animal)
-feedAnimal amount (Dillo liveness weight) = Dillo liveness (weight + amount)
+feedAnimal amount (Dillo Alive weight) = Dillo Alive (weight + amount)
+feedAnimal amount dillo@(Dillo Dead _) = dillo
 feedAnimal amount (Parrot sentence weight) = Parrot sentence (weight + amount)
+
+{-
+Eine geometrische Figur ("shape") ist:
+- Kreis
+- Quadrat
+- eine Überlagerung zweiter geometrischer Figuren
+
+1. Repräsentation programmieren
+2. Funktion schreiben, die für einen gegebenen Punkt sagt,
+   ob dieser innerhalb der geometrischen Figur liegt oder nicht.
+-}
