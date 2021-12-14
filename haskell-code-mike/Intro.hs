@@ -1,4 +1,5 @@
 module Intro where
+import GHC.Generics (Generic1(from1))
 
 x :: Integer
 x = 10
@@ -98,6 +99,10 @@ f1 = feedAnimal 1
 o :: (b -> c) -> (a -> b) -> (a -> c)
 o f g = \ a -> f (g a)
 
+-- f2 = o f1 f1
+f2 = f1 `o` f1 
+f2' = f1 . f1
+ 
 
 {-
 Eine geometrische Figur ("shape") ist:
