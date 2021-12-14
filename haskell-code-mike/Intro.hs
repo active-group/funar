@@ -143,7 +143,7 @@ data List a =
 
 listSum :: List Integer -> Integer
 listSum Empty = 0
-listSum (Cons first rest) = first + (listSum rest)
+listSum (first `Cons` rest) = first + (listSum rest)
 -}
 
 {-
