@@ -164,7 +164,17 @@ listMap f (first:rest) =
     (f first) : (listMap f rest)
 
 
--- listFold :: b -> (a -> b -> b) -> [a] -> b
-listFold forEmpty forCons [] = [] 
+listFold :: b -> (a -> b -> b) -> [a] -> b
+listFold forEmpty forCons [] = forEmpty
 listFold forEmpty forCons (first:rest) = 
-    first : (listFold forEmpty forCons rest)
+    first `forCons` (listFold forEmpty forCons rest)
+
+data Map key value = Map [(key, value)]
+  deriving Show
+
+mapLookup :: key -> Map key value -> value
+mapLookup key (Map []) = undefined 
+mapLookup key (Map ((key', value'):rest)) =
+    if key == key'
+    then value'
+    else mapLookup key (Map rest) 
