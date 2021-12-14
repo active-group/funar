@@ -25,3 +25,11 @@ isCute Snake = False
 data Liveness = Dead | Alive 
   deriving Show 
 
+type Weight = Integer
+
+data Dillo = Dillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
+
+dillo1 :: Dillo
+dillo1 = Dillo { dilloLiveness = Alive, dilloWeight = 10 }
+dillo2 :: Dillo
+dillo2 = Dillo Dead 12
