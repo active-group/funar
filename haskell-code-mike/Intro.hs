@@ -162,3 +162,9 @@ listMap :: (a -> b) -> [a] -> [b]
 listMap _ [] = []
 listMap f (first:rest) = 
     (f first) : (listMap f rest)
+
+
+-- listFold :: b -> (a -> b -> b) -> [a] -> b
+listFold forEmpty forCons [] = [] 
+listFold forEmpty forCons (first:rest) = 
+    first : (listFold forEmpty forCons rest)
