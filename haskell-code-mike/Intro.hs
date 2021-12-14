@@ -80,6 +80,10 @@ feedAnimal' :: (Weight, Animal) -> Animal
 feedAnimal' (amount, Dillo Alive weight) = Dillo Alive (weight + amount)
 feedAnimal' (amount, dillo@(Dillo Dead _)) = dillo
 feedAnimal' (amount, Parrot sentence weight) = Parrot sentence (weight + amount)
+
+untuplify :: ((Weight, Animal) -> Animal) -> (Weight -> (Animal -> Animal))
+untuplify f' = \ weight -> \ animal -> f' (weight, animal)
+
 {-
 Eine geometrische Figur ("shape") ist:
 - Kreis, hat Mittelpunkt und Radius - ODER -
