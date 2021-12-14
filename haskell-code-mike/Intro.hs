@@ -135,10 +135,18 @@ Eine Liste ist eins der folgenden:
 - leere Liste
 - Cons-Liste aus erstem Element und Rest-Liste
 -}
+{-
 data List a =
     Empty
   | Cons a (List a)
   deriving Show
 
-listSum Empty = undefined
-listSum (Cons first rest) = undefined
+listSum :: List Integer -> Integer
+listSum Empty = 0
+listSum (Cons first rest) = first + (listSum rest)
+-}
+
+{-
+leere Liste: []
+Cons:   :  in Infix-Notation
+-}
