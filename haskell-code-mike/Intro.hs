@@ -207,5 +207,7 @@ instance Eq Bool where
 
 instance Eq (Optional Integer) where
     (==) (Present x) (Present y) = x == y 
+    (==) Absent Absent = True 
+    (==) _ _ = False
 
 
