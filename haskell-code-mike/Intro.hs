@@ -11,4 +11,5 @@ f x = x + 1
 -- - Katze
 -- - Schlange
 data Pet = Dog | Cat | Snake 
---   deriving Show
+deriving Show
+
