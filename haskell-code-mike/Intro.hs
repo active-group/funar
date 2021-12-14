@@ -90,8 +90,9 @@ schönfinkeln :: ((a, b) -> c) -> (a -> b -> c)
 -- schönfinkeln f' = \ a -> \ b -> f' (a, b)
 schönfinkeln f' a b = f' (a, b)
 
-entschönfinkeln :: (t1 -> t2 -> t3) -> (t1, t2) -> t3
+entschönfinkeln :: (a -> b -> c) -> ((a, b) -> c)
 entschönfinkeln f (a, b) = f a b
+
 {-
 Eine geometrische Figur ("shape") ist:
 - Kreis, hat Mittelpunkt und Radius - ODER -
