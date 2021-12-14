@@ -84,9 +84,11 @@ feedAnimal' (amount, Parrot sentence weight) = Parrot sentence (weight + amount)
 -- untuplify :: ((Weight, Animal) -> Animal) -> (Weight -> (Animal -> Animal))
 -- Haskell B. Curry
 -- "currifzieren"
+-- Moses Schönfinkel
 
-untuplify :: ((a, b) -> c) -> (a -> b -> c)
-untuplify f' = \ a -> \ b -> f' (a, b)
+schönfinkeln :: ((a, b) -> c) -> (a -> b -> c)
+-- schönfinkeln f' = \ a -> \ b -> f' (a, b)
+schönfinkeln f' a b = f' (a, b)
 
 {-
 Eine geometrische Figur ("shape") ist:
@@ -112,4 +114,4 @@ distance :: Position -> Position -> Double
 distance (Position x1 y1) (Position x2 y2) =
     sqrt ((sqr (x1 - x2) + sqr (y1 - y2)))
 
-sqr x = x * x
+sqr = \ x -> x * x
