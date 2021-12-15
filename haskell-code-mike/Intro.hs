@@ -175,6 +175,9 @@ listFold forEmpty forCons (first:rest) =
 data Map key value = Map [(key, value)]
   deriving Show
 
+instance Functor (Map key) where
+  fmap f (Map list) = Map (map (\ (key, value) -> (key, f value)) list)
+
 data Optional a =
     Present a
   | Absent
