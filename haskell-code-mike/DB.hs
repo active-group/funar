@@ -38,9 +38,11 @@ c2 :: DB Integer
 c2 = get "Mike"
 
 splice :: DB a -> (a -> DB b) -> DB b
-splice (Get key cont) next = undefined 
+splice (Get key cont) next = 
+  Get key (\ value ->
+      cont value next
 splice (Put key value cont) next = undefined 
-splice (Return result) next = undefined 
+splice (Return result) next = next result 
 
 
 p1 :: DB Integer
