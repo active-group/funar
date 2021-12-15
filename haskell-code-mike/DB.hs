@@ -23,6 +23,7 @@ data DB =
   | Put String Integer (() -> DB)
   | Return Integer
 
+p1 :: DB
 p1 = Put "Mike" 50 (\() ->
      Get "Mike" (\ x ->
      Put "Mike" (x + 1) (\ () ->
