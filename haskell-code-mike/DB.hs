@@ -31,3 +31,5 @@ p1 = Put "Mike" 50 (\() ->
      Put "Mike" (x + 1) (\ () ->
      Get "Mike" (\ y ->
      Return (x + y)))))
+
+runDB :: DB a -> Map String Integer -> a
