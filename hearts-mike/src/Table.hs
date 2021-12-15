@@ -179,7 +179,7 @@ tableProcessCommand (PlayCard player card) state =
              event3 = case gameOver state2 of
                         Nothing -> PlayerTurnChanged trickTaker 
                         Just winner -> GameEnded winner
-
+          in [event1, event2, event3]
        else
          let event2 = PlayerTurnChanged (playerAfter state1 player)
          in [event1, event2]
