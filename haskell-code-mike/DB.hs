@@ -26,7 +26,8 @@ data DB a =
   | Return a
 
 get :: String -> DB Integer
-get key = Get key (\ value -> Return value)
+-- get key = Get key (\ value -> Return value)
+get key = Get key Return
 
 put :: String -> Integer -> DB ()
 put key value = Put key value  (\ () -> Return ())
