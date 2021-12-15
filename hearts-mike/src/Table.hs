@@ -140,6 +140,27 @@ addToPile playerPiles player cards =
   in Map.insert player (Set.union playerPile (Set.fromList cards)) playerPiles
 
 tableProcessEvent :: GameEvent -> TableState -> TableState
--- tableProcessEvent event state = state { players = ... }
+tableProcessEvent (HandDealt player hand) state =
+  state
+    { tableStateHands = Map.insert player hand (tableStateHands state)
+    }
+tableProcessEvent (PlayerTurnChanged player) state =
+  state
+    { tableStatePlayers = rotateTo player (tableStatePlayers state)
+    }
+tableProcessEvent (LegalCardPlayed player card) state =
+  state
+    { tableStateHands = takeCard (tableStateHands state) player card,
+      tableStateTrick = addToTrick player card (tableStateTrick state)
+    }
+tableProcessEvent (TrickTaken player trick) state =
+  state
+    { tableStatePiles =
+        addToPile (tableStatePiles state) player (cardsOfTrick trick),
+      tableStateTrick = emptyTrick
+    }
+tableProcessEvent (IllegalCardPlayed player card) state = state
+tableProcessEvent (GameEnded player) state = state
+
 
 tableProcessCommand :: GameCommand -> TableState -> [GameEvent]
