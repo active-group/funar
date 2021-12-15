@@ -288,8 +288,8 @@ write :: state -> State state ()
 write newState =
   State (\ _ -> ((), newState))
 
-read :: State state state
-read = State (\ state -> (state, state))
+look :: State state state
+look = State (\ state -> (state, state))
 
 instance Functor (State state) where
   -- fmap :: (a -> b) -> (State state) a -> (State state) b
@@ -315,8 +315,8 @@ runState (State t) state =
   let (a, state') = t state
   in a
 
-let sp = do write 50
-            x <- read 
-            write (x + 1)
-            y <- read
-            return (x+y)
+sp = do write 50
+        x <- look
+        write (x + 1)
+        y <- look
+        return (x+y)
