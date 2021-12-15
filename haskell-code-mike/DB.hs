@@ -25,6 +25,12 @@ data DB a =
   | Put String Integer (()      -> DB a)
   | Return a
 
+get :: String -> DB Integer
+get key = Get key (\ value -> Return value)
+
+put :: String -> Integer -> DB ()
+put key value = Put key value  (\ () -> Return ())
+
 p1 :: DB Integer
 p1 = Put "Mike" 50 (\() ->
      Get "Mike" (\ x ->
