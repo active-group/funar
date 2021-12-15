@@ -304,3 +304,19 @@ instance Monad (State state) where
   -- return :: a -> State state a
   return a = State (\ state -> (a, state))
   -- (>>=) :: State state a -> (a -> State state b) -> State state b
+  (State t) >>= next =
+    State (\ state ->
+             let (a, state') = t state
+                 (State t') = next a
+             in t' state')
+
+runState :: State state a -> state -> a
+runState (State t) state =
+  let (a, state') = t state
+  in a
+
+let sp = do write 50
+            x <- read 
+            write (x + 1)
+            y <- read
+            return (x+y)
