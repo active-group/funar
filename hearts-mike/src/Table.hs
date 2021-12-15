@@ -164,3 +164,4 @@ tableProcessEvent (GameEnded player) state = state
 
 
 tableProcessCommand :: GameCommand -> TableState -> [GameEvent]
+tableProcessCommand 
