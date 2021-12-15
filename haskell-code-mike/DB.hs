@@ -33,3 +33,8 @@ p1 = Put "Mike" 50 (\() ->
      Return (x + y)))))
 
 runDB :: DB a -> Map String Integer -> a
+runDB (Get key cont) mp = 
+    runDB (cont (mp ! key)) mp
+runDB (Put key value cont) mp = 
+    runDB (cont ()) (insert )
+runDB (Return result) mp = result
