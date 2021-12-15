@@ -32,6 +32,7 @@ p1 = Put "Mike" 50 (\() ->
      Get "Mike" (\ y ->
      Return (x + y)))))
 
+-- Interpreter
 runDB :: DB a -> Map String Integer -> a
 runDB (Get key cont) mp = 
     runDB (cont (mp ! key)) mp
