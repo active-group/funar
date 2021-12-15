@@ -291,6 +291,9 @@ write newState =
 read :: State state state
 read = State (\ state -> (state, state))
 
+instance Functor (State state) where
+  -- fmap :: (a -> b) (State state a) -> State state b
+
 instance Applicative (State state) where
-  
+
 instance Monad (State state) where
