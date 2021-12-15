@@ -281,3 +281,12 @@ primes = sieve (natsFrom 2)
 -- (a + b) + c == a + (b + c)
 
 -- Halbgruppe + neutrales Element: Monoid
+
+data State state a = State (state -> (a, state))
+
+write :: state -> State state ()
+write newState =
+  State (\ _ -> ((), newState))
+
+read :: State state state
+read = State (\ state -> (state, state))
