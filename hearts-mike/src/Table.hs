@@ -165,5 +165,6 @@ tableProcessEvent (GameEnded player) state = state
 
 tableProcessCommand :: GameCommand -> TableState -> [GameEvent]
 tableProcessCommand (DealHands hands) state =
-  map HandDealt (Map.toList hand)
-tableProcessCommand (PlayCard player card) state = undefined
+  map (uncurry HandDealt) (Map.toList hands)
+tableProcessCommand (PlayCard player card) state =
+  
