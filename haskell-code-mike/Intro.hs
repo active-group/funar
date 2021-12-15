@@ -187,6 +187,9 @@ optionalMap :: (a -> b) -> Optional a -> Optional b
 optionalMap f Absent = Absent
 optionalMap f (Present x) = Present (f x)
 
+instance Functor Optional where
+  fmap = optionalMap
+
 -- in der Kategorietheorie: Funktor
 class Mappable f where
     universalMap :: (a -> b) -> f a -> f b
