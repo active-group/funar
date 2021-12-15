@@ -169,5 +169,8 @@ tableProcessCommand (PlayCard player card) state =
   if playValid state player card
   then 
     let event1 = LegalCardPlayed player card
-    in if turnOver 
+        state1 = tableProcessEvent event1 state
+    in if turnOver state1
+       then undefined
+       else undefined
   else [IllegalCardPlayed player card]
