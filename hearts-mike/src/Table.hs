@@ -172,7 +172,8 @@ tableProcessCommand (PlayCard player card) state =
         state1 = tableProcessEvent event1 state
     in if turnOver state1
        then
-         
+         let 
+
        else
          let event2 = PlayerTurnChanged (playerAfter state1 player)
          in [event1, event2]
