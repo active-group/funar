@@ -18,10 +18,10 @@ p1 :: [DBCommand]
 p1 = [Put "Mike" 50, Get "Mike" ] -- können Ergebnis keinen Namen geben: fail
 -}
 
-data DB =
-    Get String         (Integer -> DB) -- continuation
-  | Put String Integer (() -> DB)
-  | Return Integer
+data DB a =
+    Get String         (Integer -> DB a) -- continuation
+  | Put String Integer (()      -> DB a)
+  | Return a
 
 p1 :: DB
 p1 = Put "Mike" 50 (\() ->
