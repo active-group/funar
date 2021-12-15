@@ -167,4 +167,4 @@ tableProcessCommand :: GameCommand -> TableState -> [GameEvent]
 tableProcessCommand (DealHands hands) state =
   map (uncurry HandDealt) (Map.toList hands)
 tableProcessCommand (PlayCard player card) state =
-  
+  if playValid
