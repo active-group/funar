@@ -292,8 +292,15 @@ read :: State state state
 read = State (\ state -> (state, state))
 
 instance Functor (State state) where
-  -- fmap :: (a -> b) (State state a) -> State state b
+  -- fmap :: (a -> b) -> (State state) a -> (State state) b
+  fmap f (State t) =
+    State (\ state -> 
+             let (a, state') = t state
+             in (f a, state'))
 
 instance Applicative (State state) where
 
 instance Monad (State state) where
+  -- return :: a -> State state a
+  return a = State (\ state -> (a, state))
+  -- (>>=) :: State state a -> (a -> State state b) -> State state b
