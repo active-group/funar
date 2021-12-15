@@ -236,3 +236,18 @@ sieve (first:rest) = first : sieve (strikeMultiples first rest)
 sieve [] = []
 
 primes = sieve (natsFrom 2)
+
+-- Menge / Typ: m
+-- Operation(en):
+-- op :: m -> m -> m (Beispiel)
+-- neutral :: m
+-- Gesetze / Gleichungen:
+-- op m x == op x m == x für alle x aus m
+-- x + 0 == 0 + x == x
+
+-- Halbgruppe:
+-- Menge / Typ m
+-- op :: m -> m -> m
+-- op (op a b) c == op a (op b c)
+-- Assoziativgesetz:
+-- (a + b) + c == a + (b + c)
