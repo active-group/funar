@@ -167,5 +167,7 @@ tableProcessCommand (DealHands hands) state =
   map (uncurry HandDealt) (Map.toList hands)
 tableProcessCommand (PlayCard player card) state =
   if playValid state player card
-  then undefined
+  then 
+    let event1 = LegalCardPlayed player card
+    in 
   else [IllegalCardPlayed player card]
