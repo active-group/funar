@@ -164,4 +164,6 @@ tableProcessEvent (GameEnded player) state = state
 
 
 tableProcessCommand :: GameCommand -> TableState -> [GameEvent]
-tableProcessCommand (DealHands )
+tableProcessCommand (DealHands hands) state =
+  
+tableProcessCommand (PlayCard player card) state = undefined
