@@ -36,5 +36,5 @@ runDB :: DB a -> Map String Integer -> a
 runDB (Get key cont) mp = 
     runDB (cont (mp ! key)) mp
 runDB (Put key value cont) mp = 
-    runDB (cont ()) (insert )
+    runDB (cont ()) (insert key value mp)
 runDB (Return result) mp = result
