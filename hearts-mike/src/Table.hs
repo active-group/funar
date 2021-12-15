@@ -141,3 +141,5 @@ addToPile playerPiles player cards =
 
 tableProcessEvent :: GameEvent -> TableState -> TableState
 -- tableProcessEvent event state = state { players = ... }
+
+tableProcessCommand :: ‘
