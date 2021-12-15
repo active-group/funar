@@ -290,3 +290,7 @@ write newState =
 
 read :: State state state
 read = State (\ state -> (state, state))
+
+instance Applicative (State state) where
+  
+instance Monad (State state) where
