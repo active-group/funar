@@ -46,7 +46,13 @@ splice (Put key value cont) next =
       splice (cont ()) next) 
 splice (Return result) next = next result 
 
-
+p1' :: DB Integer 
+p1' = put "Mike" 50 `splice` (\() ->
+      get "Mike" `splice` (\ x ->
+      put "Mike" (x + 1) `splice` (\ () ->
+      get "Mike" `splice` (\ y ->
+      Return (x + y)))))
+      
 p1 :: DB Integer
 p1 = Put "Mike" 50 (\() ->
      Get "Mike" (\ x ->
