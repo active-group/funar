@@ -30,7 +30,18 @@ get :: String -> DB Integer
 get key = Get key Return
 
 put :: String -> Integer -> DB ()
-put key value = Put key value  (\ () -> Return ())
+put key value = Put key value Return
+
+c1 :: DB ()
+c1 = put "Mike" 50
+c2 :: DB Integer
+c2 = get "Mike"
+
+splice :: DB a -> (a -> DB b) -> DB b
+splice (Get key cont) next = undefined 
+splice (Put key value cont) next = undefined 
+splice (Return result) next = undefined 
+
 
 p1 :: DB Integer
 p1 = Put "Mike" 50 (\() ->
