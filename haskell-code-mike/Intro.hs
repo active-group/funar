@@ -184,6 +184,7 @@ optionalMap :: (a -> b) -> Optional a -> Optional b
 optionalMap f Absent = Absent
 optionalMap f (Present x) = Present (f x)
 
+-- in der Kategorietheorie: Funktor
 class Mappable f where
     universalMap :: (a -> b) -> f a -> f b
 
@@ -251,3 +252,5 @@ primes = sieve (natsFrom 2)
 -- op (op a b) c == op a (op b c)
 -- Assoziativgesetz:
 -- (a + b) + c == a + (b + c)
+
+-- Halbgruppe + neutrales Element: Monoid
