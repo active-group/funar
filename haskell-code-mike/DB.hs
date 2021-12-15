@@ -1,5 +1,7 @@
 module DB where
 
+import Data.Map
+
 {-
 put "Mike" 50
 x = get "Mike"
