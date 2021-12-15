@@ -175,7 +175,7 @@ tableProcessCommand (PlayCard player card) state =
          let event2 = TrickTaken (tableStateTrick state1)
              state2 = tableProcessEvent event2 state
              event3 = case gameOver state2 of
-                        Nothing -> 
+                        Nothing -> PlayerTurnChanged 
                         Just winner -> GameEnded winner
 
        else
