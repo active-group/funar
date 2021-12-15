@@ -190,6 +190,27 @@ optionalMap f (Present x) = Present (f x)
 instance Functor Optional where
   fmap = optionalMap
 
+instance Applicative Optional where
+
+instance Monad Optional where
+  -- return :: a -> Optional a
+  return = Present
+
+  -- (>>=) :: Optional a -> (a -> Optional b) -> Optional b
+  (Present result) >>= next = next result
+  Absent >>= next = Absent
+
+op1 :: Integer -> Optional Integer 
+op1 = undefined
+
+op2 :: Integer -> Optional Integer 
+op2 = undefined 
+
+op12 :: Optional Integer
+op12 = do x <- op1 10
+          y <- op2 20
+          return (x+ y)
+
 -- in der Kategorietheorie: Funktor
 class Mappable f where
     universalMap :: (a -> b) -> f a -> f b
