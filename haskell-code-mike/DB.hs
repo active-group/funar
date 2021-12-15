@@ -52,13 +52,17 @@ p1' = put "Mike" 50 `splice` (\() ->
       put "Mike" (x + 1) `splice` (\ () ->
       get "Mike" `splice` (\ y ->
       Return (x + y)))))
-      
+    
 p1 :: DB Integer
 p1 = Put "Mike" 50 (\() ->
      Get "Mike" (\ x ->
      Put "Mike" (x + 1) (\ () ->
      Get "Mike" (\ y ->
      Return (x + y)))))
+
+instance Monad DB where
+    (>>=) = splice
+    return = Return
 
 -- Interpreter
 runDB :: DB a -> Map String Integer -> a
