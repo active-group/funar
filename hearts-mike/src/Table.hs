@@ -173,7 +173,10 @@ tableProcessCommand (PlayCard player card) state =
     in if turnOver state1
        then
          let event2 = TrickTaken (tableStateTrick state1)
-             event3 = gameOver 
+             state2 = tableProcessEvent event2 state
+             event3 = case gameOver state2 of
+                        Nothing -> undefined
+                        Just winner -> GameE
 
        else
          let event2 = PlayerTurnChanged (playerAfter state1 player)
