@@ -33,6 +33,7 @@ zcb1 = ZeroCouponBond (Date "2021-12-24") 100 EUR
 -}
 
 data Direction = Long | Short 
+  deriving Show
 
 data Contract =
     One Currency
