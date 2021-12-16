@@ -86,7 +86,10 @@ contractPayments (Multiple amount contract) now =
 contractPayments (Reverse contract) now = 
     let (payments, residualContract) = contractPayments contract now
     in (map reversePayment payments, Reverse residualContract)
-contractPayments (Later date contract) now = undefined 
+contractPayments c@(Later date contract) now =
+    if date >= now 
+    then contractPayments contract now 
+    else ([], c) 
 contractPayments (And contract1 contract2) now = 
     let (payments1, residualContract1) = contractPayments contract1 now
         (payments2, residualContract2) = contractPayments contract2 now
