@@ -30,5 +30,5 @@ zcb1 = ZeroCouponBond (Date "2021-12-24") 100 EUR
 
 data Contract =
     One Currency
-  | Multiple Amount Currency
+  | Multiple Amount Contract
   deriving Show
