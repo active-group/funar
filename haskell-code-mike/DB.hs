@@ -20,6 +20,11 @@ p1 :: [DBCommand]
 p1 = [Put "Mike" 50, Get "Mike" ] -- können Ergebnis keinen Namen geben: fail
 -}
 
+-- Operationen:
+-- - write
+-- - look
+data State state a = ...
+
 data DB a =
     Get String         (Integer -> DB a) -- continuation
   | Put String Integer (()      -> DB a)
