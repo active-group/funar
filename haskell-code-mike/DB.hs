@@ -23,10 +23,15 @@ p1 = [Put "Mike" 50, Get "Mike" ] -- können Ergebnis keinen Namen geben: fail
 -- Operationen:
 -- - write
 -- - look
-data State state a = ...
+data State state a =
+    Write state (() -> State state a)
+  | Look (state -> State state a)
+  | Return' a
 
 write :: state -> State state ()
+write newState = undefined
 look :: State state state
+look = undefined
 
 data DB a =
     Get String         (Integer -> DB a) -- continuation
