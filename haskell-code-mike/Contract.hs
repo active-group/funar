@@ -78,7 +78,10 @@ contractPayments Zero now = ([], Zero)
 contractPayments (One currency) now = ([Payment Long now 1 currency], Zero) 
 contractPayments (Multiple amount contract) now =
     let (payments, residualContract) = contractPayments contract now
-    in (undefined, undefined)
+    in (map (scalePayment amount) payments, Multiple amount residualContract)
 contractPayments (Reverse contract) now = undefined 
 contractPayments (Later date contract) now = undefined 
 contractPayments (And contract1 contract2) now = undefined
+
+c2 = And (zeroCouponBond (Date "2021-12-24") 100 EUR)
+         (zeroCouponBond (Date "2022-12-24") 100 EUR)
