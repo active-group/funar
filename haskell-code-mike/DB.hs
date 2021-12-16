@@ -43,7 +43,7 @@ instance Monad (State state) where
 
 spliceState :: State state a -> (a -> State state b) -> State state b
 
-runState :: State state a -> state -> 
+runState :: State state a -> state -> a
 
 s1 = do write 5
         x <- look
