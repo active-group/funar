@@ -22,18 +22,11 @@ instance Functor Decoder where
     fmap f (decode json))
 
 instance Applicative Decoder where
-  pure = Decoder . const . Right
-  Decoder decodeF <*> Decoder decodeA = Decoder (\ json ->
-    case decodeA json of
-      Right a ->
-        case decodeF json of
-          Right f -> Right (f a)
-          Left err -> Left err
-      Left err -> Left err)
+  pure = undefined
+  Decoder decodeF <*> Decoder decodeA = undefined
 
 instance Monad Decoder where
-  Decoder decode >>= f = Decoder (\ json ->
-    decode json >>= (\a -> runDecoder (f a) json))
+  Decoder decode >>= f = undefined
 
 string :: Decoder String
 string = Decoder (\ json ->
