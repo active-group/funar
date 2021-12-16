@@ -1,6 +1,8 @@
 module Json.Decode where
 
 import qualified Data.Aeson as Json
+import qualified Data.Aeson.KeyMap as KeyMap
+import qualified Data.Aeson.Key as Key
 import qualified Data.Either as Either
 import Data.Either.Combinators (mapLeft)
 import qualified Data.HashMap.Strict as HashMap
@@ -15,17 +17,48 @@ data DecodeError
   | Failure String Json.Value
   deriving (Show, Eq)
 
+{-
+data Either a b = Left a | Right b
+-}
+
 newtype Decoder a = Decoder {runDecoder :: Json.Value -> Either DecodeError a}
 
 instance Functor Decoder where
-  fmap f (Decoder decode) = undefined
+  -- fmap :: (a -> b) -> Decoder a -> Decoder b
+--  fmap f (Decoder decode) = Decoder (\ json ->
+--     case decode json of
+--       Left error -> Left error
+--       Right result -> Right (f result)
+--    ) 
+   fmap f (Decoder decode) = Decoder (\ json ->
+     fmap f (decode json))
 
 instance Applicative Decoder where
-  pure = undefined
-  Decoder decodeF <*> Decoder decodeA = undefined
+  -- pure :: a -> Decoder a
+  pure a = Decoder (\ json -> Right a)
+  -- (<*>) :: Decoder (a -> b) -> Decoder a -> Decoder b
+  Decoder decodeF <*> Decoder decodeA =
+    Decoder (\ json ->
+      case decodeF json of
+        Left error -> Left error
+        Right f ->
+          case decodeA json of
+            Left error -> Left error
+            Right a -> Right (f a))
 
 instance Monad Decoder where
-  Decoder decode >>= f = undefined
+  -- flip fmap :: Decoder a -> (a ->         b) -> Decoder b
+  -- (>>=) ::     Decoder a -> (a -> Decoder b) -> Decoder b
+  Decoder decode >>= next = 
+    Decoder (\ json ->
+      case decode json of
+        Left error -> Left error
+        Right a ->
+          -- nextDecode :: Json.Value -> Either DecodeError b
+          let Decoder nextDecode = next a
+          in nextDecode json)
+
+
 
 string :: Decoder String
 string = Decoder (\ json ->
@@ -88,7 +121,7 @@ field :: String -> Decoder a -> Decoder a
 field name decoder = Decoder (\json ->
   case json of
     Json.Object fields ->
-      case HashMap.lookup (Text.pack name) fields of
+      case KeyMap.lookup (Key.fromString name) fields of
         Just val -> mapLeft (Field name) (runDecoder decoder val)
         Nothing -> Left (Failure ("Field " ++ name ++ " not found") json)
     _ -> Left (Failure "Not a JSON object" json))
