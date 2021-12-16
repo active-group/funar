@@ -69,10 +69,16 @@ zcb1' = zeroCouponBond (Date "2021-12-24") 100 EUR
 data Payment = Payment Direction Date Amount Currency
   deriving Show
 
+scalePayment :: Amount -> Payment -> Payment
+scalePayment factor (Payment direction date amount currency) =
+    Payment direction date (factor * amount) currency
+
 contractPayments :: Contract -> Date -> ([Payment], Contract)
-contractPayments Zero now = undefined 
-contractPayments (One currency) now = undefined 
-contractPayments (Multiple amount contract) now = undefined
+contractPayments Zero now = ([], Zero) 
+contractPayments (One currency) now = ([Payment Long now 1 currency], Zero) 
+contractPayments (Multiple amount contract) now =
+    let (payments, residualContract) = contractPayments contract now
+    in (undefined, undefined)
 contractPayments (Reverse contract) now = undefined 
 contractPayments (Later date contract) now = undefined 
 contractPayments (And contract1 contract2) now = undefined
