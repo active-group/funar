@@ -39,7 +39,8 @@ data Contract =
     One Currency
   | Multiple Amount Contract
   | Later Date Contract
-  | WithDirection Direction Contract
+  | Reverse Contract
+  | And Contract Contract
   deriving Show
 
 zcb1 = Later (Date "2021-12-24") (Multiple 100 (One EUR))
