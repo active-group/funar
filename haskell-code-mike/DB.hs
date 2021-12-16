@@ -41,7 +41,7 @@ instance Monad (State state) where
   return = Return'
   (>>=) = spliceState
 
-spliceState :: State state a -> (a -> State state b) -> State state Bitraversable
+spliceState :: State state a -> (a -> State state b) -> State state b
 
 
 s1 = do write 5
