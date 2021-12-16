@@ -25,6 +25,9 @@ p1 = [Put "Mike" 50, Get "Mike" ] -- können Ergebnis keinen Namen geben: fail
 -- - look
 data State state a = ...
 
+write :: state -> State state ()
+look :: State state state
+
 data DB a =
     Get String         (Integer -> DB a) -- continuation
   | Put String Integer (()      -> DB a)
