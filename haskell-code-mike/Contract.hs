@@ -73,6 +73,10 @@ scalePayment :: Amount -> Payment -> Payment
 scalePayment factor (Payment direction date amount currency) =
     Payment direction date (factor * amount) currency
 
+reversePayment :: Payment -> Payment
+reversePayment (Payment Long date amount currency) = Payment Short date amount currency
+reversePayment (Payment Short date amount currency) = Payment Long date amount currency
+
 contractPayments :: Contract -> Date -> ([Payment], Contract)
 contractPayments Zero now = ([], Zero) 
 contractPayments (One currency) now = ([Payment Long now 1 currency], Zero) 
