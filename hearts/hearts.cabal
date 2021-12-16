@@ -35,7 +35,6 @@ library
 
 executable server
   main-is:             Main.hs
-  buildable:           False
   other-modules:       Args
                      , PlayerServer
                      , TableServer
