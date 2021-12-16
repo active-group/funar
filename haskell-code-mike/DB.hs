@@ -42,8 +42,10 @@ instance Monad (State state) where
   (>>=) = spliceState
 
 spliceState :: State state a -> (a -> State state b) -> State state b
-spliceState (Write state cont) next = undefined 
-spliceState (Look cont) next = undefined
+spliceState (Write state cont) next =
+  Write state (\() -> spliceState (cont ()) next)
+spliceState (Look cont) next =
+  Look (\state -> spliceState (cont state) next)
 spliceState (Return' result) next = next result 
 
 runState :: State state a -> state -> a
