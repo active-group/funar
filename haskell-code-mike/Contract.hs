@@ -10,7 +10,11 @@ Beispiel zerlegen in "atomare Bestandteile"
 - Menge/Vielfaches: Ich bekomme 100 EUR jetzt.
 - Später: Ich bekomme 100 EUR später.
 
+Suche nach Selbstreferenzen
 
+Currency Swap:
+Ich bekomme am 24.12.2021 100EUR - UND -
+ich bezahle am 24.12.2021 100GBP.
 -}
 
 type Amount = Double 
@@ -28,10 +32,13 @@ data Contract =
 zcb1 = ZeroCouponBond (Date "2021-12-24") 100 EUR
 -}
 
+data Direction = Long | Short 
+
 data Contract =
     One Currency
   | Multiple Amount Contract
   | Later Date Contract
+  | WithDirection Direction Contract
   deriving Show
 
 zcb1 = Later (Date "2021-12-24") (Multiple 100 (One EUR))
