@@ -43,6 +43,10 @@ data Contract =
   | And Contract Contract
   deriving Show
 
+
+instance Semigroup Contract where
+    (<>) = And
+
 zcb1 = Later (Date "2021-12-24") (Multiple 100 (One EUR))
 
 zeroCouponBond date amount currency =
