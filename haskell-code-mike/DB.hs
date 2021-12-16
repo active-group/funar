@@ -49,8 +49,10 @@ spliceState (Look cont) next =
 spliceState (Return' result) next = next result 
 
 runState :: State state a -> state -> a
-runState (Write newState cont) state = undefined 
-runState (Look cont) state = undefined 
+runState (Write newState cont) state =
+   runState (cont ()) newState
+runState (Look cont) state =
+  runState (cont state) state
 runState (Return' result) state = result
 
 s1 = do write 5
