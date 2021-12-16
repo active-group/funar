@@ -36,7 +36,8 @@ data Direction = Long | Short
   deriving Show
 
 data Contract =
-    One Currency
+    Zero
+  | One Currency
   | Multiple Amount Contract
   | Later Date Contract
   | Reverse Contract
