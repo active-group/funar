@@ -19,7 +19,7 @@ library
                      , Shuffle
                      , Teletype
   build-depends:       base
-                     , aeson
+                     , aeson <1.6
                      , cond
                      , containers
                      , either

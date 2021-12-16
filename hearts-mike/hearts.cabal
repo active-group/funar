@@ -8,12 +8,12 @@ library
   exposed-modules:     Cards
                      , GameEvent
                      , Table
---                     , EventSourcing
---                     , HeartsJson
---                     , Json.Decode
---                     , Player
---                     , Sync
---                     , TableEventSourcing
+                     , EventSourcing
+                     , HeartsJson
+                     , Json.Decode
+                     , Player
+                     , Sync
+                     , TableEventSourcing
                      -- , Concurrency
   other-modules:       MVar
                      , Shuffle
@@ -35,12 +35,11 @@ library
 
 executable server
   main-is:             Main.hs
-  buildable:           False
   other-modules:       Args
                      , PlayerServer
                      , TableServer
   build-depends:       base
-                     , aeson
+                     , aeson <1.6
                      , containers
                      , hearts
                      , mtl

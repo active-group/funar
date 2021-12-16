@@ -1,8 +1,6 @@
 module Json.Decode where
 
 import qualified Data.Aeson as Json
-import qualified Data.Aeson.KeyMap as KeyMap
-import qualified Data.Aeson.Key as Key
 import qualified Data.Either as Either
 import Data.Either.Combinators (mapLeft)
 import qualified Data.HashMap.Strict as HashMap
@@ -121,7 +119,7 @@ field :: String -> Decoder a -> Decoder a
 field name decoder = Decoder (\json ->
   case json of
     Json.Object fields ->
-      case KeyMap.lookup (Key.fromString name) fields of
+      case HashMap.lookup (Text.pack name) fields of
         Just val -> mapLeft (Field name) (runDecoder decoder val)
         Nothing -> Left (Failure ("Field " ++ name ++ " not found") json)
     _ -> Left (Failure "Not a JSON object" json))
