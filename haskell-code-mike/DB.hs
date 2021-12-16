@@ -42,8 +42,14 @@ instance Monad (State state) where
   (>>=) = spliceState
 
 spliceState :: State state a -> (a -> State state b) -> State state b
+spliceState (Write state cont) next = undefined 
+spliceState (Look cont) next = undefined
+spliceState (Return' result) next = next result 
 
 runState :: State state a -> state -> a
+runState (Write newState cont) state = undefined 
+runState (Look cont) state = undefined 
+runState (Return' result) state = result
 
 s1 = do write 5
         x <- look
