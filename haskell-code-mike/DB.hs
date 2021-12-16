@@ -29,9 +29,9 @@ data State state a =
   | Return' a
 
 write :: state -> State state ()
-write newState = undefined
+write newState = Write newState Return'
 look :: State state state
-look = undefined
+look = Look Return'
 
 instance Functor (State state) where
 
@@ -43,6 +43,7 @@ instance Monad (State state) where
 
 spliceState :: State state a -> (a -> State state b) -> State state b
 
+runState :: State state a -> state -> 
 
 s1 = do write 5
         x <- look
