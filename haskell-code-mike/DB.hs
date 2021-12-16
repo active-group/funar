@@ -33,6 +33,23 @@ write newState = undefined
 look :: State state state
 look = undefined
 
+instance Functor (State state) where
+
+instance Applicative (State state) where
+
+instance Monad (State state) where
+  return = Return'
+  (>>=) = spliceState
+
+spliceState :: State state a -> (a -> State state b) -> State state Bitraversable
+
+
+s1 = do write 5
+        x <- look
+        write (x+1)
+        y <- look
+        Return' (x + y)
+
 data DB a =
     Get String         (Integer -> DB a) -- continuation
   | Put String Integer (()      -> DB a)
