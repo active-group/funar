@@ -70,3 +70,9 @@ data Payment = Payment Direction Date Amount Currency
   deriving Show
 
 contractPayments :: Contract -> Date -> ([Payment], Contract)
+contractPayments Zero now = undefined 
+contractPayments (One currency) now = undefined 
+contractPayments (Multiple amount contract) now = undefined
+contractPayments (Reverse contract) now = undefined 
+contractPayments (Later date contract) now = undefined 
+contractPayments (And contract1 contract2) now = undefined
