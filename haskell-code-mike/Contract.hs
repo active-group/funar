@@ -48,9 +48,25 @@ data Contract =
 instance Semigroup Contract where
     (<>) = And
 
+instance Monoid Contract where
+    mempty = Zero
+
 zcb1 = Later (Date "2021-12-24") (Multiple 100 (One EUR))
 
+zeroCouponBond :: Date -> Amount -> Currency -> Contract
 zeroCouponBond date amount currency =
     Later date (Multiple amount (One currency))
 
+currencySwap :: Date -> Amount -> Currency -> Amount -> Currency -> Contract
+currencySwap date receiveAmount receiveCurrency giveAmount giveCurrency =
+    And (zeroCouponBond date receiveAmount receiveCurrency)
+        (Reverse (zeroCouponBond date giveAmount giveCurrency))
+
 zcb1' = zeroCouponBond (Date "2021-12-24") 100 EUR
+
+-- Semantik
+
+data Payment = Payment Direction Date Amount Currency
+  deriving Show
+
+contractPayments :: Contract -> Date -> ([Payment], Contract)
