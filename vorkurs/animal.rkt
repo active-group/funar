@@ -2,6 +2,17 @@
 ; Tier auf dem texanischen Highway ist eins der folgenden:
 ; - Gürteltier - ODER -
 ; - Papagei
+; Fallunterscheidung
+; gemischte Daten
+(define animal
+  (signature (mixed dillo parrot)))
+
+#|
+interface Animal { ... }
+class Dillo implements Animal { ... }
+class Parrot implements Animal { ... }
+
+|#
 
 (define weight (signature number))
 
