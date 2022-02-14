@@ -89,6 +89,7 @@ class Parrot implements Animal { ... }
   (lambda (parrot)
     (make-parrot "" (parrot-weight parrot))))
 
+#|
 ; Tier überfahren
 (: run-over-animal (animal -> animal))
 
@@ -102,3 +103,4 @@ class Parrot implements Animal { ... }
     (cond
       (... ...)
       (... ...))))
+|#
