@@ -82,3 +82,4 @@
   (lambda (time)
     (+ (* 60 (time-hour time))
        (time-minute time))))
+
