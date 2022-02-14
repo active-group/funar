@@ -8,7 +8,7 @@
   (signature (mixed dillo parrot)))
 
 #|
-interface Animal { ... }
+interface Animal { Animal runOver(); Animal feed(Weight weight); }
 class Dillo implements Animal { ... }
 class Parrot implements Animal { ... }
 class Rattlesnake implements Animal { ... }
