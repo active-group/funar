@@ -1,6 +1,8 @@
 #lang deinprogramm/sdp/beginner
 ; Tiere auf dem texanischen Highway
 
+(define weight (signature number))
+
 ; Gürteltier hat folgende Eigenschaften:
 ; - lebendig oder tot
 ; - Gewicht
@@ -31,4 +33,15 @@
 (define run-over-dillo
   (lambda (dillo)
     (make-dillo #f (dillo-weight dillo))))
+
+(: feed-dillo (dillo weight -> dillo))
+
+(define feed-dillo
+  (lambda (dillo food-weight)
+    (make-dillo (dillo-alive? dillo)
+                (cond
+                  ((dillo-alive? dillo) (+ (dillo-weight dillo)
+                                           food-weight))
+                  (else (dillo-weight dillo))))))
+
     
