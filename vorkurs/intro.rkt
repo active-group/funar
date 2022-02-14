@@ -10,11 +10,11 @@
 (define square1 (square 100 "outline" "blue"))
 (define overlay1 (overlay star1 circle1))
 
-(above
+#;(above
  (beside circle1 star1)
  (beside star1 circle1))
 
-(above
+#;(above
  (beside star1 square1)
  (beside square1 star1))
 
@@ -23,3 +23,5 @@
     (above
      (beside image1 image2)
      (beside image2 image1))))
+
+(tile star1 square1)
