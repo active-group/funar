@@ -118,9 +118,10 @@ class Rattlesnake implements Animal { ... }
 ;                                                         ^^^^^ Selbstbezug
 
 ; Anfang: Liste aus Zahlen
-(define list-of-numbers
-  (signature (mixed empty-list
-                    cons-list)))
+(define list-of
+  (lambda (element)
+    (signature (mixed empty-list
+                      (cons-list-of element)))))
 
 ; die leere Liste
 (define-record empty-list
@@ -132,10 +133,10 @@ class Rattlesnake implements Animal { ... }
 ; Eine Cons-Liste besteht aus:
 ; - erstes Element
 ; - Rest-Liste
-(define-record cons-list
+(define-record (cons-list-of element) ; macht intern ein lambda
   cons
   cons?
-  (first number)
+  (first element)
   (rest list-of-numbers))
 
 ; 1elementige Liste: 5
