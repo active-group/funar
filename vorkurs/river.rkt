@@ -1,0 +1,41 @@
+#lang deinprogramm/sdp/beginner
+; Ein Fluss ist eins der folgenden:
+; - Bach ("was aus einer Quelle kommt")
+; - Zusammentreffen ("was aus zwei Flüssen zusammenfließt")
+(define river
+  (signature (mixed creek confluence)))
+  
+; Ein Bach hat folgende Eigenschaften:
+; - Ursprungsort
+(define-record creek
+  make-creek
+  creek?
+  (creek-origin string))
+
+; Ein Zusammentreffen hat folgende Eigenschaften:
+; - Ort
+; - Hauptfluss
+; - Nebenfluss
+;        ^^^^^ Selbstbezug
+(define-record confluence
+  make-confluence
+  confluence?
+  (confluence-location string)
+  (confluence-main-stem river)
+  (confluence-tributary river))
+
+(define eschach (make-creek "Heimliswald"))
+(define prim (make-creek "Dreifaltigkeitsberg"))
+(define neckar1 (make-confluence "Rottweil" eschach prim))
+
+; Fließt Wasser von einem Ort in einen Fluss?
+(: flows-from? (string river -> boolean))
+
+(check-expect (flows-from? "Heimliswald" eschach) #t)
+(check-expect (flows-from? "Tübingen" eschach) #f)
+(check-expect (flows-from? "Heimliswald" neckar1) #t)
+
+(define flows-from?
+  (lambda (river)
+    
+
