@@ -179,4 +179,4 @@ class Rattlesnake implements Animal { ... }
        (* (first list)
           (list-product (rest list)))))))
 
-; alle geraden Zahlen aus einer Liste extrahiert
+; alle geraden Zahlen aus einer Liste extrahieren
