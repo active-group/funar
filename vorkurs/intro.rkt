@@ -24,4 +24,30 @@
      (beside image1 image2)
      (beside image2 image1))))
 
-(tile star1 square1)
+;(tile star1 square1)
+
+#|
+class C {
+  int y;
+
+  static int m(int x) {
+      ... x + 1 ...
+      x = x * 2;
+      x
+
+      ... y ...
+      z -> ... y ...
+      new K {
+        
+      }
+  } ->
+
+class K {
+  int y; // aus C kopiert
+  ... y ...
+}
+
+  C.m(17)
+}
+
+|#
