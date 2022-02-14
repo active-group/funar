@@ -137,3 +137,28 @@ class Rattlesnake implements Animal { ... }
   cons?
   (first number)
   (rest list-of-numbers))
+
+; 1elementige Liste: 5
+(define list1 (cons 5 empty))
+; 2elementige Liste: 8 5
+(define list2 (cons 8 (cons 5 empty)))
+; 3elementige Liste: 7 8 5
+;(define list3 (cons 7 (cons 8 (cons 5 empty))))
+(define list3 (cons 7 list2))
+(define list3* (cons 4 list2))
+(define list4 (cons 2 list3))
+
+; alle Elemente einer Liste addieren
+(: list-sum (list-of-numbers -> number))
+
+(check-expect (list-sum list4) 22)
+
+(define list-sum
+  (lambda (list)
+    (cond
+      ((empty? list) 0) ; "neutrales Element"
+      ((cons? list)
+       (+ (first list)
+          (list-sum (rest list)))))))
+
+
