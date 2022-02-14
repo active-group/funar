@@ -161,4 +161,20 @@ class Rattlesnake implements Animal { ... }
        (+ (first list)
           (list-sum (rest list)))))))
 
+; alle Elemente einer Liste multiplizieren
+(: list-product (list-of-numbers -> number))
 
+(check-expect (list-product list4) 560)
+
+; neutrales Element bezüglich +:
+; n + x = x + n = x für alle x --> 0
+; neutrales Element bezüglich *:
+; n * x = x * n = x für alle x --> 1
+
+(define list-product
+  (lambda (list)
+    (cond
+      ((empty? list) 1)
+      ((cons? list)
+       (* (first list)
+          (list-product (rest list)))))))
