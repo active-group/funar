@@ -137,7 +137,7 @@ class Rattlesnake implements Animal { ... }
   cons
   cons?
   (first element)
-  (rest list-of-numbers))
+  (rest (list-of element)))
 
 ; 1elementige Liste: 5
 (define list1 (cons 5 empty))
@@ -150,7 +150,7 @@ class Rattlesnake implements Animal { ... }
 (define list4 (cons 2 list3))
 
 ; alle Elemente einer Liste addieren
-(: list-sum (list-of-numbers -> number))
+(: list-sum ((list-of number) -> number))
 
 (check-expect (list-sum list4) 22)
 
@@ -161,6 +161,8 @@ class Rattlesnake implements Animal { ... }
       ((cons? list)
        (+ (first list)
           (list-sum (rest list)))))))
+
+(define list-of-numbers (signature (list-of number)))
 
 ; alle Elemente einer Liste multiplizieren
 (: list-product (list-of-numbers -> number))
@@ -195,7 +197,7 @@ class Rattlesnake implements Animal { ... }
            (list-odds (rest list)))))))
 
 ; Higher-Order-Funktion / Funktion höherer Ordnung
-(: list-extract ((number -> boolean) list-of-numbers -> list-of-numbers))
+(: list-extract ((%element -> boolean) (list-of %element) -> (list-of %element)))
 
 (define list-extract
   (lambda (p? list)
@@ -206,5 +208,7 @@ class Rattlesnake implements Animal { ... }
            (cons (first list) (list-extract p? (rest list)))
            (list-extract p? (rest list)))))))
 
+(: highway (list-of animal))
 (define highway (cons dillo1 (cons dillo2 (cons parrot1 (cons parrot2 empty)))))
+(: dillos (list-of dillo))
 (define dillos (cons dillo1 (cons dillo2 empty)))
