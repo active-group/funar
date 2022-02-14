@@ -1,5 +1,7 @@
 #lang deinprogramm/sdp/beginner
-; Tiere auf dem texanischen Highway
+; Tier auf dem texanischen Highway ist eins der folgenden:
+; - Gürteltier - ODER -
+; - Papagei
 
 (define weight (signature number))
 
