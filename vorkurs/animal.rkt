@@ -23,7 +23,7 @@ class Parrot implements Animal { ... }
 ; zusammengesetzte Daten
 (define-record dillo
   make-dillo
-  dillo?
+  dillo? ; Prädikat
   (dillo-alive? boolean)
   (dillo-weight number))
 
@@ -72,8 +72,11 @@ class Parrot implements Animal { ... }
 ; - Gewicht
 (define-record parrot
   make-parrot
+  parrot?
   (parrot-sentence string)
   (parrot-weight number))
+
+(: parrot? (any -> boolean))
 
 ; Begrüßungspapagei, 1kg
 (define parrot1 (make-parrot "Hello!" 1))
