@@ -11,7 +11,7 @@
 interface Animal { ... }
 class Dillo implements Animal { ... }
 class Parrot implements Animal { ... }
-
+class Rattlesnake implements Animal { ... }
 |#
 
 (define weight (signature number))
@@ -93,7 +93,7 @@ class Parrot implements Animal { ... }
   (lambda (parrot)
     (make-parrot "" (parrot-weight parrot))))
 
-#|
+
 ; Tier überfahren
 (: run-over-animal (animal -> animal))
 
@@ -105,6 +105,5 @@ class Parrot implements Animal { ... }
 (define run-over-animal
   (lambda (animal)
     (cond
-      (... ...)
-      (... ...))))
-|#
+      ((dillo? animal) (run-over-dillo animal))
+      ((parrot? animal) (run-over-parrot animal)))))
