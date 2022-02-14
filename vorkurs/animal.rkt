@@ -23,6 +23,7 @@ class Parrot implements Animal { ... }
 ; zusammengesetzte Daten
 (define-record dillo
   make-dillo
+  dillo?
   (dillo-alive? boolean)
   (dillo-weight number))
 
