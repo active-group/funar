@@ -18,13 +18,27 @@
  (beside star1 square1)
  (beside square1 star1))
 
+; Konstruktionsanleitungen
+
+; Kurzbeschreibung
+; quadratisches Kachelmuster erzeugen
+
+; Signatur(deklaration)
+(: tile (image image -> image))
+
+; Test
+
+
 (define tile
   (lambda (image1 image2)
     (above
      (beside image1 image2)
      (beside image2 image1))))
 
-;(tile star1 square1)
+;(tile 5 7)
+
+
+(tile star1 square1)
 
 #|
 class C {
