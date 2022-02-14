@@ -44,8 +44,41 @@
 ; - Stunde - UND -
 ; - Minute
 ; zusammengesetzte Daten
-(define-record time
-  make-time
-  (time-hour natural)
-  (time-minute natural))
+(define hour
+  (signature (integer-from-to 0 23)))
+(define minute
+  (signature (integer-from-to 0 59)))
 
+(define-record time
+  make-time ; Konstruktor
+  (time-hour hour) ; Selektor / "Getter-Funktion"
+  (time-minute minute))
+
+(: make-time (hour minute -> time))
+(: time-hour (time -> hour))
+(: time-minute (time -> minute))
+
+
+; 12 Uhr 23 Minuten
+(define time1 (make-time 12 23))
+; 14:40 Uhr
+(define time2 (make-time 14 40))
+
+; Minuten seit Mitternacht
+(: msm (time -> natural))
+
+(check-expect (msm time1)
+              743)
+(check-expect (msm time2)
+              880)
+
+; Schablone
+#;(define msm
+  (lambda (time)
+    ... (time-hour time) (time-minute time) ...))
+
+
+(define msm
+  (lambda (time)
+    (+ (* 60 (time-hour time))
+       (time-minute time))))
