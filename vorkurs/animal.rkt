@@ -179,4 +179,31 @@ class Rattlesnake implements Animal { ... }
        (* (first list)
           (list-product (rest list)))))))
 
-; alle geraden Zahlen aus einer Liste extrahieren
+; alle ungeraden Zahlen aus einer Liste extrahieren
+(: list-odds (list-of-numbers -> list-of-numbers))
+
+(check-expect (list-odds list4) (cons 7 (cons 5 empty)))
+
+(define list-odds
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (if (odd? (first list))
+           (cons (first list) (list-odds (rest list)))
+           (list-odds (rest list)))))))
+
+; Higher-Order-Funktion / Funktion höherer Ordnung
+(: list-extract ((number -> boolean) list-of-numbers -> list-of-numbers))
+
+(define list-extract
+  (lambda (p? list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (if (p? (first list))
+           (cons (first list) (list-extract p? (rest list)))
+           (list-extract p? (rest list)))))))
+
+(define highway (cons dillo1 (cons dillo2 (cons parrot1 (cons parrot2 empty)))))
+(define dillos (cons dillo1 (cons dillo2 empty)))
