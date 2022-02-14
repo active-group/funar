@@ -36,6 +36,9 @@
 
 (: feed-dillo (dillo weight -> dillo))
 
+(check-expect (feed-dillo dillo1 2) (make-dillo #t 12))
+(check-expect (feed-dillo dillo2 5) dillo2)
+
 (define feed-dillo
   (lambda (dillo food-weight)
     (make-dillo (dillo-alive? dillo)
