@@ -39,12 +39,16 @@
 (check-expect (feed-dillo dillo1 2) (make-dillo #t 12))
 (check-expect (feed-dillo dillo2 5) dillo2)
 
-(define feed-dillo
+#;(define feed-dillo
   (lambda (dillo food-weight)
     (make-dillo (dillo-alive? dillo)
-                (cond
-                  ((dillo-alive? dillo) (+ (dillo-weight dillo)
-                                           food-weight))
-                  (else (dillo-weight dillo))))))
+                (if (dillo-alive? dillo)
+                    (+ (dillo-weight dillo)
+                       food-weight)
+                    (dillo-weight dillo)))))
 
-    
+(define feed-dillo
+  (lambda (dillo food-weight)
+    (match dillo
+      ((make-dillo #t weight) (make-dillo #t (+ weight food-weight)))
+      ((make-dillo #f weight) dillo))))
