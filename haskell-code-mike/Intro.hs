@@ -115,6 +115,9 @@ tuplify f = \ (a, b) -> f a b
 untuplify :: ((a, b) -> c) -> (a -> b -> c)
 untuplify f = \ a -> \ b -> f (a, b)
 
+-- Funktionskomposition
+o :: (b -> c) -> (a -> b) -> (a -> c)
+o f g = \ a -> f (g a)
 
 
 {-
