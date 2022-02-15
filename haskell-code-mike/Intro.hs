@@ -88,3 +88,10 @@ feedAnimal'(MkDillo liveness weight, foodWeight) =
       Dead -> MkDillo Dead weight
 feedAnimal'(MkParrot sentence weight, foodWeight) =
     MkParrot sentence (weight + foodWeight)
+
+feedAnimal'' foodWeight (MkDillo liveness weight) =
+  case liveness of
+    Alive -> MkDillo Alive (weight + foodWeight)
+    Dead -> MkDillo Dead weight
+feedAnimal'' foodWeight (MkParrot sentence weight) =
+  MkParrot sentence (weight + foodWeight)
