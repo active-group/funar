@@ -163,6 +163,9 @@ data Optional a =
   | Result a
   deriving Show
 
+-- (==) :: Eq a => a -> a -> Bool
+-- Eq a: Constraint
+
 -- den Index eines Elements in einer Liste bestimmen
 listIndex :: a -> [a] -> Optional Integer 
 listIndex x' [] = Null
