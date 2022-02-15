@@ -63,6 +63,8 @@ dillo1 = MkDillo {dilloLiveness = Alive, dilloWeight = 10}
 dillo2 :: Animal
 dillo2 = MkDillo Dead 8
 
+parrot1 = MkParrot "Hello" 1
+
 -- Tier überfahren
 -- >>> runOverAnimal dillo1
 -- MkDillo {dilloLiveness = Dead, dilloWeight = 10}
