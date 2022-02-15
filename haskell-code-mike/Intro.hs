@@ -112,13 +112,15 @@ tuplify f = \ (a, b) -> f a b
 -- "schönfinkeln" (Moses Schönfinkel)
 -- "currifzieren" (Haskell Curry)
 -- eingebaut: curry
-untuplify :: ((a, b) -> c) -> (a -> b -> c)
+untuplify :: ((a, b) -> c) -> (a -> (b -> c))
 untuplify f = \ a -> \ b -> f (a, b)
 
 -- Funktionskomposition
 o :: (b -> c) -> (a -> b) -> (a -> c)
 o f g = \ a -> f (g a)
 
+-- Assoziativgesetz
+-- (a + b) + c = a + (b + c)
 
 {-
 Eine geometrische Figur ("shape") ist:
