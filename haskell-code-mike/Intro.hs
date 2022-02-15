@@ -36,4 +36,4 @@ data Dillo = MkDillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
   deriving Show
 
 dillo1 = MkDillo { dilloLiveness = Alive, dilloWeight = 10 }
-dillo2 = MkDillo { dilloLiveness = Dead, dilloWeight = 8 }
+dillo2 = MkDillo Dead 8
