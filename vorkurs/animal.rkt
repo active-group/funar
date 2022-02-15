@@ -137,7 +137,7 @@ class Rattlesnake implements Animal { ... }
   cons
   cons?
   (first element)
-  (rest (list-of element)))
+  (rest (list-of element))) ; Polymorphie
 
 ; 1elementige Liste: 5
 (define list1 (cons 5 empty))
