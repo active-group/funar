@@ -136,9 +136,11 @@ Eine geometrische Figur ("shape") ist:
 -- Eine Liste ist eins der folgenden:
 -- - die leere Liste
 -- - eine Cons-Liste aus erstem Element und Rest-Liste
-data ListOfIntegers =
+data ListOf a =
     Empty
-  | Cons Integer ListOfIntegers
+  | Cons a (ListOf a)
   deriving Show
 
-list3 = 
+list3 :: ListOf Integer
+list3 = Cons 1 (Cons 5 (Cons 7 Empty))
+
