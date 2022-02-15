@@ -206,6 +206,7 @@ optionalMap :: (a -> b) -> Optional a -> Optional b
 optionalMap f Null = Null
 optionalMap f (Result a) = Result (f a)
 
+-- eingebaut: Functor
 class Mappable f where
     uMap :: (a -> b) -> f a -> f b
 
