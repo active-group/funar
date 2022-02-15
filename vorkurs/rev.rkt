@@ -20,7 +20,8 @@
   (lambda (list acc) ; acc die  "bisher gesehenen" Elemente, umgedreht
     (cond
       ((empty? list) acc)
-      ((cons? list)       
+      ((cons? list)
+       ; kein Kontext!
        (rev* (rest list) (cons (first list) acc))))))
 
 (rev* (list 1 2 3 4) empty)
