@@ -64,6 +64,10 @@ dillo2 :: Animal
 dillo2 = MkDillo Dead 8
 
 -- Tier überfahren
+-- >>> runOverAnimal dillo1
+-- MkDillo {dilloLiveness = Dead, dilloWeight = 10}
+-- >>> runOverAnimal dillo2
+-- MkDillo {dilloLiveness = Dead, dilloWeight = 8}
 runOverAnimal :: Animal -> Animal
 runOverAnimal (MkDillo _ w) = MkDillo Dead w 
 runOverAnimal (MkParrot sentence weight) = MkParrot "" weight
