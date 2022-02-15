@@ -167,7 +167,7 @@ data Optional a =
 -- Eq a: Constraint
 
 -- den Index eines Elements in einer Liste bestimmen
-listIndex :: a -> [a] -> Optional Integer 
+listIndex :: Eq a => a -> [a] -> Optional Integer 
 listIndex x' [] = Null
 listIndex x' (x:xs) = 
     if x == x'
