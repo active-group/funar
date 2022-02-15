@@ -138,4 +138,5 @@ Eine geometrische Figur ("shape") ist:
 -- - eine Cons-Liste aus erstem Element und Rest-Liste
 data ListOfIntegers =
     Empty
-
+  | Cons Integer ListOfIntegers
+  deriving Show
