@@ -114,6 +114,9 @@ tuplify f = \ (a, b) -> f a b
 -- eingebaut: curry
 untuplify :: ((a, b) -> c) -> (a -> b -> c)
 untuplify f = \ a -> \ b -> f (a, b)
+
+
+
 {-
 Eine geometrische Figur ("shape") ist:
 - Kreis
