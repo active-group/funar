@@ -62,3 +62,8 @@ dillo1 = MkDillo {dilloLiveness = Alive, dilloWeight = 10}
 
 dillo2 :: Animal
 dillo2 = MkDillo Dead 8
+
+-- Tier überfahren
+runOverAnimal :: Animal -> Animal
+runOverAnimal (MkDillo _ w) = MkDillo Dead w 
+runOverAnimal (MkParrot sentence weight) = MkParrot "" weight
