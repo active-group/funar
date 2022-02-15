@@ -154,3 +154,22 @@ listSum :: [Integer] -> Integer
 listSum [] = 0
 listSum (first:rest) = first + (listSum rest)
 
+listMap :: (a -> b) -> [a] -> [b]
+listMap f [] = []
+listMap f (x:xs) = (f x) : (listMap f xs)
+
+data Optional a =
+    Null
+  | Result a
+  deriving Show
+
+-- den Index eines Elements in einer Liste bestimmen
+listIndex :: a -> [a] -> Optional Integer 
+listIndex x' [] = Null
+listIndex x' (x:xs) = 
+    if x == x'
+    then Result 0 
+    else
+      case listIndex x' xs of
+        Null -> Null 
+        Result index -> Result (index + 1)
