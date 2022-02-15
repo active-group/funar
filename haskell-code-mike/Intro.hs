@@ -140,3 +140,5 @@ data ListOfIntegers =
     Empty
   | Cons Integer ListOfIntegers
   deriving Show
+
+list3 = 
