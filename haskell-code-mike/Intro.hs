@@ -33,7 +33,7 @@ isCute Snake = False
 -- - lebendig oder tot
 -- - Gewicht
 data Liveness = Dead | Alive
-  deriving Show
+  deriving (Show, Eq)
 
 type Weight = Integer
 
@@ -167,7 +167,7 @@ listMap f (x:xs) = (f x) : (listMap f xs)
 data Optional a =
     Null
   | Result a
-  deriving Show
+  deriving (Show, Eq)
 
   {-
   data Maybe a =
@@ -194,3 +194,8 @@ listIndex x' (x:xs) =
       case listIndex x' xs of
         Null -> Null 
         Result index -> Result (index + 1)
+
+
+optionalMap :: (a -> b) -> Optional a -> Optional b 
+optionalMap f Null = Null
+optionalMap f (Result a) = Result (f a)
