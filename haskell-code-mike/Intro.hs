@@ -198,6 +198,19 @@ listIndex x' (x:xs) =
         Result index -> Result (index + 1)
 -}
 
+type List a = [a]
+
+-- listMap ::  (a -> b) -> [        a] -> [       b]
+-- listMap ::  (a -> b) -> List     a -> List     b
 optionalMap :: (a -> b) -> Optional a -> Optional b 
 optionalMap f Null = Null
 optionalMap f (Result a) = Result (f a)
+
+class Mappable f where
+    uMap :: (a -> b) -> f a -> f b
+
+instance Mappable Optional where
+    uMap = optionalMap
+
+instance Mappable [] where
+    uMap = listMap
