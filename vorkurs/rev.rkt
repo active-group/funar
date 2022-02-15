@@ -16,6 +16,9 @@
         (first list) ; 1
        )))))
 
+; n + (n - 1) + ... + 2 + 1
+; n*(n+1) / 2
+; n^2 + ... = O(n^2)
 (: add-element ((list-of %a) %a -> (list-of %a)))
 
 #;(check-expect (add-element (list 1 2 3) 4)
