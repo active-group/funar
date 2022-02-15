@@ -98,3 +98,9 @@ feedAnimal'' foodWeight (MkDillo liveness weight) =
     Dead -> MkDillo Dead weight
 feedAnimal'' foodWeight (MkParrot sentence weight) =
   MkParrot sentence (weight + foodWeight)
+
+feedAnimal''' foodWeight animal = feedAnimal animal foodWeight
+
+swap :: (b -> a -> c) -> (a -> b -> c)
+swap    f     a      b = f b a
+-- swap f = \ a -> \ b -> f b a
