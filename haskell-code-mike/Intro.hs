@@ -133,3 +133,9 @@ Eine geometrische Figur ("shape") ist:
    innerhalb oder außerhalb einer geometrischen Figur liegt
 -}
 
+-- Eine Liste ist eins der folgenden:
+-- - die leere Liste
+-- - eine Cons-Liste aus erstem Element und Rest-Liste
+data ListOfIntegers =
+    Empty
+
