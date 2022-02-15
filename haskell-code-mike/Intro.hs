@@ -163,6 +163,12 @@ data Optional a =
   | Result a
   deriving Show
 
+  {-
+  data Maybe a =
+      Nothing
+    | Just a
+  -}
+
 -- (==) :: Eq a => a -> a -> Bool
 -- Eq a: Constraint
 
