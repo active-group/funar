@@ -105,9 +105,15 @@ swap :: (b -> a -> c) -> (a -> b -> c)
 swap    f     a      b = f b a
 -- swap f = \ a -> \ b -> f b a
 
+-- eingebaut: uncurry
 tuplify :: (a -> b -> c) -> ((a, b) -> c)
 tuplify f = \ (a, b) -> f a b
 
+-- "schönfinkeln" (Moses Schönfinkel)
+-- "currifzieren" (Haskell Curry)
+-- eingebaut: curry
+untuplify :: ((a, b) -> c) -> (a -> b -> c)
+untuplify f = \ a -> \ b -> f (a, b)
 {-
 Eine geometrische Figur ("shape") ist:
 - Kreis
