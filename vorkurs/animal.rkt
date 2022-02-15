@@ -1,4 +1,4 @@
-#lang deinprogramm/sdp/beginner
+#lang deinprogramm/sdp
 ; Tier auf dem texanischen Highway ist eins der folgenden:
 ; - Gürteltier - ODER -
 ; - Papagei
@@ -118,22 +118,22 @@ class Rattlesnake implements Animal { ... }
 ;                                                         ^^^^^ Selbstbezug
 
 ; Anfang: Liste aus Zahlen
-(define list-of
+#;(define list-of
   (lambda (element)
     (signature (mixed empty-list
                       (cons-list-of element)))))
 
 ; die leere Liste
-(define-record empty-list
+#;(define-record empty-list
   make-empty
   empty?)
 
-(define empty (make-empty))
+#;(define empty (make-empty))
 
 ; Eine Cons-Liste besteht aus:
 ; - erstes Element
 ; - Rest-Liste
-(define-record (cons-list-of element) ; macht intern ein lambda
+#;(define-record (cons-list-of element) ; macht intern ein lambda
   cons
   cons?
   (first element)
@@ -182,6 +182,20 @@ class Rattlesnake implements Animal { ... }
        (* (first list)
           (list-product (rest list)))))))
 
+(: list-fold (%b (%a %b -> %b) (list-of %a) -> %b))
+   
+(define list-fold
+  (lambda (init op list)
+    (cond
+      ((empty? list) init)
+      ((cons? list)
+       (op (first list)
+           (list-fold init op (rest list)))))))
+
+(define list-concat
+  (lambda (list1 list2)
+    (list-fold list2 cons list1)))
+
 ; alle ungeraden Zahlen aus einer Liste extrahieren
 (: list-odds (list-of-numbers -> list-of-numbers))
 
@@ -212,3 +226,49 @@ class Rattlesnake implements Animal { ... }
 (define highway (cons dillo1 (cons dillo2 (cons parrot1 (cons parrot2 empty)))))
 (: dillos (list-of dillo))
 (define dillos (cons dillo1 (cons dillo2 empty)))
+
+; Alle Tiere einer Liste überfahren
+(: run-over-animals ((list-of animal) -> (list-of animal)))
+
+(check-expect (run-over-animals highway)
+              (list (run-over-animal dillo1)
+                    (run-over-animal dillo2)
+                    (run-over-animal parrot1)
+                    (run-over-animal parrot2)))
+
+(define run-over-animals
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cons
+        (run-over-animal (first list))
+        (run-over-animals (rest list)))))))
+
+
+(define run-over-animals*
+  (lambda (list)
+    (list-fold empty
+               (lambda (first-list rec-result)
+                 (cons
+                  (run-over-animal first-list)
+                  rec-result))
+               list)))
+
+(: list-map ((%a -> %b) (list-of %a) -> (list-of %b)))
+
+; QuickCheck
+; property-based testing
+(check-property
+ (for-all ((list (list-of string)))
+   (expect (list-map (lambda (x) x) list)
+           list)))
+
+(define list-map
+  (lambda (f list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cons
+        (f (first list))
+        (list-map f (rest list)))))))
