@@ -22,7 +22,7 @@
       ((empty? list) acc)
       ((cons? list)
        ; kein Kontext!
-       ; tail call
+       ; tail call / "endrekursiver Aufruf"
        (rev* (rest list) (cons (first list) acc))))))
 
 (rev* (list 1 2 3 4) empty)
