@@ -104,3 +104,6 @@ feedAnimal''' foodWeight animal = feedAnimal animal foodWeight
 swap :: (b -> a -> c) -> (a -> b -> c)
 swap    f     a      b = f b a
 -- swap f = \ a -> \ b -> f b a
+
+tuplify :: (a -> b -> c) -> ((a, b) -> c)
+tuplify f = \ (a, b) -> f a b
