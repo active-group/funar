@@ -141,6 +141,16 @@ data ListOf a =
   | Cons a (ListOf a)
   deriving Show
 
-list3 :: ListOf Integer
-list3 = Cons 1 (Cons 5 (Cons 7 Empty))
+list3' :: ListOf Integer
+list3' = Cons 1 (Cons 5 (Cons 7 Empty))
+
+list3 :: [Integer]
+list3 = [1,5,7]
+
+-- alle Elemente einer Liste addieren
+-- >>> listSum list3
+-- 13
+listSum :: [Integer] -> Integer
+listSum [] = 0
+listSum (first:rest) = first + (listSum rest)
 
