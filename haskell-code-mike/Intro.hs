@@ -172,6 +172,12 @@ data Optional a =
 -- (==) :: Eq a => a -> a -> Bool
 -- Eq a: Constraint
 
+{-
+-- Typklasse ("Interface")
+class Eq a where
+  (==) :: a -> a -> Bool
+-}
+
 -- den Index eines Elements in einer Liste bestimmen
 listIndex :: Eq a => a -> [a] -> Optional Integer 
 listIndex x' [] = Null
