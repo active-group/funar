@@ -22,6 +22,7 @@
       ((empty? list) acc)
       ((cons? list)
        ; kein Kontext!
+       ; tail call
        (rev* (rest list) (cons (first list) acc))))))
 
 (rev* (list 1 2 3 4) empty)
