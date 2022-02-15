@@ -25,6 +25,10 @@
        ; tail call / "endrekursiver Aufruf"
        (rev* (rest list) (cons (first list) acc))))))
 
+; proper tail calls: tail calls verbrauchen keinen Speicherplatz für Kontext
+
+; Java: return f(x)
+
 (rev* (list 1 2 3 4) empty)
 
 ; n + (n - 1) + ... + 2 + 1
