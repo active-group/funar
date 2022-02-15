@@ -191,10 +191,12 @@ listIndex x' (x:xs) =
     if x == x'
     then Result 0 
     else
+        optionalMap ((+) 1) (listIndex x' xs)
+{-
       case listIndex x' xs of
         Null -> Null 
         Result index -> Result (index + 1)
-
+-}
 
 optionalMap :: (a -> b) -> Optional a -> Optional b 
 optionalMap f Null = Null
