@@ -89,6 +89,7 @@ feedAnimal'(MkDillo liveness weight, foodWeight) =
 feedAnimal'(MkParrot sentence weight, foodWeight) =
     MkParrot sentence (weight + foodWeight)
 
+feedAnimal'' :: Weight -> Animal -> Animal
 feedAnimal'' foodWeight (MkDillo liveness weight) =
   case liveness of
     Alive -> MkDillo Alive (weight + foodWeight)
