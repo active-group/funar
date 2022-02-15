@@ -13,6 +13,12 @@ f n = n + 1
 data Pet = Dog | Cat | Snake
   deriving Show
 
+instance Eq Pet where
+  (==) Cat Cat = True 
+  (==) Dog Dog = True 
+  (==) Snake Snake = True 
+  (==) _ _ = False
+
 -- Ist Haustier niedlich?
 -- >>> isCute Dog
 -- True
