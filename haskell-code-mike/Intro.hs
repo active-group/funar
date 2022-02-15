@@ -32,5 +32,5 @@ data Liveness = Dead | Alive
 type Weight = Integer
 
 -- Record
-data Dillo = MkDillo { dilloLiveness :: Liveness, dilloWeight :: Integer}
+data Dillo = MkDillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
   deriving Show
