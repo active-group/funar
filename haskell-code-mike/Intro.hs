@@ -107,3 +107,14 @@ swap    f     a      b = f b a
 
 tuplify :: (a -> b -> c) -> ((a, b) -> c)
 tuplify f = \ (a, b) -> f a b
+
+{-
+Eine geometrische Figur ("shape") ist:
+- Kreis
+- Quadrat
+- Überlagerungen zweier geometrischer Figuren
+
+1. Datenanalyse durchführen -> Typdefinitionen
+2. Funktion schreiben, die für einen Punkt feststellt, ob dieser 
+   innerhalb oder außerhalb einer geometrischen Figur liegt
+-}
