@@ -28,3 +28,9 @@ isCute Snake = False
 -- - Gewicht
 data Liveness = Dead | Alive
   deriving Show
+
+type Weight = Integer
+
+-- Record
+data Dillo = MkDillo { dilloLiveness :: Liveness, dilloWeight :: Integer}
+  deriving Show
