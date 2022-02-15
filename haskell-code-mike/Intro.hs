@@ -132,3 +132,4 @@ Eine geometrische Figur ("shape") ist:
 2. Funktion schreiben, die für einen Punkt feststellt, ob dieser 
    innerhalb oder außerhalb einer geometrischen Figur liegt
 -}
+
