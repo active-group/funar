@@ -11,7 +11,7 @@ f n = n + 1
 
 -- Haustiere
 data Pet = Dog | Cat | Snake
-  deriving Show
+--  deriving Show
 
 instance Eq Pet where
   (==) Cat Cat = True 
