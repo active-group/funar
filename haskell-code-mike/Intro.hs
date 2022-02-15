@@ -31,6 +31,7 @@ data Liveness = Dead | Alive
 
 type Weight = Integer
 
+{-
 -- Record
 data Dillo = MkDillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
   deriving Show
@@ -46,3 +47,12 @@ runOverDillo :: Dillo -> Dillo
 -- runOverDillo (MkDillo _ w) = MkDillo Dead w
 -- runOverDillo dillo = dillo { dilloLiveness = Dead } -- functional update
 runOverDillo (MkDillo { dilloWeight = w}) = MkDillo Dead w
+-}
+
+-- Ein Tier ist eins der folgenden:
+-- - Gürteltier
+-- - Papagei
+data Animal =
+    MkDillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
+  | MkParrot String Weight
+  deriving Show
