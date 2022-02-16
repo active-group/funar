@@ -59,7 +59,8 @@ p1' = put "Mike" 50 `splice` (\() ->
 
 -- >>> runDB p1 Map.empty
 -- "101"
--- >>
+-- >>> runDB p1' Map.empty
+-- "101"
 runDB :: DB a -> Map String Integer -> a
 runDB (Get key cont) db = 
     runDB (cont (db ! key)) db
