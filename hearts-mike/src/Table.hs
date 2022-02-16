@@ -140,7 +140,7 @@ addToPile playerPiles player cards =
   in Map.insert player (Set.union playerPile (Set.fromList cards)) playerPiles
 
 tableProcessEvent :: GameEvent -> TableState -> TableState
-tableProcessEvent _ _ = undefined 
+tableProcessEvent _ tableState = undefined  -- tableState { tableStateTrick = ... }
 
 tableProcessCommand :: GameCommand -> TableState -> [GameEvent]
 tableProcessCommand _ _ = undefined
