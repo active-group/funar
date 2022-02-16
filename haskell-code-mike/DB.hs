@@ -100,6 +100,18 @@ runDBSQLite (Put key value cont) connection =
      runDBSQLite (cont ()) connection
 runDBSQLite (Return result) connection = return result
 
+-- >>> execDB p1
+-- <BLANKLINE>
+-- ByteCodeLink.lookupCE
+-- During interactive linking, GHCi couldn't find the following symbol:
+--   sqlitezmsimplezm0zi4zi18zi0zmad88ef380b37fb3f5c27133eac3f56151f083f2bd11a58038bb3dbe1bf7f84bd_DatabaseziSQLiteziSimpleziFromField_zdfFromFieldInteger_closure
+-- This may be due to you not asking GHCi to load extra object files,
+-- archives or DLLs needed by your current session.  Restart GHCi, specifying
+-- the missing library using the -L/path/to/object/dir and -lmissinglibname
+-- flags, or simply by naming the relevant files on the GHCi command line.
+-- Alternatively, this link failure might indicate a bug in GHCi.
+-- If you suspect the latter, please report this as a GHC bug:
+--   https://www.haskell.org/ghc/reportabug
 execDB :: DB a -> IO a
 execDB command =
   do connection <- open "test.db"
