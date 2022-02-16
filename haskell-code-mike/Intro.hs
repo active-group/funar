@@ -240,3 +240,7 @@ instance Mappable [] where
 -- Assoziativgesetz
 
 -- Halbgruppe + neutrales Element: Monoid
+
+-- Gruppe: Monoid + inverse Operation
+-- inverse :: a -> a
+-- (inverse x) `combine` x == x `combine (inverse x) == neutral
