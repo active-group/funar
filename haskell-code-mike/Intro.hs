@@ -1,5 +1,8 @@
 module Intro where
 
+-- eingebaute Monoid, Semigroup verstecken
+import Prelude hiding (Monoid, Semigroup)
+
 x :: Integer
 x = 9
 
