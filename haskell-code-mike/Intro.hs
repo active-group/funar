@@ -217,5 +217,26 @@ instance Mappable [] where
     uMap = listMap
 
 
--- neutrales Element bezüglich einer
---
+-- neutrales Element bezüglich einer Operation
+-- "0 ist das neutrale Element bezüglich +"
+-- "1 ist das neutrale Element bezüglich *"
+-- combine :: a -> a -> a
+-- "True ist das neutrale Element bezüglich &&"
+-- True && x == x && True == x für alle x in Bool
+-- False || x == x || False == x für alle x in Bool
+
+-- Zutaten:
+-- - ein Typ a / eine Menge
+-- - Operation(en), hier combine :: a -> a -> a
+-- - Gleichungen, hier x `combine` n == n `combine` x == x für alle x in a
+
+-- in der Algebra: neutrales Element gehört zu einer Gruppe
+-- in einer Gruppe das Assoziativgesetz:
+-- a `combine` (b `combine` c) == (a `combine` b) `combine` c
+
+-- Halbgruppe
+-- Ein Typ a
+-- combine :: a -> a -> a
+-- Assoziativgesetz
+
+-- Halbgruppe + neutrales Element: Monoid
