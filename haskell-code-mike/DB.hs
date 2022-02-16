@@ -80,6 +80,8 @@ runDB (Put key value cont) db =
     runDB (cont ()) (Map.insert key value db)
 runDB (Return result) db = result
 
+runDBSQLite :: 
+
 instance Functor DB where
 
 instance Applicative DB where
