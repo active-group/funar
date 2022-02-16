@@ -51,4 +51,11 @@ splice (Put key value cont) next =
 splice (Return result) next = next result
 
 
+-- >>> runDB p1 Map.empty
+-- "101"
 runDB :: DB a -> Map String Integer -> a
+runDB (Get key cont) db = 
+    runDB (cont (db ! key)) db
+runDB (Put key value cont) db = 
+    runDB (cont ()) (Map.insert key value db)
+runDB (Return result) db = result
