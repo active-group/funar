@@ -265,3 +265,12 @@ instance Monoid [t] where
 combineAll :: Monoid a => [a] -> a
 combineAll [] = neutral
 combineAll (x : xs) = x `combine` (combineAll xs)
+
+data Additive = Additive Integer
+  deriving Show
+
+instance Semigroup Additive where
+  combine (Additive x) (Additive y) = Additive (x + y)
+
+instance (Semigroup a, Semigroup b) => Semigroup (a, b) where
+  (x1, y1) `combine` (x2, y2) = (x1 `combine` x2, y1 `combine` y2)
