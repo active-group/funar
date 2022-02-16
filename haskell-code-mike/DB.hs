@@ -4,7 +4,7 @@ import qualified Data.Map.Strict as Map
 import Data.Map (Map, (!))
 
 import Database.SQLite.Simple
-import Database.SQLite.
+import Database.SQLite.Simple.FromRow
 
 {-
 put "Mike" 50
