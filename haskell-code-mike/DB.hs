@@ -50,7 +50,7 @@ splice (Put key value cont) next =
                     splice (cont ()) next)
 splice (Return result) next = next result
 
-p1'
+p1' = put "Mike" 50 `splice` (\()
 
 -- >>> runDB p1 Map.empty
 -- "101"
