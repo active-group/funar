@@ -274,3 +274,6 @@ instance Semigroup Additive where
 
 instance (Semigroup a, Semigroup b) => Semigroup (a, b) where
   (x1, y1) `combine` (x2, y2) = (x1 `combine` x2, y1 `combine` y2)
+
+instance (Monoid a, Monoid b) => Monoid (a, b) where
+  neutral = (neutral, neutral)
