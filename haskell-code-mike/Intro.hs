@@ -215,3 +215,7 @@ instance Mappable Optional where
 
 instance Mappable [] where
     uMap = listMap
+
+
+-- neutrales Element bezüglich einer
+--
