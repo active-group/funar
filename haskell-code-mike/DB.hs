@@ -100,6 +100,15 @@ runDBSQLite (Put key value cont) connection =
      runDBSQLite (cont ()) connection
 runDBSQLite (Return result) connection = return result
 
+execDB :: DB a -> IO a
+execDB command =
+  do connection <- open "test.db"
+     execute_ connection "CREATE TABLE IF NOT EXISTS test (key TEXT PRIMARY KEY, value INTEGER)"
+     result <- runDBSQLite command connection 
+     close connection
+     return result
+
+
 instance Functor DB where
 
 instance Applicative DB where
