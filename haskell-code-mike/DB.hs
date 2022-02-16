@@ -1,7 +1,7 @@
 module DB where
 
 import qualified Data.Map.Strict as Map 
-import Data.Map (Map)
+import Data.Map (Map, (!))
 
 {-
 put "Mike" 50
@@ -51,4 +51,4 @@ splice (Put key value cont) next =
 splice (Return result) next = next result
 
 
-runDB :: DB a -> a
+runDB :: DB a -> Map String Integer -> a
