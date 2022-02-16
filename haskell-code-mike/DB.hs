@@ -3,6 +3,9 @@ module DB where
 import qualified Data.Map.Strict as Map 
 import Data.Map (Map, (!))
 
+import Database.SQLite.Simple
+import Database.SQLite.
+
 {-
 put "Mike" 50
 x = get "Mike"
