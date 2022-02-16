@@ -80,10 +80,19 @@ runDB (Put key value cont) db =
     runDB (cont ()) (Map.insert key value db)
 runDB (Return result) db = result
 
+data Entry = Entry String Integer 
+
+instance FromRow Entry where
+  fromRow = (fmap Entry field) <*> field
+
+instance ToRow Entry where
+    toRow (Entry key value) = toRow (key, value)
+
 runDBSQLite :: DB a -> Connection -> IO a
-runDBSQLite (Get key cont) connection =
-  do execute ""
-runDBSQLite (Put key value cont) connection = undefined 
+runDBSQLite (Get key cont) connection = undefined
+runDBSQLite (Put key value cont) connection =
+  do execute connection "INSERT INTO test (key, value) VALUES (?, ?)" (Entry key value)
+     runDBSQLite (cont ()) connection
 runDBSQLite (Return result) connection = return result
 
 instance Functor DB where
