@@ -83,7 +83,7 @@ runDB (Return result) db = result
 runDBSQLite :: DB a -> Connection -> IO a
 runDBSQLite (Get key cont) connection = undefined 
 runDBSQLite (Put key value cont) connection = undefined 
-runDBSQLite (Return result) connection = result
+runDBSQLite (Return result) connection = return result
 
 instance Functor DB where
 
