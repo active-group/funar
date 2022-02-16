@@ -247,3 +247,10 @@ instance Mappable [] where
 -- Gruppe: Monoid + inverse Operation
 -- inverse :: a -> a
 -- (inverse x) `combine` x == x `combine (inverse x) == neutral
+
+class Semigroup a where
+  -- sollte das Assoziativgesetz erfüllen
+  combine :: a -> a -> a
+
+instance Semigroup [t] where
+  combine = (++)
