@@ -81,7 +81,8 @@ runDB (Put key value cont) db =
 runDB (Return result) db = result
 
 runDBSQLite :: DB a -> Connection -> IO a
-runDBSQLite (Get key cont) connection = undefined 
+runDBSQLite (Get key cont) connection =
+  do execute ""
 runDBSQLite (Put key value cont) connection = undefined 
 runDBSQLite (Return result) connection = return result
 
