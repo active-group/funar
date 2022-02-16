@@ -50,6 +50,7 @@ splice (Put key value cont) next =
                     splice (cont ()) next)
 splice (Return result) next = next result
 
+p1' :: DB String
 p1' = put "Mike" 50 `splice` (\() ->
       get "Mike" `splice` (\x -> 
       put "Mike" (x+1) `splice` (\() ->
@@ -58,6 +59,7 @@ p1' = put "Mike" 50 `splice` (\() ->
 
 -- >>> runDB p1 Map.empty
 -- "101"
+-- >>
 runDB :: DB a -> Map String Integer -> a
 runDB (Get key cont) db = 
     runDB (cont (db ! key)) db
