@@ -252,5 +252,16 @@ class Semigroup a where
   -- sollte das Assoziativgesetz erfüllen
   combine :: a -> a -> a
 
+
 instance Semigroup [t] where
   combine = (++)
+
+class Semigroup a => Monoid a where
+  neutral :: a
+
+instance Monoid [t] where
+  neutral = []
+
+combineAll :: Monoid a => [a] -> a
+combineAll [] = neutral
+combineAll (x : xs) = x   ... (combineAll xs
