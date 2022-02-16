@@ -96,7 +96,7 @@ runDBSQLite (Get key cont) connection =
        (queryNamed connection "SELECT * from test WHERE key = :key" [":key" := key] :: IO [Entry])
      runDBSQLite (cont value) connection
 runDBSQLite (Put key value cont) connection =
-  do execute connection "INSERT INTO test (key, value) VALUES (?, ?)" (Entry key value)
+  do execute connection "INSERT IF NOT EXISTS INTO test (key, value) VALUES (?, ?)" (Entry key value)
      runDBSQLite (cont ()) connection
 runDBSQLite (Return result) connection = return result
 
