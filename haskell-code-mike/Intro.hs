@@ -264,4 +264,4 @@ instance Monoid [t] where
 
 combineAll :: Monoid a => [a] -> a
 combineAll [] = neutral
-combineAll (x : xs) = x   ... (combineAll xs
+combineAll (x : xs) = x `combine` (combineAll xs)
