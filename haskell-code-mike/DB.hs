@@ -1,5 +1,4 @@
-  do execute "INSERT INTO test (key, value) VALUES (?, ?)"
-
+{-# LANGUAGE OverloadedStrings #-}
 
 module DB where
 
@@ -92,7 +91,8 @@ instance ToRow Entry where
     toRow (Entry key value) = toRow (key, value)
 
 runDBSQLite :: DB a -> Connection -> IO a
-runDBSQLite (Get key cont) connection = undefined
+runDBSQLite (Get key cont) connection = 
+    
 runDBSQLite (Put key value cont) connection =
   do execute connection "INSERT INTO test (key, value) VALUES (?, ?)" (Entry key value)
      runDBSQLite (cont ()) connection
