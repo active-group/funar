@@ -57,9 +57,25 @@ p1' = put "Mike" 50 `splice` (\() ->
       get "Mike" `splice` (\y ->
       Return (show (x+y))))))
 
+p1' :: DB String
+p1' = put "Mike" 50 `splice` (\() ->
+      get "Mike" `splice` (\x -> 
+      put "Mike" (x+1) `splice` (\() ->
+      get "Mike" `splice` (\y ->
+      Return (show (x+y))))))
+
+p1''' :: DB String
+p1''' =
+  put "Mike" 50 >>= ( \() ->
+  get "Mike">>= ( \x ->
+  put "Mike" (x + 1) >>= ( \() ->
+  get "Mike" >>= ( \y ->
+  return (show (x + y))))))
 -- >>> runDB p1 Map.empty
 -- "101"
 -- >>> runDB p1' Map.empty
+-- "101"
+-- >>> runDB p1'' Map.empty
 -- "101"
 runDB :: DB a -> Map String Integer -> a
 runDB (Get key cont) db = 
@@ -68,6 +84,17 @@ runDB (Put key value cont) db =
     runDB (cont ()) (Map.insert key value db)
 runDB (Return result) db = result
 
+instance Functor DB where
+
+instance Applicative DB where
+
 instance Monad DB where
     (>>=) = splice
     return = Return
+
+p1'' :: DB String
+p1'' = do put "Mike" 50
+          x <- get "Mike"
+          put "Mike" (x+1)
+          y <- get "Mike"
+          return (show (x+y))
