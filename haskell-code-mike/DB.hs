@@ -1,3 +1,6 @@
+  do execute "INSERT INTO test (key, value) VALUES (?, ?)"
+
+
 module DB where
 
 import qualified Data.Map.Strict as Map 
