@@ -57,13 +57,6 @@ p1' = put "Mike" 50 `splice` (\() ->
       get "Mike" `splice` (\y ->
       Return (show (x+y))))))
 
-p1' :: DB String
-p1' = put "Mike" 50 `splice` (\() ->
-      get "Mike" `splice` (\x -> 
-      put "Mike" (x+1) `splice` (\() ->
-      get "Mike" `splice` (\y ->
-      Return (show (x+y))))))
-
 p1''' :: DB String
 p1''' =
   put "Mike" 50 >>= ( \() ->
