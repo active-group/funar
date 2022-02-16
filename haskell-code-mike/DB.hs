@@ -1,5 +1,8 @@
 module DB where
 
+import qualified Data.Map.Strict as Map 
+import Data.Map (Map)
+
 {-
 put "Mike" 50
 x = get "Mike"
@@ -36,4 +39,16 @@ get :: String -> DB Integer
 get key = Get key Return -- (\ value -> Return value)
 
 put :: String -> Integer -> DB ()
-put key value = Put key value (\() -> Return ())
+put key value = Put key value Return -- (\() -> Return ())
+
+splice :: DB a -> (a -> DB b) -> DB b
+splice (Get key cont) next =
+    Get key (\ value ->
+               splice (cont value) next)
+splice (Put key value cont) next =
+    Put key value (\ () ->
+                    splice (cont ()) next)
+splice (Return result) next = next result
+
+
+runDB :: DB a -> a
