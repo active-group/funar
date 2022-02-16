@@ -67,3 +67,7 @@ runDB (Get key cont) db =
 runDB (Put key value cont) db = 
     runDB (cont ()) (Map.insert key value db)
 runDB (Return result) db = result
+
+instance Monad DB where
+    (>>=) = splice
+    return = Return
