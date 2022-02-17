@@ -301,6 +301,7 @@ instance (Monoid a, Monoid b) => Monoid (a, b) where
 -- Zustand einer Variablen
 newtype VarState v = MkVarState v
 
+-- eingebaut: State
 data VariableM v a = MkVariableM (VarState v -> (a, VarState v))
 
 set :: v -> VariableM v ()
