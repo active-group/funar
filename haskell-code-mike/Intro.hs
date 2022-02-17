@@ -303,3 +303,9 @@ data VarState v = MkVarState v
 
 data VariableM v a = MkVariableM (VarState v -> (a, VarState v))
 
+set :: v -> VariableM v ()
+set newValue = MkVariableM (\ (MkVarState oldValue) -> ((), MkVarState newValue))
+
+get :: VariableM v v
+get = MkVariableM (\ (MkVarState value) -> (value, MkVarState value))
+
