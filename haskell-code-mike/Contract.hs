@@ -54,4 +54,12 @@ zeroCouponBond date amount currency = Later date (Multiple amount (One currency)
 
 zcb2 = Negate (zeroCouponBond (Date "2022-12-24") 100 GBP)
 
-runContract 
+data Direction = Long | Short
+  deriving Show
+
+data Payment = Payment Direction Date Amount Currency
+  deriving Show
+
+-- Zahlungen bis zu einem bestimmten Datum
+runContract :: Contract -> Date -> ([Payment], Contract) 
+-----------------------------------------------^^^^^^^^^  "Residualvertrag"
