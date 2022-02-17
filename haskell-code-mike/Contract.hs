@@ -62,4 +62,4 @@ data Payment = Payment Direction Date Amount Currency
 
 -- Zahlungen bis zu einem bestimmten Datum
 runContract :: Contract -> Date -> ([Payment], Contract) 
------------------------------------------------^^^^^^^^^  "Residualvertrag"
+-- --------------------------------------------^^^^^^^^^  "Residualvertrag"
