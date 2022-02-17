@@ -81,6 +81,9 @@ runContract contract@(Later date contract') now =
 runContract (Negate contract') now =
     let (payments, residual) = runContract contract' now 
     in (map flipPayment payments, Negate residual)    
-runContract (Merge contract1 )
+runContract (Merge contract1 contract2) now =
+    let (payments1, residual1) = runContract contract1 now 
+        (payments2, residual2) = runContract contract2 now 
+    in (payments1 ++ payments2, Merge residual1 residual2)
 runContract Empty now = ([], Empty)
 
