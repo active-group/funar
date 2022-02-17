@@ -66,6 +66,7 @@ scalePayment factor (Payment direction date amount currency) =
 flipPayment (Payment Short date amount currency) = Payment Short date amount currency
 flipPayment (Payment Long date amount currency) = Payment Long date amount currency
 
+-- >>> runContract zcb1 (Date "2022-12-31")
 
 -- Zahlungen bis zu einem bestimmten Datum
 runContract :: Contract -> Date -> ([Payment], Contract) 
