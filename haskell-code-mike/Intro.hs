@@ -299,7 +299,7 @@ instance (Monoid a, Monoid b) => Monoid (a, b) where
 
 
 -- Zustand einer Variablen
-data VarState v = MkVarState v
+newtype VarState v = MkVarState v
 
 data VariableM v a = MkVariableM (VarState v -> (a, VarState v))
 
