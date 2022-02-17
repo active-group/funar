@@ -63,7 +63,8 @@ strategy3 = interactiveStrategy @"Fredo"
 strategy4 :: InteractivePlayerEffects "Connie" effects => Strategy effects
 strategy4 = interactiveStrategy @"Connie"
 
-interpretPlayers :: Member (State [GameCommand]) effects => 
+interpretPlayers :: Member (State [GameCommand]) effects =>
+-- ': "cons auf Typebene" 
                       Players effects -> Sem (GameStep ': effects) a -> Sem effects a
 interpretPlayers players = interpret $ \case
   BroadcastEvent event ->
