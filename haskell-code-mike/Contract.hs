@@ -68,6 +68,7 @@ flipPayment (Payment Long date amount currency) = Payment Long date amount curre
 
 -- Merge x Empty == x
 
+-- smart constructor
 merge :: Contract -> Contract -> Contract
 merge Empty contract = contract
 merge contract Empty = contract
