@@ -295,3 +295,11 @@ instance (Semigroup a, Semigroup b) => Semigroup (a, b) where
 
 instance (Monoid a, Monoid b) => Monoid (a, b) where
   neutral = (neutral, neutral)
+
+
+
+-- Zustand einer Variablen
+data VarState v = MkVarState v
+
+data VariableM v a = MkVariableM (VarState v -> (a, VarState v))
+
