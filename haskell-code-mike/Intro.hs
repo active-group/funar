@@ -324,4 +324,17 @@ instance Monad (VariableM v) where
                        (MkVariableM f') = next a
                    in f' state')
 
+runState :: VariableM v a -> v -> a
+runState (MkVariableM f) value =
+  let (a, state') = f (MkVarState value)
+  in a
+
+p1 :: VariableM Integer String
+p1 = do set 5
+        x <- get
+        set (x+1)
+        y <- get
+        return (show (x + y))
+
+
 
