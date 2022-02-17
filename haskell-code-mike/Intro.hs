@@ -337,4 +337,5 @@ p1 = do set 5
         return (show (x + y))
 
 
+-- >>> runState p1 0
 
