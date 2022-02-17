@@ -53,3 +53,5 @@ zeroCouponBond :: Date -> Amount -> Currency -> Contract
 zeroCouponBond date amount currency = Later date (Multiple amount (One currency))
 
 zcb2 = Negate (zeroCouponBond (Date "2022-12-24") 100 GBP)
+
+runContract 
