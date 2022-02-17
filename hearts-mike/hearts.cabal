@@ -7,13 +7,13 @@ maintainer:          michael.sperber@active-group.de
 library
   exposed-modules:     Cards
                      , GameEvent
---                     , HeartsJson
---                     , Json.Decode
---                     , Player
---                     , PlayerIO
---                     , Game
---                     , GameIO
---                     , Sync
+                     , HeartsJson
+                     , Json.Decode
+                     , Player
+                     , PlayerIO
+                     , Game
+                     , GameIO
+                     , Sync
                      , Table
   other-modules:       MVar
                      , Shuffle
@@ -35,7 +35,7 @@ library
   default-language:    Haskell2010
 
 executable server
-  buildable:           False
+--  buildable:           False
   main-is:             Main.hs
   other-modules:       Args
                      , PlayerServer

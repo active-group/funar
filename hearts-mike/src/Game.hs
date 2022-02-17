@@ -39,10 +39,17 @@ import Data.Set (Set)
 
 import Debug.Trace (trace)
 
+
+-- spezielle Syntax für "Generalized Abstract Datatypes"
+-- Schlüsselwort "where"
+-- Typsignaturen für die einzelnen Konstruktoren
 data GameStep monad a where
   BroadcastEvent :: GameEvent -> GameStep monad ()
   ReceiveCommand :: GameStep monad (Maybe GameCommand)
 
+-- Sem: Monade in Polysemy
+-- effects: Liste möglicher Effekte (auf Typebene)
+-- Member GameStep effects: Irgendwo in effects muß GameStep stehen
 broadcastEvent :: Member GameStep effects => GameEvent -> Sem effects ()
 broadcastEvent event = send (BroadcastEvent event)
 
