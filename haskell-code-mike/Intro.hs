@@ -167,10 +167,28 @@ listMap :: (a -> b) -> [a] -> [b]
 listMap f [] = []
 listMap f (x:xs) = (f x) : (listMap f xs)
 
+{-
+interface Stream<T> {
+   // (>>=) :: Stream t -> (t -> Stream r) -> Stream r
+   <R> Stream<R> flatMap(Function<T, Stream<R>> mapper)
+}
+-}
+
 data Optional a =
     Null
   | Result a
   deriving (Show, Eq)
+
+instance Functor Optional where
+  fmap = optionalMap
+
+instance Applicative Optional where
+  pure = undefined 
+  (<*>) = undefined
+
+instance Monad Optional where
+  return = undefined 
+  (>>=) = undefined
 
   {-
   data Maybe a =

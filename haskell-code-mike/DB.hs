@@ -100,18 +100,6 @@ runDBSQLite (Put key value cont) connection =
      runDBSQLite (cont ()) connection
 runDBSQLite (Return result) connection = return result
 
--- >>> execDB p1
--- <BLANKLINE>
--- ByteCodeLink.lookupCE
--- During interactive linking, GHCi couldn't find the following symbol:
---   sqlitezmsimplezm0zi4zi18zi0zmad88ef380b37fb3f5c27133eac3f56151f083f2bd11a58038bb3dbe1bf7f84bd_DatabaseziSQLiteziSimpleziFromField_zdfFromFieldInteger_closure
--- This may be due to you not asking GHCi to load extra object files,
--- archives or DLLs needed by your current session.  Restart GHCi, specifying
--- the missing library using the -L/path/to/object/dir and -lmissinglibname
--- flags, or simply by naming the relevant files on the GHCi command line.
--- Alternatively, this link failure might indicate a bug in GHCi.
--- If you suspect the latter, please report this as a GHC bug:
---   https://www.haskell.org/ghc/reportabug
 execDB :: DB a -> IO a
 execDB command =
   do connection <- open "test.db"
@@ -122,8 +110,36 @@ execDB command =
 
 
 instance Functor DB where
+    -- flip splice :: (a -> DB b) -> DB a -> DB b
+    -- fmap        :: (a ->    b) -> DB a -> DB b
+--    fmap f (Get key cont) = Get key (\ value -> fmap f (cont value))
+--    fmap f (Put key value cont) = Put key value (\ () -> fmap f (cont ()))
+--    fmap f (Return result) = Return (f result)
+    -- fmap id = id
+    -- (fmap f) . (fmap g) = fmap (f . g)
+    -- id x = x
+    fmap f db = db >>= (\ a -> Return (f a))
 
 instance Applicative DB where
+    pure = Return
+    -- (<*>) :: DB (a -> b) -> DB a -> DB b
+    (<*>) dbf dba =
+        dbf `splice` (\ f ->
+        dba `splice` (\ a ->
+        return (f a)))
+
+-- do-Syntax: aus <- wird >>=
+--        do f <- dbf
+--           a <- dba
+--           return (f a)
+
+fmap2 :: Applicative f => (a -> (b -> c)) -> f a -> f b -> f c
+-- fmap f fa :: f (b -> c)
+fmap2 f fa fb = (fmap f fa) <*> fb
+
+fmap4 :: Applicative f => (a -> b -> c -> d -> e) -> f a -> f b -> f c -> f d -> f e
+fmap4 f fa fb fc fd = f <$> fa <*> fb <*> fc <*> fd
+            
 
 instance Monad DB where
     (>>=) = splice
