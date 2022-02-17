@@ -60,13 +60,27 @@ data Direction = Long | Short
 data Payment = Payment Direction Date Amount Currency
   deriving Show
 
+scalePayment factor (Payment direction date amount currency) =
+    Payment direction date (factor * amount) currency
+
+flipPayment (Payment Short date amount currency) = Payment Short date amount currency
+flipPayment (Payment Long date amount currency) = Payment Long date amount currency
+
+
 -- Zahlungen bis zu einem bestimmten Datum
 runContract :: Contract -> Date -> ([Payment], Contract) 
 -- --------------------------------------------^^^^^^^^^  "Residualvertrag"
-runContract (One currency) now = ([Payment Long now 1 currency], Zero)
+runContract (One currency) now = ([Payment Long now 1 currency], Empty)
 runContract (Multiple amount contract') now =
     let (payments, residual) = runContract contract' now 
-    in 
-
+    in (map (scalePayment amount) payments, Multiple amount residual)
+runContract contract@(Later date contract') now =
+    if now >= date 
+    then runContract contract' now 
+    else ([], contract)
+runContract (Negate contract') now =
+    let (payments, residual) = runContract contract' now 
+    in (map flipPayment payments, Negate residual)    
+runContract 
 runContract Empty now = ([], Empty)
 
