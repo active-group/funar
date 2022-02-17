@@ -309,3 +309,19 @@ set newValue = MkVariableM (\ (MkVarState oldValue) -> ((), MkVarState newValue)
 get :: VariableM v v
 get = MkVariableM (\ (MkVarState value) -> (value, MkVarState value))
 
+instance Functor (VariableM v) where
+
+
+instance Applicative (VariableM v) where
+
+
+instance Monad (VariableM v) where
+  return result = MkVariableM (\ state -> (result, state))
+  -- (>>=) :: VariableM v a -> (a -> VariableM v b) -> VariableM v b
+  (MkVariableM f) >>= next =
+    MkVariableM (\ state@(MkVarState value) ->
+                   let (a, state') = f state
+                       (MkVariableM f') = next a
+                   in f' state')
+
+
