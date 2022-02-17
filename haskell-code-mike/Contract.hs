@@ -63,4 +63,10 @@ data Payment = Payment Direction Date Amount Currency
 -- Zahlungen bis zu einem bestimmten Datum
 runContract :: Contract -> Date -> ([Payment], Contract) 
 -- --------------------------------------------^^^^^^^^^  "Residualvertrag"
-runCo
+runContract (One currency) now = ([Payment Long now 1 currency], Zero)
+runContract (Multiple amount contract') now =
+    let (payments, residual) = runContract contract' now 
+    in 
+
+runContract Empty now = ([], Empty)
+
