@@ -39,7 +39,8 @@ data Contract =
   | Multiple Amount Contract
   | Later Date Contract
   | Negate Contract
-  | Merge Contract Contract
+  | Merge Contract Contract -- <- Halbgruppe!
+  | Empty -- - neutrales Element
   deriving Show
 
 -- Ich bekomme 100€ jetzt.
