@@ -81,6 +81,7 @@ negate :: Contract -> Contract
 negate Empty = Empty
 negate contract = contract
 
+later :: Date -> Contract -> Contract
 later date Empty = Empty
 later date contract = Later date contract
 
@@ -92,17 +93,17 @@ runContract :: Contract -> Date -> ([Payment], Contract)
 runContract (One currency) now = ([Payment Long now 1 currency], Empty)
 runContract (Multiple amount contract') now =
     let (payments, residual) = runContract contract' now 
-    in (map (scalePayment amount) payments, Multiple amount residual)
+    in (map (scalePayment amount) payments, multiple amount residual)
 runContract contract@(Later date contract') now =
     if now >= date 
     then runContract contract' now 
     else ([], contract)
 runContract (Negate contract') now =
     let (payments, residual) = runContract contract' now 
-    in (map flipPayment payments, Negate residual)    
+    in (map flipPayment payments, Contract.negate residual)    
 runContract (Merge contract1 contract2) now =
     let (payments1, residual1) = runContract contract1 now 
         (payments2, residual2) = runContract contract2 now 
-    in (payments1 ++ payments2, Merge residual1 residual2)
+    in (payments1 ++ payments2, merge residual1 residual2)
 runContract Empty now = ([], Empty)
 
