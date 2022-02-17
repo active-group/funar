@@ -10,6 +10,9 @@ module Contract where
 -- - Anzahl: "100€ jetzt"
 -- - Später
 
+-- Weitere Beispiele:
+-- "Ich ZAHLE am 24.12.2022 100GBP."
+
 data Date = Date String 
   deriving (Show, Eq, Ord)
 
@@ -32,8 +35,11 @@ zcb1 = ZeroCouponBond (Date "2022-12-24") 100 EUR
 
 data Contract =
     One Currency
+--  | OnePay Currency
   | Multiple Amount Contract
   | Later Date Contract
+  | Negate Contract
+  | Merge Contract Contract
   deriving Show
 
 -- Ich bekomme 100€ jetzt.
@@ -44,3 +50,5 @@ zcb1 = Later (Date "2022-12-24") (Multiple 100 (One EUR))
 
 zeroCouponBond :: Date -> Amount -> Currency -> Contract
 zeroCouponBond date amount currency = Later date (Multiple amount (One currency))
+
+zcb2 = Negate (zeroCouponBond (Date "2022-12-24") 100 GBP)
