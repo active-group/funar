@@ -306,8 +306,8 @@ data VariableM v a = MkVariableM (VarState v -> (a, VarState v))
 set :: v -> VariableM v ()
 set newValue = MkVariableM (\ (MkVarState oldValue) -> ((), MkVarState newValue))
 
-get :: VariableM v v
-get = MkVariableM (\ (MkVarState value) -> (value, MkVarState value))
+get :: () -> VariableM v v
+get () = MkVariableM (\ (MkVarState value) -> (value, MkVarState value))
 
 instance Functor (VariableM v) where
 
@@ -331,9 +331,9 @@ runState (MkVariableM f) value =
 
 p1 :: VariableM Integer String
 p1 = do set 5
-        x <- get
+        x <- get()
         set (x+1)
-        y <- get
+        y <- get()
         return (show (x + y))
 
 
