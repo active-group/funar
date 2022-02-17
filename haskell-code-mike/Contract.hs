@@ -5,5 +5,42 @@ module Contract where
 -- "Ich bekomme am 24.12.2022 100€."
 -- implizit: Vertrag zwischen zwei Parteien, eine davon bin ich
 
+-- Beispiel in Einzelteile / separaten Ideen:
+-- - Währung: "1€ jetzt"
+-- - Anzahl: "100€ jetzt"
+-- - Später
+
+data Date = Date String 
+  deriving (Show, Eq, Ord)
+
+type Amount = Double 
+
+data Currency = EUR | USD | GBP
+  deriving Show
+
+{-
 data Contract =
     ZeroCouponBond Date Amount Currency
+  | Call 
+  | Put 
+  | Everest
+  | Himalaya
+  deriving Show
+
+zcb1 = ZeroCouponBond (Date "2022-12-24") 100 EUR
+-}
+
+data Contract =
+    One Currency
+  | Multiple Amount Contract
+  | Later Date Contract
+  deriving Show
+
+-- Ich bekomme 100€ jetzt.
+c1 = Multiple 100 (One EUR)
+c2 = Multiple 500 c1
+
+zcb1 = Later (Date "2022-12-24") (Multiple 100 (One EUR))
+
+zeroCouponBond :: Date -> Amount -> Currency -> Contract
+zeroCouponBond date amount currency = Later date (Multiple amount (One currency))
