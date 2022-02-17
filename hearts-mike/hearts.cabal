@@ -59,7 +59,7 @@ executable server
   default-language:    Haskell2010
 
 test-suite heart-spec
-  buildable:           False
+--  buildable:           False
   type:                exitcode-stdio-1.0
   main-is:             Spec.hs
   other-modules:       HeartsJsonSpec
