@@ -66,6 +66,24 @@ scalePayment factor (Payment direction date amount currency) =
 flipPayment (Payment Short date amount currency) = Payment Short date amount currency
 flipPayment (Payment Long date amount currency) = Payment Long date amount currency
 
+-- Merge x Empty == x
+
+merge :: Contract -> Contract -> Contract
+merge Empty contract = contract
+merge contract Empty = contract
+merge contract1 contract2 = Merge contract1 contract2
+
+multiple :: Amount -> Contract -> Contract
+multiple amount Empty = Empty
+multiple amount contract = Multiple amount contract
+
+negate :: Contract -> Contract
+negate Empty = Empty
+negate contract = contract
+
+later date Empty = Empty
+later date contract = Later date contract
+
 -- >>> runContract zcb1 (Date "2022-12-31")
 
 -- Zahlungen bis zu einem bestimmten Datum
