@@ -21,11 +21,48 @@
 
 ; Abstraktion
 
+; Kurzbeschreibung:
+; Kachelmuster aus zwei Bildern zusammensetzen 
+
+; Signatur
+(: tile (image image -> image))
+
+; Test
+
 (define tile
   (lambda (image1 image2)
     (above
      (beside image1 image2)
      (beside image2 image1))))
 
-(tile square1 circle1)
+;(tile square1 circle1)
+
+#|
+class C {
+   static void m(int x) {
+     // x steht für eine Speicherzelle, in der eine Zahl drin ist
+     ... x ...
+     x = x + 1;
+     ... x ...
+   }
+
+  C.m(17) -> {
+     ... 17 ...
+  }
+}
+
+|#
+
+#|
+
+class K {
+  public int x;
+  K(int x) { this.x = x }
+}
+
+m(K k) {
+  k.x = k.x +1;
+}
+
+|#
 
