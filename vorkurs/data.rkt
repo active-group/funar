@@ -329,5 +329,11 @@ class Snake implements Animal { ... }
   (first number)
   (rest list-of-numbers))
 
-
-  
+; Liste mit 1 Element: 5
+(define list1 (cons 5 empty))
+; Liste mit 2 Elementen: 5 2
+(define list2 (cons 5 (cons 2 empty)))
+; Liste mit 3 Elementen: 5 2 7
+(define list3 (cons 5 (cons 2 (cons 7 empty))))
+; Liste mit 4 Elementene: 4 5 2 7
+(define list4 (cons 4 list3))
