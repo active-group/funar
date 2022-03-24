@@ -17,6 +17,8 @@
 (define pet
   (signature (enum "dog" "cat" "snake")))
 
+; f : N -> N
+
 ; Ist ein Haustier niedlich?
 (: cute? (pet -> boolean))
 
