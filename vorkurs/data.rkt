@@ -310,9 +310,11 @@ class Snake implements Animal { ... }
 ; - eine Cons-Liste aus erstem Element und Rest-Liste
 ;                                               ^^^^^ Selbstbezug
 ; gemischte Daten
-(define list-of-numbers
-  (signature (mixed empty-list
-                    cons-list)))
+(define list-of
+  (lambda (a)
+    (signature (mixed empty-list
+                      (cons-of a)))))
+(: list-of (signature -> signature))
 
 (define-record empty-list
   make-empty
@@ -323,11 +325,13 @@ class Snake implements Animal { ... }
 ; Die Cons-Liste besteht aus:
 ; - erstes Element - UND -
 ; - Rest-Liste
-(define-record cons-list
+(define-record (cons-of a)
   cons
   cons?
-  (first number)
-  (rest list-of-numbers))
+  (first a)
+  (rest (list-of a)))
+
+(define list-of-numbers (signature (list-of number)))
 
 ; Liste mit 1 Element: 5
 (define list1 (cons 5 empty))
@@ -382,7 +386,10 @@ class Snake implements Animal { ... }
           (extract-positives (rest list))))))))
 
 ; Alle Elemente einer Liste extrahieren, die ein bestimmtes Kriterium
-(: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
+; (: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
+(: extract ((%a -> boolean) (list-of %a) -> (list-of %a)))
+; %a: Signaturvariable
+
 ; Funktion höherer Ordnung / Higher-Order-Funktion
 ; Funktionen sind Objekte erster Klasse
 
@@ -403,4 +410,4 @@ class Snake implements Animal { ... }
          (else
           (extract p? (rest list))))))))
 
-; (extract dillo-alive? (cons dillo1 (cons dillo2 empty)))
+(extract dillo-alive? (cons dillo1 (cons dillo2 empty)))
