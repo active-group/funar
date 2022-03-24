@@ -382,7 +382,9 @@ class Snake implements Animal { ... }
           (extract-positives (rest list))))))))
 
 ; Alle Elemente einer Liste extrahieren, die ein bestimmtes Kriterium
-(: extract (... ... -> ...))
+(: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
+; Funktion höherer Ordnung / Higher-Order-Funktion
+; Funktionen sind Objekte erster Klasse
 
 (check-expect (extract even? list4)
               (cons 4 (cons 2 empty)))
