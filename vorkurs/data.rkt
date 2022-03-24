@@ -134,6 +134,27 @@
 
 (: dillo? (any -> boolean))
 
+#|
+class Dillo {
+  private final bool isAlive;
+  private final int weight;
+
+  // sogenannter "Konstruktor"
+  Dillo(bool isAlive, int weight) {
+    this.isAlive = isAlive;
+    this.weight = weight;
+  }
+
+  public bool isAlive() {
+    return this.isAlive;
+  }
+
+  public int getWeight() {
+    return this.weight;
+  }
+}
+|#
+
 ; Gürteltier, lebendig, 10kg
 (define dillo1 (make-dillo #t 10))
 ; Gürteltier, tot, 8kg
