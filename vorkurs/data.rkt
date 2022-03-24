@@ -124,12 +124,15 @@
 ; zusammengesetzte Daten
 (define-record dillo ; Signatur
   make-dillo ; Konstruktor
+  parrot? ; Prädikat
   (dillo-alive? boolean) ; Selektor
   (dillo-weight number))
 
 (: make-dillo (boolean number -> dillo))
 (: dillo-alive? (dillo -> boolean))
 (: dillo-weight (dillo -> number))
+
+(: parrot? (any -> boolean))
 
 ; Gürteltier, lebendig, 10kg
 (define dillo1 (make-dillo #t 10))
@@ -184,6 +187,7 @@
   (lambda (parrot)
     (make-parrot "" (parrot-weight parrot))))
 
+#|
 ; Tier überfahren
 (: run-over-animal (animal -> animal))
 
@@ -192,4 +196,9 @@
 (check-expect (run-over-animal parrot1)
               (run-over-parrot parrot1))
 
-
+(define run-over-animal
+  (lambda (animal)
+    (cond
+      (... ...)
+      (... ...))))
+|#
