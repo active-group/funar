@@ -352,3 +352,4 @@ class Snake implements Animal { ... }
        (+ (first list)
           (list-sum (rest list)))))))
 
+; Alle geraden Zahlen aus einer Liste extrahieren
