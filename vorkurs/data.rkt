@@ -370,6 +370,22 @@ class Snake implements Animal { ... }
       ((cons? list)
        (* (first list)
           (list-product (rest list)))))))
+
+#;(define list-product
+  (lambda (list)
+    (cond
+      ((empty? list) ...)
+      ((cons? list)
+       (... (first list)
+            (list-product (rest list)))))))
+; fold
+(define list-operator
+  (lambda (neutral operation list)
+    (cond
+      ((empty? list) neutral)
+      ((cons? list)
+       (operation (first list)
+                  (list-operator neutral operation (rest list)))))))
            
 ; Alle geraden Zahlen aus einer Liste extrahieren
 
