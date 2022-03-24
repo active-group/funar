@@ -215,3 +215,20 @@ class Parrot implements Animal { ... }
 class Snake implements Animal { ... }
 
 |#
+
+
+; Ein Fluss ist eins der folgenden:
+; - ein Bach aus einer Quelle - ODER -
+; - ein Zusammentreffen von einem Hauptfluss und einem Nebenfluss
+;                                      ^^^^^                ^^^^^
+;                                      Selbstbezug
+(define river
+  (signature (mixed creek confluence)))
+
+; Ein Bach hat folgende Eigenschaften:
+; - Ursprungsort
+(define-record creek
+  make-creek
+  creek?
+  (creek-origin string))
+
