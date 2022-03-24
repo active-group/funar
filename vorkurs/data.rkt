@@ -91,3 +91,4 @@
     (+ (* (time-hour time) 60)
        (time-minute time))))
 
+; Minuten seit Mitternacht in time-Objekt umrechnen
