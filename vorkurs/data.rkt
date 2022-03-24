@@ -402,3 +402,5 @@ class Snake implements Animal { ... }
                 (extract p? (rest list))))
          (else
           (extract p? (rest list))))))))
+
+; (extract dillo-alive? (cons dillo1 (cons dillo2 empty)))
