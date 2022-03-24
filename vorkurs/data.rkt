@@ -206,6 +206,7 @@
 #|
 interface Animal {
   Animal runOver();
+  Animal feed(...);
 }
 
 class Dillo implements Animal { ... }
