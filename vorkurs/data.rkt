@@ -114,6 +114,9 @@
 ; - Papagei
 ; Fallunterscheidung (keine Aufzählung)
 ; gemischte Daten / "union types" / Summentypen
+(define animal
+  (signature
+   (mixed dillo parrot)))
 
 ; Ein Gürteltier hat folgende Eigenschaften:
 ; - lebendig oder tot - UND -
