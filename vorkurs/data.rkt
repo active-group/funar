@@ -316,6 +316,8 @@ class Snake implements Animal { ... }
                       (cons-of a)))))
 (: list-of (signature -> signature))
 
+; List<A>
+
 (define-record empty-list
   make-empty
   empty?)
@@ -356,6 +358,19 @@ class Snake implements Animal { ... }
        (+ (first list)
           (list-sum (rest list)))))))
 
+; Elemente einer Liste multiplizieren
+(: list-product (list-of-numbers -> number))
+
+(check-expect (list-product list3) 70)
+
+(define list-product
+  (lambda (list)
+    (cond
+      ((empty? list) 1) ; neutrales Element bezüglich *
+      ((cons? list)
+       (* (first list)
+          (list-product (rest list)))))))
+           
 ; Alle geraden Zahlen aus einer Liste extrahieren
 
 ; Alle positiven Zahlen aus einer Liste extrahieren
