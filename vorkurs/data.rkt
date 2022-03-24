@@ -24,6 +24,8 @@
 (check-expect (cute? "cat") #t)
 (check-expect (cute? "snake") #f)
 
+;(check-expect (cute? "parrot") #t)
+
 ; Gerüst
 #;(define cute?
   (lambda (pet)
@@ -48,4 +50,16 @@
       ; jeder Zweig: (<Bedingung> <Antwort>)
       ((string=? pet "dog") #t)
       ((string=? pet "cat") #t)
-      ((string=? pet "snake") #f))))
+      ((string=? pet "snake") #f)
+      (else #t))))
+
+; Uhrzeit besteht aus / hat folgende Eigeschaften:
+; - Stunde - UND -
+; - Minute
+; zusammengesetzte Daten
+(define-record time ; Signatur
+  make-time ; Konstruktor
+  (time-hour natural)
+  (time-minute natural))
+
+(: make-time (natural natural -> time))
