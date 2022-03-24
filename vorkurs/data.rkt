@@ -159,3 +159,24 @@
       ((dillo-alive? dillo)
        (make-dillo #t (+ (dillo-weight dillo) kg_fed)))
       (else dillo))))
+
+; Ein Papagei hat folgende Eigenschaften:
+; - ein Satz
+; - Gewicht
+(define-record parrot
+  make-parrot
+  (parrot-sentence string)
+  (parrot-weight number))
+
+(define parrot1 (make-parrot "Hello!" 1))
+(define parrot2 (make-parrot "Goodbye!" 2))
+
+; Papagei überfahren
+(: run-over-parrot (parrot -> parrot))
+
+(check-expect (run-over-parrot parrot1)
+              (make-parrot "" 1))
+
+(define run-over-parrot
+  (lambda (parrot)
+    (make-parrot "" (parrot-weight parrot))))
