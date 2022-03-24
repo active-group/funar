@@ -124,7 +124,7 @@
 ; zusammengesetzte Daten
 (define-record dillo ; Signatur
   make-dillo ; Konstruktor
-  parrot? ; Prädikat
+  dillo? ; Prädikat
   (dillo-alive? boolean) ; Selektor
   (dillo-weight number))
 
@@ -132,7 +132,7 @@
 (: dillo-alive? (dillo -> boolean))
 (: dillo-weight (dillo -> number))
 
-(: parrot? (any -> boolean))
+(: dillo? (any -> boolean))
 
 ; Gürteltier, lebendig, 10kg
 (define dillo1 (make-dillo #t 10))
