@@ -12,3 +12,9 @@
 ; - Schlange
 ; Fallunterscheidung
 ; hier speziell: Aufzählung
+
+; Datendefinition -> Signatur
+(define pet
+  (signature (enum "dog" "cat" "snake")))
+
+; Ist ein Haustier niedlich?
