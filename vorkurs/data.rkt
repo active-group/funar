@@ -106,3 +106,17 @@
   (lambda (minutes)
     (make-time (quotient minutes 60)
                (modulo minutes 60))))
+
+; Tiere auf dem texanischem Highway
+
+; Ein Gürteltier hat folgende Eigenschaften:
+; - lebendig oder tot - UND -
+; - Gewicht
+; zusammengesetzte Daten
+(define-record dillo
+  make-dillo
+  (dillo-alive? boolean)
+  (dillo-weight number))
+
+
+    
