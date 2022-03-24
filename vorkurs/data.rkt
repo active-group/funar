@@ -243,3 +243,39 @@ class Snake implements Animal { ... }
   (confluence-main-stem river)
   (confluence-tributary river))
 
+(define eschach (make-creek "Heimliswald"))
+(define prim (make-creek "Dreifaltigkeitsberg"))
+(define neckar-1 (make-confluence "Rottweil" eschach prim))
+(define schlichem (make-creek "Tieringen"))
+(define neckar-2 (make-confluence "Epfendorf" neckar-1 schlichem))
+
+(define location (signature string))
+
+; Fließt Wasser von einem Ort in einen Fluss?
+(: flows-from? (location river -> boolean))
+
+(check-expect (flows-from? "Heimliswald" eschach) #t)
+(check-expect (flows-from? "Tübingen" eschach) #f)
+(check-expect (flows-from? "Heimliswald" neckar-2) #t)
+
+; Schablone
+
+#;(define flows-from?
+  (lambda (location river)
+    (cond
+      ((creek? river)
+       ... (creek-origin river) ...)
+      ((confluence? river)
+       ... (confluence-location river) ...
+       (flows-from? location (confluence-main-stem river))
+       (flows-from? location (confluence-tributary river)) ...))))
+
+(define flows-from?
+  (lambda (location river)
+    (cond
+      ((creek? river)
+       (string=? location (creek-origin river)))
+      ((confluence? river)
+       (or (string=? (confluence-location river) location)
+           (flows-from? location (confluence-main-stem river))
+           (flows-from? location (confluence-tributary river)))))))
