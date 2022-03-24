@@ -26,3 +26,6 @@
     (above
      (beside image1 image2)
      (beside image2 image1))))
+
+(tile square1 circle1)
+
