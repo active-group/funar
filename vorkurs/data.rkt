@@ -211,5 +211,6 @@ interface Animal {
 class Dillo implements Animal { ... }
 class Parrot implements Animal { ... }
 
+class Snake implements Animal { ... }
 
 |#
