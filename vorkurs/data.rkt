@@ -230,7 +230,7 @@ class Snake implements Animal { ... }
 (define-record creek
   make-creek
   creek?
-  (creek-origin string))
+  (creek-origin string)) ; Selektor
 
 ; Ein Zusammentreffen besteht aus:
 ; - Ort
