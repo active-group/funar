@@ -24,6 +24,9 @@
 ; Kurzbeschreibung:
 ; Kachelmuster aus zwei Bildern zusammensetzen 
 
+; Mathematik:
+; tile : image x image -> image
+
 ; Signatur
 (: tile (image image -> image))
 
