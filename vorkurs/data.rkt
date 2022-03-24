@@ -271,11 +271,20 @@ class Snake implements Animal { ... }
        (flows-from? location (confluence-tributary river)) ...))))
 
 (define flows-from?
-  (lambda (location river)
+  (lambda (loc river)
     (cond
       ((creek? river)
-       (string=? location (creek-origin river)))
+       (string=? loc (creek-origin river)))
       ((confluence? river)
-       (or (string=? (confluence-location river) location)
-           (flows-from? location (confluence-main-stem river))
-           (flows-from? location (confluence-tributary river)))))))
+       (or (string=? (confluence-location river) loc)
+           (flows-from? loc (confluence-main-stem river))
+           (flows-from? loc (confluence-tributary river)))))))
+
+; lexikalische Bindung: innen -> außen
+
+; Kombinatoren: +, overlay, beside, above
+
+; Eine Liste ist eins der folgenden:
+; - die leere Liste
+; - eine Cons-Liste aus erstem Element und Rest-Liste
+;                                               ^^^^^ Selbstbezug
