@@ -113,7 +113,7 @@
 ; - Gürteltier - ODER -
 ; - Papagei
 ; Fallunterscheidung (keine Aufzählung)
-; gemischte Daten
+; gemischte Daten / "union types" / Summentypen
 
 ; Ein Gürteltier hat folgende Eigenschaften:
 ; - lebendig oder tot - UND -
