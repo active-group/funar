@@ -306,6 +306,28 @@ class Snake implements Animal { ... }
 ; Kombinatoren: +, overlay, beside, above
 
 ; Eine Liste ist eins der folgenden:
-; - die leere Liste
+; - die leere Liste - ODER -
 ; - eine Cons-Liste aus erstem Element und Rest-Liste
 ;                                               ^^^^^ Selbstbezug
+; gemischte Daten
+(define list-of-numbers
+  (signature (mixed empty-list
+                    cons-list)))
+
+(define-record empty-list
+  make-empty
+  empty?)
+
+(define empty (make-empty))
+
+; Die Cons-Liste besteht aus:
+; - erstes Element - UND -
+; - Rest-Liste
+(define-record cons-list
+  cons
+  cons?
+  (first number)
+  (rest list-of-numbers))
+
+
+  
