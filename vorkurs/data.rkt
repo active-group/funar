@@ -139,5 +139,17 @@
   (lambda (dillo)
     (make-dillo #f (dillo-weight dillo))))
 
+; Gürteltier füttern mit bestimmtem Gewicht
+(: feed-dillo (dillo number -> dillo))
 
-    
+(check-expect (feed-dillo dillo1 2) (make-dillo #t 12))
+(check-expect (feed-dillo dillo2 2) dillo2)
+
+(define feed-dillo
+  (lambda (dillo kg_fed)
+    (cond
+      ; (dillo-alive? (boolean="t" pet "dog") #t)
+      ; ((boolean="f") dillo)
+      ((dillo-alive? dillo)
+       (make-dillo #t (+ (dillo-weight dillo) kg_fed)))
+      (else dillo))))
