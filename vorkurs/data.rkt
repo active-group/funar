@@ -335,7 +335,7 @@ class Snake implements Animal { ... }
 (define list2 (cons 5 (cons 2 empty)))
 ; Liste mit 3 Elementen: 5 2 7
 (define list3 (cons 5 (cons 2 (cons 7 empty))))
-; Liste mit 4 Elementene: 4 5 2 7
+; Liste mit 4 Elementen: 4 5 2 7
 (define list4 (cons 4 list3))
 
 ; Elemente einer Liste addieren
@@ -353,3 +353,49 @@ class Snake implements Animal { ... }
           (list-sum (rest list)))))))
 
 ; Alle geraden Zahlen aus einer Liste extrahieren
+
+; Alle positiven Zahlen aus einer Liste extrahieren
+(: extract-positives (list-of-numbers -> list-of-numbers))
+
+(check-expect (extract-positives (cons 1 (cons -2 (cons 3 (cons -5 (cons 4 empty))))))
+              (cons 1 (cons 3 (cons 4 empty))))
+
+; Schablone
+#;(define extract-positives
+  (lambda (list)
+    (cond
+      ((empty? list) ...)
+      ((cons? list)
+       ... (first list) ...
+       ... (extract-positives (rest list)) ...))))
+
+(define extract-positives
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cond
+         ((positive? (first list))
+          (cons (first list)
+                (extract-positives (rest list))))
+         (else
+          (extract-positives (rest list))))))))
+
+; Alle Elemente einer Liste extrahieren, die ein bestimmtes Kriterium
+
+(check-expect (extract even? list4)
+              (cons 4 (cons 2 empty)))
+(check-expect (extract positive? (cons 1 (cons -2 (cons 3 (cons -5 (cons 4 empty))))))
+              (cons 1 (cons 3 (cons 4 empty))))
+
+(define extract
+  (lambda (p? list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cond
+         ((p? (first list))
+          (cons (first list)
+                (extract p? (rest list))))
+         (else
+          (extract p? (rest list))))))))
