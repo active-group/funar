@@ -382,6 +382,7 @@ class Snake implements Animal { ... }
           (extract-positives (rest list))))))))
 
 ; Alle Elemente einer Liste extrahieren, die ein bestimmtes Kriterium
+(: extract (... ... -> ...))
 
 (check-expect (extract even? list4)
               (cons 4 (cons 2 empty)))
