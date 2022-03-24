@@ -202,3 +202,14 @@
       ((dillo? animal) (run-over-dillo animal))
       ((parrot? animal) (run-over-parrot animal)))))
 
+
+#|
+interface Animal {
+  Animal runOver();
+}
+
+class Dillo implements Animal { ... }
+class Parrot implements Animal { ... }
+
+
+|#
