@@ -92,3 +92,17 @@
        (time-minute time))))
 
 ; Minuten seit Mitternacht in time-Objekt umrechnen
+(: msm->time (natural -> time))
+
+(check-expect (msm->time 662) time1)
+
+; Schablone
+
+#;(define msm->time 
+  (lambda (minutes)
+    (make-time ... ...)))
+
+(define msm->time 
+  (lambda (minutes)
+    (make-time (quotient minutes 60)
+               (modulo minutes 60))))
