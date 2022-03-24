@@ -232,3 +232,14 @@ class Snake implements Animal { ... }
   creek?
   (creek-origin string))
 
+; Ein Zusammentreffen besteht aus:
+; - Ort
+; - Hauptfluss
+; - Nebenfluss
+(define-record confluence
+  make-confluence
+  confluence?
+  (confluence-location string)
+  (confluence-main-stem river)
+  (confluence-tributary river))
+
