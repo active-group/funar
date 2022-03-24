@@ -62,4 +62,6 @@
   (time-hour natural)
   (time-minute natural))
 
+; natural: natürliche Zahlen, 0,1,2,3,4,5,6,...
+
 (: make-time (natural natural -> time))
