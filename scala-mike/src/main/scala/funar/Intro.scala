@@ -347,7 +347,7 @@ trait Semigroup[S] {
 }
 
 object IntAddSemigroup extends Semigroup[Int] {
-  override extension (x: Int) def combine(y: Int): Int = x + y
+  extension (x: Int) def combine(y: Int): Int = x + y
 }
 
 object IntMultSemigroup extends Semigroup[Int] {
