@@ -309,10 +309,12 @@ def listIndex[A](list: List[A], element: A): Option[Int] =
           else
             Some(res.get)
             */
+            /*
           listIndex(rest, element) match {
             case None => None
             case Some(index) => Some(index+1)
-          }
+          }*/
+          applyInsideOption(1+_, listIndex(rest, element))
         }
       }
   }
