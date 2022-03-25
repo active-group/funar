@@ -277,7 +277,7 @@ def rev[A](list: List[A], acc: List[A]): List[A] =
 
 def revLoop[A](list0: List[A]): List[A] = {
   var list = list0
-  val acc = Nil
+  val acc: List[A] = Nil
   while (list != Nil) {
     list = list.tail
     acc = list.head :: acc
