@@ -342,11 +342,12 @@ case class ShoppingItem(name: String, price: Price)
 
 // Pattern: Typklasse
 trait Semigroup[S] {
-  def combine(y: S): S
+  extension (x: S)
+    def combine(y: S): S
 }
 
 case class ShoppingCart(items: List[ShoppingItem]) {
-  override def combine(cart2: ShoppingCart): ShoppingCart =
+  def combine(cart2: ShoppingCart): ShoppingCart =
     // Listen bilden auch eine Halbgruppe
     ShoppingCart(this.items ++ cart2.items) // ++ konkateniert zwei Listen
 }
