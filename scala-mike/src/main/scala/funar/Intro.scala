@@ -301,10 +301,18 @@ def listIndex[A](list: List[A], element: A): Option[Int] =
     case first :: rest => 
       (first == element) match {
         case true => Some(0) 
-        case false =>
+        case false => {
+          /*
+          val res = listIndex(rest, element)
+          if (res == None)
+            None
+          else
+            Some(res.get)
+            */
           listIndex(rest, element) match {
             case None => None
             case Some(index) => Some(index+1)
           }
+        }
       }
   }
