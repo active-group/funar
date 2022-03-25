@@ -342,7 +342,7 @@ trait Semigroup[S] {
   def combine(other: S): S
 }
 
-case class ShoppingCart(items: List[ShoppingItem]) extends Semigroup[S] {
+case class ShoppingCart(items: List[ShoppingItem]) extends Semigroup[ShoppingCart] {
   def combine(cart2: ShoppingCart): ShoppingCart =
     // Listen bilden auch eine Halbgruppe
     ShoppingCart(this.items ++ cart2.items) // ++ konkateniert zwei Listen
