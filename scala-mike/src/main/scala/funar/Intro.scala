@@ -281,6 +281,6 @@ def revLoop[A](list0: List[A]): List[A] = {
   while (list != Nil) {
     acc = list.head :: acc
     list = list.tail
-  }
+  } 
   return acc
 }
