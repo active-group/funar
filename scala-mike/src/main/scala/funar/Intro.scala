@@ -357,6 +357,11 @@ object IntMultSemigroup extends Semigroup[Int] {
 import IntAddSemigroup._
 val n1 = 1.combine(5)
 
+given [A]: Semigroup[List[A]] with {
+  extension (x: List[A])
+    def combine(y: List[A]): List[A] = x ++ y
+}
+
 case class ShoppingCart(items: List[ShoppingItem]) {
   def combine(cart2: ShoppingCart): ShoppingCart =
     // Listen bilden auch eine Halbgruppe
