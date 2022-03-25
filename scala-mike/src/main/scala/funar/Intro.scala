@@ -307,3 +307,4 @@ def listIndex[A](list: List[A], element: A): Option[Int] =
             case Some(index) => Some(index+1)
           }
       }
+  }
