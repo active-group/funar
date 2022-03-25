@@ -342,8 +342,11 @@ case class ShoppingItem(name: String, price: Price)
 
 // Pattern: Typklasse
 trait Semigroup[S] {
-  extension (x: S)
-    def combine(y: S): S
+  def combine(x: S, y: S): S
+}
+
+object IntAddSemigroup extends Semigroup[Int] {
+  override def combine(x: Int, y: Int): Int = x + y
 }
 
 case class ShoppingCart(items: List[ShoppingItem]) {
