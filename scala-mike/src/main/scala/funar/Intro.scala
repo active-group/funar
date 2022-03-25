@@ -235,6 +235,8 @@ def rev[A](list: List[A]): List[A] =
     case Nil => Nil
     case first :: rest =>
       // list = 1 2 3 => first = 1, rest = 2 3 => rev(rest) = 3 2
+      // 1 recursive call for each element of list
+      // + 1 call to addElement for each element of list
       addElement(rev(rest), first)
   }
 
