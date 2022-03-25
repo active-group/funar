@@ -397,8 +397,19 @@ trait Monoid[S] extends Semigroup[S] {
     list.fold(neutral)(_.combine(_))
 }
 
+
+
+
 given [A]: Monoid[List[A]] with {
   def neutral = List.empty
   extension (x: List[A])
     def combine(y: List[A]): List[A] = x ++ y
 }
+
+given Monoid[ShoppingCart] with {
+  def neutral = ShoppingCart(List.empty)
+  extension (x: ShoppingCart)
+    def combine(y: ShoppingCart): ShoppingCart = combineShoppingCarts(x, y)
+}
+
+val shs = List(sh1, sh2, sh3)
