@@ -317,5 +317,5 @@ def listIndex[A](list: List[A], element: A): Option[Int] =
       }
   }
 
-def applyInsideOption[A, B](f: A => B, Option[A]): Option[B] =
+def applyInsideOption[A, B](f: A => B, option: Option[A]): Option[B] =
   
