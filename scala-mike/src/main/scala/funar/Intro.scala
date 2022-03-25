@@ -351,7 +351,7 @@ object IntAddSemigroup extends Semigroup[Int] {
 }
 
 object IntMultSemigroup extends Semigroup[Int] {
-  override def combine(x: Int, y: Int): Int = x * y
+  extension (x: Int) def combine(y: Int): Int = x * y
 }
 
 val n1 = IntAddSemigroup.combine(1, 2) // 1.combine(2)
