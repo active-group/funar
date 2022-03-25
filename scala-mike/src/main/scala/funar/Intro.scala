@@ -71,8 +71,8 @@ type Weight = Double
 
 case class Dillo(liveness: Liveness, weight: Weight)
 
-val dillo1 = Dillo(Alive, 10)
-val dillo2 = Dillo(Dead, 8)
+val dillo1 = Dillo(Liveness.Alive, 10)
+val dillo2 = Dillo(Liveness.Dead, 8)
 
 // run over an armadillo
 def runOverDillo(dillo: Dillo): Dillo =
