@@ -121,3 +121,5 @@ def runOverAnimal(animal: Animal): Animal =
     case Dillo(l, w) => Dillo(Dead, w)
     case Parrot(s, w) => Parrot("", w)
   }
+
+// feed an animal
