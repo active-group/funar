@@ -284,3 +284,23 @@ def revLoop[A](list0: List[A]): List[A] = {
   } 
   return acc
 }
+
+// built-in type:
+/*
+enum Option[A] {
+  case None extends Option[A]
+  case Some(value: A) extends Option[A]
+}
+*/
+
+// determine the index of a list element
+// listIndex(List(10,20,30,40,50), 40) => 3
+def listIndex[A](list: List[A], element: A): Option[Int] =
+  list match {
+    case Nil => None
+    case first :: rest => 
+      if (first == element)
+        0
+      else
+        ??? // listIndex(rest, element)
+  }
