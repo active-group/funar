@@ -179,7 +179,7 @@ def fold(e: Int, op: (Int, Int) => Int, list: List[Int]): Int =
   list match {
     case Nil => e
     case f :: r =>
-      op(f, fold(e, op r))
+      op(f, fold(e, op, r))
   }
 
 // exercise: abstract over listSum and listProduct
