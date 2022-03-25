@@ -172,3 +172,11 @@ def listSum(list: List[Int]): Int =
 val parrot1 = Parrot("Hello", 1)
 val parrot2 = Parrot("Goodbye!", 2)
 val highway = List(dillo1, dillo2, parrot1, parrot2)
+
+// run over all animals in a list
+def runOverAnimals(list: List[Animal]): List[Animal] =
+  list match {
+    case Nil => Nil
+    case first :: rest =>
+      first.runOver :: runOverAnimals(rest)
+  }
