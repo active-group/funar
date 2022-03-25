@@ -319,7 +319,7 @@ def listIndex[A](list: List[A], element: A): Option[Int] =
             case None => None
             case Some(index) => Some(index+1)
           }*/
-          applyInsideOption(inc, listIndex(rest, element))
+          optionMap(inc, listIndex(rest, element))
         }
       }
   }
