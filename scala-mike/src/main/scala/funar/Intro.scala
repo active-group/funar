@@ -374,7 +374,7 @@ case class ShoppingCart(items: List[ShoppingItem]) {
 def combineShoppingCarts(cart1: ShoppingCart, cart2: ShoppingCart): ShoppingCart =
   ShoppingCart(cart1.items ++ cart2.items)
 
-  given Semigroup[ShoppingCart] with {
-    extension (x: ShoppingCart)
-      def combine(y: ShoppingCart): ShoppingCart = combineShoppingCarts(x, y)
-  }
+given Semigroup[ShoppingCart] with {
+  extension (x: ShoppingCart)
+    def combine(y: ShoppingCart): ShoppingCart = combineShoppingCarts(x, y)
+}
