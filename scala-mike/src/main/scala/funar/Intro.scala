@@ -168,3 +168,5 @@ def listSum(list: List[Int]): Int =
     case f :: r => 
       f + listSum(r) 
   }
+
+val highway = List(dillo1, dillo2, parrot1, parrot2)
