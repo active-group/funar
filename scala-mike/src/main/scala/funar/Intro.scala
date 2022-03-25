@@ -381,4 +381,4 @@ given Semigroup[ShoppingCart] with {
 
 val sh1 = ShoppingCart(List(ShoppingItem("Seife", 2)))
 val sh2 = ShoppingCart(List(ShoppingItem("Klopapier", 2)))
-val sh3 = s1.combine(s2)
+val sh3 = sh1.combine(sh2)
