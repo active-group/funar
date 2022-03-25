@@ -243,6 +243,10 @@ def rev[A](list: List[A]): List[A] =
       // needs to be stored at run time
   }
 
+// JVM: context stored on a "stack"
+// - stack is separate from heap
+// - constrained in size
+
 // add an element to the end of the list
 def addElement[A](list: List[A], element: A): List[A] =
   list match {
