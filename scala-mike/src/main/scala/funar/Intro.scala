@@ -243,5 +243,5 @@ def addElement[A](list: List[A], element: A): List[A] =
   list match {
     case Nil => element :: Nil
     case first :: rest => 
-      first :: addElement(list, element)
+      first :: addElement(rest, element)
   }
