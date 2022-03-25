@@ -86,3 +86,7 @@ def silly(x: Int, y: Int) = {
   sum * 2
 }
 
+// A parrot has the following properties:
+// - a sentence
+// - weight
+case class Parrot(sentence: String, weight: Weight)
