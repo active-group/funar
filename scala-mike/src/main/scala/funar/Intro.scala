@@ -74,6 +74,7 @@ type Weight = Double
 // An animal is one the following:
 // - armadillo
 // - parrot
+/*
 sealed trait Animal {
   def runOver(): Animal =
     this match {
@@ -83,6 +84,12 @@ sealed trait Animal {
 }
 case class Dillo(liveness: Liveness, weight: Weight) extends Animal
 case class Parrot(sentence: String, weight: Weight) extends Animal
+*/
+enum Animal {
+  case Dillo(liveness: Liveness, weight: Weight)
+  case Parrot(sentence: String, weight: Weight)
+}
+
 
 val dillo1 = Dillo(Liveness.Alive, 10)
 val dillo2 = Dillo(Liveness.Dead, 8)
