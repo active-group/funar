@@ -93,6 +93,17 @@ enum Animal {
       case Dillo(_, w) => Dillo(Dead, w)
       case Parrot(_, w) => Parrot("", w)
     }
+
+  def feed(amount: Weight): Animal =
+    this match {
+      case Dillo(liveness, weight) =>
+        liveness match {
+          case Dead => this
+          case Alive => Dillo(Alive, weight + amount)
+        }
+      case Parrot(sentence, weight) =>
+        Parrot(sentence, weight + amount)
+    }
 }
 
 import Animal._
