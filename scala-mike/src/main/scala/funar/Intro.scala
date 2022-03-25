@@ -392,6 +392,9 @@ val sh3 = sh1.combine(sh2)
 
 trait Monoid[S] extends Semigroup[S] {
   def neutral: S
+
+  def combineAll(list: List[S]): S =
+    list.fold(neutral)(combine)
 }
 
 given [A]: Monoid[List[A]] with {
