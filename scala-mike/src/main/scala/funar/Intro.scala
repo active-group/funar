@@ -168,6 +168,12 @@ def listSum(list: List[Int]): Int =
     case f :: r => 
       f + listSum(r) 
   }
+def listProduct(list: List[Int]): Int =
+  list match {
+    case Nil => 1
+    case f :: r =>
+      f * listProduct(r)
+  }
 
 val parrot1 = Parrot("Hello", 1)
 val parrot2 = Parrot("Goodbye!", 2)
@@ -195,7 +201,7 @@ def listInc(list: List[Int]): List[Int] =
       inc(first) :: listInc(rest)
   }
 
-def map[A](f: A => A, list: List[A]): List[A] =
+def map[A, B](f: A => B, list: List[A]): List[B] =
   list match {
     case Nil => Nil
     case first :: rest =>
