@@ -214,7 +214,7 @@ extension (list: List[Animal])
   def runOver =
     runOverAnimals(list)
 
-val dillo5 = dillo4.runOver
+val dillo5 = dillo1.runOver
 
 def inc(x: Int): Int = x + 1
 
