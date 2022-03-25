@@ -302,5 +302,8 @@ def listIndex[A](list: List[A], element: A): Option[Int] =
       if (first == element)
         Some(0)
       else
-        ??? // listIndex(rest, element)
+        listIndex(rest, element) match {
+          case None => None
+          case Some(index) => Some(index+1)
+        }
   }
