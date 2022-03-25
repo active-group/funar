@@ -67,7 +67,7 @@ enum Liveness {
   case Alive
 }
 
-import Liveness._
+// import Liveness._
 
 type Weight = Double
 
@@ -85,3 +85,4 @@ def silly(x: Int, y: Int) = {
   val sum = x + y
   sum * 2
 }
+
