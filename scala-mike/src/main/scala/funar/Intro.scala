@@ -362,6 +362,8 @@ given [A]: Semigroup[List[A]] with {
     def combine(y: List[A]): List[A] = x ++ y
 }
 
+val list7 = list4.combine(list3)
+
 case class ShoppingCart(items: List[ShoppingItem]) {
   def combine(cart2: ShoppingCart): ShoppingCart =
     // Listen bilden auch eine Halbgruppe
