@@ -184,6 +184,8 @@ def fold[A, B](e: B, op: (A, B) => B, list: List[A]): B =
       op(f, fold(e, op, r))
   }
 
+val s1 = fold(0, {(x: Int, y: Int) => x + y}, list4)
+
 // exercise: abstract over listSum and listProduct
 
 val parrot1 = Parrot("Hello", 1)
