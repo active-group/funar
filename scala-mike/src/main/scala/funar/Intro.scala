@@ -169,4 +169,6 @@ def listSum(list: List[Int]): Int =
       f + listSum(r) 
   }
 
+val parrot1 = Parrot("Hello", 1)
+val parrot2 = Parrot("Goodbye!", 2)
 val highway = List(dillo1, dillo2, parrot1, parrot2)
