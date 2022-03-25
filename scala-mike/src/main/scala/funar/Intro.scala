@@ -96,6 +96,8 @@ enum Animal {
 
   def feed(amount: Weight): Animal =
     this match {
+      // case Dillo(Dead, weight) => this
+      // case Dillo(Alive, weight) = Dillo(Alive, weight + amount)
       case Dillo(liveness, weight) =>
         liveness match {
           case Dead => this
