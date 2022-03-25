@@ -67,7 +67,7 @@ enum Liveness {
   case Alive
 }
 
-// import Liveness._
+import Liveness._
 
 type Weight = Double
 
