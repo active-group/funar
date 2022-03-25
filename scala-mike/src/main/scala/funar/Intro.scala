@@ -394,7 +394,7 @@ trait Monoid[S] extends Semigroup[S] {
   def neutral: S
 
   def combineAll(list: List[S]): S =
-    list.fold(neutral)(combine)
+    list.fold(neutral)(_.combine(_))
 }
 
 given [A]: Monoid[List[A]] with {
