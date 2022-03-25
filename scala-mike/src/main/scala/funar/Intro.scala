@@ -175,6 +175,13 @@ def listProduct(list: List[Int]): Int =
       f * listProduct(r)
   }
 
+def fold(list: List[Int]): Int =
+  list match {
+    case Nil => e
+    case f :: r =>
+      f * fold(r)
+  }
+
 // exercise: abstract over listSum and listProduct
 
 val parrot1 = Parrot("Hello", 1)
