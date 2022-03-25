@@ -300,7 +300,7 @@ def listIndex[A](list: List[A], element: A): Option[Int] =
     case Nil => None
     case first :: rest => 
       if (first == element)
-        0
+        Some(0)
       else
         ??? // listIndex(rest, element)
   }
