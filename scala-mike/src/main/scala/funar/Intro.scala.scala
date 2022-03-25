@@ -9,3 +9,5 @@ val s: String = "Mike"
 // - a dog - OR -
 // - a cat - OR -
 // - a snake
+// mixed data
+trait
