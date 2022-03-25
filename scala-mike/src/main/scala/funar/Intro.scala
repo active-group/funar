@@ -88,6 +88,11 @@ case class Parrot(sentence: String, weight: Weight) extends Animal
 enum Animal {
   case Dillo(liveness: Liveness, weight: Weight)
   case Parrot(sentence: String, weight: Weight)
+  def runOver(): Animal =
+    this match {
+      case Dillo(_, w) => Dillo(Dead, w)
+      case Parrot(_, w) => Parrot("", w)
+    }
 }
 
 
