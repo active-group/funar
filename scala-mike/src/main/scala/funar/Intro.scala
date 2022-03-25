@@ -318,4 +318,7 @@ def listIndex[A](list: List[A], element: A): Option[Int] =
   }
 
 def applyInsideOption[A, B](f: A => B, option: Option[A]): Option[B] =
-  
+  option match {
+    case None => None
+    case Some(thing) => Some(f(thing))  
+  }
