@@ -175,7 +175,7 @@ def listProduct(list: List[Int]): Int =
       f * listProduct(r)
   }
 
-def fold[A](e: A, op: (Int, Int) => Int, list: List[Int]): Int =
+def fold[A](e: A, op: (A, A) => A, list: List[A]): A =
   list match {
     case Nil => e
     case f :: r =>
