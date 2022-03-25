@@ -180,3 +180,7 @@ def runOverAnimals(list: List[Animal]): List[Animal] =
     case first :: rest =>
       runOverAnimal(first) :: runOverAnimals(rest)
   }
+
+extension (list: List[Animal])
+  def runOver =
+    runOverAnimals(list)
