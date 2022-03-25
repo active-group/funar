@@ -378,3 +378,7 @@ given Semigroup[ShoppingCart] with {
   extension (x: ShoppingCart)
     def combine(y: ShoppingCart): ShoppingCart = combineShoppingCarts(x, y)
 }
+
+val s1 = ShoppingCart(List(ShoppingItem("Seife", 2)))
+val s2 = ShoppingCart(List(ShoppingItem("Klopapier", 2)))
+val s3 = s1.combine(s2)
