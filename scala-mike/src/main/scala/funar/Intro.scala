@@ -354,7 +354,8 @@ object IntMultSemigroup extends Semigroup[Int] {
   extension (x: Int) def combine(y: Int): Int = x * y
 }
 
-val n1 = IntAddSemigroup.combine(1, 2) // 1.combine(2)
+import IntAddSemigroup._
+val n1 = 1.combine(5)
 
 case class ShoppingCart(items: List[ShoppingItem]) {
   def combine(cart2: ShoppingCart): ShoppingCart =
