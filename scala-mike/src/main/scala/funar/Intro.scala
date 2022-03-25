@@ -58,6 +58,11 @@ def isCute(pet: Pet): Boolean =
 
 // Animals on the Texas Highway
 
+// An animal is one the following:
+// - armadillo
+// - parrot
+sealed trait Animal
+
 // An armadillo has the following properties:
 // - dead - OR - alive
 // - weight
@@ -69,7 +74,7 @@ enum Liveness {
 
 type Weight = Double
 
-case class Dillo(liveness: Liveness, weight: Weight)
+case class Dillo(liveness: Liveness, weight: Weight) extends Animal
 
 val dillo1 = Dillo(Liveness.Alive, 10)
 val dillo2 = Dillo(Liveness.Dead, 8)
@@ -89,4 +94,11 @@ def silly(x: Int, y: Int) = {
 // A parrot has the following properties:
 // - a sentence
 // - weight
-case class Parrot(sentence: String, weight: Weight)
+case class Parrot(sentence: String, weight: Weight) extends Animal
+
+// run over an animal
+def runOverAnimal(animal: Animal): Animal =
+  animal match {
+    case Dillo(l, w) => Dillo(Dead, w)
+    case Parrot(s, w) => Parrot("", w)
+  }
