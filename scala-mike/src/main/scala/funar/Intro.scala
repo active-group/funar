@@ -224,11 +224,16 @@ def listInc(list: List[Int]): List[Int] =
       inc(first) :: listInc(rest)
   }
 
-def map[A, B](f: A => B, list: List[A]): List[B] =
+def map[A, B]              (f: A => B, list:  List[A]):    List[B] =
   list match {
     case Nil => Nil
     case first :: rest =>
       f(first) :: map(f, rest)
+  }
+def optionMap[A, B]        (f: A => B, option: Option[A]): Option[B] =
+  option match {
+    case None => None
+    case Some(thing) => Some(f(thing))  
   }
 
 // reverse the elements of l0ist
@@ -319,8 +324,3 @@ def listIndex[A](list: List[A], element: A): Option[Int] =
       }
   }
 
-def applyInsideOption[A, B](f: A => B, option: Option[A]): Option[B] =
-  option match {
-    case None => None
-    case Some(thing) => Some(f(thing))  
-  }
