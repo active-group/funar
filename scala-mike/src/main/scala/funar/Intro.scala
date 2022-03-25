@@ -336,6 +336,12 @@ def listIndex[A](list: List[A], element: A): Option[Int] =
 // Halbgruppe / Semigroup
 // (: overlay (image image -> image))
 
+// Haben Halbgruppe
+// neutrales Element
+// n: A
+// n op x = x op n = x für alle x : A
+// Monoid
+
 type Price = Double
 
 case class ShoppingItem(name: String, price: Price)
@@ -383,3 +389,11 @@ given Semigroup[ShoppingCart] with {
 val sh1 = ShoppingCart(List(ShoppingItem("Seife", 2)))
 val sh2 = ShoppingCart(List(ShoppingItem("Klopapier", 2)))
 val sh3 = sh1.combine(sh2)
+
+trait Monoid[S] extends Semigroup[S] {
+  def neutral: S
+}
+
+given [A]: Monoid[List[A]] with {
+  def neutral = List.empty
+}
