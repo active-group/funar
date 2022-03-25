@@ -379,6 +379,6 @@ given Semigroup[ShoppingCart] with {
     def combine(y: ShoppingCart): ShoppingCart = combineShoppingCarts(x, y)
 }
 
-val s1 = ShoppingCart(List(ShoppingItem("Seife", 2)))
-val s2 = ShoppingCart(List(ShoppingItem("Klopapier", 2)))
-val s3 = s1.combine(s2)
+val sh1 = ShoppingCart(List(ShoppingItem("Seife", 2)))
+val sh2 = ShoppingCart(List(ShoppingItem("Klopapier", 2)))
+val sh3 = s1.combine(s2)
