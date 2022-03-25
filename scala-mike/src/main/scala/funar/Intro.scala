@@ -1,5 +1,7 @@
 package funar
 
+import scala.annotation.tailrec
+
 // note: there are two Scala versions right now
 // Scala 2 and Scala 3
 
@@ -229,7 +231,7 @@ def map[A, B](f: A => B, list: List[A]): List[B] =
       f(first) :: map(f, rest)
   }
 
-// reverse the elements of list
+// reverse the elements of l0ist
 def rev[A](list: List[A]): List[A] =
   list match {
     case Nil => Nil
@@ -261,9 +263,13 @@ def addElement[A](list: List[A], element: A): List[A] =
 // Gauß formula: n*(n+1)/2 = O(n^2)
 
 // acc is the reversed list of elements we've already seen
+@tailrec
 def rev[A](list: List[A], acc: List[A]): List[A] =
   list match {
     case Nil => acc
     case first :: rest =>
+      // call to rev has *no* context: tail call
+      // doesn't need to store anything on the stack
+      // bug in the JVM: stores something on the stack anyway
       rev(rest, first :: acc)
   }
