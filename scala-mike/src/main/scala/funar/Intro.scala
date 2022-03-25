@@ -178,5 +178,5 @@ def runOverAnimals(list: List[Animal]): List[Animal] =
   list match {
     case Nil => Nil
     case first :: rest =>
-      first.runOver :: runOverAnimals(rest)
+      runOverAnimal(first) :: runOverAnimals(rest)
   }
