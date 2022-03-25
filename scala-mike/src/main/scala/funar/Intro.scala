@@ -185,7 +185,11 @@ def fold[A, B](e: B, op: (A, B) => B, list: List[A]): B =
       op(f, fold(e, op, r))
   }
 
+// Scala always infers types within one pair of parantheses
+// simultaneously
 val s1 = fold(0, {(x: Int, y: Int) => x + y}, list4)
+// it infers the first parentheses first,
+// then the second
 val s2 = list4.foldRight(0)(_+_)
 
 // exercise: abstract over listSum and listProduct
