@@ -342,6 +342,7 @@ case class ShoppingItem(name: String, price: Price)
 
 // Pattern: Typklasse
 trait Semigroup[S] {
+  // combine muss assoziativ sein
   extension (x: S)
      def combine(y: S): S
 }
