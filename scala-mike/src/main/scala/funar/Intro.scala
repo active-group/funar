@@ -259,3 +259,12 @@ def addElement[A](list: List[A], element: A): List[A] =
 // run time of rev, if list has length n:
 // n + (n-1) + (n-2) + ... + 3 + 2 + 1
 // Gauß formula: n*(n+1)/2 = O(n^2)
+
+// acc is the reversed list of elements we've already seen
+def rev[A](list: List[A], acc: List[A]): List[A] =
+  list match {
+    case Nil => ???
+    case first :: rest =>
+      first ... rest
+
+  }
