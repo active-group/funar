@@ -1,4 +1,4 @@
-# Schulung "Funktionale Softarearchitektur" mit Scala
+# Schulung "Funktionale Softwarearchitektur" mit Scala
 
 ## Vorkurs
 
