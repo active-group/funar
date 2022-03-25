@@ -229,3 +229,19 @@ def map[A, B](f: A => B, list: List[A]): List[B] =
       f(first) :: map(f, rest)
   }
 
+// reverse the elements of list
+def rev[A](list: List[A]): List[A] =
+  list match {
+    case Nil => Nil
+    case first :: rest =>
+      // list = 1 2 3 => first = 1, rest = 2 3 => rev(rest) = 3 2
+      addElement(rev(rest), first)
+  }
+
+// add an element to the end of the list
+def addElement[A](list: List[A], element: A): List[A] =
+  list match {
+    case Nil => element :: Nil
+    case first :: rest => 
+      first :: addElement(list, element)
+  }
