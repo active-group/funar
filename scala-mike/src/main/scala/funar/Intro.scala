@@ -414,3 +414,4 @@ given shoppingCartMonoid: Monoid[ShoppingCart] with {
 
 val shs = List(sh1, sh2, sh3)
 
+val shss = shoppingCartMonoid.combineAll(shs)
