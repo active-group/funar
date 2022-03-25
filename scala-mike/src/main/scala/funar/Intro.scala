@@ -139,7 +139,32 @@ def runOverAnimal(animal: Animal): Animal =
 // A list is one of the following:
 // - the empty list
 // - a cons list consisting of the first element and the rest list
+//                                                       ^^^^^^^^^
+//                                                   self-reference
 
 // Scala:
 // empty list: Nil
 // cons:       ::, can write in infix
+val list1: List[Int] = 5 :: Nil // Java: List<Int>
+val list2 = 5 :: 7 :: Nil
+val list3 = List(5, 4, 7)
+val list4 = 2 :: list3
+
+
+// add the elements of a list
+// template:
+/*
+def listSum(list: List[Int]): Int =
+  list match {
+    case Nil => ???
+    case f :: r => 
+      f ... listSum(r) 
+  }
+  */
+
+def listSum(list: List[Int]): Int =
+  list match {
+    case Nil => 0
+    case f :: r => 
+      f + listSum(r) 
+  }
