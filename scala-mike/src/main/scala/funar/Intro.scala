@@ -190,7 +190,7 @@ def fold[A, B](e: B, op: (A, B) => B, list: List[A]): B =
 val s1 = fold(0, {(x: Int, y: Int) => x + y}, list4)
 // it infers the first parentheses first,
 // then the second
-val s2 = list4.foldRight(0)(_+_)
+val s2 = list4.foldRight
 
 // exercise: abstract over listSum and listProduct
 
