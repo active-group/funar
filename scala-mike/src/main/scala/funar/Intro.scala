@@ -338,10 +338,16 @@ type Price = Double
 
 case class ShoppingItem(name: String, price: Price)
 
-case class ShoppingCart(items: List[ShoppingItem]) {
+trait Semigroup[S] {
+  def combine(other: S): S
+}
+
+case class ShoppingCart(items: List[ShoppingItem]) extends Semigroup[S] {
   def combine(cart2: ShoppingCart): ShoppingCart =
+    // Listen bilden auch eine Halbgruppe
     ShoppingCart(this.items ++ cart2.items) // ++ konkateniert zwei Listen
 }
 
 def combineShoppingCarts(cart1: ShoppingCart, cart2: ShoppingCart): ShoppingCart =
   ShoppingCart(cart1.items ++ cart2.items)
+
