@@ -184,3 +184,15 @@ def runOverAnimals(list: List[Animal]): List[Animal] =
 extension (list: List[Animal])
   def runOver =
     runOverAnimals(list)
+
+def inc(x: Int): Int = x + 1
+
+// increment all elements of a list
+def listInc(list: List[Int]): List[Int] =
+  list match {
+    case Nil => Nil
+    case first :: rest =>
+      inc(first) :: listInc(rest)
+  }
+
+def map
