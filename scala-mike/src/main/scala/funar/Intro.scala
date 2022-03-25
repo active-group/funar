@@ -69,3 +69,4 @@ enum Liveness {
 
 type Weight = Double
 
+case class Dillo(liveness: Liveness, weight: Weight)
