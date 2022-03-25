@@ -238,6 +238,9 @@ def rev[A](list: List[A]): List[A] =
       // 1 recursive call for each element of list
       // + 1 call to addElement for each element of list
       addElement(rev(rest), first)
+      // recursive call has context: after the recursive call,
+      // addElements needs to be called
+      // needs to be stored at run time
   }
 
 // add an element to the end of the list
@@ -247,3 +250,7 @@ def addElement[A](list: List[A], element: A): List[A] =
     case first :: rest => 
       first :: addElement(rest, element)
   }
+
+// run time of rev, if list has length n:
+// n + (n-1) + (n-2) + ... + 3 + 2 + 1
+// Gauß formula: n*(n+1)/2 = O(n^2)
