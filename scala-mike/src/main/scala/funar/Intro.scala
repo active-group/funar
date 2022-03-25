@@ -280,7 +280,7 @@ def revLoop[A](list0: List[A]): List[A] = {
   val acc = Nil
   while (list != Nil) {
     list = list.tail
-
+    acc = list.head :: acc
   }
   return acc
 }
