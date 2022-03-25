@@ -136,3 +136,9 @@ def runOverAnimal(animal: Animal): Animal =
     case Parrot(s, w) => Parrot("", w)
   }
 
+// A list is one of the following:
+// - the empty list
+// - a cons list consisting of the first element and the rest list
+
+// Scala:
+// empty list: Nil
