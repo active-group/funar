@@ -273,3 +273,13 @@ def rev[A](list: List[A], acc: List[A]): List[A] =
       // bug in the JVM: stores something on the stack anyway
       rev(rest, first :: acc)
   }
+
+
+def revLoop[A](list0: List[A]): List[A] = {
+  var list = list0
+  val acc = Nil
+  while (list != Nil) {
+    list = list.tail
+    
+  }
+}
