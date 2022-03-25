@@ -357,6 +357,7 @@ object IntMultSemigroup extends Semigroup[Int] {
 import IntAddSemigroup._
 val n1 = 1.combine(5)
 
+// Instanz der Typklasse
 given [A]: Semigroup[List[A]] with {
   extension (x: List[A])
     def combine(y: List[A]): List[A] = x ++ y
