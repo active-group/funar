@@ -75,8 +75,10 @@ val dillo1 = Dillo(Liveness.Alive, 10)
 val dillo2 = Dillo(Liveness.Dead, 8)
 
 // run over an armadillo
-def runOverDillo(dillo: Dillo): Dillo =
+def runOverDillo(dillo: Dillo): Dillo = {
+  import Liveness._
   Dillo(Dead, dillo.weight)
+}
 
 
 def silly(x: Int, y: Int) = {
