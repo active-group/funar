@@ -338,7 +338,10 @@ type Price = Double
 
 case class ShoppingItem(name: String, price: Price)
 
-case class ShoppingCart(items: List[ShoppingItem])
+case class ShoppingCart(items: List[ShoppingItem]) {
+  def combine(cart2: ShoppingCart): ShoppingCart =
+    ShoppingCart(this.items + cart2.item)
+}
 
 def combineShoppingCarts(cart1: ShoppingCart, cart2: ShoppingCart): ShoppingCart =
   ShoppingCart(cart1.items ++ cart2.items)
