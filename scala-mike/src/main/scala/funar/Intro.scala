@@ -263,7 +263,7 @@ def addElement[A](list: List[A], element: A): List[A] =
 // Gauß formula: n*(n+1)/2 = O(n^2)
 
 // acc is the reversed list of elements we've already seen
-@tailrec
+@tailrec // compile into a loop
 def rev[A](list: List[A], acc: List[A]): List[A] =
   list match {
     case Nil => acc
