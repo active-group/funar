@@ -142,3 +142,4 @@ def runOverAnimal(animal: Animal): Animal =
 
 // Scala:
 // empty list: Nil
+// cons:       ::, can write in infix
