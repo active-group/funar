@@ -396,4 +396,6 @@ trait Monoid[S] extends Semigroup[S] {
 
 given [A]: Monoid[List[A]] with {
   def neutral = List.empty
+  extension (x: List[A])
+    def combine(y: List[A]): List[A] = x ++ y
 }
