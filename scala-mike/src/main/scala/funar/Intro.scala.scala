@@ -10,4 +10,4 @@ val s: String = "Mike"
 // - a cat - OR -
 // - a snake
 // mixed data
-trait
+trait Pet
