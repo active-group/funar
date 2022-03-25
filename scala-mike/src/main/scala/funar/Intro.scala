@@ -349,6 +349,10 @@ object IntAddSemigroup extends Semigroup[Int] {
   override def combine(x: Int, y: Int): Int = x + y
 }
 
+object IntMultSemigroup extends Semigroup[Int] {
+  override def combine(x: Int, y: Int): Int = x * y
+}
+
 case class ShoppingCart(items: List[ShoppingItem]) {
   def combine(cart2: ShoppingCart): ShoppingCart =
     // Listen bilden auch eine Halbgruppe
