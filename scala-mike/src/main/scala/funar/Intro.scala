@@ -195,4 +195,10 @@ def listInc(list: List[Int]): List[Int] =
       inc(first) :: listInc(rest)
   }
 
-def map
+def map[A](f: A => A, list: List[A]): List[A] =
+  list match {
+    case Nil => Nil
+    case first :: rest =>
+      f(first) :: map(f, rest)
+  }
+
