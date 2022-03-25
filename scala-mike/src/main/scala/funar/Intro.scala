@@ -325,3 +325,20 @@ def listIndex[A](list: List[A], element: A): Option[Int] =
       }
   }
 
+// Assoziativität
+// op : (A, A) => A
+// (a op b) op c = a op (b op c)
+// Zutaten:
+// Typ A, op : (A, A) => A
+// Assoziativität
+// Halbgruppe / Semigroup
+// (: overlay (image image -> image))
+
+type Price = Double
+
+case class ShoppingItem(name: String, price: Price)
+
+case class ShoppingCart(items: List[ShoppingItem])
+
+def combineShoppingCarts(cart1: ShoppingCart, cart2: ShoppingCart): ShoppingCart =
+  ShoppingCart(cart1.items ++ cart2.items)
