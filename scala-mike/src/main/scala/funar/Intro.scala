@@ -72,6 +72,8 @@ enum Liveness {
   case Alive
 }
 
+import Liveness._
+
 type Weight = Double
 
 case class Dillo(liveness: Liveness, weight: Weight) extends Animal
