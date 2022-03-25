@@ -246,6 +246,7 @@ def rev[A](list: List[A]): List[A] =
 // JVM: context stored on a "stack"
 // - stack is separate from heap
 // - constrained in size
+// => StackOverflow exception at about 10.000 open calls
 
 // add an element to the end of the list
 def addElement[A](list: List[A], element: A): List[A] =
