@@ -263,8 +263,7 @@ def addElement[A](list: List[A], element: A): List[A] =
 // acc is the reversed list of elements we've already seen
 def rev[A](list: List[A], acc: List[A]): List[A] =
   list match {
-    case Nil => ???
+    case Nil => acc
     case first :: rest =>
-      first ... rest
-
+      rev(rest, first :: acc)
   }
