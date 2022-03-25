@@ -299,11 +299,11 @@ def listIndex[A](list: List[A], element: A): Option[Int] =
   list match {
     case Nil => None
     case first :: rest => 
-      if (first == element)
-        Some(0)
-      else
-        listIndex(rest, element) match {
-          case None => None
-          case Some(index) => Some(index+1)
-        }
-  }
+      (first == element) match {
+        case true => Some(0) 
+        case false =>
+          listIndex(rest, element) match {
+            case None => None
+            case Some(index) => Some(index+1)
+          }
+      }
