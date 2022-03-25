@@ -78,4 +78,5 @@ val dillo2 = Dillo(Dead, 8)
 
 // run over an armadillo
 def runOverDillo(dillo: Dillo): Dillo =
-  Dillo(Dead, dillo.weight)
+  Dillo(Dead, 
+        dillo.weight)
