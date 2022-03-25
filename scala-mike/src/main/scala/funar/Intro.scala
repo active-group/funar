@@ -175,11 +175,11 @@ def listProduct(list: List[Int]): Int =
       f * listProduct(r)
   }
 
-def fold(e: Int, list: List[Int]): Int =
+def fold(e: Int, op: (Int, Int) => Int, list: List[Int]): Int =
   list match {
     case Nil => e
     case f :: r =>
-      f * fold(e, r)
+      op(f, fold(e, op r))
   }
 
 // exercise: abstract over listSum and listProduct
