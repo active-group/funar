@@ -5,3 +5,7 @@ package funar
 
 val s: String = "Mike"
 
+// A pet is one of the following:
+// - a dog - OR -
+// - a cat - OR -
+// - a snake
