@@ -406,10 +406,11 @@ given [A]: Monoid[List[A]] with {
     def combine(y: List[A]): List[A] = x ++ y
 }
 
-given Monoid[ShoppingCart] with {
+given shoppingCartMonoid: Monoid[ShoppingCart] with {
   def neutral = ShoppingCart(List.empty)
   extension (x: ShoppingCart)
     def combine(y: ShoppingCart): ShoppingCart = combineShoppingCarts(x, y)
 }
 
 val shs = List(sh1, sh2, sh3)
+
