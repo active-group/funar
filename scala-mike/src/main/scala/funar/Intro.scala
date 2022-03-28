@@ -220,7 +220,7 @@ extension (list: List[Animal])
   def runOver =
     runOverAnimals(list)
 
-sealed trait MyList[A] {
+sealed trait MyList[+A] {
   def runOver: MyList[Animal] =
     this match {
       case Empty => Empty
