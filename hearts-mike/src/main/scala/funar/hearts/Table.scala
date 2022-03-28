@@ -1,8 +1,6 @@
 package funar.hearts
 
 import scala.annotation.tailrec
-import funar.hearts.GameEvent.HandDealt
-import funar.hearts.GameEvent.PlayerTurnChanged
 
 object Table {
   def whoTakesTrick(trick: Trick): Player = {
