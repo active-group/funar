@@ -33,8 +33,8 @@ enum DB[A] {
 
 import DB._
 
-val p1 = Put("Mike", 50, {() =>
+val p1 = Put("Mike", 50, {_ =>
          Get("Mike", {x =>
-         Put("Mike", x+1, {() =>
+         Put("Mike", x+1, {_ =>
          Get("Mike", {y =>
          Return(x+y)})})})  })
