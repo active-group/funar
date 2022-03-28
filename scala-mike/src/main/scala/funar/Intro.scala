@@ -281,6 +281,9 @@ given Functor[Seq] with {
     def fmap(f: A => B): Seq[B] = thing.map(f)
 }
 
+val lis1 = List(1,2,3,4)
+val lis2 = lis1.fmap(inc)
+
 // reverse the elements of list
 def rev[A](list: List[A]): List[A] =
   list match {
