@@ -258,7 +258,12 @@ def optionMap[A, B]        (f: A => B, option: Option[A]): Option[B] =
     case Some(thing) => Some(f(thing))  
   }
 
-  
+// F ist sowas wie List, Option
+trait Functor[F[_]] {
+  extension (c: F[A])
+    def fmap(f: A => B): F[B]
+}
+
 
 // reverse the elements of list
 def rev[A](list: List[A]): List[A] =
