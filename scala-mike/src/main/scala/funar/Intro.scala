@@ -195,7 +195,7 @@ val s1 = fold(0, {(x: Int, y: Int) => x + y}, list4)
 // here: list4 says A must be Int
 // 0 says B must be an Int
 val s2 = list4.foldRight(0)(_+_)
-val s2_a = list4.foldRight(0)({x: Int, y: Int => x +y})
+val s2_a = list4.foldRight(0){x: Int, y: Int => x +y}
 
 
 // exercise: abstract over listSum and listProduct
