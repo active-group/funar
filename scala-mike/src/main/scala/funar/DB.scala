@@ -49,4 +49,4 @@ def put(key: String, value: Int): DB[Unit] =
   Put(key, value, { _ => Return(())})
 
 // "spleißen"
-def splice(dba: DB[A], dbb: DB[B]): DB[B] = ??
+def splice[A, B](dba: DB[A], dbb: DB[B]): DB[B] = ??
