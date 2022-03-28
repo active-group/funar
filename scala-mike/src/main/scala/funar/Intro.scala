@@ -220,6 +220,11 @@ extension (list: List[Animal])
   def runOver =
     runOverAnimals(list)
 
+enum MyList[A] {
+  case Empty
+  case Cons(first: A, rest: MyList[A])
+}
+
 val deadHighway = highway.runOver
 
 def inc(x: Int): Int = x + 1
@@ -244,7 +249,7 @@ def optionMap[A, B]        (f: A => B, option: Option[A]): Option[B] =
     case Some(thing) => Some(f(thing))  
   }
 
-// reverse the elements of l0ist
+// reverse the elements of list
 def rev[A](list: List[A]): List[A] =
   list match {
     case Nil => Nil
