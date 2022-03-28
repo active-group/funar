@@ -221,7 +221,7 @@ extension (list: List[Animal])
     runOverAnimals(list)
 
 enum MyList[A] {
-  case Empty
+  case Empty extends MyList[Nothing]
   case Cons(first: A, rest: MyList[A])
 }
 
