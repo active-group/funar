@@ -223,7 +223,7 @@ extension (list: List[Animal])
 sealed trait MyList[A] {
   def runOver: MyList[Animal] =
     this match {
-      case Empty => ???
+      case Empty => Empty
       case Cons(first, rest) => ???
     }
 }
