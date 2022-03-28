@@ -152,7 +152,6 @@ object Table {
           }
         } else
           Seq(IllegalCardPlayed(player, card))
-
     }
 }
       
