@@ -426,8 +426,11 @@ given [A]: Monoid[List[A]] with {
 
 given [S1, S2]: Monoid[(S1, S2)] with {
   extension (x: (S1, S2))
-    def combine(y: (S1, S2)): (S1, S2) =
-      ???
+    def combine(y: (S1, S2)): (S1, S2) = {
+      val (x1, x2) = x
+      val (y1, y2) = y
+      (x1.combine(y1), x2.combine(y2))
+    }
 
   def neutral: (S1, S2) = ???
 }
