@@ -112,7 +112,7 @@ object Table {
     import GameEvent._
     event match {
       case HandDealt(player, hand) => 
-        tableState.copy(hands = tableState.hands + (player -> hand))
+        tableState.copy(hands = tableState.hands + (player, hand))
       case PlayerTurnChanged(player) =>
         tableState.copy(players = rotateTo(player, tableState.players))
       case LegalCardPlayed(player, card) =>
