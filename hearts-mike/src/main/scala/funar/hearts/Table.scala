@@ -139,10 +139,16 @@ object Table {
           if (turnOver(state1)) {
             val trickTaker = whoTakesTrick(state1.trick)
             val event2 = TrickTaken(trickTaker, state1.trick)
-            
-            ???
+            val state2 = tableProcessEvent(event2, state1)
+            val event3 =
+              gameOver(state2) match {
+                case Some(winner) => GameEnded(winner)
+                case None => PlayerTurnChanged(trickTaker)
+              }
+            Seq(event1, event2, event3)
           } else {
-            ???
+            val event2 = PlayerTurnChanged(playerAfter(state1, player))
+            Seq(event1, event2)
           }
         } else
           Seq(IllegalCardPlayed(player, card))
