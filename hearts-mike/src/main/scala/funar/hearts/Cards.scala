@@ -46,25 +46,34 @@ case class Card(suit: Suit, rank : Rank) {
 
 object Card {
 
+  // Seq: generalisierte Folgen // analog zu List<A> in Java
+  // Seq: Interface
+  // List: konkrete Implementierung 
+  // vgl. List<A> Interface, Implementierung ArrayList<A>
   def cartesianProduct[A, B](as: Seq[A], bs: Seq[B]): Seq[(A, B)] =
-    as.map { a => bs.map { b => (a, b) }} flatten
+    as.map { a => bs.map { b => (a, b) }}.flatten
 
   val deck : Seq[Card] = cartesianProduct(Suit.all, Rank.all).map { case (suit, rank) => Card(suit, rank) }
 }
 
+type Hand = Set[Card]
+
 object Hand {
   val empty: Hand = Set.empty
 }
+
+// letzte Karte ist das erste Element
+type Trick = List[(Player, Card)]
 
 object Trick {
   val empty: Trick = List.empty
 
   def isEmpty(trick: Trick): Boolean = trick.isEmpty
 
-  def cards(trick: Trick): Seq[Card] = trick.map(_._2)
+  def cards(trick: Trick): Seq[Card] = trick.map(_._2) // 2. Komponente aus Tupel
 
   def add(trick: Trick, player: Player, card: Card) =
-    trick :+ (player, card)
+    (player, card) :: trick
 
   def leadingCard(trick: Trick): Card =
     trick.last._2
@@ -88,9 +97,6 @@ object Trick {
 
 }
 
-type Hand = Set[Card]
-
-type Trick = List[(Player, Card)]
 
 type PlayerHands = Map[Player, Hand]
 
