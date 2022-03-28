@@ -130,7 +130,7 @@ object Table {
     import GameEvent._
     command match {
       case GameCommand.DealHands(hands) =>
-        hands.map(HandDealt)
+        hands.map(HandDealt).toSeq
 
     }
 }
