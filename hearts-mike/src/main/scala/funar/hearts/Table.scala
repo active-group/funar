@@ -125,5 +125,8 @@ object Table {
       case GameEnded(player) => tableState
     }
   }
+
+  def tableProcessCommand(command: GameCommand, tableState: TableState): Seq[GameEvent] =
+    ???
 }
       
