@@ -36,6 +36,7 @@ object Table {
       case _ => 0
     }
 
+  // Karten, die man aufnehmen mußte vom Stich
   type Pile = Set[Card]
 
   type PlayerPiles = Map[Player, Pile]
