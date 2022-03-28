@@ -28,4 +28,5 @@ val p1 = List(Put("Mike", 50),
 enum DB[A] {
   case Get(key: String, callback: Int => DB[A])
   case Put(key: String, value: Int, callback: Unit => DB[A])
+  case Return(result: A)
 }
