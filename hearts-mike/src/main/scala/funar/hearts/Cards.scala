@@ -68,7 +68,9 @@ type Trick = List[(Player, Card)]
 object Trick {
   val empty: Trick = List.empty
 
-  def isEmpty(trick: Trick): Boolean = trick.isEmpty
+  val isEmpty(trick: Trick): Boolean = trick.isEmpty
+  
+  // def isEmpty(trick: Trick): Boolean = trick.isEmpty
 
   def cards(trick: Trick): Seq[Card] = trick.map(_._2) // 2. Komponente aus Tupel
 
