@@ -103,7 +103,7 @@ enum Animal {
       case Dillo(liveness, weight) =>
         liveness match {
           case Dead => this
-          case Alive => Dillo(Alive, weight + amount)
+//          case Alive => Dillo(Alive, weight + amount)
         }
       case Parrot(sentence, weight) =>
         Parrot(sentence, weight + amount)
