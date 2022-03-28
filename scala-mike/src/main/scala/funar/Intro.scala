@@ -452,3 +452,10 @@ class ShoppingCartV1 private (val items: mutable.IndexedBuffer[ShoppingItem]) {
 
   def clear() = this.items.clear()
 }
+
+// Ziel: Effekte / Interaktion mit der Außenwelt
+// um Spieler:innen-Strategien zu beschreiben
+// in Java: void executeStrategy(...)
+// im Zusammenhang mit Testbarkeit / Dependency Injection
+// FP: Monade, Spezialfall von einem Funktor "etwas mit map"
+// in Scala: mit Typklassen
