@@ -273,7 +273,7 @@ given Functor[List] with {
 
 given Functor[Option] with {
   extension [A, B] (thing: Option[A])
-    def fmap(f: A => B): List[B] = optionMap(f, thing)
+    def fmap(f: A => B): Option[B] = optionMap(f, thing)
 }
 
 
