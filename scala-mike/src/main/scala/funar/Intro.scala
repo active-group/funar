@@ -220,7 +220,13 @@ extension (list: List[Animal])
   def runOver =
     runOverAnimals(list)
 
-sealed trait MyList[A]
+sealed trait MyList[A] {
+  def runOver: MyList[Animal] =
+    this match {
+      case Empty => ???
+      case Cons(first, rest) => ???
+    }
+}
 
 case object Empty extends MyList[Nothing]
 case class Cons[A](first: A, rest: MyList[A]) extends MyList[A]
