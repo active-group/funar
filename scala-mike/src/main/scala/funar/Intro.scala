@@ -428,6 +428,8 @@ given [S1, S2]: Monoid[(S1, S2)] with {
   extension (x: (S1, S2))
     def combine(y: (S1, S2)): (S1, S2) =
       ???
+
+  def neutral: (S1, S2) = ???
 }
 
 given shoppingCartMonoid: Monoid[ShoppingCart] with {
