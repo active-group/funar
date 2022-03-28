@@ -10,6 +10,8 @@ package funar.hearts
 // - Events sollten fachlich motiviert sein
 // - Redundanz ist vollkommen in Ordnung
 
+// --> EventStorming
+
 // Command
 // Wunsch, dass etwas passieren soll
 // != Event
