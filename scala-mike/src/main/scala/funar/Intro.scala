@@ -260,8 +260,13 @@ def optionMap[A, B]        (f: A => B, option: Option[A]): Option[B] =
 
 // F ist sowas wie List, Option
 trait Functor[F[_]] {
+  // t.fmap { x => x } == t
   extension [A, B] (thing: F[A])
     def fmap(f: A => B): F[B]
+}
+
+given Functor[List] {
+  
 }
 
 
