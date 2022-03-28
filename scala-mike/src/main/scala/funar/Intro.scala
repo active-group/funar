@@ -432,7 +432,8 @@ given [S1: Monoid, S2: Monoid]: Monoid[(S1, S2)] with {
       (x1.combine(y1), x2.combine(y2))
     }
 
-  def neutral: (S1, S2) = (neutral, neutral)
+  def neutral: (S1, S2) = (summon[Monoid[S1]].neutral,
+                           summon[Monoid[S2]].neutral)
 }
 
 given shoppingCartMonoid: Monoid[ShoppingCart] with {
