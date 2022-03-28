@@ -57,5 +57,5 @@ def splice[A, B](dba: DB[A], cont: A => DB[B]): DB[B] =
     case Put(key, value, callback) =>
       Put(key, value, { _ =>
         splice(callback(()), cont) })
-    case Return(result) => cont(resullt)
+    case Return(result) => cont(result)
   }
