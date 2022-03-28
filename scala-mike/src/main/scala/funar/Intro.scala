@@ -424,7 +424,7 @@ given [A]: Monoid[List[A]] with {
     def combine(y: List[A]): List[A] = x ++ y
 }
 
-given [S1, S2]: Monoid[(S1, S2)] with {
+given [S1: Monoid, S2: Monoid]: Monoid[(S1, S2)] with {
   extension (x: (S1, S2))
     def combine(y: (S1, S2)): (S1, S2) = {
       val (x1, x2) = x
