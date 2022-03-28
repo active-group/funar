@@ -118,11 +118,11 @@ object Table {
       case LegalCardPlayed(player, card) =>
         tableState.copy(hands = takeCard(tableState.hands, player, card),
                         trick = Trick.add(tableState.trick, player, card))
-      case GameEvent.IllegalCardPlayed(player, card) => tableState
-      case GameEvent.TrickTaken(player, trick) =>
+      case IllegalCardPlayed(player, card) => tableState
+      case TrickTaken(player, trick) =>
         tableState.copy(piles = addToPile(tableState.piles, player, Trick.cards(trick)),
                         trick = Trick.empty)
-      case GameEvent.GameEnded(player) => tableState
+      case GameEnded(player) => tableState
     }
   }
 }
