@@ -31,6 +31,8 @@ enum DB[A] {
   case Return(result: A)
 }
 
+import DB._
+
 val p1 = Put("Mike", 50, {() =>
          Get("Mike", {x =>
          Put("Mike", x+1, {() =>
