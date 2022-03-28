@@ -109,6 +109,7 @@ object Table {
     playerPiles + (player -> playerPile.union(Set.from(cards)))
   }
 
-  
+  def tableProcessEvent(event: GameEvent, tableState: TableState): TableState =
+    ???
 }
       
