@@ -265,7 +265,7 @@ trait Functor[F[_]] {
     def fmap(f: A => B): F[B]
 }
 
-given Functor[List] {
+given Functor[List] with {
   extension [A, B] (thing: List[A])
     def fmap(f: A => B): List[B] = map(thing, f)
 
