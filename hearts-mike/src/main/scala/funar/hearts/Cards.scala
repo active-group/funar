@@ -68,7 +68,7 @@ type Trick = List[(Player, Card)]
 object Trick {
   val empty: Trick = List.empty
 
-  val isEmpty = {(trick: Trick): Boolean => trick.isEmpty }
+  val isEmpty = {(trick: Trick): Boolean = trick.isEmpty }
 
   // def isEmpty(trick: Trick): Boolean = trick.isEmpty
 
