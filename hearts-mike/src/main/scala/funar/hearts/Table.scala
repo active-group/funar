@@ -131,6 +131,18 @@ object Table {
     command match {
       case GameCommand.DealHands(hands) =>
         hands.map(HandDealt.apply).toSeq
+      case GameCommand.PlayCard(player, card) =>
+        if (playValid(tableState, player, card)) {
+          val event1 = LegalCardPlayed(player, card)
+          val state1 = tableProcessEvent(event1, tableState)
+          // ist der Stich voll?
+          if (turnOver(state1)) {
+            ???
+          } else {
+            ???
+          }
+        } else
+          Seq(IllegalCardPlayed(player, card))
 
     }
 }
