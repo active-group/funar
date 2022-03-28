@@ -258,6 +258,8 @@ def optionMap[A, B]        (f: A => B, option: Option[A]): Option[B] =
     case Some(thing) => Some(f(thing))  
   }
 
+  
+
 // reverse the elements of list
 def rev[A](list: List[A]): List[A] =
   list match {
