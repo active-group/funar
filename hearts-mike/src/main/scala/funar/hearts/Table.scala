@@ -110,6 +110,6 @@ object Table {
   }
 
   def tableProcessEvent(event: GameEvent, tableState: TableState): TableState =
-    ???
+    tableState.copy(players = ???)
 }
       
