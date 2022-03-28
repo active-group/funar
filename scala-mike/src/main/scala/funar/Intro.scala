@@ -411,6 +411,7 @@ val sh2 = ShoppingCart(List(ShoppingItem("Klopapier", 2)))
 val sh3 = sh1.combine(sh2)
 
 trait Monoid[S] extends Semigroup[S] {
+  // neutral.combine(x) == x.combine(neutral) == x
   def neutral: S
 
   def combineAll(list: List[S]): S =
