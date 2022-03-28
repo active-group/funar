@@ -220,6 +220,7 @@ extension (list: List[Animal])
   def runOver =
     runOverAnimals(list)
 
+/*
 sealed trait MyList[+A] {
   def runOver: MyList[Animal] =
     this match {
@@ -231,6 +232,7 @@ sealed trait MyList[+A] {
 
 case object Empty extends MyList[Nothing]
 case class Cons[A](first: A, rest: MyList[A]) extends MyList[A]
+*/
 
 val deadHighway = highway.runOver
 
