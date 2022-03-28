@@ -436,6 +436,10 @@ given [S1: Monoid, S2: Monoid]: Monoid[(S1, S2)] with {
                            summon[Monoid[S2]].neutral)
 }
 
+given [S]: Monoid[Option[S]] with {
+  
+}
+
 given shoppingCartMonoid: Monoid[ShoppingCart] with {
   def neutral = ShoppingCart(List.empty)
   extension (x: ShoppingCart)
