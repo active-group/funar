@@ -126,7 +126,12 @@ object Table {
     }
   }
 
-  def tableProcessCommand(command: GameCommand, tableState: TableState): Seq[GameEvent] =
-    ???
+  def tableProcessCommand(command: GameCommand, tableState: TableState): Seq[GameEvent] = {
+    import GameEvent._
+    command match {
+      case GameCommand.DealHands(hands) =>
+        hands.map(HandDealt)
+
+    }
 }
       
