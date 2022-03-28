@@ -30,3 +30,9 @@ enum DB[A] {
   case Put(key: String, value: Int, callback: Unit => DB[A])
   case Return(result: A)
 }
+
+val p1 = Put("Mike", 50, {() =>
+         Get("Mike", {x =>
+         Put("Mike", x+1, {() =>
+         Get("Mike", {y =>
+         Return(x+y)})})})  })
