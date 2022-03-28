@@ -115,7 +115,7 @@ object Table {
         tableState.copy(hands = tableState.hands + (player -> hand))
       case PlayerTurnChanged(player) =>
         tableState.copy(players = rotateTo(player, tableState.players))
-      case GameEvent.LegalCardPlayed(player, card) =>
+      case LegalCardPlayed(player, card) =>
         tableState.copy(hands = takeCard(tableState.hands, player, card),
                         trick = Trick.add(tableState.trick, player, card))
       case GameEvent.IllegalCardPlayed(player, card) => tableState
