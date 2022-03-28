@@ -108,5 +108,7 @@ object Table {
     val playerPile = playerPiles.getOrElse(player, Set.empty)
     playerPiles + (player -> playerPile.union(Set.from(cards)))
   }
+
+  
 }
       
