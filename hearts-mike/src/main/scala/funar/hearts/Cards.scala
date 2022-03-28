@@ -62,6 +62,12 @@ object Hand {
   val empty: Hand = Set.empty
 }
 
+// Architektur wäre besser mit Extra-Klasse
+// case class Trick(cards: List[(Player, Card)])
+// oder in Scala 3:
+// opaque type Trick = List[(Player, Card)]
+// ^^^^^^
+
 // letzte Karte ist das erste Element
 type Trick = List[(Player, Card)]
 
