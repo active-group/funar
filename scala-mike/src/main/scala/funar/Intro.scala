@@ -215,6 +215,7 @@ def runOverAnimals(list: List[Animal]): List[Animal] =
       runOverAnimal(first) :: runOverAnimals(rest)
   }
 
+// "extension method"
 extension (list: List[Animal])
   def runOver =
     runOverAnimals(list)
