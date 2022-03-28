@@ -222,7 +222,7 @@ extension (list: List[Animal])
 
 sealed trait MyList[A]
 
-case class Empty extends MyList[Nothing]
+case object Empty extends MyList[Nothing]
 case class Cons(first: A, rest: MyList[A]) extends MyList[A]
 
 val deadHighway = highway.runOver
