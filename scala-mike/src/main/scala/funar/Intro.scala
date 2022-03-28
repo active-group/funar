@@ -198,6 +198,7 @@ val s2 = list4.foldRight(0)(_+_)
 val s2_a = list4.foldRight(0)({(x: Int, y: Int) => x +y})
 val s2_b = list4.foldRight(0)({(x, y) => x +y})
 val s2_c = list4.foldRight(0) {(x, y) => x +y}
+val s3_d = list4.foldRight(0)(_+_)
 
 
 // exercise: abstract over listSum and listProduct
