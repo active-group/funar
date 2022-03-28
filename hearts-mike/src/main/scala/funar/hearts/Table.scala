@@ -108,9 +108,20 @@ object Table {
     val playerPile = playerPiles.getOrElse(player, Set.empty)
     playerPiles + (player -> playerPile.union(Set.from(cards)))
   }
-
   def tableProcessEvent(event: GameEvent, tableState: TableState): TableState =
-    // tableState.copy(players = ???)
-    ???
+    event match {
+      case HandDealt(player, hand) => 
+        tableState.copy(hands = tableState.hands + (player -> hand))
+      case PlayerTurnChanged(player) =>
+        tableState.copy(players = rotateTo(player, tableState.players))
+      case GameEvent.LegalCardPlayed(player, card) =>
+        tableState.copy(hands = takeCard(tableState.hands, player, card),
+                        trick = Trick.add(tableState.trick, player, card))
+      case GameEvent.IllegalCardPlayed(player, card) => tableState
+      case GameEvent.TrickTaken(player, trick) =>
+        tableState.copy(piles = addToPile(tableState.piles, player, Trick.cards(trick)),
+                        trick = Trick.empty)
+      case GameEvent.GameEnded(player) => tableState
+    }
 }
       
