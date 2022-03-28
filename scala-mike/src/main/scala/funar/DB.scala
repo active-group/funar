@@ -46,4 +46,4 @@ def get(key: String): DB[Int] =
    Get(key, { value => Return(value)})
 
 def put(key: String, value: Int): DB[Unit] =
-  ???
+  Put(key, value, { _ => Return(())})
