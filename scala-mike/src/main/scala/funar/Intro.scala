@@ -416,6 +416,8 @@ val shs = List(sh1, sh2, sh3)
 
 val shss = shoppingCartMonoid.combineAll(shs)
 
+import scala.collection.mutable 
+
 class ShoppingCartV1 private (val items: mutable.IndexedBuffer[ShoppingItem]) {
   def this() = this(mutable.ArrayBuffer.empty)
 
