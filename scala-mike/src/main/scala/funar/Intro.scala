@@ -271,6 +271,11 @@ given Functor[List] with {
 
 }
 
+given Functor[Option] with {
+  extension [A, B] (thing: Option[A])
+    def fmap(f: A => B): List[B] = optionMap(f, thing)
+}
+
 
 // reverse the elements of list
 def rev[A](list: List[A]): List[A] =
