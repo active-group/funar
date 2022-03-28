@@ -139,6 +139,8 @@ object Table {
           if (turnOver(state1)) {
             val trickTaker = whoTakesTrick(state1.trick)
             val event2 = TrickTaken(trickTaker, state1.trick)
+            
+            ???
           } else {
             ???
           }
