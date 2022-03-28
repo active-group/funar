@@ -224,7 +224,8 @@ sealed trait MyList[+A] {
   def runOver: MyList[Animal] =
     this match {
       case Empty => Empty
-      case Cons(first, rest) => ???
+      case Cons(first, rest) =>
+        Cons(runOverAnimal(first), rest.runOver)
     }
 }
 
