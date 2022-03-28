@@ -137,7 +137,8 @@ object Table {
           val state1 = tableProcessEvent(event1, tableState)
           // ist der Stich voll?
           if (turnOver(state1)) {
-            ???
+            val trickTaker = whoTakesTrick(state1.trick)
+            val event2 = TrickTaken()
           } else {
             ???
           }
