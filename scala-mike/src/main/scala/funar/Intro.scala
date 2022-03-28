@@ -220,10 +220,10 @@ extension (list: List[Animal])
   def runOver =
     runOverAnimals(list)
 
-enum MyList[A] {
-  case Empty extends MyList[Nothing]
-  case Cons(first: A, rest: MyList[A])
-}
+sealed trait MyList[A]
+
+case class Empty extends MyList[Nothing]
+case class Cons(first: A, rest: MyList[A]) extends MyList[A]
 
 val deadHighway = highway.runOver
 
