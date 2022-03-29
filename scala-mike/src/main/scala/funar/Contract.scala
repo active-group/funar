@@ -71,5 +71,5 @@ object Contract {
   val zcb1_ = zeroCouponBond(Date("2022-12-24"), 100, EUR)
 
   val rollover = Combined(zeroCouponBond(Date("2022-03-29"), 100, EUR),
-                          Reverse(zeroCouponBond(Date("2022-03-30"), 105, EUR))
+                          Reverse(zeroCouponBond(Date("2022-03-30"), 105, EUR)))
 }
