@@ -95,5 +95,24 @@ object Contract {
 
   // alle Zahlungen, die bis heute fällig sind
   // heraus kommt ein "Residualvertrag"
-  def meaning(contract: Contract, today: Date): (Seq[Payment], Contract) = ???
+  def meaning(contract: Contract, today: Date): (Seq[Payment], Contract) = 
+    contract match {
+      case Zero => (Seq.empty, Zero)
+      case One(currency) => (Seq(Payment(today, Direction.Long, 1, currency)), Zero)
+      case Multiple(amount, contract) => 
+        val (payments, residualContract) = meaning(contract, today)
+        (payments.map(_.scale(amount)), Multiple(amount, residualContract))
+      case Forward(date, contract) =>
+        if (date.before(today))
+          meaning(contract, today)
+        else
+          (Seq.zero, Forward(date, contract))
+      case Combined(contract1, contract2) =>
+        val (payments1, residual1) = meaning(contract1, today)
+        val (payments2, residual2) = meaning(contract2, today)
+        (payments1 ++ payments2, Combined(residual1, residual2))
+      case Reverse(contract) =>
+        val (payments, residualContract) = meaning(contract, today)
+        (payments.map(_.invert), Reverse(residualContract))
+    }
 }
