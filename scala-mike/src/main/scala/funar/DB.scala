@@ -86,4 +86,14 @@ object DB {
       _ <- put("Mike", x+1)
       y <- get("Mike")
     } yield(x+y)
+
+  def runDB(dba: DB[A], mp: Map[String, Int]): A =
+    dba match {
+      case Get(key, callback) => {
+        val value = mp(key)
+        runDB(callback(value), mp)
+      }
+      case Put(key, value, callback) => ???
+      case Return(result) => result
+    }
 }
