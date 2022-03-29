@@ -36,7 +36,9 @@ Rollover-Geschäft: heute was bekommen, morgen was mit Zinsen zahlen
 4. sukzessive größere Beispiele abbilden, ggf. neue Kombinatoren definieren
 */
 
-case class Date(iso: String)
+case class Date(iso: String) {
+  def before(other: Date): Boolean = this.iso < other.iso
+}
 
 type Amount = Double
 
