@@ -54,7 +54,7 @@ object DB {
     dba match {
       case Get(key, callback) => 
         Get(key, { value =>
-          splce(callback(value), cont) })
+          splice(callback(value), cont) })
       case Put(key, value, callback) => ???
       case Return(result) => cont(result)
     }
