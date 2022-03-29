@@ -87,6 +87,7 @@ object DB {
       y <- get("Mike")
     } yield(x+y)
 
+  @tailrec
   def runDB[A](dba: DB[A], mp: Map[String, Int]): A =
     dba match {
       case Get(key, callback) => {
