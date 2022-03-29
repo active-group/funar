@@ -53,5 +53,22 @@ hier:
 
 https://guide.elm-lang.org/install/
 
+## Harts starten
+
+Im `hearts`-Verzeichnis:
+
+```
+sbt console
+funar.hearts.Servers.startServers()
+```
+
+Dann im `hearts-frontend`-Verzeichnis:
+
+```
+elm reactor
+```
+
+Dann im Browser auf
+[`http://localhost:8000/src/HeartsFrontend.elm`](http://localhost:8000/src/HeartsFrontend.elm) gehen.
 
 
