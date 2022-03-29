@@ -495,3 +495,6 @@ class ShoppingCartV1 private (val items: mutable.IndexedBuffer[ShoppingItem]) {
 // im Zusammenhang mit Testbarkeit / Dependency Injection
 // FP: Monade, Spezialfall von einem Funktor "etwas mit map"
 // in Scala: mit Typklassen
+
+
+
