@@ -74,4 +74,15 @@ object Contract {
 
   val rollover = Combined(zeroCouponBond(Date("2022-03-29"), 100, EUR),
                           Reverse(zeroCouponBond(Date("2022-03-30"), 105, EUR)))
+
+
+  enum Direction {
+    case Long 
+    case Short
+  }
+
+  case class Payment(date: Date, direction: Direction, amount: Amount, currency: Currency)
+
+  // alle Zahlungen bis heute fällig sind
+  def meaning(contract: Contract, today: Date): Seq[Payment]
 }
