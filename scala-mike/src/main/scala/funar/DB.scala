@@ -70,4 +70,12 @@ object DB {
     splice(put("Mike", x + 1), { _ =>
     splice(get("Mike"), { y => 
     Return(x+y)})})})})
+
+  val p1_b =
+    for {
+      _ <- put("Mike", 50)
+      x <- get("Mike")
+      _ <- put("Mike", x+1)
+      y <- get("Mike")
+    } yield(x+y)
 }
