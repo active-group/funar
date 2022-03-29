@@ -94,7 +94,7 @@ object DB {
         runDB(callback(value), mp)
       }
       case Put(key, value, callback) => {
-        val mp1 = mp.+ (key -> value)
+        val mp1 = mp + (key, value)
         runDB(callback(()), mp1)
       }
       case Return(result) => result
