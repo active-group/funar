@@ -81,7 +81,7 @@ object DB {
   // das finale yield wird zu einem .map
   val p1_b =
     for {
-      () <- put("Mike", 50)
+      _ <- put("Mike", 50)
       x <- get("Mike")
       _ <- put("Mike", x+1)
       y <- get("Mike")
