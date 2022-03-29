@@ -60,4 +60,12 @@ object DB {
           splice(callback(()), cont) })
       case Return(result) => cont(result)
     }
+
+    val p1 =
+      splice(put("Mike", 50), { _ =>
+      splice(get("Mike"), { x => 
+      splice(put("Mike", x + 1), { _ =>
+      splice(get("Mike"), { y => 
+      Return(x+y)})})})
+        })
 }
