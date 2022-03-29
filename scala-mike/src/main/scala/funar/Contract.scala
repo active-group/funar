@@ -23,11 +23,15 @@ Rollover-Geschäft: heute was bekommen, morgen was mit Zinsen zahlen
 
 "Am 24.12. bekomme ich 100€": Zero-Bond, Zero-Coupon Bond
 
+2. einfache Beispiel in "atomare Bestandteile" zerlegt
+
 3 Ideen:
 
 - € "Währung"
 - Vielfaches
 - Später
+
+3. finde Selbstbezüge / Kombinatoren
 */
 
 case class Date(iso: String)
@@ -56,5 +60,6 @@ enum Contract {
 object Contract {
   import Currency._
   import Contract._
+  val zcb1 = Forward(Date("2022-12-24"), Multiple(100, One(EUR)))
   // val zcb1 = ZeroCouponBond(Date("2022-12-24"), 100, EUR)
 }
