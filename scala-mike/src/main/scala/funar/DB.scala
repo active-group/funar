@@ -35,11 +35,13 @@ enum DB[A] {
 
 import DB._
 
-val p1 = Put("Mike", 50, {_ =>
-         Get("Mike", {x =>
-         Put("Mike", x+1, {_ =>
-         Get("Mike", {y =>
-         Return(x+y)})})})})
+object DB {
+  val p1 = Put("Mike", 50, {_ =>
+          Get("Mike", {x =>
+          Put("Mike", x+1, {_ =>
+          Get("Mike", {y =>
+          Return(x+y)})})})})
+}
 
 // get, put einzeln
 def get(key: String): DB[Int] =
