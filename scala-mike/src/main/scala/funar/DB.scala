@@ -68,7 +68,7 @@ object DB {
       case Return(result) => cont(result)
     }
 
-  val p1_a =
+  val p1_a: DB[Int] =
     splice(put("Mike", 50), { _ =>
     splice(get("Mike"), { x => 
     splice(put("Mike", x + 1), { _ =>
