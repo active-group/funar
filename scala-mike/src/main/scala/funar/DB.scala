@@ -71,6 +71,8 @@ object DB {
     splice(get("Mike"), { y => 
     Return(x+y)})})})})
 
+  // identisch zu p1_a
+  // flatMap macht DB zu einer Monade
   val p1_b =
     for {
       _ <- put("Mike", 50)
