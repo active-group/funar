@@ -77,9 +77,11 @@ object DB {
 
   // identisch zu p1_a
   // flatMap macht DB zu einer Monade
+  // jeder -> wird zu einem .flatMap
+  // das finale yield wird zu einem .map
   val p1_b =
     for {
-      _ <- put("Mike", 50)
+      () <- put("Mike", 50)
       x <- get("Mike")
       _ <- put("Mike", x+1)
       y <- get("Mike")
