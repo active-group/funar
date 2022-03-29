@@ -84,5 +84,5 @@ object Contract {
   case class Payment(date: Date, direction: Direction, amount: Amount, currency: Currency)
 
   // alle Zahlungen bis heute fällig sind
-  def meaning(contract: Contract, today: Date): Seq[Payment]
+  def meaning(contract: Contract, today: Date): Seq[Payment] = ???
 }
