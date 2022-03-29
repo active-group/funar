@@ -63,12 +63,10 @@ object DB {
 
   val p0 = 
     splice(put("Mike", 50), {_ => Return(5)})
-   /*   
-    val p1_a =
-      splice(put("Mike", 50), { _ =>
-      splice(get("Mike"), { x => 
-      splice(put("Mike", x + 1), { _ =>
-      splice(get("Mike"), { y => 
-      Return(x+y)})})})})
-      */
+  val p1_a =
+    splice(put("Mike", 50), { _ =>
+    splice(get("Mike"), { x => 
+    splice(put("Mike", x + 1), { _ =>
+    splice(get("Mike"), { y => 
+    Return(x+y)})})})})
 }
