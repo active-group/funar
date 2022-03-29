@@ -61,5 +61,8 @@ object Contract {
   import Currency._
   import Contract._
   val zcb1 = Forward(Date("2022-12-24"), Multiple(100, One(EUR)))
+
+  def zeroCouponBond(date: Date, amount: Amount, currency: Currency): Contract =
+
   // val zcb1 = ZeroCouponBond(Date("2022-12-24"), 100, EUR)
 }
