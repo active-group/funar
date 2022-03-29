@@ -88,7 +88,10 @@ object Contract {
     }
   }
 
-  case class Payment(date: Date, direction: Direction, amount: Amount, currency: Currency)
+  case class Payment(date: Date, direction: Direction, amount: Amount, currency: Currency) {
+    def invert: this.copy(direction = this direction.invert)
+    def scale(factor: Double) = this.copy(amount = this.amount * factor)
+  }
 
   // alle Zahlungen, die bis heute fällig sind
   // heraus kommt ein "Residualvertrag"
