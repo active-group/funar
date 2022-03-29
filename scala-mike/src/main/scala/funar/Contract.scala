@@ -82,7 +82,7 @@ object Contract {
     case Long 
     case Short
 
-    def invert: this match {
+    def invert = this match {
       case Long => Short
       case Short => Long
     }
