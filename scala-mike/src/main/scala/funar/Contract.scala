@@ -46,6 +46,10 @@ enum Contract {
 }
 */
 
+enum Contract {
+  case One(currency: Currency)
+  case Multiple(amount: Amount, currency: Currency)
+}
 object Contract {
   import Currency._
   import Contract._
