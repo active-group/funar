@@ -56,6 +56,8 @@ enum Contract {
   case Multiple(amount: Amount, contract: Contract)
   case Forward(date: Date, contract: Contract)
   case Reverse(contract: Contract)
+  case Combined(contract1: Contract, contract2: Contract)
+  case Zero
 }
 
 object Contract {
