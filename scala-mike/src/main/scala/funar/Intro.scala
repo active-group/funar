@@ -185,7 +185,7 @@ def plus_s(x: Int): Int => Int = { (y: Int) => x + y }
 // Moses Schönfinkel
 def plus_s2(x: Int)(y: Int): Int = x + y
 
-def schönfinkeln[A, B, C](f: (A, B) => C)): A => (B => C) =
+def schönfinkeln[A, B, C](f: (A, B) => C): A => (B => C) =
   ???
 
 // "right fold"
