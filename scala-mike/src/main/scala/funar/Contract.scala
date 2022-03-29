@@ -81,6 +81,11 @@ object Contract {
   enum Direction {
     case Long 
     case Short
+
+    def invert: this match {
+      case Long => Short
+      case Short => Long
+    }
   }
 
   case class Payment(date: Date, direction: Direction, amount: Amount, currency: Currency)
