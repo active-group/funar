@@ -1,5 +1,7 @@
 package funar
 
+import scala.annotation.tailrec
+
 // Datenbank-Zugriff funktional
 
 // put("Mike", 50)
