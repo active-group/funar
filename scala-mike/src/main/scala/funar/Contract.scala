@@ -89,7 +89,7 @@ object Contract {
   }
 
   case class Payment(date: Date, direction: Direction, amount: Amount, currency: Currency) {
-    def invert: this.copy(direction = this direction.invert)
+    def invert = this.copy(direction = this direction.invert)
     def scale(factor: Double) = this.copy(amount = this.amount * factor)
   }
 
