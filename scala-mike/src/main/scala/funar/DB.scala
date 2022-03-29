@@ -33,7 +33,7 @@ enum DB[A] {
   case Return(result: A)
 
   // magischer Name
-  def flatMap[B](cont: A => DB[B]): DB[B] = DB.splice(this, next)
+  def flatMap[B](cont: A => DB[B]): DB[B] = DB.splice(this, cont)
 }
 
 import DB._
