@@ -52,6 +52,7 @@ enum Contract {
   case Multiple(amount: Amount, contract: Contract)
   case Forward(date: Date, contract: Contract)
 }
+
 object Contract {
   import Currency._
   import Contract._
