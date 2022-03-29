@@ -497,4 +497,4 @@ class ShoppingCartV1 private (val items: mutable.IndexedBuffer[ShoppingItem]) {
 // in Scala: mit Typklassen
 
 
-
+def plus(x: Int, y: Int): Int = x + y
