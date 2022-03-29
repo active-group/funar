@@ -106,7 +106,7 @@ object Contract {
         if (date.before(today))
           meaning(contract, today)
         else
-          (Seq.zero, Forward(date, contract))
+          (Seq.empty, Forward(date, contract))
       case Combined(contract1, contract2) =>
         val (payments1, residual1) = meaning(contract1, today)
         val (payments2, residual2) = meaning(contract2, today)
