@@ -181,6 +181,8 @@ def plus(x: Int, y: Int): Int = x + y
 
 def plus_s(x: Int): Int => Int = { (y: Int) => x + y }
 
+def plus_s2(x: Int)(y: Int): Int = x + y
+
 // "right fold"
 def fold[A, B](e: B, op: (A, B) => B, list: List[A]): B =
   list match {
