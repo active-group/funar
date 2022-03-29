@@ -32,6 +32,8 @@ Rollover-Geschäft: heute was bekommen, morgen was mit Zinsen zahlen
 - Später
 
 3. finde Selbstbezüge / Kombinatoren
+
+4. sukzessive größere Beispiele abbilden, ggf. neue Kombinatoren definieren
 */
 
 case class Date(iso: String)
