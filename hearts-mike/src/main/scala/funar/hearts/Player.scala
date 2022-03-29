@@ -106,6 +106,7 @@ object Player {
     } 
   }
 
+  // Roboterspieler
   def alongStrategy[PlayerId, Effects](implicit member: State[PlayerState[PlayerId], _] |= Effects): Strategy[Effects] =
     chooserStrategy(chooseAlong[PlayerId, Effects])
 

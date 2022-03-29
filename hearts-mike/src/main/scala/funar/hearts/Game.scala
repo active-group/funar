@@ -63,6 +63,7 @@ object Game {
             }
           } yield res
         case Some(winner) =>
+          // pure ist wie Return
           Eff.pure(Some(winner))
       }
     } yield res

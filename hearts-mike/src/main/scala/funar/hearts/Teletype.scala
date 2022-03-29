@@ -19,6 +19,15 @@ enum Teletype[+A] {
   case WriteTTY(line: String) extends Teletype[Unit]
 }
 
+/*
+Wunsch: Mehr als ein Effekt in einem Programm
+
+Dafür Eff-Monade: Eff[Effects, A]
+
+- A ist das Ergebnis
+- Effects ist eine Beschreibung der Effekte
+*/
+
 object Teletype {
   def readLine[T, R : _io]: Eff[R, String] = 
     fromIO(Console[IO].readLine)
@@ -84,6 +93,20 @@ object Teletype {
   type Stack = Fx.fx2[IO, Teletype]
 
   def runP() = unsafeRunSync(runTeletype(p[Stack]))
+
+/*
+Haskell:
+def putStrLn(line: String): IO[Unit]
+def readLine: IO[String]
+
+für die Ausführung bräuchten wir:
+
+// das hier wäre unsicher:
+def runIO(io: IO[A]): A 
+
+def main(): IO[Unit]
+
+*/
 
 
 }
