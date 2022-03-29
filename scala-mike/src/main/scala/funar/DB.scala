@@ -31,6 +31,9 @@ enum DB[A] {
   case Get(key: String,             callback: Int  => DB[A])
   case Put(key: String, value: Int, callback: Unit => DB[A])
   case Return(result: A)
+
+  // magischer Name
+  def flatMap[B](cont: A => DB[B]): DB[B] = splice(this, next)
 }
 
 import DB._
