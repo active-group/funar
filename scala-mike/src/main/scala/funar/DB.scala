@@ -50,5 +50,10 @@ object DB {
     Put(key, value, { _ => Return(())})
 
   // "spleißen"
-  def splice[A, B](dba: DB[A], cont: A => DB[B]): DB[B] = ???
+  def splice[A, B](dba: DB[A], cont: A => DB[B]): DB[B] =
+    dba match {
+      case Get(key, callback) => ???
+      case Put(key, value, callback) => ???
+      case Return(result) => cont(result)
+    }
 }
