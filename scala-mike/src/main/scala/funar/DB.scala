@@ -66,6 +66,5 @@ object DB {
       splice(get("Mike"), { x => 
       splice(put("Mike", x + 1), { _ =>
       splice(get("Mike"), { y => 
-      Return(x+y)})})})
-        })
+      Return(x+y)})})})})
 }
