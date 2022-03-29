@@ -189,6 +189,7 @@ def plus_s2(x: Int)(y: Int): Int = x + y
 def schönfinkeln[A, B, C](f: (A, B) => C): A => (B => C) =
   { (a: A) => { (b: B) => f(a, b) }  }
 
+// "uncurry"
 def entschönfinkeln[A, B, C](f: A => (B => C)): (A, B) => C =
   { (a: A, b: B) => f(a)(b) }
 
