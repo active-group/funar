@@ -32,7 +32,8 @@ enum DB[A] {
   case Put(key: String, value: Int, callback: Unit => DB[A])
   case Return(result: A)
 
-  def map
+  def map[B](f: A => B): DB[B] =
+    this.flatMap(Return)
 
   // magischer Name
   // cont ~ "continuation"
