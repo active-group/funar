@@ -102,4 +102,17 @@ object DB {
       }
       case Return(result) => result
     }
+
+  // Monade:
+  // - Funktor M[_]
+  // - Methode flatMap Signatur wie oben
+  // - Funktion wie Return: A => M[A]
+  // + 3 Gleichungen
+
+  // - sequenziellen Prozess beschreiben
+  // - Implementierung von Interface trennen
+  // - Effekte im Typsystem markiert
+
+  // freie Monade: jemand hat den Callback und Return
+  // herausabstrahiert
 }
