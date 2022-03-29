@@ -57,7 +57,7 @@ object DB {
           splice(callback(value), cont) })
       case Put(key, value, callback) =>
         Put(key, value, { _ =>
-          callback(()) })
+          splice(callback(()), cont) })
       case Return(result) => cont(result)
     }
 }
