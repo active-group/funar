@@ -49,5 +49,5 @@ enum Contract {
 object Contract {
   import Currency._
   import Contract._
-  val zcb1 = ZeroCouponBond(Date("2022-12-24"), 100, EUR)
+  // val zcb1 = ZeroCouponBond(Date("2022-12-24"), 100, EUR)
 }
