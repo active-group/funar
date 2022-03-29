@@ -28,7 +28,7 @@ val p1 = List(Put("Mike", 50),
 // "Beschreibung eines Datenbank-Programms,
 //  das ein Ergebnis vom Typ A liefert."
 enum DB[A] {
-  case Get(key: String, callback: Int => DB[A])
+  case Get(key: String,             callback: Int  => DB[A])
   case Put(key: String, value: Int, callback: Unit => DB[A])
   case Return(result: A)
 }
@@ -41,14 +41,14 @@ object DB {
           Put("Mike", x+1, {_ =>
           Get("Mike", {y =>
           Return(x+y)})})})})
+
+  // get, put einzeln
+  def get(key: String): DB[Int] =
+    Get(key, { value => Return(value)})
+
+  def put(key: String, value: Int): DB[Unit] =
+    Put(key, value, { _ => Return(())})
+
+  // "spleißen"
+  def splice[A, B](dba: DB[A], cont: A => DB[B]): DB[B] = ???
 }
-
-// get, put einzeln
-def get(key: String): DB[Int] =
-   Get(key, { value => Return(value)})
-
-def put(key: String, value: Int): DB[Unit] =
-  Put(key, value, { _ => Return(())})
-
-// "spleißen"
-def splice[A, B](dba: DB[A], cont: A => DB[B]): DB[B] = ???
