@@ -33,7 +33,7 @@ enum DB[A] {
   case Return(result: A)
 
   def map[B](f: A => B): DB[B] =
-    this.flatMap { x => Return(x) }
+    this.flatMap { x => Return(f(x)) }
 
   // magischer Name
   // cont ~ "continuation"
