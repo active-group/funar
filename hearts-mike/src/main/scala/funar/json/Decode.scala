@@ -17,6 +17,12 @@ object Decode {
   }
   import Error._
 
+/*
+  enum Either[A, B] {
+    case Left(value: A)
+    case Right(value: B)
+  }
+*/
   type Decoder[A] = Json => Either[Error, A]
 
   def string: Decoder[String] = { json =>
@@ -64,13 +70,23 @@ object Decode {
     }
   }
 
-  implicit val decoderFunctor: Functor[Decoder] = new Functor[Decoder] {
+  given decoderFunctor: Functor[Decoder] with {
     def map[A, B](decoder: Decoder[A])(f: A => B): Decoder[B] = { Json =>
       decoder(Json).map(f)
     }
   }
 
-  implicit val decoderApplicative: Applicative[Decoder] = new Applicative[Decoder] {
+  // "applikativer Funktor": zwischen Functor und Monad
+  /*
+  trait Applicative[F[_]] {
+    def pure(value: A): F[A] // wie Return
+    def map[B](f:       A =>   B)(fa: F[A]): F[B]    
+    def ap[B](ff:     F[A =>   B])(fa: F[A]): F[B]
+    def flatMap[B](fff: A => F[B])(fa: F[A]): F[B]
+  }
+  */
+
+  given decoderApplicative: Applicative[Decoder] with {
     def pure[A](value: A) = succeed(value)
     def ap[A, B](ff : Decoder[A=>B])(fa: Decoder[A]): Decoder[B] = { Json =>
       fa(Json) match {
@@ -86,7 +102,7 @@ object Decode {
 
   }
 
-  implicit val decoderMonad: Monad[Decoder] = new Monad[Decoder] {
+  given decoderMonad: Monad[Decoder] with {
     def flatMap[A, B](decoder: Decoder[A])(f: A => Decoder[B]): Decoder[B] = { Json =>
       decoder(Json).flatMap { valueA => f(valueA)(Json) }
     }

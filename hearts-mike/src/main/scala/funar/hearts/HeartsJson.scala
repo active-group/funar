@@ -15,6 +15,10 @@ object HeartsJson {
 
   val tagDecoder: Decoder[String] = field("tag", string)
 
+  /*
+  { "playerName" : "Mike",
+    "playerId" : "50" } 
+  */
   val playerDecoder: Decoder[Player] =
     Applicative[Decoder].map2(field("playerName", string), field("playerId", string)) { (name, id) =>
       Player(name = name, id = id)
