@@ -79,6 +79,11 @@
 
 ; Tiere auf dem texanischen Highway
 
+; Ein Tier ist eins der folgenden:
+; - Gürteltier - ODER -
+; - Papagei
+; Fallunterscheidung
+
 ; Gürteltier hat folgende Eigenschaften:
 ; - lebendig oder tot - UND -
 ; - Gewicht
@@ -128,3 +133,18 @@
                 #;(cond
                   ((dillo-alive? dillo) (+ (dillo-weight dillo) amount))
                   (else (dillo-weight dillo))))))
+
+; Ein Papagei hat folgende Eigenschaften:
+; - Satz - UND -
+; - Gewicht
+(define-record parrot
+  make-parrot
+  (parrot-sentence string)
+  (parrot-weight number))
+
+; Begrüßungs-Papagei, 1kg
+(define parrot1 (make-parrot "Hallo!" 1))
+
+; Verabschiedungs-Papagei, 2kg
+(define parrot2 (make-parrot "Tschüß!" 2))
+
