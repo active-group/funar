@@ -170,3 +170,8 @@
 (check-expect (run-over-animal parrot1)
               (run-over-parrot parrot1))
 
+(define run-over-animal
+  (lambda (animal)
+    (cond
+      (... ...)
+      (... ...))))
