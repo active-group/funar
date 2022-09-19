@@ -275,6 +275,20 @@ class Parrot implements Animal { ... }
        (* (first list)
           (list-product (rest list)))))))
 
+; "Liste zusammenfalten"
+(: list-fold (%b (%a %b -> %b) (list-of %a) -> %b))
+
+(check-expect (list-fold 0 + (list 1 2 3 4 5)) 15)
+(check-expect (list-fold 1 * (list 1 2 3 4 5)) 120)
+
+(define list-fold
+  (lambda (b op list)
+    (cond
+      ((empty? list) b)
+      ((cons? list)
+       (op (first list)
+           (list-fold b op (rest list)))))))
+
 ; alle ungeraden Zahlen einer Liste extrahieren
 (: extract-odds (list-of-numbers -> list-of-numbers))
 
