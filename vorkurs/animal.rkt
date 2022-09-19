@@ -92,7 +92,7 @@
 ; - lebendig oder tot - UND -
 ; - Gewicht
 (define-record dillo
-  make-dillo
+  make-dillo dillo?
   (dillo-alive? boolean)
   (dillo-weight number))
 
