@@ -25,3 +25,15 @@
 (define prim (make-creek "Dreifaltigkeitsberg"))
 (define neckar1 (make-confluence "Rottweil" eschach prim))
 
+; Fließt Wasser aus einem Ort in einen Fluss?
+(: flows-from? (string river -> boolean))
+
+(check-expect (flows-from? "Heimliswald" eschach) #t)
+(check-expect (flows-from? "Tübingen" eschach) #f)
+(check-expect (flows-from? "Heimliswald" neckar1) #t)
+
+(define flows-from?
+  (lambda (location river)
+    ...))
+
+
