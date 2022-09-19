@@ -72,3 +72,20 @@
        (time-minute time))))
 
 ; Aus Minuten nach Mitternacht die Zeit berechnen
+; (: msm->time (natural -> time))
+; zusammengesetzte Daten als Ausgabe
+; Schablone: Konstruktoraufruf
+; (make-time ... ...)
+
+; Tiere auf dem texanischen Highway
+
+; Gürteltier hat folgende Eigenschaften:
+; - lebendig oder tot - UND -
+; - Gewicht
+(define-record dillo
+  make-dillo
+  (dillo-alive? boolean)
+  (dillo-weight number))
+
+
+
