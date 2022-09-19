@@ -87,5 +87,27 @@
   (dillo-alive? boolean)
   (dillo-weight number))
 
+; Gürteltier, lebendig, 10kg
+(define dillo1 (make-dillo #t 10))
+; totes Gürteltier, 12kg
+(define dillo2 (make-dillo #f 12))
+
+; Gürteltier überfahren
+(: run-over-dillo (dillo -> dillo))
+
+(check-expect (run-over-dillo dillo1)
+              (make-dillo #f 10))
+(check-expect (run-over-dillo dillo2)
+              dillo2)
+
+; 2 Schablonen kombiniert
+#;(define run-over-dillo
+  (lambda (dillo)
+    ... (make-dillo ... ...) ...
+    (dillo-alive? dillo) ... (dillo-weight dillo) ...))
 
 
+(define run-over-dillo
+  (lambda (dillo)
+    (make-dillo #f (dillo-weight dillo))))
+    
