@@ -109,4 +109,22 @@
 (define run-over-dillo
   (lambda (dillo)
     (make-dillo #f (dillo-weight dillo))))
-    
+
+; Gürteltier füttern
+(: feed-dillo (dillo number -> dillo))
+
+(check-expect (feed-dillo dillo1 2)
+              (make-dillo #t 12))
+(check-expect (feed-dillo dillo2 5) dillo2)
+
+(define feed-dillo
+  (lambda (dillo amount)
+    (define alive? (dillo-alive? dillo))
+    (define weight (dillo-weight dillo))
+    (make-dillo alive?
+                (if alive?
+                    (+ weight amount)
+                    weight)
+                #;(cond
+                  ((dillo-alive? dillo) (+ (dillo-weight dillo) amount))
+                  (else (dillo-weight dillo))))))
