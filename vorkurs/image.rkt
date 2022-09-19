@@ -23,6 +23,15 @@
 ; Schritt 1: Kurzbeschreibung
 ; quadratisches Kachelmuster erstellen
 
+; Schritt 2: Signaturdeklaration
+(: tile (image image -> image))
+
+; Schritt 3: Tests
+(check-expect (tile square1 overlay1)
+              (above (beside square1 overlay1)
+                     (beside overlay1 square1)))
+
+; Funktionsdefinition
 (define tile
   (lambda (image1 image2)
     (above
