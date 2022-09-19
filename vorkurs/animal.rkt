@@ -286,3 +286,21 @@ class Parrot implements Animal { ... }
            (cons f (extract-odds r))
            (extract-odds r))))))
 
+; alle Elemente, die ein Kriterium erfüllen, aus einer Liste extrahieren
+(: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
+
+(check-expect (extract even? list4)
+              (cons 6 (cons 4 empty)))
+(check-expect (extract odd? list4)
+              (cons 5 (cons 9 empty)))
+
+(define extract
+  (lambda (p? list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (define f (first list))
+       (define r (rest list))
+       (if (p? f)
+           (cons f (extract p? r))
+           (extract p? r))))))
