@@ -83,6 +83,10 @@
 ; - Gürteltier - ODER -
 ; - Papagei
 ; Fallunterscheidung
+; gemischte Daten
+(define animal
+  (signature (mixed dillo parrot)))
+
 
 ; Gürteltier hat folgende Eigenschaften:
 ; - lebendig oder tot - UND -
