@@ -299,6 +299,8 @@ class Parrot implements Animal { ... }
 (check-expect (extract odd? list4)
               (cons 5 (cons 9 empty)))
 
+; i.d.R. eingebaut "filter"
+
 (define extract
   (lambda (p? list)
     (cond
