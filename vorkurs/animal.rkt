@@ -205,6 +205,7 @@ class Parrot implements Animal { ... }
 ; Eine Liste ist eins der folgenden:
 ; - die leere Liste
 ; - eine Cons-Liste, bestehend aus erstem Element und Rest-Liste
+;                                                          ^^^^^  Selbstbezug
 (define list-of-numbers
   (signature (mixed empty-list
                     cons-list)))
@@ -232,4 +233,39 @@ class Parrot implements Animal { ... }
 ; 4elementige Liste: 6 5 9 4
 (define list4 (cons 6 list3))
 
+; Elemente einer Liste addieren
+(: list-sum (list-of-numbers -> number))
+
+(check-expect (list-sum list4) 24)
+
+; Schablone:
+
+#;(define list-sum
+  (lambda (list)
+    (cond
+      ((empty? list) ...)
+      ((cons? list)
+       ... (first list) ...
+       (list-sum (rest list)) ...))))
+
+(define list-sum
+  (lambda (list)
+    (cond
+      ((empty? list) 0)
+      ((cons? list)
+       (+ (first list)
+          (list-sum (rest list)))))))
+
+; Produkt der Elemente einer Liste
+(: list-product (list-of-numbers -> number))
+
+(check-expect (list-product list4) 1080)
+
+(define list-product
+  (lambda (list)
+    (cond
+      ((empty? list) 1)
+      ((cons? list)
+       (* (first list)
+          (list-product (rest list)))))))
 
