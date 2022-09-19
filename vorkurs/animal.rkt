@@ -195,3 +195,9 @@ class Dillo implements Animal {
 class Parrot implements Animal { ... }
 
 |#
+
+
+; Datenanalyse
+; - ("primitive" Daten - Zahlen, Zeichenketten, Booleans)
+; - Fallunterscheidungen (Aufzählungen, gemischte Daten)
+; - zusammengesetzte Daten
