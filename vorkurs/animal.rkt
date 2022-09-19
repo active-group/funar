@@ -222,3 +222,14 @@ class Parrot implements Animal { ... }
   cons cons?
   (first number)
   (rest list-of-numbers))
+
+; einelementige Liste: 5
+(define list1 (cons 5 empty))
+; 2elementige Liste: 8 5
+(define list2 (cons 8 (cons 5 empty)))
+; 3elementige Liste: 5 9 4
+(define list3 (cons 5 (cons 9 (cons 4 empty))))
+; 4elementige Liste: 6 5 9 4
+(define list4 (cons 6 list3))
+
+
