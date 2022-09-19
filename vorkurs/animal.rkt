@@ -306,6 +306,15 @@ class Parrot implements Animal { ... }
            (cons f (extract-odds r))
            (extract-odds r))))))
 
+(define extract-odds*
+  (lambda (list)
+    (list-fold empty
+               (lambda (f rec-result)
+                 (if (odd? f)
+                     (cons f rec-result)
+                     rec-result))
+               list)))
+
 ; alle Elemente, die ein Kriterium erfüllen, aus einer Liste extrahieren
 ;(: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
 ; %element: Signaturvariable
