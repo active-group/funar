@@ -290,7 +290,9 @@ class Parrot implements Animal { ... }
            (extract-odds r))))))
 
 ; alle Elemente, die ein Kriterium erfüllen, aus einer Liste extrahieren
-(: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
+;(: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
+; %element: Signaturvariable
+(: extract ((%element -> boolean) (list-of %element) -> (list-of %element)))
 
 (check-expect (extract even? list4)
               (cons 6 (cons 4 empty)))
@@ -311,3 +313,4 @@ class Parrot implements Animal { ... }
 (define highway (cons dillo1 (cons dillo2 empty)))
 
 (extract dillo-alive? highway)
+
