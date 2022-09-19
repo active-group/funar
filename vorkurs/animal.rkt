@@ -36,3 +36,12 @@
       ((string=? pet "dog") #t) ; Zweig: (<Bedingung> <Ergebnis>)
       ((string=? pet "cat") #t)
       ((string=? pet "snake") #f))))
+
+; Uhrzeit besteht aus: / hat folgende Eigenschaften:
+; - Stunden - UND -
+; - Minuten
+; zusammengesetzte Daten
+(define-record time
+  make-time
+  (time-hour natural)
+  (time-minute natural))
