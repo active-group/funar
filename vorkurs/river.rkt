@@ -1,6 +1,6 @@
 #lang deinprogramm/sdp/beginner
 ; Ein Fluss ist eins der folgenden:
-; - Bach (kommt aus Quelle)
+; - Bach (kommt aus Quelle) - ODER -
 ; - Zusammentreffen (aus zwei Flüssen)
 (define river
   (signature (mixed creek confluence)))
@@ -12,7 +12,7 @@
   (creek-origin string))
 
 ; Ein Zusammentreffen hat folgende Eigenschaften:
-; - Ort
+; - Ort - UND -
 ; - Haupt*fluss*  <--- Selbstbezug
 ; - Nebenfluss    <--- auch
 (define-record confluence
@@ -34,6 +34,12 @@
 
 (define flows-from?
   (lambda (location river)
-    ...))
+    (cond
+      ((creek? river)
+       ... (creek-origin river) ...) ; Bach
+      ((confluence? river)
+       ... (confluence-location river) ...
+       (confluence-main-strem river) ...
+       (confluence-tributary river) ...)))) ; Zusammenfluss
 
 
