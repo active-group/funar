@@ -11,7 +11,7 @@
     (cond
       ((empty? list) empty)
       ((cons? list)
-       (snoc
+       (snoc ; Kontext des Aufrufs von rev
         (rev (rest list)) ; 3 2
         (first list) ; 1 
         )))))
@@ -44,6 +44,8 @@
     (cond
       ((empty? list) acc)
       ((cons? list)
+       ; kein Kontext!
+       ; endrekursiver Aufruf / tail call
        (rev* (rest list)
              (cons (first list) acc))))))
     
