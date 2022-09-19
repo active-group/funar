@@ -206,9 +206,10 @@ class Parrot implements Animal { ... }
 ; - die leere Liste
 ; - eine Cons-Liste, bestehend aus erstem Element und Rest-Liste
 ;                                                          ^^^^^  Selbstbezug
-(define list-of-numbers
-  (signature (mixed empty-list
-                    cons-list)))
+(define list-of
+  (lambda (element)
+    (signature (mixed empty-list
+                      (cons-list-of element)))))
 
 ; Die leere Liste ... "Singleton"
 (define-record empty-list
@@ -219,10 +220,10 @@ class Parrot implements Animal { ... }
 ; Eine Cons-Liste besteht aus:
 ; - erstes Element
 ; - Rest-Liste
-(define-record cons-list
+(define-record (cons-list-of element)
   cons cons?
-  (first number)
-  (rest list-of-numbers))
+  (first element)
+  (rest (list-of element)))
 
 ; einelementige Liste: 5
 (define list1 (cons 5 empty))
@@ -233,8 +234,10 @@ class Parrot implements Animal { ... }
 ; 4elementige Liste: 6 5 9 4
 (define list4 (cons 6 list3))
 
+(define list-of-numbers (signature (list-of number)))
+
 ; Elemente einer Liste addieren
-(: list-sum (list-of-numbers -> number))
+(: list-sum ((list-of number) -> number))
 
 (check-expect (list-sum list4) 24)
 
@@ -304,3 +307,7 @@ class Parrot implements Animal { ... }
        (if (p? f)
            (cons f (extract p? r))
            (extract p? r))))))
+
+(define highway (cons dillo1 (cons dillo2 empty)))
+
+(extract dillo-alive? highway)
