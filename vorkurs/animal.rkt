@@ -1,4 +1,4 @@
-#lang deinprogramm/sdp/beginner
+#lang deinprogramm/sdp
 ; Datenanalyse
 
 ; Ein Haustier ist eins folgenden:
@@ -206,6 +206,8 @@ class Parrot implements Animal { ... }
 ; - die leere Liste
 ; - eine Cons-Liste, bestehend aus erstem Element und Rest-Liste
 ;                                                          ^^^^^  Selbstbezug
+#|
+
 (define list-of
   (lambda (element)
     (signature (mixed empty-list
@@ -224,6 +226,7 @@ class Parrot implements Animal { ... }
   cons cons?
   (first element)
   (rest (list-of element)))
+|#
 
 ; einelementige Liste: 5
 (define list1 (cons 5 empty))
@@ -292,6 +295,7 @@ class Parrot implements Animal { ... }
 ; alle Elemente, die ein Kriterium erfüllen, aus einer Liste extrahieren
 ;(: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
 ; %element: Signaturvariable
+; Higher-Order-Funktion
 (: extract ((%element -> boolean) (list-of %element) -> (list-of %element)))
 
 (check-expect (extract even? list4)
@@ -316,3 +320,20 @@ class Parrot implements Animal { ... }
 
 (extract dillo-alive? highway)
 
+; den ganzen Highway überfahren
+(: run-over-animals ((list-of animal) -> (list-of animal)))
+
+(check-expect (run-over-animals (list dillo1 dillo2 parrot1 parrot2))
+              (list (run-over-animal dillo1)
+                    (run-over-animal dillo2)
+                    (run-over-animal parrot1)
+                    (run-over-animal parrot2)))
+
+(define run-over-animals
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cons
+        (run-over-animal (first list))
+        (run-over-animals (rest list)))))))
