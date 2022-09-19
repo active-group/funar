@@ -269,5 +269,11 @@ class Parrot implements Animal { ... }
        (* (first list)
           (list-product (rest list)))))))
 
-; alle geraden Zahlen einer Liste extrahieren
+; alle ungeraden Zahlen einer Liste extrahieren
+(: extract-odds (list-of-numbers -> list-of-numbers))
+
+(check-expect (extract-odds list4)
+              (cons 5 (cons 9 empty)))
+
+
 
