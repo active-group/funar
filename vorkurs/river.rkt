@@ -32,14 +32,25 @@
 (check-expect (flows-from? "Tübingen" eschach) #f)
 (check-expect (flows-from? "Heimliswald" neckar1) #t)
 
-(define flows-from?
+; Schablone
+#;(define flows-from?
   (lambda (location river)
     (cond
       ((creek? river)
        ... (creek-origin river) ...) ; Bach
       ((confluence? river)
        ... (confluence-location river) ...
-       (confluence-main-strem river) ...
-       (confluence-tributary river) ...)))) ; Zusammenfluss
+       (flows-from? location (confluence-main-strem river)) ...
+       (flows-from? location (confluence-tributary river)) ...)))) ; Zusammenfluss
 
+
+(define flows-from?
+  (lambda (location river)
+    (cond
+      ((creek? river)
+       (string=? location (creek-origin river))) ; Bach
+      ((confluence? river)
+       (or (string=? location (confluence-location river))
+           (flows-from? location (confluence-main-strem river))
+           (flows-from? location (confluence-tributary river))))))) ; Zusammenfluss
 
