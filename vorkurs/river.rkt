@@ -51,6 +51,6 @@
        (string=? location (creek-origin river))) ; Bach
       ((confluence? river)
        (or (string=? location (confluence-location river))
-           (flows-from? location (confluence-main-strem river))
+           (flows-from? location (confluence-main-stem river))
            (flows-from? location (confluence-tributary river))))))) ; Zusammenfluss
 
