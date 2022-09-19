@@ -275,5 +275,14 @@ class Parrot implements Animal { ... }
 (check-expect (extract-odds list4)
               (cons 5 (cons 9 empty)))
 
-
+(define extract-odds
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (define f (first list))
+       (define r (rest list))
+       (if (odd? f)
+           (cons f (extract-odds r))
+           (extract-odds r))))))
 
