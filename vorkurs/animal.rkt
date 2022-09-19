@@ -337,3 +337,21 @@ class Parrot implements Animal { ... }
        (cons
         (run-over-animal (first list))
         (run-over-animals (rest list)))))))
+
+; alle Elemente einer Liste inkrementieren
+(: list-inc ((list-of number) -> (list-of number)))
+
+(check-expect (list-inc (list 1 2 3 4))
+              (list 2 3 4 5))
+
+(define list-inc
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cons
+        (inc (first list))
+        (list-inc (rest list)))))))
+
+(define inc
+  (lambda (n) (+ 1 n)))
