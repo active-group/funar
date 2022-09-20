@@ -316,6 +316,10 @@ listIndex x (first:rest) =
         Null -> Null
         Result index -> Result (index + 1)
 
+optionalMap :: (a -> b) -> Optional a -> Optional b
+optionalMap f Null = Null
+optionalMap f (Result a) = Result (f a)
+
 -- Eq a: Constraint, Einschränkung von möglichen Typen, die für a eingesetzt werden
 -- Eq a => : "Wenn a die Eigenschaft Eq hat"
 
