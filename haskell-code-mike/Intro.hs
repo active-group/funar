@@ -130,3 +130,11 @@ feedAnimal dillo@(MkDillo liveness weight) amount = -- Alias-Pattern
         Alive -> MkDillo liveness (weight + amount)
 feedAnimal (Parrot sentence weight) amount =
     Parrot sentence (weight + amount)
+
+feedAnimal' :: Weight -> Animal -> Animal
+feedAnimal' amount dillo@(MkDillo liveness weight) =
+        case liveness of -- pattern matching
+        Dead -> dillo -- MkDillo liveness weight
+        Alive -> MkDillo liveness (weight + amount)
+feedAnimal' amount (Parrot sentence weight) =
+    Parrot sentence (weight + amount)
