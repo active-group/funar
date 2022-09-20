@@ -47,7 +47,10 @@ Haskell:
 1 Typ: Pet
 -}
 
+-- Ein Gürteltier hat folgende Eigenschaften:
+-- - lebendig oder tot
+-- - Gewicht
 
-
+data Liveness = Dead | Alive
 
 
