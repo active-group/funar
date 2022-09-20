@@ -149,7 +149,9 @@ feedAnimal' amount (Parrot sentence weight) =
 -- Higher-Order-Funktion, eingebaut als flip
 swap :: (a -> b -> c) -> (b -> a -> c)
 -- swap f = \ b -> \ a -> f a b
+-- swap f = \ b a -> f a b
 swap f b a = f a b
+-- swap f b a = f a b
 
 feedAnimal' :: Weight -> Animal -> Animal
 -- >>> feedAnimal' 5 dillo1
@@ -177,3 +179,4 @@ tuplify :: (a -> (b -> c)) -> ((a, b) -> c)
 tuplify f = \(a, b) -> f a b
 
 untuplify :: ((a, b) -> c) -> (a -> (b -> c))
+untuplify f a b = f (a, b)
