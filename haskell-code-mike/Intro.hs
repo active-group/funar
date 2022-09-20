@@ -20,13 +20,16 @@ f' = \ a -> a + x + y
 -- Typ: Pet
 -- Konstruktoren: Dog / Cat / Snake
 data Pet = Dog | Cat | Snake
-  deriving Show
+  deriving Eq
 
+{-
 instance Eq Pet where
     Dog == Dog = True
     Cat == Cat = True
     Snake == Snake = True
     _ == _ = False
+-}
+
 -- Ist ein Haustier niedlich?
 -- >>> isCute Dog
 -- True
