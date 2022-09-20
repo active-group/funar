@@ -30,6 +30,23 @@ isCute Dog = True
 isCute Cat = True
 isCute Snake = False
 
+{-
+interface Pet { ... }
+class Dog implements Pet { ... }
+class Cat implements Pet { ... }
+class Snake implements Pet { ... }
+
+Java: 4 Typen
+
+3 Konstruktoren: new Dog, new Cat, new Snake
+
+Pet dog = new Dog()
+
+Haskell:
+
+1 Typ: Pet
+-}
+
 
 
 
