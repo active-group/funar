@@ -8,6 +8,7 @@ y :: Integer
 y = x + 12
 
 -- >>> f 17
-f a = a + x y
+f a = a + x + y
+
 
 
