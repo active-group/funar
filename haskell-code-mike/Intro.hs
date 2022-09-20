@@ -236,3 +236,7 @@ listSum :: [Integer] -> Integer
 -- 24
 listSum [] = 0
 listSum (first:rest) = first + (listSum rest)
+
+listMap :: (a -> b) -> [a] -> [b]
+listMap f [] = []
+listMap f (first:rest) = (f first) : (listMap f rest)
