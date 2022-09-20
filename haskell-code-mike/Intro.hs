@@ -246,3 +246,7 @@ listMap f (first:rest) = (f first) : (listMap f rest)
 listCopy :: [a] -> [a]
 listCopy [] = []
 listCopy (first:rest) = first : (listCopy rest)
+
+listFold :: b -> (a -> b -> b) -> [a] -> b
+listFold e f [] = e
+listFold e f (first : rest) = first `f` (listFold e f rest) -- `f` : Infix
