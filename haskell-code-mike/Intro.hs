@@ -238,5 +238,11 @@ listSum [] = 0
 listSum (first:rest) = first + (listSum rest)
 
 listMap :: (a -> b) -> [a] -> [b]
+-- >>> listMap (\ x -> x * 2) [1,2,3,4]
+-- [2,4,6,8]
 listMap f [] = []
 listMap f (first:rest) = (f first) : (listMap f rest)
+
+listCopy :: [a] -> [a]
+listCopy [] = []
+listCopy (first:rest) = first : (listCopy rest)
