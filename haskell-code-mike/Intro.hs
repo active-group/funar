@@ -138,3 +138,6 @@ feedAnimal' amount dillo@(MkDillo liveness weight) =
         Alive -> MkDillo liveness (weight + amount)
 feedAnimal' amount (Parrot sentence weight) =
     Parrot sentence (weight + amount)
+
+swap :: (Animal -> (Weight -> Animal)) -> (Weight -> (Animal -> Animal))
+swap f = \ weight -> \ animal -> f animal weight
