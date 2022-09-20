@@ -296,6 +296,11 @@ data Optional a =
   | Result a
   deriving Show
 
+instance Eq a => Eq (Optional a) where
+    Null == Null          = True
+    Result a == Result a' = a == a'
+    _ == _                = False 
+
 -- Index eines Elements in einer Liste berechnen
 -- >>> listIndex 5 [3, 4, 7, 5, 11]
 -- Result 3
