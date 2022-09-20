@@ -303,7 +303,7 @@ listIndex x (first:rest) =
 -- Eq a => : "Wenn a die Eigenschaft Eq hat"
 
 -- Speziell Constraint Eq: Typklasse (denke "Interface")
-
+-- Implementierung einer Typklasse: "instance"
 {-
 class Eq a where
   (==) :: a -> a -> Bool
