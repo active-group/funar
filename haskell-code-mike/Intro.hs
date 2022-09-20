@@ -267,5 +267,11 @@ natsFrom n = n : natsFrom (n+1)
 
 -- Vielfache einer Zahl aus einer Liste von Zahlen streichen
 strikeMultiples :: Integer -> [Integer] -> [Integer]
+-- >>> strikeMultiples 2 [2,3,4,5,6,7,8]
+-- [3,5,7]
 strikeMultiples n list =
     filter (\ n' -> n' `mod` n /= 0) list
+
+sieve :: [Integer] -> [Integer]
+sieve [] = []
+sieve (p:rest) = p : (sieve (strikeMultiples p rest))
