@@ -15,6 +15,7 @@
     (cond
       ((empty? list) acc)
       ((cons? list)
+       ; Aufruf ohne Kontext / tail call / endrekursiv
        (list-sum* (rest list) (+ acc (first list)))))))
 
 (list-sum* (list 1 2 3 4) 0)
