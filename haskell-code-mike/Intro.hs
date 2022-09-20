@@ -1,5 +1,4 @@
 module Intro where
-import qualified Data.Sequence.Internal.Sorting as Figuren
 
 -- Typsignatur
 x :: Integer
