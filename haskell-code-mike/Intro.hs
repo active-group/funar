@@ -379,6 +379,6 @@ instance Semigroup a => Semigroup (Optional a) where
     combine o Null = o
     combine (Result a) (Result a') = Result (combine a a')
 
-instance Monoid (Optional a) where
+instance Semigroup a => Monoid (Optional a) where
     neutral = Null
     
