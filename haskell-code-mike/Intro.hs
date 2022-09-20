@@ -17,6 +17,15 @@ f a = a + x + y
 data Pet = Dog | Cat | Snake
   deriving Show
 
+-- Ist ein Haustier niedlich?
+-- >>> isCute Dog
+
+isCute :: Pet -> Bool
+isCute Dog = True
+isCute Cat = True
+isCute Snake = False
+
+
 
 
 
