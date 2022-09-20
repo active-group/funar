@@ -131,6 +131,7 @@ feedAnimal dillo@(MkDillo liveness weight) amount = -- Alias-Pattern
 feedAnimal (Parrot sentence weight) amount =
     Parrot sentence (weight + amount)
 
+{-
 feedAnimal' :: Weight -> (Animal -> Animal)
 feedAnimal' amount dillo@(MkDillo liveness weight) =
         case liveness of -- pattern matching
@@ -138,6 +139,14 @@ feedAnimal' amount dillo@(MkDillo liveness weight) =
         Alive -> MkDillo liveness (weight + amount)
 feedAnimal' amount (Parrot sentence weight) =
     Parrot sentence (weight + amount)
+-}
 
-swap :: (Animal -> (Weight -> Animal)) -> (Weight -> (Animal -> Animal))
+-- swap :: (Animal -> (Weight -> Animal)) -> (Weight -> (Animal -> Animal))
+-- Typvariablen
+swap :: (a -> b -> c) -> (b -> a -> c)
 swap f = \ weight -> \ animal -> f animal weight
+
+feedAnimal' :: Weight -> Animal -> Animal
+-- >>> feedAnimal' 5 dillo1
+-- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
+feedAnimal' = swap feedAnimal
