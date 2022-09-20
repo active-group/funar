@@ -348,3 +348,7 @@ Kombination: Typ a, op :: a -> a -> a, Assoziativgesetz
 Halbgruppe
 
 -}
+
+class Semigroup a where
+    -- combine (combine a b) c == combine a (combine b c)
+    combine :: a -> a -> a
