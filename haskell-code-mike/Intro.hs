@@ -344,9 +344,14 @@ op :: a -> a -> a
 (a * b) * c = a * (b * c)
 (a && b) && c = a && (b && c)
 
-Kombination: Typ a, op :: a -> a -> a, Assoziativgesetz
+Kombination: Typ a, combine :: a -> a -> a, Assoziativgesetz
 Halbgruppe
 
+Halbgruppe + neutrales Element "neutral"
+
+combine neutral x == x == combine x neutral
+
+Monoid
 -}
 
 class Semigroup a where
@@ -355,3 +360,9 @@ class Semigroup a where
 
 instance Semigroup [a] where
     combine l1 l2 = l1 ++ l2
+
+class Semigroup a => Monoid a where
+    neutral :: a
+
+instance Monoid [a] where
+    neutral = []
