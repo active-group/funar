@@ -60,3 +60,4 @@ type Weight = Integer
 -- Record
 data Dillo = MkDillo { dilloLiveness :: Liveness, 
                        dilloWeight :: Weight }
+  deriving Show
