@@ -248,11 +248,6 @@ listSum :: [Integer] -> Integer
 listSum [] = 0
 listSum (first:rest) = first + (listSum rest)
 
-listMap :: (a -> b) -> [a] -> [b]
--- >>> listMap (\ x -> x * 2) [1,2,3,4]
--- [2,4,6,8]
-listMap f [] = []
-listMap f (first:rest) = (f first) : (listMap f rest)
 
 listCopy :: [a] -> [a]
 listCopy [] = []
@@ -312,15 +307,33 @@ listIndex x (first:rest) =
     if x == first
     then Result 0
     else 
+       optionalMap (\ index -> index + 1) (listIndex x rest)
 {-
       case listIndex x rest of 
         Null -> Null
         Result index -> Result (index + 1)
 -}
 
+type List a = [a]
+listMap :: (a -> b) -> List a -> List b
+-- >>> listMap (\ x -> x * 2) [1,2,3,4]
+-- [2,4,6,8]
+listMap f [] = []
+listMap f (first : rest) = (f first) : (listMap f rest)
+
 optionalMap :: (a -> b) -> Optional a -> Optional b
 optionalMap f Null = Null
 optionalMap f (Result a) = Result (f a)
+
+-- c = List, = Optional
+class Functor c where
+    universalMap :: (a -> b) -> c a -> c b
+
+instance Functor [] where
+    universalMap = listMap
+
+instance Functor Optional where
+    universalMap = optionalMap
 
 -- Eq a: Constraint, Einschränkung von möglichen Typen, die für a eingesetzt werden
 -- Eq a => : "Wenn a die Eigenschaft Eq hat"
