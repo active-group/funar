@@ -251,6 +251,16 @@ listFold :: b -> (a -> b -> b) -> [a] -> b
 listFold e f [] = e
 listFold e f (first : rest) = first `f` (listFold e f rest) -- `f` : Infix
 
+-- strikte Auswertung / call-by-value 
+-- Bei einem Funktionsaufruf werden die Argumente ausgewertet,
+-- bevor der Rumpf der Funktion ausgewertet wird.
+-- Java, C#, F#, Racket, Python
+
+-- nicht-strikt: das Gegenteil
+-- Ausdrücke werden erst ausgewertet, wenn der Wert benötigt wird.
+
+
+
 -- alle natürlichen Zahlen, angefangen bei n
 natsFrom :: Integer -> [Integer]
 natsFrom n = n : natsFrom (n+1)
