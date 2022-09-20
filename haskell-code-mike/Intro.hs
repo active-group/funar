@@ -264,3 +264,8 @@ listFold e f (first : rest) = first `f` (listFold e f rest) -- `f` : Infix
 -- alle natürlichen Zahlen, angefangen bei n
 natsFrom :: Integer -> [Integer]
 natsFrom n = n : natsFrom (n+1)
+
+-- Vielfache einer Zahl aus einer Liste von Zahlen streichen
+strikeMultiples :: Integer -> [Integer] -> [Integer]
+strikeMultiples n list =
+    filter (\ n' -> n' `mod` n /= 0) list
