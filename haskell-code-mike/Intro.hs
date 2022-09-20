@@ -80,4 +80,8 @@ runOverDillo :: Dillo -> Dillo
 -- runOverDillo dillo = 
 --    MkDillo { dilloLiveness = Dead, dilloWeight = dilloWeight dillo }
 -- "functional update"
-runOverDillo dillo = dillo { dilloLiveness = Dead }
+-- runOverDillo dillo = dillo { dilloLiveness = Dead }
+-- pattern matching
+-- runOverDillo (MkDillo { dilloLiveness = l, dilloWeight = w}) =
+--    MkDillo { dilloLiveness = Dead, dilloWeight = w}
+runOverDillo (MkDillo _ w) = MkDillo Dead w
