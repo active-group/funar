@@ -274,6 +274,7 @@ listFold e f (first : rest) = first `f` (listFold e f rest) -- `f` : Infix
 
 -- alle natürlichen Zahlen, angefangen bei n
 natsFrom :: Integer -> [Integer]
+-- (cons n (nats-from (+ n 1)))
 natsFrom n = n : (natsFrom (n+1))
 
 -- Vielfache einer Zahl aus einer Liste von Zahlen streichen
