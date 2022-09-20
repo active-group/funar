@@ -312,9 +312,11 @@ listIndex x (first:rest) =
     if x == first
     then Result 0
     else 
+{-
       case listIndex x rest of 
         Null -> Null
         Result index -> Result (index + 1)
+-}
 
 optionalMap :: (a -> b) -> Optional a -> Optional b
 optionalMap f Null = Null
