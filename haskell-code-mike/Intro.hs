@@ -366,3 +366,7 @@ class Semigroup a => Monoid a where
 
 instance Monoid [a] where
     neutral = []
+
+instance (Semigroup a, Semigroup b) => Semigroup (a, b) where
+    combine (a1, b1) (a2, b2) =
+        (combine a1 a2, combine b1 b2)
