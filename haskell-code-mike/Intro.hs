@@ -307,7 +307,7 @@ listIndex x (first:rest) =
     if x == first
     then Result 0
     else 
-       optionalMap (\ index -> index + 1) (listIndex x rest)
+       universalMap (\ index -> index + 1) (listIndex x rest)
 {-
       case listIndex x rest of 
         Null -> Null
