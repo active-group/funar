@@ -175,3 +175,5 @@ feedAnimal''(Parrot sentence weight, amount) =
 -- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
 tuplify :: (a -> (b -> c)) -> ((a, b) -> c)
 tuplify f = \(a, b) -> f a b
+
+untuplify :: ((a, b) -> c) -> (a -> (b -> c))
