@@ -20,6 +20,7 @@ f' = \ a -> a + x + y
 -- Typ: Pet
 -- Konstruktoren: Dog / Cat / Snake
 data Pet = Dog | Cat | Snake
+  -- deriving: mach Standard-Instanz für Standard-Typklasse
   deriving Eq
 
 {-
