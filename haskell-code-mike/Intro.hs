@@ -10,6 +10,9 @@ y = x + 12
 -- >>> f 17
 f a = a + x + y
 
+f' :: Integer -> Integer
+f' = \ a -> a + x + y
+
 -- Ein Haustier ist eins der folgenden:
 -- - Hund
 -- - Katze
@@ -143,10 +146,21 @@ feedAnimal' amount (Parrot sentence weight) =
 
 -- swap :: (Animal -> (Weight -> Animal)) -> (Weight -> (Animal -> Animal))
 -- Typvariablen
+-- Higher-Order-Funktion, eingebaut als flip
 swap :: (a -> b -> c) -> (b -> a -> c)
-swap f = \ weight -> \ animal -> f animal weight
+-- swap f = \ b -> \ a -> f a b
+swap f b a = f a b
 
 feedAnimal' :: Weight -> Animal -> Animal
 -- >>> feedAnimal' 5 dillo1
 -- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
 feedAnimal' = swap feedAnimal
+
+feedAnimal'' :: (Animal, Weight) -> Animal
+feedAnimal''(dillo@(MkDillo liveness weight), amount) =
+  -- Alias-Pattern
+  case liveness of -- pattern matching
+    Dead -> dillo -- MkDillo liveness weight
+    Alive -> MkDillo liveness (weight + amount)
+feedAnimal''(Parrot sentence weight, amount) =
+  Parrot sentence (weight + amount)
