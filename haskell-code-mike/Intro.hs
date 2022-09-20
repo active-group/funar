@@ -1,4 +1,5 @@
 module Intro where
+import qualified Data.Sequence.Internal.Sorting as Figuren
 
 -- Typsignatur
 x :: Integer
@@ -185,3 +186,10 @@ tuplify f = \(a, b) -> f a b
 -- eingebaut als curry
 untuplify :: ((a, b) -> c) -> (a -> (b -> c))
 untuplify f a b = f (a, b)
+
+-- Eine geometrische Figur ("Shape") ist eins der folgenden:
+-- - ein Kreis
+-- - ein Quadrat
+-- - eine Überlagerung zweiter geometrischer Figuren
+
+-- Entwickle Datenrepräsentation für geometrische Figuren.
