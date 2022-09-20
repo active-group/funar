@@ -1,5 +1,7 @@
 module Intro where
 
+import Prelude hiding (Semigroup, Monoid, Functor)
+
 -- Typsignatur
 x :: Integer
 x = 5
@@ -325,3 +327,24 @@ class Eq a where
   (/=) :: a -> a -> Bool
 -}
 
+{-
+Algebra:
+
+algebraische Struktur
+
+Menge M (manchmal mehrere), Operation(en), Gleichungen/Gesetze
+
+-- Jörg: Assoziativgesetz (richtig!)
+
+Menge/Typ: a
+
+op :: a -> a -> a
+
+(a + b) + c = a + (b + c)
+(a * b) * c = a * (b * c)
+(a && b) && c = a && (b && c)
+
+Kombination: Typ a, op :: a -> a -> a, Assoziativgesetz
+Halbgruppe
+
+-}
