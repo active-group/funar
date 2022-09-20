@@ -21,7 +21,7 @@ f' = \ a -> a + x + y
 -- Konstruktoren: Dog / Cat / Snake
 data Pet = Dog | Cat | Snake
   -- deriving: mach Standard-Instanz für Standard-Typklasse
-  deriving Eq
+  deriving (Eq, Show)
 
 {-
 instance Eq Pet where
