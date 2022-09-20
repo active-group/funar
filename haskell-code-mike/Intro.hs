@@ -191,4 +191,6 @@ untuplify f a b = f (a, b)
 -- - ein Quadrat
 -- - eine Überlagerung zweiter geometrischer Figuren
 
--- Entwickle Datenrepräsentation für geometrische Figuren.
+-- Entwickle Datenrepräsentation für geometrische Figuren! 
+-- Schreibe eine Funktion, die feststellt, ob ein Punkt in
+-- einer geometrischen Figur liegt oder außerhalb.
