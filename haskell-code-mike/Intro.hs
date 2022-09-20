@@ -52,5 +52,5 @@ Haskell:
 -- - Gewicht
 
 data Liveness = Dead | Alive
-
+  deriving Show
 
