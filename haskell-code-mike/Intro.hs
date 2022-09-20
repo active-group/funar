@@ -14,11 +14,16 @@ f a = a + x + y
 -- - Hund
 -- - Katze
 -- - Schlange
+-- Typ: Pet
+-- Konstruktoren: Dog / Cat / Snake
 data Pet = Dog | Cat | Snake
   deriving Show
 
 -- Ist ein Haustier niedlich?
 -- >>> isCute Dog
+-- True
+
+-- data Bool = True | False
 
 isCute :: Pet -> Bool
 isCute Dog = True
