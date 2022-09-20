@@ -382,3 +382,5 @@ instance Semigroup a => Semigroup (Optional a) where
 instance Semigroup a => Monoid (Optional a) where
     neutral = Null
     
+-- data Maybe a = Nothing | Just a
+
