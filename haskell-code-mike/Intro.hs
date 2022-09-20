@@ -198,6 +198,7 @@ untuplify f a b = f (a, b)
 -- Eine Liste ist eins der folgenden:
 -- - die leere Liste
 -- - eine Cons-Liste aus erstem Element und Rest-Liste
+{-
 data ListOf a =
     Empty 
   | Cons a (ListOf a)
@@ -215,3 +216,23 @@ listSum :: ListOf Integer -> Integer
 -- 20
 listSum Empty = 0
 listSum (Cons first rest) = first + (listSum rest)
+-}
+
+-- eingebaute Listen:
+-- leere Liste: []
+-- cons: : (Infix)
+
+list1 :: [Integer]
+list1 = 5 : []
+list2 :: [Integer]
+list2 = 8 : (5 : [])
+list3 :: [Integer]
+list3 = 7 : list2
+list4 :: [Integer]
+list4 = [4, 7, 8, 5]
+
+listSum :: [Integer] -> Integer
+-- >>> listSum list4
+-- 24
+listSum [] = 0
+listSum (first:rest) = first + (listSum rest)
