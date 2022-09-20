@@ -373,3 +373,11 @@ instance (Semigroup a, Semigroup b) => Semigroup (a, b) where
 
 instance (Monoid a, Monoid b) => Monoid (a, b) where
     neutral = (neutral, neutral)
+
+instance Semigroup a => Semigroup (Optional a) where
+    combine Null o = o
+    combine o Null = o
+    combine (Result a) (Result a') = Result (combine a a')
+
+
+    
