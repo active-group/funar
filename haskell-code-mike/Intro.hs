@@ -119,6 +119,11 @@ runOverAnimal (MkDillo _liveness weight) = MkDillo Dead weight
 runOverAnimal (Parrot _ weight) = Parrot "" weight
 
 -- Tier füttern
+-- >>> feedAnimal dillo1 5
+-- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
+-- >>> feedAnimal parrot1 7
+-- Parrot "Hallo!" 8
+feedAnimal :: Animal -> (Weight -> Animal)
 feedAnimal dillo@(MkDillo liveness weight) amount = -- Alias-Pattern
     case liveness of -- pattern matching
         Dead -> dillo -- MkDillo liveness weight
