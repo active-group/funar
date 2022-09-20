@@ -175,8 +175,13 @@ feedAnimal''(Parrot sentence weight, amount) =
 -- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
 -- >>> tuplify feedAnimal (dillo1, 5)
 -- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
+
+-- Idee: Haskell Curry
+--       Moses Schönfinkel
+-- eingebaut als uncurry
 tuplify :: (a -> (b -> c)) -> ((a, b) -> c)
 tuplify f = \(a, b) -> f a b
 
+-- eingebaut als curry
 untuplify :: ((a, b) -> c) -> (a -> (b -> c))
 untuplify f a b = f (a, b)
