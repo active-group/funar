@@ -275,3 +275,6 @@ strikeMultiples n list =
 sieve :: [Integer] -> [Integer]
 sieve [] = []
 sieve (p:rest) = p : (sieve (strikeMultiples p rest))
+
+primes :: [Integer]
+primes = sieve (natsFrom 2)
