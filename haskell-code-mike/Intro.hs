@@ -54,3 +54,9 @@ Haskell:
 data Liveness = Dead | Alive
   deriving Show
 
+-- Typsynonym
+type Weight = Integer
+
+-- Record
+data Dillo = MkDillo { dilloLiveness :: Liveness, 
+                       dilloWeight :: Weight }
