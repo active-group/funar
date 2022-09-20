@@ -1,2 +1,2 @@
-module Intro whe
+module Intro where
 
