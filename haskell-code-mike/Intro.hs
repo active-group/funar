@@ -301,3 +301,5 @@ listIndex x (first:rest) =
 
 -- Eq a: Constraint, Einschränkung von möglichen Typen, die für a eingesetzt werden
 -- Eq a => : "Wenn a die Eigenschaft Eq hat"
+
+-- Speziell Constraint Eq: Typklasse (denke "Interface")
