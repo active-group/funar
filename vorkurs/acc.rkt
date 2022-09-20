@@ -8,4 +8,14 @@
        (+ (first list)
           (list-sum (rest list)))))))
 
-(list-sum (list 1 2 3 4))
+; (list-sum (list 1 2 3 4))
+
+(define list-sum*
+  (lambda (list acc) ; acc ist das Zwischenergebnis / die Summe der "gesehenen" Elemente
+    (cond
+      ((empty? list) acc)
+      ((cons? list)
+       (list-sum* (rest list) (+ acc (first list)))))))
+
+(list-sum* (list 1 2 3 4) 0)
+
