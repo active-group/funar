@@ -194,3 +194,9 @@ untuplify f a b = f (a, b)
 -- Entwickle Datenrepräsentation für geometrische Figuren! 
 -- Schreibe eine Funktion, die feststellt, ob ein Punkt in
 -- einer geometrischen Figur liegt oder außerhalb.
+
+-- Eine Liste ist eins der folgenden:
+-- - die leere Liste
+-- - eine Cons-Liste aus erstem Element und Rest-Liste
+data ListOfNumbers =
+    EmptyList
