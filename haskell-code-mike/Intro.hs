@@ -168,3 +168,8 @@ feedAnimal''(dillo@(MkDillo liveness weight), amount) =
     Alive -> MkDillo liveness (weight + amount)
 feedAnimal''(Parrot sentence weight, amount) =
   Parrot sentence (weight + amount)
+
+-- >>> tuplify (swap feedAnimal) (5, dillo1)
+-- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
+tuplify :: (a -> b -> c) -> ((a, b) -> c)
+tuplify f = \(a, b) -> f a b
