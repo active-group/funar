@@ -352,3 +352,6 @@ Halbgruppe
 class Semigroup a where
     -- combine (combine a b) c == combine a (combine b c)
     combine :: a -> a -> a
+
+instance Semigroup [a] where
+    combine l1 l2 = l1 ++ l2
