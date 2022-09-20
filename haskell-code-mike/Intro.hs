@@ -250,3 +250,7 @@ listCopy (first:rest) = first : (listCopy rest)
 listFold :: b -> (a -> b -> b) -> [a] -> b
 listFold e f [] = e
 listFold e f (first : rest) = first `f` (listFold e f rest) -- `f` : Infix
+
+-- alle natürlichen Zahlen, angefangen bei n
+natsFrom :: Integer -> [Integer]
+natsFrom n = n : natsFrom (n+1)
