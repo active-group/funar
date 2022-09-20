@@ -57,6 +57,7 @@ data Liveness = Dead | Alive
 -- Typsynonym
 type Weight = Integer
 
+{-
 -- Record
 data Dillo = MkDillo { dilloLiveness :: Liveness, 
                        dilloWeight :: Weight }
@@ -85,3 +86,25 @@ runOverDillo :: Dillo -> Dillo
 -- runOverDillo (MkDillo { dilloLiveness = l, dilloWeight = w}) =
 --    MkDillo { dilloLiveness = Dead, dilloWeight = w}
 runOverDillo (MkDillo _ w) = MkDillo Dead w
+-}
+
+-- Ein Tier auf dem texanischen Highway ist eins der folgenden:
+-- - Gürteltier
+-- - Papagei
+-- gemischte Daten: in Haskell alle Fälle in ein "data"
+
+data Animal =
+    MkDillo { dilloLiveness :: Liveness, 
+              dilloWeight :: Weight }
+  | Parrot String Weight
+  deriving Show
+
+dillo1 :: Animal
+dillo1 = MkDillo { dilloLiveness = Alive, dilloWeight = 10}
+dillo2 :: Animal
+dillo2 = MkDillo Dead 12
+
+parrot1 :: Animal
+parrot1 = Parrot "Hallo!" 1
+parrot2 :: Animal
+parrot2 = Parrot "Goodbye!" 2
