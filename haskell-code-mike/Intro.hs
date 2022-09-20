@@ -66,3 +66,12 @@ dillo1 :: Dillo
 dillo1 = MkDillo {dilloLiveness = Alive, dilloWeight = 10}
 dillo2 :: Dillo
 dillo2 = MkDillo Dead 12
+
+-- Faustregel:
+-- - Variablen klein
+-- - "Konstante" groß
+
+-- Gürteltier überfahren
+runOverDillo :: Dillo -> Dillo
+runOverDillo dillo = 
+    MkDillo { dilloLiveness = Dead, dilloWeight = dilloWeight dillo }
