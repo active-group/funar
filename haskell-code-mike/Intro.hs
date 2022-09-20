@@ -22,6 +22,11 @@ f' = \ a -> a + x + y
 data Pet = Dog | Cat | Snake
   deriving Show
 
+instance Eq Pet where
+    Dog == Dog = True
+    Cat == Cat = True
+    Snake == Snake = True
+    _ == _ = False
 -- Ist ein Haustier niedlich?
 -- >>> isCute Dog
 -- True
