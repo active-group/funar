@@ -159,6 +159,8 @@ feedAnimal' = swap feedAnimal
 feedAnimal'' :: (Animal, Weight) -> Animal
 -- >>> feedAnimal''(dillo1, 5)
 -- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
+
+-- (dillo1, 5) ist ein Tupel, Ad-hoc-zusammengesetzte Daten
 feedAnimal''(dillo@(MkDillo liveness weight), amount) =
   -- Alias-Pattern
   case liveness of -- pattern matching
