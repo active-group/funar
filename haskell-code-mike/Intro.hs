@@ -280,3 +280,24 @@ sieve (p:rest) = p : (sieve (strikeMultiples p rest))
 
 primes :: [Integer]
 primes = sieve (natsFrom 2)
+
+data Optional a =
+    Null
+  | Result a
+  deriving Show
+
+-- Index eines Elements in einer Liste berechnen
+-- >>> listIndex 5 [3, 4, 7, 5, 11]
+-- Result 3
+listIndex :: Eq a => a -> [a] -> Optional Integer 
+listIndex x [] = Null
+listIndex x (first:rest) =
+    if x == first
+    then Result 0
+    else 
+      case listIndex x rest of 
+        Null -> Null
+        Result index -> Result (index + 1)
+
+-- Eq a: Constraint, Einschränkung von möglichen Typen, die für a eingesetzt werden
+-- Eq a => : "Wenn a die Eigenschaft Eq hat"
