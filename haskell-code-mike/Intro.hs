@@ -198,5 +198,10 @@ untuplify f a b = f (a, b)
 -- Eine Liste ist eins der folgenden:
 -- - die leere Liste
 -- - eine Cons-Liste aus erstem Element und Rest-Liste
-data ListOfNumbers =
-    EmptyList
+data ListOfIntegers =
+    Empty 
+  | Cons Integer ListOfIntegers
+
+list1 = Cons 5 Empty
+list2 = Cons 8 (Cons 5 Empty)
+list3 = Cons 7 list2
