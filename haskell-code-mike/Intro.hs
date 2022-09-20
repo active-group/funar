@@ -259,6 +259,8 @@ listFold e f (first : rest) = first `f` (listFold e f rest) -- `f` : Infix
 -- nicht-strikt: das Gegenteil
 -- Ausdrücke werden erst ausgewertet, wenn der Wert benötigt wird.
 
+-- ghc (Haskell-Compiler): lazy evaluation
+-- nicht-strikt, berechnet nix doppelt
 
 
 -- alle natürlichen Zahlen, angefangen bei n
