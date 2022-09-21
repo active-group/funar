@@ -52,12 +52,12 @@ p1 = Put "Mike" 51 (\() ->
      Get "Mike" (\y ->
      Return (x+y)))))
 
-p1' :: DB Integer
+p1' :: DB String
 p1' = splice (put "Mike" 51) (\() -> 
       splice (get "Mike") (\x ->
       splice (put "Mike" (x+1)) (\() ->
       splice (get "Mike") (\y ->
-      Return (x+y)))))
+      Return (show (x+y))))))
 
 
 
@@ -86,3 +86,7 @@ Monade:
 
 ... paar Gleichungen
 -}
+
+instance Monad DB where
+  return = Return
+  (>>=) = splice
