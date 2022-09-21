@@ -8,6 +8,7 @@ import Polysemy.Input
 import Polysemy.Output
 
 data Teletype m a where
+  -- jeweils Typ des Konstruktors
   ReadTTY  :: Teletype m String
   WriteTTY :: String -> Teletype m ()
 
@@ -42,8 +43,9 @@ echo :: Member Teletype r => Sem r ()
 echo = do
   i <- readTTY
   case i of
-    "" -> pure ()
-    _  -> writeTTY i >> echo
+    "" -> return ()
+    _  -> do writeTTY i
+             echo
 
 
 -- Let's pretend
