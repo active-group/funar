@@ -50,6 +50,7 @@ cardScore _ = 0
 
 -- * Spiellogik
 
+-- eingezogenen Karten vom Stich
 type Pile = Set Card
 
 -- eingezogene Karten, pro Spieler
