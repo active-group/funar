@@ -40,5 +40,6 @@ runDB (Get key callback) map =
     let value = map ! key
     in runDB (callback value) map
 runDB (Put key value callback) map = 
-    let map' = Map.insert
+    let map' = Map.insert key value map
+    in runDB (callback ()) map'
 runDB (Return result) map = result
