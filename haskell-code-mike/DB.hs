@@ -82,5 +82,7 @@ Monade:
 
 - Typ mit 1 Parameter
 - return :: a -> m a
-- 
+- (>>=) :: m a -> (a -> m b) -> m b
+
+... paar Gleichungen
 -}
