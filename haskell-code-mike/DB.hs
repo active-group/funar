@@ -87,6 +87,8 @@ Monade:
 ... paar Gleichungen
 -}
 
+instance Functor DB
+
 instance Applicative DB where
 
 instance Monad DB where
