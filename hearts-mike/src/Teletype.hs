@@ -44,7 +44,7 @@ echo = do
   i <- readTTY
   case i of
     "" -> return ()
-    _  -> do writeTTY i
+    _  -> do writeTTY ("Hallo " ++ i)
              echo
 
 
