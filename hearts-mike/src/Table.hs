@@ -18,6 +18,7 @@ whoTakesTrick :: Trick -> Player
 whoTakesTrick [] = undefined
 whoTakesTrick trick =
   let loop :: Player -> Card -> Trick -> Player
+      -- bricht die Abstraktion
       loop player _ [] = player
       loop player card ((player', card') : rest) =
         case cardBeats card' card of
