@@ -81,4 +81,5 @@ class Applicative m => Monad m where
 Monade:
 
 - Typ mit 1 Parameter
+- 
 -}
