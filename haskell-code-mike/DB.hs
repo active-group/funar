@@ -100,3 +100,6 @@ instance Applicative DB where
 instance Monad DB where
   return = Return
   (>>=) = splice
+
+
+  -- <R> Stream<R> flatMap(Function<? super T,? extends Stream<? extends R>> mapper)
