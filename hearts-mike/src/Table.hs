@@ -147,3 +147,7 @@ addToPile playerPiles player trick =
   let playerPile = Map.findWithDefault Set.empty player playerPiles
   in Map.insert player (Set.union playerPile (Set.fromList (cardsOfTrick trick))) playerPiles
 
+-- Event verarbeiten
+
+-- Command verarbeiten
+
