@@ -17,7 +17,8 @@ import Debug.Trace (trace)
 whoTakesTrick :: Trick -> Player
 whoTakesTrick [] = undefined
 whoTakesTrick trick =
-  let loop player _ [] = player
+  let loop :: Player -> Card -> Trick -> Player
+      loop player _ [] = player
       loop player card ((player', card') : rest) =
         case cardBeats card' card of
           Nothing -> loop player card rest
