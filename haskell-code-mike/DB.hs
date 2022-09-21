@@ -59,6 +59,12 @@ p1' = splice (put "Mike" 51) (\() ->
       splice (get "Mike") (\y ->
       Return (show (x+y))))))
 
+p1'' :: DB String
+p1'' = do put "Mike" 51
+          x <- get "Mike"
+          put "Mike" (x+1)
+          y <- get "Mike"
+          return (show (x+y))
 
 
 runDB :: DB a -> Map String Integer -> a
