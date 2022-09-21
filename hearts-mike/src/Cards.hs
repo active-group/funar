@@ -74,7 +74,7 @@ instance Ord Player where
 
 -- * Stich
 
--- Letzte Karte liegt oben
+-- Zuetzt gespielte Karte kommt zuerst
 type Trick = [(Player, Card)]
 
 -- leeren Stich herstellen
@@ -89,7 +89,7 @@ trickEmpty trick = null trick
 trickSize :: Trick -> Int
 trickSize trick = length trick
 
--- alle Karten desStich
+-- alle Karten des Stich
 cardsOfTrick :: Trick -> [Card]
 cardsOfTrick trick = map snd trick
 
