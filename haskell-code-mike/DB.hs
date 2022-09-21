@@ -39,5 +39,6 @@ runDB :: DB a -> Map String Integer -> a
 runDB (Get key callback) map = 
     let value = map ! key
     in runDB (callback value) map
-runDB (Put key value callback) map = undefined
+runDB (Put key value callback) map = 
+    let map' = Map.insert
 runDB (Return result) map = result
