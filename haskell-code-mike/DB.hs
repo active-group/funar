@@ -1,6 +1,8 @@
 module DB where
 
+-- die Namen fangen alle mit Map.
 import qualified Data.Map.Strict as Map
+import Data.Map (Map, (!))
 
 {-
 put "Mike" 51
