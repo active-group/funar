@@ -174,3 +174,4 @@ tableProcessEvent (GameEnded player) state = state
 
 -- Command verarbeiten
 
+
