@@ -87,6 +87,8 @@ Monade:
 ... paar Gleichungen
 -}
 
+instance Applicative DB where
+
 instance Monad DB where
   return = Return
   (>>=) = splice
