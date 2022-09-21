@@ -19,7 +19,7 @@ p1 :: DBProgram Integer
 p1 = [Put "Mike" 51, Get "Mike", Return 5 ] -- und nu? Wie dem Ergebnis einen Namen geben?
 -}
 
-type DB a =
+data DB a =
     Get String (Integer -> DB a)
   | Put String Integer (() -> DB a)
   | Return a
