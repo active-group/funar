@@ -37,6 +37,10 @@ legalCard card hand trick =
     in  suit card == firstSuit -- ok if suit is followed
         || all ((/= firstSuit) . suit) hand)) -- ok if no such suit in hand
 
+-- Funktionskomposition
+o :: (b -> c) -> (a -> b) -> (a -> c)
+o f g = \ a -> f (g a)
+
 -- Wert einer Karte
 cardScore :: Card -> Integer
 cardScore (Card Spades Queen) = 13
