@@ -93,6 +93,11 @@ Monade:
 ... paar Gleichungen
 -}
 
+-- in Stream<A>:
+-- <B> Stream<B>    flatMap(Function<A, Stream<B>> mapper)
+-- in Optional<A>:
+-- <B> Optional<B> 	flatMap(Function<A,Optional<B>> mapper)
+
 instance Functor DB
 
 instance Applicative DB where
@@ -101,6 +106,3 @@ instance Monad DB where
   return = Return
   (>>=) = splice
 
-
-  -- <R> Stream<R> flatMap(Function<? super T,? extends Stream<? extends R>> mapper)
-  -- <U> Optional<U> 	flatMap(Function<? super T,Optional<U>> mapper)
