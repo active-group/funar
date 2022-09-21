@@ -35,6 +35,7 @@ legalCard card hand trick =
    (let firstCard = leadingCardOfTrick trick
         firstSuit = suit firstCard
     in  suit card == firstSuit -- ok if suit is followed
+--      || all ((/= firstSuit) . suit) hand)) -- ok if no such suit in hand
         || all (\card -> (suit card) /= firstSuit) hand)) -- ok if no such suit in hand
 
 -- Funktionskomposition
