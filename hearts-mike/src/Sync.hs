@@ -234,7 +234,7 @@ gameInteractive :: IO (Maybe Player)
 gameInteractive =
   do let player1 = Player "1" "Mike"
          strategy1 :: Strategy InteractiveEffects
-         strategy1 = interactiveStrategy @"Mike"
+         strategy1 = interactiveStrategy @"Mike" -- @"Mike" -> player
          player2 = Player "2" "Peter"
          strategy2 :: Strategy InteractiveEffects
          strategy2 = interactiveStrategy @"Peter"
