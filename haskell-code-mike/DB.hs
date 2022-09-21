@@ -72,6 +72,13 @@ runDB (Return result) map = result
 
 {-
 class Applicative m => Monad m where
+  -- "bind" / "flatMap"
   (>>=) :: m a -> (a -> m b) -> m b
   return :: a -> m a
+-}
+
+{-
+Monade:
+
+- Typ mit 1 Parameter
 -}
