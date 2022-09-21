@@ -112,6 +112,7 @@ chooseAlong _ playerState =
            Just card ->
              return card           -- sonst kleine passende
 
+-- Roboterspieler
 alongStrategy :: forall player effects .
  Member (State (PlayerState player)) effects => Strategy effects
 alongStrategy player event = -- braucht Eta-Expansion
@@ -120,7 +121,8 @@ alongStrategy player event = -- braucht Eta-Expansion
 -- newtype InteractiveEffect player monad a = InteractiveEffect (Bundle '[State (PlayerState player), Teletype] monad a)
 
 -- interaktiver Spieler
-chooseInteractive :: forall player effects . Member Teletype effects => Chooser player effects
+chooseInteractive :: forall player effects .
+ Member Teletype effects => Chooser player effects
 chooseInteractive player playerState =
   do Teletype.writeTTY ("Your turn, player " ++ (playerName player))
      case playerStateTrick playerState of
