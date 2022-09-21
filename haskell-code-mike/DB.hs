@@ -29,11 +29,26 @@ data DB a =
   | Put String Integer (() -> DB a)
   | Return a
 
+get :: String -> DB Integer
+get key = Get key Return -- (\ value -> Return value)
+
+put :: String -> Integer -> DB ()
+put key value = Put key value Return
+
+-- zwei DB-Programme verketten
+splice :: DB a -> (a -> DB b) -> DB b
+splice (Get key callback) next = undefined
+splice (Put key value callback) next = undefined
+splice (Return result) next = undefined
+
+
 p1 = Put "Mike" 51 (\() ->
      Get "Mike" (\x ->
      Put "Mike" (x+1) (\() ->
      Get "Mike" (\y ->
      Return (x+y)))))
+
+
 
 runDB :: DB a -> Map String Integer -> a
 runDB (Get key callback) map = 
