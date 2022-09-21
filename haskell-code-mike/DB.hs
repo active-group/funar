@@ -1,4 +1,7 @@
 module DB where
+
+import qualified Data.Map.Strict as Map
+
 {-
 put "Mike" 51
 x = get "Mike"
