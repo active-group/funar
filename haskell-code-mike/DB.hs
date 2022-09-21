@@ -7,10 +7,15 @@ y = get "Mike"
 return x + y
 -}
 
-data DBCommand =
+data DBCommand a =
     Put String Integer
   | Get String
-  | Return Integer
+  | Return a
 
-type DBProgram = [DBCommand]
+type DBProgram a = [DBCommand a]
+
+p1 :: DBProgram Integer
+p1 = [Put "Mike" 51, Get "Mike", Return 5 ] -- und nu? Wie dem Ergebnis einen Namen geben?
+
+
 
