@@ -70,7 +70,8 @@ runDB (Put key value callback) map =
     in runDB (callback ()) map'
 runDB (Return result) map = result
 
+{-
 class Applicative m => Monad m where
   (>>=) :: m a -> (a -> m b) -> m b
-  (>>) :: m a -> m b -> m b
   return :: a -> m a
+-}
