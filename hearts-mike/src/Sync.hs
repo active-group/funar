@@ -251,6 +251,8 @@ gameInteractive =
      let playerIdentities = Map.keys players
      shuffledDeck <- shuffle deck
      let game = Game.playGame playerIdentities shuffledDeck
+     --- ^^^^  Spiel konstruiert
+     --- !!!!  Dependency Injection
      let gameWithPlayers = interpretPlayers players game
      let s1 = State.evalState [] gameWithPlayers
      let s2 = State.evalState (emptyTableState playerIdentities) s1
