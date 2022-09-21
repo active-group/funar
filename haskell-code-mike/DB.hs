@@ -36,6 +36,8 @@ p1 = Put "Mike" 51 (\() ->
      Return (x+y)))))
 
 runDB :: DB a -> Map String Integer -> a
-runDB (Get key callback) map = undefined
+runDB (Get key callback) map = 
+    let value = map ! key
+    in runDB (callback value) map
 runDB (Put key value callback) map = undefined
 runDB (Return result) map = result
