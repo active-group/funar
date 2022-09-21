@@ -112,7 +112,8 @@ chooseAlong _ playerState =
            Just card ->
              return card           -- sonst kleine passende
 
-alongStrategy :: forall player effects . Member (State (PlayerState player)) effects => Strategy effects
+alongStrategy :: forall player effects .
+ Member (State (PlayerState player)) effects => Strategy effects
 alongStrategy player event = -- braucht Eta-Expansion
   chooserStrategy chooseAlong player event
 
