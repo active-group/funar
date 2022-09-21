@@ -77,7 +77,7 @@ instance Ord Player where
 -- Zuetzt gespielte Karte kommt zuerst
 type Trick = [(Player, Card)]
 
--- data
+-- newtype Trick = Trick [(Player, Card)]
 
 -- leeren Stich herstellen
 emptyTrick :: Trick
