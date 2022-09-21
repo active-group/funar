@@ -40,3 +40,17 @@ data GameEvent =
 data GameCommand =
     PlayCard Player Card
 -}
+
+data GameEvent
+  = HandDealt Player Hand
+  | PlayerTurnChanged Player
+  | LegalCardPlayed Player Card
+  | TrickTaken Player Trick
+  | IllegalCardAttempted Player Card
+  | GameEnded Player
+  deriving (Eq, Show)
+
+data GameCommand
+  = DealHands PlayerHands
+  | PlayCard Player Card
+  deriving (Eq, Show)
