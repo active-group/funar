@@ -103,3 +103,4 @@ instance Monad DB where
 
 
   -- <R> Stream<R> flatMap(Function<? super T,? extends Stream<? extends R>> mapper)
+  -- <U> Optional<U> 	flatMap(Function<? super T,Optional<U>> mapper)
