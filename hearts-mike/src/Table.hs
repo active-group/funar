@@ -148,6 +148,7 @@ addToPile playerPiles player trick =
   in Map.insert player (Set.union playerPile (Set.fromList (cardsOfTrick trick))) playerPiles
 
 -- Event verarbeiten
+tableProcessEvent :: GameEvent -> TableState -> TableState
 
 -- Command verarbeiten
 
