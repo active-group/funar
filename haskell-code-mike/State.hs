@@ -1,5 +1,7 @@
 module State where
 
+import Prelude hiding (read)
+
 data State a =
     Read (Integer -> State a)
   | Write Integer (() -> State a)
