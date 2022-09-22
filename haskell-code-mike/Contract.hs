@@ -19,3 +19,6 @@ type Amount = Double
 
 data Contract =
     ZeroCouponBond Date Amount Currency
+  | Future
+  | Call 
+  | Put
