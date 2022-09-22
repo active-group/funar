@@ -31,5 +31,12 @@ data Contract =
 -}
 
 data Contract =
-    -- "Ich bekomme 1 Euro jetzt"
-    
+    -- "Ich bekomme 1€ jetzt"
+    One Currency
+    -- "Ich bekomme 100€ jetzt."    
+  | Multiple Amount Contract
+    -- "Ich bekomme 100€ am 24.12.2022"
+  | Later Date Contract
+
+c1 = One EUR
+c2 = Multiple 100 (One EUR)
