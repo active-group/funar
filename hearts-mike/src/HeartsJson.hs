@@ -42,6 +42,16 @@ mapDecoder keyDecoder valueDecoder =
   Map.fromList
     <$> Decode.list (tuple2Decoder keyDecoder valueDecoder)
 
+{-
+JSON:
+{"playerId" : "17",
+ "playerName" : "Mike"
+ }
+
+Cards.Player :: String -> String -> Player
+Decode.field "playerId" Decode.string :: Decoder String
+Decode.field "playerName" Decode.string :: Decoder String
+-}
 playerDecoder :: Decoder Cards.Player
 playerDecoder =
   Cards.Player
@@ -106,6 +116,12 @@ constructor2Decoder decodeA decodeB constructor =
 handDealtDecoder :: Decoder GameEvent
 handDealtDecoder = constructor2Decoder playerDecoder handDecoder HandDealt
 
+{-
+-- data GameEvent = ... PlayerTurnChanged Player
+JSON dafür:
+{ "playerId" : "0815",
+  "playerName" : "Mike"}
+-}
 playerTurnChangedDecoder :: Decoder GameEvent
 playerTurnChangedDecoder = constructor1Decoder playerDecoder PlayerTurnChanged
 

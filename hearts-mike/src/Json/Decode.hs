@@ -13,17 +13,66 @@ data DecodeError
   | Index Int DecodeError
   | OneOf [DecodeError]
   | Failure String Json.Value
+  | Combined DecodeError DecodeError
   deriving (Show, Eq)
+
+-- data Either c a = Left c | Right a
 
 newtype Decoder a = Decoder {runDecoder :: Json.Value -> Either DecodeError a}
 
+
+{-
+instance Functor (Either b) where
+  -- fmap :: (a -> b) -> (Either c) a -> (Either c) b
+  fmap f (Left c) = Left c
+  fmap f (Right a) = Right (f a)
+-}
+
 instance Functor Decoder where
   fmap f (Decoder decode) = Decoder (\ json ->
+    -- fmap von Either b
     fmap f (decode json))
 
+-- >>> :type (>>=)
+-- (>>=) :: Monad m => m a -> (a -> m b) -> m b
+-- >>> :type (flip (>>=))
+-- (flip (>>=)) :: Monad m => (a -> m b) -> m a -> m b
+{-
+Functor
+fmap  ::        (a ->   b) -> f a -> f b
+Applicative
+(<*>) ::      f (a ->   b) -> f a -> f b
+Monad
+(flip (>>=)) :: (a -> f b) -> f a -> f b
+-}
+
 instance Applicative Decoder where
+  -- das gleiche wie return
   pure = Decoder . const . Right
-  Decoder decodeF <*> Decoder decodeA = undefined
+  Decoder decodeF <*> Decoder decodeA = 
+    Decoder (\json ->
+      case (decodeF json, decodeA json) of
+        (Left errF, Left errA) -> Left (Combined errF errA)
+        (Left errF, Right a) -> Left errF
+        (Right f, Left errA) -> Left errA
+        (Right f, Right a) -> Right (f a))
+
+-- optionalMap  ::              (a -> b) -> Optional a -> Optional b
+-- universalMap :: Functor f => (a -> b) ->        f a ->        f b
+
+-- (<*>) :: Applicative f => f (a -> b) -> f a -> f b
+fmap2 :: Applicative f => (a -> b -> c) -> f a -> f b -> f c
+-- >>> fmap2 (+) (Just 2) (Just 3)
+-- Just 5
+-- >>> fmap2 (+) [3,4] [5,6]
+-- [8,9,9,10]
+fmap2 f fa fb = -- für <*> brauchen wir f (a -> b)
+  -- pure f -- f (a -> (b -> c))
+  (pure f) <*> fa <*> fb
+
+fmap3 :: Applicative f => (a -> b -> c -> d) -> f a -> f b -> f c -> f d
+fmap3 f fa fb fc =
+  f <$> fa <*> fb <*> fc
 
 instance Monad Decoder where
   Decoder decode >>= f = Decoder (\ json ->
