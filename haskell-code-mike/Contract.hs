@@ -41,6 +41,7 @@ data Contract =
   | Multiple Amount Contract
     -- "Ich bekomme 100€ am 24.12.2022"
   | Later Date Contract
+  | 
 
 c1 = One EUR
 c2 = Multiple 100 (One EUR)
