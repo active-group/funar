@@ -7,6 +7,14 @@ data State a =
   | Write Integer (() -> State a)
   | Return a
 
+instance Show a => Show (State a) where
+    show (Read callback) = "Read"
+    show (Write newState callback) =
+        "Write " ++ (show newState)
+    show (Return result) =
+        "Return " ++ (show result)
+
+
 read :: State Integer
 read = Read Return
 
