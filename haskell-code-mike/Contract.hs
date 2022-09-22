@@ -67,3 +67,13 @@ c4 = zeroCouponBond (Date "2022-12-24") 100 USD
 c5 = And c3 (Reverse c4)
 
 -- Semantik
+
+data Payment = Payment Direction Date Amount Currency
+  deriving Show
+
+-- im Paper:
+-- Later (Obs Amount) Contract
+-- Obs: (zeitabhängige) Beobachtung
+
+-- alle Zahlungen bis zum Datum
+semantics :: Contract -> Date -> [Payment]
