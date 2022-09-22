@@ -47,7 +47,8 @@ data Contract =
   -- | Flux Direction Contract
   -- besser
   | Reverse Contract
-  | And Contract Contract
+  | And Contract Contract -- Semigroup?
+  | Zero -- neutrales Element
   deriving Show
 
 c1 = One EUR
