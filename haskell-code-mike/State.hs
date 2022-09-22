@@ -36,7 +36,7 @@ instance Monad (State s) where
     Return result >>= next = 
         next result
 
-
+p1 :: State Integer String
 -- >>> p1
 -- Write 17
 p1 = do write 17
@@ -45,7 +45,7 @@ p1 = do write 17
         y <- read
         return (show y)
 
-runState :: State a -> Integer -> a
+runState :: State s a -> s -> a
 -- >>> runState p1 0
 -- "18"
 runState (Read callback) state =
@@ -54,7 +54,7 @@ runState (Write newState callback) state =
     runState (callback ()) newState
 runState (Return result) state = result
 
-traceState :: State a -> Integer -> (a, [Integer])
+traceState :: State s a -> s -> (a, [s])
 -- >>> traceState p1 0
 -- ("18",[17,18])
 traceState (Read callback) state =
