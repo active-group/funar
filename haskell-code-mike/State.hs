@@ -7,7 +7,7 @@ data State s a =
   | Write s (() -> State s a)
   | Return a
 
-instance Show a => Show (State s a) where
+instance (Show s, Show a) => Show (State s a) where
     show (Read callback) = "Read"
     show (Write newState callback) =
         "Write " ++ (show newState)
