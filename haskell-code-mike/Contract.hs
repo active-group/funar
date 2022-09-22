@@ -17,8 +17,11 @@ data Currency = EUR | GBP | YEN | USD
 
 type Amount = Double
 
+-- Scheißspiel:
+{-
 data Contract =
     ZeroCouponBond Date Amount Currency
   | Future
   | Call 
   | Put
+-}
