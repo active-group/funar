@@ -3,13 +3,24 @@ module State where
 import Prelude hiding (read)
 
 data State s a =
+    -- jeder "Befehl" hat einen Selbstbezug
     Read (s -> State s a)
   | Write s (() -> State s a)
   | Return a
 
-data UniversalMonad a =
+data State' s self =
+    Read' (s -> self)
+  | Write' (() -> self) 
+
+-- der Selbstbezug auf UniversalMonad
+-- d.h. der Selbstbezug muß Typparameter werden
+-- c wird dann später "State' s"
+data UniversalMonad c a =
     UniversalReturn a
-  | 
+  | UniversalCommand (c (UniversalMonad c a))
+
+type StateMonad s a = UniversalMonad (State' s)
+
 
 instance (Show s, Show a) => Show (State s a) where
     show (Read callback) = "Read"
