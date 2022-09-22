@@ -76,4 +76,4 @@ data Payment = Payment Direction Date Amount Currency
 -- Obs: (zeitabhängige) Beobachtung
 
 -- alle Zahlungen bis zum Datum
-semantics :: Contract -> Date -> [Payment]
+semantics :: Contract -> Date -> ([Payment], Contract)
