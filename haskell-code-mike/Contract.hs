@@ -40,3 +40,4 @@ data Contract =
 
 c1 = One EUR
 c2 = Multiple 100 (One EUR)
+c3 = Later (Date "2022-12-24") c2
