@@ -63,4 +63,5 @@ zeroCouponBond date amount currency =
 
 c4 = zeroCouponBond (Date "2022-12-24") 100 USD
 
+-- currency swap
 c5 = And c3 (Reverse c4)
