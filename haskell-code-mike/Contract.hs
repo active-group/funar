@@ -34,6 +34,9 @@ data Contract =
   | Put
 -}
 
+data Direction = Long | Short
+  deriving Show
+
 data Contract =
     -- "Ich bekomme 1€ jetzt"
     One Currency
@@ -41,11 +44,17 @@ data Contract =
   | Multiple Amount Contract
     -- "Ich bekomme 100€ am 24.12.2022"
   | Later Date Contract
-  | 
+  -- | Flux Direction Contract
+  -- besser
+  | Reverse Contract
+  | And Contract Contract
+  deriving Show
 
 c1 = One EUR
 c2 = Multiple 100 (One EUR)
 c3 = Later (Date "2022-12-24") c2
+
+-- c3' = Flux Long c3
 
 zeroCouponBond :: Date -> Amount -> Currency -> Contract
 zeroCouponBond date amount currency =
