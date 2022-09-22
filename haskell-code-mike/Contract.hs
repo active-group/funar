@@ -9,6 +9,10 @@ Zero-Bond / Zero Coupon Bond
 - Währung
 - Vielfaches
 - Später
+
+3. Entferne Redundanzen zu Gunsten von Selbstreferenzen
+
+4. Repeat
 -}
 
 data Date = Date String
