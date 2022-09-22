@@ -28,8 +28,16 @@ instance Monad State where
     Return result >>= next = 
         next result
 
+p1 :: State String
 p1 = do write 17
         x <- read
         write (x+1)
         y <- read
-        return y
+        return (show y)
+
+runState :: State a -> Integer -> a
+runState (Read callback) state =
+    runState (callback state) state
+runState (Write newState callback) state =
+    runState (callback ()) newState
+runState (Return result) state = result
