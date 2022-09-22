@@ -60,3 +60,7 @@ c3 = Later (Date "2022-12-24") c2
 zeroCouponBond :: Date -> Amount -> Currency -> Contract
 zeroCouponBond date amount currency =
     Later date (Multiple amount (One currency))
+
+c4 = zeroCouponBond (Date "2022-12-24") 100 USD
+
+c5 = And c3 (Reverse c4)
