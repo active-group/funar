@@ -25,3 +25,7 @@ instance Monad State where
             callback () >>= next)
     Return result >>= next = 
         next result
+
+p1 = do write 17
+        x <- read
+        return undefined
