@@ -77,3 +77,4 @@ data Payment = Payment Direction Date Amount Currency
 
 -- alle Zahlungen bis zum Datum
 semantics :: Contract -> Date -> ([Payment], Contract)
+
