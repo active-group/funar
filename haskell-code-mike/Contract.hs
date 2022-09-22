@@ -5,6 +5,10 @@ module Contract where
 Zero-Bond / Zero Coupon Bond
 "Ich bekomme am 24.12.2022 100€."
 
+2. Beispiel in "atomare" Teile / Ideen zerlegen
+- Währung
+- Vielfaches
+- Später
 -}
 
 data Date = Date String
@@ -25,3 +29,7 @@ data Contract =
   | Call 
   | Put
 -}
+
+data Contract =
+    -- "Ich bekomme 1 Euro jetzt"
+    
