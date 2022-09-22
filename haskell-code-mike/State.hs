@@ -7,6 +7,9 @@ data State s a =
   | Write s (() -> State s a)
   | Return a
 
+data UniversalMonad a =
+
+
 instance (Show s, Show a) => Show (State s a) where
     show (Read callback) = "Read"
     show (Write newState callback) =
