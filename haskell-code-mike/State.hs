@@ -30,4 +30,6 @@ instance Monad State where
 
 p1 = do write 17
         x <- read
-        return undefined
+        write (x+1)
+        y <- read
+        return y
