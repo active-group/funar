@@ -1,5 +1,7 @@
 module Contract where
 
+import Prelude hiding (and, reverse)
+
 {-
 1. einfaches Beispiel
 Zero-Bond / Zero Coupon Bond
@@ -85,6 +87,23 @@ invertPayment (Payment Short date amount currency) =
 -- Later (Obs Amount) Contract
 -- Obs: (zeitabhängige) Beobachtung
 
+-- And Zero c =-= c
+-- And c Zero =-= c
+-- Multiple amount Zero =-= Zero
+-- Reverse Zero =-= Zero
+
+-- smart constructor
+multiple _ Zero = Zero
+multiple amount contract = Multiple amount contract
+
+and :: Contract -> Contract -> Contract
+and Zero c = c 
+and c Zero = c
+and c1 c2 = And c1 c2
+
+-- >>> semantics (multiple 100 (One EUR)) (Date "2022-09-22")
+-- ([Payment Long (Date "2022-09-22") 100.0 EUR],Zero)
+
 -- alle Zahlungen bis zum Datum
 semantics :: Contract -> Date -> ([Payment], Contract)
 semantics Zero now =
@@ -93,14 +112,14 @@ semantics (One currency) now =
     ([Payment Long now 1 currency], Zero)
 semantics (Multiple amount contract) now =
     let (payments, contract') = semantics contract now
-    in (map (multiplyPayment amount) payments, Multiple amount contract')
+    in (map (multiplyPayment amount) payments, multiple amount contract')
 semantics (Reverse contract) now =
     let (payments, contract') = semantics contract now
     in (map invertPayment payments, Reverse contract')
 semantics (And contract1 contract2) now = 
     let (payments1, contract1') = semantics contract1 now
         (payments2, contract2') = semantics contract2 now
-    in (payments1 ++ payments2, And contract1' contract2')   
+    in (payments1 ++ payments2, and contract1' contract2')   
 semantics c@(Later date contract) now =
     if now >= date
     then -- Weihnachten
