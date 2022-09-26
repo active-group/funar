@@ -223,6 +223,8 @@ class Snake implements Animal { ... }
         (first list)
         (list-product (rest list)))))))
 
+; Aus einer Liste von Zahlen die geraden Zahlen extrahieren
+
 ; n neutrales Element:
 ; n + x = x + n = x für alle Zahlen n
 ; => n = 0
