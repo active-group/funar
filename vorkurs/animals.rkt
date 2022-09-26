@@ -317,7 +317,7 @@ class Snake implements Animal { ... }
 
 (define inc (lambda (x) (+ 1 x)))
 
-(: list-map ((%element1 -> %element2) (list-of %element1) -> (list-of %element2)))
+(: list-map ((%a -> %b) (list-of %a) -> (list-of %b)))
 
 (define list-map
   (lambda (f list)
