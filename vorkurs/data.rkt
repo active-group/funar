@@ -56,7 +56,15 @@
 ; zusammengesetzte Daten
 (define-record time ; Signatur
   make-time ; Konstruktor
-  (time-hour natural)
+  ; natural: Signatur für natürliche Zahlen: 0, 1, 2, 3, 4, 5...
+  (time-hour natural) ; Selektor / "Getter-Funktion"
   (time-minute natural))
+
+(: make-time (natural natural -> time))
+(: time-hour (time -> natural))
+(: time-minute (time -> natural))
+
+(define time1 (make-time 10 34))
+(define time2 (make-time 15 12))
 
   
