@@ -48,6 +48,9 @@
     (cond
       ((empty? list) acc)
       ((cons? list)
+       ; kein Kontext um Aufruf von rev*
+       ; tail call / endrekursiver Aufruf
+       ; braucht keinen zusätzlichen Platz in der Continuation
        (rev* (rest list)
              (cons (first list) acc))
        ))))
