@@ -247,6 +247,11 @@ class Snake implements Animal { ... }
                  (extract-odds (rest list)))
            (extract-odds (rest list)))))))
 
+; Alle Elemente einer Liste extrahieren, die ein "Kriterium"
+(: extract ((number -> boolean) list-of-numbers  -> list-of-numbers)
+
+(check-expect (extract even? list4) (cons 2 (cons 8 empty)))
+(check-expect (extract odd? list4) (cons 5 (cons 3 empty)))
 
 (define extract
   (lambda (p? list)
