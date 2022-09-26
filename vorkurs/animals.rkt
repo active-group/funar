@@ -208,3 +208,24 @@ class Snake implements Animal { ... }
        (+
         (first list)
         (list-sum (rest list)))))))
+
+; Elemente einer Liste multiplizieren
+(: list-product (list-of-numbers -> number))
+
+(check-expect (list-product list4) 240)
+
+(define list-product
+  (lambda (list)
+    (cond
+      ((empty? list) 1)
+      ((cons? list)
+       (*
+        (first list)
+        (list-product (rest list)))))))
+
+; n neutrales Element:
+; n + x = x + n = x für alle Zahlen n
+; => n = 0
+
+; n * x = x * n = x
+; => n = 1
