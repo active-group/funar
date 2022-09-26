@@ -28,5 +28,14 @@
 (check-expect (run-over-dillo dillo2)
               dillo2)
 
+; Schablone
+#;(define run-over-dillo
+  (lambda (dillo)
+    (make-dillo ... ...)
+    ...
+    (dillo-alive? dillo)
+    (dillo-weight dillo)))
 
-
+(define run-over-dillo
+  (lambda (dillo)
+    (make-dillo #f (dillo-weight dillo))))
