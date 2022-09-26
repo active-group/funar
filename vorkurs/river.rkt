@@ -36,7 +36,8 @@
 (check-expect (flows-from? "Tübingen" eschach) #f)
 (check-expect (flows-from? "Heimliswald" neckar2) #t)
 
-(define flows-from?
+; Schablone:
+#;(define flows-from?
   (lambda (location river)
     (cond
       ((stream? river)
@@ -50,4 +51,14 @@
        (flows-from? location (confluence-tributary river))
        ...))))
 
-    
+ (define flows-from?
+  (lambda (location river)
+    (cond
+      ((stream? river)
+       (string=? location (stream-origin river)))
+      ((confluence? river)
+       (or
+        (string=? (confluence-location river))
+        (flows-from? location (confluence-main-stem river))
+        (flows-from? location (confluence-tributary river)))))))
+   
