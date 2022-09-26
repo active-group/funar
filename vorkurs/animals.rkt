@@ -130,6 +130,7 @@
       ((dillo? animal) (run-over-dillo animal))
       ((parrot? animal) (run-over-parrot animal)))))
 
+; Tier füttern
 
 ; Klassiker:
 ; gemischte Daten, jeder Fall zusammengesetzte Daten
@@ -137,6 +138,7 @@
 #|
 interface Animal {
    Animal runOver();
+   Animal feed(double amount);
 }
 class Dillo implements Animal {
    Animal runOver() { ... }
