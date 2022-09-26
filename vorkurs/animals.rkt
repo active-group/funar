@@ -1,4 +1,4 @@
-#lang deinprogramm/sdp/beginner
+#lang deinprogramm/sdp
 
 ; Tiere auf dem texanischen Highway, eins der folgenden:
 ; - Gürteltier - ODER -
@@ -157,6 +157,8 @@ class Snake implements Animal { ... }
 ; - eine Cons-Liste bestehend aus erstem Element und Rest-Liste
 ;                                                         ^^^^^
 
+#|
+
 ; parametrische Polymorphie
 (define list-of
   (lambda (element)
@@ -178,6 +180,7 @@ class Snake implements Animal { ... }
   cons cons?
   (first element)
   (rest (list-of element)))
+|#
 
 ; 1elementige Liste: 5
 (define list1 (cons 5 empty))
@@ -277,3 +280,36 @@ class Snake implements Animal { ... }
 (define highway (cons dillo1 (cons dillo2 (cons parrot1 (cons parrot2 empty)))))
 
 ;(extract dillo-alive? dillos)
+
+; Alle Tiere überfahren
+(: run-over-animals ((list-of animal) -> (list-of animal)))
+
+(check-expect (run-over-animals highway)
+              (cons (run-over-animal dillo1)
+                    (cons (run-over-animal dillo2)
+                          (cons (run-over-animal parrot1)
+                                (cons (run-over-animal parrot2) empty)))))
+
+(define run-over-animals
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cons
+        (run-over-animal (first list))
+        (run-over-animals (rest list)))))))
+
+; Alle Zahlen einer Liste inkrementieren
+(: list-inc ((list-of number) -> (list-of number)))
+
+(check-expect (list-inc (list 1 2 3 4))
+              (list 2 3 4 5))
+
+(define list-inc
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cons
+        (+ 1 (first list))
+        (list-inc (rest list)))))))
