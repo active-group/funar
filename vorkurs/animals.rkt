@@ -283,10 +283,10 @@ class Snake implements Animal { ... }
   (lambda (list)
     (list-fold
      (lambda (first-list rec-result)
-       (if (odd? first-list
+       (if (odd? first-list)
            (cons first-list
                  rec-result)
-           rec-result)))
+           rec-result))
      empty
      list)))
 
