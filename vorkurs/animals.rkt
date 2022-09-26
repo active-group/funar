@@ -151,3 +151,24 @@ class Parrot implements Animal {
 class Snake implements Animal { ... }
 
 |#
+
+; Eine Liste ist der folgenden:
+; - die leere Liste
+; - eine Cons-Liste bestehend aus erstem Element und Rest-Liste
+;                                                         ^^^^^
+(define list-of-numbers
+  (signature (mixed empty-list cons-list)))
+
+; Die leere Liste ...
+(define-record empty-list
+  make-empty empty?)
+
+(define empty (make-empty))
+
+; Eine Cons-Liste besteht aus:
+; - erstes Element
+; - Rest-Liste
+(define-record cons-list
+  cons cons?
+  (first number)
+  (rest list-of-numbers))
