@@ -144,4 +144,8 @@ class Dillo implements Animal {
 class Parrot implements Animal {
    Animal runOver() { ... }
 }
+
+// Open/Closed Principle
+class Snake implements Animal { ... }
+
 |#
