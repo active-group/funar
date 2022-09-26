@@ -24,3 +24,6 @@
   (confluence-location string)
   (confluence-main-stem river)
   (confluence-tributary river))
+
+(define neckar1 (make-confluence "Rottweil" eschach prim))
+
