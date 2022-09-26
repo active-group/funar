@@ -135,7 +135,13 @@
 ; gemischte Daten, jeder Fall zusammengesetzte Daten
 
 #|
-interface Animal { ... }
-class Dillo implements Animal { ... }
-class Parrot implements Animal { ... }
+interface Animal {
+   Animal runOver();
+}
+class Dillo implements Animal {
+   Animal runOver() { ... }
+}
+class Parrot implements Animal {
+   Animal runOver() { ... }
+}
 |#
