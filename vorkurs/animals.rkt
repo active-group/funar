@@ -232,6 +232,29 @@ class Snake implements Animal { ... }
         (first list)
         (list-product (rest list)))))))
 
+(: list-fold ((%a %b -> %b) %b (list-of %a) -> %b))
+
+#;(define f
+    (lambda (list)
+      (cond
+        ((empty? list) ...)
+        ((cons? list)
+         ...
+         (first list)
+         (f (rest list))
+         ...))))
+
+
+
+(define list-fold
+  (lambda (f e list)
+    (cond
+      ((empty? list) e)
+      ((cons? list)
+       (f
+        (first list)
+        (list-fold f e (rest list)))))))
+
 
 ; n neutrales Element:
 ; n + x = x + n = x für alle Zahlen n
@@ -255,6 +278,17 @@ class Snake implements Animal { ... }
            (cons (first list)
                  (extract-odds (rest list)))
            (extract-odds (rest list)))))))
+
+(define extract-odds*
+  (lambda (list)
+    (list-fold
+     (lambda (first-list rec-result)
+       (if (odd? first-list
+           (cons first-list
+                 rec-result)
+           rec-result)))
+     empty
+     list)))
 
 ; Alle Elemente einer Liste extrahieren, die ein "Kriterium"
 ; %element: Signaturvariable
