@@ -31,7 +31,7 @@
     (cond
       ((empty? list) (cons element empty))
       ((cons? list)
-       (cons ; Kontext vom Aufruf append-element
+       (cons ; Kontext vom Aufruf append-element => zur Laufzeit Continuation
         (first list)
         (append-element (rest list) element))))))
 
