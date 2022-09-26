@@ -316,3 +316,6 @@ class Snake implements Animal { ... }
 
 
 (define inc (lambda (x) (+ 1 x)))
+
+
+
