@@ -46,8 +46,8 @@
       ((confluence? river)
        ...
        (confluence-location river)
-       (confluence-main-stem river)
-       (confluence-tributary river)
+       (flows-from? location (confluence-main-stem river))
+       (flows-from? location (confluence-tributary river))
        ...))))
 
     
