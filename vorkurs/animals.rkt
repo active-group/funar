@@ -276,4 +276,4 @@ class Snake implements Animal { ... }
 
 (define highway (cons dillo1 (cons dillo2 (cons parrot1 (cons parrot2 empty)))))
 
-(extract dillo-alive? dillos)
+;(extract dillo-alive? dillos)
