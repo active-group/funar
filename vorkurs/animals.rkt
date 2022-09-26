@@ -317,5 +317,14 @@ class Snake implements Animal { ... }
 
 (define inc (lambda (x) (+ 1 x)))
 
+(: list-map ((%element -> %element) (list-of %element) -> (list-of %element)))
 
+(define list-map
+  (lambda (f list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cons
+        (f (first list))
+        (list-map f (rest list)))))))
 
