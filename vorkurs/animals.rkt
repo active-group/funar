@@ -223,7 +223,6 @@ class Snake implements Animal { ... }
         (first list)
         (list-product (rest list)))))))
 
-; Aus einer Liste von Zahlen die geraden Zahlen extrahieren
 
 ; n neutrales Element:
 ; n + x = x + n = x für alle Zahlen n
@@ -231,3 +230,19 @@ class Snake implements Animal { ... }
 
 ; n * x = x * n = x
 ; => n = 1
+
+; Aus einer Liste von Zahlen die ungeraden Zahlen extrahieren
+(: extract-odds (list-of-numbers -> list-of-numbers))
+
+(check-expect (extract-odds list4)
+              (cons 5 (cons 3 empty)))
+
+(define extract-odds
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (if (odd? (first list))
+           (cons (first list)
+                 (extract-odds (rest list)))
+           (extract-odds (rest list)))))))
