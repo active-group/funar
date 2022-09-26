@@ -1,6 +1,9 @@
 #lang deinprogramm/sdp/beginner
 
-; Tiere auf dem texanischen Highway
+; Tiere auf dem texanischen Highway, eins der folgenden:
+; - Gürteltier - ODER -
+; - Papagei
+; Fallunterscheidung
 
 ; Gürteltier hat folgende Eigenschaften:
 ; - lebendig oder tot - UND -
@@ -76,4 +79,29 @@
                     (+ weight amount)
                     weight))))
 
-  
+
+; Ein Papagei hat folgende Eigenschaften:
+; - Satz
+; - Gewicht
+(define-record parrot
+  make-parrot
+  (parrot-sentence string)
+  (parrot-weight number))
+
+; Begrüßungspapagei, 1kg
+(define parrot1 (make-parrot "Hello!" 1))
+; dicker Papagei
+(define parrot2 (make-parrot "Goodbye!" 3))
+
+; Papagei überfahren
+(: run-over-parrot (parrot -> parrot))
+
+(check-expect (run-over-parrot parrot1)
+              (make-parrot "" 1))
+
+(define run-over-parrot
+  (lambda (parrot)
+    (make-parrot  ... ...)
+    (parrot-sentence parrot)
+    (parrot-weight parrot)
+    ...))
