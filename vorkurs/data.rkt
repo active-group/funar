@@ -40,5 +40,5 @@
     ; brauchen: Verzweigung, ein Zweig pro Fall
     (cond
       ((string=? pet "dog") #t) ; (<Bedingung> <Antwort>)
-      ((string=? pet "cat") #f)
+      ((string=? pet "cat") #t)
       ((string=? pet "snake") #f))))
