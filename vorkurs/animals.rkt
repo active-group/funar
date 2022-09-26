@@ -133,3 +133,9 @@
 
 ; Klassiker:
 ; gemischte Daten, jeder Fall zusammengesetzte Daten
+
+#|
+interface Animal { ... }
+class Dillo implements Animal { ... }
+class Parrot implements Animal { ... }
+|#
