@@ -58,7 +58,7 @@
        (string=? location (stream-origin river)))
       ((confluence? river)
        (or
-        (string=? (confluence-location river))
+        (string=? location (confluence-location river))
         (flows-from? location (confluence-main-stem river))
         (flows-from? location (confluence-tributary river)))))))
    
