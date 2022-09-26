@@ -27,4 +27,20 @@
      (beside image1 image2)
      (beside image2 image1))))
 
-(tile star1 circle1)
+; (tile star1 circle1)
+
+
+#|
+class C {
+  static m(int x) {
+
+     ... x ...
+     x = x + 1;
+     ... x ...
+  }
+
+  ... C.m(17) ... => wird x durch 17 ersetzt?
+
+}
+
+|#
