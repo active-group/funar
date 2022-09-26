@@ -21,6 +21,22 @@
  (beside star1 square1)
  (beside square1 star1))
 
+; Konstruktionsanleitungen
+; (Wir schreiben eine Funktion.)
+
+; 1. Kurzbeschreibung
+; Zwei Kacheln zu quadratischem Muster zusammensetzen
+
+; 2. Signaturdeklaration
+(: tile (image image -> image))
+
+; 3. Tests
+(check-expect (tile star1 circle1)
+              (above
+               (beside star1 circle1)
+               (beside circle1 star1)))
+
+
 (define tile
   (lambda (image1 image2)
     (above
