@@ -84,9 +84,13 @@
 
 
 (define msm
-  (lambda (time)
-    (+ (* 60 (time-hour time))
-       (time-minute time))))
+  (lambda (t)
+    (+ (* 60 (time-hour t))
+       (time-minute t))))
+
+; lexikalische Bindung:
+; bei Variablen-Vorkommen von innen nach außen nach der ersten Bindung suchen
+; Bindung: lambda, define
 
 ; Aus Minuten seit Mitternacht die Zeit berechnen
 (: msm->time (natural -> time))
