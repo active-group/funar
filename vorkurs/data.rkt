@@ -19,7 +19,17 @@
 (check-expect (cute? "snake") #f)
 
 ; Gerüst
-(define cute?
+#;(define cute?
   (lambda (pet)
     ...))
+
+; Schablone (ergibt sich *nur* aus der Signatur)
+(define cute?
+  (lambda (pet)
+    ; Fallunterscheidung als Eingabe
+    ; brauchen: Verzweigung, ein Zweig pro Fall
+    (cond
+      ((string=? pet "dog") ...) ; (<Bedingung> <Antwort>)
+      ((string=? pet "cat") ...)
+      ((string=? pet "snake") ...))))
 
