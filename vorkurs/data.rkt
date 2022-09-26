@@ -7,3 +7,4 @@
 ; - Katze
 ; - Schlange
 
+; Ist ein Haustier niedlich?
