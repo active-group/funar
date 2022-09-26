@@ -101,7 +101,4 @@
 
 (define run-over-parrot
   (lambda (parrot)
-    (make-parrot  ... ...)
-    (parrot-sentence parrot)
-    (parrot-weight parrot)
-    ...))
+    (make-parrot  "" (parrot-weight parrot))))
