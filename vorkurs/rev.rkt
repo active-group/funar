@@ -51,6 +51,7 @@
        ; kein Kontext um Aufruf von rev*
        ; tail call / endrekursiver Aufruf
        ; braucht keinen zusätzlichen Platz in der Continuation
+       ; JVM: verbraucht leider trotzdem Platz
        (rev* (rest list)
              (cons (first list) acc))
        ))))
