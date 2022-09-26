@@ -11,3 +11,8 @@
   (dillo-alive? boolean)
   (dillo-weight number))
 
+(: make-dillo (boolean number -> dillo))
+(: dillo-alive? (dillo -> boolean))
+(: dillo-weight (dillo -> number))
+
+
