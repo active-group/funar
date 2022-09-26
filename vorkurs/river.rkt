@@ -26,4 +26,4 @@
   (confluence-tributary river))
 
 (define neckar1 (make-confluence "Rottweil" eschach prim))
-
+(define neckar2 (make-confluence "Epfendorf" neckar1 schlichem))
