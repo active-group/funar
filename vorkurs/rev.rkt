@@ -23,7 +23,7 @@
 ; Element an Liste an Liste dranhängen
 (: append-element ((list-of %a) %a -> (list-of %a)))
 
-(check-expect (append-element (list 4 3 2) 1)
+#;(check-expect (append-element (list 4 3 2) 1)
               (list 4 3 2 1))
 
 (define append-element
@@ -41,7 +41,7 @@
 
 (check-expect (rev* (list 1 2 3 4) empty)
               (list 4 3 2 1))
-
+; linear!
 (define rev*
   ; acc ist Zwischenergebnis: die "bisher gesehenen" Elemente in umg. Reihenfolge
   (lambda (list acc)
