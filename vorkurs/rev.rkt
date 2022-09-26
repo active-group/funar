@@ -31,7 +31,7 @@
     (cond
       ((empty? list) (cons element empty))
       ((cons? list)
-       (cons
+       (cons ; Kontext vom Aufruf append-element
         (first list)
         (append-element (rest list) element))))))
 
