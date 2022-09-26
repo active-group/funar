@@ -37,7 +37,7 @@
 (check-expect (flows-from? "Heimliswald" neckar2) #t)
 
 (define flows-from?
-  (lambda (river)
+  (lambda (location river)
     (cond
       ((stream? river)
        ...
