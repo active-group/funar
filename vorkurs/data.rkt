@@ -34,7 +34,7 @@
       ((string=? pet "snake") ...))))
 
 
-(define cute?
+#;(define cute?
   (lambda (pet)
     ; Fallunterscheidung als Eingabe
     ; brauchen: Verzweigung, ein Zweig pro Fall
@@ -42,3 +42,11 @@
       ((string=? pet "dog") #t) ; (<Bedingung> <Antwort>)
       ((string=? pet "cat") #t)
       ((string=? pet "snake") #f))))
+
+(define cute?
+  (lambda (pet)
+    (match pet
+      ("dog" #t)
+      ("cat" #t)
+      ("snake" #f))))
+
