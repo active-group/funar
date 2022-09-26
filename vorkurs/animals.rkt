@@ -246,3 +246,14 @@ class Snake implements Animal { ... }
            (cons (first list)
                  (extract-odds (rest list)))
            (extract-odds (rest list)))))))
+
+
+(define extract
+  (lambda (p? list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (if (p? (first list))
+           (cons (first list)
+                 (extract p? (rest list)))
+           (extract p? (rest list)))))))
