@@ -156,6 +156,8 @@ class Snake implements Animal { ... }
 ; - die leere Liste
 ; - eine Cons-Liste bestehend aus erstem Element und Rest-Liste
 ;                                                         ^^^^^
+
+; parametrische Polymorphie
 (define list-of
   (lambda (element)
     (signature (mixed empty-list
@@ -185,6 +187,8 @@ class Snake implements Animal { ... }
 (define list3 (cons 5 (cons 8 (cons 3 empty))))
 ; 4elementige Liste: 2 5 8 3
 (define list4 (cons 2 list3))
+
+(define list-of-numbers (signature (list-of number)))
 
 ; Elemente einer Liste addieren
 (: list-sum (list-of-numbers -> number))
