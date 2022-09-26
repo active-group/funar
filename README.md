@@ -1,4 +1,4 @@
-# Funktionale Softwarearchitektur, 14.-17.2.2022
+# Funktionale Softwarearchitektur, 26.-29.9.2022
 
 ## Technische Vorbereitung
 
