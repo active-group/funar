@@ -189,7 +189,7 @@ class Snake implements Animal { ... }
 
 (check-expect (list-sum list4) 18)
 
-(define list-sum
+#;(define list-sum
   (lambda (list)
     (cond
       ((empty? list) ...)
@@ -199,3 +199,12 @@ class Snake implements Animal { ... }
        (list-sum (rest list))
        ...))))
 
+
+(define list-sum
+  (lambda (list)
+    (cond
+      ((empty? list) 0)
+      ((cons? list)
+       (+
+        (first list)
+        (list-sum (rest list)))))))
