@@ -90,7 +90,7 @@
 ; - Satz
 ; - Gewicht
 (define-record parrot
-  make-parrot
+  make-parrot parrot?
   (parrot-sentence string)
   (parrot-weight number))
 
