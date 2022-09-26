@@ -35,5 +35,5 @@
         (first list)
         (append-element (rest list) element))))))
 
-   
+; in vielen Runtimes: Stack als Repräsentation für die Continuation
        
