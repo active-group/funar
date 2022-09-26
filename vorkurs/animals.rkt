@@ -254,7 +254,8 @@ class Snake implements Animal { ... }
            (extract-odds (rest list)))))))
 
 ; Alle Elemente einer Liste extrahieren, die ein "Kriterium"
-(: extract ((number -> boolean) list-of-numbers  -> list-of-numbers))
+; %element: Signaturvariable
+(: extract ((%element -> boolean) (list-of %element) -> (list-of %element)))
 ; Higher-Order-Funktion
 
 (check-expect (extract even? list4) (cons 2 (cons 8 empty)))
@@ -270,4 +271,8 @@ class Snake implements Animal { ... }
                  (extract p? (rest list)))
            (extract p? (rest list)))))))
 
+(define dillos (cons dillo1 (cons dillo2 empty)))
+
 (define highway (cons dillo1 (cons dillo2 (cons parrot1 (cons parrot2 empty)))))
+
+(extract dillo-alive? dillos)
