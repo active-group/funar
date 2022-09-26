@@ -39,3 +39,24 @@
 (define run-over-dillo
   (lambda (dillo)
     (make-dillo #f (dillo-weight dillo))))
+
+
+
+; Absolutbetrag
+(: absl (number -> number))
+
+(check-expect (absl 5) 5)
+(check-expect (absl -5) 5)
+
+(define absl
+  (lambda (n)
+    ; binäre Verzweigung
+    #;(cond
+      ((>= n 0) n)
+      (else (- n)))
+    (if (>= n 0)
+        n
+        (- n))
+    ))
+
+  
