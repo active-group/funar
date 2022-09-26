@@ -12,3 +12,14 @@
   (signature (enum "dog" "cat" "snake")))
 
 ; Ist ein Haustier niedlich?
+(: cute? (pet -> boolean))
+
+(check-expect (cute? "dog") #t)
+(check-expect (cute? "cat") #t)
+(check-expect (cute? "snake") #f)
+
+; Gerüst
+(define cute?
+  (lambda (pet)
+    ...))
+
