@@ -36,6 +36,7 @@
                (beside star1 circle1)
                (beside circle1 star1)))
 
+; ab 4.: Funktionsdefinition
 
 (define tile
   (lambda (image1 image2)
