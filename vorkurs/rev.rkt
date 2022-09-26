@@ -36,4 +36,6 @@
         (append-element (rest list) element))))))
 
 ; in vielen Runtimes: Stack als Repräsentation für die Continuation
+
+; JVM: Stack ist ein separater Speicherbereich, fester Größe, klein
        
