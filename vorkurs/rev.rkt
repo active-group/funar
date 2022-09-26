@@ -38,4 +38,16 @@
 ; in vielen Runtimes: Stack als Repräsentation für die Continuation
 
 ; JVM: Stack ist ein separater Speicherbereich, fester Größe, klein
-       
+
+(check-expect (rev* (list 1 2 3 4) empty)
+              (list 4 3 2 1))
+
+(define rev*
+  ; acc ist Zwischenergebnis: die "bisher gesehenen" Elemente in umg. Reihenfolge
+  (lambda (list acc)
+    (cond
+      ((empty? list) acc)
+      ((cons? list)
+       (rev* (rest list)
+             (cons (first list) acc))
+       ))))
