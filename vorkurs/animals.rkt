@@ -311,5 +311,8 @@ class Snake implements Animal { ... }
       ((empty? list) empty)
       ((cons? list)
        (cons
-        (+ 1 (first list))
+        (inc (first list))
         (list-inc (rest list)))))))
+
+
+(define inc (lambda (x) (+ 1 x)))
