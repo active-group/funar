@@ -13,7 +13,8 @@
 ; - Gewicht
 ; zusammengesetzte Daten
 (define-record dillo
-  make-dillo dillo?
+  make-dillo
+  dillo? ; Prädikat
   (dillo-alive? boolean)
   (dillo-weight number))
 
