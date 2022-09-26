@@ -255,6 +255,7 @@ class Snake implements Animal { ... }
 
 ; Alle Elemente einer Liste extrahieren, die ein "Kriterium"
 ; %element: Signaturvariable
+; eingebaut: filter
 (: extract ((%element -> boolean) (list-of %element) -> (list-of %element)))
 ; Higher-Order-Funktion
 
