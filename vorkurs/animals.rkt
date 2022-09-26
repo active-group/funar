@@ -163,6 +163,8 @@ class Snake implements Animal { ... }
 (define-record empty-list
   make-empty empty?)
 
+(: empty? (any -> boolean))
+
 (define empty (make-empty))
 
 ; Eine Cons-Liste besteht aus:
@@ -191,4 +193,9 @@ class Snake implements Animal { ... }
   (lambda (list)
     (cond
       ((empty? list) ...)
-      ((cons? list) ...))))
+      ((cons? list)
+       ...
+       (first list)
+       (list-sum (rest list))
+       ...))))
+
