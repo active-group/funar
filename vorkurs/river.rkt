@@ -19,11 +19,12 @@
 ; - Ort
 ; - Hauptfluss
 ; - Nebenfluss
+;        ^^^^^ Selbstbezug
 (define-record confluence
   make-confluence confluence?
   (confluence-location string)
-  (confluence-main-stem river)
-  (confluence-tributary river))
+  (confluence-main-stem river) ; Selbstbezug
+  (confluence-tributary river)) ; Selbstbezug
 
 (define neckar1 (make-confluence "Rottweil" eschach prim))
 (define neckar2 (make-confluence "Epfendorf" neckar1 schlichem))
