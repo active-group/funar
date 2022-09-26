@@ -130,3 +130,6 @@
       ((dillo? animal) (run-over-dillo animal))
       ((parrot? animal) (run-over-parrot animal)))))
 
+
+; Klassiker:
+; gemischte Daten, jeder Fall zusammengesetzte Daten
