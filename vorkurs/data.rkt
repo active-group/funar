@@ -24,7 +24,7 @@
     ...))
 
 ; Schablone (ergibt sich *nur* aus der Signatur)
-(define cute?
+#;(define cute?
   (lambda (pet)
     ; Fallunterscheidung als Eingabe
     ; brauchen: Verzweigung, ein Zweig pro Fall
@@ -33,3 +33,12 @@
       ((string=? pet "cat") ...)
       ((string=? pet "snake") ...))))
 
+
+(define cute?
+  (lambda (pet)
+    ; Fallunterscheidung als Eingabe
+    ; brauchen: Verzweigung, ein Zweig pro Fall
+    (cond
+      ((string=? pet "dog") #t) ; (<Bedingung> <Antwort>)
+      ((string=? pet "cat") #f)
+      ((string=? pet "snake") #f))))
