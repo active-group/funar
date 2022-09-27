@@ -201,6 +201,6 @@ feedAnimal''(amount, MkParrot sentence weight) =
 -- - Seife (pH-Wert)
 -- - Shampoo (Farbe, Haartyp)
 
--- Ein Duschgelt besteht aus:
+-- Ein Duschgel besteht aus:
 -- - prozentualer Anteil Seife
 -- - prozentualer Anteil Shampoo
