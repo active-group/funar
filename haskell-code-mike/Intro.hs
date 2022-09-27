@@ -182,6 +182,7 @@ feedAnimal' amount (MkParrot sentence weight) =
 
 -- swap :: (Animal -> Weight -> Animal) -> (Weight -> Animal -> Animal)
 -- Kleinbuchstaben im Typ: Typvariablen
+-- eingebaut als flip
 swap :: (a -> b -> c) -> (b -> a -> c)
 -- swap f = \ b -> \ a -> f a b
 swap f b a = f a b
