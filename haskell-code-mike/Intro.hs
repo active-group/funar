@@ -330,3 +330,12 @@ listMap f nonEmptyList =
 first2 :: [a] -> (a, a)
 first2 (first:(second:rest)) = (first, second)
 first2 _ = error "list not long enough"
+
+strikeMultiples :: Integer -> [Integer] -> [Integer]
+-- >>> strikeMultiples 2 [1,2,3,4,5,6,7,8]
+-- Prelude.undefined
+strikeMultiples n [] = []]
+strikeMultiples n (first:rest) =
+    if mod first n == 0
+    then strikeMultiples n rest
+    else first : strikeMultiples n rest
