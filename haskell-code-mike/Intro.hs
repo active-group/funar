@@ -138,6 +138,14 @@ runOverAnimal :: Animal -> Animal
 runOverAnimal (MkDillo liveness weight) = MkDillo Dead weight
 runOverAnimal (MkParrot sentence weight) = MkParrot "" weight
 
+-- >>> feedAnimal dillo1 5
+-- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
+
+-- >>> feedAnimal parrot1 2
+-- MkParrot "Hello" 3
+
+-- alle Haskell-Funktionen sind einstellig
+feedAnimal :: Animal -> (Weight -> Animal)
 feedAnimal (MkDillo liveness weight) amount =
     case liveness of
         Dead -> MkDillo liveness weight
