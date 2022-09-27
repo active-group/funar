@@ -311,13 +311,21 @@ listSum :: [Integer] -> Integer
 -- >>> listSum list4
 -- 22
 listSum [] = 0
-listSum (first : rest) = 
-    first + (listSum rest)
+-- listSum (first : rest) = 
+--    first + (listSum rest)
+listSum nonEmptyList =
+    let first = head nonEmptyList
+        rest = tail nonEmptyList
+    in first + listSum rest
 
 listMap :: (a -> b) -> [a] -> [b]
 listMap f [] = []
-listMap f (first:rest) = 
-    (f first) : (listMap f rest)
+-- listMap f (first:rest) = 
+--    (f first) : (listMap f rest)
+listMap f nonEmptyList =
+    let first = head nonEmptyList
+        rest = tail nonEmptyList
+    in (f first) : (listMap f rest)
 
 first2 :: [a] -> (a, a)
 first2 (first:(second:rest)) = (first, second)
