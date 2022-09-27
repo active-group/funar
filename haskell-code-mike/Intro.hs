@@ -46,6 +46,7 @@ data Liveness = Dead | Alive
 -- Typsynonym
 type Weight = Integer
 
+{-
 data Dillo =
     MkDillo { dilloLiveness :: Liveness,
               dilloWeight :: Weight }
@@ -90,3 +91,6 @@ data Parrot = MkParrot String Weight
   deriving Show
 
 parrot1 = MkParrot "Hello" 1
+-}
+
+-- Haskell: gemischte Daten müssen in *einer* data-Definition
