@@ -274,6 +274,8 @@ list3 = [5, 6, 3] -- wie list
 list4 = 8 : list3
 
 listSum :: [Integer] -> Integer
+-- >>> listSum list4
+-- 22
 listSum [] = 0
 listSum (first : rest) = 
     first + (listSum rest)
