@@ -280,6 +280,8 @@ listSum [] = 0
 listSum (first : rest) = 
     first + (listSum rest)
 
+listMap :: (a -> b) -> [a] -> [b]
+
 first2 :: [a] -> (a, a)
 first2 (first:(second:rest)) = (first, second)
 first2 _ = error "list not long enough"
