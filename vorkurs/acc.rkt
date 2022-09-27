@@ -9,7 +9,7 @@
         (first list)
         (list-sum (rest list)))))))
 
-(check-expect (list-sum* (list 1 2 3 4) 0)
+(check-expect (list-sum (list 1 2 3 4))
               10)
 
   #|
@@ -25,7 +25,8 @@
 (define list-sum
   (lambda (list0)
     (define list-sum*
-      ; acc: Summe der "gesehenen" Listenelemente
+      ; Schleifeninvariante:
+      ; acc: Summe der Listenelemente zwischene list0 und list
       (lambda (list acc)
         (cond
           ((empty? list) acc)
