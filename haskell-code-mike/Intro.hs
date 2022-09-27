@@ -116,6 +116,20 @@ data Animal =
   deriving Show
 
 {-
+#define DILLO 1
+#define PARROT 2
+
+struct animal {
+    int tag;
+    union {
+        struct { liveness ... weight_t }
+        struct { char[] ... weight_t }
+    }
+}
+
+-}
+
+{-
 interface Animal { 
     ... 
 }
@@ -280,7 +294,9 @@ listSum [] = 0
 listSum (first : rest) = 
     first + (listSum rest)
 
-listMap :: (a -> b) -> [a] -> [b]
+-- listMap :: (a -> b) -> [a] -> [b]
+
+
 
 first2 :: [a] -> (a, a)
 first2 (first:(second:rest)) = (first, second)
