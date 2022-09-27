@@ -239,3 +239,9 @@ feedAnimal''(amount, MkParrot sentence weight) =
 -- - eine Überlappung zweier geometrischer Figuren
 
 -- Ist ein Punkt innerhalb einer geometrischen Figur?
+
+-- Eine Liste ist eins der folgenden:
+-- - die leere Liste
+-- - eine Cons-Liste aus erstem Element und Rest-Liste
+data ListOfNumbers =
+    Empty
