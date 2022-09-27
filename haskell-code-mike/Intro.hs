@@ -354,3 +354,5 @@ natsFrom n = n : (natsFrom (n+1))
 sieve :: [Integer] -> [Integer]
 sieve [] = []
 sieve (first:rest) = first : (sieve (strikeMultiples first rest))
+
+primes = sieve (natsFrom 2)
