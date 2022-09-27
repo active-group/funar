@@ -23,6 +23,7 @@ g' = \ x -> \ y -> (x + y) * 2
 
 h x y =
     let d = x - y
+    in d * d
 
 tuple3 :: (Pet, Animal, Bool)
 tuple3 = (Dog, dillo1, True)
