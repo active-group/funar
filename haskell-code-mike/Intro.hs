@@ -243,5 +243,12 @@ feedAnimal''(amount, MkParrot sentence weight) =
 -- Eine Liste ist eins der folgenden:
 -- - die leere Liste
 -- - eine Cons-Liste aus erstem Element und Rest-Liste
-data ListOfNumbers =
+data ListOfIntegers =
     Empty
+  | Cons Integer ListOfIntegers
+  deriving Show
+
+list1 = Cons 5 Empty
+list2 = Cons 6 (Cons 3 Empty)
+list3 = Cons 5 list2
+list4 = Cons 8 list3
