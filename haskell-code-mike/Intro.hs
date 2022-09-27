@@ -15,6 +15,12 @@ f x = x + 7
 f' :: Integer -> Integer
 f' = \ x -> x + 7
 
+g :: Integer -> Integer -> Integer
+g x y = (x + y) * 2
+
+g' :: Integer -> Integer -> Integer
+g' = \ x -> \ y -> (x + y) * 2
+
 -- Ein Haustier ist eins der folgenden:
 -- - Hund
 -- - Katze
