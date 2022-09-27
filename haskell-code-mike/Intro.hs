@@ -187,6 +187,8 @@ swap :: (a -> b -> c) -> (b -> a -> c)
 swap f b a = f a b
 
 feedAnimal'' :: (Weight, Animal) -> Animal
+-- >>> feedAnimal''(3, dillo1)
+-- MkDillo {dilloLiveness = Alive, dilloWeight = 13}
 feedAnimal''(amount, MkDillo liveness weight) =
     case liveness of
         Alive -> MkDillo Alive (weight + amount)
