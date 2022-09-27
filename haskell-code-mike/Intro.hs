@@ -94,10 +94,25 @@ parrot1 = MkParrot "Hello" 1
 -}
 
 -- Haskell: gemischte Daten müssen in *einer* data-Definition
+-- algebraischer Datentyp
 data Animal =
     MkDillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
   | MkParrot String Weight
   deriving Show
+
+{-
+interface Animal { 
+    ... 
+}
+class Dillo implements Animal { ... }
+class Parrot implements Animal { ... }
+
+class AnimalFactory {
+    Animal mkDillo(...) { return new Dillo(...); }
+    Animal mkParrot(...) { return new Parrot(...); }
+}
+
+-}
 
 dillo1 :: Animal
 dillo1 = MkDillo { dilloLiveness = Alive, dilloWeight = 10 }
