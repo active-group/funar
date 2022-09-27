@@ -195,11 +195,20 @@ tuplify :: (a -> b -> c) -> ((a, b) -> c)
 --  \ (a, b) -> f a b
 tuplify f (a, b) = f a b
 
+-- Moses Schönfinkel
+-- Haskell B. Curry
 -- eingebaut curry
 untuplify :: ((a, b) -> c) -> (a -> (b -> c))
 --untuplify f a b = f (a, b)
 untuplify f = -- f :: (a, b) -> c
      \a -> \b -> f (a, b)
+
+-- Funktionskomposition
+o :: (b -> c) -> (a -> b) -> (a -> c)
+o bc ab = \a -> bc (ab a)
+
+-- eingebaut unter dem Namen .
+-- in Haskell: Namen, die aus Sonderzeichen bestehen, werden infix geschrieben
 
 -- Tupel
 feedAnimal'' :: (Weight, Animal) -> Animal
