@@ -356,3 +356,9 @@ sieve [] = []
 sieve (first:rest) = first : (sieve (strikeMultiples first rest))
 
 primes = sieve (natsFrom 2)
+
+-- >>> listSum' [1,2,3,4,5] 0
+-- 15
+listSum' [] acc = acc
+listSum' (first:rest) acc =
+    listSum' rest (acc + first)
