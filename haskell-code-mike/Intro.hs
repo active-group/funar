@@ -252,3 +252,9 @@ list1 = Cons 5 Empty
 list2 = Cons 6 (Cons 3 Empty)
 list3 = Cons 5 list2
 list4 = Cons 8 list3
+
+-- Elemente einer Liste summieren
+listSum :: ListOfIntegers -> Integer
+listSum Empty = 0
+listSum (Cons first rest) =
+    first + (listSum rest)
