@@ -189,12 +189,17 @@ swap :: (a -> b -> c) -> (b -> a -> c)
 -- swap f = \ b -> \ a -> f a b
 swap f b a = f a b
 
+-- eingebaut uncurry
 tuplify :: (a -> b -> c) -> ((a, b) -> c)
 -- tuplify f = -- f :: a -> b -> c
 --  \ (a, b) -> f a b
 tuplify f (a, b) = f a b
 
-untuplify :: ((a, b) -> c) -> (a -> b -> c)
+-- eingebaut curry
+untuplify :: ((a, b) -> c) -> (a -> (b -> c))
+--untuplify f a b = f (a, b)
+untuplify f = -- f :: (a, b) -> c
+     \a -> \b -> f (a, b)
 
 -- Tupel
 feedAnimal'' :: (Weight, Animal) -> Animal
