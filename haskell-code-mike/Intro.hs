@@ -82,3 +82,8 @@ runOverDillo :: Dillo -> Dillo
 --    MkDillo Dead w
 -- runOverDillo (MkDillo _ w) = MkDillo Dead w
 runOverDillo dillo = dillo { dilloLiveness = Dead }
+
+-- Ein Tier ist eins der folgenden:
+-- - Gürteltier
+-- - Papagei
+data Parrot = MkParrot String Weight
