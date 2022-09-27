@@ -186,6 +186,7 @@ swap :: (a -> b -> c) -> (b -> a -> c)
 -- swap f = \ b -> \ a -> f a b
 swap f b a = f a b
 
+-- Tupel
 feedAnimal'' :: (Weight, Animal) -> Animal
 -- >>> feedAnimal''(3, dillo1)
 -- MkDillo {dilloLiveness = Alive, dilloWeight = 13}
