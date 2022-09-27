@@ -21,6 +21,9 @@ g x y = (x + y) * 2
 g' :: Integer -> Integer -> Integer
 g' = \ x -> \ y -> (x + y) * 2
 
+h x y =
+    let d = x - y
+
 tuple3 :: (Pet, Animal, Bool)
 tuple3 = (Dog, dillo1, True)
 -- Ein Haustier ist eins der folgenden:
