@@ -146,9 +146,13 @@ runOverAnimal (MkParrot sentence weight) = MkParrot "" weight
 
 -- alle Haskell-Funktionen sind einstellig
 feedAnimal :: Animal -> (Weight -> Animal)
+feedAnimal (MkDillo Dead weight) amount = MkDillo Dead weight
+feedAnimal (MkDillo Alive weight) amount = MkDillo Alive (weight+amount)
+{-
 feedAnimal (MkDillo liveness weight) amount =
     case liveness of
         Dead -> MkDillo liveness weight
         Alive -> MkDillo liveness (weight + amount)
+-}
 feedAnimal (MkParrot sentence weight) amount =
     MkParrot sentence (weight + amount)
