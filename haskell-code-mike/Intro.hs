@@ -146,7 +146,8 @@ runOverAnimal (MkParrot sentence weight) = MkParrot "" weight
 
 -- alle Haskell-Funktionen sind einstellig
 feedAnimal :: Animal -> (Weight -> Animal)
-feedAnimal (MkDillo Dead weight) amount = MkDillo Dead weight
+-- Alias-Pattern
+feedAnimal dillo@(MkDillo Dead weight) amount = dillo
 feedAnimal (MkDillo Alive weight) amount = MkDillo Alive (weight+amount)
 {-
 feedAnimal (MkDillo liveness weight) amount =
