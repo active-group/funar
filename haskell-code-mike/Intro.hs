@@ -87,3 +87,6 @@ runOverDillo dillo = dillo { dilloLiveness = Dead }
 -- - Gürteltier
 -- - Papagei
 data Parrot = MkParrot String Weight
+  deriving Show
+
+parrot1 = MkParrot "Hello" 1
