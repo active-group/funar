@@ -12,6 +12,9 @@ f :: Integer -> Integer
 -- 20
 f x = x + 7
 
+f' :: Integer -> Integer
+f' = \ x -> x + 7
+
 -- Ein Haustier ist eins der folgenden:
 -- - Hund
 -- - Katze
