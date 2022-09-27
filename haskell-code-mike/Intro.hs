@@ -228,3 +228,10 @@ feedAnimal''(amount, MkParrot sentence weight) =
 -- Ein Duschgel besteht aus:
 -- - prozentualer Anteil Seife
 -- - prozentualer Anteil Shampoo
+
+-- Eine geometrische Figur (Shape) ist eins der folgenden:
+-- - ein Kreis
+-- - Quadrat
+-- - eine Überlappung zweier geometrischer Figuren
+
+-- Ist ein Punkt innerhalb einer geometrischen Figur?
