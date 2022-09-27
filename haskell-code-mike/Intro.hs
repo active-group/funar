@@ -243,10 +243,12 @@ feedAnimal''(amount, MkParrot sentence weight) =
 -- Eine Liste ist eins der folgenden:
 -- - die leere Liste
 -- - eine Cons-Liste aus erstem Element und Rest-Liste
-data ListOfIntegers =
+data ListOf element =
     Empty
-  | Cons Integer ListOfIntegers
+  | Cons element (ListOf element)
   deriving Show
+
+{-
 
 list1 = Cons 5 Empty
 list2 = Cons 6 (Cons 3 Empty)
@@ -254,7 +256,24 @@ list3 = Cons 5 list2
 list4 = Cons 8 list3
 
 -- Elemente einer Liste summieren
-listSum :: ListOfIntegers -> Integer
+listSum :: ListOf Integer -> Integer
+-- >>> listSum list4
+-- 22
 listSum Empty = 0
 listSum (Cons first rest) =
+    first + (listSum rest)
+-}
+
+-- Eingebaute Listen:
+-- - die leere Liste: []
+-- - Cons-Liste first:rest
+
+list1 = 5 : []
+list2 = 6 : (3 : [])
+list3 = [5, 6, 3] -- wie list
+list4 = 8 : list3
+
+listSum :: [Integer] -> Integer
+listSum [] = 0
+listSum (first : rest) = 
     first + (listSum rest)
