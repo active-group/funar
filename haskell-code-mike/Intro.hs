@@ -196,3 +196,11 @@ feedAnimal''(amount, MkDillo liveness weight) =
         Dead -> MkDillo liveness weight
 feedAnimal''(amount, MkParrot sentence weight) =
     MkParrot sentence (weight+amount)
+
+-- Ein Duschprodukt ist eins der folgenden:
+-- - Seife (pH-Wert)
+-- - Shampoo (Farbe, Haartyp)
+
+-- Ein Duschgelt besteht aus:
+-- - prozentualer Anteil Seife
+-- - prozentualer Anteil Shampoo
