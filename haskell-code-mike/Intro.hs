@@ -349,3 +349,8 @@ strikeMultiples n list =
 -- lazy/nicht-strikt: Argumente erst auswerten, wenn sie benötigt werden
 natsFrom :: Integer -> [Integer]
 natsFrom n = n : (natsFrom (n+1))
+
+-- Annahme: erstes Element der Eingabeliste ist Primzahl
+sieve :: [Integer] -> [Integer]
+sieve [] = []
+sieve (first:rest) = first : (sieve (strikeMultiples first rest))
