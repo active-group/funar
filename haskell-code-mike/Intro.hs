@@ -189,6 +189,10 @@ swap :: (a -> b -> c) -> (b -> a -> c)
 -- swap f = \ b -> \ a -> f a b
 swap f b a = f a b
 
+tuplify :: (a -> b -> c) -> ((a, b) -> c)
+tuplify f = -- f :: a -> b -> c
+  \ (a, b) -> f a b
+
 -- Tupel
 feedAnimal'' :: (Weight, Animal) -> Animal
 -- >>> feedAnimal''(3, dillo1)
