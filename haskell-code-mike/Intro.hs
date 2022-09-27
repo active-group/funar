@@ -344,5 +344,8 @@ strikeMultiples n (first:rest) =
 strikeMultiples n list =
     filter (\e -> mod e n /= 0) list
 
+-- lazy evaluation
+-- strikt: Argumente auswerten vor Funktionsaufruf
+-- lazy/nicht-strikt: Argumente erst auswerten, wenn sie benötigt werden
 natsFrom :: Integer -> [Integer]
 natsFrom n = n : (natsFrom (n+1))
