@@ -167,6 +167,16 @@ runOverAnimal :: Animal -> Animal
 runOverAnimal (MkDillo liveness weight) = MkDillo Dead weight
 runOverAnimal (MkParrot sentence weight) = MkParrot "" weight
 
+{-
+animal_t run_over_animal(animal_t animal) {
+    switch (animal.tag) {
+        case DILLO: ...
+        case PARROT: ...
+    }
+}
+
+-}
+
 -- >>> feedAnimal dillo1 5
 -- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
 
@@ -263,6 +273,16 @@ data ListOf element =
   deriving Show
 
 {-
+struct List {
+    int tag;
+    union {
+        struct empty {}
+        struct cons { element ... List }
+    }
+}
+-}
+
+{-
 
 list1 = Cons 5 Empty
 list2 = Cons 6 (Cons 3 Empty)
@@ -294,9 +314,10 @@ listSum [] = 0
 listSum (first : rest) = 
     first + (listSum rest)
 
--- listMap :: (a -> b) -> [a] -> [b]
-
-
+listMap :: (a -> b) -> [a] -> [b]
+listMap f [] = []
+listMap f (first:rest) = 
+    (f first) : (listMap f rest)
 
 first2 :: [a] -> (a, a)
 first2 (first:(second:rest)) = (first, second)
