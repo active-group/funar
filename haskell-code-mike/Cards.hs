@@ -6,6 +6,8 @@ module Cards where
 -- Liste aller Spielkarten des französischen Blatts
 -- Denkt an die Listenfunktionen, die Ihr schon kennt!
 
+-- "Make illegable states unrepresentable."
+
 data Suit = Diamonds | Clubs | Spades | Hearts
   deriving (Show, Eq, Ord)
 
@@ -25,4 +27,7 @@ allRanks = [Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten,
 -- |Spielkarte
 data Card = Card { suit :: Suit, rank :: Rank }
   deriving (Show, Eq, Ord)
+
+deck = 
+    map (\suit -> ) all
 
