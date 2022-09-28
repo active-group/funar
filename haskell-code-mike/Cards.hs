@@ -6,6 +6,7 @@ module Cards where
 -- Liste aller Spielkarten des französischen Blatts
 -- Denkt an die Listenfunktionen, die Ihr schon kennt!
 
+-- Yaron Minsky:
 -- "Make illegable states unrepresentable."
 
 data Suit = Diamonds | Clubs | Spades | Hearts
