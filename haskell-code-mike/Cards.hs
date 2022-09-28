@@ -43,4 +43,5 @@ cartesianProduct list1 list2 =
 deck :: [Card]
 deck =
 --  concatMap (\suit -> map (\rank -> Card suit rank) allRanks) allSuits
-  cartesianProduct allSuits allRanks
+  map (uncurry Card) (cartesianProduct allSuits allRanks)
+
