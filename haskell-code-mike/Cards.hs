@@ -28,9 +28,6 @@ allRanks = [Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten,
 data Card = Card { suit :: Suit, rank :: Rank }
   deriving (Show, Eq, Ord)
 
-deck :: [Card]
-deck = 
-    concatMap (\suit -> map (\rank -> Card suit rank) allRanks) allSuits
 
 deck' =
     let suits = take 52 (cycle allSuits)
@@ -43,3 +40,7 @@ cartesianProduct :: [a] -> [b] -> [(a, b)]
 cartesianProduct list1 list2 =
   concat (map (\el1 -> map (\el2 -> (el1, el2)) list2) list1)
 
+deck :: [Card]
+deck =
+--  concatMap (\suit -> map (\rank -> Card suit rank) allRanks) allSuits
+  cartesianProduct allSuits allRanks
