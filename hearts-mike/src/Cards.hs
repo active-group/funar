@@ -1,7 +1,7 @@
 -- Das französische Blatt
 module Cards where
 
-import qualified Data.Set as Set
+import qualified Data.Set as Set -- Set.insert, Set.update, Set.Set
 import Data.Set (Set)
 
 import qualified Data.Map.Strict as Map
@@ -75,6 +75,7 @@ instance Ord Player where
 -- * Stich
 
 -- Zuletzt gespielte Karte zuerst
+-- data Trick = Trick [(Player, Card)]
 type Trick = [(Player, Card)]
 
 -- leeren Stich herstellen
@@ -103,3 +104,13 @@ leadingCardOfTrick trick = snd (last trick)
 
 -- Hände der Spieler
 type PlayerHands  = Map Player Hand
+
+{-
+data Trick =
+  -- Trick (Maybe Card) (Maybe Card) (Maybe Card) (Maybe Card)
+    Trick0
+  | Trick1 Card
+  | Trick2 Card Card
+  | Trick3 Card Card Card
+  | Trick4 Card Card Card Card
+-}

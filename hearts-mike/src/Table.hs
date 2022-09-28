@@ -17,7 +17,7 @@ import Debug.Trace (trace)
 whoTakesTrick :: Trick -> Player
 whoTakesTrick [] = undefined
 whoTakesTrick trick =
-  let loop player _ [] = player
+  let loop player _    [] = player
       loop player card ((player', card') : rest) =
         case cardBeats card' card of
           Nothing -> loop player card rest
@@ -132,6 +132,8 @@ gameOver state =
 playCard :: PlayerHands -> Player -> Card -> PlayerHands
 playCard playerHands player card =
   Map.alter (fmap (removeCard card)) player playerHands
+
+-- tableProcessEvent :: GameEvent -> TableState -> TableState
 
 -- Karten zum Stapel hinzufügen
 addToPile :: PlayerPiles -> Player -> [Card] -> PlayerPiles
