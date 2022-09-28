@@ -379,7 +379,7 @@ listSum' (first:rest) acc =
 -- >>> listIndex 5 [1,2,3]
 -- Null
 
-data Semigroup a => Optional a =
+data {- Semigroup a => -} Optional a = -- fordert Semigroup, vergißt es aber wieder
     Null
   | Result a
   deriving Show
@@ -504,6 +504,9 @@ instance (Monoid a, Monoid b) => Monoid (a, b) where
 
 instance Semigroup a => Semigroup (Optional a) where
     combine Null Null = Null
-    combine (Result a) Null = undefined
-    combine Null (Result a) = undefined
+    combine (Result a) Null = Result a
+    combine Null (Result a) = Result a
     combine (Result a) (Result a') = Result (combine a a')
+
+instance Semigroup a => Monoid (Optional a) where
+    neutral = Null -- Result neutral
