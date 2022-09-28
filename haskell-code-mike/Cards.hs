@@ -35,5 +35,5 @@ deck =
 deck' =
     let suits = take 52 (cycle allSuits)
         ranks = take 52 (cycle allRanks)
-    in zip suits ranks
+    in map (uncurry Card) (zip suits ranks)
 
