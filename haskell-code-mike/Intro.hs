@@ -366,6 +366,9 @@ listSum' (first:rest) acc =
 -- Index eines Elements in einer Liste
 -- soll 2
 -- >>> listIndex 3 [10,9,3,2,5]
+-- Result 2
+-- >>> listIndex 5 [1,2,3]
+-- Null
 
 data Optional a =
     Null
