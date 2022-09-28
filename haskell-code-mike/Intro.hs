@@ -1,7 +1,7 @@
 module Intro where
 
 -- "Functor" verstecken
-import Prelude hiding (Functor)
+import Prelude hiding (Functor, Semigroup, Monoid)
 
 -- Typsignatur
 x :: Integer
@@ -431,6 +431,8 @@ class Functor f where -- f z.B. List oder Optional
 -- => i.d.R. Konzepte aus der Mathematik
 
 {-
+- Semigroup, Monoid 
+- Functor, [Applicative], Monad
 -}
 
 instance Functor Optional where
@@ -453,3 +455,21 @@ class Eq a where
 -- ^^^ alle bei deriving zulässig
 
 -- Num: numerische Operationen
+
+-- "neutrales Element"
+-- ... "Assoziativität"
+-- ... "Kommutativität"
+
+-- Assoziativität:
+-- (a + b) + c = a + (b + c) = a + b + c
+-- (a * b) * c = a * (b * c) = a * b * c
+-- (a && b) && c = a && (b && c)
+-- (a || b) || c = a || (b || c)
+-- Zutaten:
+-- - Typ t
+-- - Operationen auf t
+-- - Gesetze / Gleichungen
+
+-- Halbgruppe:
+-- combine :: t -> t -> t
+-- combine (combine a b) c == combine a (combine b c)
