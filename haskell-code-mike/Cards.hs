@@ -28,6 +28,7 @@ allRanks = [Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten,
 data Card = Card { suit :: Suit, rank :: Rank }
   deriving (Show, Eq, Ord)
 
+deck :: [[Card]]
 deck = 
-    map (\suit -> ) all
+    map (\suit -> map (\rank -> Card suit rank) allRanks) allSuits
 
