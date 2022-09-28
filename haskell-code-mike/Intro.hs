@@ -508,5 +508,7 @@ instance Semigroup a => Semigroup (Optional a) where
     combine Null (Result a) = Result a
     combine (Result a) (Result a') = Result (combine a a')
 
+-- Optional macht aus einer Halbgruppe einen Monoiden.
+
 instance Semigroup a => Monoid (Optional a) where
     neutral = Null -- Result neutral
