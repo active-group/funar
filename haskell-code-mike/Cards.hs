@@ -56,7 +56,7 @@ data Maybe a =
 cardBeats :: Card -> Card -> Maybe Bool
 cardBeats card1 card2 =
     if suit card1 == suit card2
-    then Just (...)
+    then Just (rank card1 > rank card2)
     else Nothing
 
 -- vielleicht noch besser:
