@@ -6,6 +6,9 @@ module Cards where
 -- Liste aller Spielkarten des französischen Blatts
 -- Denkt an die Listenfunktionen, die Ihr schon kennt!
 
+data Suit = Diamonds | Clubs | Spades | Hearts
+  deriving (Show, Eq, Ord)
+
 -- |Liste aller Farben
 allSuits :: [Suit]
 allSuits = [Spades, Hearts, Diamonds, Clubs]
