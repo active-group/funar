@@ -30,5 +30,5 @@ data Card = Card { suit :: Suit, rank :: Rank }
 
 deck :: [[Card]]
 deck = 
-    map (\suit -> map (\rank -> Card suit rank) allRanks) allSuits
+    concat (map (\suit -> map (\rank -> Card suit rank) allRanks) allSuits)
 
