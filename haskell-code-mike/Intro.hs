@@ -362,3 +362,27 @@ primes = sieve (natsFrom 2)
 listSum' [] acc = acc
 listSum' (first:rest) acc =
     listSum' rest (acc + first)
+
+-- Index eines Elements in einer Liste
+-- soll 2
+-- >>> listIndex 3 [10,9,3,2,5]
+
+data Optional a =
+    Null
+  | Result a
+  deriving Show
+
+-- Fehlerfall:
+-- - Exception
+-- - -1
+-- - null
+listIndex :: a -> [a] -> Optional Integer
+listIndex x [] = Null
+listIndex x (first:rest) =
+--   ... first ... (listIndex x rest) ...
+  if x == first
+  then Result 0
+  else
+    case listIndex x rest of
+        Null -> Null
+        Result index -> Result (index + 1)
