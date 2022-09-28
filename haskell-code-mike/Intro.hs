@@ -501,3 +501,9 @@ instance (Monoid a, Monoid b) => Monoid (a, b) where
     neutral = (neutral, neutral)
 
 -- Instanzen von Semigroup und Monoid für Optional a
+
+instance Semigroup (Optional a) where
+    combine Null Null = undefined
+    combine (Result a) Null = undefined
+    combine Null (Result a) = undefined
+    combine (Result a) (Result a') = undefined
