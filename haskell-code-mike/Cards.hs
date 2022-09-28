@@ -5,3 +5,5 @@ module Cards where
 
 -- Liste aller Spielkarten des französischen Blatts
 -- Denkt an die Listenfunktionen, die Ihr schon kennt!
+
+cards = []
