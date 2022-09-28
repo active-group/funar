@@ -35,7 +35,7 @@ tuple3 = (Dog, dillo1, True)
 -- Pet: Typ
 -- Dog, Cat, Snake: Konstruktoren
 data Pet = Dog | Cat | Snake
-  deriving Eq -- macht eine Instanz von Eq automatisch
+  deriving (Eq, Show) -- macht eine Instanz von Eq automatisch
 
 -- instance: Implementierung einer Typklasse für einen Typ
 -- (==): Vergleich in "normaler" Präfix-Notation
