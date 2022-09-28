@@ -499,3 +499,5 @@ instance Monoid [a] where
 
 instance (Monoid a, Monoid b) => Monoid (a, b) where
     neutral = (neutral, neutral)
+
+-- Instanzen von Semigroup und Monoid für Optional a
