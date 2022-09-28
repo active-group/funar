@@ -32,3 +32,6 @@ deck :: [Card]
 deck = 
     concatMap (\suit -> map (\rank -> Card suit rank) allRanks) allSuits
 
+deck' =
+    
+
