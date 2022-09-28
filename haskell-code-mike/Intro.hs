@@ -421,3 +421,5 @@ class Eq a where
 -- Show: Ausdrucken show
 -- Ord: Vergleich / Reihenfolge
 -- ^^^ alle bei deriving zulässig
+
+-- Num: numerische Operationen
