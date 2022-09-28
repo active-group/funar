@@ -427,6 +427,12 @@ listMap f nonEmptyList =
 class Functor f where -- f z.B. List oder Optional
   universalMap :: (a -> b) -> f a -> f b
 
+-- neue Typklassen: domänenübergreifende Konzepte
+-- => i.d.R. Konzepte aus der Mathematik
+
+{-
+-}
+
 instance Functor Optional where
     universalMap = optionalMap
 
