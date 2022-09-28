@@ -405,14 +405,26 @@ listIndex x (first:rest) =
   if x == first
   then Result 0
   else
+    -- optionalMap (\index -> index + 1) (listIndex x rest)
+    optionalMap ((+) 1) (listIndex x rest)
+{-    
     case listIndex x rest of
         Null -> Null
         Result index -> Result (index + 1)
+-}
 
 optionalMap :: (a -> b) -> Optional a -> Optional b
 optionalMap f Null = Null
 optionalMap f (Result a) = Result (f a)
 
+listMap :: (a -> b) -> [a] -> [b]
+listMap f [] = []
+-- listMap f (first:rest) =
+--    (f first) : (listMap f rest)
+listMap f nonEmptyList =
+  let first = head nonEmptyList
+      rest = tail nonEmptyList
+   in (f first) : (listMap f rest)
 {-
 Eq ist eine sogenannte Typklasse. => (aus OO) denke "Interface"
 
