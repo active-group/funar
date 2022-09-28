@@ -37,6 +37,17 @@ tuple3 = (Dog, dillo1, True)
 data Pet = Dog | Cat | Snake
   deriving Show
 
+-- instance: Implementierung einer Typklasse für einen Typ
+-- (==): Vergleich in "normaler" Präfix-Notation
+instance Eq Pet where -- "Pet hat die Eigenschaft Eq"
+   (==) = eqPet
+
+eqPet :: Pet -> Pet -> Bool
+eqPet Dog Dog = True
+eqPet Cat Cat = True
+eqPet Snake Snake = True
+eqPet _ _ = False
+
 -- data Bool = True | False
 
 -- Ist ein Haustier niedlich?
