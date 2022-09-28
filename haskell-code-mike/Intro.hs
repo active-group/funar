@@ -427,6 +427,12 @@ listMap f nonEmptyList =
 class Functor f where -- f z.B. List oder Optional
   universalMap :: (a -> b) -> f a -> f b
 
+instance Functor Optional where
+    universalMap = optionalMap
+
+instance Functor [] where -- "List"
+    universalMap = listMap
+
 {-
 Eq ist eine sogenannte Typklasse. => (aus OO) denke "Interface"
 
