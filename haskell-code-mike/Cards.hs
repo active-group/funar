@@ -45,3 +45,19 @@ deck =
 --  concatMap (\suit -> map (\rank -> Card suit rank) allRanks) allSuits
   map (uncurry Card) (cartesianProduct allSuits allRanks)
 
+{-
+data Maybe a =
+    Nothing
+  | Just a
+-}
+
+-- "Ist eine Karte höherwertiger als eine andere?"
+-- ... geht nur bei Karten gleicher Farbe
+cardBeats :: Card -> Card -> Maybe Bool
+cardBeats card1 card2 =
+    if suit card1 == suit card2
+    then Just (...)
+    else Nothing
+
+-- vielleicht noch besser:
+data BeatResult = Beats | GetsBeaten | CantCompare
