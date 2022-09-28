@@ -483,3 +483,16 @@ class Semigroup t where
 instance Semigroup [a] where
     combine = (++)
 
+-- wenn a und b Halbgruppen sind, ist es auch (a, b)
+instance (Semigroup a, Semigroup b) => Semigroup (a, b) where
+    combine (a1, b1) (a2, b2) =
+        (combine a1 a2, combine b1 b2)
+
+-- Monoid: Halbruppe + neutrales Element n
+-- combine n a = combine a n = a
+-- Implikation andersrum: Jeder Monoid muß auch eine Halbgruppe
+class Semigroup a => Monoid a where
+    neutral :: a
+
+instance Monoid [a] where
+    neutral = []
