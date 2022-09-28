@@ -28,7 +28,7 @@ allRanks = [Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten,
 data Card = Card { suit :: Suit, rank :: Rank }
   deriving (Show, Eq, Ord)
 
-deck :: [[Card]]
+deck :: [Card]
 deck = 
     concat (map (\suit -> map (\rank -> Card suit rank) allRanks) allSuits)
 
