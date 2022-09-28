@@ -515,5 +515,5 @@ instance Semigroup a => Semigroup (Optional a) where
 
 -- Optional macht aus einer Halbgruppe einen Monoiden.
 
-instance Monoid a => Monoid (Optional a) where
+instance Semigroup a => Monoid (Optional a) where
     neutral = Null
