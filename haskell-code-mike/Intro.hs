@@ -376,7 +376,12 @@ data Optional a =
 -- - Exception
 -- - -1
 -- - null
-listIndex :: a -> [a] -> Optional Integer
+
+-- Eq a: Constraint / Einschränkung
+-- "a muß ein vergleichbarer Typ sein"
+-- "a muß die Funktion == unterstützen"
+
+listIndex :: Eq a => a -> [a] -> Optional Integer
 listIndex x [] = Null
 listIndex x (first:rest) =
 --   ... first ... (listIndex x rest) ...
