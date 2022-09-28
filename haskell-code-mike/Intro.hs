@@ -394,3 +394,10 @@ listIndex x (first:rest) =
     case listIndex x rest of
         Null -> Null
         Result index -> Result (index + 1)
+
+{-
+Eq ist eine sogenannte Typklasse. => (aus OO) denke "Interface"
+
+class Eq a where
+  (==) :: a -> a -> Bool
+-}
