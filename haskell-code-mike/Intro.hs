@@ -415,3 +415,8 @@ Eq ist eine sogenannte Typklasse. => (aus OO) denke "Interface"
 class Eq a where
   (==) :: a -> a -> Bool
 -}
+
+-- "Eingebaute" Typklassen:
+-- Eq: Gleichheit (==)
+-- Show: Ausdrucken show
+-- Ord: Vergleich / Reihenfolge
