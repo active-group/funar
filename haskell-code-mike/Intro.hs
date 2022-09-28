@@ -473,3 +473,13 @@ class Eq a where
 -- Halbgruppe:
 -- combine :: t -> t -> t
 -- combine (combine a b) c == combine a (combine b c)
+
+-- Beispiele: Duschprodukte, Shape, image
+
+class Semigroup t where
+    -- combine (combine a b) c == combine a (combine b c)
+    combine :: t -> t -> t
+
+instance Semigroup [a] where
+    combine = (++)
+
