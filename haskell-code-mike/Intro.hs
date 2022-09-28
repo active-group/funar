@@ -496,3 +496,6 @@ class Semigroup a => Monoid a where
 
 instance Monoid [a] where
     neutral = []
+
+instance (Monoid a, Monoid b) => Monoid (a, b) where
+    neutral = (neutral, neutral)
