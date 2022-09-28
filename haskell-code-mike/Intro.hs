@@ -420,3 +420,4 @@ class Eq a where
 -- Eq: Gleichheit (==)
 -- Show: Ausdrucken show
 -- Ord: Vergleich / Reihenfolge
+-- ^^^ alle bei deriving zulässig
