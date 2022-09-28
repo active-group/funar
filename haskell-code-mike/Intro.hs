@@ -42,13 +42,14 @@ data Pet = Dog | Cat | Snake
 {-
 instance Eq Pet where -- "Pet hat die Eigenschaft Eq"
    (==) = eqPet
--}
+
 
 eqPet :: Pet -> Pet -> Bool
 eqPet Dog Dog = True
 eqPet Cat Cat = True
 eqPet Snake Snake = True
 eqPet _ _ = False
+-}
 
 -- data Bool = True | False
 
