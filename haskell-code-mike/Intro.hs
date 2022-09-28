@@ -1,5 +1,8 @@
 module Intro where
 
+-- "Functor" verstecken
+import Prelude hiding (Functor)
+
 -- Typsignatur
 x :: Integer
 x = 12
@@ -332,14 +335,6 @@ listSum nonEmptyList =
         rest = tail nonEmptyList
     in first + listSum rest
 
-listMap :: (a -> b) -> [a] -> [b]
-listMap f [] = []
--- listMap f (first:rest) = 
---    (f first) : (listMap f rest)
-listMap f nonEmptyList =
-    let first = head nonEmptyList
-        rest = tail nonEmptyList
-    in (f first) : (listMap f rest)
 
 first2 :: [a] -> (a, a)
 first2 (first:(second:rest)) = (first, second)
@@ -417,7 +412,8 @@ optionalMap :: (a -> b) -> Optional a -> Optional b
 optionalMap f Null = Null
 optionalMap f (Result a) = Result (f a)
 
-listMap :: (a -> b) -> [a] -> [b]
+type List a = [a]
+listMap ::     (a -> b) -> List    a -> List      b
 listMap f [] = []
 -- listMap f (first:rest) =
 --    (f first) : (listMap f rest)
@@ -425,6 +421,12 @@ listMap f nonEmptyList =
   let first = head nonEmptyList
       rest = tail nonEmptyList
    in (f first) : (listMap f rest)
+
+-- Gemeinsamkeit von List und Optional: haben Typparameter
+
+class Functor f where -- f z.B. List oder Optional
+  universalMap :: (a -> b) -> f a -> f b
+
 {-
 Eq ist eine sogenannte Typklasse. => (aus OO) denke "Interface"
 
