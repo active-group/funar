@@ -48,7 +48,7 @@ gameSem players =
                   case step of
                     RecordedEvent event cont ->
                       do
-                        let (step', state') = runGameStep (cont ()) state
+                        let (step', state') = trace ("RecordedEvent " ++ show event) (runGameStep (cont ()) state)
                         loop step' state' (event : events)
                     NeedsCommand cont ->
                       do
