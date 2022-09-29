@@ -191,3 +191,78 @@ tableProcessCommand (PlayCard player card) state =
     [IllegalCardAttempted player card]
 
 -- brauchen Monaden!
+data Game a =
+    Done a -- return
+  | PlayValid Player Card (Bool -> Game a)
+--  | LegalCardPlayed Player Card (() -> Game) etc.
+  | RecordEvent GameEvent (() -> Game a)
+  | TurnOver (Bool -> Game a)
+  | Trick (Trick -> Game a)
+  | GameOver (Maybe Player -> Game a)
+  | PlayerAfter Player (Player -> Game a)
+
+playValidM :: Player -> Card -> Game Bool
+playValidM player card = PlayValid player card Done
+
+recordEventM :: GameEvent -> Game ()
+recordEventM event = RecordEvent event Done
+
+turnOverM :: Game Bool
+turnOverM = TurnOver Done
+
+trickM :: Game Trick
+trickM = Trick Done
+
+playerAfterM player = PlayerAfter player Done
+
+gameOverM = GameOver Done
+
+instance Functor Game where
+
+instance Applicative Game where
+
+instance Monad Game where
+  return = Done
+  (PlayValid player card cont) >>= next =
+    PlayValid player card (\valid ->
+      (>>=) (cont valid) next)
+  (RecordEvent event cont) >>= next =
+    RecordEvent
+      event
+      ( \() ->
+          cont () >>= next
+      )
+  (TurnOver cont) >>= next =
+    TurnOver
+      ( \over ->
+          cont over >>= next
+      )
+  (Trick cont) >>= next =
+    Trick
+      ( \trick ->
+          cont trick >>= next
+      )
+  (PlayerAfter player cont) >>= next =
+    PlayerAfter
+      player
+      ( \player ->
+          cont player >>= next
+      )
+  (GameOver cont) >>= next =
+    GameOver
+      ( \won ->
+          cont won >>= next
+      )
+  (Done result) >>= next = next result
+
+tableProcessCommandM :: GameCommand -> Game (Maybe Player)
+tableProcessCommandM (DealHands hands) =
+  do mapM_ recordEventM (map (uncurry HandDealt) (Map.toList hands))
+     return Nothing
+tableProcessCommandM (PlayCard player card) =
+  do valid <- playValidM player card
+     if valid
+     then undefined
+     else
+      do recordEventM (IllegalCardAttempted player card)
+         return Nothing
