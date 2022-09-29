@@ -112,3 +112,5 @@ invertPayment (MkPayment Long date amount currency) =
   MkPayment Short date amount currency
 invertPayment (MkPayment Short date amount currency) =
   MkPayment Long date amount currency
+
+let c4 = And (One EUR) (zeroCouponBond christmas 1 EUR)
