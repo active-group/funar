@@ -254,6 +254,8 @@ instance Monad Game where
       ( \won ->
           cont won >>= next
       )
+  (GetCommand cont) >>= next =
+    GetCommand (\command -> cont command >>= next)
   (Done result) >>= next = next result
 
 -- Einen Spielschritt verarbeiten
@@ -297,5 +299,5 @@ tableLoopM :: GameCommand -> Game (Maybe Player)
 tableLoopM command =
   do maybeWinner <- tableProcessCommandM command
      case maybeWinner of
-      Nothing -> undefined
+      Nothing ->
       Just winner -> return maybeWinner
