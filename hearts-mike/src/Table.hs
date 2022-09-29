@@ -313,6 +313,8 @@ data GameStep a =
 -- "Spiel laufen lassen"
 --- runGameStep :: Game a -> TableState -> ...
 runGameStep :: Game a -> TableState -> (GameStep a, TableState)
+runGameStep game state 
+  | trace ("runGameStep " ++ state) False = undefined
 runGameStep (PlayValid player card cont) state =
   runGameStep (cont (playValid state player card)) state
 runGameStep (TurnOver cont) state =
