@@ -255,6 +255,7 @@ instance Monad Game where
       )
   (Done result) >>= next = next result
 
+
 tableProcessCommandM :: GameCommand -> Game (Maybe Player)
 tableProcessCommandM (DealHands hands) =
   do mapM_ recordEventM (map (uncurry HandDealt) (Map.toList hands))
