@@ -329,7 +329,7 @@ runGameStep (GameOver cont) state =
 runGameStep (Done result) state = (GameDone result, state)
 
 runGameStep (RecordEvent event cont) state =
-   (RecordedEvent event cont, state)
+   (RecordedEvent event cont, tableProcessEvent event state)
 runGameStep (GetCommand cont) state = 
    (NeedsCommand cont, state)
 
