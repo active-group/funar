@@ -49,12 +49,18 @@ data Contract =
   | Multiple Amount Contract
   | Later Date Contract
   -- "Ich zahle ..."
-
+--  | WithDirection Direction Contract
+  -- 
+  | Reverse Contract
+  | And Contract Contract
   deriving Show
 
 -- "Ich bekomme 100€ jetzt."
 c1 = Multiple 100 (One EUR)
 zcb1 = Later christmas (Multiple 100 (One EUR))
+
+-- "Ich bezahle Weihnachten 100€."
+c2 = Reverse zcb1
 
 zeroCouponBond date amount currency =
     Later date (Multiple amount (One currency))
