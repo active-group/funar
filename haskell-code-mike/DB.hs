@@ -32,6 +32,7 @@ p1 = [Put "Mike" 51,
 -- Idee, von FP-Seite: Benutze lambda, um dem Resultat einer Op einen Namen zu geben
 -- Idee, NodeJS: Callback
 
+-- in OO wäre das hier ein Interface:
 data DB a =
     Get String (Integer -> DB a) -- <-- Continuation
   | Put String Integer (() -> DB a)
