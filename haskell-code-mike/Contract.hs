@@ -53,6 +53,7 @@ data Contract =
   -- 
   | Reverse Contract
   | And Contract Contract
+  | Zero
   deriving Show
 
 instance Semigroup Contract where
