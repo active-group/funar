@@ -127,3 +127,8 @@ p1'' = do put "Mike" 51
 -- ? Wunsch: IO a -> a
 
 -- main :: IO () => ghc das IO-Programm zur Ausführung bringt
+
+pio = do line <- getLine
+         if line == "Marcus"
+         then putStrLn "Glückwunsch"
+         else putStrLn "bäh" 
