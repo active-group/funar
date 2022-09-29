@@ -43,7 +43,8 @@ runDB (Get key cont) map =
     let value = map ! key
     in runDB (cont value) map
 runDB (Put key value cont) map =
-    
+    let map' = Map.insert key value map
+    in runDB (cont ()) map'
 runDB (Return result) map = result
 
 -- Beschreibung von etwas, was man mit der Datenbank machen könnte
