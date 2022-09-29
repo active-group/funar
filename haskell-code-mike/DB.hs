@@ -38,6 +38,10 @@ data DB a =
   | Return a
 
 -- DB-Programm ausführen
+-- >>> runDB p1 Map.empty
+-- "103"
+
+-- Interpreter
 runDB :: DB a -> Map String Integer -> a
 runDB (Get key cont) map = 
     let value = map ! key
