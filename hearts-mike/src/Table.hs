@@ -307,4 +307,12 @@ tableLoopM command =
 --- runGameStep :: Game a -> TableState -> ...
 runGameStep (PlayValid player card cont) state =
   runGameStep (cont (playValid state player card)) state
+runGameStep (TurnOver cont) state =
+  runGameStep (cont (turnOver state)) state
+runGameStep (Trick cont) state =
+  runGameStep (cont (tableStateTrick state)) state
+runGameStep (PlayerAfter player cont) state =
+  runGameStep (cont (playerAfter state player)) state
+runGameStep (GameOver cont) state =
+  runGameStep (cont (gameOver state)) state
 
