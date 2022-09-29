@@ -302,3 +302,9 @@ tableLoopM command =
       Nothing ->
         GetCommand tableLoopM
       Just winner -> return maybeWinner
+
+-- "Spiel laufen lassen"
+--- runGameStep :: Game a -> TableState -> ...
+runGameStep (PlayValid player card cont) state =
+  runGameStep (cont (playValid state player card)) state
+
