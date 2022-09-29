@@ -41,6 +41,9 @@ data Contract =
     One Currency
     -- "Ich bekomme 100€ jetzt."
   | Multiple Amount Contract
+  | Later Date Contract
+  deriving Show
 
 -- "Ich bekomme 100€ jetzt."
 c1 = Multiple 100 (One EUR)
+zcb1 = Later christmas (Multiple 100 (One EUR))
