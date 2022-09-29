@@ -63,6 +63,8 @@ playerProcessEventM player event =
      let playerState' = playerProcessEvent player event playerState
      State.put playerState'
 
+-- Sem: Effekt-Monade aus Polysemy
+-- effects: Liste aller Effekte, auf die Spieler:in zugreifen kann
 type GameEventProcessor effects = GameEvent -> Sem effects [GameCommand]
 
 -- ... macht aus Events Commands
