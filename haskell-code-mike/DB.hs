@@ -87,3 +87,8 @@ splice (Put key value cont) next =
     Put key value (\() ->    splice (cont ())    next)
 splice (Return result) next = next result 
 
+p1' = splice (put "Mike" 51) (\() ->
+      splice (get "Mike") (\x ->
+      splice (put "Mike" (x+1)) (\() ->
+      splice (get "Mike") (\y ->
+      Return (show (x+y))))))
