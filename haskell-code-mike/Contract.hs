@@ -47,3 +47,7 @@ data Contract =
 -- "Ich bekomme 100€ jetzt."
 c1 = Multiple 100 (One EUR)
 zcb1 = Later christmas (Multiple 100 (One EUR))
+
+zeroCouponBond date amount currency =
+    Later date (Multiple amount (One currency))
+zcb1' = zeroCouponBond christmas 100 EUR
