@@ -86,3 +86,4 @@ splice (Get key cont) next =
 splice (Put key value cont) next =
     Put key value (\() ->    splice (cont ())    next)
 splice (Return result) next = next result 
+
