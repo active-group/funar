@@ -87,6 +87,20 @@ splice (Put key value cont) next =
     Put key value (\() ->    splice (cont ())    next)
 splice (Return result) next = next result 
 
+{-
+class Monad m where
+  (>>=) :: m a -> (a -> m b) -> m b
+  return :: a -> m a
+-}
+
+instance Functor DB where
+
+instance Applicative DB where
+
+instance Monad DB where
+    (>>=) = splice
+    return = Return
+
 p1' :: DB String
 -- >>> runDB p1' Map.empty
 -- "103"
@@ -96,8 +110,13 @@ p1' = splice (put "Mike" 51) (\() ->
       splice (get "Mike") (\y ->
       Return (show (x+y))))))
 
-{-
-class Monad m where
-  (>>=) :: m a -> (a -> m b) -> m b
-  return :: a -> m a
--}
+p1'' :: DB String
+-- >>> runDB p1'' Map.empty
+-- "103"
+
+-- => p1'' wird vom Haskell-Compiler in p1'
+p1'' = do put "Mike" 51
+          x <- get "Mike"
+          put "Mike" (x+1)
+          y <- get "Mike"
+          return (show (x+y))
