@@ -95,6 +95,7 @@ class Monad m where
 -}
 
 instance Functor DB where
+    -- fmap :: (a -> b) -> DB a -> DB b
 
 instance Applicative DB where
 
