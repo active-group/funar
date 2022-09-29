@@ -60,5 +60,26 @@ p1 = Put "Mike" 51 (\() ->
      Return (show (x + y))))))
 
 -- Die Klammern müssen noch weg.
--- Nix läuft.
+-- Nix läuft. <- erledigt
+-- Bisher "monolithisch", wollen Datenbank-Programme modular gestalten
+-- außerdem: Groß- statt Kleinbuchstaben
 
+-- -> einzelne Bausteine
+
+get :: String -> DB Integer
+get key = Get key Return -- (\ value -> Return value)
+
+put :: String -> Integer -> DB ()
+put key value = Put key value Return
+
+c1 :: DB ()
+c1 = put "Mike" 51
+c2 :: DB Integer
+c2 = get "Mike"
+
+-- Wie zwei Befehle / zwei DBs zusammensetzen?
+
+splice :: DB a -> (a -> DB b) -> DB b 
+splice (Get key cont) next = undefined
+splice (Put key value cont) next = undefined
+splice (Return result) next = undefined
