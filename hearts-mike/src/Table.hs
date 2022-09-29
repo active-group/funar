@@ -303,6 +303,11 @@ tableLoopM command =
         GetCommand tableLoopM
       Just winner -> return maybeWinner
 
+data GameStep a =
+    RecordedEvent GameEvent (() -> Game a)
+  | NeedsCommand (GameCommand -> Game a)
+  | GameDone a
+
 -- "Spiel laufen lassen"
 --- runGameStep :: Game a -> TableState -> ...
 runGameStep (PlayValid player card cont) state =
