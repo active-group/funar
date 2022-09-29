@@ -12,6 +12,9 @@ Zero-Bond / Zero-Coupon Bond
 - Vielfaches
 - Später
 
+3. Wiederholen
+
+"Currency Swap": Weihnachten: Ich bekomme 100€ und ich zahle 100 Pfund.
 -}
 
 data Date = Date String deriving (Eq, Ord, Show)
@@ -36,12 +39,17 @@ zcb1 = ZeroCouponBond christmas 100 EUR
 
 -}
 
+data Direction = Long | Short
+  deriving Show
+
 data Contract =
     -- "Ich bekomme 1€ jetzt."
     One Currency
     -- "Ich bekomme 100€ jetzt."
   | Multiple Amount Contract
   | Later Date Contract
+  -- "Ich zahle ..."
+
   deriving Show
 
 -- "Ich bekomme 100€ jetzt."
