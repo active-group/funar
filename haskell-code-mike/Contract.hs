@@ -77,5 +77,6 @@ currencySwap date amount1 currency1 amount2 currency2 =
 -- schön wäre noch: Semantik
 
 data Payment = MkPayment Direction Date Amount Currency
+  deriving Show
 
-semantics :: Contract -> [Payment]
+semantics :: Contract -> Date -> ([Payment], Contract)
