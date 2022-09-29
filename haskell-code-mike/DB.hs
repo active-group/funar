@@ -121,3 +121,6 @@ p1'' = do put "Mike" 51
           put "Mike" (x+1)
           y <- get "Mike"
           return (show (x+y))
+
+-- In Haskell eingebaut: IO-Monade
+-- REPL führt Werte vom Typ IO a automatisch
