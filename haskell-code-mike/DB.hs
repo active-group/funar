@@ -42,7 +42,8 @@ runDB :: DB a -> Map String Integer -> a
 runDB (Get key cont) map = 
     let value = map ! key
     in runDB (cont value) map
-runDB (Put key value cont) map = undefined
+runDB (Put key value cont) map =
+    
 runDB (Return result) map = result
 
 -- Beschreibung von etwas, was man mit der Datenbank machen könnte
