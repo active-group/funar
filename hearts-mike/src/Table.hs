@@ -321,7 +321,9 @@ runGameStep (PlayerAfter player cont) state =
 runGameStep (GameOver cont) state =
   runGameStep (cont (gameOver state)) state
   
-runGameStep (Done result) state = undefined
+runGameStep (Done result) state = (GameDone result, state)
 
-runGameStep (RecordEvent event cont) state = undefined
-runGameStep (GetCommand cont) state = undefined
+runGameStep (RecordEvent event cont) state =
+   (RecordedEvent event cont, state)
+runGameStep (GetCommand cont) state = 
+   (NeedsCommand cont, state)
