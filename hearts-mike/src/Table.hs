@@ -143,8 +143,8 @@ addToPile playerPiles player cards =
 
 -- Ereignis in den Zustand einarbeiten
 tableProcessEvent :: GameEvent -> TableState -> TableState
--- tableProcessEvent event state
---   | trace ("tableProcessEvent " ++ show state ++ " " ++ show event) False = undefined
+tableProcessEvent event state
+   | trace ("tableProcessEvent " ++ show state ++ " " ++ show event) False = undefined
 tableProcessEvent (HandDealt player hand) state =
   state
     { tableStateHands = Map.insert player hand (tableStateHands state),
