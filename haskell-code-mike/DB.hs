@@ -124,3 +124,4 @@ p1'' = do put "Mike" 51
 
 -- In Haskell eingebaut: IO-Monade
 -- REPL führt Werte vom Typ IO a automatisch
+-- ? Wunsch: IO a -> a
