@@ -31,4 +31,13 @@ p1 = [Put "Mike" 51,
 
 data DB a =
     Get String (Integer -> DB a) -- <-- Continuation
-  | Put String Integer (() -> )
+  | Put String Integer (() -> DB a)
+  | Return a
+
+-- Beschreibung von etwas, was man mit der Datenbank machen könnte
+p1 :: DB String
+p1 = Put "Mike" 51 (\() ->
+     Get "Mike" (\x ->
+     Put "Mike" (x+1) (\() ->
+     Get "Mike" (\y ->
+     Return (show (x + y))))))
