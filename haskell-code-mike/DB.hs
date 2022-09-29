@@ -96,6 +96,11 @@ class Monad m where
 
 instance Functor DB where
     -- fmap :: (a -> b) -> DB a -> DB b
+    fmap f (Get key cont) =
+        Get key (\value -> fmap f (cont value))
+    fmap f (Put key value cont) = 
+        Put key value (\() -> fmap f (cont ()))
+    fmap f (Return result) = Return (f result)
 
 instance Applicative DB where
 
