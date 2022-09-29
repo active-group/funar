@@ -80,3 +80,5 @@ data Payment = MkPayment Direction Date Amount Currency
   deriving Show
 
 semantics :: Contract -> Date -> ([Payment], Contract)
+-- let (payments, residualContract) = semantics contract date
+-- in ...
