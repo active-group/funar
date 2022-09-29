@@ -314,7 +314,7 @@ data GameStep a =
 --- runGameStep :: Game a -> TableState -> ...
 runGameStep :: Game a -> TableState -> (GameStep a, TableState)
 runGameStep game state 
-  | trace ("runGameStep " ++ state) False = undefined
+  | trace ("runGameStep " ++ show state) False = undefined
 runGameStep (PlayValid player card cont) state =
   runGameStep (cont (playValid state player card)) state
 runGameStep (TurnOver cont) state =
