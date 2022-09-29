@@ -260,6 +260,8 @@ instance Monad Game where
 
 -- Einen Spielschritt verarbeiten
 tableProcessCommandM :: GameCommand -> Game (Maybe Player)
+tableProcessCommandM command
+  | trace ("tableProcessCommandM " ++ command) False = undefined
 tableProcessCommandM (DealHands hands) =
   do
     mapM_ (recordEventM . uncurry HandDealt) (Map.toList hands)
