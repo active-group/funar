@@ -130,5 +130,6 @@ p1'' = do put "Mike" 51
 
 pio = do line <- getLine
          if line == "Marcus"
-         then putStrLn "Glückwunsch"
+         then do putStrLn "Glückwunsch"
+                 pio
          else putStrLn "bäh" 
