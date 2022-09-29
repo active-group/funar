@@ -1,0 +1,128 @@
+Monaden:
+
+- Abläufe beschreiben (Kartenspiel)
+- mit der Außenwelt kommunizieren
+- hexagonale Architektur
+- Dependency Injection
+- Cross-cutting concerns
+- Continuations
+- Asynchronität
+-> Monade
+
+Auch noch:
+    - Validierung
+    - funktionale UI
+    - funktionale Modellierung
+
+Remote Debugging:
+https://gitlab.haskell.org/ghc/ghc-debug
+
+DSLs für Hardware/Realtime:
+https://github.com/GaloisInc/cryptol
+https://ivorylang.org/ivory-introduction.html
+
+Haskell/FP:
+Einführung in Haskelll:
+https://www.cs.nott.ac.uk/~pszgmh/pih.html
+
+http://learnyouahaskell.com/introduction
+
+Blog "OO-Mensch lernt FP"
+https://blog.ploeh.dk/
+
+"DDD mit F#"
+https://pragprog.com/titles/swdddf/domain-modeling-made-functional/
+"Funktionale Modellierung mit Haskell"
+https://algebradriven.design/
+
+Debugging:
+https://wiki.haskell.org/Debugging
+
+Debug.Trace:
+https://hackage.haskell.org/package/base-4.17.0.0/docs/Debug-Trace.html
+
+Event-Sourcing (mit "applikativen Profunktoren"):
+https://www.youtube.com/watch?v=Nq_6VZsiXXE
+Folien dazu:
+https://tjenwellens.eu/everblog/b4cc2df6-b008-48cb-8129-26cfd59e2069/
+Blog-Post:
+https://thinkbeforecoding.com/post/2021/12/17/functional-event-sourcing-decider?hmsr=joyk.com&utm_source=joyk.com&utm_medium=referral
+
+C4-Modell:
+https://c4model.com/
+
+AUTOSAR:
+https://www.autosar.org/standards/classic-platform/
+
+Event-Sourcing
+https://martinfowler.com/eaaDev/EventSourcing.html
+
+Literate Haskell:
+https://wiki.haskell.org/Literate_programming
+
+Pandoc:
+https://pandoc.org/
+
+Hoogle:
+https://hoogle.haskell.org/
+
+Kartenspiel Hearts:
+https://cardgames.io/hearts/
+
+Enum (für Markus G):
+https://hackage.haskell.org/package/base-4.17.0.0/docs/GHC-Enum.html
+
+Zeitplan:
+
+9:00 Beginn
+10:15-10:25 Pause
+11:30-11:40 Pause
+12:30-13:30 Mittagspause
+14:30-14:45 Pause
+15:45-16:00 Pause
+17:00 Ende
+
+Haskell:
+cabal repl
+
+DeinProgramm:
+https://www.deinnprogramm.de/
+
+Racket:
+https://racket-lang.org/
+
+Repo:
+https://github.com/active-group/funar
+
+https://github.com/active-group/funar/blob/master/vorkurs/image.rkt
+
+Konstruktionsanleitungen:
+https://docs.racket-lang.org/deinprogramm/Konstruktionsanleitungen.html
+
+Literatur:
+https://pragprog.com/titles/swdddf/domain-modeling-made-functional/
+https://algebradriven.design/
+
+
+ls -1 *.rkt | entr -s 'ls -1 *.rkt | xargs git add && git commit -m "Update." && git push'
+
+
+(define-record duschgel
+  mk-duschgel
+  (anteilseife integer))
+  
+(define anteilshampoo
+  (lambda (duschgel)
+    (- 100
+        (anteilseife duschgel))))
+
+(duschgel) -> 100 - duschgel.seife
+
+int shampoo() {
+  return 100 - this.seife;
+}
+
+anteilShampoo duschgel = 100 - (anteilSeife duschgel)
+
+
+
