@@ -98,7 +98,7 @@ instance Functor DB where
 instance Applicative DB where
 
 instance Monad DB where
-    (>>=) = splice
+    (>>=) = splice -- auch genannt "bind", Scala, Java: "flatMap"
     return = Return
 
 p1' :: DB String
