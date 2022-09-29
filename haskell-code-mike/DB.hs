@@ -37,6 +37,14 @@ data DB a =
   | Put String Integer (() -> DB a)
   | Return a
 
+-- DB-Programm ausführen
+runDB :: DB a -> Map String Integer -> a
+runDB (Get key cont) map = 
+    let value = map ! key
+    in runDB (cont value) map
+runDB (Put key value cont) map = undefined
+runDB (Return result) map = result
+
 -- Beschreibung von etwas, was man mit der Datenbank machen könnte
 p1 :: DB String
 p1 = Put "Mike" 51 (\() ->
@@ -47,3 +55,4 @@ p1 = Put "Mike" 51 (\() ->
 
 -- Die Klammern müssen noch weg.
 -- Nix läuft.
+
