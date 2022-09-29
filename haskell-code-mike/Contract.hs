@@ -69,3 +69,7 @@ c2 = Reverse zcb1
 zeroCouponBond date amount currency =
     Later date (Multiple amount (One currency))
 zcb1' = zeroCouponBond christmas 100 EUR
+
+currencySwap date amount1 currency1 amount2 currency2 =
+    And (zeroCouponBond date amount1 currency1)
+        (Reverse (zeroCouponBond date amount2 currency2))
