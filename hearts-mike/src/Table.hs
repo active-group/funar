@@ -255,15 +255,38 @@ instance Monad Game where
       )
   (Done result) >>= next = next result
 
-
+-- Einen Spielschritt verarbeiten
 tableProcessCommandM :: GameCommand -> Game (Maybe Player)
 tableProcessCommandM (DealHands hands) =
-  do mapM_ recordEventM (map (uncurry HandDealt) (Map.toList hands))
-     return Nothing
+  do
+    mapM_ (recordEventM . uncurry HandDealt) (Map.toList hands)
+    return Nothing
 tableProcessCommandM (PlayCard player card) =
-  do valid <- playValidM player card
-     if valid
-     then undefined
-     else
-      do recordEventM (IllegalCardAttempted player card)
-         return Nothing
+  do
+    valid <- playValidM player card
+    if valid
+      then do
+        recordEventM (LegalCardPlayed player card)
+        turnOver <- turnOverM
+        if turnOver
+          then do
+            trick <- trickM
+            let trickTaker = whoTakesTrick trick
+            recordEventM (TrickTaken trickTaker trick)
+            over <- gameOverM
+            case over of
+              Just winner ->
+                do
+                  recordEventM (GameEnded winner)
+                  return (Just winner)
+              Nothing ->
+                do
+                  recordEventM (PlayerTurnChanged trickTaker)
+                  return Nothing
+          else do
+            nextPlayer <- playerAfterM player
+            recordEventM (PlayerTurnChanged nextPlayer)
+            return Nothing
+      else do
+        recordEventM (IllegalCardAttempted player card)
+        return Nothing
