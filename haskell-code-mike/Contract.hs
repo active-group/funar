@@ -82,4 +82,23 @@ data Payment = MkPayment Direction Date Amount Currency
 semantics :: Contract -> Date -> ([Payment], Contract)
 -- let (payments, residualContract) = semantics contract date
 -- in ...
-semantics Zero now = ([], Zero)
+semantics Zero now =
+  ([], Zero)
+semantics (One currency) now =
+  ([Payment Long now 1 currency], Zero)
+semantics (Multiple amount contract) now =
+  let (payments, contract') = semantics contract now
+   in (map (multiplyPayment amount) payments, multiple amount contract')
+semantics (Reverse contract) now =
+  let (payments, contract') = semantics contract now
+   in (map invertPayment payments, Reverse contract')
+semantics (And contract1 contract2) now =
+  let (payments1, contract1') = semantics contract1 now
+      (payments2, contract2') = semantics contract2 now
+   in (payments1 ++ payments2, and contract1' contract2')
+semantics c@(Later date contract) now =
+  if now >= date
+    then -- Weihnachten
+      semantics contract now
+    else -- noch nicht Weihnachten
+      ([], c)
