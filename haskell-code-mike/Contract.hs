@@ -75,3 +75,7 @@ currencySwap date amount1 currency1 amount2 currency2 =
         (Reverse (zeroCouponBond date amount2 currency2))
 
 -- schön wäre noch: Semantik
+
+data Payment = MkPayment Direction Date Amount Currency
+
+semantics :: Contract -> [Payment]
