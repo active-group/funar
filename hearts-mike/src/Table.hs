@@ -200,6 +200,7 @@ data Game a =
   | Trick (Trick -> Game a)
   | GameOver (Maybe Player -> Game a)
   | PlayerAfter Player (Player -> Game a)
+  | GetCommand (GameCommand -> Game a)
 
 playValidM :: Player -> Card -> Game Bool
 playValidM player card = PlayValid player card Done
