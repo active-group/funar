@@ -55,6 +55,9 @@ data Contract =
   | And Contract Contract
   deriving Show
 
+instance Semigroup Contract where
+    (<>) = And
+
 -- "Ich bekomme 100€ jetzt."
 c1 = Multiple 100 (One EUR)
 zcb1 = Later christmas (Multiple 100 (One EUR))
