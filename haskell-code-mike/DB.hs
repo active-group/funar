@@ -30,4 +30,5 @@ p1 = [Put "Mike" 51,
 -- Idee, NodeJS: Callback
 
 data DB a =
-    Get String (Integer -> DB a)
+    Get String (Integer -> DB a) -- <-- Continuation
+  | Put String Integer (() -> )
