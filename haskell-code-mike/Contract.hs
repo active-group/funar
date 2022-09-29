@@ -113,7 +113,6 @@ invertPayment (MkPayment Long date amount currency) =
 invertPayment (MkPayment Short date amount currency) =
   MkPayment Long date amount currency
 
--- >>> semantics c4 (Date "2022-06-01")
--- ([MkPayment Long (Date "2022-06-01") 1.0 EUR],And Zero (Later (Date "2022-12-24") (Multiple 1.0 (One EUR))))
+-- >>> semantics c4 (Date "2022-10-01")
 c4 = And (One EUR) (zeroCouponBond christmas 1 EUR)
 
