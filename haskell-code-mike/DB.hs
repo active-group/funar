@@ -80,7 +80,10 @@ c2 = get "Mike"
 
 -- Wie zwei Befehle / zwei DBs zusammensetzen?
 
-splice :: DB a -> (a -> DB b) -> DB b 
+-- fmap ::      (a -> b) -> DB a -> DB b
+-- flip fmap :: DB a -> (a -> b)    -> DB b
+
+splice ::       DB a -> (a -> DB b) -> DB b 
 splice (Get key cont) next = 
     Get key       (\value -> splice (cont value) next)
     -- key cont next
