@@ -431,8 +431,8 @@ class Functor f where -- f z.B. List oder Optional
 -- => i.d.R. Konzepte aus der Mathematik
 
 {-
-- Semigroup, Monoid 
-- Functor, [Applicative], Monad
+- "ohne Typparameter": Semigroup, Monoid 
+- "mit Typparameter": Functor, [Applicative], Monad
 -}
 
 instance Functor Optional where
