@@ -95,7 +95,7 @@ semantics (Reverse contract) now =
 semantics (And contract1 contract2) now =
   let (payments1, contract1') = semantics contract1 now
       (payments2, contract2') = semantics contract2 now
-   in (payments1 ++ payments2, and contract1' contract2')
+   in (payments1 ++ payments2, Contract.and contract1' contract2')
 semantics c@(Later date contract) now =
   if now >= date
     then -- Weihnachten
