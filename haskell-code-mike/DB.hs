@@ -95,3 +95,9 @@ p1' = splice (put "Mike" 51) (\() ->
       splice (put "Mike" (x+1)) (\() ->
       splice (get "Mike") (\y ->
       Return (show (x+y))))))
+
+{-
+class Monad m where
+  (>>=) :: m a -> (a -> m b) -> m b
+  return :: a -> m a
+-}
