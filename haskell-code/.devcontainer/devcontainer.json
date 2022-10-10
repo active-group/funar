@@ -1,0 +1,22 @@
+{
+	"name": "haskell",
+	"dockerFile": "Dockerfile",
+	"context": "..",
+	"settings": {
+		"terminal.integrated.profiles.linux": {
+			"nix-shell": {
+				"path": "nix-shell",
+				"icon": "terminal-linux"
+			},
+			"bash": {
+				"path": "/bin/bash",
+				"icon": "terminal-linux"
+			}
+		},
+		"terminal.integrated.defaultProfile.linux": "nix-shell"
+	},
+	"extensions": [
+		"haskell.haskell",
+		"mkhl.direnv"
+	]
+}
