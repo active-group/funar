@@ -153,3 +153,17 @@
                 (if alive?
                     (+ weight amount)
                     weight))))
+
+; Ein Papagei hat folgende Eigenschaften:
+; - Satz - UND -
+; - Gewicht
+(define-record parrot
+  make-parrot
+  (parrot-sentence string)
+  (parrot-weight number))
+
+; Begrüßungs-Papagei, 1kg
+(define parrot1 (make-parrot "Hallo!" 1))
+; Verabschiedungs-Papagei, 2kg
+(define parrot2 (make-parrot "Tschüss!" 2))
+
