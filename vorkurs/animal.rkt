@@ -310,5 +310,21 @@ Schön wäre: beides billig, "expression problem"
 ; aus einer Liste die geraden Zahlen extrahieren
 ; Eingabe: 6 7 2 5 => Ausgabe 6 2
 
+; Alle ungeraden Zahlen extrahieren
+(: extract-odds (list-of-numbers -> list-of-numbers))
+
+(check-expect (extract-odds list4)
+              (cons 7 (cons 5 empty)))
+
+(define extract-odds
+  (lambda (list)
+    (cond
+      ((empty? list) ...)
+      ((cons? list)
+       ...
+       (first list)
+       (extract-odds (rest list))
+       ...))))
+
 
 
