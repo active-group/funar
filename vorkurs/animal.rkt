@@ -139,10 +139,12 @@
 
 (define feed-dillo
   (lambda (dillo amount)
-    (make-dillo (dillo-alive? dillo)
+    ; lokale Variablen
+    (define alive? (dillo-alive? dillo))
+    (define weight (dillo-weight dillo))
+    (make-dillo alive?
                 ; binäre Verzweigung:
                 ; (if <Bedingung> <Konsequente> <Alternative>)
-                (if (dillo-alive? dillo)
-                    (+ (dillo-weight dillo)
-                       amount)
-                    (dillo-weight dillo)))))
+                (if alive?
+                    (+ weight amount)
+                    weight))))
