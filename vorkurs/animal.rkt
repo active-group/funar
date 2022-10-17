@@ -167,3 +167,12 @@
 ; Verabschiedungs-Papagei, 2kg
 (define parrot2 (make-parrot "Tschüss!" 2))
 
+; Papagei überfahren
+(: run-over-parrot (parrot -> parrot))
+
+(check-expect (run-over-parrot parrot1)
+              (make-parrot "" 1))
+
+(define run-over-parrot
+  (lambda (parrot)
+    (make-parrot "" (parrot-weight parrot))))
