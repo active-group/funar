@@ -310,6 +310,18 @@ Schön wäre: beides billig, "expression problem"
        (* (first list)
           (list-product (rest list)))))))
 
+(: list-fold (... (... ... -> ...) (list-of %a) -> ...))
+
+(check-expect (list-fold 0 + list4) 20)
+(check-expect (list-fold 1 * list4) 420)
+
+(define list-fold
+  (lambda (n o list)
+    (cond
+      ((empty? list) n) ; "neutrales Element bezüglich *"
+      ((cons? list)
+       (o (first list)
+          (list-fold n o (rest list)))))))
 
 ; aus einer Liste die geraden Zahlen extrahieren
 ; Eingabe: 6 7 2 5 => Ausgabe 6 2
