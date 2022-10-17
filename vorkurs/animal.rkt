@@ -228,9 +228,11 @@ Schön wäre: beides billig, "expression problem"
 ; - eine Cons-Liste aus erstem Element und Rest-Liste
 ;                                               ^^^^^ Selbstbezug
 
-; zunächst nur Listen aus Zahlen
-(define list-of-numbers
-  (signature (mixed empty-list cons-list)))
+
+(define list-of
+  (lambda (element)
+    (signature (mixed empty-list
+                      (cons-list-of element)))))
 
 ; "die leere Liste": Singleton
 (define-record empty-list
@@ -241,10 +243,10 @@ Schön wäre: beides billig, "expression problem"
 ; Eine Cons-Liste besteht aus:
 ; - erstes Element
 ; - Rest-Liste
-(define-record cons-list
+(define-record (cons-list-of element) ; macht lambda
   cons cons?
-  (first number)
-  (rest list-of-numbers))
+  (first element)
+  (rest (list-of element)))
 
 ; 1elementige Liste: 5
 (define list1 (cons 5 empty))
@@ -341,5 +343,9 @@ Schön wäre: beides billig, "expression problem"
        (if (p? (first list))
            (cons (first list) (extract p? (rest list)))
            (extract p? (rest list)))))))
+
+(define highway
+  (cons dillo1 (cons dillo2 (cons parrot1 (cons parrot2 empty)))))
+
 
 
