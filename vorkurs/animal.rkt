@@ -199,4 +199,5 @@
       ((parrot? animal) (run-over-parrot animal)))))
 
 ; Fallunterscheidungen ("ODER" / "eins der folgenden")
+; vs.
 ; zusammengesetzte Daten ("UND" / "besteht aus", "hat folgende Eigenschaften")
