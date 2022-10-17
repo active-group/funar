@@ -279,6 +279,19 @@ Schön wäre: beides billig, "expression problem"
        (+ (first list)
           (list-sum (rest list)))))))
 
+#|
+(: list-sum* (cons-list -> number))
+
+(check-expect (list-sum* list4) 20)
+
+(define list-sum*
+  (lambda (c)
+    (first c)
+    (rest c)
+|#
+    
+    
+
 ; Produkt der Listenelemente berechnen
 (: list-product (list-of-numbers -> number))
 
