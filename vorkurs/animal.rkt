@@ -280,7 +280,7 @@ Schön wäre: beides billig, "expression problem"
           (list-sum (rest list)))))))
 
 ; Produkt der Listenelemente berechnen
-(: list-product (list-of-number -> number))
+(: list-product (list-of-numbers -> number))
 
 (check-expect (list-product list4)
               420)
