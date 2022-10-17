@@ -341,6 +341,16 @@ Schön wäre: beides billig, "expression problem"
            (cons (first list) (extract-odds (rest list)))
            (extract-odds (rest list)))))))
 
+(define extract-odds*
+  (lambda (list)
+    (list-fold
+     empty
+     (lambda (first-list rec-result)
+       (if (odd? first-list)
+           (cons first-list rec-result)
+           rec-result))
+     list)))
+
 ; Alle Elemente extrahieren, die ein bestimmtes Kriterium erfüllen
 ; %element: Signaturvariable
 ; Higher-Order-Funktion / Funktion höherer Ordnung
