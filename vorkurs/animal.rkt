@@ -260,7 +260,8 @@ Schön wäre: beides billig, "expression problem"
 
 (check-expect (list-sum list4) 20)
 
-(define list-sum
+; Schablone:
+#;(define list-sum
   (lambda (list)
     (cond
       ((empty? list) ...)
@@ -270,6 +271,13 @@ Schön wäre: beides billig, "expression problem"
        (list-sum (rest list))
        ...))))
 
+(define list-sum
+  (lambda (list)
+    (cond
+      ((empty? list) 0)
+      ((cons? list)
+       (+ (first list)
+          (list-sum (rest list)))))))
 
 
 
