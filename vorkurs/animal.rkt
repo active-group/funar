@@ -201,3 +201,25 @@
 ; Fallunterscheidungen ("ODER" / "eins der folgenden")
 ; vs.
 ; zusammengesetzte Daten ("UND" / "besteht aus", "hat folgende Eigenschaften")
+
+#|
+interface Animal {
+  Animal runOver();
+  Animal feed(double amount);
+}
+class Dillo implements Animal { Animal runOver() { ... } }
+class Parrot implements Animal { Animal runOver() { ... } }
+
+class Snake implements Animal { Animal runOver() { ... } }
+
+FP vs. OOP:
+
+- In FP ist es "billig", neue Funktionen zu definieren.
+- In OOP ist es "billig", neue Klassen zu definieren.
+
+Schön wäre: beides billig, "expression problem"
+
+
+
+|#
+
