@@ -325,6 +325,9 @@ Schön wäre: beides billig, "expression problem"
            (cons (first list) (extract-odds (rest list)))
            (extract-odds (rest list)))))))
 
+; Alle Elemente extrahieren, die ein bestimmtes Kriterium erfüllen
+(: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
+
 (check-expect (extract even? list4)
               (cons 6 (cons 2 empty)))
 (check-expect (extract odd? list4)
