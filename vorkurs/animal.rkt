@@ -255,6 +255,22 @@ Schön wäre: beides billig, "expression problem"
 ; 4elementige Liste: 6 7 2 5
 (define list4 (cons 6 list3))
 
+; Elemente einer Liste aufsummieren
+(: list-sum (list-of-numbers -> number))
+
+(check-expect (list-sum list4) 20)
+
+(define list-sum
+  (lambda (list)
+    (cond
+      ((empty? list) ...)
+      ((cons? list) ...
+       ...
+       (first list)
+       (list-sum (rest list))
+       ...))))
+
+
 
 
 
