@@ -63,3 +63,5 @@
 
 ; 12 Uhr 24 Minuten
 (define time1 (make-time 12 24))
+; 15:11
+(define time2 (make-time 15 11))
