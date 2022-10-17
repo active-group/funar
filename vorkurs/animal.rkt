@@ -55,7 +55,7 @@
 ; zusammengesetzte Daten
 (define-record time ; Signatur
   make-time ; Konstruktor
-  (time-hour natural)
+  (time-hour natural) ; Selektor
   (time-minute natural))
 
 ; natural: Signatur für natürliche Zahlen / Zählzahlen
