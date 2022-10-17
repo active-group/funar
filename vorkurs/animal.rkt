@@ -380,3 +380,17 @@ Schön wäre: beides billig, "expression problem"
 (define double
   (lambda (x)
     (* x 2)))
+
+(: list-map ((%a -> %b) (list-of %a) -> (list-of %b)))
+
+(check-expect (list-map double (cons 1 (cons 2 (cons 3 empty))))
+              (cons 2 (cons 4 (cons 6 empty))))
+
+(define list-map
+  (lambda (f list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cons
+        (f (first list))
+        (list-map f (rest list)))))))
