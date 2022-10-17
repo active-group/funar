@@ -197,3 +197,6 @@
     (cond
       ((dillo? animal) (run-over-dillo animal))
       ((parrot? animal) (run-over-parrot animal)))))
+
+; Fallunterscheidungen ("ODER" / "eins der folgenden")
+; zusammengesetzte Daten ("UND" / "besteht aus", "hat folgende Eigenschaften")
