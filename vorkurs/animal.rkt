@@ -307,8 +307,8 @@ Schön wäre: beides billig, "expression problem"
           (list-product (rest list)))))))
 
 
-
-
+; aus einer Liste die geraden Zahlen extrahieren
+; Eingabe: 6 7 2 5 => Ausgabe 6 2
 
 
 
