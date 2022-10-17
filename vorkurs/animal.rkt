@@ -319,12 +319,11 @@ Schön wäre: beides billig, "expression problem"
 (define extract-odds
   (lambda (list)
     (cond
-      ((empty? list) ...)
+      ((empty? list) empty)
       ((cons? list)
-       ...
-       (first list)
-       (extract-odds (rest list))
-       ...))))
+       (if (odd? (first list))
+           (cons (first list) (extract-odds (rest list)))
+           (extract-odds (rest list)))))))
 
 
 
