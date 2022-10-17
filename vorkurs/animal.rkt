@@ -274,7 +274,7 @@ Schön wäre: beides billig, "expression problem"
 (define list-sum
   (lambda (list)
     (cond
-      ((empty? list) 0)
+      ((empty? list) 0) ; neutrale Element bezüglich +
       ((cons? list)
        (+ (first list)
           (list-sum (rest list)))))))
@@ -288,7 +288,7 @@ Schön wäre: beides billig, "expression problem"
 (define list-product
   (lambda (list)
     (cond
-      ((empty? list) 1)
+      ((empty? list) 1) ; "neutrales Element bezüglich *"
       ((cons? list)
        (* (first list)
           (list-product (rest list)))))))
