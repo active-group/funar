@@ -330,12 +330,15 @@ Schön wäre: beides billig, "expression problem"
            (extract-odds (rest list)))))))
 
 ; Alle Elemente extrahieren, die ein bestimmtes Kriterium erfüllen
-(: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
+; %element: Signaturvariable
+(: extract ((%element -> boolean) (list-of %element) -> (list-of %element)))
 
 (check-expect (extract even? list4)
               (cons 6 (cons 2 empty)))
 (check-expect (extract odd? list4)
               (cons 7 (cons 5 empty)))
+(check-expect (extract dillo? highway)
+              (cons dillo1 (cons dillo2 empty)))
 
 (define extract
   (lambda (p? list)
