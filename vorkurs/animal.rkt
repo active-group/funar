@@ -331,6 +331,7 @@ Schön wäre: beides billig, "expression problem"
 
 ; Alle Elemente extrahieren, die ein bestimmtes Kriterium erfüllen
 ; %element: Signaturvariable
+; Higher-Order-Funktion / Funktion höherer Ordnung
 (: extract ((%element -> boolean) (list-of %element) -> (list-of %element)))
 
 (check-expect (extract even? list4)
