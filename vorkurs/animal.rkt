@@ -48,3 +48,12 @@
       ((string=? pet "cat") #t) ; (<Bedingung> <Ergebnis>)
       ((string=? pet "dog") #t)
       ((string=? pet "snake") #f))))
+
+; Uhrzeit hat folgende Eigenschaften:
+; - Stunde - UND -
+; - Minute
+; zusammengesetzte Daten
+(define-record time
+  make-time
+  (time-hour natural)
+  (time-minute natural))
