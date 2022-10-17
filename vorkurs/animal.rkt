@@ -325,6 +325,11 @@ Schön wäre: beides billig, "expression problem"
            (cons (first list) (extract-odds (rest list)))
            (extract-odds (rest list)))))))
 
+(check-expect (extract even? list4)
+              (cons 6 (cons 2 empty)))
+(check-expect (extract odd? list4)
+              (cons 7 (cons 5 empty)))
+
 (define extract
   (lambda (p? list)
     (cond
