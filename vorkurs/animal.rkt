@@ -90,6 +90,11 @@
 
 ; Tiere auf dem texanischen Highway
 
+; Tier ist eins der folgenden:
+; - Gürteltier - ODER -
+; - Papagei
+; Fallunterscheidung
+
 ; Gürteltier hat folgende Eigenschaften:
 ; - lebendig oder tot - UND -
 ; - Gewicht
