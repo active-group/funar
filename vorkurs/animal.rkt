@@ -53,7 +53,9 @@
 ; - Stunde - UND -
 ; - Minute
 ; zusammengesetzte Daten
-(define-record time
-  make-time
+(define-record time ; Signatur
+  make-time ; Konstruktor
   (time-hour natural)
   (time-minute natural))
+
+; natural: Signatur für natürliche Zahlen / Zählzahlen
