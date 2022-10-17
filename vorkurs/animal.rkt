@@ -59,3 +59,7 @@
   (time-minute natural))
 
 ; natural: Signatur für natürliche Zahlen / Zählzahlen
+
+
+; 12 Uhr 24 Minuten
+(define time1 (make-time 12 24))
