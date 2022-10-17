@@ -274,7 +274,7 @@ Schön wäre: beides billig, "expression problem"
 (define list-sum
   (lambda (list)
     (cond
-      ((empty? list) 0) ; neutrales Element bezüglich + (Algebra)
+      ((empty? list) 0) ; neutrales Element bezüglich + (Algebra, "Gruppen"?)
       ((cons? list)
        (+ (first list)
           (list-sum (rest list)))))))
