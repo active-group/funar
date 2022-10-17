@@ -257,6 +257,8 @@ Schön wäre: beides billig, "expression problem"
 ; 4elementige Liste: 6 7 2 5
 (define list4 (cons 6 list3))
 
+(define list-of-numbers (signature (list-of number)))
+
 ; Elemente einer Liste aufsummieren
 (: list-sum (list-of-numbers -> number))
 
