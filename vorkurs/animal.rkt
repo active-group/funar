@@ -129,15 +129,15 @@
 (check-expect (feed-dillo dillo2 2)
               dillo2)
 
-#;(define feed-dillo
+(define feed-dillo
   (lambda (dillo amount)
     (make-dillo (dillo-alive? dillo)
                 (cond
                   ((dillo-alive? dillo) (+ (dillo-weight dillo)
                                            amount))
-                  (else (dillo-weight dillo))))))
+                  ((not (dillo-alive? dillo)) (dillo-weight dillo))))))
 
-(define feed-dillo
+#;(define feed-dillo
   (lambda (dillo amount)
     ; lokale Variablen
     (define alive? (dillo-alive? dillo))
