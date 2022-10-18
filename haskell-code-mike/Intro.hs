@@ -181,4 +181,3 @@ entschönfinkeln = tuplify
 
 -- Mittagspause
 
-data List
