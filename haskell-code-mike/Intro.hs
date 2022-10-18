@@ -112,7 +112,7 @@ runOverAnimal (MkParrot _ weight) = MkParrot "" weight
 
 -- Tier füttern
 feedAnimal :: Animal -> (Weight -> Animal)
--- >>> feedAnimal dillo1 2
+-- >>> (feedAnimal dillo1) 2
 -- MkDillo {dilloLiveness = Alive, dilloWeight = 12}
 feedAnimal dillo@(MkDillo liveness weight) amount = -- Alias-Pattern
     case liveness of
@@ -138,6 +138,16 @@ swap :: (a -> b -> c) -> (b -> a -> c)
 -- swap f = \ b -> \ a ->  f a b
 -- swap f b = \ a -> f a b
 swap f b a = f a b
+
+feedAnimal'' :: (Weight, Animal) -> Animal
+feedAnimal''(amount, dillo@(MkDillo liveness weight)) =
+  -- Alias-Pattern
+  case liveness of
+    Dead -> dillo -- MkDillo liveness weight
+    Alive -> MkDillo liveness (weight + amount)
+feedAnimal''(amount, MkParrot sentence weight) =
+  MkParrot sentence (weight + amount)
+
 
 -- Duschprodukte:
 -- - Seife (hat pH-Wert)
