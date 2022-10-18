@@ -219,3 +219,5 @@ listSum [] = 0
 -- listSum (first:rest) = first + (listSum rest)
 -- listSum (head:tail) = head + (listSum tail)
 listSum (x:xs) = x + listSum xs
+
+listMap :: (a -> b) -> [a] -> [b]
