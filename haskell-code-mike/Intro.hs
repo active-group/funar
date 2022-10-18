@@ -224,3 +224,8 @@ listMap :: (a -> b) -> [a] -> [b]
 listMap f [] = []
 listMap f (x:xs) = f x : (listMap f xs)
 
+listFold :: b -> (a -> b -> b) -> [a] -> b
+listFold n o [] = n
+listFold n o (x:xs) =
+    x 
+    listFold n o xs
