@@ -188,3 +188,18 @@ entschönfinkeln = tuplify
 -- - die leere Liste
 -- - eine Cons-Liste aus erstem Element und Rest-Liste
 
+{-
+-- Typkonstruktor
+data ListOf element =
+    Empty 
+  | Cons element (ListOf element)
+  deriving Show
+
+list1 :: ListOf Integer
+list1 = Cons 5 Empty
+
+list2 :: ListOf Integer
+list2 = Cons 2 (Cons 5 Empty)
+
+-}
+
