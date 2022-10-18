@@ -120,3 +120,15 @@ feedAnimal dillo@(MkDillo liveness weight) amount = -- Alias-Pattern
         Alive -> MkDillo liveness (weight + amount)
 feedAnimal (MkParrot sentence weight) amount =
     MkParrot sentence (weight + amount)
+
+
+-- Duschprodukte:
+-- - Seife (hat pH-Wert)
+-- - Shampoo (hat Haartyp)
+-- - Duschgel (50% Seife, 50% Shampoo)
+
+-- Datenanalyse + Datentyp
+-- Funktion, die den Seifenanteil berechnet
+
+-- Erweiterung:
+-- - Mixtur aus zwei Duschprodukten, beliebige Anteile
