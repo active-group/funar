@@ -289,6 +289,8 @@ listIndex e (x:xs) =
         Result index -> Result (index+1)
 
 {-
+Typklasse: "Eigenschaft eines Typs" / definiert durch Methoden
+
 class Eq a where -- denk "Interface"
   (==) :: a -> a -> Bool
 
