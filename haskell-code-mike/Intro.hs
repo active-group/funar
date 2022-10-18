@@ -65,6 +65,7 @@ runOverDillo :: Dillo -> Dillo
 -- MkDillo {dilloLiveness = Dead, dilloWeight = 10}
 -- >>> runOverDillo dillo2
 -- MkDillo {dilloLiveness = Dead, dilloWeight = 8}
-runOverDillo dillo =
+-- runOverDillo dillo =
     -- Schablone: dilloLiveness dillo  dilloWeight dillo
-    MkDillo { dilloLiveness = Dead, dilloWeight = dilloWeight dillo }
+--    MkDillo { dilloLiveness = Dead, dilloWeight = dilloWeight dillo }
+runOverDillo
