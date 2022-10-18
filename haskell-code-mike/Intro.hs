@@ -151,6 +151,9 @@ feedAnimal''(amount, dillo@(MkDillo liveness weight)) =
 feedAnimal''(amount, MkParrot sentence weight) =
   MkParrot sentence (weight + amount)
 
+g :: Integer -> Integer -> Integer
+g a b = a + b
+
 tuplify :: (a -> b -> c) -> ((a, b) -> c)
 -- >>> (tuplify feedAnimal) (dillo1, 2)
 -- MkDillo {dilloLiveness = Alive, dilloWeight = 12}
