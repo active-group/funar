@@ -121,7 +121,6 @@ feedAnimal dillo@(MkDillo liveness weight) amount = -- Alias-Pattern
 feedAnimal (MkParrot sentence weight) amount =
     MkParrot sentence (weight + amount)
 
-
 -- Duschprodukte:
 -- - Seife (hat pH-Wert)
 -- - Shampoo (hat Haartyp)
