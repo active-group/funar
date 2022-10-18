@@ -1,5 +1,7 @@
 module Intro where
 
+import Prelude hiding (Semigroup, Monoid)
+
 x :: Integer
 x = 7
 
@@ -326,3 +328,4 @@ Algebra:
 - op neutral x == op x neutral == x
   ^^^ Halbgruppe + neutrales Element = Monoid
 -}
+
