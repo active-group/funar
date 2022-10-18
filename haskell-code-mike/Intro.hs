@@ -46,6 +46,7 @@ data Liveness = Alive | Dead
 -- Typsynonym
 type Weight = Integer
 
+{-
 -- Record-Definition
 data Dillo = MkDillo { dilloLiveness :: Liveness,
                        dilloWeight :: Weight }
@@ -74,3 +75,28 @@ runOverDillo :: Dillo -> Dillo
 -- "functional update"
 -- "Kopie von dillo, ein Feld anders"
 runOverDillo dillo = dillo { dilloLiveness = Dead }
+
+-}
+
+-- Ein Tier ist eins der folgenden:
+-- - Gürteltier
+-- - Papagei
+
+data Animal =
+    MkDillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
+  | MkParrot String Weight
+
+dillo1 :: Animal
+dillo1 = MkDillo { dilloLiveness = Alive, dilloWeight = 10 }
+dillo2 :: Animal
+dillo2 = MkDillo Dead 8
+
+parrot1 :: Animal
+parrot1 = MkParrot "Hello!" 1
+parrot2 :: Animal
+parrot2 = MkParrot "Goodbye!" 2
+
+-- Tier überfahren
+runOverAnimal :: Animal -> Animal
+runOverAnimal (MkDillo _ weight) = MkDillo Dead weight
+runOverAnimal (MkParrot _ weight) = MkParrot "" weight
