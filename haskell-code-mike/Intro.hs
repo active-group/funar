@@ -329,3 +329,20 @@ Algebra:
   ^^^ Halbgruppe + neutrales Element = Monoid
 -}
 
+class Semigroup t where
+    -- op a (op b c) = op (op a b) c
+    op :: t -> t -> t
+
+-- >>> op [1,2,3] [4,5,6]
+-- [1,2,3,4,5,6]
+
+instance Semigroup [a] where
+    -- Assoziativgesetz check
+    op list1 list2 = list1 ++ list2
+
+-- (Doppelpfeil falschrum)
+class Semigroup t => Monoid t where
+  neutral :: t
+
+instance Monoid [a] where
+    neutral = []
