@@ -28,6 +28,6 @@ data Pet = Cat | Dog | Snake
 -- Ist Haustier niedlich?
 isCute :: Pet -> Bool 
 -- 1 Gleichung pro Fall
-isCute Cat = undefined
-isCute Dog = undefined
-isCute Snake = undefined
+isCute Cat = True
+isCute Dog = True
+isCute Snake = False
