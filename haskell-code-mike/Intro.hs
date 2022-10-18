@@ -225,7 +225,20 @@ listMap f [] = []
 listMap f (x:xs) = f x : (listMap f xs)
 
 listFold :: b -> (a -> b -> b) -> [a] -> b
-listFold n o [] = n
-listFold n o (x:xs) =
-    x 
-    listFold n o xs
+-- >>> listFold 0 (+) [1,2,3]
+-- 6
+-- >>> listFold 1 (*) [1,2,3,4]
+-- 24
+-- >>> listFold [] (:) [1,2,3,4]
+-- [1,2,3,4]
+listFold n op [] = n
+listFold n op (x  :                  xs) = -- op x (listFold n op xs)
+               x `op` (listFold n op xs)
+
+-- lazy evaluation
+-- vs. strikte Auswertung: 
+-- bei einem Funktionsaufruf werden erst die Argumente ausgewertet,
+-- dann wird erst zur Funktion gesprungen
+
+natsFrom :: Integer -> [Integer]
+natsFrom n = n : natsFrom (n+1)
