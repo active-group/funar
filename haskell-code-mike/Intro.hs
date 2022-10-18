@@ -25,6 +25,15 @@ f' n = n * 2
 data Pet = Cat | Dog | Snake
  deriving Show
 
+eqPet :: Pet -> Pet -> Bool
+eqPet Cat Cat = True
+eqPet Dog Dog = True
+eqPet Snake Snake = True
+eqPet _ _ = False
+
+instance Eq Pet where
+    (==) = undefined
+
 -- Ist Haustier niedlich?
 isCute :: Pet -> Bool 
 -- 1 Gleichung pro Fall
