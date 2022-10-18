@@ -137,6 +137,7 @@ feedAnimal' amount (MkParrot sentence weight) =
 swap :: (a -> b -> c) -> (b -> a -> c)
 -- swap f = \ b -> \ a ->  f a b
 -- swap f b = \ a -> f a b
+-- eingebaut als flip
 swap f b a = f a b
 
 feedAnimal'' :: (Weight, Animal) -> Animal
