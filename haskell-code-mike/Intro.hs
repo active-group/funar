@@ -100,6 +100,8 @@ parrot2 = MkParrot "Goodbye!" 2
 -- Tier überfahren
 runOverAnimal :: Animal -> Animal
 -- >>> runOverAnimal dillo1
--- No instance for (Show Animal) arising from a use of ‘evalPrint’
+-- MkDillo {dilloLiveness = Dead, dilloWeight = 10}
+-- >>> runOverAnimal parrot1
+-- MkParrot "" 1
 runOverAnimal (MkDillo _ weight) = MkDillo Dead weight
 runOverAnimal (MkParrot _ weight) = MkParrot "" weight
