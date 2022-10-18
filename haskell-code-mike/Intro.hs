@@ -23,5 +23,5 @@ f' n = n * 2
 -- - Schlange
 -- ==> neuer Typ
 data Pet = Cat | Dog | Snake
- deriving Show
+-- deriving Show
 
