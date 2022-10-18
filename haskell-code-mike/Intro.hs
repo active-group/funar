@@ -305,5 +305,19 @@ bisher:
 - Show: "ausdrucken"
 - Eq: Gleichheit
 - Ord: (totale) Ordnung
+- Num: numerische Operationen
+-}
+
+{-
+Algebra:
+- Typ T
+- Operationen (mit Typsignaturen)
+- Gesetze / Gleichungen
+
+neutrales Element:
+- Typ T
+- Operationen: op :: T -> T -> T
+-              neutral :: T
+- op neutral x == op x neutral == x
 
 -}
