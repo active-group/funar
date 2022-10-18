@@ -150,6 +150,9 @@ feedAnimal''(amount, dillo@(MkDillo liveness weight)) =
 feedAnimal''(amount, MkParrot sentence weight) =
   MkParrot sentence (weight + amount)
 
+tuplify :: (a -> b -> c) -> ((a, b) -> c)
+tuplify f =
+    \ (a, b) -> f a b
 
 -- Duschprodukte:
 -- - Seife (hat pH-Wert)
