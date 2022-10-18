@@ -58,3 +58,9 @@ dillo1 = MkDillo { dilloLiveness = Alive, dilloWeight = 10 }
 -- totes Gürteltier, 8kg
 dillo2 :: Dillo
 dillo2 = MkDillo Dead 8
+
+-- Gürteltier überfahren
+runOverDillo :: Dillo -> Dillo
+runOverDillo dillo =
+    -- Schablone: dilloLiveness dillo  dilloWeight dillo
+    MkDillo { dilloLiveness = Dead, dilloWeight = dilloWeight dillo }
