@@ -184,3 +184,7 @@ entschönfinkeln = tuplify
 
 -- Mittagspause
 
+-- Eine Liste ist eins der folgenden:
+-- - die leere Liste
+-- - eine Cons-Liste aus erstem Element und Rest-Liste
+
