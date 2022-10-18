@@ -254,3 +254,15 @@ strikeMultiples n list =
 sieve :: [Integer] -> [Integer]
 sieve [] = []
 sieve (p:ps) = p : (sieve (strikeMultiples p ps))
+
+data Optional a =
+    Null 
+  | Result a
+
+-- Index eines Elements in einer Liste ermitteln
+listIndex :: a -> [a] -> Integer
+-- >>> listIndex 2 [4,3,5,2,1]
+-- 3
+listIndex e [] = undefined
+listIndex e (x:xs) = undefined
+  -- listIndex e xs
