@@ -296,3 +296,13 @@ class Eq a where -- denk "Interface"
 
 Implementierung eines Interfaces: "instance"
 -}
+
+{-
+Sinnvoll: Typklassen für "universelle" Abstraktionen
+
+bisher:
+
+- Show: "ausdrucken"
+- Eq: Gleichheit
+
+-}
