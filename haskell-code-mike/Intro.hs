@@ -186,7 +186,9 @@ entschönfinkeln = tuplify
 
 -- Eine Liste ist eins der folgenden:
 -- - die leere Liste
+--   []
 -- - eine Cons-Liste aus erstem Element und Rest-Liste
+--   first : rest
 
 {-
 -- Typkonstruktor
@@ -203,3 +205,5 @@ list2 = Cons 2 (Cons 5 Empty)
 
 -}
 
+list1 = 5 : []
+list2 = 2 : (5 : [])
