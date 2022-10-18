@@ -28,6 +28,23 @@ data Pet = Cat | Dog | Snake
 -- Ist Haustier niedlich?
 isCute :: Pet -> Bool 
 -- 1 Gleichung pro Fall
+-- >>> isCute Dog
+-- True
+-- >>> isCute Snake
+-- False
 isCute Cat = True
 isCute Dog = True
 isCute Snake = False
+
+-- Gürteltier hat folgende Eigenschaften:
+-- - lebendig oder tot
+-- - Gewicht
+
+data Liveness = Alive | Dead
+  deriving Show
+
+-- Typsynonym
+type Weight = Integer
+
+data Dillo = MkDillo { dilloLiveness :: Liveness,
+                       dilloWeight :: Weight }
