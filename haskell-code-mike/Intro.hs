@@ -205,5 +205,10 @@ list2 = Cons 2 (Cons 5 Empty)
 
 -}
 
+list1 :: [Integer]
 list1 = 5 : []
+list2 :: [Integer]
 list2 = 2 : (5 : [])
+list3 :: [Integer]
+list3 = [6, 2, 6]
+list4 = 7 : list3
