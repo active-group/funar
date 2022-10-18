@@ -72,4 +72,5 @@ runOverDillo :: Dillo -> Dillo
 --    MkDillo { dilloLiveness = Dead, dilloWeight = w }
 -- runOverDillo (MkDillo _ w) = MkDillo Dead w
 -- "functional update"
+-- "Kopie von dillo, ein Feld anders"
 runOverDillo dillo = dillo { dilloLiveness = Dead }
