@@ -244,3 +244,13 @@ listFold n op (x  :                  xs) = -- op x (listFold n op xs)
 
 natsFrom :: Integer -> [Integer]
 natsFrom n = n : natsFrom (n+1)
+
+strikeMultiples :: Integer -> [Integer] -> [Integer]
+-- >>> strikeMultiples 2 [1,2,3,4,5,6,7,8]
+-- [1,3,5,7]
+strikeMultiples n list =
+    filter (\ n' -> mod n' n /= 0) list
+
+sieve :: [Integer] -> [Integer]
+sieve [] = []
+sieve (p:ps) = p : (sieve (strikeMultiples p ps))
