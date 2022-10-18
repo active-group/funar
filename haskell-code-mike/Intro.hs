@@ -121,6 +121,19 @@ feedAnimal dillo@(MkDillo liveness weight) amount = -- Alias-Pattern
 feedAnimal (MkParrot sentence weight) amount =
     MkParrot sentence (weight + amount)
 
+feedAnimal' :: Weight -> (Animal -> Animal)
+feedAnimal' amount dillo@(MkDillo liveness weight) =
+  -- Alias-Pattern
+  case liveness of
+    Dead -> dillo -- MkDillo liveness weight
+    Alive -> MkDillo liveness (weight + amount)
+feedAnimal' amount (MkParrot sentence weight) =
+  MkParrot sentence (weight + amount)
+
+swap :: (Animal -> (Weight -> Animal)) -> (Weight -> (Animal -> Animal))
+swap f = 
+    \ weight -> \ animal ->  f animal weight
+
 -- Duschprodukte:
 -- - Seife (hat pH-Wert)
 -- - Shampoo (hat Haartyp)
