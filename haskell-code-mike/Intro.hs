@@ -258,11 +258,18 @@ sieve (p:ps) = p : (sieve (strikeMultiples p ps))
 data Optional a =
     Null 
   | Result a
+  deriving Show
 
 -- Index eines Elements in einer Liste ermitteln
-listIndex :: a -> [a] -> Integer
+-- Eq a: Constraint / Einschränkung
+listIndex :: Eq a => a -> [a] -> Optional Integer
 -- >>> listIndex 2 [4,3,5,2,1]
 -- 3
-listIndex e [] = undefined
-listIndex e (x:xs) = undefined
-  -- listIndex e xs
+listIndex e [] = Null
+listIndex e (x:xs) =
+  if x == e 
+  then Result 0
+  else 
+    case listIndex e xs of
+        Null -> Null
+        Result index -> Result (index+1)
