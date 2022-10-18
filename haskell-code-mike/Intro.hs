@@ -151,8 +151,14 @@ feedAnimal''(amount, MkParrot sentence weight) =
   MkParrot sentence (weight + amount)
 
 tuplify :: (a -> b -> c) -> ((a, b) -> c)
+-- >>> (tuplify feedAnimal) (dillo1, 2)
+-- MkDillo {dilloLiveness = Alive, dilloWeight = 12}
 tuplify f =
     \ (a, b) -> f a b
+
+untuplify :: ((a, b) -> c) -> (a -> b -> c)
+untuplify f =
+    \ a -> \ b -> f (a, b)
 
 -- Duschprodukte:
 -- - Seife (hat pH-Wert)
