@@ -164,6 +164,9 @@ untuplify :: ((a, b) -> c) -> (a -> b -> c)
 untuplify f =
     \ a -> \ b -> f (a, b)
 
+schönfinkeln = untuplify
+entschönfinkeln = tuplify
+
 -- Duschprodukte:
 -- - Seife (hat pH-Wert)
 -- - Shampoo (hat Haartyp)
