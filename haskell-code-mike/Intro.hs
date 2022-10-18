@@ -211,4 +211,6 @@ list2 :: [Integer]
 list2 = 2 : (5 : [])
 list3 :: [Integer]
 list3 = [6, 2, 6]
+list4 :: [Integer]
 list4 = 7 : list3
+
