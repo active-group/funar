@@ -276,3 +276,10 @@ listIndex e (x:xs) =
     case listIndex e xs of
         Null -> Null
         Result index -> Result (index+1)
+
+{-
+class Eq a where -- denk "Interface"
+  (==) :: a -> a -> Bool
+
+Implementierung eines Interfaces: "instance"
+-}
