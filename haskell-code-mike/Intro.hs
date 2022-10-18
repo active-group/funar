@@ -262,9 +262,12 @@ data Optional a =
 
 -- Index eines Elements in einer Liste ermitteln
 -- Eq a: Constraint / Einschränkung
+-- "a unterstützt Gleichheit / =="
 listIndex :: Eq a => a -> [a] -> Optional Integer
 -- >>> listIndex 2 [4,3,5,2,1]
--- 3
+-- Result 3
+-- >>> listIndex Dog [Snake, Snake, Snake, Cat, Dog, Snake]
+-- No instance for (Eq Pet) arising from a use of ‘listIndex’
 listIndex e [] = Null
 listIndex e (x:xs) =
   if x == e 
