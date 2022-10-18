@@ -23,7 +23,7 @@ f' n = n * 2
 -- - Schlange
 -- ==> neuer Typ
 data Pet = Cat | Dog | Snake
- deriving Show
+ deriving (Eq, Show)
 
 eqPet :: Pet -> Pet -> Bool
 eqPet Cat Cat = True
@@ -31,8 +31,10 @@ eqPet Dog Dog = True
 eqPet Snake Snake = True
 eqPet _ _ = False
 
+{-
 instance Eq Pet where
     (==) = eqPet
+-}
 
 -- Ist Haustier niedlich?
 isCute :: Pet -> Bool 
