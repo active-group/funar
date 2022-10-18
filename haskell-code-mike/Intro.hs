@@ -178,3 +178,6 @@ entschönfinkeln = tuplify
 
 -- Erweiterung:
 -- - Mixtur aus zwei Duschprodukten, beliebige Anteile
+
+-- Mittagspause
+
