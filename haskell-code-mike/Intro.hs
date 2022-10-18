@@ -32,7 +32,7 @@ eqPet Snake Snake = True
 eqPet _ _ = False
 
 instance Eq Pet where
-    (==) = undefined
+    (==) = eqPet
 
 -- Ist Haustier niedlich?
 isCute :: Pet -> Bool 
