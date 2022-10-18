@@ -23,5 +23,11 @@ f' n = n * 2
 -- - Schlange
 -- ==> neuer Typ
 data Pet = Cat | Dog | Snake
-deriving Show
+ deriving Show
 
+-- Ist Haustier niedlich?
+isCute :: Pet -> Bool 
+-- 1 Gleichung pro Fall
+isCute Cat = undefined
+isCute Dog = undefined
+isCute Snake = undefined
