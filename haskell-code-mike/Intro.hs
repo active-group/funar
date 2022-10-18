@@ -140,6 +140,8 @@ swap :: (a -> b -> c) -> (b -> a -> c)
 swap f b a = f a b
 
 feedAnimal'' :: (Weight, Animal) -> Animal
+-- >>> feedAnimal'' (1, dillo1)
+-- MkDillo {dilloLiveness = Alive, dilloWeight = 11}
 feedAnimal''(amount, dillo@(MkDillo liveness weight)) =
   -- Alias-Pattern
   case liveness of
