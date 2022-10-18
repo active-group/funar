@@ -240,5 +240,7 @@ listFold n op (x  :                  xs) = -- op x (listFold n op xs)
 -- bei einem Funktionsaufruf werden erst die Argumente ausgewertet,
 -- dann wird erst zur Funktion gesprungen
 
+-- in Haskell: Argumente werden erst ausgewertet, wenn sie benötigt werden
+
 natsFrom :: Integer -> [Integer]
 natsFrom n = n : natsFrom (n+1)
