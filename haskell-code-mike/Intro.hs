@@ -347,5 +347,11 @@ class Semigroup t => Monoid t where
 instance Monoid [a] where
     neutral = []
 
+-- >>> op ([1,2,3], [4,5,6]) ([7,8,9], [10,11])
+-- ([1,2,3,7,8,9],[4,5,6,10,11])
+
 instance (Semigroup a, Semigroup b) => Semigroup (a, b) where
     op (a1, b1) (a2, b2) = (op a1 a2, op b1 b2)
+
+instance (Monoid a, Monoid b) => Monoid (a, b) where
+    neutral = (neutral, neutral)
