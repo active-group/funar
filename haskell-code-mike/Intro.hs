@@ -131,6 +131,8 @@ feedAnimal' amount (MkParrot sentence weight) =
   MkParrot sentence (weight + amount)
 
 swap :: (Animal -> (Weight -> Animal)) -> (Weight -> (Animal -> Animal))
+-- >>> :type swap feedAnimal
+-- swap feedAnimal :: Weight -> Animal -> Animal
 swap f = 
     \ weight -> \ animal ->  f animal weight
 
