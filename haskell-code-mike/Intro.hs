@@ -314,10 +314,15 @@ Algebra:
 - Operationen (mit Typsignaturen)
 - Gesetze / Gleichungen
 
-neutrales Element:
 - Typ T
-- Operationen: op :: T -> T -> T
+- Operationen: op :: T -> T -> T ("binärer Kombinator")
+  Assoziativgesetz:
+  op a (op b c) = op (op a b) c
+  z.B. a + (b + c) == (a + b) + c
+  ^^^ Halbgruppe
+
+- neutrales Element:
 -              neutral :: T
 - op neutral x == op x neutral == x
-
+  ^^^ Halbgruppe + neutrales Element = Monoid
 -}
