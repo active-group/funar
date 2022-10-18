@@ -130,11 +130,13 @@ feedAnimal' amount dillo@(MkDillo liveness weight) =
 feedAnimal' amount (MkParrot sentence weight) =
   MkParrot sentence (weight + amount)
 
-swap :: (Animal -> (Weight -> Animal)) -> (Weight -> (Animal -> Animal))
+-- swap :: (Animal -> (Weight -> Animal)) -> (Weight -> (Animal -> Animal))
 -- >>> :type swap feedAnimal
 -- swap feedAnimal :: Weight -> Animal -> Animal
+-- a, b, c: Typvariablen
+swap :: (a -> b -> c) -> (b -> a -> c)
 swap f = 
-    \ weight -> \ animal ->  f animal weight
+    \ b -> \ a ->  f a b
 
 -- Duschprodukte:
 -- - Seife (hat pH-Wert)
