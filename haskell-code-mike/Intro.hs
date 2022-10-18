@@ -356,6 +356,10 @@ instance (Semigroup a, Semigroup b) => Semigroup (a, b) where
 instance (Monoid a, Monoid b) => Monoid (a, b) where
     neutral = (neutral, neutral)
 
-instance Semigroup (Optional a) where
+instance Semigroup a => Semigroup (Optional a) where
+    op Null x = x
+    op x Null = x
+    op (Result a) (Result a') = Result (op a a')
 
-instance Monoid (Optional a) where
+instance Monoid a => Monoid (Optional a) where
+    neutral = Null
