@@ -108,7 +108,10 @@ runOverAnimal :: Animal -> Animal
 runOverAnimal (MkDillo _ w) = MkDillo Dead w
 runOverAnimal (MkParrot _ weight) = MkParrot "" weight
 
+-- nur 1stellige Funktionen in Haskell!
+
 -- Tier füttern
+feedAnimal :: Animal -> (Weight -> Animal)
 feedAnimal dillo@(MkDillo liveness weight) amount = -- Alias-Pattern
     case liveness of
         Dead -> dillo -- MkDillo liveness weight
