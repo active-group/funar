@@ -85,6 +85,7 @@ runOverDillo dillo = dillo { dilloLiveness = Dead }
 data Animal =
     MkDillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
   | MkParrot String Weight
+  deriving Show
 
 dillo1 :: Animal
 dillo1 = MkDillo { dilloLiveness = Alive, dilloWeight = 10 }
@@ -98,5 +99,7 @@ parrot2 = MkParrot "Goodbye!" 2
 
 -- Tier überfahren
 runOverAnimal :: Animal -> Animal
+-- >>> runOverAnimal dillo1
+-- No instance for (Show Animal) arising from a use of ‘evalPrint’
 runOverAnimal (MkDillo _ weight) = MkDillo Dead weight
 runOverAnimal (MkParrot _ weight) = MkParrot "" weight
