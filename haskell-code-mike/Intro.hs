@@ -304,5 +304,6 @@ bisher:
 
 - Show: "ausdrucken"
 - Eq: Gleichheit
+- Ord: (totale) Ordnung
 
 -}
