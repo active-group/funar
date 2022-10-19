@@ -145,12 +145,12 @@ runDBSQLite conn (Get key callback) =
          <- queryNamed conn "SELECT (key, value) FROM entries WHERE key = :key" [":key" := key]
        runDBSQLite conn (callback value)
 runDBSQLite conn (Put key value callback) =
-    do execute conn "UPDATE entries SET value = :value WHERE key = :key" (MkEntry key value)
+    do execute conn "UPSERT entries SET value = :value WHERE key = :key" (MkEntry key value)
        runDBSQLite conn (callback ())
 runDBSQLite conn (Return result) = return result
 
 -- >>> execDB p1
--- SQLite3 returned ErrorError while attempting to perform prepare "UPDATE INTO entries (key, value) VALUES (?,?)": near "INTO": syntax error
+-- FormatError {fmtMessage = "Only unnamed '?' query parameters are accepted, ':value' given", fmtQuery = "UPDATE entries SET value = :value WHERE key = :key", fmtParams = ["SQLText \"Mike\"","SQLInteger 51"]}
 execDB :: DB a -> IO a
 execDB db =
     do conn <- open "test.db"
