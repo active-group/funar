@@ -35,9 +35,15 @@ p1 = Put "Mike" 51 (\() ->
      Get "Mike" (\y ->
      Return (show (x+y))))))
 
+-- Datenbankprogramm ausführen
+-- "dependency injection"
 runDB :: Map String Integer -> DB a -> a
+-- >>> runDB Map.empty p1
+-- "103"
 runDB mp (Get key callback) =
     runDB mp (callback (mp ! key))
+
 runDB mp (Put key value callback) = 
     runDB (Map.insert key value mp) (callback ())
+
 runDB mp (Return result) = result
