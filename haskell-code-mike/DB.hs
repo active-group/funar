@@ -22,4 +22,12 @@ p1 = [Put "Mike" 51,
 -}
 data DB a =
     Get String (Integer -> DB a)
-  | Put String (() -> DB a)
+  | Put String Integer (()      -> DB a)
+  | Return a
+
+p1 :: DB String
+p1 = Put "Mike" 51 (\() ->
+     Get "Mike" (\x ->
+     Put "Mike" (x+1) (\() ->
+     Get "Mike" (\y ->
+     Return (show (x+y))))))
