@@ -23,6 +23,8 @@ p1 = [Put "Mike" 51,
       Get "Mike"] -- wie dem Ergebnis einen Namen geben?
 
 -}
+
+-- "(Beschreibung eines) Datenbankprogramm mit Ergebnis vom Typ a"
 data DB a =
     Get String         (Integer -> DB a)
   | Put String Integer (()      -> DB a)
