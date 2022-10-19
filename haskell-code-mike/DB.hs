@@ -41,7 +41,7 @@ p1 = Put "Mike" 51 (\() ->
 -- "dependency injection"
 runDB :: Map String Integer -> DB a -> a
 -- >>> runDB Map.empty p1
--- "103"
+-- Map.!: given key is not an element in the map
 runDB mp (Get key callback) =
     let value = mp ! key
     in runDB mp (callback value)
