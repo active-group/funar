@@ -173,5 +173,14 @@ tableProcessEvent (GameEnded player) state = state
 
 tableProcessCommand :: GameCommand -> TableState -> [GameEvent]
 tableProcessCommand (DealHands hands) state =
-  map HandDealt (Map.toList hands)
-tableProcessCommand (PlayCard player card) state = undefined
+  -- paar Checks wären noch gut!
+  map (uncurry HandDealt) (Map.toList hands)
+tableProcessCommand (PlayCard player card) state = 
+  if playValid state player card
+  then 
+    let event1 = LegalCardPlayed player card
+    in case turnOverTrick state of
+         Just (trick, trickTaker) -> undefined
+         Nothing -> undefined
+  else
+    [IllegalCardAttempted player card]
