@@ -92,6 +92,7 @@ class Monad m where
 -- >>> :type Return
 -- Return :: a -> DB a
 instance Functor DB where
+    -- fmap :: (a -> b) -> DB a -> DB b
 
 instance Applicative DB where
 
