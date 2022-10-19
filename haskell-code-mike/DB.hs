@@ -96,6 +96,11 @@ class Monad m where
 instance Functor DB where
     -- fmap ::        (a -> b)    -> DB a -> DB b
     -- flip splice :: (a -> DB b) -> DB a -> DB b
+    fmap f (Get key callback) =
+        Get key (\value -> fmap f (callback value))
+    fmap f (Put key value callback) =
+        Put key value (\() -> fmap f (callback ()))
+    fmap f (Return result) = Return (f result)
 
 instance Applicative DB where
 
