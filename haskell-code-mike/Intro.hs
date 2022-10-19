@@ -1,3 +1,4 @@
+{-# LANGUAGE InstanceSigs #-}
 module Intro where
 
 import Prelude hiding (Semigroup, Monoid)
@@ -290,6 +291,10 @@ listIndex e (x:xs) =
         Null -> Null
         Result index -> Result (index+1)
 
+optionalMap :: (a -> b) -> Optional a -> Optional b
+optionalMap f Null = Null
+optionalMap f (Result a) = Result (f a)
+
 {-
 Typklasse: "Eigenschaft eines Typs" / definiert durch Methoden
 
@@ -357,6 +362,7 @@ instance (Monoid a, Monoid b) => Monoid (a, b) where
     neutral = (neutral, neutral)
 
 instance Semigroup a => Semigroup (Optional a) where
+    op :: Semigroup a => Optional a -> Optional a -> Optional a
     op Null x = x
     op x Null = x
     op (Result a) (Result a') = Result (op a a')
