@@ -131,11 +131,14 @@ runDB mp (Return result) = result
 -- benötigen Datentyp, der den Datenbank-Zeilen entspricht
 data Entry = MkEntry String Integer
 
+instance FromRow Entry where
+  fromRow = MkEntry <$> field <*> field
+
 runDBSQLite :: Connection -> DB a -> IO a
 runDBSQLite conn (Get key callback) =
     do [MkEntry _ value] 
          -- OverloadedStrings macht aus SQL-Text ein Query-Objekt
          <- queryNamed conn "SELECT (key, value) FROM entries WHERE key = :key" [":key" := key]
        runDBSQLite conn (callback value)
-runDBSQLite conn (Put key value callback) = undefined
+runDBSQLite conn (Put key value callback) =
 runDBSQLite conn (Return result) = return result
