@@ -89,10 +89,13 @@ class Monad m where
   return :: a -> m a
 -}
 
+-- optionalMap :: (a -> b) -> Optional a -> Optional b
+
 -- >>> :type Return
 -- Return :: a -> DB a
 instance Functor DB where
-    -- fmap :: (a -> b) -> DB a -> DB b
+    -- fmap ::        (a -> b)    -> DB a -> DB b
+    -- flip splice :: (a -> DB b) -> DB a -> DB b
 
 instance Applicative DB where
 
