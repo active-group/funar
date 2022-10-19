@@ -149,6 +149,8 @@ runDBSQLite conn (Put key value callback) =
        runDBSQLite conn (callback ())
 runDBSQLite conn (Return result) = return result
 
+-- >>> execDB p1
+-- SQLite3 returned ErrorError while attempting to perform prepare "UPDATE INTO entries (key, value) VALUES (?,?)": near "INTO": syntax error
 execDB :: DB a -> IO a
 execDB db =
     do conn <- open "test.db"
