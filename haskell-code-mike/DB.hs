@@ -37,6 +37,7 @@ p1 = Put "Mike" 51 (\() ->
      Get "Mike" (\y ->
      Return (show (x+y))))))
 
+
 -- >>> runDB Map.empty p1'
 -- "103"
 p1' :: DB String
@@ -71,6 +72,19 @@ splice (Put key value callback) next =
     Put key value (\ () ->
         splice (callback ()) next)
 splice (Return result) next = next result
+
+{-
+class Monad m where
+  -- "bind" / "flatMap"
+  (>>=) :: m a -> (a -> m b) -> m b
+  return :: a -> m a
+-}
+
+-- >>> :type Return
+
+instance Monad DB where
+    (>>=) = splice
+
 
 -- Datenbankprogramm ausführen
 -- "dependency injection"
