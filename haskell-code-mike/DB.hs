@@ -134,6 +134,7 @@ data Entry = MkEntry String Integer
 runDBSQLite :: Connection -> DB a -> IO a
 runDBSQLite conn (Get key callback) =
     do [MkEntry _ value] 
+         -- OverloadedStrings macht aus SQL-Text ein Query-Objekt
          <- queryNamed conn "SELECT (key, value) FROM entries WHERE key = :key" [":key" := key]
        runDBSQLite conn (callback value)
 runDBSQLite conn (Put key value callback) = undefined
