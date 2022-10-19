@@ -32,7 +32,7 @@ data DB a =
 
 p1 :: DB String
 p1 = Put "Mike" 51 (\() ->
-     Get "Mik" (\x ->
+     Get "Mike" (\x ->
      Put "Mike" (x+1) (\() ->
      Get "Mike" (\y ->
      Return (show (x+y))))))
