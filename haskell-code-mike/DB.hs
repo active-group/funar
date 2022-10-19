@@ -8,3 +8,12 @@ module DB where
   return (show (x+y))
 -}
 
+data DBCommand a =
+    Put String Integer
+  | Get String
+  | Return a
+
+type DBProgram a = [DBCommand a]
+
+p1 = [Put "Mike" 51,
+      Get "Mike"]
