@@ -81,10 +81,13 @@ class Monad m where
 -}
 
 -- >>> :type Return
+-- Return :: a -> DB a
+
+instance Applicative DB where
 
 instance Monad DB where
     (>>=) = splice
-
+    return = Return
 
 -- Datenbankprogramm ausführen
 -- "dependency injection"
