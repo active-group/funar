@@ -37,6 +37,24 @@ p1 = Put "Mike" 51 (\() ->
      Get "Mike" (\y ->
      Return (show (x+y))))))
 
+-- >>> runDB Map.empty p1'
+-- "103"
+p1' :: DB String
+p1' = splice (put "Mike" 51) (\() ->
+      splice (get "Mike") (\x ->
+      splice (put "Mike" (x+1)) (\() ->
+      splice (get "Mike") (\y ->
+      Return (show (x+y))))))
+
+-- >>> runDB Map.empty p2'
+-- 51
+p2' :: DB Integer
+p2' = splice (put "Mike" 51) (\() ->
+              get "Mike")
+
+p2'' = splice (Put "Mike" 51 Return) (\() ->
+               Get "Mike" Return)
+
 get :: String -> DB Integer
 get key = Get key Return -- (\value -> Return value)
 
