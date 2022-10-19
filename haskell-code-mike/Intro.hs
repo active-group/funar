@@ -362,6 +362,6 @@ instance Semigroup a => Semigroup (Optional a) where
     op (Result a) (Result a') = Result (op a a')
 
 instance Semigroup a => Monoid (Optional a) where
-    neutral = Null -- Result neutral
+    neutral = Null -- Result neutral wäre falsch
 
 -- data Maybe a = Nothing | Just a 
