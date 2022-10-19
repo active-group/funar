@@ -150,7 +150,7 @@ runDBSQLite conn (Put key value callback) =
 runDBSQLite conn (Return result) = return result
 
 -- >>> execDB p1
--- SQLite3 returned ErrorError while attempting to perform prepare "SELECT (key, value) FROM entries WHERE key = :key": row value misused
+-- "103"
 execDB :: DB a -> IO a
 execDB db =
     do conn <- open "test.db"
