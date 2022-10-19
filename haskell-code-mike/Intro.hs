@@ -301,6 +301,9 @@ listMap     :: (a -> b) -> List    a -> List      b
 listMap f [] = []
 listMap f (x : xs) = f x : (listMap f xs)
 
+instance Functor Optional where
+  fmap = optionalMap
+
 {-
 Typklasse: "Eigenschaft eines Typs" / definiert durch Methoden
 
