@@ -132,6 +132,8 @@ data Entry = MkEntry String Integer
 
 runDBSQLite :: Connection -> DB a -> IO a
 runDBSQLite conn (Get key callback) =
-    queryNamed conn "SELECT (key, value) FROM entries WHERE key = :key" [":key" := key]
+    do [MkEntry _ value] 
+         <- queryNamed conn "SELECT (key, value) FROM entries WHERE key = :key" [":key" := key]
+       runDBSQLite conn (callback value)
 runDBSQLite conn (Put key value callback) = undefined
 runDBSQLite conn (Return result) = return result
