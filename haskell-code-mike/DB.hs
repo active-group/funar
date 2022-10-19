@@ -127,4 +127,11 @@ runDB mp (Put key value callback) =
 
 runDB mp (Return result) = result
 
+-- benötigen Datentyp, der den Datenbank-Zeilen entspricht
+data Entry = MkEntry String Integer
+
 runDBSQLite :: Connection -> DB a -> IO a
+runDBSQLite conn (Get key callback) =
+    queryNamed 
+runDBSQLite conn (Put key value callback) = undefined
+runDBSQLite conn (Return result) = return result
