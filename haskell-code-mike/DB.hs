@@ -47,6 +47,15 @@ p1' = splice (put "Mike" 51) (\() ->
       splice (get "Mike") (\y ->
       Return (show (x+y))))))
 
+-- monadische Syntax
+p1'' :: DB String
+-- >>> runDB Map.empty p1''
+-- "103"
+p1'' = do put "Mike" 51
+          x <- get "Mike"
+          put "Mike" (x+1)
+          y <- get "Mike"
+          return (show (x+y))
 -- >>> runDB Map.empty p2'
 -- 51
 p2' :: DB Integer
@@ -82,6 +91,7 @@ class Monad m where
 
 -- >>> :type Return
 -- Return :: a -> DB a
+instance Functor DB where
 
 instance Applicative DB where
 
