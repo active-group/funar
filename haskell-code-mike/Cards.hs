@@ -11,3 +11,5 @@ module Cards where
 
 -- - Ist eine Karte höherwertiger als eine andere?
 --   (nur zulässig bei gleicher Farbe)
+
+-- deriving funktioniert bei Show, Eq, Ord
