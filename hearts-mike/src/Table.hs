@@ -170,3 +170,8 @@ tableProcessEvent (TrickTaken player trick) state =
     }
 tableProcessEvent (IllegalCardAttempted player card) state = state
 tableProcessEvent (GameEnded player) state = state
+
+tableProcessCommand :: GameCommand -> TableState -> [GameEvent]
+tableProcessCommand (DealHands hands) state =
+  map HandDealt (Map.toList hands)
+tableProcessCommand (PlayCard player card) state = undefined
