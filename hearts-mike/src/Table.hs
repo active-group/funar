@@ -179,6 +179,7 @@ tableProcessCommand (PlayCard player card) state =
   if playValid state player card
   then 
     let event1 = LegalCardPlayed player card
+        state1 = tableProcessEvent event1 state
     in case turnOverTrick state of
          Just (trick, trickTaker) -> undefined
          Nothing -> undefined
