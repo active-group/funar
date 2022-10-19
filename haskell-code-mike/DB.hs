@@ -147,10 +147,12 @@ x =
 
 runDBSQLite :: Connection -> DB a -> IO a
 runDBSQLite conn (Get key callback) =
-    do [(MkEntry _ value)] 
+    do [entry] 
          -- OverloadedStrings macht aus SQL-Text ein Query-Objekt
          <- queryNamed conn "SELECT key, value FROM entries WHERE key = :key" [":key" := key]
+       let (MkEntry _ value) = entry
        runDBSQLite conn (callback value)
+
 runDBSQLite conn (Put key value callback) =
     do execute conn "REPLACE INTO entries (key, value) VALUES (?,?)" (MkEntry key value)
        runDBSQLite conn (callback ())
