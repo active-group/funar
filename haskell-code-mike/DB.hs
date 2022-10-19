@@ -43,6 +43,12 @@ get key = Get key Return -- (\value -> Return value)
 put :: String -> Integer -> DB ()
 put key value = Put key value Return
 
+
+splice :: DB a -> (a -> DB b) -> DB b
+splice (Get key callback) next = undefined
+splice (Put key value callback) next = undefined
+splice (Return result) next = undefined
+
 -- Datenbankprogramm ausführen
 -- "dependency injection"
 runDB :: Map String Integer -> DB a -> a
