@@ -304,6 +304,16 @@ listMap f (x : xs) = f x : (listMap f xs)
 instance Functor Optional where
   fmap = optionalMap
 
+-- eingebaut als id
+identity x = x 
+-- fmap identiy = identity
+
+o :: (b -> c) -> (a -> b) -> (a -> c)
+o f g = \ a -> f (g a)
+
+-- Semigroup -> Monoid
+-- Functor -> Applicative -> Monad
+
 {-
 Typklasse: "Eigenschaft eines Typs" / definiert durch Methoden
 
