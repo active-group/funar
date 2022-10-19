@@ -1,6 +1,8 @@
 module DB where
 
-import qualified Data.Map as Map
+import qualified Data.Map as Map -- alle Funktionen benutzen mit Map.
+import Data.Map (Map, (!))
+
 {-
   put "Mike" 51
   x = get "Mike"
