@@ -308,6 +308,7 @@ instance Functor Optional where
 identity x = x 
 -- fmap identiy = identity
 
+-- eingebaut als "."
 o :: (b -> c) -> (a -> b) -> (a -> c)
 o f g = \ a -> f (g a)
 
