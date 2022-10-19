@@ -37,6 +37,12 @@ p1 = Put "Mike" 51 (\() ->
      Get "Mike" (\y ->
      Return (show (x+y))))))
 
+get :: String -> DB Integer
+get key = Get key Return -- (\value -> Return value)
+
+put :: String -> Integer -> DB ()
+put key value = Put key value Return
+
 -- Datenbankprogramm ausführen
 -- "dependency injection"
 runDB :: Map String Integer -> DB a -> a
