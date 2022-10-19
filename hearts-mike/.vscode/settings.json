@@ -1,0 +1,4 @@
+{
+    "haskell.manageHLS": "PATH",
+    "extensions.ignoreRecommendations": true
+}
