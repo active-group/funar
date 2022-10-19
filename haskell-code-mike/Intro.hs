@@ -234,10 +234,6 @@ listSum [] = 0
 -- listSum (head:tail) = head + (listSum tail)
 listSum (x:xs) = x + listSum xs
 
-listMap :: (a -> b) -> [a] -> [b]
-listMap f [] = []
-listMap f (x:xs) = f x : (listMap f xs)
-
 listFold :: b -> (a -> b -> b) -> [a] -> b
 -- >>> listFold 0 (+) [1,2,3]
 -- 6
@@ -298,6 +294,12 @@ listIndex e (x:xs) =
 optionalMap :: (a -> b) -> Optional a -> Optional b
 optionalMap f Null = Null
 optionalMap f (Result a) = Result (f a)
+
+type List a = [a]
+listMap     :: (a -> b) -> List    a -> List      b    
+-- listMap ::     (a -> b) -> [a]       -> [b]
+listMap f [] = []
+listMap f (x : xs) = f x : (listMap f xs)
 
 {-
 Typklasse: "Eigenschaft eines Typs" / definiert durch Methoden
