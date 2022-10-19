@@ -32,7 +32,7 @@ data DB a =
 
 p1 :: DB String
 p1 = Put "Mike" 51 (\() ->
-     Get "Mike" (\x ->
+     Get "Mik" (\x ->
      Put "Mike" (x+1) (\() ->
      Get "Mike" (\y ->
      Return (show (x+y))))))
@@ -46,7 +46,8 @@ runDB mp (Get key callback) =
     let value = mp ! key
     in runDB mp (callback value)
 
-runDB mp (Put key value callback) = 
-    runDB (Map.insert key value mp) (callback ())
+runDB mp (Put key value callback) =
+    let mp' = Map.insert key value mp
+    in runDB mp' (callback ())
 
 runDB mp (Return result) = result
