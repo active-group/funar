@@ -150,7 +150,7 @@ runDBSQLite conn (Put key value callback) =
 runDBSQLite conn (Return result) = return result
 
 -- >>> execDB p1
--- FormatError {fmtMessage = "Only unnamed '?' query parameters are accepted, ':value' given", fmtQuery = "UPDATE entries SET value = :value WHERE key = :key", fmtParams = ["SQLText \"Mike\"","SQLInteger 51"]}
+-- SQLite3 returned ErrorError while attempting to perform prepare "UPSERT INTO entries (key, value) VALUES (?,?)": near "UPSERT": syntax error
 execDB :: DB a -> IO a
 execDB db =
     do conn <- open "test.db"
