@@ -24,7 +24,7 @@ p1 = [Put "Mike" 51,
 
 -}
 data DB a =
-    Get String (Integer -> DB a)
+    Get String         (Integer -> DB a)
   | Put String Integer (()      -> DB a)
   | Return a
 
@@ -36,6 +36,8 @@ p1 = Put "Mike" 51 (\() ->
      Return (show (x+y))))))
 
 runDB :: Map String Integer -> DB a -> a
-runDB mp (Get key callback) = undefined
-runDB mp (Put key value callback) = undefined
-runDB mp (Return result) = undefined
+runDB mp (Get key callback) =
+    runDB mp (callback (mp ! key))
+runDB mp (Put key value callback) = 
+    runDB (Map.insert key value mp) (callback ())
+runDB mp (Return result) = result
