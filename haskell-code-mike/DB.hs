@@ -138,6 +138,11 @@ instance ToRow Entry where
     -- toRow :: Entry -> [SQLData]
     toRow (MkEntry key value) = toRow (key, value)
 
+
+x =
+    let (a, b) = (5,7)
+    in a+b
+
 runDBSQLite :: Connection -> DB a -> IO a
 runDBSQLite conn (Get key callback) =
     do [MkEntry _ value] 
