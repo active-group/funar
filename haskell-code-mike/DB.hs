@@ -122,3 +122,5 @@ runDB mp (Put key value callback) =
     in runDB mp' (callback ())
 
 runDB mp (Return result) = result
+
+runDBSQLite :: 
