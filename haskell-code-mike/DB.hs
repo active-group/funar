@@ -145,7 +145,7 @@ runDBSQLite conn (Get key callback) =
          <- queryNamed conn "SELECT (key, value) FROM entries WHERE key = :key" [":key" := key]
        runDBSQLite conn (callback value)
 runDBSQLite conn (Put key value callback) =
-    do execute conn "UPDATE INTO entries (key, value) VALUES (?,?)" (MkEntry key value)
+    do execute conn "UPDATE entries SET value := value WHERE key = :key" (MkEntry key value)
        runDBSQLite conn (callback ())
 runDBSQLite conn (Return result) = return result
 
