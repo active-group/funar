@@ -34,3 +34,8 @@ p1 = Put "Mike" 51 (\() ->
      Put "Mike" (x+1) (\() ->
      Get "Mike" (\y ->
      Return (show (x+y))))))
+
+runDB :: Map String Integer -> DB a -> a
+runDB mp (Get key callback) = undefined
+runDB mp (Put key value callback) = undefined
+runDB mp (Return result) = undefined
