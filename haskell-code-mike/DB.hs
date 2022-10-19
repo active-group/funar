@@ -1,5 +1,6 @@
 module DB where
 
+import qualified Data.Map as Map
 {-
   put "Mike" 51
   x = get "Mike"
