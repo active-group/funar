@@ -149,3 +149,11 @@ runDBSQLite conn (Put key value callback) =
        runDBSQLite conn (callback ())
 runDBSQLite conn (Return result) = return result
 
+execDB :: DB a -> IO a
+execDB db =
+    do conn <- open "test.db"
+       execute_ conn
+         "CREATE TABLE IF NOT EXISTS entries (key TEXT PRIMARY KEY, value INTEGER)"
+       result <- runDBSQLite conn command
+       close conn
+       return result
