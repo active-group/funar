@@ -3,6 +3,10 @@ module DB where
 import qualified Data.Map as Map -- alle Funktionen benutzen mit Map.
 import Data.Map (Map, (!))
 
+import Control.Applicative
+import Database.SQLite.Simple
+import Database.SQLite.Simple.FromRow
+
 {-
   put "Mike" 51
   x = get "Mike"
@@ -123,4 +127,4 @@ runDB mp (Put key value callback) =
 
 runDB mp (Return result) = result
 
-runDBSQLite :: 
+runDBSQLite :: Connection -> DB a -> IO a
