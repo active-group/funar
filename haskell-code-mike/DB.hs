@@ -139,13 +139,15 @@ instance ToRow Entry where
     toRow (MkEntry key value) = toRow (key, value)
 
 
+-- >>> x
+-- 12
 x =
-    let (a, b) = (5,7)
+    let [a, b] = [5,7]
     in a+b
 
 runDBSQLite :: Connection -> DB a -> IO a
 runDBSQLite conn (Get key callback) =
-    do [MkEntry _ value] 
+    do [(MkEntry _ value)] 
          -- OverloadedStrings macht aus SQL-Text ein Query-Objekt
          <- queryNamed conn "SELECT key, value FROM entries WHERE key = :key" [":key" := key]
        runDBSQLite conn (callback value)
