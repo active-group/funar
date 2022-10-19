@@ -1,3 +1,4 @@
+{-# LANGUAGE OverloadedStrings #-}
 module DB where
 
 import qualified Data.Map as Map -- alle Funktionen benutzen mit Map.
