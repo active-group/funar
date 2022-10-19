@@ -309,10 +309,15 @@ identity x = x
 -- fmap identiy = identity
 
 -- eingebaut als "."
+-- Funktionskomposition
 o :: (b -> c) -> (a -> b) -> (a -> c)
 o f g = \ a -> f (g a)
 
+-- fmap (f . g) = (fmap f) . (fmap g)
+
 -- Semigroup -> Monoid
+
+-- brauchen Typparameter:
 -- Functor -> Applicative -> Monad
 
 {-
