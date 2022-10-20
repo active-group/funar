@@ -270,6 +270,30 @@ data Optional a =
   | Result a
   deriving Show
 
+safeDivide :: (Eq a, Fractional a) => a -> a -> Optional a
+safeDivide n m =
+  if m == 0
+  then Null
+  else Result (n/m)
+
+instance Applicative Optional where
+
+instance Monad Optional where
+  return = Result
+  Null >>= next = Null
+  (Result a) >>= next = next a 
+
+optionalMap2 :: (a -> b -> c) -> Optional a -> Optional b -> Optional c
+optionalMap2 f (Result a) (Result b) = Result (f a b)
+optionalMap2 f _ _ = Null
+
+
+da :: Double -> Double -> Double -> Double -> Optional Double
+da a b c d =
+  do r1 <- safeDivide a b
+     r2 <- safeDivide c d
+     return (r1 + r2)
+
 -- Index eines Elements in einer Liste ermitteln
 -- Eq a: Constraint / Einschränkung
 -- "a unterstützt Gleichheit / =="
