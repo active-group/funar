@@ -78,3 +78,4 @@ data Payment = MkPayment Direction Date Amount Currency
 
 -- Datum: "jetzt" bzw. "Zahlungen bis jetzt."
 semantics :: Contract -> Date -> ([Payment], Contract) -- "Residualvertrag"
+semantics (One crr)
