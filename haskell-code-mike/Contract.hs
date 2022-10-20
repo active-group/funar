@@ -41,7 +41,8 @@ data Contract =
   | Many Amount Contract  -- <<< Selbstbezug
   | Later Date Contract
   | Give Contract
-  | And Contract Contract
+  | And Contract Contract -- Halbgruppe
+  | Zero -- neutrale Element
   deriving Show
 
 c1 = One EUR -- "Ich bekomme 1€ jetzt."
