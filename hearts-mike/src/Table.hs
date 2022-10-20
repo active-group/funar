@@ -204,33 +204,11 @@ tableProcessCommand (PlayCard player card) state =
 data Game a = -- brauchen Typparameter
   -- pro Operation einen Konstruktor
     PlayValid Player Card (Bool -> Game a)
-   | RecordEvent GameEvent (() -> Game a)
- | GetCommand (GameCommand -> Game a)
+ | RecordEvent GameEvent (() -> Game a)
  | TurnOverTrick (Maybe (Trick, Player) -> Game a)
  | PlayerAfter Player (Player -> Game a)
  | GameOver (Maybe Player -> Game a)
  | Done a
-
-data GameStep a =
-   RecordedEvent GameEvent (() -> Game a)
- | NeedsCommand (GameCommand -> Game a)
- | GameDone a
-
-runGameStep :: Game a -> TableState -> (GameStep a, TableState)
-runGameStep (PlayValid player card cont) state =
-  runGameStep (cont (playValid state player card)) state
-runGameStep (TurnOverTrick cont) state =
-  runGameStep (cont (turnOverTrick state)) state
-runGameStep (PlayerAfter player cont) state =
-  runGameStep (cont (playerAfter state player)) state
-runGameStep (GameOver cont) state =
-  runGameStep (cont (gameOver state)) state
-runGameStep (RecordEvent event cont) state =
-  (RecordedEvent event cont, tableProcessEvent event state)
-runGameStep (GetCommand cont) state =
-  (NeedsCommand cont, state)
-runGameStep (Done result) state =
-  (GameDone result, state)
 
 playValidM :: Player -> Card -> Game Bool
 playValidM player card = PlayValid player card Done
@@ -297,14 +275,4 @@ tableProcessCommandM (PlayCard player card) =
      else
       do recordEventM (IllegalCardAttempted player card)
          return Nothing
-
--- Gesamtes Spiel spielen 
-tableLoopM :: GameCommand -> Game (Maybe Player)
-tableLoopM command =
-  do maybeWinner <- tableProcessCommandM command
-     case maybeWinner of
-      Nothing -> 
-        GetCommand tableLoopM
-      Just winner ->
-        return maybeWinner
 
