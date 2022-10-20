@@ -292,7 +292,7 @@ data GameStep a =
   | NeedsCommand (GameCommand -> Game a)
   | GameDone a
 
-runGameStep :: Game a -> TableState -> (GameStep a, TableState)
+-- runGameStep :: Game a -> TableState -> (GameStep a, TableState)
 runGameStep (PlayValid player card callback) state =
   runGameStep (callback (playValid state player card)) state
 runGameStep (TurnOverTrick callback) state =
@@ -301,7 +301,7 @@ runGameStep (PlayerAfter player callback) state =
   runGameStep (callback (playerAfter state player)) state
 runGameStep (GameOver callback) state =
   runGameStep (callback (gameOver state)) state
-
+{-
 runGameStep (Done result) state = (GameDone result, state)
 
 runGameStep (RecordEvent event callback) state =
@@ -310,3 +310,4 @@ runGameStep (RecordEvent event callback) state =
 
 runGameStep (GetCommand callback) state =
   (NeedsCommand callback, state)
+-}
