@@ -129,7 +129,7 @@ gameAlong =
      let playerIdentities = Map.keys players
      shuffledDeck <- shuffle deck
      let game = runGame players shuffledDeck
-     let s1 = State.evalState [] game
+     let s1 = State.evalState [] game -- wie runDB
      let s2 = State.evalState initialGameStepState s1
      let p1 = State.evalState emptyPlayerState s2
      let p2 = State.evalState emptyPlayerState p1
