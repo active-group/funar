@@ -273,3 +273,11 @@ tableProcessCommandM (PlayCard player card) =
       do recordEventM (IllegalCardAttempted player card)
          return Nothing
 
+-- "Das ganze Spiel"
+tableLoopM :: GameCommand -> Game (Maybe Player)
+tableLoopM command =
+  do maybeWinner <- tableProcessCommandM command
+     case maybeWinner of
+      Nothing -> 
+        undefined -- tableLoopM
+      Just winner -> return maybeWinner
