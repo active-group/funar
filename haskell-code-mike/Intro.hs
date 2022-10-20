@@ -276,6 +276,9 @@ safeDivide n m =
   then Null
   else Result (n/m)
 
+-- instance Functor Optional where
+--    fmap :: (a -> b) -> Optional a -> Optional b
+
 instance Applicative Optional where
 
 instance Monad Optional where
@@ -293,6 +296,9 @@ da a b c d =
   do r1 <- safeDivide a b
      r2 <- safeDivide c d
      return (r1 + r2)
+
+da' :: Double -> Double -> Double -> Double -> Optional Double
+da' a b c d = optionalMap2 (+) (safeDivide a b) (safeDivide c d)
 
 -- Index eines Elements in einer Liste ermitteln
 -- Eq a: Constraint / Einschränkung
