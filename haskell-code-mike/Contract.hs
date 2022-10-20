@@ -104,9 +104,9 @@ semantics (And contract1 contract2) now =
 semantics Zero now = ([], Zero)
 
 -- >>> semantics cc (MkDate "2022-10-20")
--- ([MkPayment Long (MkDate "2022-10-20") 1.0 EUR],And Zero (Later (MkDate "2022-12-24") (One EUR)))
+-- ([MkPayment Long (MkDate "2022-10-20") 1.0 EUR],Later (MkDate "2022-12-24") (One EUR))
 -- >>> semantics cc (MkDate "2022-12-25")
--- ([MkPayment Long (MkDate "2022-12-25") 1.0 EUR,MkPayment Long (MkDate "2022-12-25") 1.0 EUR],And Zero Zero)
+-- ([MkPayment Long (MkDate "2022-12-25") 1.0 EUR,MkPayment Long (MkDate "2022-12-25") 1.0 EUR],Zero)
 cc = And (One EUR) (Later (MkDate "2022-12-24") (One EUR))
 
 -- smart constructor
