@@ -209,4 +209,9 @@ data Game a = -- brauchen Typparameter
 
 playValidM :: Player -> Card -> Game Bool
 playValidM player card = PlayValid player card Done
+-- ...
 
+-- liefert Gewinner:in zurück, falls Spiel vorbei
+tableProcessCommandM :: GameCommand -> Game (Maybe Player)
+tableProcessCommandM (DealHands hands) = undefined
+tableProcess
