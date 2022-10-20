@@ -76,7 +76,13 @@ data Direction = Long | Short
 data Payment = MkPayment Direction Date Amount Currency
   deriving Show
 
-scalePayment 
+scalePayment :: Amount -> Payment -> Payment
+scalePayment factor (MkPayment direction date amount currency) =
+    MkPayment direction date (factor * amount) currency
+
+invertPayment :: Payment -> Payment
+invertPayment (MkPayment Long date amount currency) = MkPayment Short date amount currency
+invertPayment (MkPayment Short date amount currency) = MkPayment Long date amount currency
 
 -- Datum: "jetzt" bzw. "Zahlungen bis jetzt."
 semantics :: Contract -> Date -> ([Payment], Contract) -- "Residualvertrag"
@@ -84,3 +90,12 @@ semantics (One currency) now = ([MkPayment Long now currency], Zero)
 semantics (Many amount contract) now =
     let (payments, residualContract) = semantics contract date
     in (map (scalePayment amount) payments, Many amount residualContract)
+semantics c@(Later date contract) now =
+    if now >= date
+    then semantics contract date
+    else ([], c)
+
+semantics (And contract1 contract2) now =
+    let (payments1, residualContract1) = semantics contract1 date
+        (payments1, residualContract2) = semantics contract2 date
+    in (payments1 ++ payments2, And contract1 contract2)
