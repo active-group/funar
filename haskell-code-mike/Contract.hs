@@ -69,3 +69,7 @@ currencySwap date amount1 currency1 amount2 currency2 =
 
 -- haben Syntax
 -- brauchen Semantik
+
+data Payment = MkPayment Direction Date Amount Currency
+
+semantics :: Contract -> [Payment]
