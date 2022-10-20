@@ -211,7 +211,18 @@ playValidM :: Player -> Card -> Game Bool
 playValidM player card = PlayValid player card Done
 -- ...
 
+instance Functor Game where
+
+instance Applicative Game where
+
+instance Monad Game where
+  -- Aufgabe
+
 -- liefert Gewinner:in zurück, falls Spiel vorbei
 tableProcessCommandM :: GameCommand -> Game (Maybe Player)
 tableProcessCommandM (DealHands hands) = undefined
-tableProcess
+tableProcessCommandM (PlayCard player card) =
+   do valid <- playValidM player card
+      if valid
+      then undefined -- Aufgabe
+      else undefined -- Aufgabe
