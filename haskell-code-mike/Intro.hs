@@ -291,10 +291,14 @@ instance Monad Optional where
   Null >>= next = Null
   (Result a) >>= next = next a 
 
-optionalMap2 :: (a -> b -> c) -> Optional a -> Optional b -> Optional c
-optionalMap2 f (Result a) (Result b) = Result (f a b)
-optionalMap2 f _ _ = Null
+optionalMap2 :: (a -> (b -> c)) -> Optional a -> Optional b -> Optional c
+-- optionalMap2 f (Result a) (Result b) = Result (f a b)
+-- optionalMap2 f _ _ = Null
+optionalMap2 f oa ob =
+  -- (pure f) <*> oa <*> ob
+  f <$> oa <*> ob
 
+optionalMap3 f oa ob oc = f <$> oa <*> ob <*> oc
 
 da :: Double -> Double -> Double -> Double -> Optional Double
 da a b c d =
