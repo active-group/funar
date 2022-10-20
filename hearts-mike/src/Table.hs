@@ -202,4 +202,5 @@ tableProcessCommand (PlayCard player card) state =
 -- (>>=) :: m a -> (a -> m b) -> m b
 
 data Game a = -- brauchen Typparameter
-  
+  -- pro Operation einen Konstruktor
+  PlayValid
