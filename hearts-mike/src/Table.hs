@@ -205,26 +205,3 @@ data Game a = -- brauchen Typparameter
   -- pro Operation einen Konstruktor
     PlayValid Player Card (Bool -> Game a)
   
-  | RecordEvent GameEvent (() -> Game a)
-  -- Aufgabe: vervollständigen
-  | Done a
-
-playValidM :: Player -> Card -> Game Bool
-playValidM player card = PlayValid player card Done
--- Aufgabe
-
-instance Functor Game where
-
-instance Applicative Game where
-
-instance Monad Game where
-  -- Aufgabe
-
--- liefert Gewinner:in zurück, falls Spiel vorbei
-tableProcessCommandM :: GameCommand -> Game (Maybe Player)
-tableProcessCommandM (DealHands hands) = undefined
-tableProcessCommandM (PlayCard player card) =
-   do valid <- playValidM player card
-      if valid
-      then undefined -- Aufgabe
-      else undefined -- Aufgabe
