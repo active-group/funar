@@ -283,5 +283,5 @@ tableLoopM command =
   do maybeWinner <- tableProcessCommandM command
      case maybeWinner of
       Nothing -> 
-        GetCommand tableLoopM
+        GetCommand (\nextCommand -> tableLoopM nextCommand)
       Just winner -> return maybeWinner
