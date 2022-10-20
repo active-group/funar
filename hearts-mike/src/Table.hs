@@ -203,4 +203,6 @@ tableProcessCommand (PlayCard player card) state =
 
 data Game a = -- brauchen Typparameter
   -- pro Operation einen Konstruktor
-  PlayValid
+    PlayValid Player Card
+  -- ...
+  | Done a
