@@ -280,6 +280,11 @@ safeDivide n m =
 --    fmap :: (a -> b) -> Optional a -> Optional b
 
 instance Applicative Optional where
+  -- pure :: a -> Optional a
+  -- (<*>) :: Optional (a -> b) -> Optional a -> Optional b
+  pure = Result
+  Result f <*> Result a = Result (f a)
+  _ <*> _ = Null
 
 instance Monad Optional where
   return = Result
