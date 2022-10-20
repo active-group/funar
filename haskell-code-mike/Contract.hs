@@ -11,6 +11,11 @@ Zero-Bond / Zero Coupon Bond
 - Währung ("Ich bekomme 1€ jetzt!")
 - Betrag ("Ich bekomme jetzt 100€")
 - Später
+
+Currency swap:
+   Am 24.12.2022:
+   - ich bekomme 100€
+   - ich bezahle 150GBP
 -}
 
 data Date = MkDate String deriving (Eq, Ord, Show)
