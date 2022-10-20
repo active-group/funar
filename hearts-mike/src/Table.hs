@@ -231,9 +231,6 @@ instance Monad Game where
   (RecordEvent event cont) >>= next =
     RecordEvent event (\() ->
       cont () >>= next)
-  (GetCommand cont) >>= next =
-    GetCommand (\command ->
-      cont command >>= next)
   (TurnOverTrick cont) >>= next =
     TurnOverTrick (\over ->
       cont over >>= next)
