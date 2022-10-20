@@ -301,6 +301,26 @@ runGameStep (PlayerAfter player callback) state =
   runGameStep (callback (playerAfter state player)) state
 runGameStep (GameOver callback) state =
   runGameStep (callback (gameOver state)) state
+
+runGameStep (RecordEvent event callback) state =
+  ("EventHappened", processTableEvent event state)
+
+runGameStep (GetCommand callback) state =
+  undefined
+
+runGameStep (Done result) state = undefined
+
+
+
+
+
+
+
+
+
+
+
+
 {-
 runGameStep (Done result) state = (GameDone result, state)
 
