@@ -52,7 +52,8 @@ echo = do
   i <- readTTY
   case i of
     "" -> return ()
-    _  -> writeTTY i >> echo
+    _  -> do writeTTY i 
+             echo
 
 
 -- Let's pretend
