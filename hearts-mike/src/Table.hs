@@ -211,12 +211,6 @@ data Game a = -- brauchen Typparameter
  | GetCommand (GameCommand -> Game a)
  | Done a
 
- data GameStep a =
-    RecordedEvent GameEvent (() -> Game a)
-  | NeedsCommand (GameCommand -> Game a)
-  | GameDone a
-
-
 playValidM :: Player -> Card -> Game Bool
 playValidM player card = PlayValid player card Done
 recordEventM :: GameEvent -> Game ()
@@ -291,6 +285,11 @@ tableLoopM command =
       Nothing -> 
         GetCommand (\nextCommand -> tableLoopM nextCommand)
       Just winner -> return maybeWinner
+
+data GameStep a =
+    RecordedEvent GameEvent (() -> Game a)
+  | NeedsCommand (GameCommand -> Game a)
+  | GameDone a
 
 runGameStep :: Game a -> TableState -> (GameStep a, TableState)
 runGameStep (PlayValid player card callback) state =
