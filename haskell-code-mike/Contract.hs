@@ -100,5 +100,17 @@ semantics (Give contract) now =
 semantics (And contract1 contract2) now =
     let (payments1, residualContract1) = semantics contract1 now
         (payments2, residualContract2) = semantics contract2 now
-    in (payments1 ++ payments2, And contract1 contract2)
+    in (payments1 ++ payments2, And residualContract1 residualContract2)
 semantics Zero now = ([], Zero)
+
+-- >>> semantics cc (MkDate "2022-10-20")
+-- ([MkPayment Long (MkDate "2022-10-20") 1.0 EUR],And Zero (Later (MkDate "2022-12-24") (One EUR)))
+-- >>> semantics cc (MkDate "2022-12-25")
+-- ([MkPayment Long (MkDate "2022-12-25") 1.0 EUR,MkPayment Long (MkDate "2022-12-25") 1.0 EUR],And Zero Zero)
+cc = And (One EUR) (Later (MkDate "2022-12-24") (One EUR))
+
+-- smart constructor
+and' :: Contract -> Contract -> Contract
+and' Zero c = c
+and' c Zero = c
+and' c1 c2 = And c1 c2
