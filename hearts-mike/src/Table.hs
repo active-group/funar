@@ -208,6 +208,7 @@ data Game a = -- brauchen Typparameter
  | TurnOverTrick (Maybe (Trick, Player) -> Game a)
  | PlayerAfter Player (Player -> Game a)
  | GameOver (Maybe Player -> Game a)
+ | GetCommand (GameCommand -> Game a)
  | Done a
 
 playValidM :: Player -> Card -> Game Bool
@@ -240,6 +241,9 @@ instance Monad Game where
   (GameOver cont) >>= next =
     GameOver (\won ->
       cont won >>= next)
+  (GetCommand cont) >>= next =
+    GetCommand (\command ->
+      cont command >>= next) -- cont command `splice` next
   (Done result) >>= next = next result
 
 
@@ -279,5 +283,5 @@ tableLoopM command =
   do maybeWinner <- tableProcessCommandM command
      case maybeWinner of
       Nothing -> 
-        undefined -- tableLoopM
+        GetCommand tableLoopM
       Just winner -> return maybeWinner
