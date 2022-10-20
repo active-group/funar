@@ -285,3 +285,8 @@ tableLoopM command =
       Nothing -> 
         GetCommand (\nextCommand -> tableLoopM nextCommand)
       Just winner -> return maybeWinner
+
+data GameStep a =
+    RecordedEvent GameEvent (() -> Game a)
+  | NeedsCommand (GameCommand -> Game a)
+  | GameDone a
