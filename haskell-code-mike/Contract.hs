@@ -40,6 +40,7 @@ data Contract =
     One Currency
   | Many Amount Contract  -- <<< Selbstbezug
   | Later Date Contract
+  | Give Contract
   deriving Show
 
 c1 = One EUR -- "Ich bekomme 1€ jetzt."
