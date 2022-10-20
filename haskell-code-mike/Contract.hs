@@ -63,3 +63,9 @@ zcb2 = Give (zeroCouponBond (MkDate "2022-12-24") 150 GBP)
 currencySwap date amount1 currency1 amount2 currency2 =
     And (zeroCouponBond date amount1 currency1)
         (Give (zeroCouponBond date amount2 currency2))
+
+-- im Paper:
+-- scale :: Obs Double -> Contract -> Contract
+
+-- haben Syntax
+-- brauchen Semantik
