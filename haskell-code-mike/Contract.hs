@@ -33,7 +33,11 @@ zcb1 = ZeroCouponBond (MkDate "2022-12-24") 100 EUR
 
 data Contract =
     One Currency
-  | Many Amount Currency
+  | Many Amount Contract  -- <<< Selbstbezug
+  | Later Date Contract
   deriving Show
 
 c1 = One EUR -- "Ich bekomme 1€ jetzt."
+c2 = Many 100 (One EUR) -- "Ich bekomme 100€ jetzt."
+
+c3 = Many 10 (Many 20 (One EUR)) -- 200€
