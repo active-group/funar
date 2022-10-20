@@ -70,6 +70,11 @@ currencySwap date amount1 currency1 amount2 currency2 =
 -- haben Syntax
 -- brauchen Semantik
 
-data Payment = MkPayment Direction Date Amount Currency
+data Direction = Long | Short
+  deriving Show
 
-semantics :: Contract -> [Payment]
+data Payment = MkPayment Direction Date Amount Currency
+  deriving Show
+
+-- Datum: "jetzt" bzw. "Zahlungen bis jetzt."
+semantics :: Contract -> Date -> ([Payment], Contract) -- "Residualvertrag"
