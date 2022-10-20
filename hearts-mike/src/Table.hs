@@ -193,3 +193,10 @@ tableProcessCommand (PlayCard player card) state =
           [event1, PlayerTurnChanged (playerAfter state1 player)]
   else
     [IllegalCardAttempted player card]
+
+-- Functor:
+-- fmap ::    (a -> b) -> f a -> f b
+-- Applicative:
+-- (<*>) :: f (a -> b) -> f a -> f b
+-- Monad:
+-- (>>=) :: m a -> (a -> m b) -> m b
