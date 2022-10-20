@@ -55,3 +55,5 @@ zeroCouponBond date amount currency =
     Later date (Many amount (One currency))
 
 zcb1' = zeroCouponBond (MkDate "2022-12-24") 100 EUR
+
+zcb2 = Give (zeroCouponBond (MkDate "2022-12-24") 150 GBP)
