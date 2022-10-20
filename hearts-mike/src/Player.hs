@@ -33,12 +33,13 @@ emptyPlayerState = PlayerState emptyHand [] []
 
 -- Spielevent "sehen"
 playerProcessEvent :: Player -> GameEvent -> PlayerState player -> PlayerState player
-playerProcessEvent player (HandDealt player' hand) state
-  | player == player' =
+playerProcessEvent player (HandDealt player' hand) state =
+  if player == player' 
+  then
     PlayerState { playerStateHand = hand,
                   playerStateTrick = emptyTrick,
                   playerStatePile = [] }
-  | otherwise = state
+  else state
 playerProcessEvent player (PlayerTurnChanged player') state = state
 playerProcessEvent player (LegalCardPlayed player' card) state
   | player' == player =
