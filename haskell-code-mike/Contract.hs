@@ -88,14 +88,17 @@ invertPayment (MkPayment Short date amount currency) = MkPayment Long date amoun
 semantics :: Contract -> Date -> ([Payment], Contract) -- "Residualvertrag"
 semantics (One currency) now = ([MkPayment Long now currency], Zero)
 semantics (Many amount contract) now =
-    let (payments, residualContract) = semantics contract date
+    let (payments, residualContract) = semantics contract now
     in (map (scalePayment amount) payments, Many amount residualContract)
 semantics c@(Later date contract) now =
     if now >= date
-    then semantics contract date
+    then semantics contract now
     else ([], c)
-
+semantics (Give contract) now =
+    let (payments, residualContract) = semantics contract now
+    in (map invertPayment payments, Give residualContract)
 semantics (And contract1 contract2) now =
-    let (payments1, residualContract1) = semantics contract1 date
-        (payments1, residualContract2) = semantics contract2 date
+    let (payments1, residualContract1) = semantics contract1 now
+        (payments2, residualContract2) = semantics contract2 now
     in (payments1 ++ payments2, And contract1 contract2)
+semantics Zero now = ([], Zero)
