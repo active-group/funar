@@ -86,7 +86,7 @@ invertPayment (MkPayment Short date amount currency) = MkPayment Long date amoun
 
 -- Datum: "jetzt" bzw. "Zahlungen bis jetzt."
 semantics :: Contract -> Date -> ([Payment], Contract) -- "Residualvertrag"
-semantics (One currency) now = ([MkPayment Long now currency], Zero)
+semantics (One currency) now = ([MkPayment Long now 1 currency], Zero)
 semantics (Many amount contract) now =
     let (payments, residualContract) = semantics contract now
     in (map (scalePayment amount) payments, Many amount residualContract)
