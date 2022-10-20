@@ -200,3 +200,6 @@ tableProcessCommand (PlayCard player card) state =
 -- (<*>) :: f (a -> b) -> f a -> f b
 -- Monad:
 -- (>>=) :: m a -> (a -> m b) -> m b
+
+data Game a = -- brauchen Typparameter
+  
