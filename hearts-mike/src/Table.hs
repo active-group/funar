@@ -204,10 +204,11 @@ tableProcessCommand (PlayCard player card) state =
 data Game a = -- brauchen Typparameter
   -- pro Operation einen Konstruktor
     PlayValid Player Card (Bool -> Game a)
- | RecordEvent GameEvent (() -> Game a)
  | TurnOverTrick (Maybe (Trick, Player) -> Game a)
  | PlayerAfter Player (Player -> Game a)
  | GameOver (Maybe Player -> Game a)
+
+ | RecordEvent GameEvent (() -> Game a)
  | GetCommand (GameCommand -> Game a)
  | Done a
 
