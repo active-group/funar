@@ -11,6 +11,15 @@ data Teletype m a where
   ReadTTY  :: Teletype m String
   WriteTTY :: String -> Teletype m ()
 
+-- In Polysemy gibt es *eine* Monade Sem mit einem Typparameter,
+-- eine Liste von Effekten
+
+-- Sem effects a: "effektbehaftete Berechnung" mit Effekten effects und 
+-- Resultat a
+
+-- Annahme: Sem '[DB Game] a
+--        + Sem '[Game] a
+
 readTTY :: Member Teletype effects => Sem effects String 
 readTTY = send ReadTTY
 writeTTY :: Member Teletype effects => String -> Sem effects ()
@@ -42,7 +51,7 @@ echo :: Member Teletype r => Sem r ()
 echo = do
   i <- readTTY
   case i of
-    "" -> pure ()
+    "" -> return ()
     _  -> writeTTY i >> echo
 
 
