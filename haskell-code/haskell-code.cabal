@@ -1,0 +1,22 @@
+cabal-version:       2.4
+name:                haskell-code
+version:             0.1.0.0
+license:             NONE
+author:              Mike Sperber
+maintainer:          michael.sperber@active-group.de
+
+library
+  build-depends:       QuickCheck,
+                       base,
+                       containers,
+                       parallel,
+                       sqlite-simple,
+                       text,
+                       polysemy, polysemy-plugin
+
+
+  -- hs-source-dirs:
+  default-language:    Haskell2010
+
+  exposed-modules: Intro
+
