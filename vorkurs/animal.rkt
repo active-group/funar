@@ -44,7 +44,7 @@
 ; - Minute
 ; zusammengesetzte Daten
 (define-record time
-  make-time
-  (time-hour natural)
+  make-time ; Konstruktor
+  (time-hour natural) ; Selektor
   (time-minute natural))
 
