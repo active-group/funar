@@ -285,7 +285,7 @@ FP: neue Fälle schwer, neue Operationen einfach
   (lambda (list)
     (cond
       ((empty? list)
-       0)
+       0) ; das neutrale Element in bezug auf die Summe
       ((cons? list)
        (+ (first list)
           (list-sum (rest list)))))))
