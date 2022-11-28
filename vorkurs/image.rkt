@@ -27,6 +27,11 @@
 ; 2. Unterschieden Namen geben
 ; 3. lambda
 
+; Konstruktionsanleitungen
+; - Kurzbeschreibung
+
+; Quadratisches Kachelmuster aus zwei Bildern
+
 (define tile
   (lambda (image1 image2)
     (above
