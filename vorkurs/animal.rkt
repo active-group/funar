@@ -238,4 +238,6 @@ Tradeoffs:
 
 OOP: neue Fälle einfach, neue Operationen schwer
 FP: neue Fälle schwer, neue Operationen einfach
+
+"expression problem": beides soll einfach sein
 |#
