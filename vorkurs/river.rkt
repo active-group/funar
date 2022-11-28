@@ -32,3 +32,10 @@
   (make-confluence "Rottweil" eschach prim))
 (define neckar2
   (make-confluence "Epfendorf" neckar1 schlichem))
+
+; Fließt Wasser aus Ort in Fluß?
+(: flows-from? (string river -> boolean))
+
+(check-expect (flows-from? "Epfendorf" neckar2) #t)
+(check-expect (flows-from? "Tübingen" neckar2) #f)
+
