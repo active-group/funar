@@ -39,3 +39,13 @@
 (check-expect (flows-from? "Epfendorf" neckar2) #t)
 (check-expect (flows-from? "Tübingen" neckar2) #f)
 
+(define flows-from?
+  (lambda (location river)
+    (cond
+      ((creek? river)
+       (string=? location (creek-origin river)))
+      ((confluence? river)
+       (or
+        (string=? location (confluence-location river))
+        (flows-from? location (confluence-main-stem river))
+        (flows-from? location (confluence-tributary river)))))))
