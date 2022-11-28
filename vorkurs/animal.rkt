@@ -141,6 +141,4 @@
 
 (define run-over-dillo
   (lambda (dillo)
-    (make-dillo ... ...)
-    ... (dillo-alive? dillo) ...
-    ... (dillo-weight dillo) ...))
+    (make-dillo #f (dillo-weight dillo))))
