@@ -227,8 +227,15 @@
 
 #|
 interface Animal { Animal runOver(); }
-class Dillo implements Animal { @Override Dillo runOver(); }
+class Dillo implements Animal { @Override Animal runOver(); }
 class Parrot implements Animal { ... }
 
 class Snake implements Animal { ... } 
+|#
+
+#|
+Tradeoffs:
+
+OOP: neue Fälle einfach, neue Operationen schwer
+FP: neue Fälle schwer, neue Operationen einfach
 |#
