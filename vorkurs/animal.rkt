@@ -100,6 +100,11 @@
 
 ; Tiere auf dem texanischen Highway
 
+; Ein Tier ist eins der folgenden:
+; - Gürteltiere - ODER -
+; - Papagei
+; Fallunterscheidung
+
 ; Gürteltier hat folgende Eigenschaften:
 ; - lebendig oder tot? - UND -
 ; - Gewicht
@@ -169,4 +174,13 @@
                     (+ weight amount)
                     weight))))
 
+
+; Ein Papagei hat folgende Eigenschaften:
+; - ein Satz - UND -
+; - ein Gewicht
+; zusammengesetzte Daten
+(define-record parrot
+  make-parrot
+  (parrot-sentence string)
+  (parrot-weight number))
 
