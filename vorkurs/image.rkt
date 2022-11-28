@@ -29,8 +29,11 @@
 
 ; Konstruktionsanleitungen
 ; - Kurzbeschreibung
+; - Signatur(deklaration)
 
 ; Quadratisches Kachelmuster aus zwei Bildern
+
+(: tile (image image -> image))
 
 (define tile
   (lambda (image1 image2)
@@ -40,3 +43,5 @@
 
 ; (z (image1 image2))
 (define image1 (rectangle 200 100 "solid" "yellow"))
+
+(tile square1 star1)
