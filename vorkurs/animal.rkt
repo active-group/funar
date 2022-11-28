@@ -379,4 +379,28 @@ FP: neue Fälle schwer, neue Operationen einfach
         (double-list (rest list)))))))
 
 (define double (lambda (x) (* 2 x)))
+
+(: list-map ((%element -> %element) (list-of %element) -> (list-of %element)))
+
+(check-expect (list-map double list4)
+              (cons 10 (cons 12 (cons 6 (cons 8 empty)))))
+(check-expect (list-map run-over-animal highway)
+              (cons
+               (run-over-animal dillo1)
+               (cons
+                (run-over-animal dillo2)
+                (cons
+                 (run-over-animal parrot1)
+                 (cons
+                  (run-over-animal parrot2)
+                  empty)))))
+
+(define list-map
+  (lambda (f list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cons
+        (f (first list))
+        (list-map f (rest list)))))))
               
