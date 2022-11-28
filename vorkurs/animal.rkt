@@ -192,8 +192,10 @@
   (parrot-weight number))
 
 ; Begrüßungspapagei, 1kg
+(: parrot1 parrot)
 (define parrot1 (make-parrot "Hello!" 1))
 ; Verabschiedungspapagei, 2kg
+(: parrot2 animal)
 (define parrot2 (make-parrot "Goodbye!" 2))
 
 ; Papagei überfahren
