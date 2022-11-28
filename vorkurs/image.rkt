@@ -44,4 +44,20 @@
 ; (z (image1 image2))
 (define image1 (rectangle 200 100 "solid" "yellow"))
 
-(tile square1 star1)
+;(tile square1 star1)
+
+#|
+
+Imperative Programmierung: Variablen stehen für Speicherzellen,
+deren Inhalt ausgetauscht werden kann.
+
+class C {
+  static int m(int x) {
+     ... x ...
+     x = x + 1;
+     ... x ...
+  }
+  ... C.m(17) ...
+
+}
+|#
