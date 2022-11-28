@@ -24,6 +24,7 @@
   (lambda (pet)
     ...))
 
+; Schablone
 (define cute?
   (lambda (pet)
     (cond ; Verzweigung, 1 Zweig pro Fall
