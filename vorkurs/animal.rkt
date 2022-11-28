@@ -7,4 +7,4 @@
 ; - Katze - ODER -
 ; - Schlange
 ; Fallunterscheidung
-; 
+; hier speziell: Aufzählung
