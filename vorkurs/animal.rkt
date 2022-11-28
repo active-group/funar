@@ -352,3 +352,6 @@ FP: neue Fälle schwer, neue Operationen einfach
        (if (p? (first list))
            (cons (first list) (extract p? (rest list)))
            (extract p? (rest list)))))))
+
+(define highway
+  (cons dillo1 (cons dillo2 (cons parrot1 (cons parrot2 empty)))))
