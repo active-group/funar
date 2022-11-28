@@ -372,11 +372,10 @@ FP: neue Fälle schwer, neue Operationen einfach
 (define double-list
   (lambda (list)
     (cond
-      ((empty? list) ...)
+      ((empty? list) empty)
       ((cons? list)
-       ...
-       (first list)
-       (double-list (rest list))
-       ...))))
+       (cons
+        (* 2 (first list))
+        (double-list (rest list)))))))
       
               
