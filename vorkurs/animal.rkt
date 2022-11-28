@@ -92,6 +92,7 @@
 (check-expect (msm->time 851)
               time2)
 
+; Schablone: Konstruktoraufruf
 (define msm->time
   (lambda (minutes)
     (make-time (quotient minutes 60)
