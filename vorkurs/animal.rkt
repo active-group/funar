@@ -380,7 +380,7 @@ FP: neue Fälle schwer, neue Operationen einfach
 
 (define double (lambda (x) (* 2 x)))
 
-(: list-map ((%element1 -> %element2) (list-of %element1) -> (list-of %element2)))
+(: list-map ((%a -> %b) (list-of %a) -> (list-of %b)))
 
 (check-expect (list-map double list4)
               (cons 10 (cons 12 (cons 6 (cons 8 empty)))))
