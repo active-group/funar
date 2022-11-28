@@ -187,6 +187,7 @@
 ; zusammengesetzte Daten
 (define-record parrot
   make-parrot
+  parrot?
   (parrot-sentence string)
   (parrot-weight number))
 
@@ -207,6 +208,7 @@
   (lambda (parrot)
     (make-parrot "" (parrot-weight parrot))))
 
+#|
 ; Tier überfahren
 (: run-over-animal (animal -> animal))
 
@@ -220,3 +222,4 @@
     (cond
       (... ...)
       (... ...))))
+|#
