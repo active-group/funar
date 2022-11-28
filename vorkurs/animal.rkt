@@ -163,7 +163,7 @@
         dillo)
     #;(if alive?
         (make-dillo alive? (+ weight amount))
-        (make-dillo alive? weight)
+        (make-dillo alive? weight))
     (make-dillo alive?
                 (if alive?
                     (+ weight amount)
