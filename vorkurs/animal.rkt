@@ -241,3 +241,23 @@ FP: neue Fälle schwer, neue Operationen einfach
 
 "expression problem": beides soll einfach sein
 |#
+
+
+; Liste ist eins der folgenden:
+; - die leere Liste
+; - eine Cons-Liste, bestehend aus erstem Element und Rest-Liste
+;                                                          ^^^^^
+#;(define list-of-numbers
+  (signature (mixed empty-list cons-list)))
+
+; Die leere Liste ...
+(define-singleton empty-list empty empty?)
+
+; Eine Cons-Liste besteht aus:
+; - erstes Element
+; - Rest-Liste
+(define-record cons-list
+  cons
+  cons?
+  (first number)
+  (rest list-of-numbers)) ; Selbstbezug
