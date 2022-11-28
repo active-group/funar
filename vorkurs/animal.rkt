@@ -25,9 +25,16 @@
     ...))
 
 ; Schablone
-(define cute?
+#;(define cute?
   (lambda (pet)
     (cond ; Verzweigung, 1 Zweig pro Fall
       ((string=? pet "dog") ...) ; (<Bedingung> <Ergebnis>)
       ((string=? pet "cat") ...)
       ((string=? pet "snake") ...))))
+
+(define cute?
+  (lambda (pet)
+    (cond ; Verzweigung, 1 Zweig pro Fall
+      ((string=? pet "dog") #t) ; (<Bedingung> <Ergebnis>)
+      ((string=? pet "cat") #t)
+      ((string=? pet "snake") #f))))
