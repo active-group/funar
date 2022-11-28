@@ -342,7 +342,8 @@ FP: neue Fälle schwer, neue Operationen einfach
            (cons (first list) (extract-odds (rest list)))
            (extract-odds (rest list)))))))
 
-(: extract ((number -> boolean) (list-of number) -> (list-of number)))
+; %element: Signaturvariable
+(: extract ((%element -> boolean) (list-of %element) -> (list-of %element)))
    
 (check-expect (extract even? list4)
               (cons 6 (cons 4 empty)))
