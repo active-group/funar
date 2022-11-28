@@ -363,4 +363,20 @@ FP: neue Fälle schwer, neue Operationen einfach
 (define highway
   (cons dillo1 (cons dillo2 (cons parrot1 (cons parrot2 empty)))))
 
-(extract dillo? highway)
+; alle Zahlen in einer Liste verdoppelt
+(: double-list ((list-of number) -> (list-of number)))
+
+(check-expect (double-list list4)
+              (cons 10 (cons 12 (cons 6 (cons 8 empty)))))
+
+(define double-list
+  (lambda (list)
+    (cond
+      ((empty? list) ...)
+      ((cons? list)
+       ...
+       (first list)
+       (double-list (rest list))
+       ...))))
+      
+              
