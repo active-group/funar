@@ -327,7 +327,7 @@ FP: neue Fälle schwer, neue Operationen einfach
 ; n * x = x * n = x
 
 ; Alle ungeraden Elemente aus einer Liste extrahieren
-(: extract-odds (list-of-numbers -> list-of-numbers))
+(: extract-odds ((list-of number) -> (list-of number)))
 
 (check-expect (extract-odds list4)
               (cons 5 (cons 3 empty)))
