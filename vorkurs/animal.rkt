@@ -247,7 +247,7 @@ FP: neue Fälle schwer, neue Operationen einfach
 ; - die leere Liste
 ; - eine Cons-Liste, bestehend aus erstem Element und Rest-Liste
 ;                                                          ^^^^^
-#;(define list-of-numbers
+(define list-of-numbers
   (signature (mixed empty-list cons-list)))
 
 ; Die leere Liste ...
@@ -270,3 +270,5 @@ FP: neue Fälle schwer, neue Operationen einfach
 (define list3 (cons 6 (cons 3 (cons 4 empty))))
 ; 4elementige Liste: 5 6 3 4
 (define list4 (cons 5 list3))
+; 0elementige Liste
+(define list5 empty)
