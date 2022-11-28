@@ -73,3 +73,7 @@
 (check-expect (msm time2)
               851)
 
+(define msm
+  (lambda (time)
+    ...))
+
