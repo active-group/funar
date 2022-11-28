@@ -197,3 +197,6 @@
 (check-expect (run-over-parrot parrot2)
               (make-parrot "" 2))
 
+(define run-over-parrot
+  (lambda (parrot)
+    (make-parrot "" (parrot-weight parrot))))
