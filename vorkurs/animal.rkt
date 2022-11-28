@@ -104,6 +104,8 @@
 ; - lebendig oder tot? - UND -
 ; - Gewicht
 ; zusammengesetzte Daten
+
+; eigentlich: (Wahrnehmung des) Zustands des Gürteltiers zu einem bestimmten Zeitpunkt
 (define-record dillo
   make-dillo
   (dillo-alive? boolean)
@@ -121,3 +123,6 @@
 (define dillo1 (make-dillo #t 10))
 ; totes Gürteltier, 8kg
 (define dillo2 (make-dillo #f 8))
+
+; Gürteltier überfahren
+(: run-over-dillo (dillo -> dillo))
