@@ -32,4 +32,6 @@
     (above
      (beside image1 image2)
      (beside image2 image1))))
-  
+
+; (z (image1 image2))
+(define image1 (rectangle 200 100 "solid" "yellow"))
