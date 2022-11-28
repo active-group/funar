@@ -324,6 +324,15 @@ FP: neue Fälle schwer, neue Operationen einfach
        (* (first list)
           (list-product (rest list)))))))
 
+(define list-fold
+  (lambda (n f list)
+    (cond
+      ((empty? list)
+       n)
+      ((cons? list)
+       (f (first list)
+          (list-fold n f (rest list)))))))
+
 ; n * x = x * n = x
 
 ; Alle ungeraden Elemente aus einer Liste extrahieren
