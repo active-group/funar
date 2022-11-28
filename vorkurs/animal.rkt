@@ -285,7 +285,36 @@ FP: neue Fälle schwer, neue Operationen einfach
   (lambda (list)
     (cond
       ((empty? list)
-       0) ; das neutrale Element in bezug auf die Summe
+       0) ; das neutrale Element in bezug auf + (Gruppentheorie - Algebra)
       ((cons? list)
        (+ (first list)
           (list-sum (rest list)))))))
+
+; n + x = x + n = x
+
+; Produkt der Listenelemente
+(: list-product (list-of-numbers -> number))
+
+(check-expect (list-product list4)
+              360)
+
+; Schablone:
+#;(define list-product
+  (lambda (list)
+    (cond
+      ((empty? list) ...)
+      ((cons? list)
+       ...
+       (first list)
+       (list-product (rest list))
+       ...))))
+
+(define list-product
+  (lambda (list)
+    (cond
+      ((empty? list) 1)
+      ((cons? list)
+       (* (first list)
+          (list-product (rest list)))))))
+
+; n * x = x * n = x
