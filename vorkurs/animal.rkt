@@ -6,3 +6,5 @@
 ; - Hund - ODER -
 ; - Katze - ODER -
 ; - Schlange
+; Fallunterscheidung
+; 
