@@ -39,4 +39,8 @@
       ((string=? pet "cat") #t)
       ((string=? pet "snake") #f))))
 
+; Uhrzeit:
+; - Stunde
+; - Minute
+
 
