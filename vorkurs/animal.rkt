@@ -331,6 +331,7 @@ FP: neue Fälle schwer, neue Operationen einfach
     (cond
       ((empty? list) empty)
       ((cons? list)
+       (define rest-odds (extract-odds (rest list))) ; auch OK
        (if (odd? (first list))
            (cons (first list) (extract-odds (rest list)))
            (extract-odds (rest list)))))))
