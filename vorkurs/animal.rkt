@@ -39,18 +39,22 @@
       ((string=? pet "cat") #t)
       ((string=? pet "snake") #f))))
 
+; Eine Stunde ist eine natürliche Zahl zwischen 0 und 23.
+(define hour (signature (integer-from-to 0 23)))
+(define minute (signature (integer-from-to 0 59)))
+  
 ; Uhrzeit besteht aus/hat folgende Eigenschaften:
 ; - Stunde - UND -
 ; - Minute
 ; zusammengesetzte Daten
 (define-record time ; Signatur
   make-time ; Konstruktor
-  (time-hour natural) ; Selektor
-  (time-minute natural))
+  (time-hour hour) ; Selektor
+  (time-minute minute))
 
-(: make-time (natural natural -> time))
-(: time-hour (time -> natural))
-(: time-minute (time -> natural))
+(: make-time (hour minute -> time))
+(: time-hour (time -> hour))
+(: time-minute (time -> minute))
 
 ; 11 Uhr 23
 (define time1 (make-time 11 23))
