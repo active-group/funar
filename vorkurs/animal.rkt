@@ -116,12 +116,15 @@
 ; eigentlich: (Wahrnehmung eines) Zustands des Gürteltiers zu einem bestimmten Zeitpunkt
 (define-record dillo
   make-dillo
+  dillo? ; Prädikat
   (dillo-alive? boolean)
   (dillo-weight number))
 
 (: make-dillo (boolean number -> dillo))
 (: dillo-alive? (dillo -> boolean))
 (: dillo-weight (dillo -> number))
+
+(: dillo? (any -> boolean))
 
 (define make-default-dillo
   (lambda (weight)
