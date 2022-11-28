@@ -324,6 +324,8 @@ FP: neue Fälle schwer, neue Operationen einfach
        (* (first list)
           (list-product (rest list)))))))
 
+(: list-fold (%b (%a %b -> %b) (list-of %a) -> %b))
+
 (define list-fold
   (lambda (n f list)
     (cond
