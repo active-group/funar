@@ -60,3 +60,16 @@
 (define time1 (make-time 11 23))
 ; 14:11
 (define time2 (make-time 14 11))
+
+; Signaturverletzung
+;(make-time 27 12)
+
+
+; Minuten seit Mitternacht berechnen
+(: msm (time -> natural))
+
+(check-expect (msm time1)
+              683)
+(check-expect (msm time2)
+              851)
+
