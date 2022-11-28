@@ -342,7 +342,7 @@ FP: neue Fälle schwer, neue Operationen einfach
            (cons (first list) (extract-odds (rest list)))
            (extract-odds (rest list)))))))
 
-(: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
+(: extract ((number -> boolean) (list-of number) -> (list-of number)))
    
 (check-expect (extract even? list4)
               (cons 6 (cons 4 empty)))
@@ -361,3 +361,5 @@ FP: neue Fälle schwer, neue Operationen einfach
 
 (define highway
   (cons dillo1 (cons dillo2 (cons parrot1 (cons parrot2 empty)))))
+
+(extract dillo? highway)
