@@ -105,7 +105,7 @@
 ; - Gewicht
 ; zusammengesetzte Daten
 
-; eigentlich: (Wahrnehmung des) Zustands des Gürteltiers zu einem bestimmten Zeitpunkt
+; eigentlich: (Wahrnehmung eines) Zustands des Gürteltiers zu einem bestimmten Zeitpunkt
 (define-record dillo
   make-dillo
   (dillo-alive? boolean)
