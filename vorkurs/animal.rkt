@@ -319,3 +319,5 @@ FP: neue Fälle schwer, neue Operationen einfach
           (list-product (rest list)))))))
 
 ; n * x = x * n = x
+
+; Alle geraden Elemente aus einer Liste extrahieren
