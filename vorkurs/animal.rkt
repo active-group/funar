@@ -167,5 +167,4 @@
     (make-dillo alive?
                 (if alive?
                     (+ weight amount)
-                    weight))
-    ))
+                    weight))))
