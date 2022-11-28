@@ -24,3 +24,9 @@
   (lambda (pet)
     ...))
 
+(define cute?
+  (lambda (pet)
+    (cond ; Verzweigung, 1 Zweig pro Fall
+      ((string=? pet "dog") ...) ; (<Bedingung> <Ergebnis>)
+      ((string=? pet "cat") ...)
+      ((string=? pet "snake") ...))))
