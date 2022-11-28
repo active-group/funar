@@ -39,8 +39,8 @@
       ((string=? pet "cat") #t)
       ((string=? pet "snake") #f))))
 
-; Uhrzeit:
-; - Stunde
+; Uhrzeit besteht aus/hat folgende Eigenschaften:
+; - Stunde - UND -
 ; - Minute
-
+; zusammengesetzte Daten
 
