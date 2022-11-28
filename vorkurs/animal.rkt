@@ -38,3 +38,5 @@
       ((string=? pet "dog") #t) ; (<Bedingung> <Ergebnis>)
       ((string=? pet "cat") #t)
       ((string=? pet "snake") #f))))
+
+
