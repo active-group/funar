@@ -247,8 +247,12 @@ FP: neue Fälle schwer, neue Operationen einfach
 ; - die leere Liste
 ; - eine Cons-Liste, bestehend aus erstem Element und Rest-Liste
 ;                                                          ^^^^^
-(define list-of-numbers
+#;(define list-of-numbers
   (signature (mixed empty-list cons-list)))
+(define list-of
+  (lambda (element)
+    (signature (mixed empty-list
+                      (cons-list-of element)))))
 
 ; Die leere Liste ...
 (define-singleton empty-list ; Signatur
@@ -258,11 +262,11 @@ FP: neue Fälle schwer, neue Operationen einfach
 ; Eine Cons-Liste besteht aus:
 ; - erstes Element
 ; - Rest-Liste
-(define-record cons-list
+(define-record (cons-list-of element) ; macht lambda für uns
   cons
   cons?
-  (first number)
-  (rest list-of-numbers)) ; Selbstbezug
+  (first element)
+  (rest (list-of element))) ; Selbstbezug
 
 ; 1elementige Liste: 5
 (define list1 (cons 5 empty))
