@@ -274,3 +274,18 @@ FP: neue Fälle schwer, neue Operationen einfach
 (define list4 (cons 5 list3))
 ; 0elementige Liste
 (define list5 empty)
+
+; Summe der Listenelemente
+(: list-sum (list-of-numbers -> number))
+
+(check-expect (list-sum list4)
+              18)
+
+(define list-sum
+  (lambda (list)
+    (cond
+      ((empty? list)
+       0)
+      ((cons? list)
+       (+ (first list)
+          (list-sum (rest list)))))))
