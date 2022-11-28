@@ -251,7 +251,9 @@ FP: neue Fälle schwer, neue Operationen einfach
   (signature (mixed empty-list cons-list)))
 
 ; Die leere Liste ...
-(define-singleton empty-list empty empty?)
+(define-singleton empty-list ; Signatur
+  empty ; "das Singleton"
+  empty?) ; Prädikat
 
 ; Eine Cons-Liste besteht aus:
 ; - erstes Element
