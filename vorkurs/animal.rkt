@@ -414,4 +414,14 @@ FP: neue Fälle schwer, neue Operationen einfach
        (cons
         (f (first list))
         (list-map f (rest list)))))))
+
+(define list-map*
+  (lambda (f list)
+    (list-fold
+     empty
+     (lambda (first-list rec-result)
+       (cons
+        (f first-list)
+        rec-result))
+     list)))
               
