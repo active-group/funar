@@ -85,4 +85,6 @@ runOverDillo dillo = dillo { dilloLiveness = Dead }
 data Animal =
     MkDillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
   | MkParrot String Weight
-  deriving Show 
+  deriving Show
+
+ 
