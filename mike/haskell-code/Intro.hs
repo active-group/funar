@@ -19,7 +19,8 @@ y = x+3
 -- - Schlange
 
 -- data: neuer Datentyp
-data Pet =
-    Dog 
+data Pet
+  = Dog 
   | Cat
   | Snake
+  deriving Show
