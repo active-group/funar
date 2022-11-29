@@ -52,3 +52,8 @@ data Dillo =
 
 dillo1 :: Dillo
 dillo1 = MkDillo { dilloLiveness = Alive, dilloWeight = 10 }
+
+-- Gürteltier überfahren
+runOverDillo :: Dillo -> Dillo
+
+runOverDillo dillo = MkDillo { dilloLiveness = Dead, dilloWeight = dilloWeight dillo }
