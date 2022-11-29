@@ -55,7 +55,7 @@ data Liveness = Alive | Dead
 
 -- Typalias
 type Weight = Integer
-
+{-
 data Dillo =
     MkDillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
     deriving Show
@@ -80,3 +80,4 @@ runOverDillo :: Dillo -> Dillo
 -- "functional update"
 -- Kopie von dillo, nur ist dilloLiveness = Dead
 runOverDillo dillo = dillo { dilloLiveness = Dead }
+-}
