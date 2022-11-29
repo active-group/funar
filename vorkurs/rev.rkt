@@ -49,3 +49,8 @@
       ((cons? list)
        ; tail call / endrekursiver Aufruf
        (rev* (rest list) (cons (first list) acc)))))) ; kein Kontext, braucht keinen Speicherplatz
+
+
+; gänginge Repräsentation für Kontext zur Laufzeit:
+; Stack
+; gängige Runtimes: Stack feste Größe, klein im Vergleich zum Hauptspeicher
