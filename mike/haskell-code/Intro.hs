@@ -24,3 +24,14 @@ data Pet
   | Cat
   | Snake
   deriving Show
+
+-- Ist Haustier niedlich?
+isCute :: Pet -> Bool
+-- >>> isCute Cat
+
+-- >>> isCute Snake
+
+-- eine Gleichung pro Fall
+isCute Dog = True
+isCute Cat = True
+isCute Snake = False
