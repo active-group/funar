@@ -179,3 +179,13 @@ data Duschprodukt =
           mixturProdukt2 :: Duschprodukt
         }
 type Proportion = Double 
+
+mkDuschgel :: Duschprodukt -> Duschprodukt -> Duschprodukt
+mkDuschgel produkt1 produkt2 = MkMixtur 0.5 produkt1 0.5 produkt2
+
+seifenAnteil :: Duschprodukt -> Proportion
+seifenAnteil (MkSeife _) = 1
+seifenAnteil (MkShampoo _) = 0
+seifenAnteil (MkMixtur prop1 produkt1 prop2 produkt2) =
+  ((seifenAnteil produkt1 * prop1) +
+   (seifenAnteil produkt2 * prop2)) / (prop1 + prop2)
