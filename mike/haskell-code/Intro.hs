@@ -14,9 +14,13 @@ y :: Integer
 y = x+3
 
 f :: Integer -> Integer
+-- >>> f 5
+-- 6
 f n = n + 1
 
 f' :: Integer -> Integer
+-- >>> f' 5
+-- 6
 f' = \ n -> n + 1
 
 -- Haustier ist eins der folgenden:
@@ -58,6 +62,9 @@ data Dillo =
 
 dillo1 :: Dillo
 dillo1 = MkDillo { dilloLiveness = Alive, dilloWeight = 10 }
+
+dillo2 :: Dillo
+dillo2 = MkDillo Dead 8
 
 -- Gürteltier überfahren
 runOverDillo :: Dillo -> Dillo
