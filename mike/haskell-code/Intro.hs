@@ -171,7 +171,8 @@ tuplify f (a, b) = f a b
 schönfinkeln :: ((a, b) -> c) -> (a -> b -> c)
 schönfinkeln = untuplify
 
--- eingebaut .
+-- Funktionskomposition
+-- eingebaut als .
 o :: (b -> c) -> (a -> b) -> (a -> c)
 --   f           g           o f g
 o f g = \ a -> f (g a)
