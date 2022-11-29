@@ -189,3 +189,4 @@ seifenAnteil (MkShampoo _) = 0
 seifenAnteil (MkMixtur prop1 produkt1 prop2 produkt2) =
   ((seifenAnteil produkt1 * prop1) +
    (seifenAnteil produkt2 * prop2)) / (prop1 + prop2)
+
