@@ -233,5 +233,10 @@ seifenAnteil (MkMixtur prop1 produkt1 prop2 produkt2) =
 -- Eine Liste ist eins der folgenden:
 -- - die leere Liste
 -- - eine Cons-Liste aus erstem Element und Rest-Liste
-data ListOfInts =
+data ListOf a =
     Empty
+  | Cons Int (ListOf a)
+  deriving Show
+
+list1 = Cons 3 Empty
+list2 = Cons 4 (Cons 3 Empty)
