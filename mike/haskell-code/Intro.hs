@@ -23,4 +23,4 @@ data Pet
   = Dog 
   | Cat
   | Snake
-  -- deriving Show
+  deriving Show
