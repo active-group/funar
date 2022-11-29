@@ -305,6 +305,8 @@ listIndex :: Eq a => a -> [a] -> Optional Integer
 -- Result 1
 -- >>> listIndex 5 [1,2,3]
 -- Null
+-- >>> listIndex Dog [Cat, Snake, Dog, Snake]
+-- No instance for (Eq Pet) arising from a use of ‘listIndex’
 listIndex e [] = Null
 listIndex e (x:xs) =
     if e == x
@@ -321,4 +323,6 @@ listIndex e (x:xs) =
 -- >>> :info Eq
 -- class Eq a where
 --   (==) :: a -> a -> Bool
+
+-- instance: Implementierung einer Typklasse
         
