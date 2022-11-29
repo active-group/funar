@@ -20,7 +20,7 @@ y = x+3
 
 -- data: neuer Datentyp
 data Pet
-  = Dog 
+  = Dog -- Konstruktor
   | Cat
   | Snake
   deriving Show
@@ -36,3 +36,19 @@ isCute :: Pet -> Bool
 isCute Dog = True
 isCute Cat = True
 isCute Snake = False
+
+-- Gürteltier hat folgende Eigenschaften:
+-- - lebendig oder tot
+-- - Gewicht
+data Liveness = Alive | Dead
+  deriving Show
+
+-- Typalias
+type Weight = Integer
+
+data Dillo =
+    MkDillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
+    deriving Show
+
+dillo1 :: Dillo
+dillo1 = MkDillo { dilloLiveness = Alive, dilloWeight = 10 }
