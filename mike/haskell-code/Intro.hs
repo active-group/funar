@@ -231,6 +231,7 @@ data Duschprodukt =
           mixturProportion2 :: Proportion,
           mixturProdukt2 :: Duschprodukt
         }
+    deriving (Show, Ord)
 type Proportion = Double 
 
 mkDuschgel :: Duschprodukt -> Duschprodukt -> Duschprodukt
