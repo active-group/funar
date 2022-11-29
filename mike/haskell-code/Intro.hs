@@ -279,3 +279,5 @@ listMap f (first:rest) =
 
 -- (: list-fold (%b (%a %b -> %b) (list-of %a)-> %b))
 listFold :: b -> (a -> b -> b) -> [a] -> b
+listFold n f [] = undefined
+listFold n f (x:xs) = undefined
