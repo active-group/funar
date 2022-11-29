@@ -277,3 +277,5 @@ listMap f (first:rest) =
 
 -- eingebaut als map
 
+-- (: list-fold (%b (%a %b -> %b) (list-of %a)-> %b))
+listFold :: b -> (a -> b -> b) -> [a] -> b
