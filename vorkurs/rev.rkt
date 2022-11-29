@@ -64,3 +64,21 @@
 
 ; Schleifeninvariante
 
+; Summe aller Listenelemente
+(: list-sum ((list-of number) -> number))
+
+(check-expect (list-sum (list 1 2 3 4))
+              10)
+
+(define list-sum
+  (lambda (list0)
+    (define loop
+      ; acc ist die Summe der Elemente zwischen list0 und list
+      (lambda (list acc)
+        (cond
+          ((empty? list) acc)
+          ((cons? list)
+           (loop (rest list) (+ (first list) acc))))))
+    (loop list0 0)))
+
+
