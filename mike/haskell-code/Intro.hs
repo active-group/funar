@@ -168,8 +168,15 @@ untuplify f a b = f (a, b)
 tuplify :: (a -> b -> c) -> ((a, b) -> c)
 tuplify f (a, b) = f a b 
 
+-- eingebaut .
 o :: (b -> c) -> (a -> b) -> (a -> c)
+--   f           g           o f g
 o f g = \ a -> f (g a)
+
+-- Haskell: Namen, die aus Sonderzeichen bestehen, sind
+-- Infix-Operatoren
+
+swapTupled 
 
 -- Ein Duschprodukt ist eins der folgenden:
 -- - Seife, hat pH-Wert
