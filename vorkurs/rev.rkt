@@ -54,3 +54,5 @@
 ; gänginge Repräsentation für Kontext zur Laufzeit:
 ; Stack
 ; gängige Runtimes: Stack feste Größe, klein im Vergleich zum Hauptspeicher
+
+; JVM: auch Tail-Calls verbrauchen Speicher
