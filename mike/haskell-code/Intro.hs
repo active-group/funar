@@ -28,8 +28,9 @@ data Pet
 -- Ist Haustier niedlich?
 isCute :: Pet -> Bool
 -- >>> isCute Cat
-
+-- True
 -- >>> isCute Snake
+-- False
 
 -- eine Gleichung pro Fall
 isCute Dog = True
