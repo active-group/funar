@@ -13,6 +13,9 @@ x = 42
 y :: Integer
 y = x+3
 
+f :: Integer -> Integer
+f n = n + 1
+
 -- Haustier ist eins der folgenden:
 -- - Hund
 -- - Katze
