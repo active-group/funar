@@ -31,7 +31,7 @@
     (cond
       ((empty? list) (cons element empty))
       ((cons? list)
-       (cons
+       (cons ; Kontext des rekursiven Aufrufs -> braucht Speicherplatz
         (first list)
         (append-element (rest list) element)))))) 
 
@@ -47,4 +47,4 @@
     (cond
       ((empty? list) acc)
       ((cons? list)
-       (rev* (rest list) (cons (first list) acc))))))
+       (rev* (rest list) (cons (first list) acc)))))) ; kein Kontext
