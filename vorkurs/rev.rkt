@@ -9,7 +9,7 @@
 (define rev
   (lambda (list)
     (cond
-      ((empty? list) ...)
+      ((empty? list) empty)
       ((cons? list)
        (append-element
         (rev (rest list)) ; 4 3 2
