@@ -294,7 +294,18 @@ listFold n f (x  :                xs) =
 -- >>> foldl (+) 0 [1,2,3,4]
 -- 10
 
+data Optional a =
+    Null 
+  | Result a
+  deriving Show
+
 -- Index des Elements einer Liste finden
-listIndex :: a -> [a] -> Integer
-listIndex e [] = undefined
-listIndex e (x:xs) = undefined
+listIndex :: a -> [a] -> Optional Integer
+listIndex e [] = Null
+listIndex e (x:xs) =
+    if e == x
+    then Result 0
+    else case listIndex e xs of
+      Null -> Null
+      Result index -> Result (index+1)
+        
