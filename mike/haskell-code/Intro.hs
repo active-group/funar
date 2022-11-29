@@ -16,8 +16,8 @@ y = x+3
 f :: Integer -> Integer
 f n = n + 1
 
-ff :: Integer -> Integer
-ff = \ n -> n + 1
+f' :: Integer -> Integer
+f' = \ n -> n + 1
 
 -- Haustier ist eins der folgenden:
 -- - Hund
