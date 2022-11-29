@@ -263,6 +263,17 @@ listSum (first : rest) =
     first + (listSum rest)
 
 listMap :: (a -> b) -> [a] -> [b]
+-- >>> listMap runOverAnimal [dillo1, dillo2, parrot1, parrot2]
+-- [MkDillo {dilloLiveness = Dead, dilloWeight = 10},MkDillo {dilloLiveness = Dead, dilloWeight = 8},MkParrot "" 1,MkParrot "" 2]
+
+-- >>> listMap ((flip feedAnimal) 1) [dillo1, dillo2, parrot1, parrot2]
+-- [MkDillo {dilloLiveness = Alive, dilloWeight = 11},MkDillo {dilloLiveness = Dead, dilloWeight = 8},MkParrot "Hello!" 2,MkParrot "Goodbye!" 3]
+
+-- >>> listMap (* 2) [1,2,3,4]
+-- [2,4,6,8]
 listMap f [] = []
 listMap f (first:rest) =
     f first : (listMap f rest)
+
+-- eingebaut als map
+
