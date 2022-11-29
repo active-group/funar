@@ -162,15 +162,20 @@ type PHWert = Double
 data Haartyp = Oily | Dandruffy | Regular
  deriving Show
 
+{-
 data Seife = MkSeife PHWert
 data Shampoo = MkShampoo Haartyp
   deriving Show
+-}
 
 data Duschprodukt =
-    Duschgel Seife Shampoo
-
+     MkSeife PHWert
+   | MkShampoo Haartyp
+--   | MkDuschgel Duschprodukt Duschprodukt
+   | MkMixtur
+        { mixturProportion1 :: Proportion,
+          mixturProdukt1 :: Duschprodukt,
+          mixturProportion2 :: Proportion,
+          mixturProdukt2 :: Duschprodukt
+        }
 type Proportion = Double 
-data Mixtur = MkMixtur { mixturProportion1 :: Proportion,
-                         mixturProdukt1 ::  Duschprodukt,
-                         mixturProportion2 :: Proportion,
-                         mixturProdukt2 :: Duschprodukt }
