@@ -100,4 +100,6 @@ parrot1 = MkParrot "Hello!" 1
 parrot2 :: Animal
 parrot2 = MkParrot "Goodbye!" 2
 
+parrotSentence :: Animal -> String
+parrotSentence (MkDillo {}) = error "kein Papagei"
 parrotSentence (MkParrot sentence _) = sentence
