@@ -138,4 +138,5 @@ feedAnimal (MkDillo liveness weight) amount =
 feedAnimal (MkParrot sentence weight) amount =
     MkParrot sentence (weight+amount)
 
-feedAnimal' animal amount = feedAnimal' amount animal
+feedAnimal' :: Weight -> Animal -> Animal
+feedAnimal' animal amount = feedAnimal amount animal
