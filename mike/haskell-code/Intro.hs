@@ -146,3 +146,14 @@ swap :: (a -> b -> c) -> (b -> a -> c) -- Typvariablen
 -- swap f = \ b -> \ a -> f a b
 -- swap f = \ b a -> f a b
 swap f b a = f a b
+
+-- Ein Duschprodukt ist eins der folgenden:
+-- - Seife, hat pH-Wert
+-- - Shampoo, hat Farbe und Haartyp
+-- - Duschgel, besteht zu 50% aus Seife, 50% Shampoo
+
+-- - Datentyp
+-- - Funktion, die den Seifenanteil berechnet
+
+-- Erweiterung:
+-- - Mixtur aus zwei Duschprodukten, beliebige Anteile
