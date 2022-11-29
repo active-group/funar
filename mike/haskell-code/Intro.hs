@@ -315,7 +315,7 @@ listIndex :: Eq a => a -> [a] -> Optional Integer
 -- >>> listIndex 5 [1,2,3]
 -- Null
 -- >>> listIndex Dog [Cat, Snake, Dog, Snake]
--- No instance for (Eq Pet) arising from a use of ‘listIndex’
+-- Result 2
 listIndex e [] = Null
 listIndex e (x:xs) =
     if e == x
