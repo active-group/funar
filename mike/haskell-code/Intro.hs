@@ -2,6 +2,7 @@
 module Intro where
 
 import Prelude hiding (Semigroup, Monoid)
+import Data.Sequence (Seq(Empty))
 
 -- Zeilenkommentar
 
@@ -230,4 +231,8 @@ seifenAnteil (MkMixtur prop1 produkt1 prop2 produkt2) =
   ((seifenAnteil produkt1 * prop1) +
    (seifenAnteil produkt2 * prop2)) / (prop1 + prop2)
 
--- Eine Liste ist eins der
+-- Eine Liste ist eins der folgenden:
+-- - die leere Liste
+-- - eine Cons-Liste aus erstem Element und Rest-Liste
+data ListOfInts =
+    Empty
