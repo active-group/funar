@@ -168,10 +168,15 @@ untuplify f a b = f (a, b)
 tuplify :: (a -> b -> c) -> ((a, b) -> c)
 tuplify f (a, b) = f a b 
 
+schönfinkeln :: ((a, b) -> c) -> (a -> b -> c)
+schönfinkeln = untuplify
+
 -- eingebaut .
 o :: (b -> c) -> (a -> b) -> (a -> c)
 --   f           g           o f g
 o f g = \ a -> f (g a)
+
+-- . ist assoziativ
 
 -- Haskell: Namen, die aus Sonderzeichen bestehen, sind
 -- Infix-Operatoren
