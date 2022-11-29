@@ -279,5 +279,17 @@ listMap f (first:rest) =
 
 -- (: list-fold (%b (%a %b -> %b) (list-of %a)-> %b))
 listFold :: b -> (a -> b -> b) -> [a] -> b
-listFold n f [] = undefined
-listFold n f (x:xs) = undefined
+-- >>> listFold 0 (+) [1,2,3,4]
+-- 10
+listFold n f [] = n
+listFold n f (x  :                xs) =
+              x `f` (listFold n f xs) -- `f` : f in Infix-Schreibweise
+           -- f x (listFold n f xs) 
+
+-- >>> foldr (+) 0 [1,2,3,4]
+-- 10
+
+-- aus Schablone für endrekursive Funktionen
+-- andernorten: reduce
+-- >>> foldl (+) 0 [1,2,3,4]
+-- 10
