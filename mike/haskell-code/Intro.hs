@@ -110,5 +110,8 @@ parrotSentence (MkParrot sentence _) = sentence
 
 -- Tiere überfahren
 runOverAnimal :: Animal -> Animal
+-- >>> runOverAnimal parrot1
+
+-- runOverAnimal (MkDillo _ weight) = MkDillo Dead weight
+runOverAnimal (dillo@MkDillo {}) = dillo { dilloLiveness = Dead }
 runOverAnimal (MkParrot _ weight) = MkParrot "" weight
-runOverAnimal (MkDillo _ weight) = MkDillo Dead weight
