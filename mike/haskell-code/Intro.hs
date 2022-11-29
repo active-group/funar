@@ -317,4 +317,8 @@ listIndex e (x:xs) =
           Result index -> Result (index+1)
 
 -- Eq ist eine Typklasse, denke: Interface
+
+-- >>> :info Eq
+-- class Eq a where
+--   (==) :: a -> a -> Bool
         
