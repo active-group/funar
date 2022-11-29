@@ -176,7 +176,8 @@ o f g = \ a -> f (g a)
 -- Haskell: Namen, die aus Sonderzeichen bestehen, sind
 -- Infix-Operatoren
 
-swapTupled 
+swapTupled :: ((b, a) -> c) -> ((a, b) -> c)
+swapTupled = tuplify . swap . untuplify
 
 -- Ein Duschprodukt ist eins der folgenden:
 -- - Seife, hat pH-Wert
