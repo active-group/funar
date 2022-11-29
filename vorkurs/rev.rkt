@@ -47,4 +47,4 @@
     (cond
       ((empty? list) acc)
       ((cons? list)
-       (rev* (rest list) (cons (first list) acc)))))) ; kein Kontext
+       (rev* (rest list) (cons (first list) acc)))))) ; kein Kontext, braucht keinen Speicherplatz
