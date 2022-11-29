@@ -43,6 +43,7 @@
               (list 3 2 1))
 
 (define rev*
+  ; acc ist die Summe aller "schon gesehenen" Elemente
   (lambda (list acc) ; "Akkumulator"
     (cond
       ((empty? list) acc)
