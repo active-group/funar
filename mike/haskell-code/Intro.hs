@@ -99,3 +99,5 @@ parrot1 :: Animal
 parrot1 = MkParrot "Hello!" 1
 parrot2 :: Animal
 parrot2 = MkParrot "Goodbye!" 2
+
+parrotSentence (MkParrot sentence _) = sentence
