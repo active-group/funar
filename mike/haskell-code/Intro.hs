@@ -299,13 +299,20 @@ data Optional a =
   | Result a
   deriving Show
 
--- Index des Elements einer Liste finden
-listIndex :: a -> [a] -> Optional Integer
+-- Index des (ersten Vorkommens des) Elements einer Liste finden
+listIndex :: Eq a => a -> [a] -> Optional Integer
+-- >>> listIndex 5 [1,5,2,7]
+-- Result 1
+-- >>> listIndex 5 [1,2,3]
+-- Null
 listIndex e [] = Null
 listIndex e (x:xs) =
     if e == x
     then Result 0
-    else case listIndex e xs of
-      Null -> Null
-      Result index -> Result (index+1)
+    else 
+      let r = listIndex e xs
+      in
+        case r of
+          Null -> Null
+          Result index -> Result (index+1)
         
