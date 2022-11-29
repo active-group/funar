@@ -45,6 +45,6 @@
 (define rev*
   (lambda (list acc) ; "Akkumulator"
     (cond
-      ((empty? list) ...)
+      ((empty? list) acc)
       ((cons? list)
        (rev* (rest list) (cons (first list) acc))))))
