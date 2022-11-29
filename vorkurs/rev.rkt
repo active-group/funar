@@ -11,7 +11,8 @@
     (cond
       ((empty? list) ...)
       ((cons? list)
-       ...
-       (first list)
-       (rev (rest list))
-       ...))))
+       (append-element
+        (rev (rest list)) ; 4 3 2
+        (first list) ; 1
+       )))))
+
