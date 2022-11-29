@@ -213,7 +213,7 @@ swapTupled = tuplify . swap . untuplify
 
 type PHWert = Double
 data Haartyp = Oily | Dandruffy | Regular
- deriving Show
+ deriving (Show, Eq, Ord)
 
 {-
 data Seife = MkSeife PHWert
@@ -231,7 +231,7 @@ data Duschprodukt =
           mixturProportion2 :: Proportion,
           mixturProdukt2 :: Duschprodukt
         }
-    deriving (Show, Ord)
+    deriving (Show, Eq, Ord)
 type Proportion = Double 
 
 mkDuschgel :: Duschprodukt -> Duschprodukt -> Duschprodukt
