@@ -82,9 +82,12 @@ runOverDillo :: Dillo -> Dillo
 runOverDillo dillo = dillo { dilloLiveness = Dead }
 -}
 
+-- algebraischer Datentyp:
+-- gemischte Daten, alle Fälle zusammengesetzte Daten
 data Animal =
     MkDillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
   | MkParrot String Weight
   deriving Show
 
- 
+dillo1 :: Animal
+dillo1 = MkDillo { dilloLiveness = Alive, dilloWeight = 10 } 
