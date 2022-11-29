@@ -64,7 +64,7 @@ isCute Snake = False
 -- - lebendig oder tot
 -- - Gewicht
 data Liveness = Alive | Dead
-  deriving Show
+  deriving (Show, Eq)
 
 -- Typalias
 type Weight = Integer
@@ -100,7 +100,7 @@ runOverDillo dillo = dillo { dilloLiveness = Dead }
 data Animal =
     MkDillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
   | MkParrot String Weight
-  deriving Show
+  deriving (Show, Eq)
 
 dillo1 :: Animal
 dillo1 = MkDillo { dilloLiveness = Alive, dilloWeight = 10 } 
@@ -339,3 +339,12 @@ listIndex e (x:xs) =
 
 -- instance: Implementierung einer Typklasse
         
+-- >>> :info Ord
+-- class Eq a => Ord a where
+--   compare :: a -> a -> Ordering
+--   (<) :: a -> a -> Bool
+--   (<=) :: a -> a -> Bool
+--   (>) :: a -> a -> Bool
+--   (>=) :: a -> a -> Bool
+--   max :: a -> a -> a
+--   min :: a -> a -> a
