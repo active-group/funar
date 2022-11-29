@@ -315,4 +315,6 @@ listIndex e (x:xs) =
         case r of
           Null -> Null
           Result index -> Result (index+1)
+
+-- Eq ist eine Typklasse, denke: Interface
         
