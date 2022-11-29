@@ -168,6 +168,9 @@ untuplify f a b = f (a, b)
 tuplify :: (a -> b -> c) -> ((a, b) -> c)
 tuplify f (a, b) = f a b 
 
+o :: (b -> c) -> (a -> b) -> (a -> c)
+o f g = \ a -> f (g a)
+
 -- Ein Duschprodukt ist eins der folgenden:
 -- - Seife, hat pH-Wert
 -- - Shampoo, hat Farbe und Haartyp
