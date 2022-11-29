@@ -160,7 +160,7 @@ swap f b a = f a b
 
 type PHWert = Double
 data Haartyp = Oily | Dandruffy | Regular
---  deriving Show
+ deriving Show
 
 data Seife = MkSeife PHWert
 data Shampoo = MkShampoo Haartyp
@@ -168,3 +168,9 @@ data Shampoo = MkShampoo Haartyp
 
 data Duschprodukt =
     Duschgel Seife Shampoo
+
+type Proportion = Double 
+data Mixtur = MkMixtur { mixturProportion1 :: Proportion,
+                         mixturProdukt1 ::  Duschprodukt,
+                         mixturProportion2 :: Proportion,
+                         mixturProdukt2 :: Duschprodukt }
