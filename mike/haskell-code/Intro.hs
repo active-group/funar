@@ -111,8 +111,15 @@ parrotSentence (MkParrot sentence _) = sentence
 -- Tiere überfahren
 runOverAnimal :: Animal -> Animal
 -- >>> runOverAnimal parrot1
+-- MkParrot "" 1
+-- >>> runOverAnimal dillo1
+-- MkDillo {dilloLiveness = Dead, dilloWeight = 10}
 
 -- runOverAnimal (MkDillo _ weight) = MkDillo Dead weight
 -- @: Alias-Pattern
 runOverAnimal (dillo@MkDillo {}) = dillo { dilloLiveness = Dead }
 runOverAnimal (MkParrot _ weight) = MkParrot "" weight
+
+-- Tier füttern
+feedAnimal (MkDillo liveness weight) amount = undefined
+feedAnimal (MkParrot sentence weight) amount = undefined
