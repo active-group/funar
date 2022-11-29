@@ -166,7 +166,9 @@ untuplify f a b = f (a, b)
 
 -- eingebaut: uncurry
 tuplify :: (a -> b -> c) -> ((a, b) -> c)
-tuplify f (a, b) = f a b 
+-- tuplify f (a, b) = f a b 
+tuplify f =
+    \ (a, b) -> f a b
 
 schönfinkeln :: ((a, b) -> c) -> (a -> b -> c)
 schönfinkeln = untuplify
