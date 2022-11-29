@@ -100,6 +100,15 @@ parrot1 = MkParrot "Hello!" 1
 parrot2 :: Animal
 parrot2 = MkParrot "Goodbye!" 2
 
+-- Laufzeitfehler:
+-- >>> dilloLiveness parrot1
+-- No match in record selector dilloLiveness
+
 parrotSentence :: Animal -> String
 parrotSentence (MkDillo {}) = error "kein Papagei"
 parrotSentence (MkParrot sentence _) = sentence
+
+-- Tiere überfahren
+runOverAnimal :: Animal -> Animal
+runOverAnimal (MkParrot _ weight) = MkParrot "" weight
+runOverAnimal (MkDillo _ weight) = MkDillo Dead weight
