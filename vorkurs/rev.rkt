@@ -60,3 +60,6 @@
 ; Kotlin: tailrec
 ; Scala: @tailrec
 ; Clojure: loop
+
+; Schleifeninvariante
+
