@@ -16,3 +16,19 @@
         (first list) ; 1
        )))))
 
+; Element an eine Liste hängen
+(: append-element ((list-of %a) %a -> (list-of %a)))
+
+(check-expect (append-element (list 1 2 3) 4)
+              (list 1 2 3 4))
+
+(define append-element
+  (lambda (list element)
+    (cond
+      ((empty? list) ...)
+      ((cons? list)
+       ...
+       (first list)
+       (append-element (rest list) element)
+       ...)))) 
+                              
