@@ -113,5 +113,6 @@ runOverAnimal :: Animal -> Animal
 -- >>> runOverAnimal parrot1
 
 -- runOverAnimal (MkDillo _ weight) = MkDillo Dead weight
+-- @: Alias-Pattern
 runOverAnimal (dillo@MkDillo {}) = dillo { dilloLiveness = Dead }
 runOverAnimal (MkParrot _ weight) = MkParrot "" weight
