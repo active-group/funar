@@ -137,3 +137,5 @@ feedAnimal (MkDillo liveness weight) amount =
         Dead -> MkDillo liveness weight
 feedAnimal (MkParrot sentence weight) amount =
     MkParrot sentence (weight+amount)
+
+feedAnimal' animal amount = feedAnimal' amount animal
