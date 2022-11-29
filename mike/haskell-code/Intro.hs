@@ -158,7 +158,10 @@ swap :: (a -> b -> c) -> (b -> a -> c) -- Typvariablen
 swap f b a = f a b
 
 untuplify :: ((a, b) -> c) -> (a -> b -> c)
-untuplify f = \ a -> \ b -> f (a, b) 
+untuplify f a b = f (a, b) 
+
+tuplify :: (a -> b -> c) -> ((a, b) -> c)
+tuplify f (a, b) = f a b 
 
 -- Ein Duschprodukt ist eins der folgenden:
 -- - Seife, hat pH-Wert
