@@ -2,7 +2,6 @@
 module Intro where
 
 import Prelude hiding (Semigroup, Monoid)
-import Data.Text.Encoding (Decoding)
 
 -- Zeilenkommentar
 
