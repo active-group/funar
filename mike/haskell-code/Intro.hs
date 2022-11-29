@@ -143,4 +143,5 @@ feedAnimal' :: Weight -> Animal -> Animal
 feedAnimal' = swap feedAnimal
 
 swap :: (a -> b -> c) -> (b -> a -> c) -- Typvariablen
-swap f = \ b -> \ a -> f a b
+-- swap f = \ b -> \ a -> f a b
+swap f = \ b a -> f a b
