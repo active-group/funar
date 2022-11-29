@@ -81,3 +81,7 @@ runOverDillo :: Dillo -> Dillo
 -- Kopie von dillo, nur ist dilloLiveness = Dead
 runOverDillo dillo = dillo { dilloLiveness = Dead }
 -}
+
+data Animal =
+    MkDillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
+  | MkParrot String Weight 
