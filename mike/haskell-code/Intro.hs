@@ -142,6 +142,14 @@ feedAnimal' :: Weight -> Animal -> Animal
 -- feedAnimal' animal amount = feedAnimal amount animal
 feedAnimal' = swap feedAnimal
 
+feedAnimal'' :: (Animal, Weight) -> Animal
+feedAnimal''(MkDillo liveness weight, amount) =
+    case liveness of
+        Alive -> MkDillo liveness (weight+amount)
+        Dead -> MkDillo liveness weight
+feedAnimal''(MkParrot sentence weight, amount) =
+    MkParrot sentence (weight+amount)
+
 swap :: (a -> b -> c) -> (b -> a -> c) -- Typvariablen
 -- swap f = \ b -> \ a -> f a b
 -- swap f = \ b a -> f a b
