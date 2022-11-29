@@ -35,6 +35,87 @@ data Pet
   | Snake
   deriving Show
 
+-- >>> :info Show
+-- type Show :: * -> Constraint
+-- class Show a where
+--   showsPrec :: Int -> a -> ShowS
+--   show :: a -> String
+--   showList :: [a] -> ShowS
+--   {-# MINIMAL showsPrec | show #-}
+--   	-- Defined in ‘GHC.Show’
+-- instance Show Pet
+--   -- Defined at /Users/sperber/data/active-group/schulung/isaqb/funar/funar-2022-11-hh/mike/haskell-code/Intro.hs:36:12
+-- instance Show a => Show (Optional a)
+--   -- Defined at /Users/sperber/data/active-group/schulung/isaqb/funar/funar-2022-11-hh/mike/haskell-code/Intro.hs:311:12
+-- instance Show Liveness
+--   -- Defined at /Users/sperber/data/active-group/schulung/isaqb/funar/funar-2022-11-hh/mike/haskell-code/Intro.hs:65:12
+-- instance Show Haartyp
+--   -- Defined at /Users/sperber/data/active-group/schulung/isaqb/funar/funar-2022-11-hh/mike/haskell-code/Intro.hs:214:11
+-- instance Show Animal
+--   -- Defined at /Users/sperber/data/active-group/schulung/isaqb/funar/funar-2022-11-hh/mike/haskell-code/Intro.hs:101:12
+-- instance (Show a, Show b) => Show (Either a b)
+--   -- Defined in ‘Data.Either’
+-- instance Show a => Show [a] -- Defined in ‘GHC.Show’
+-- instance Show Word -- Defined in ‘GHC.Show’
+-- instance Show a => Show (Solo a) -- Defined in ‘GHC.Show’
+-- instance Show RuntimeRep -- Defined in ‘GHC.Show’
+-- instance Show Ordering -- Defined in ‘GHC.Show’
+-- instance Show a => Show (Maybe a) -- Defined in ‘GHC.Show’
+-- instance Show Integer -- Defined in ‘GHC.Show’
+-- instance Show Int -- Defined in ‘GHC.Show’
+-- instance Show Char -- Defined in ‘GHC.Show’
+-- instance Show Bool -- Defined in ‘GHC.Show’
+-- instance (Show a, Show b, Show c, Show d, Show e, Show f, Show g,
+--           Show h, Show i, Show j, Show k, Show l, Show m, Show n, Show o) =>
+--          Show (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o)
+--   -- Defined in ‘GHC.Show’
+-- instance (Show a, Show b, Show c, Show d, Show e, Show f, Show g,
+--           Show h, Show i, Show j, Show k, Show l, Show m, Show n) =>
+--          Show (a, b, c, d, e, f, g, h, i, j, k, l, m, n)
+--   -- Defined in ‘GHC.Show’
+-- instance (Show a, Show b, Show c, Show d, Show e, Show f, Show g,
+--           Show h, Show i, Show j, Show k, Show l, Show m) =>
+--          Show (a, b, c, d, e, f, g, h, i, j, k, l, m)
+--   -- Defined in ‘GHC.Show’
+-- instance (Show a, Show b, Show c, Show d, Show e, Show f, Show g,
+--           Show h, Show i, Show j, Show k, Show l) =>
+--          Show (a, b, c, d, e, f, g, h, i, j, k, l)
+--   -- Defined in ‘GHC.Show’
+-- instance (Show a, Show b, Show c, Show d, Show e, Show f, Show g,
+--           Show h, Show i, Show j, Show k) =>
+--          Show (a, b, c, d, e, f, g, h, i, j, k)
+--   -- Defined in ‘GHC.Show’
+-- instance (Show a, Show b, Show c, Show d, Show e, Show f, Show g,
+--           Show h, Show i, Show j) =>
+--          Show (a, b, c, d, e, f, g, h, i, j)
+--   -- Defined in ‘GHC.Show’
+-- instance (Show a, Show b, Show c, Show d, Show e, Show f, Show g,
+--           Show h, Show i) =>
+--          Show (a, b, c, d, e, f, g, h, i)
+--   -- Defined in ‘GHC.Show’
+-- instance (Show a, Show b, Show c, Show d, Show e, Show f, Show g,
+--           Show h) =>
+--          Show (a, b, c, d, e, f, g, h)
+--   -- Defined in ‘GHC.Show’
+-- instance (Show a, Show b, Show c, Show d, Show e, Show f,
+--           Show g) =>
+--          Show (a, b, c, d, e, f, g)
+--   -- Defined in ‘GHC.Show’
+-- instance (Show a, Show b, Show c, Show d, Show e, Show f) =>
+--          Show (a, b, c, d, e, f)
+--   -- Defined in ‘GHC.Show’
+-- instance (Show a, Show b, Show c, Show d, Show e) =>
+--          Show (a, b, c, d, e)
+--   -- Defined in ‘GHC.Show’
+-- instance (Show a, Show b, Show c, Show d) => Show (a, b, c, d)
+--   -- Defined in ‘GHC.Show’
+-- instance (Show a, Show b, Show c) => Show (a, b, c)
+--   -- Defined in ‘GHC.Show’
+-- instance (Show a, Show b) => Show (a, b) -- Defined in ‘GHC.Show’
+-- instance Show () -- Defined in ‘GHC.Show’
+-- instance Show Float -- Defined in ‘GHC.Float’
+-- instance Show Double -- Defined in ‘GHC.Float’
+
 eqPet :: Pet -> Pet -> Bool
 eqPet Dog Dog = True
 eqPet Cat Cat = True
