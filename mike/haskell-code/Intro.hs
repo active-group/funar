@@ -152,14 +152,19 @@ feedAnimal''(MkDillo liveness weight, amount) =
 feedAnimal''(MkParrot sentence weight, amount) =
     MkParrot sentence (weight+amount)
 
+-- eingebaut als flip
 swap :: (a -> b -> c) -> (b -> a -> c) -- Typvariablen
 -- swap f = \ b -> \ a -> f a b
 -- swap f = \ b a -> f a b
 swap f b a = f a b
 
+-- Haskell B. Curry
+-- Moses Schönfinkel
+-- eingebaut: curry
 untuplify :: ((a, b) -> c) -> (a -> b -> c)
 untuplify f a b = f (a, b) 
 
+-- eingebaut: uncurry
 tuplify :: (a -> b -> c) -> ((a, b) -> c)
 tuplify f (a, b) = f a b 
 
