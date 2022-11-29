@@ -121,5 +121,9 @@ runOverAnimal (dillo@MkDillo {}) = dillo { dilloLiveness = Dead }
 runOverAnimal (MkParrot _ weight) = MkParrot "" weight
 
 -- Tier füttern
-feedAnimal (MkDillo liveness weight) amount = undefined
-feedAnimal (MkParrot sentence weight) amount = undefined
+feedAnimal (MkDillo liveness weight) amount =
+    case liveness of
+        Alive -> MkDillo liveness (weight+amount)
+        Dead -> MkDillo liveness weight
+feedAnimal (MkParrot sentence weight) amount =
+    MkParrot sentence (weight+amount)
