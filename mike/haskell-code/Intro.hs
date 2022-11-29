@@ -20,6 +20,6 @@ y = x+3
 
 -- data: neuer Datentyp
 data Pet =
-Dog 
+    Dog 
   | Cat
   | Snake
