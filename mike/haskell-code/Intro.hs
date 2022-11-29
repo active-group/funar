@@ -139,7 +139,8 @@ feedAnimal (MkParrot sentence weight) amount =
     MkParrot sentence (weight+amount)
 
 feedAnimal' :: Weight -> Animal -> Animal
-feedAnimal' animal amount = feedAnimal amount animal
+-- feedAnimal' animal amount = feedAnimal amount animal
+feedAnimal' = swap feedAnimal
 
 swap :: (a -> b -> c) -> (b -> a -> c) -- Typvariablen
 swap f = \ b -> \ a -> f a b
