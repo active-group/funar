@@ -233,6 +233,7 @@ seifenAnteil (MkMixtur prop1 produkt1 prop2 produkt2) =
 -- Eine Liste ist eins der folgenden:
 -- - die leere Liste
 -- - eine Cons-Liste aus erstem Element und Rest-Liste
+{-
 data ListOf a =
     Empty
   | Cons a (ListOf a)
@@ -242,3 +243,21 @@ list1 :: ListOf Integer
 list1 = Cons 3 Empty
 list2 :: ListOf Integer
 list2 = Cons 4 (Cons 3 Empty)
+-}
+
+-- Eingebaut:
+-- leere Liste: []
+-- cons:        :
+list0 = []
+list1 :: [Integer]
+list1 = 3 : []
+list2 :: [Integer]
+list2 = 4 : 3 : []
+list3 :: [Integer]
+list3 = [5,4,3]
+
+-- Summe der Listenelemente berechnen
+listSum :: [Integer] -> Integer
+listSum [] = 0
+listSum (first : rest) =
+    first + (listSum rest)
