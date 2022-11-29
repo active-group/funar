@@ -157,3 +157,14 @@ swap f b a = f a b
 
 -- Erweiterung:
 -- - Mixtur aus zwei Duschprodukten, beliebige Anteile
+
+type PHWert = Double
+data Haartyp = Oily | Dandruffy | Regular
+--  deriving Show
+
+data Seife = MkSeife PHWert
+data Shampoo = MkShampoo Haartyp
+  deriving Show
+
+data Duschprodukt =
+    Duschgel Seife Shampoo
