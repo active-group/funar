@@ -261,3 +261,4 @@ listSum :: [Integer] -> Integer
 listSum [] = 0
 listSum (first : rest) =
     first + (listSum rest)
+
