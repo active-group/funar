@@ -238,5 +238,7 @@ data ListOf a =
   | Cons Int (ListOf a)
   deriving Show
 
+list1 :: ListOf a
 list1 = Cons 3 Empty
+list2 :: ListOf a
 list2 = Cons 4 (Cons 3 Empty)
