@@ -55,5 +55,6 @@ dillo1 = MkDillo { dilloLiveness = Alive, dilloWeight = 10 }
 
 -- Gürteltier überfahren
 runOverDillo :: Dillo -> Dillo
-
+-- >>> runOverDillo dillo1
+-- MkDillo {dilloLiveness = Dead, dilloWeight = 10}
 runOverDillo dillo = MkDillo { dilloLiveness = Dead, dilloWeight = dilloWeight dillo }
