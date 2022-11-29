@@ -293,3 +293,8 @@ listFold n f (x  :                xs) =
 -- andernorten: reduce
 -- >>> foldl (+) 0 [1,2,3,4]
 -- 10
+
+-- Index des Elements einer Liste finden
+listIndex :: a -> [a] -> Integer
+listIndex e [] = undefined
+listIndex e (x:xs) = undefined
