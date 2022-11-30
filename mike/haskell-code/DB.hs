@@ -114,13 +114,13 @@ runDB map (Return result) = (result , map)
 data Entry = MkEntry Key Value
 
 instance FromRow Entry where
-    fromRow = MkEntry <$> field 
+    fromRow = MkEntry <$> field <*> field
 
 
 runDBSQLite :: Connection -> DB a -> IO a
 runDBSQLite conn (Get key callback) = 
     do [MkEntry _ value] 
         <- queryNamed conn "SELECT key, value FROM entries WHERE key = :key" [":key" := key]
-       return undefined
+       runDBSQLite conn (callback value)
 runDBSQLite conn (Put key value callback) = undefined
 runDBSQLite conn (Return result) = return result
