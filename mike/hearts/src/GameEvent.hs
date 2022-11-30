@@ -58,6 +58,7 @@ eventsWinner (first : rest) =
 
 data Game a =
     RecordEvent GameEvent (() -> Game a)
+  | PlayValid Player Card (Bool -> Game a)
   | Done a
 
 instance Functor Game where
@@ -73,10 +74,15 @@ instance Monad Game where
  
 recordEventM event = RecordEvent event Done
 
+-- sagt uns, ob ein Spielzug zulässig ist
+playValidM :: Player -> Card -> Game Bool
+playValidM player card = PlayValid player card Done
+
 tableProcessCommandM :: GameCommand -> Game (Maybe Player)
 tableProcessCommandM (DealHands hands) = 
-    do mapM (\(player, hand) -> recordEventM (HandDealt player hand)) 
-            (Map.toList hands)
+    do mapM_ (\(player, hand) -> recordEventM (HandDealt player hand)) 
+             (Map.toList hands)
        return Nothing
 
-tableProcessCommandM (PlayCard player card) = undefined
+tableProcessCommandM (PlayCard player card) =
+    i
