@@ -129,7 +129,8 @@ runDBSQLite conn (Put key value callback) =
        runDBSQLite conn (callback ())
 runDBSQLite conn (Return result) = return result
 
-execDBSQLite :: DB a -> IO a
+execDBSQLite :: DB a -> IO 
+-- >>> execDBSQLite p1
 execDBSQLite db =
     do conn <- open "test.db"
        execute_ conn
