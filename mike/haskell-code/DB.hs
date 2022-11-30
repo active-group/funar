@@ -41,6 +41,8 @@ p1 = Put "Mike" 51 (\() ->
 runDB :: Map Key Value -> DB a -> (a, Map Key Value)
 runDB map (Get key callback) = 
     let value = map ! key
-    in callback value
-runDB map (Put key value callback) = undefined
+    in runDB map (callback value)
+runDB map (Put key value callback) = 
+    let map' = Map.insert key value map
+    in runDB map' (callback ())
 runDB map (Return result) = (result , map)
