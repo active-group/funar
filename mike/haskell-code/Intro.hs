@@ -320,6 +320,12 @@ instance Eq a => Eq (Optional a) where
   (==) (Result a) Null = False
   (==) (Result a) (Result a') = a == a'
 
+instance Eq a => Ord (Optional a) where
+  (<=) Null Null = True
+  (<=) Null (Result a) = True
+  (<=) (Result a) Null = False
+  (<=) (Result a) (Result a') = a <= a'
+
 -- >>> Null == Result 5 
 -- False
 -- >>> Result 5 == Result 5
