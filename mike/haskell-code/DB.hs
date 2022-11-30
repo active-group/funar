@@ -1,4 +1,9 @@
+{-# LANGUAGE OverloadedStrings #-}
 module DB where
+
+import Control.Applicative
+import Database.SQLite.Simple
+import Database.SQLite.Simple.FromRow
 
 import qualified Data.Map as Map 
 import Data.Map (Map, (!))
