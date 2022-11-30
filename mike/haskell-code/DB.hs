@@ -38,6 +38,11 @@ get key = Get key Return -- (\value -> Return value)
 put :: Key -> Value -> DB ()
 put key value = Put key value Return -- (\() -> Return ())
 
+splice :: DB a -> (a -> DB b) -> DB b
+splice (Get key callback) next = undefined
+splice (Put key value callback) next = undefined
+splice (Return result) next = undefined
+
 p1 :: DB String
 p1 = Put "Mike" 51 (\() ->
      Get "Mike" (\x ->
