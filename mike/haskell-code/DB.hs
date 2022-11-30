@@ -18,3 +18,5 @@ data DBCommand a = -- a: Typ des Ergebnisses
 
 type DBProgram a = [DBCommand a]
 
+p1 = [Put "Mike" 51,
+      Get "Mike"]
