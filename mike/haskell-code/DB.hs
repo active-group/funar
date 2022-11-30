@@ -110,9 +110,11 @@ runDB map (Return result) = (result , map)
 
 -- Tabelle entries, 2 Spalten key, value
 
+-- entspricht einer Zeile in der Datenbank
 data Entry = MkEntry Key Value
 
 instance FromRow Entry where
+    
 
 
 runDBSQLite :: Connection -> DB a -> IO a
