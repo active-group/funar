@@ -326,6 +326,12 @@ instance Applicative Optional where
 --   pure :: a -> f a
 --   (<*>) :: f (a -> b) -> f a -> f b
 
+-- fmap ::       (a ->   b) -> f a -> f b
+-- (<*>) ::    f (a ->   b) -> f a -> f b
+-- flip (>>=) :: (a -> f b) -> f a -> f b
+
+-- (>>=) :: f a -> (a -> f b) -> f b
+
 instance Monad Optional where
   return :: a -> Optional a
   return = Result
