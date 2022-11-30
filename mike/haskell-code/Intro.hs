@@ -410,6 +410,11 @@ instance Monoid [a] where
   neutral :: [a]
   neutral = []
 
+monoidConcat :: Monoid a => [a] -> a
+-- >>> monoidConcat [[1,2,3], [4,5], [7,8,9]]
+-- [1,2,3,4,5,7,8,9]
+monoidConcat as = foldr op neutral as
+
 -- >>> op [4,5,6] [1,2,3]
 -- [4,5,6,1,2,3]
 -- >>> op neutral [1,2,3]
