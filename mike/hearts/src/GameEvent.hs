@@ -55,3 +55,9 @@ eventsWinner (first : rest) =
   case first of
     GameEnded winner -> Just winner
     _ -> eventsWinner rest
+
+data Game a = Later
+
+tableProcessCommandM :: GameCommand -> Game (Maybe Player)
+tableProcessCommandM (DealHands hands) = undefined
+tableProcessCommandM (PlayCard player card) = undefined
