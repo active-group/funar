@@ -17,7 +17,7 @@ let
     ];
   };
 in pkgs.haskellPackages.shellFor {
-  packages = _: [ haskell-code ];
+  packages = _: [ haskell-code hearts ];
   buildInputs = (with pkgs; [ cabal-install ghcid haskell-language-server ])
     ++ pkgs.lib.optional withVSCode vscodeFunar;
   shellHook = ''
