@@ -313,6 +313,8 @@ data Optional a =
   | Result a
   deriving Show
 
+-- data Maybe a = Nothing | Just a
+
 instance Eq a => Eq (Optional a) where
   (==) :: Optional a -> Optional a -> Bool
   (==) Null Null = True
