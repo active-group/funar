@@ -110,6 +110,6 @@ runDB map (Return result) = (result , map)
 
 runDBSQLite :: Connection -> DB a -> IO a
 runDBSQLite conn (Get key callback) = 
-    queryNamed
+    queryNamed conn 
 runDBSQLite conn (Put key value callback) = undefined
 runDBSQLite conn (Return result) = return result
