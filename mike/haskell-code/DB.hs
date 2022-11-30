@@ -27,3 +27,9 @@ data DB a =
     Get Key (Value -> DB a)
   | Put Key Value (() -> DB a) -- (): "unit", Wert auch ()
   | Return a
+
+p1 = Put "Mike" 51 (\() ->
+     Get "Mike" (\x ->
+     Put "Mike" (x+1) (\() ->
+     Get "Mike" (\y ->
+     Return (show (x+y))))))
