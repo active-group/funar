@@ -419,3 +419,9 @@ monoidConcat as = foldr op neutral as
 -- [4,5,6,1,2,3]
 -- >>> op neutral [1,2,3]
 -- [1,2,3]
+
+-- Instanzen für Semigroup (Optional a), Monoid (Optional a)
+
+instance Semigroup (Optional a) where
+
+instance Monoid (Optional a) where
