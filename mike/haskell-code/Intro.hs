@@ -325,7 +325,7 @@ instance Monad Optional where
   return = Result
   (>>=) :: Optional a -> (a -> Optional b) -> Optional b
   (>>=) Null next = Null
-  (>>=) (Result a) next = undefined
+  (>>=) (Result a) next = next a
 
 -- data Maybe a = Nothing | Just a
 
