@@ -320,6 +320,11 @@ instance Eq a => Eq (Optional a) where
   (==) (Result a) Null = False
   (==) (Result a) (Result a') = a == a'
 
+-- >>> Null == Result 5 
+-- False
+-- >>> Result 5 == Result 5
+-- True
+
 -- Index des (ersten Vorkommens des) Elements einer Liste finden
 listIndex :: Eq a => a -> [a] -> Optional Integer
 -- >>> listIndex 5 [1,5,2,7]
