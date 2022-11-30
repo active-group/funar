@@ -122,5 +122,6 @@ runDBSQLite conn (Get key callback) =
     do [MkEntry _ value] 
         <- queryNamed conn "SELECT key, value FROM entries WHERE key = :key" [":key" := key]
        runDBSQLite conn (callback value)
-runDBSQLite conn (Put key value callback) = undefined
+runDBSQLite conn (Put key value callback) = 
+    do  
 runDBSQLite conn (Return result) = return result
