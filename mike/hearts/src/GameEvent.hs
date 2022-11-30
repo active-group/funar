@@ -15,14 +15,23 @@ import Data.Map (Map)
 
 -- - in der Zukunft
 -- - != Event
+{-
+type RandomSeed = Integer
 
 data GameEvent =
     GameStarted [Player]
   | FirstMoveMade Player
+  | DeckShuffled RandomSeed
   | CardsDistributed Hand Hand Hand Hand
   | CardPlayed Player Card
   | RoundFinished Player Trick
+  | PilesFinished Pile Pile Pile Pile
   | GameFinished Player
   | TurnChanged Player 
 
--- data GameCommand =
+data GameCommand =
+    PlayCard Player Card
+  | MakeFirstMove Player
+  | StartGame [Card] -- Hand Hand Hand Hand
+-}
+
