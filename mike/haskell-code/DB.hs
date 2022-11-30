@@ -107,3 +107,5 @@ runDB map (Put key value callback) =
     let map' = Map.insert key value map
     in runDB map' (callback ())
 runDB map (Return result) = (result , map)
+
+runDBSQLite :: DB a -> IO a
