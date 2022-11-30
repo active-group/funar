@@ -59,5 +59,6 @@ eventsWinner (first : rest) =
 data Game a = Later
 
 tableProcessCommandM :: GameCommand -> Game (Maybe Player)
-tableProcessCommandM (DealHands hands) = undefined
+tableProcessCommandM (DealHands hands) = 
+    
 tableProcessCommandM (PlayCard player card) = undefined
