@@ -323,7 +323,9 @@ instance Applicative Optional where
 instance Monad Optional where
   return :: a -> Optional a
   return = Result
-  
+  (>>=) :: Optional a -> (a -> Optional b) -> Optional b
+  (>>=) Null next = Null
+  (>>=) (Result a) next = undefined
 
 -- data Maybe a = Nothing | Just a
 
