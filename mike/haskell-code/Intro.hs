@@ -390,3 +390,6 @@ listIndex e (x:xs) =
 -- Typ a
 -- op :: a -> a -> a
 -- Assoziativität: op x (op y z) = op (op x y) z
+-- Halbgruppe
+
+class Semigroup a where
