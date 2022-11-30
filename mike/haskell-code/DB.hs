@@ -134,4 +134,6 @@ execDBSQLite db =
     do conn <- open "test.db"
        execute_ conn
         "CREATE TABLE IF NOT EXISTS entries (key TEXT PRIMARY KEY, value INTEGER)"
-       
+       result <- runDBSQLite db
+       close conn
+       return result
