@@ -128,3 +128,7 @@ runDBSQLite conn (Put key value callback) =
     do execute conn "REPLACE INTO entries (key, value) VALUES (?,?)" (MkEntry key value)
        runDBSQLite conn (callback ())
 runDBSQLite conn (Return result) = return result
+
+execDBSQLite :: DB a -> IO a
+execDBSQLite db =
+    do 
