@@ -392,6 +392,9 @@ listIndex e (x:xs) =
 -- Assoziativität: op x (op y z) = op (op x y) z
 -- Halbgruppe
 
+-- Halbgruppe + neutrales Element: Monoid
+-- op neutral a == op a neutral == a
+
 class Semigroup a where
   -- op ist assoziativ
   op :: a -> a -> a
