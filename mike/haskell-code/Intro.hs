@@ -393,4 +393,5 @@ listIndex e (x:xs) =
 -- Halbgruppe
 
 class Semigroup a where
+  -- op ist assoziativ
   op :: a -> a -> a
