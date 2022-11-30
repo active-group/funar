@@ -60,11 +60,23 @@ data Game a =
     RecordEvent GameEvent (() -> Game a)
   | Done a
 
-instance Monad Game where
+instance Functor Game where
 
+instance Applicative Game where
+
+instance Monad Game where
+    return = Done
+    (>>=) (RecordEvent event callback) next =
+        RecordEvent event (\() ->
+            callback () >>= next)
+    (Done result) >>= next = next result
+ 
 recordEventM event = RecordEvent event Done
 
 tableProcessCommandM :: GameCommand -> Game (Maybe Player)
-tableProcessCommandM (DealHands hands) = undefined
+tableProcessCommandM (DealHands hands) = 
+    do mapM (\(player, hand) -> recordEventM (HandDealt player hand)) 
+            (Map.toList hands)
+       return Nothing
 
 tableProcessCommandM (PlayCard player card) = undefined
