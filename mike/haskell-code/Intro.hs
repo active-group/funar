@@ -319,6 +319,8 @@ instance Functor Optional where
   fmap f (Result a) = Result (f a)
 
 instance Applicative Optional where
+  (<*>) :: Optional (a -> b) -> Optional a -> Optional b
+  (<*>) = undefined
 
 -- >>> :info Applicative
 -- type Applicative :: (* -> *) -> Constraint
