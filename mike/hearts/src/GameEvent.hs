@@ -65,6 +65,6 @@ instance Monad Game where
 recordEventM event = RecordEvent event Done
 
 tableProcessCommandM :: GameCommand -> Game (Maybe Player)
-tableProcessCommandM (DealHands hands) = 
+tableProcessCommandM (DealHands hands) = undefined
 
 tableProcessCommandM (PlayCard player card) = undefined
