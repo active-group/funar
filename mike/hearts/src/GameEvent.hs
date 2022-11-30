@@ -93,4 +93,5 @@ tableProcessCommandM (PlayCard player card) =
        if valid
        then undefined
        else 
-        recordEventM (IllegalCardAttempted player card)
+        do recordEventM (IllegalCardAttempted player card)
+           return Nothing
