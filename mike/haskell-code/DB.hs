@@ -117,7 +117,7 @@ instance FromRow Entry where
     fromRow = MkEntry <$> field <*> field
 
 instance ToRow Entry where
-    
+    toRow (MkEntry key value) = 
 runDBSQLite :: Connection -> DB a -> IO a
 runDBSQLite conn (Get key callback) = 
     do [MkEntry _ value] 
