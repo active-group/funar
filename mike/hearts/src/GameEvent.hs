@@ -56,9 +56,15 @@ eventsWinner (first : rest) =
     GameEnded winner -> Just winner
     _ -> eventsWinner rest
 
-data Game a = Later
+data Game a =
+    RecordEvent GameEvent (() -> Game a)
+  | Done a
+
+instance Monad Game where
+
+recordEventM event = RecordEvent event Done
 
 tableProcessCommandM :: GameCommand -> Game (Maybe Player)
 tableProcessCommandM (DealHands hands) = 
-    
+
 tableProcessCommandM (PlayCard player card) = undefined
