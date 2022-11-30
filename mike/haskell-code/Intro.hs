@@ -319,6 +319,7 @@ instance Functor Optional where
   fmap f (Result a) = Result (f a)
 
 instance Applicative Optional where
+  pure = Result
   (<*>) :: Optional (a -> b) -> Optional a -> Optional b
   (<*>) = undefined
 
