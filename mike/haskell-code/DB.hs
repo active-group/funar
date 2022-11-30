@@ -61,10 +61,20 @@ p1' = put "Mike" 51 `splice` (\() ->
       get "Mike" `splice` (\y ->
       Return (show (x+y))))))
 
+p1'' = do 
 -- >>> :info Monad
+-- type Monad :: (* -> *) -> Constraint
 -- class Monad m where
 --   (>>=) :: m a -> (a -> m b) -> m b
 --   return :: a -> m a
+
+instance Functor DB where
+
+instance Applicative DB where
+
+instance Monad DB where
+    (>>=) = splice
+    return = Return
 
 runDB :: Map Key Value -> DB a -> (a, Map Key Value)
 -- >>> runDB Map.empty p1
