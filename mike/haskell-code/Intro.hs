@@ -318,6 +318,13 @@ instance Functor Optional where
   fmap f Null = Null
   fmap f (Result a) = Result (f a)
 
+instance Applicative Optional where
+
+instance Monad Optional where
+  return :: a -> Optional a
+  return = Result
+  
+
 -- data Maybe a = Nothing | Just a
 
 instance Eq a => Eq (Optional a) where
