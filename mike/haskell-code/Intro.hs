@@ -358,13 +358,15 @@ listIndex e [] = Null
 listIndex e (x:xs) =
     if e == x
     then Result 0
-    else 
+    else
+      fmap (\index -> index + 1) (listIndex e xs)
+{-       
       let r = listIndex e xs
       in
         case r of
           Null -> Null
           Result index -> Result (index+1)
-
+-}
 -- Eq ist eine Typklasse, denke: Interface
 
 -- >>> :info Eq
