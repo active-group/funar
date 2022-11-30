@@ -402,3 +402,7 @@ class Semigroup a where
 instance Semigroup [a] where
   op :: [a] -> [a] -> [a]
   op = (++)
+
+class Semigroup a => Monoid a where
+  neutral :: a
+
