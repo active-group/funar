@@ -8,3 +8,5 @@ module Cards where
 -- (alle Wertigkeiten, Farben auflisten OK)
 
 -- Funktion, die ermittelt, ob eine Karte eine andere (gleicher Farbe) schlägt
+
+-- Alle Karten aufzählen: Alle Kombinationen aus Elementen zweier Listen
