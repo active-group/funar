@@ -11,6 +11,7 @@ return (show (x + y))
 type Key = String
 type Value = Integer
 
+{-
 data DBCommand a = -- a: Typ des Ergebnisses 
     Put Key Value
   | Get Key
@@ -20,3 +21,8 @@ type DBProgram a = [DBCommand a]
 
 p1 = [Put "Mike" 51,
       Get "Mike"]
+-}
+
+data DB a =
+    Get Key (Value -> DB a)
+  | Put Key Value (() -> DB a) -- (): "unit", Wert auch ()
