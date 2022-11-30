@@ -35,5 +35,11 @@ data Rank = Two | Three | Four
 data Card = MkCard Suit Rank
   deriving Show
 
+cardTuples = cartesianProduct [Hearts .. Spades] [Two .. Four]
+
+deck = map MkCard cardTuples
+
+-- >>> :type MkCard
+
 -- >>> cartesianProduct [Hearts .. Spades] [Two .. Four]
 -- [(Hearts,Two),(Hearts,Three),(Hearts,Four),(Spades,Two),(Spades,Three),(Spades,Four)]
