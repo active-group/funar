@@ -114,7 +114,7 @@ runDB map (Return result) = (result , map)
 data Entry = MkEntry Key Value
 
 instance FromRow Entry where
-    fromRow = MkEntry 
+    fromRow = MkEntry <$> key 
 
 
 runDBSQLite :: Connection -> DB a -> IO a
