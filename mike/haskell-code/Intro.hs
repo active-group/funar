@@ -320,6 +320,12 @@ instance Functor Optional where
 
 instance Applicative Optional where
 
+-- >>> :info Applicative
+-- type Applicative :: (* -> *) -> Constraint
+-- class Functor f => Applicative f where
+--   pure :: a -> f a
+--   (<*>) :: f (a -> b) -> f a -> f b
+
 instance Monad Optional where
   return :: a -> Optional a
   return = Result
