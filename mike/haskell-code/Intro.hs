@@ -324,6 +324,30 @@ instance Applicative Optional where
   (<*>) (Result f) (Result a) = Result (f a)
   (<*>) _ _ = Null
 
+-- fmap: Funktion auf 1 Ergebnis
+
+safeDivide :: (Eq a, Fractional a) => a -> a -> Optional a
+safeDivide n d =
+  if d == 0
+  then Null
+  else Result (n/d)
+
+foo a b c d =
+  fmap2 (+) (safeDivide a b) (safeDivide c d)
+{-
+  do n1 <- safeDivide a b 
+     n2 <- safeDivide c d
+     return (n1+n2)
+-}
+
+-- fmap2 :: (a -> b -> c) -> Optional a -> Optional b -> Optional c
+fmap2 :: Applicative f => (a -> b -> c) -> f a -> f b -> f c
+fmap2 f oa ob =
+  -- pure f <*> oa <*> ob
+  -- fmap f oa <*> ob
+  -- <$> Alias für fmap
+  f <$> oa <*> ob
+
 -- >>> :info Applicative
 -- type Applicative :: (* -> *) -> Constraint
 -- class Functor f => Applicative f where
