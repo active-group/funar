@@ -423,6 +423,11 @@ monoidConcat as = foldr op neutral as
 
 -- Instanzen für Semigroup (Optional a), Monoid (Optional a)
 
-instance Semigroup (Optional a) where
+instance Semigroup a => Semigroup (Optional a) where
+  op Null Null = Null
+  op Null (Result a) = Result a
+  op (Result a) Null = Result a
+  op (Result a) (Result a') = Result (op a a')
 
-instance Monoid (Optional a) where
+instance Monoid a => Monoid (Optional a) where
+  neutral = Result neutral
