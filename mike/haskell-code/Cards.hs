@@ -14,12 +14,15 @@ module Cards where
 cartesianProduct :: [a] -> [b] -> [(a, b)]
 -- >>> cartesianProduct [1,2,3] [4,5,6]
 -- [(1,4),(1,5),(1,6),(2,4),(2,5),(2,6),(3,4),(3,5),(3,6)]
-cartesianProduct [] bs = []
-cartesianProduct (a:as) bs =
-    cartesianProduct1 a bs ++ cartesianProduct as bs
+-- cartesianProduct [] bs = []
+-- cartesianProduct (a:as) bs =
+--    cartesianProduct1 a bs ++ cartesianProduct as bs
+cartesianProduct as bs =
+    concat (map (\a -> cartesianProduct1 a bs) as)
 
 cartesianProduct1 :: a -> [b] -> [(a, b)]
 -- >>> cartesianProduct1 42 [1,2,3]
 -- [(42,1),(42,2),(42,3)]
-cartesianProduct1 a [] = []
-cartesianProduct1 a (b:bs) = (a, b) : cartesianProduct1 a bs
+-- cartesianProduct1 a [] = []
+-- cartesianProduct1 a (b:bs) = (a, b) : cartesianProduct1 a bs
+cartesianProduct1 a bs = map (\b -> (a, b)) bs 
