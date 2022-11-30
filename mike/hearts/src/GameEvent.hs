@@ -10,3 +10,8 @@ import Data.Map (Map)
 -- - in der Vergangenheit passiert
 -- - können gesamte Geschichte der Domäne erzählen
 -- - Redundanz ist OK
+
+-- Command: Objekt, das einen (fachlichen) Wunsch repräsentiert.
+
+-- - in der Zukunft
+-- - != Event
