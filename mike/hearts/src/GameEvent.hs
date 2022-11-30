@@ -70,6 +70,9 @@ instance Monad Game where
     (>>=) (RecordEvent event callback) next =
         RecordEvent event (\() ->
             callback () >>= next)
+    (>>=) (PlayValid player card callback) next =
+        PlayValid player card (\valid ->
+            callback valid >>= next)
     (Done result) >>= next = next result
  
 recordEventM event = RecordEvent event Done
