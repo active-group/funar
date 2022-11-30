@@ -395,3 +395,7 @@ listIndex e (x:xs) =
 class Semigroup a where
   -- op ist assoziativ
   op :: a -> a -> a
+
+instance Semigroup [a] where
+  op :: [a] -> [a] -> [a]
+  op = (++)
