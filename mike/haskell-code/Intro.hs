@@ -375,3 +375,18 @@ listIndex e (x:xs) =
 --   (>=) :: a -> a -> Bool
 --   max :: a -> a -> a
 --   min :: a -> a -> a
+
+-- Algebra:
+
+-- Mathematik: Menge + Operationen + Gleichungen
+
+-- Programmierung: Menge -> Typ
+
+-- Assoziativität
+-- (a + b) + c == a + (b + c)
+
+-- Grundlage: Operation (+) :: Integer -> Integer -> Integer
+
+-- Typ a
+-- op :: a -> a -> a
+-- Assoziativität: op x (op y z) = op (op x y) z
