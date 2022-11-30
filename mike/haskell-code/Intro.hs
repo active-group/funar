@@ -313,6 +313,11 @@ data Optional a =
   | Result a
   deriving Show
 
+instance Functor Optional where
+  fmap :: (a -> b) -> Optional a -> Optional b
+  fmap f Null = Null
+  fmap f (Result a) = Result (f a)
+
 -- data Maybe a = Nothing | Just a
 
 instance Eq a => Eq (Optional a) where
