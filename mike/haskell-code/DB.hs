@@ -61,7 +61,11 @@ p1' = put "Mike" 51 `splice` (\() ->
       get "Mike" `splice` (\y ->
       Return (show (x+y))))))
 
-p1'' = do 
+p1'' = do put "Mike" 51
+          x <- get "Mike"
+          put "Mike" (x+1)
+          y <- get "Mike"
+          return (show (x+y))
 -- >>> :info Monad
 -- type Monad :: (* -> *) -> Constraint
 -- class Monad m where
