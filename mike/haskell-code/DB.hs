@@ -131,4 +131,4 @@ runDBSQLite conn (Return result) = return result
 
 execDBSQLite :: DB a -> IO a
 execDBSQLite db =
-    do 
+    do conn <- open "test.db"
