@@ -28,6 +28,7 @@ data DB a =
   | Put Key Value (() -> DB a) -- (): "unit", Wert auch ()
   | Return a
 
+p1 :: DB String
 p1 = Put "Mike" 51 (\() ->
      Get "Mike" (\x ->
      Put "Mike" (x+1) (\() ->
