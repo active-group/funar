@@ -89,4 +89,6 @@ tableProcessCommandM (DealHands hands) =
        return Nothing
 
 tableProcessCommandM (PlayCard player card) =
-    undefined
+    do if playValid player card
+       then undefined
+       else undefined
