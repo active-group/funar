@@ -321,7 +321,8 @@ instance Functor Optional where
 instance Applicative Optional where
   pure = Result
   (<*>) :: Optional (a -> b) -> Optional a -> Optional b
-  (<*>) = undefined
+  (<*>) (Result f) (Result a) = Result (f a)
+  (<*>) _ _ = Null
 
 -- >>> :info Applicative
 -- type Applicative :: (* -> *) -> Constraint
