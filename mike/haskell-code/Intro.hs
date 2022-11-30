@@ -313,12 +313,12 @@ data Optional a =
   | Result a
   deriving Show
 
-instance Eq (Optional a) where
+instance Eq a => Eq (Optional a) where
   (==) :: Optional a -> Optional a -> Bool
-  (==) Null Null = undefined
-  (==) Null (Result a) = undefined
-  (==) (Result a) Null = undefined
-  (==) (Result a) (Result a') = undefined
+  (==) Null Null = True
+  (==) Null (Result a) = False
+  (==) (Result a) Null = False
+  (==) (Result a) (Result a') = a == a'
 
 -- Index des (ersten Vorkommens des) Elements einer Liste finden
 listIndex :: Eq a => a -> [a] -> Optional Integer
