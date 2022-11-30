@@ -59,10 +59,12 @@ p1' = put "Mike" 51 `splice` (\() ->
       get "Mike" `splice` (\x ->
       put "Mike" (x+1) `splice` (\() ->
       get "Mike" `splice` (\y ->
-      Return (show (x+y)))))) 
+      Return (show (x+y))))))
 
-
-
+-- >>> :info Monad
+-- class Monad m where
+--   (>>=) :: m a -> (a -> m b) -> m b
+--   return :: a -> m a
 
 runDB :: Map Key Value -> DB a -> (a, Map Key Value)
 -- >>> runDB Map.empty p1
