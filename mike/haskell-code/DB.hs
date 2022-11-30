@@ -82,6 +82,10 @@ instance Functor DB where
 -- class Functor f where
 --   fmap :: (a -> b) -> f a -> f b
 
+-- map :: (a -> b) -> [a] -> [b]
+
+-- instance Functor [] where ...
+
 instance Applicative DB where
 
 instance Monad DB where
