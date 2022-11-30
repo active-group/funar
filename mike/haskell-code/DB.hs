@@ -117,7 +117,8 @@ instance FromRow Entry where
     fromRow = MkEntry <$> field <*> field
 
 instance ToRow Entry where
-    toRow (MkEntry key value) = 
+    toRow (MkEntry key value) = toRow (key, value)
+
 runDBSQLite :: Connection -> DB a -> IO a
 runDBSQLite conn (Get key callback) = 
     do [MkEntry _ value] 
@@ -125,5 +126,5 @@ runDBSQLite conn (Get key callback) =
        runDBSQLite conn (callback value)
 runDBSQLite conn (Put key value callback) = 
     do execute conn "REPLACE INTO entries (key, value) VALUES (?,?)" (MkEntry key value)
-       return undefined
+       runDBSQLite conn (callback ())
 runDBSQLite conn (Return result) = return result
