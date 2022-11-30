@@ -31,12 +31,22 @@ data DB a =
   | Put Key Value (() -> DB a) -- (): "unit", Wert auch ()
   | Return a
 
+-- Get/Put unabhängig machen, später zusammensetzen
+get :: Key -> DB Value
+get key = Get key (\value -> Return value)
+
+put :: Key -> Value -> DB ()
+put key value = Put key value (\() -> Return ())
+
 p1 :: DB String
 p1 = Put "Mike" 51 (\() ->
      Get "Mike" (\x ->
      Put "Mike" (x+1) (\() ->
      Get "Mike" (\y ->
      Return (show (x+y))))))
+
+
+
 
 runDB :: Map Key Value -> DB a -> (a, Map Key Value)
 -- >>> runDB Map.empty p1
