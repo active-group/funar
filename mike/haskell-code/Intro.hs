@@ -393,3 +393,4 @@ listIndex e (x:xs) =
 -- Halbgruppe
 
 class Semigroup a where
+  op :: a -> a -> a
