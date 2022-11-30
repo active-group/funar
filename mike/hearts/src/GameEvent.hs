@@ -7,5 +7,6 @@ import Data.Map (Map)
 
 -- Event: Objekt, das ein fachliches Ereignis in der Domäne repräsentiert.
 
+-- - in der Vergangenheit passiert
 -- - können gesamte Geschichte der Domäne erzählen
 -- - Redundanz ist OK
