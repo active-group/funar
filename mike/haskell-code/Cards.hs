@@ -37,9 +37,10 @@ data Card = MkCard Suit Rank
 
 cardTuples = cartesianProduct [Hearts .. Spades] [Two .. Four]
 
-deck = map MkCard cardTuples
+deck = map (uncurry MkCard) cardTuples
 
 -- >>> :type MkCard
+-- MkCard :: Suit -> Rank -> Card
 
 -- >>> cartesianProduct [Hearts .. Spades] [Two .. Four]
 -- [(Hearts,Two),(Hearts,Three),(Hearts,Four),(Spades,Two),(Spades,Three),(Spades,Four)]
