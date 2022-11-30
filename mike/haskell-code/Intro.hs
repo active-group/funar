@@ -430,4 +430,4 @@ instance Semigroup a => Semigroup (Optional a) where
   op (Result a) (Result a') = Result (op a a')
 
 instance Monoid a => Monoid (Optional a) where
-  neutral = Result neutral
+  neutral = Null
