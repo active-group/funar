@@ -325,6 +325,14 @@ instance Eq a => Eq (Optional a) where
 -- >>> Result 5 == Result 5
 -- True
 
+data NonEq = Marc | Mike
+
+-- >>> Marc == Mike
+-- No instance for (Eq NonEq) arising from a use of ‘==’
+
+oMarc :: Optional NonEq
+oMarc = Result Marc
+
 -- Index des (ersten Vorkommens des) Elements einer Liste finden
 listIndex :: Eq a => a -> [a] -> Optional Integer
 -- >>> listIndex 5 [1,5,2,7]
