@@ -110,7 +110,10 @@ runDB map (Return result) = (result , map)
 
 -- Tabelle entries, 2 Spalten key, value
 
--- data Entry = 
+data Entry = MkEntry Key Value
+
+
+
 runDBSQLite :: Connection -> DB a -> IO a
 runDBSQLite conn (Get key callback) = 
     queryNamed conn "SELECT key, value FROM entries WHERE key = :key" [":key" := key]
