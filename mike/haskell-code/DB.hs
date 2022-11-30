@@ -108,4 +108,7 @@ runDB map (Put key value callback) =
     in runDB map' (callback ())
 runDB map (Return result) = (result , map)
 
-runDBSQLite :: DB a -> IO a
+runDBSQLite :: Connection -> DB a -> IO a
+runDBSQLite conn (Get key callback) = undefined
+runDBSQLite conn (Put key value callback) = undefined
+runDBSQLite conn (Return result) = undefined
