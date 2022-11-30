@@ -39,6 +39,8 @@ p1 = Put "Mike" 51 (\() ->
      Return (show (x+y))))))
 
 runDB :: Map Key Value -> DB a -> (a, Map Key Value)
+-- >>> runDB Map.empty p1
+-- ("103",fromList [("Mike",52)])
 runDB map (Get key callback) = 
     let value = map ! key
     in runDB map (callback value)
