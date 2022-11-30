@@ -15,3 +15,14 @@ import Data.Map (Map)
 
 -- - in der Zukunft
 -- - != Event
+
+data GameEvent =
+    GameStarted [Player]
+  | FirstMoveMade Player
+  | CardsDistributed Hand Hand Hand Hand
+  | CardPlayed Player Card
+  | RoundFinished Player Trick
+  | GameFinished Player
+  | TurnChanged Player 
+
+-- data GameCommand =
