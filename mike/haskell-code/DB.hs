@@ -33,10 +33,10 @@ data DB a =
 
 -- Get/Put unabhängig machen, später zusammensetzen
 get :: Key -> DB Value
-get key = Get key (\value -> Return value)
+get key = Get key Return -- (\value -> Return value)
 
 put :: Key -> Value -> DB ()
-put key value = Put key value (\() -> Return ())
+put key value = Put key value Return -- (\() -> Return ())
 
 p1 :: DB String
 p1 = Put "Mike" 51 (\() ->
