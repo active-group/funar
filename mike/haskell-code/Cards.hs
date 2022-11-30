@@ -26,3 +26,14 @@ cartesianProduct1 :: a -> [b] -> [(a, b)]
 -- cartesianProduct1 a [] = []
 -- cartesianProduct1 a (b:bs) = (a, b) : cartesianProduct1 a bs
 cartesianProduct1 a bs = map (\b -> (a, b)) bs 
+
+data Suit = Hearts | Spades
+  deriving (Enum, Show)
+data Rank = Two | Three | Four
+  deriving (Enum, Show)
+
+data Card = MkCard Suit Rank
+  deriving Show
+
+-- >>> cartesianProduct [Hearts .. Spades] [Two .. Four]
+-- [(Hearts,Two),(Hearts,Three),(Hearts,Four),(Spades,Two),(Spades,Three),(Spades,Four)]
