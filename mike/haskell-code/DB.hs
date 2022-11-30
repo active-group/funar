@@ -132,4 +132,5 @@ runDBSQLite conn (Return result) = return result
 execDBSQLite :: DB a -> IO a
 execDBSQLite db =
     do conn <- open "test.db"
-       execute_ conn "CREATE TABLE IF NOT EXISTS entries (key, value)"
+       execute_ conn#
+        "CREATE TABLE IF NOT EXISTS entries (key TEXT PRIMARY KEY, value INTEGER)"
