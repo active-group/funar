@@ -77,6 +77,11 @@ p1'' = do put "Mike" 51
 
 instance Functor DB where
 
+-- >>> :info Functor
+-- type Functor :: (* -> *) -> Constraint
+-- class Functor f where
+--   fmap :: (a -> b) -> f a -> f b
+
 instance Applicative DB where
 
 instance Monad DB where
