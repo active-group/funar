@@ -64,6 +64,10 @@ invertPayment (MkPayment Short date amount currency) =
 invertPayment (MkPayment Long date amount currency) =
     MkPayment Short date amount currency
 
+multiplyPayment :: Amount -> Payment -> Payment
+multiplyPayment factor (MkPayment dir date amount currency) =
+    MkPayment dir date (factor * amount) currency
+
 -- alle Zahlungen bis zu diesem Datum
 -- Rückgabe: Residualvertrag
 semantics :: Contract -> Date -> ([Payment], Contract)
