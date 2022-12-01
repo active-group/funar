@@ -61,6 +61,7 @@ data Game a =
   | PlayValid Player Card (Bool -> Game a)
   | TurnOverTrick (Maybe (Trick, Player) -> Game a)
   | PlayerAfter Player (Player -> Game a)
+  | GameOver (Maybe Player -> Game a)
   | Done a
 
 instance Functor Game where
@@ -79,6 +80,7 @@ instance Monad Game where
         TurnOverTrick (\over -> callback over >>= next)
     (PlayerAfter player callback) >>= next =
         PlayerAfter player (\nextPlayer -> callback nextPlayer >>= next)
+    (GameOver )
     (Done result) >>= next = next result
  
 recordEventM :: GameEvent -> Game ()
@@ -95,6 +97,9 @@ turnOverTrickM = TurnOverTrick Done
 -- wer ist Spieler dran?
 playerAfterM :: Player -> Game Player
 playerAfterM player = PlayerAfter player Done
+
+gameOverM :: Game (Maybe Player)
+gameOverM = GameOver Done
 
 -- liefert, wer gewonnen hat
 tableProcessCommandM :: GameCommand -> Game (Maybe Player)
@@ -114,7 +119,8 @@ tableProcessCommandM (PlayCard player card) =
                         recordEventM (PlayerTurnChanged nextPlayer)
                         return Nothing
                 Just (trick, trickTaker) ->
-                    do undefined
+                    do gameOver <- gameOverM
+                            
                        return undefined
        else 
         do recordEventM (IllegalCardAttempted player card)
