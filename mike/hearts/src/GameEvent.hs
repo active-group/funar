@@ -131,3 +131,4 @@ tableProcessCommandM (PlayCard player card) =
        else 
         do recordEventM (IllegalCardAttempted player card)
            return Nothing
+
