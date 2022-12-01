@@ -76,8 +76,14 @@ semantics (One currency) now = ([MkPayment Long now 1 currency], Empty)
 semantics (Multiplier amount contract) now = 
   let (payments, residualContract) = semantics contract now
   in (map (multiplyPayment amount) payments, Multiplier amount residualContract)
-semantics (Delayed date contract) now = undefined
-semantics (Combine contract1 contract2) now = undefined
+semantics (Delayed date contract) now =
+    if date >= now
+    then semantics contract now
+    else ([], Delayed date contract)
+semantics (Combine contract1 contract2) now =
+    let (payments1, residualContract1) = semantics contract1 now
+        (payments2, residualContract2) = semantics contract2 now
+    in (payments1 ++ payments2, Combine residualContract1 residualContract2)
 semantics (Invert contract) now =
   let (payments, residualContract) = semantics contract now
   in (map invertPayment payments, Invert residualContract)    
