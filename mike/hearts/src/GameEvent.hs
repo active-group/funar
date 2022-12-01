@@ -96,6 +96,7 @@ turnOverTrickM = TurnOverTrick Done
 playerAfterM :: Player -> Game Player
 playerAfterM player = PlayerAfter player Done
 
+-- liefert, wer gewonnen hat
 tableProcessCommandM :: GameCommand -> Game (Maybe Player)
 tableProcessCommandM (DealHands hands) = 
     do mapM_ (\(player, hand) -> recordEventM (HandDealt player hand)) 
@@ -109,9 +110,12 @@ tableProcessCommandM (PlayCard player card) =
                over <- turnOverTrickM
                case over of
                 Nothing -> 
-                     do recordEventM (PlayerTurnChanged undefined)
-                Just (trick, trickTaker) -> undefined
-               return undefined
+                     do nextPlayer <- playerAfterM player
+                        recordEventM (PlayerTurnChanged undefined)
+                        return Nothing
+                Just (trick, trickTaker) ->
+                    do undefined
+                       return undefined
        else 
         do recordEventM (IllegalCardAttempted player card)
            return Nothing
