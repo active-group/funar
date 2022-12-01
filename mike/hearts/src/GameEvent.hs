@@ -123,7 +123,8 @@ tableProcessCommandM (PlayCard player card) =
                         recordEventM (PlayerTurnChanged nextPlayer)
                         return Nothing
                 Just (trick, trickTaker) ->
-                    do gameOver <- gameOverM
+                    do recordEventM (TrickTaken trickTaker trick)
+                       gameOver <- gameOverM
                        case gameOver of
                         Nothing ->
                             do recordEventM (PlayerTurnChanged trickTaker)
