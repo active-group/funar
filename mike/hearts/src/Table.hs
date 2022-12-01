@@ -182,5 +182,21 @@ tableProcessEvent (GameEnded player) state = state
 
 -- Spiel ausführen
 -- [GameEvent]: umgekehrte Liste aller schon produzierten Events
-runTable :: Game a -> TableState -> [GameEvent] ->
-              (TableState, [GameEvent], a)
+-- runTable :: Game a -> TableState -> [GameEvent] ->
+--              (TableState, [GameEvent], a)
+runTable (PlayValid player card cont) state revents =
+  runTable (cont (playValid state player card)) state revents
+runTable (TurnOverTrick cont) state revents =
+  runTable (cont (turnOverTrick state)) state revents
+runTable (PlayerAfter player cont) state revents =
+  runTable (cont (playerAfter state player)) state revents
+runTable (GameOver cont) state revents =
+  runTable (cont (gameOver state)) state revents
+
+runTable (RecordEvent event cont) state revents =
+  runTable (cont ()) (tableProcessEvent event state)  (event:revents)
+
+runTable (GetCommand cont) state revents = undefined
+runTable (Done result) state revents =
+  (state, reverse revents, undefined)
+ 
