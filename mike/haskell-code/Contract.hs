@@ -86,4 +86,9 @@ semantics (Combine contract1 contract2) now =
     in (payments1 ++ payments2, Combine residualContract1 residualContract2)
 semantics (Invert contract) now =
   let (payments, residualContract) = semantics contract now
-  in (map invertPayment payments, Invert residualContract)    
+  in (map invertPayment payments, Invert residualContract) 
+
+combine :: Contract -> Contract -> Contract
+combine Empty c = c 
+combine c Empty = c
+combine c1 c2 = Combine c1 c2
