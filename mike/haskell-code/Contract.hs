@@ -40,3 +40,7 @@ data Contract =
   deriving Show
 
 zcb1 = Delayed christmas (Multiplier 100 (One EUR))
+
+zeroCouponBond :: Date -> Amount -> Currency -> Contract
+zeroCouponBond date amount currency =
+    Delayed date (Multiplier amount (One currency))
