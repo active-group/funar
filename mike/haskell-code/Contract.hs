@@ -88,6 +88,7 @@ semantics (Invert contract) now =
   let (payments, residualContract) = semantics contract now
   in (map invertPayment payments, Invert residualContract) 
 
+-- smart constructor
 combine :: Contract -> Contract -> Contract
 combine Empty c = c 
 combine c Empty = c
