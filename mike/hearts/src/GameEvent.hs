@@ -80,7 +80,8 @@ instance Monad Game where
         TurnOverTrick (\over -> callback over >>= next)
     (PlayerAfter player callback) >>= next =
         PlayerAfter player (\nextPlayer -> callback nextPlayer >>= next)
-    (GameOver )
+    (GameOver callback) >>= next =
+        GameOver (\over -> callback over >>= next)
     (Done result) >>= next = next result
  
 recordEventM :: GameEvent -> Game ()
