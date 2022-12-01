@@ -60,6 +60,7 @@ data Game a =
     RecordEvent GameEvent (() -> Game a)
   | PlayValid Player Card (Bool -> Game a)
   | TurnOverTrick (Maybe (Trick, Player) -> Game a)
+  | PlayerAfter Player (Player -> Game a)
   | Done a
 
 instance Functor Game where
@@ -76,6 +77,8 @@ instance Monad Game where
             callback valid >>= next)
     (TurnOverTrick callback) >>= next =
         TurnOverTrick (\over -> callback over >>= next)
+    (PlayerAfter player callback) >>= next =
+        PlayerAfter player (\nextPlayer -> callback nextPlayer >>= next)
     (Done result) >>= next = next result
  
 recordEventM :: GameEvent -> Game ()
@@ -88,6 +91,10 @@ playValidM player card = PlayValid player card Done
 -- ist die Runde vorbei und wenn ja, was ist der Stich und wer muß ihn nehmen
 turnOverTrickM :: Game (Maybe (Trick, Player))
 turnOverTrickM = TurnOverTrick Done
+
+-- wer ist Spieler dran?
+playerAfterM :: Player -> Game Player
+playerAfterM player = PlayerAfter player Done
 
 tableProcessCommandM :: GameCommand -> Game (Maybe Player)
 tableProcessCommandM (DealHands hands) = 
