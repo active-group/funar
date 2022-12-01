@@ -36,4 +36,7 @@ zcb1 = ZeroCouponBond christmas 100 EUR
 data Contract =
     One Currency
   | Multiplier Amount Contract
-  | 
+  | Delayed Date Contract
+  deriving Show
+
+zcb1 = Delayed christmas (Multiplier 100 (One EUR))
