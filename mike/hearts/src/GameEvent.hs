@@ -62,6 +62,7 @@ data Game a =
   | TurnOverTrick (Maybe (Trick, Player) -> Game a)
   | PlayerAfter Player (Player -> Game a)
   | GameOver (Maybe Player -> Game a)
+  | GetCommand (GameCommand -> Game a)
   | Done a
 
 instance Functor Game where
@@ -82,6 +83,8 @@ instance Monad Game where
         PlayerAfter player (\nextPlayer -> callback nextPlayer >>= next)
     (GameOver callback) >>= next =
         GameOver (\over -> callback over >>= next)
+    (GetCommand callback) >>= next =
+        GetCommand (\command -> callback command >>= next)
     (Done result) >>= next = next result
  
 recordEventM :: GameEvent -> Game ()
