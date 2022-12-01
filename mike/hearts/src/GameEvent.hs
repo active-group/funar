@@ -121,7 +121,13 @@ tableProcessCommandM (PlayCard player card) =
                         return Nothing
                 Just (trick, trickTaker) ->
                     do gameOver <- gameOverM
-                            
+                       case gameOver of
+                        Nothing ->
+                            do recordEventM (PlayerTurnChanged trickTaker)
+                               return Nothing
+                        Just winner ->
+                            do recordEventM (GameEnded winner)
+                               return (Just winner)
                        return undefined
        else 
         do recordEventM (IllegalCardAttempted player card)
