@@ -54,3 +54,15 @@ zcb1 = Delayed christmas (Multiplier 100 (One EUR))
 zeroCouponBond :: Date -> Amount -> Currency -> Contract
 zeroCouponBond date amount currency =
     Delayed date (Multiplier amount (One currency))
+
+data Payment = MkPayment Direction Date Amount Currency
+  deriving Show
+
+-- alle Zahlungen bis zu diesem Datum
+-- Rückgabe: Residualvertrag
+semantics :: Contract -> Date -> ([Payment], Contract)
+semantics Empty now = undefined
+semantics (One currency) now = undefined
+semantics (Multiplier amount contract) now = undefined
+semantics (Delayed date contract) now = undefined
+semantics (And contract1 contract2) now = undefined
