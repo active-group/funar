@@ -46,7 +46,7 @@ data Contract =
   | Delayed Date Contract
   | Invert Contract
   | Combine Contract Contract -- Halbgruppe
-  | Empty
+  | Empty -- neutrales Element
   deriving Show
 
 zcb1 = Delayed christmas (Multiplier 100 (One EUR))
