@@ -128,7 +128,6 @@ tableProcessCommandM (PlayCard player card) =
                         Just winner ->
                             do recordEventM (GameEnded winner)
                                return (Just winner)
-                       return undefined
        else 
         do recordEventM (IllegalCardAttempted player card)
            return Nothing
