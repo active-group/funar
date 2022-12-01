@@ -58,6 +58,12 @@ zeroCouponBond date amount currency =
 data Payment = MkPayment Direction Date Amount Currency
   deriving Show
 
+invertPayment :: Payment -> Payment
+invertPayment (MkPayment Short date amount currency) = 
+    MkPayment Long date amount currency
+invertPayment (MkPayment Long date amount currency) =
+    MkPayment Short date amount currency
+
 -- alle Zahlungen bis zu diesem Datum
 -- Rückgabe: Residualvertrag
 semantics :: Contract -> Date -> ([Payment], Contract)
@@ -65,4 +71,5 @@ semantics Empty now = undefined
 semantics (One currency) now = undefined
 semantics (Multiplier amount contract) now = undefined
 semantics (Delayed date contract) now = undefined
-semantics (And contract1 contract2) now = undefined
+semantics (Combine contract1 contract2) now = undefined
+semantics (Invert contract) now = undefined
