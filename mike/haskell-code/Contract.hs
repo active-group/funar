@@ -73,7 +73,9 @@ multiplyPayment factor (MkPayment dir date amount currency) =
 semantics :: Contract -> Date -> ([Payment], Contract)
 semantics Empty now = undefined
 semantics (One currency) now = undefined
-semantics (Multiplier amount contract) now = undefined
+semantics (Multiplier amount contract) now = 
+  let (payments, residualContract) = semantics contract now
+  in (undefined, undefined)
 semantics (Delayed date contract) now = undefined
 semantics (Combine contract1 contract2) now = undefined
 semantics (Invert contract) now = undefined
