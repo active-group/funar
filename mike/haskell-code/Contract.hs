@@ -7,7 +7,8 @@ module Contract where
 -- 2. In "atomare Bestandteile" / "Ideen" zerlegen
 
 -- "Währung": "Ich bekomme 1€ jetzt."
--- "Betrag" / "Vielfaches"
+-- "Betrag" / "Vielfaches":
+--    "Ich bekomme 100€ jetzt."
 -- "Später"
 
 newtype Date = Date String
