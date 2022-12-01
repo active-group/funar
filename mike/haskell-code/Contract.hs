@@ -11,6 +11,10 @@ module Contract where
 --    "Ich bekomme 100€ jetzt."
 -- "Später"
 
+-- 3. nächstes Beispiel
+-- "Currency Swap"
+-- "Weihnachten bekomme ich 100€ und bezahle $100."
+
 newtype Date = Date String
   deriving (Show, Eq, Ord)
 
@@ -33,10 +37,15 @@ data Contract =
 zcb1 = ZeroCouponBond christmas 100 EUR
 -}
 
+data Direction = Short | Long 
+  deriving Show
+
 data Contract =
     One Currency
   | Multiplier Amount Contract
   | Delayed Date Contract
+  | Invert Contract
+  | Combine Contract Contract
   deriving Show
 
 zcb1 = Delayed christmas (Multiplier 100 (One EUR))
