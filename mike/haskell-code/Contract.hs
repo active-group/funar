@@ -71,8 +71,8 @@ multiplyPayment factor (MkPayment dir date amount currency) =
 -- alle Zahlungen bis zu diesem Datum
 -- Rückgabe: Residualvertrag
 semantics :: Contract -> Date -> ([Payment], Contract)
-semantics Empty now = undefined
-semantics (One currency) now = undefined
+semantics Empty now = ([], Empty)
+semantics (One currency) now = ([MkPayment Long now 1 currency], Empty)
 semantics (Multiplier amount contract) now = 
   let (payments, residualContract) = semantics contract now
   in (undefined, undefined)
