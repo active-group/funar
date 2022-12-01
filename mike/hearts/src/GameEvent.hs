@@ -111,7 +111,7 @@ tableProcessCommandM (PlayCard player card) =
                case over of
                 Nothing -> 
                      do nextPlayer <- playerAfterM player
-                        recordEventM (PlayerTurnChanged undefined)
+                        recordEventM (PlayerTurnChanged nextPlayer)
                         return Nothing
                 Just (trick, trickTaker) ->
                     do undefined
