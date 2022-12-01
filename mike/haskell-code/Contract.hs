@@ -35,4 +35,5 @@ zcb1 = ZeroCouponBond christmas 100 EUR
 
 data Contract =
     One Currency
-  | Multiplier Amount 
+  | Multiplier Amount Contract
+  | 
