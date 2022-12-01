@@ -179,3 +179,8 @@ tableProcessEvent (TrickTaken player trick) state =
     }
 tableProcessEvent (IllegalCardAttempted player card) state = state
 tableProcessEvent (GameEnded player) state = state
+
+-- Spiel ausführen
+-- [GameEvent]: umgekehrte Liste aller schon produzierten Events
+runTable :: Game a -> TableState -> [GameEvent] ->
+              (TableState, [GameEvent], a)
