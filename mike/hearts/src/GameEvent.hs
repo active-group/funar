@@ -59,6 +59,7 @@ eventsWinner (first : rest) =
 data Game a =
     RecordEvent GameEvent (() -> Game a)
   | PlayValid Player Card (Bool -> Game a)
+  | TurnOverTrick (Maybe (Trick, Player) -> Game a)
   | Done a
 
 instance Functor Game where
@@ -73,6 +74,8 @@ instance Monad Game where
     (PlayValid player card callback) >>= next =
         PlayValid player card (\valid ->
             callback valid >>= next)
+    (TurnOverTrick callback) >>= next =
+        TurnOverTrick (\over -> callback over >>= next)
     (Done result) >>= next = next result
  
 recordEventM :: GameEvent -> Game ()
@@ -81,6 +84,10 @@ recordEventM event = RecordEvent event Done
 -- sagt uns, ob ein Spielzug zulässig ist
 playValidM :: Player -> Card -> Game Bool
 playValidM player card = PlayValid player card Done
+
+-- ist die Runde vorbei und wenn ja, was ist der Stich und wer muß ihn nehmen
+turnOverTrickM :: Game (Maybe (Trick, Player))
+turnOverTrickM = TurnOverTrick Done
 
 tableProcessCommandM :: GameCommand -> Game (Maybe Player)
 tableProcessCommandM (DealHands hands) = 
@@ -92,6 +99,11 @@ tableProcessCommandM (PlayCard player card) =
     do valid <- playValidM player card
        if valid
        then do recordEventM (LegalCardPlayed player card)
+               over <- turnOverTrickM
+               case over of
+                Nothing -> 
+                     do recordEventM (PlayerTurnChanged undefined)
+                Just (trick, trickTaker) -> undefined
                return undefined
        else 
         do recordEventM (IllegalCardAttempted player card)
