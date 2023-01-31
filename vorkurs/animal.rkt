@@ -372,10 +372,12 @@ Siehe: Expression problem
 ; Abstraktion über list-sum und list-product
 (: foo (%neutral (%neutral %neutral -> %neutral) (list-of %a) -> %neutral))
 
-(define list-product
+(check-expect (
+
+(define foo
   (lambda (neutral op list)
     (cond
       ((empty? list) neutral)
       ((cons? list)
        (op (first list)
-           (list-product (rest list)))))))
+           (foo (rest list)))))))
