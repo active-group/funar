@@ -76,9 +76,9 @@
 ; Namensvorschlag: minutes-since-midnight->time
 (: msm->time (natural -> time))
 
-(check-expect (msm->time 683)
+(check-expect (msm->time 743)
               time1)
-(check-expect (msm->time 851)
+(check-expect (msm->time 911)
               time2)
 
 (define msm->time
