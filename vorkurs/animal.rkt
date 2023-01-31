@@ -284,7 +284,7 @@ Siehe: Expression problem
 (define list-product
   (lambda (list)
     (cond
-      ((empty? list) 1)
+      ((empty? list) 1) ; 1 ist das neutrale Element der Multiplikation
       ((cons? list)
        (* (first list)
           (list-product (rest list)))))))
