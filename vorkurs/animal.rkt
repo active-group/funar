@@ -372,7 +372,8 @@ Siehe: Expression problem
 ; Abstraktion über list-sum und list-product
 (: list-reduce (%neutral (%neutral %neutral -> %neutral) (list-of %a) -> %neutral))
 
-(check-expect (
+(check-expect (list-reduce 0 + list4)
+              (list-sum list4))
 
 (define list-reduce
   (lambda (neutral op list)
