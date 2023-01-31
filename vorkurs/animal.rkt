@@ -97,7 +97,7 @@
 
 (define-record dillo
   make-dillo
-  dillo?
+  dillo? ; <- nachträglich eingefügt: Prädikat
   (dillo-alive? boolean)
   (dillo-weight natural))
 
