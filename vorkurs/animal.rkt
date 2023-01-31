@@ -370,14 +370,14 @@ Siehe: Expression problem
              (list-map f (rest list)))))))
 
 ; Abstraktion über list-sum und list-product
-(: foo (%neutral (%neutral %neutral -> %neutral) (list-of %a) -> %neutral))
+(: list-reduce (%neutral (%neutral %neutral -> %neutral) (list-of %a) -> %neutral))
 
 (check-expect (
 
-(define foo
+(define list-reduce
   (lambda (neutral op list)
     (cond
       ((empty? list) neutral)
       ((cons? list)
        (op (first list)
-           (foo (rest list)))))))
+           (list-reduce (rest list)))))))
