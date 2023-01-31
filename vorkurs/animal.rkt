@@ -70,3 +70,6 @@
     (+ (* 60
           (time-hour time))
        (time-minute time))))
+
+; Übung:
+; minutes-since-midnight->time
