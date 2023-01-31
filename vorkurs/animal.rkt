@@ -278,7 +278,7 @@ Siehe: Expression problem
 (define list-product
   (lambda (list)
     (cond
-      ((empty? list) 0)
+      ((empty? list) 1)
       ((cons? list)
        (* (first list)
           (list-product (rest list)))))))
