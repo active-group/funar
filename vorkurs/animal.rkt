@@ -221,3 +221,12 @@ ABER: in beiden Paradigmen gibt es natürlich Lösungen/Muster/Ansätze!
 
 Siehe: Expression problem
 |#
+
+
+
+
+
+
+
+
+
