@@ -370,7 +370,7 @@ Siehe: Expression problem
              (list-map f (rest list)))))))
 
 ; Abstraktion über list-sum und list-product
-(: list-reduce (%neutral (%neutral %neutral -> %neutral) (list-of %a) -> %neutral))
+(: list-reduce (%b (%a %b -> %b) (list-of %a) -> %b))
 
 (check-expect (list-reduce 0 + list4)
               (list-sum list4))
