@@ -353,7 +353,7 @@ Siehe: Expression problem
              (double-all (rest list)))))))
 
 ; Alle Elemente einer Liste "verändern"
-(: list-map ((%a -> %b) (list-of %a) -> (list-of %a)))
+(: list-map ((%a -> %b) (list-of %a) -> (list-of %b)))
 
 (check-expect (list-map (lambda (n) (* n 2)) list4)
               (double-all list4))
