@@ -43,3 +43,6 @@
   (time-hour natural) ; Selektoren
   (time-minute natural))
 
+(define time1 (make-time 12 23))
+(define time2 (make-time 15 11))
+
