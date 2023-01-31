@@ -243,7 +243,7 @@ Siehe: Expression problem
 (define-record cons-list-of-numbers
   cons ; histor. Gründe
   cons?
-  (first element) ; car, cadr, caddr, cadddr, cadadadr
+  (first number) ; car, cadr, caddr, cadddr, cadadadr
   (rest cons-list-of-numbers)) ; cdr
 
 (define list1 (cons 5 empty))
