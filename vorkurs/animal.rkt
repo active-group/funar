@@ -244,6 +244,7 @@ Siehe: Expression problem
   cons ; histor. Gründe
   cons?
   (first number) ; car, cadr, caddr, cadddr, cadadadr
-  (rest cons-list-of-numbers)) ; cdr
+  (rest list-of-numbers)) ; cdr
 
+; 
 (define list1 (cons 5 empty))
