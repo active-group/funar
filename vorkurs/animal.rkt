@@ -134,6 +134,6 @@
       ((dillo-alive? dillo)
        (make-dillo #t (+ amount
                          (dillo-weight dillo))))
-      (t dillo))))
+      (#t dillo))))
 
 
