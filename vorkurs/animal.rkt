@@ -208,7 +208,7 @@ Tradeoffs:
 Präziser:
 
 Neue Fälle (neues Tier):
-- FP wie oben: (Anzahl Fallunterscheidung) Codestellen müssen "angefasst" werden,
+- FP wie oben: (Anzahl Fallunterscheidungen) Codestellen müssen "angefasst" werden,
   nämlich jede Funktion, die (: foo (animal -> x)) erfüllt
 - OOP wie oben: _eine_ Codestelle muss angefasst werden, nämlich
   die neue Klasse
