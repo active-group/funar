@@ -263,7 +263,7 @@ Siehe: Expression problem
 (define list-sum
   (lambda (list)
     (cond
-      ((empty? list) ...)
+      ((empty? list) 0)
       ((cons? list)
        (+ (first list)
           (list-sum (rest list))))))) ; Schablone: rek. Selbstaufruf vor (rest list)
