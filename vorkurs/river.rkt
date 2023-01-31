@@ -49,7 +49,7 @@
        (string=? (creek-origin river)
                  location))
       ((confluence? river)
-       ... (confluence-lcation river)
+       ... (confluence-location river)
        ... (confluence-main-stem river)
        ... (confluence-tributary river)))))
 
