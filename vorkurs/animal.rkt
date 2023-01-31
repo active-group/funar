@@ -380,4 +380,4 @@ Siehe: Expression problem
       ((empty? list) neutral)
       ((cons? list)
        (op (first list)
-           (list-reduce (rest list)))))))
+           (list-reduce neutral op (rest list)))))))
