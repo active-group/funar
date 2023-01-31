@@ -228,9 +228,22 @@ Siehe: Expression problem
 ; Eine Liste ist eins der Folgenden:
 ; - die leere Liste
 ; - eine Cons-Liste, bestehend aus erstem Element und einer Rest-Liste
+(define list-of-numbers
+  (signature (mixed empty-list
+                    cons-list-of-numbers)))
 
+; Die leere Liste....
+(define-singleton empty-list
+  empty ; Konstruktor: "das Singleton"
+  empty?)
 
+; Eine Cons-Liste hat folgende Eigenschaften:
+; - erstes Element
+; - Rest-Liste
+(define-record cons-list-of-numbers
+  cons ; histor. Gründe
+  cons?
+  (first element) ; car, cadr, caddr, cadddr, cadadadr
+  (rest cons-list-of-numbers)) ; cdr
 
-
-
-
+(define list1 (cons 5 empty))
