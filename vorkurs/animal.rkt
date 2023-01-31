@@ -386,7 +386,7 @@ Siehe: Expression problem
            (list-reduce neutral op (rest list)))))))
 
 (list-reduce empty cons list4)
-(cons 6 (cons 5 (cons 3 (cons 4 empty))))
+(cons 5 (cons 6 (cons 3 (cons 4 empty))))
 
 
 
