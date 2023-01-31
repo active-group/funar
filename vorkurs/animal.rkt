@@ -352,4 +352,20 @@ Siehe: Expression problem
        (cons (* 2 (first list))
              (double-all (rest list)))))))
 
+; Alle Elemente einer Liste "verändern"
+(: list-map ((%a -> %a) (list-of %a) -> (list-of %a)))
+
+(check-expect (list-map (lambda (n) (* n 2)) list4)
+              (double-all list4))
+(check-expect (list-map (lambda (s) (string-append s "foo"))
+                        (cons "abc" (cons "def" empty)))
+              (cons "abcfoo" (cons "deffoo" empty)))
+
+(define list-map
+  (lambda (f list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cons (* 2 (first list))
+             (list-map f (rest list)))))))
 
