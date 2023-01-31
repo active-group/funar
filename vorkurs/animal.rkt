@@ -274,6 +274,8 @@ Siehe: Expression problem
 
 (check-expect (list-product list4)
               360)
+(check-expect (list-product empty)
+              1)
 
 (define list-product
   (lambda (list)
