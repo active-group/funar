@@ -336,6 +336,7 @@ Siehe: Expression problem
                  (extract p? (rest list)))
            (extract p? (rest list)))))))
 
-
+; Alle Zahlen einer Liste verdoppeln
+(: double-all (list-of-numbers -> list-of-numbers))
 
 
