@@ -233,6 +233,9 @@ Siehe: Expression problem
   (signature (mixed empty-list
                     (cons-list-of element)))))
 
+(define list-of-numbers
+  (list-of number))
+
 ; Die leere Liste....
 (define-singleton empty-list
   empty ; Konstruktor: "das Singleton"
