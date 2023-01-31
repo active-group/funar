@@ -20,8 +20,8 @@
 
 ; Gerüst zuerst
 #;(define cute?
-  (lambda (pet)
-    ...))
+    (lambda (pet)
+      ...))
 
 ; bei Daten, die Fallunterscheidung sind ->
 ; Fälle unterschiedlich behandeln
@@ -51,5 +51,17 @@
 
 (check-expect (minutes-since-midnight time1)
               743)
-(check-expect (minutes-since-midnight time1)
+(check-expect (minutes-since-midnight time2)
               911)
+
+; Brauchen: Schablone f. zusammengesetzte Daten
+; - müssen Bestandteile anschauen
+#;(define minutes-since-midnight
+    (lambda (time)
+      ... (time-hour time) ... (time-minute time) ...))
+
+(define minutes-since-midnight
+  (lambda (time)
+    (+ (* 60
+          (time-hour time))
+       (time-minute time))))
