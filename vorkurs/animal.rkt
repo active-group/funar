@@ -301,6 +301,15 @@ Siehe: Expression problem
            (cons (first list)
                  (extract-odds (rest list))))))))
 
+(define extract-evens
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (if (odd? (first list))
+           (extract-odds (rest list))
+           (cons (first list)
+                 (extract-odds (rest list))))))))
 
 
 
