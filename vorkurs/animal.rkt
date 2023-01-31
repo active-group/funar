@@ -238,7 +238,7 @@ Siehe: Expression problem
 
 ; Die leere Liste....
 (define-singleton empty-list
-  empty ; Konstruktor: "das Singleton"
+  empty ; kein richtiger Konstruktor: "das Singleton"
   empty?)
 
 ; Eine Cons-Liste hat folgende Eigenschaften:
@@ -318,6 +318,11 @@ Siehe: Expression problem
 ; Signaturvariable
 #;(: extract ((%element -> boolean) (list-of %element)
                                     -> (list-of %element)))
+
+
+
+
+
 
 
 
