@@ -322,6 +322,7 @@ Siehe: Expression problem
 
 (check-expect (extract odd? list4)
               (extract-odds list4))
+(check-expect (extract (lambda (n) (> n 5)) list4))
 
 (define extract
   (lambda (p? list)
