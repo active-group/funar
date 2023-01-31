@@ -370,11 +370,12 @@ Siehe: Expression problem
              (list-map f (rest list)))))))
 
 ; Abstraktion über list-sum und list-product
-(: foo (... ... (list-of %a) ->
+(: foo (... ... (list-of %a) -> ...))
+
 (define list-product
-  (lambda (... ... list)
+  (lambda (neutral ... list)
     (cond
-      ((empty? list) 1) ; 1 ist das neutrale Element der Multiplikation
+      ((empty? list) neutral) ; 1 ist das neutrale Element der Multiplikation
       ((cons? list)
        (* (first list)
           (list-product (rest list)))))))
