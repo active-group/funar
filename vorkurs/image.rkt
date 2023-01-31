@@ -53,7 +53,7 @@
 #|
 class C {
   static int m(int x) {
-      x = x + 1;0
+      x = x + 1;
       ... 17 ...
   }
 
