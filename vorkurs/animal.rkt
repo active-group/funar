@@ -290,7 +290,7 @@ Siehe: Expression problem
 (: extract-odds (list-of-numbers -> list-of-numbers))
 
 ; Signaturvariable
-;(: extract ((%element -> boolean) (list-of %element)
+#;(: extract ((%element -> boolean) (list-of %element)
                                   -> (list-of %element)))
 
 (check-expect (extract-odds list4)
