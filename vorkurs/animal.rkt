@@ -140,4 +140,20 @@
                          (dillo-weight dillo)))
         dillo)))
 
+; Ein Papagei hat folgende Eigenschaften
+; - ein Satz, den er sagen kann
+; - ein Gewicht
+(define-record parrot
+  make-parrot
+  (parrot-sentence string)
+  (parrot-weight number))
+
+; Ein Begrüßungspapagei
+(define parrot1 (make-parrot "Hallo!" 2))
+; Verabschiedungspapagei
+(define parrot2 (make-parrot "Ciao" 1))
+
+
+
+
 
