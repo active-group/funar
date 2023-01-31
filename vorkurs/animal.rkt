@@ -87,4 +87,33 @@
     (make-time (quotient minutes 60)
                (remainder minutes 60))))
 
+; gemischte Daten
+
+; Tiere auf dem texanischen Highway
+; Ein Gürteltier hat folgende Eigenschaften
+; - lebendig oder tot?
+; - Gewicht
+; -> wieder zusammengesetzte Daten
+
+(define-record dillo
+  make-dillo
+  (dillo-alive? boolean)
+  (dillo-weight natural))
+
+(define dillo1 (make-dillo #t 10))
+(define dillo2 (make-dillo #f 5))
+
+; Gürteltier überfahren
+(: run-over-dillo (dillo -> dillo))
+
+(check-expect (run-over-dillo dillo1)
+              (make-dillo #f 10))
+(check-expect (run-over-dillo dillo2)
+              dillo2)
+
+(define run-over-dillo
+  (lambda (dillo)
+    (make-dillo #f
+                (dillo-weight dillo))))
+
 
