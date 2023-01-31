@@ -374,6 +374,8 @@ Siehe: Expression problem
 
 (check-expect (list-reduce 0 + list4)
               (list-sum list4))
+(check-expect (list-reduce empty cons list4)
+              ...)
 
 (define list-reduce
   (lambda (neutral op list)
