@@ -320,7 +320,15 @@ Siehe: Expression problem
 
 ; Gehen so vor wie bei tile (Mike)
 
-
+(define extract
+  (lambda (p? list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (if (odd? (first list))
+           (extract-odds (rest list))
+           (cons (first list)
+                 (extract (rest list))))))))
 
 
 
