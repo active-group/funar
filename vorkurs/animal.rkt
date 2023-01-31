@@ -230,8 +230,8 @@ Siehe: Expression problem
 ; - eine Cons-Liste, bestehend aus erstem Element und einer Rest-Liste
 (define list-of
   (lambda (element)
-  (signature (mixed empty-list
-                    (cons-list-of element)))))
+    (signature (mixed empty-list
+                      (cons-list-of element)))))
 
 (define list-of-numbers
   (list-of number))
@@ -294,7 +294,7 @@ Siehe: Expression problem
 
 ; Signaturvariable
 #;(: extract ((%element -> boolean) (list-of %element)
-                                  -> (list-of %element)))
+                                    -> (list-of %element)))
 
 (check-expect (extract-odds list4)
               (cons 5 (cons 3 empty)))
