@@ -118,8 +118,22 @@
 
 ; Gürteltier füttern
 
+#;(if alive? ; Prädikat
+    3 ; then-Fall
+    5) ; else-Fall
+(: feed-dillo (dillo number -> dillo))
 
+(check-expect (feed-dillo dillo1 3)
+              (make-dillo #t 13))
+(check-expect (feed-dillo dillo2 5)
+              dillo2)
 
-
+(define feed-dillo
+  (lambda (dillo amount)
+    (cond
+      ((dillo-alive? dillo)
+       (make-dillo #t (+ amount
+                         (dillo-weight dillo))))
+      ((not (dillo-alive? dillo)) dillo))))
 
 
