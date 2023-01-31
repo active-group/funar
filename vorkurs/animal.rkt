@@ -192,3 +192,11 @@
       ((dillo? animal) (run-over-dillo animal))
       ((parrot? animal) (run-over-parrot animal)))))
 
+#|
+interface Animal { Animal runOver(); Animal petAnimal(); }
+
+class Dillo implements Animal { @Override Animal runOver(); petAnimal  }
+class Parrot implements Animal { ... }
+
+
+|#
