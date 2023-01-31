@@ -255,6 +255,7 @@ Siehe: Expression problem
 ; Summe der Listenelement ermitteln
 (: list-sum (list-of-numbers -> number))
 
+(check-expect (list-sum empty) 0)
 (check-expect (list-sum list1) 5)
 (check-expect (list-sum list2) 13)
 (check-expect (list-sum list3) 13)
@@ -269,14 +270,18 @@ Siehe: Expression problem
           (list-sum (rest list))))))) ; Schablone: rek. Selbstaufruf vor (rest list)
 
 ; Produkt der Listenelemente
-
 (: list-product (list-of-numbers -> number))
 
 (check-expect (list-product list4)
               360)
 
-
-
+(define list-product
+  (lambda (list)
+    (cond
+      ((empty? list) 0)
+      ((cons? list)
+       (* (first list)
+          (list-product (rest list)))))))
 
 
 
