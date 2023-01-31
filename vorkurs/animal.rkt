@@ -292,10 +292,6 @@ Siehe: Expression problem
 ; Alle ungeraden Zahlen aus einer Liste extrahieren
 (: extract-odds (list-of-numbers -> list-of-numbers))
 
-; Signaturvariable
-#;(: extract ((%element -> boolean) (list-of %element)
-                                    -> (list-of %element)))
-
 (check-expect (extract-odds list4)
               (cons 5 (cons 3 empty)))
 
@@ -319,7 +315,9 @@ Siehe: Expression problem
            (cons (first list)
                  (extract-odds (rest list))))))))
 
-
+; Signaturvariable
+#;(: extract ((%element -> boolean) (list-of %element)
+                                    -> (list-of %element)))
 
 
 
