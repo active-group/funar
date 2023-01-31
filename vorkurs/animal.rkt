@@ -376,6 +376,8 @@ Siehe: Expression problem
               (list-sum list4))
 (check-expect (list-reduce empty cons list4)
               list4)
+(check-expect (list-reduce 1 * list4)
+              (list-product list4))
 
 (define list-reduce
   (lambda (neutral op list)
