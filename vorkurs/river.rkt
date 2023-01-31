@@ -34,7 +34,13 @@
 (define neckar2
   (make-confluence "Epfendorf" neckar1 schlichem))
 
+; Fließt Wasser aus einem best. Ort in einen best. Fluss?
+(: flows-from? (string river -> boolean))
 
+(check-expect (flows-from? "Epfendorf" neckar2)
+              #t)
+(check-expect (flows-from? "Tieringen" neckar1)
+              #f)
 
 
 
