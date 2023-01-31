@@ -202,6 +202,6 @@ class Parrot implements Animal { ... }
 class Snake implements Animal { ... }
 
 Tradeoffs:
-- OOP: neue Fälle einfach, neue Operationen schwer
-- FP: neue Operationen einfach, neue Fälle schwer
+- OOP: neue Fälle einfach, neue Operationen "schwer"
+- FP: neue Operationen einfach, neue Fälle "schwer"
 |#
