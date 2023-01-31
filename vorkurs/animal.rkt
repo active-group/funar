@@ -228,9 +228,10 @@ Siehe: Expression problem
 ; Eine Liste ist eins der Folgenden:
 ; - die leere Liste
 ; - eine Cons-Liste, bestehend aus erstem Element und einer Rest-Liste
-(define list-of-numbers
+(define list-of
+  (lambda (element)
   (signature (mixed empty-list
-                    cons-list-of-numbers)))
+                    (cons-list-of element)))))
 
 ; Die leere Liste....
 (define-singleton empty-list
@@ -240,10 +241,10 @@ Siehe: Expression problem
 ; Eine Cons-Liste hat folgende Eigenschaften:
 ; - erstes Element
 ; - Rest-Liste
-(define-record cons-list-of-numbers
+(define-record (cons-list-of element)
   cons ; histor. Gründe
   cons?
-  (first number) ; car, cadr, caddr, cadddr, cadadadr
+  (first element) ; car, cadr, caddr, cadddr, cadadadr
   (rest list-of-numbers)) ; cdr
 
 ; List mit einem Element
@@ -287,6 +288,10 @@ Siehe: Expression problem
 
 ; Alle ungeraden Zahlen aus einer Liste extrahieren
 (: extract-odds (list-of-numbers -> list-of-numbers))
+
+; Signaturvariable
+(: extract ((%element -> boolean) (list-of %element)
+                                  -> (list-of %element)))
 
 (check-expect (extract-odds list4)
               (cons 5 (cons 3 empty)))
