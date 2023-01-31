@@ -165,7 +165,24 @@
   (lambda (parrot)
     (make-parrot "" (parrot-weight parrot))))
 
+; Ein Tier ist eins der Folgenden
+; - Ein Gürteltier -ODER-
+; - Ein Papagei
+; -> gemischte Daten -> mixed
+(define animal
+  (signature (mixed dillo parrot)))
 
+; Tiere überfahren
+(: run-over-animal (animal -> animal))
+
+(check-expect (run-over-animal dillo1)
+              (run-over-dillo dillo1))
+(check-expect (run-over-animal dillo2)
+              (run-over-dillo dillo2))
+(check-expect (run-over-animal parrot1)
+              (run-over-parrot parrot1))
+(check-expect (run-over-animal parrot2)
+              (run-over-parrot parrot2))
 
 
 
