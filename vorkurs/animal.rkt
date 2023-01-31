@@ -265,8 +265,8 @@ Siehe: Expression problem
     (cond
       ((empty? list) ...)
       ((cons? list)
-       ... (first list)
-       ... (list-sum (rest list)))))) ; Schablone: rek. Selbstaufruf vor (rest list)
+       (+ (first list)
+          (list-sum (rest list)))))) ; Schablone: rek. Selbstaufruf vor (rest list)
 
 
 
@@ -275,3 +275,4 @@ Siehe: Expression problem
 
 
 
+  
