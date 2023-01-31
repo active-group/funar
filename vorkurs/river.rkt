@@ -18,11 +18,6 @@
 (define prim (make-creek "Dreifaltigkeitsberg"))
 (define schlichem (make-creek "Tieringen"))
 
-(define neckar1
-  (make-confluence "Rottweil" eschach prim))
-(define neckar2
-  (make-confluence "Epfendorf" neckar1 schlichem))
-
 ; Ein Zusammenfluss hat folgende Eigenschaften:
 ; - Ort des Zusammenflusses
 ; - Hauptfluss
@@ -33,6 +28,11 @@
   (confluence-location string)
   (confluence-main-stem river) ; Selbstbezug
   (confluence-tributary river)) ; Selbstbezug
+
+(define neckar1
+  (make-confluence "Rottweil" eschach prim))
+(define neckar2
+  (make-confluence "Epfendorf" neckar1 schlichem))
 
 
 
