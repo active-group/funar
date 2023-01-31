@@ -204,4 +204,15 @@ class Snake implements Animal { ... }
 Tradeoffs:
 - OOP: neue Fälle einfach, neue Operationen "schwer"
 - FP: neue Operationen einfach, neue Fälle "schwer"
+
+
+Neue Fälle (neues Tier):
+- FP wie oben: (Anzahl Tiere) Codestellen müssen "angefasst" werden,
+  nämlich jede Funktion, die (: foo (animal -> x)) erfüllt
+- OOP wie oben: _eine_ Codestelle muss angefasst werden, nämlich
+  die neue Klasse
+
+Neue Funktionalität (neue Funktion (animal -> x)):
+- FP wie oben: _eine_ Codestelle muss angefasst werden, nämlich die Funktion
+- OOP wie oben: (Anzahl Tiere) Codestellen müssten angefasst werden
 |#
