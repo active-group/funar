@@ -73,4 +73,4 @@
 
 ; Übung:
 ; Minuten seit Mitternacht rein -> time raus
-; minutes-since-midnight->time
+; Namensvorschlag: minutes-since-midnight->time
