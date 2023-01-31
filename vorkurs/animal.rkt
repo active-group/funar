@@ -43,6 +43,11 @@
   (time-hour natural) ; Selektoren
   (time-minute natural))
 
+; optional: Signaturen für Record-Teile
+(: make-time (natural natural -> time))
+(: time-hour (time -> natural))
+(: time-minute (time -> natural))
+
 (define time1 (make-time 12 23))
 (define time2 (make-time 15 11))
 
