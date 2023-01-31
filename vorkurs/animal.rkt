@@ -339,4 +339,17 @@ Siehe: Expression problem
 ; Alle Zahlen einer Liste verdoppeln
 (: double-all (list-of-numbers -> list-of-numbers))
 
+(check-expect (double-all empty)
+              empty)
+(check-expect (double-all (cons 3 empty))
+              (cons 6 empty))
+
+(define double-all
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cons (* 2 (first list))
+             (double-all (rest list)))))))
+
 
