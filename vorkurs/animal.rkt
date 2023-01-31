@@ -386,3 +386,19 @@ Siehe: Expression problem
            (list-reduce neutral op (rest list)))))))
 
 (list-reduce empty cons list4)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
