@@ -248,7 +248,7 @@ Siehe: Expression problem
   cons ; histor. Gründe
   cons?
   (first element) ; car, cadr, caddr, cadddr, cadadadr
-  (rest list-of-numbers)) ; cdr
+  (rest (list-of element))) ; cdr
 
 ; List mit einem Element
 (define list1 (cons 5 empty))
