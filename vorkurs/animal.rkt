@@ -19,7 +19,7 @@
               #f)
 
 ; Gerüst zuerst
-(define cute?
+#;(define cute?
   (lambda (pet)
     ...))
 
@@ -30,9 +30,9 @@
 (define cute?
   (lambda (pet)
     (cond ; Verzweigung: ein Paar pro Fall
-      ((string=? pet "dog") ...) ; (<Beding> <Erg>)
-      ((string=? pet "snake") ...)
-      ((string=? pet "cat") ...))))
+      ((string=? pet "dog") #t) ; (<Beding> <Erg>)
+      ((string=? pet "snake") #f)
+      ((string=? pet "cat") #t))))
 
 
 
