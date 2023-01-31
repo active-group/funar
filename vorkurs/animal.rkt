@@ -192,7 +192,7 @@
       ((dillo? animal) (run-over-dillo animal))
       ((parrot? animal) (run-over-parrot animal)))))
 
-(define feed-animal ...)
+;(define feed-animal ...)
 
 #|
 interface Animal { Animal runOver(); Animal petAnimal(); }
