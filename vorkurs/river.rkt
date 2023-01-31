@@ -47,13 +47,12 @@
     (cond
       ((creek? river)
        (string=? (creek-origin river)
-                 location)
+                 location))
       ((confluence? river)
        ... (confluence-lcation river)
        ... (confluence-main-stem river)
-       ... (confluence-tributary river))))))
+       ... (confluence-tributary river)))))
 
 
 
 
-  
