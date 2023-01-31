@@ -384,3 +384,5 @@ Siehe: Expression problem
       ((cons? list)
        (op (first list)
            (list-reduce neutral op (rest list)))))))
+
+(list-reduce empty cons list4)
