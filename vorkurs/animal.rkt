@@ -120,8 +120,8 @@
 ; Gürteltier füttern
 
 #;(if alive? ; Prädikat
-    3 ; then-Fall
-    5) ; else-Fall
+      3 ; then-Fall
+      5) ; else-Fall
 (: feed-dillo (dillo number -> dillo))
 
 (check-expect (feed-dillo dillo1 3)
@@ -132,13 +132,13 @@
 (define feed-dillo
   (lambda (dillo amount)
     #;(cond
-      ((dillo-alive? dillo)
-       (make-dillo #t (+ amount
-                         (dillo-weight dillo))))
-      (#t dillo))
+        ((dillo-alive? dillo)
+         (make-dillo #t (+ amount
+                           (dillo-weight dillo))))
+        (#t dillo))
     (if (dillo-alive? dillo)
         (make-dillo #t (+ amount
-                         (dillo-weight dillo)))
+                          (dillo-weight dillo)))
         dillo)))
 
 ; Ein Papagei hat folgende Eigenschaften
@@ -260,7 +260,13 @@ Siehe: Expression problem
 (check-expect (list-sum list3) 13)
 (check-expect (list-sum list4) 18)
 
-
+(define list-sum
+  (lambda (list)
+    (cond
+      ((empty? list) ...)
+      ((cons? list)
+       ... (first list)
+       ... (list-sum (rest list))))))
 
 
 
