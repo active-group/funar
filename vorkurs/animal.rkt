@@ -370,7 +370,7 @@ Siehe: Expression problem
              (list-map f (rest list)))))))
 
 ; Abstraktion über list-sum und list-product
-(: foo (... ... (list-of %a) -> ...))
+(: foo (%neutral (%neutral %neutral -> %neutral) (list-of %a) -> ...))
 
 (define list-product
   (lambda (neutral op list)
