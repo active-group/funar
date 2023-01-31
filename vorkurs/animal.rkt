@@ -316,8 +316,7 @@ Siehe: Expression problem
                  (extract-odds (rest list))))))))
 
 ; Signaturvariable
-#;(: extract ((%element -> boolean) (list-of %element)
-                                    -> (list-of %element)))
+(: extract ((%a -> boolean) (list-of %a) -> (list-of %a)))
 
 
 
