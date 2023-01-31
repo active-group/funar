@@ -223,7 +223,11 @@ Siehe: Expression problem
 |#
 
 
+;; LISTEN
 
+; Eine Liste ist eins der Folgenden:
+; - die leere Liste
+; - eine Cons-Liste, bestehend aus erstem Element und einer Rest-Liste
 
 
 
