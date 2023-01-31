@@ -377,5 +377,5 @@ Siehe: Expression problem
     (cond
       ((empty? list) neutral) ; 1 ist das neutrale Element der Multiplikation
       ((cons? list)
-       (* (first list)
-          (list-product (rest list)))))))
+       (op (first list)
+           (list-product (rest list)))))))
