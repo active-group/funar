@@ -46,6 +46,7 @@
 ; - Kurzbeschreibung
 ; - Signaturdeklaration
 ; - Tests
+; - Funktionsdefinition
 
 ;(tile star1 circle1)
 
