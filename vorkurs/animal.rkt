@@ -373,7 +373,7 @@ Siehe: Expression problem
 (: foo (... ... (list-of %a) -> ...))
 
 (define list-product
-  (lambda (neutral ... list)
+  (lambda (neutral op list)
     (cond
       ((empty? list) neutral) ; 1 ist das neutrale Element der Multiplikation
       ((cons? list)
