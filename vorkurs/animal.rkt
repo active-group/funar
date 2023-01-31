@@ -76,6 +76,7 @@
 ; Namensvorschlag: minutes-since-midnight->time
 (: msm->time (natural -> time))
 
+; hier wird strukturell auf Gleicheit geprüft
 (check-expect (msm->time 743)
               time1)
 (check-expect (msm->time 911)
