@@ -192,11 +192,16 @@
       ((dillo? animal) (run-over-dillo animal))
       ((parrot? animal) (run-over-parrot animal)))))
 
+(define feed-animal ...)
+
 #|
 interface Animal { Animal runOver(); Animal petAnimal(); }
 
 class Dillo implements Animal { @Override Animal runOver(); petAnimal  }
 class Parrot implements Animal { ... }
+class Snake implements Animal { ... }
 
-
+Tradeoffs:
+- OOP: neue Fälle einfach, neue Operationen schwer
+- FP: neue Operationen einfach, neue Fälle schwer
 |#
