@@ -299,7 +299,7 @@ Siehe: Expression problem
        (if (even? (first list))
            (extract-odds (rest list))
            (cons (first list)
-                 (extract-odds list)))))))
+                 (extract-odds (rest list))))))))
 
 
 
