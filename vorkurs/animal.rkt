@@ -366,6 +366,6 @@ Siehe: Expression problem
     (cond
       ((empty? list) empty)
       ((cons? list)
-       (cons (* 2 (first list))
+       (cons (f (first list))
              (list-map f (rest list)))))))
 
