@@ -320,6 +320,9 @@ Siehe: Expression problem
 
 ; Gehen so vor wie bei tile (Mike)
 
+(check-expect (extract odd? list4)
+              (extract-odds list4))
+
 (define extract
   (lambda (p? list)
     (cond
