@@ -205,6 +205,7 @@ Tradeoffs:
 - OOP: neue Fälle einfach, neue Operationen "schwer"
 - FP: neue Operationen einfach, neue Fälle "schwer"
 
+Präziser:
 
 Neue Fälle (neues Tier):
 - FP wie oben: (Anzahl Tiere) Codestellen müssen "angefasst" werden,
@@ -215,4 +216,6 @@ Neue Fälle (neues Tier):
 Neue Funktionalität (neue Funktion (animal -> x)):
 - FP wie oben: _eine_ Codestelle muss angefasst werden, nämlich die Funktion
 - OOP wie oben: (Anzahl Tiere) Codestellen müssten angefasst werden
+
+ABER: in beiden Paradigmen gibt es Lösungen/Muster/Ansätze!
 |#
