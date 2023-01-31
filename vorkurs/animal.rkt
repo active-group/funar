@@ -375,7 +375,7 @@ Siehe: Expression problem
 (define list-product
   (lambda (neutral op list)
     (cond
-      ((empty? list) neutral) ; 1 ist das neutrale Element der Multiplikation
+      ((empty? list) neutral)
       ((cons? list)
        (op (first list)
            (list-product (rest list)))))))
