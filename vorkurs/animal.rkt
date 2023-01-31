@@ -46,3 +46,10 @@
 (define time1 (make-time 12 23))
 (define time2 (make-time 15 11))
 
+; Minuten seit Mitternacht ausrechnen
+(: minutes-since-midnight (time -> natural))
+
+(check-expect (minutes-since-midnight time1)
+              743)
+(check-expect (minutes-since-midnight time1)
+              911)
