@@ -42,6 +42,17 @@
 (check-expect (flows-from? "Tieringen" neckar1)
               #f)
 
+(define flows-from?
+  (lambda (location river)
+    (cond
+      ((creek? river)
+       (string=? (creek-origin river)
+                 location)
+      ((confluence? river)
+       ... (confluence-location river)
+       ... (confluence-main-stem river)
+       ... (confluence-tributary river)))))
+
 
 
 
