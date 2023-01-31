@@ -285,6 +285,22 @@ Siehe: Expression problem
        (* (first list)
           (list-product (rest list)))))))
 
+; Alle ungeraden Zahlen aus einer Liste extrahieren
+(: extract-odds (list-of-numbers -> list-of-numbers))
+
+(check-expect (extract-odds list4)
+              (cons 5 (cons 3 empty)))
+
+(define extract-odds
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (if (even? (first list))
+           (extract-odds (rest list))
+           (cons (first list)
+                 (extract-odds (rest list))))))))
 
 
-  
+
+
