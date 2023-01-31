@@ -325,7 +325,7 @@ Siehe: Expression problem
     (cond
       ((empty? list) empty)
       ((cons? list)
-       (if (odd? (first list))
+       (if (p? (first list))
            (extract-odds (rest list))
            (cons (first list)
                  (extract (rest list))))))))
