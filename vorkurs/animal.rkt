@@ -116,4 +116,10 @@
     (make-dillo #f
                 (dillo-weight dillo))))
 
+; Gürteltier füttern
+
+
+
+
+
 
