@@ -252,9 +252,13 @@ Siehe: Expression problem
 (define list3 (cons 6 (cons 3 (cons 4 empty))))
 (define list4 (cons 5 list3))
 
+; Summe der Listenelement ermitteln
+(: list-sum (list-of-numbers -> number))
 
-
-
+(check-expect (list-sum list1) 5)
+(check-expect (list-sum list2) 13)
+(check-expect (list-sum list3) 13)
+(check-expect (list-sum list4) 18)
 
 
 
