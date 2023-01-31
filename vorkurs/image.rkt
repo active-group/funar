@@ -28,10 +28,30 @@
 ; 2. Unterschiede ersetzen wir durch ("abstrakte") Namen
 ; 3. lambda -> Funktion
 
+; quadratisches Kachelmuster erzeugen
+(: tile (image image -> image))
+
 (define tile
   (lambda (image1 image2)
     (above
      (beside image1 image2)
      (beside image2 image1))))
 
-(tile star1 circle1)
+; Konstruktionsanleitungen:
+; - Kurzbeschreibung
+; - Signaturdeklaration
+; - Tests
+
+;(tile star1 circle1)
+
+#|
+class C {
+  static int m(int x) {
+      x = x + 1;0
+      ... 17 ...
+  }
+
+  ... C.m(17) ...
+}
+
+|#
