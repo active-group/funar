@@ -217,5 +217,5 @@ Neue Funktionalität (neue Funktion (animal -> x)):
 - FP wie oben: _eine_ Codestelle muss angefasst werden, nämlich die Funktion
 - OOP wie oben: (Anzahl Tiere) Codestellen müssten angefasst werden
 
-ABER: in beiden Paradigmen gibt es Lösungen/Muster/Ansätze!
+ABER: in beiden Paradigmen gibt es natürlich Lösungen/Muster/Ansätze!
 |#
