@@ -34,7 +34,12 @@
       ((string=? pet "snake") #f)
       ((string=? pet "cat") #t))))
 
-
-
-
+; Digitaluhr (Uhrzeit) hat folgende Eigenschaften:
+; - Stunde -UND-
+; - Minute
+; zusammengesetzte Daten -> Record
+(define-record time ; Signatur
+  make-time ; Konstruktor
+  (time-hour natural) ; Selektoren
+  (time-minute natural))
 
