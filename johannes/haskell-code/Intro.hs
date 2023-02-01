@@ -208,8 +208,7 @@ allPrimes = let ps = sieve [2..] in ps
     --     sieve :: ....
 
 -- Index eines Elements in einer Liste ermitteln
-listIndex :: a -> [a] -> Integer
+listIndex :: Eq a => a -> [a] -> Integer
 listIndex elem [] = undefined
 listIndex elem (x : xs) =
-    undefined
-    -- if x == elem then undefined else undefined
+    if x == elem then undefined else undefined
