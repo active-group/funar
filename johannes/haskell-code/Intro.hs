@@ -214,8 +214,12 @@ allPrimes = let ps = sieve [2..] in ps
 data Optional a =
     Result a
     | None
+    deriving Show
 
 -- Index eines Elements in einer Liste ermitteln
+-- >>> listIndex "a" ["b", "c", "f"]
+-- No instance for (Show (Optional Integer))
+--   arising from a use of ‘evalPrint’
 listIndex :: Eq a => a -> [a] -> Optional Integer
 listIndex elem [] = None
 listIndex elem (x : xs) =
