@@ -128,9 +128,9 @@ type Percentage = Integer
 
 -- Seifenanteil berechnen
 soapPercentage :: ShowerProduct -> Percentage
-soapPercentage (MkSoap _) = undefined
-soapPercentage (MkShampoo _) = undefined
-soapPercentage MkShowerGel = undefined
+soapPercentage (MkSoap _) = 100
+soapPercentage (MkShampoo _) = 0
+soapPercentage MkShowerGel = 50
 
 -- 1) Datenanalyse + Datendefinition
 -- 2) Funktion, die den Seifenanteil eines Duschprodukts berechnet
