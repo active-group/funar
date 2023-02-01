@@ -120,3 +120,6 @@ feedAnimal parrot amount = parrot { parrotWeight = parrotWeight parrot + amount 
 -- 2) Funktion, die den Seifenanteil eines Duschprodukts berechnet
 -- 3) - weitere Ausprägung: Mixtur aus zwei Duschprodukten, zu beliebigen
 --      Anteilen gemischt
+
+-- Division?
+-- Selbstbezug?
