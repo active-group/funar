@@ -173,3 +173,12 @@ myCons = 2 : [] -- Cons 2 Empty
 listSum :: [Integer] -> Integer
 listSum [] = 0
 listSum (x : xs) = x + listSum xs
+
+
+-- lazy evaluation
+
+-- vs. strikte Evaluation:
+--   Funktionsargumente werden _vor_ dem Aufruf der Funktion ausgewertet
+--   dann erst wird zur Funktion gesprungen
+
+-- in Haskell: Argumente werden erst dann ausgewertet, wenn sie benötigt werden
