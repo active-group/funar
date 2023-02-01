@@ -91,6 +91,7 @@ data Animal =
     -- MkDillo Dillo -> Problem mit nicht-totalen Funktionen umgehen
     MkDillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
   | MkParrot { parrotSentence :: Sentence, parrotWeight :: Weight }
+--   | MkParrot Sentence Weight
   deriving Show
 
 -- Tiere überfahren
