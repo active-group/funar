@@ -200,9 +200,9 @@ sieve [] = []
 sieve (x : xs) = x : (sieve (strikeMultiples x xs))
 
 allPrimes :: [Integer]
-allPrimes = --sieve [2..]
-    let n = 5
-        m = 2 * n
-    in m + 1
+allPrimes = sieve [1..]
+    -- let n = 5
+    --     m = 2 * n
+    -- in m + 1
     -- where
     --     sieve :: ....
