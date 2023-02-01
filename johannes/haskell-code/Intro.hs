@@ -168,6 +168,8 @@ myCons = 2 : [] -- Cons 2 Empty
 -- Listenelemente summieren
 -- >>> listSum [2,3,17]
 -- 22
+-- >>> listSum []
+-- 0
 listSum :: [Integer] -> Integer
 listSum [] = 0
 listSum (x : xs) = x + listSum xs
