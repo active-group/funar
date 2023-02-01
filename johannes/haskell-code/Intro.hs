@@ -198,7 +198,7 @@ strikeMultiples n xs =
 
 -- Sieb der Eratosthenes
 sieve :: [Integer] -> [Integer]
-sieve [] = []
+sieve [] = neutral
 sieve (x : xs) = x : (sieve (strikeMultiples x xs))
 
 allPrimes :: [Integer]
