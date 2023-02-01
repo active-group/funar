@@ -79,16 +79,19 @@ dillo2 = MkDillo { dilloLiveness = Dead, dilloWeight = 5 }
 -- runOverDillo (MkDillo { dilloWeight = weight }) =
 --     MkDillo Dead weight
 
-
 type Sentence = String
+
+data Dillo = MkRawDillo Liveness Weight
 
 -- gemischte Daten:
 -- Ein Tier ist eins der Folgenden:
 -- - Dillo
 -- - Papagei
 data Animal =
-    MkDillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
+    MkDillo Dillo
+    -- MkDillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
   | MkParrot { parrotSentence :: Sentence, parrotWeight :: Weight }
+  | MkSnake
   deriving Show
 
 -- Tiere überfahren
