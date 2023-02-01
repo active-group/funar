@@ -110,3 +110,8 @@ feedAnimal dillo@(MkDillo liveness weight) amount =
         Dead -> dillo
         Alive -> MkDillo Alive (weight + amount)
 feedAnimal parrot amount = parrot { parrotWeight = parrotWeight parrot + amount }
+
+-- Duschprodukt ist eins der Folgenden:
+-- - Seife (hat pH-Wert)
+-- - Shampoo (hat Haartyp)
+-- - Duschgel (50% Seife, 50% Shampoo)
