@@ -182,3 +182,9 @@ listSum (x : xs) = x + listSum xs
 --   dann erst wird zur Funktion gesprungen
 
 -- in Haskell: Argumente werden erst dann ausgewertet, wenn sie "benötigt" werden
+
+
+-- Sieb des Eratosthenes (Primzahlberechnung)
+
+natsFrom :: Integer -> [Integer]
+natsFrom n = n : natsFrom (n+1)
