@@ -9,6 +9,6 @@ y :: Integer
 y = 12 * x + 5
 
 -- Eine Zahl verdoppeln
-f = \ n -> n * 2
+f = \ n -> n * 2 -- \ ist Lambda!
 
 
