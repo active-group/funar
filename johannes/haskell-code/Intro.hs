@@ -150,5 +150,5 @@ soapPercentage (Mixture ratio p1 p2) =
 -- - eine Cons-Liste aus erstem Element und Rest-Liste
 data ListOf a = -- ListOf a -> a ist "Typparameter"
     Empty
-    | Cons Integer (ListOf a)
+    | Cons a (ListOf a)
     deriving Show
