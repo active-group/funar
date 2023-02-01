@@ -35,3 +35,9 @@ isCute Dog = True
 isCute Snake = False
 
 -- g n = 2 * n
+
+-- Ein Gürteltier hat folgende Eigenschaften:
+-- - Gewicht
+-- - Lebenszustand
+data Liveness = Alive | Dead
+    deriving Show
