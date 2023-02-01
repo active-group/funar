@@ -23,6 +23,7 @@ data Pet = Cat | Dog | Snake
 -- Ist ein Haustier niedlich?
 isCute :: Pet -> Bool
 -- 1 Gleichung pro Fall (Racket: eine cond-Klausel pro Fall)
+-- Pattern Matching: matchen auf best. Werte von Pet
 isCute Cat = True
 isCute Dog = True
 isCute Snake = False
