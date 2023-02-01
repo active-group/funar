@@ -122,6 +122,15 @@ data HairType = Curly | Straight
 data ShowerProduct
     = MkSoap PhValue
     | MkShampoo HairType
+    | MkShowerGel -- HairType PhValue
+
+type Percentage = Integer
+
+-- Seifenanteil berechnen
+soapPercentage :: ShowerProduct -> Percentage
+soapPercentage (MkSoap _) = undefined
+soapPercentage (MkShampoo _) = undefined
+soapPercentage MkShowerGel = undefined
 
 -- 1) Datenanalyse + Datendefinition
 -- 2) Funktion, die den Seifenanteil eines Duschprodukts berechnet
