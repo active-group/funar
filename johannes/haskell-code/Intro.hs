@@ -114,7 +114,7 @@ feedAnimal parrot amount = parrot { parrotWeight = parrotWeight parrot + amount 
 -- Duschprodukt ist eins der Folgenden:
 -- - Seife (hat pH-Wert)
 -- - Shampoo (hat Haartyp)
--- - Duschgel (50% Seife, 50% Shampoo)
+-- - Duschgel (_IMMER_ 50% Seife, 50% Shampoo)
 
 -- 1) Datenanalyse + Datendefinition
 -- 2) Funktion, die den Seifenanteil eines Duschprodukts berechnet
