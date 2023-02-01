@@ -53,7 +53,7 @@ type Weight = Integer
 -- data Dillo = MkDillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
 --     deriving Show
 
-dillo1 :: Dillo
+-- dillo1 :: Dillo
 dillo1 = MkDillo Alive 10
 
 dillo2 :: Dillo
