@@ -237,3 +237,8 @@ listIndex elem (x : xs) =
 -- TODO/FIXME: geht das auch eleganter?
 
 -- Typklassen
+
+{-
+Eigenschaften eines Typs -> definiert durch Methoden
+
+-}
