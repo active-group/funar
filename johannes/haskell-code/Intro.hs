@@ -241,7 +241,16 @@ listIndex elem (x : xs) =
 {-
 Eigenschaften eines Typs -> definiert durch Methoden
 
+      v   Typklass
 class Eq a where    -- denk: Interface
     (==) :: a -> a -> Bool
 
 -}
+
+-- brauchen Eq für Pet
+instance Eq Pet where
+    (==) :: Pet -> Pet -> Bool
+    (==) Cat Cat = True
+    (==) Dog Dog = True
+    (==) Snake Snake = True
+    (==) _ _ = False
