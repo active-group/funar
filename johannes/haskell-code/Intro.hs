@@ -196,9 +196,11 @@ strikeMultiples :: Integer -> [Integer] -> [Integer]
 strikeMultiples n xs =
     filter (\ n' -> n' `mod` n /= 0) xs -- /= ist "ungleich"
 
+-- List<Integer>.of()
+
 -- Sieb der Eratosthenes
-sieve :: [Integer] -> [Integer]
-sieve [] = neutral
+-- sieve :: [Integer] -> [Integer]
+sieve [] = [] -- neutral!
 sieve (x : xs) = x : (sieve (strikeMultiples x xs))
 
 allPrimes :: [Integer]
