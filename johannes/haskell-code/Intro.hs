@@ -102,6 +102,6 @@ feedAnimal :: Animal -> Amount -> Animal
 feedAnimal (MkDillo liveness weight) amount =
     -- Fallunterscheidung
     case liveness of
-        Dead -> undefined
-        Alive -> undefined
+        Dead -> MkDillo Dead weight
+        Alive -> MkDillo Alive (weight + amount)
 feedAnimal (MkParrot _ weight) amount = undefined
