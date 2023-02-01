@@ -55,3 +55,6 @@ data Dillo = MkDillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
 
 dillo1 :: Dillo
 dillo1 = MkDillo Alive 10
+
+dillo2 :: Dillo
+dillo2 = MkDillo { dilloLiveness = Dead, dilloWeight = 5 }
