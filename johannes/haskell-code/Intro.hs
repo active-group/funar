@@ -294,3 +294,6 @@ instance Semigroup Integer where
 -- Listentypen bilden eine Halbgruppe unter Listenkonkatenation
 instance Semigroup [a] where
     op xs ys = xs ++ ys -- Listenkonkatenation
+
+-- prakt. Beispiel:
+-- String vs. Text vs. Text.Lazy vs. ByteString vs. ByteString.Lazy ...
