@@ -11,7 +11,11 @@ y = 12 * x + 5
 -- Eine Zahl verdoppeln
 -- (: f (number -> number))
 f :: Integer -> Integer
-f = \ n -> n * 2 -- \ ist Lambda!
+-- f = \ n -> n * 2 -- \ ist Lambda!
+f 0 = 0
+f 1 = 2
+f 2 = 4
+f n = n * 2
 
 -- Ein Haustier ist eins der Folgenden:
 -- - Katze -ODER-
