@@ -89,3 +89,8 @@ type Sentence = String
 data Animal =
     MkDillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
   | MkParrot Sentence Weight
+
+-- Tiere überfahren
+runOverAnimal :: Animal -> Animal
+runOverAnimal (MkDillo _ weight) = MkDillo Dead weight
+runOverAnimal (MkParrot _ weight) = MkParrot "" weight
