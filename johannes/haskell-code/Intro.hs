@@ -218,8 +218,8 @@ data Optional a =
 
 -- Index eines Elements in einer Liste ermitteln
 -- >>> listIndex "a" ["b", "c", "f"]
--- No instance for (Show (Optional Integer))
---   arising from a use of ‘evalPrint’
+-- None
+-- >>> listIndex "a" ["b", "c", "a", "bla"]
 listIndex :: Eq a => a -> [a] -> Optional Integer
 listIndex elem [] = None
 listIndex elem (x : xs) =
