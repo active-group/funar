@@ -327,3 +327,6 @@ instance Monoid [a] where
 -- ??? => Monoid (Optional a)
 
 
+instance Semigroup a => Semigroup (Optional a) where
+    op :: Optional a -> Optional a -> Optional a
+    op (Result a) (Result b) = Result (op a b)
