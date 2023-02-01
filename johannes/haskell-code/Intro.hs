@@ -79,7 +79,7 @@ dillo2 = MkDillo { dilloLiveness = Dead, dilloWeight = 5 }
 -- runOverDillo (MkDillo { dilloWeight = weight }) =
 --     MkDillo Dead weight
 
-data Dillo = MkDillo Liveness Weight
+-- data Dillo = MkDillo Liveness Weight
 
 type Sentence = String
 
@@ -88,6 +88,7 @@ type Sentence = String
 -- - Dillo
 -- - Papagei
 data Animal =
+    -- MkDillo Dillo
     MkDillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
   | MkParrot { parrotSentence :: Sentence, parrotWeight :: Weight }
   deriving Show
