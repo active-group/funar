@@ -134,7 +134,8 @@ soapPercentage MkShowerGel = 50
 
 -- 1) Datenanalyse + Datendefinition
 -- 2) Funktion, die den Seifenanteil eines Duschprodukts berechnet
--- 3) - weitere Ausprägung: Mixtur aus zwei Duschprodukten, zu beliebigen
+-- 3) - weitere Ausprägung von Duschprodukten:
+--      Mixtur aus zwei Duschprodukten, zu beliebigen
 --      Anteilen gemischt
 
 -- Division?
