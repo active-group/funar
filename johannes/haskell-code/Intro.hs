@@ -111,10 +111,17 @@ feedAnimal dillo@(MkDillo liveness weight) amount =
         Alive -> MkDillo Alive (weight + amount)
 feedAnimal parrot amount = parrot { parrotWeight = parrotWeight parrot + amount }
 
+type PhValue = Integer
+
+data HairType = Curly | Straight
+
 -- Duschprodukt ist eins der Folgenden:
 -- - Seife (hat pH-Wert)
 -- - Shampoo (hat Haartyp)
 -- - Duschgel (_IMMER_ 50% Seife, 50% Shampoo)
+data ShowerProduct
+    = MkSoap PhValue
+    | MkShampoo HairType
 
 -- 1) Datenanalyse + Datendefinition
 -- 2) Funktion, die den Seifenanteil eines Duschprodukts berechnet
