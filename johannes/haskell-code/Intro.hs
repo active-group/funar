@@ -297,3 +297,4 @@ instance Semigroup [a] where
 
 -- prakt. Beispiel:
 -- String vs. Text vs. Text.Lazy vs. ByteString vs. ByteString.Lazy ...
+-- "abc" `op` "def" statt (++)
