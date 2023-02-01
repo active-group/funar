@@ -24,6 +24,8 @@ data Pet = Cat | Dog | Snake
 isCute :: Pet -> Bool
 -- 1 Gleichung pro Fall (Racket: eine cond-Klausel pro Fall)
 -- Pattern Matching: matchen auf best. Werte von Pet
+-- Funktionen in Haskell sind _TOTAL_:
+-- - zu jedem Input _muss_ es einen Output geben
 isCute Cat = True
 isCute Dog = True
 -- isCute Snake = False
