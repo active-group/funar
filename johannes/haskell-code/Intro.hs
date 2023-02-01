@@ -41,3 +41,5 @@ isCute Snake = False
 -- - Lebenszustand
 data Liveness = Alive | Dead
     deriving Show
+
+type Weight = Integer
