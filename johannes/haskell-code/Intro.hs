@@ -292,4 +292,4 @@ instance Semigroup Integer where
     op a b = a + b
 
 instance Semigroup [a] where
-    op :: [a] -> [a] -> [a]
+    op xs ys = xs ++ ys -- Listenkonkatenation
