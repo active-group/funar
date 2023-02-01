@@ -314,4 +314,8 @@ instance Monoid [a] where
     neutral :: [a]
     neutral = []
 
+-- Instanzen für:
+-- Semigroup (Optional a)
+-- Monoid (Optional a)
+
 
