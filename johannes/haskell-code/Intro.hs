@@ -341,3 +341,8 @@ instance Semigroup a => Monoid (Optional a) where
     neutral :: Optional a
     -- neutral = Result neutral
     neutral = None
+
+
+optionalToList :: Optional a -> [a]
+optionalToList None = []
+optionalToList (Result x) = [x]
