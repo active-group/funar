@@ -283,8 +283,9 @@ Leider: Gesetze können (noch) nicht auf dem Typlevel ausgedrückt werden
 
 -}
 
-class Semigroup
-
+class Semigroup t where
+    -- Es soll das Assoziativgesetz gelten
+    op :: t -> t -> t
 
 
 
