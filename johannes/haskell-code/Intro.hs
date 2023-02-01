@@ -155,4 +155,4 @@ data ListOf a = -- ListOf a -> a ist "Typparameter"
 
 -- Listen in Haskell: eckige Klammern
 list1 :: [Integer]
-list1 = [5, 6, 7]
+list1 = [5, 6, 7] -- kommasepariert
