@@ -99,3 +99,5 @@ type Amount = Integer
 
 -- Tiere füttern
 feedAnimal :: Animal -> Amount -> Animal
+feedAnimal (MkDillo _ weight) amount = undefined
+feedAnimal (MkParrot _ weight) amount = undefined
