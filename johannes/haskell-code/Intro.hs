@@ -13,7 +13,11 @@ y = 12 * x + 5
 f :: Integer -> Integer
 f = \ n -> n * 2 -- \ ist Lambda!
 
-
+-- Ein Haustier ist eins der Folgenden:
+-- - Katze -ODER-
+-- - Hund -ODER-
+-- - Schlange
+data Pet = Cat | Dog | Snake
 
 
 
