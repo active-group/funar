@@ -148,7 +148,7 @@ soapPercentage (Mixture ratio p1 p2) =
 -- Eine Liste ist eines der Folgenden:
 -- - die leere Liste
 -- - eine Cons-Liste aus erstem Element und Rest-Liste
-data ListOfNumbers =
+data ListOf a =
     Empty
-    | Cons Integer ListOfNumbers
+    | Cons Integer (ListOf a)
     deriving Show
