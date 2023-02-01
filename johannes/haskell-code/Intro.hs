@@ -337,6 +337,6 @@ instance Semigroup a => Semigroup (Optional a) where
     op None res = res
     op (Result a) None = Result a
 
-instance Monoid (Optional a) where
+instance Semigroup a => Monoid (Optional a) where
     neutral :: Optional a
     neutral = None
