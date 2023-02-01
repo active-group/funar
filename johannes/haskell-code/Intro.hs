@@ -5,6 +5,7 @@ module Intro where
 x :: Integer -- feste Typen: groß, Werte klein
 x = 7
 
+y :: Integer
 y = 12 * x + 5
 
 
