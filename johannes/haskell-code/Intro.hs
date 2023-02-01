@@ -205,7 +205,7 @@ sieve :: Integral a => [a] -> [a]
 sieve [] = neutral -- neutral!
 sieve (x : xs) = x : (sieve (strikeMultiples x xs))
 
-allPrimes :: [Integer]
+allPrimes :: Integral a => [Integer]
 allPrimes = let ps = sieve [2..] in ps
     -- let n = 5
     --     m = 2 * n
