@@ -220,5 +220,8 @@ listIndex :: Eq a => a -> [a] -> Optional Integer
 listIndex elem [] = None
 listIndex elem (x : xs) =
     if x == elem
-        then Result 0
-        else undefined
+    then Result 0
+    else
+        case listIndex elem xs of
+            None -> None
+            Result index -> Result (index + 1)
