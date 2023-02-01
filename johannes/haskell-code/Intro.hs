@@ -288,5 +288,5 @@ class Semigroup t where
     -- Es soll das Assoziativgesetz gelten
     op :: t -> t -> t
 
-
-
+instance Semigroup Integer where
+    op a b = a + b
