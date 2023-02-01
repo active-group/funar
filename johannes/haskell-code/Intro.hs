@@ -216,7 +216,7 @@ data Optional a =
     | None
 
 -- Index eines Elements in einer Liste ermitteln
-listIndex :: Eq a => a -> [a] -> Integer
-listIndex elem [] = -1
+listIndex :: Eq a => a -> [a] -> Optional Integer
+listIndex elem [] = None
 listIndex elem (x : xs) =
     if x == elem then undefined else undefined
