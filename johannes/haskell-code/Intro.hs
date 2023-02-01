@@ -99,7 +99,8 @@ type Amount = Integer
 
 -- Tiere füttern
 feedAnimal :: Animal -> Amount -> Animal
-feedAnimal (MkDillo liveness weight) amount =
+-- Alias-Pattern
+feedAnimal dillo@(MkDillo liveness weight) amount =
     -- Fallunterscheidung
     case liveness of
         Dead -> MkDillo Dead weight
