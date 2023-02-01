@@ -201,3 +201,5 @@ sieve (x : xs) = x : (sieve (strikeMultiples x xs))
 
 allPrimes :: [Integer]
 allPrimes = sieve [2..]
+    -- where
+    --     sieve :: ....
