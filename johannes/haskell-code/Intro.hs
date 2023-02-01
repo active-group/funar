@@ -79,7 +79,6 @@ dillo2 = MkDillo { dilloLiveness = Dead, dilloWeight = 5 }
 -- runOverDillo (MkDillo { dilloWeight = weight }) =
 --     MkDillo Dead weight
 
-
 type Sentence = String
 
 -- gemischte Daten:
