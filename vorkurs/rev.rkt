@@ -88,8 +88,8 @@
 (define map-tail-rec*
   (lambda (f list acc)
     (cond
-      ((empty? acc) (rev acc))
-      ((cons? acc)
+      ((empty? list) (rev acc))
+      ((cons? list)
        (map-tail-rec*
         f
         (rest list)
