@@ -28,6 +28,6 @@ isCute :: Pet -> Bool
 -- - zu jedem Input _muss_ es einen Output geben
 isCute Cat = True
 isCute Dog = True
--- isCute Snake = False
+isCute Snake = False
 
 
