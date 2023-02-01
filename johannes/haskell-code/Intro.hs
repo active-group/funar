@@ -97,7 +97,7 @@ data Animal =
 
 -- Tiere überfahren
 runOverAnimal :: Animal -> Animal
-runOverAnimal (MkDillo _ weight) = MkDillo Dead weight
+runOverAnimal (MkDillo (MkRawDillo _ weight)) = MkDillo Dead weight
 runOverAnimal (MkParrot _ weight) = MkParrot "" weight
 
 type Amount = Integer
