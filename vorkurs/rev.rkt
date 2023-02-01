@@ -74,7 +74,24 @@
 
 ; list-map, list-reduce, extract endrekursiv schreiben
 
+; Funktion auf alle Elemente einer Liste anwenden
+(: map-tail-rec ((%a -> %b) (list-of %a) -> (list-of %a)))
 
+(check-expect (map-tail-rec (lambda (n) (+ n 2))
+                            (list 1 2 3 4))
+              (list 3 4 5 6))
 
+(define map-tail-rec
+  (lambda (f list)
+    (map-tail-rec* f list empty)))
 
-
+(define map-tail-rec*
+  (lambda (f list acc)
+    (cond
+      ((empty? acc) (rev acc))
+      ((cons? acc)
+       (map-tail-rec*
+        f
+        (rest list)
+        (cons (f (first list))
+              acc))))))
