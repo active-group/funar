@@ -188,3 +188,8 @@ listSum (x : xs) = x + listSum xs
 
 natsFrom :: Integer -> [Integer]
 natsFrom n = n : natsFrom (n+1)
+
+-- Vielfache einer Zahl streichen
+strikeMultiples :: Integer -> [Integer] -> [Integer]
+strikeMultiples n xs =
+    filter undefined xs
