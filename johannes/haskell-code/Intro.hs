@@ -233,3 +233,5 @@ listIndex elem (x : xs) =
         case listIndex elem xs of
             None -> None
             Result index -> Result (index + 1)
+
+-- TODO/FIXME: geht das auch eleganter?
