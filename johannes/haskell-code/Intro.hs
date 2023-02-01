@@ -291,5 +291,6 @@ class Semigroup t where
 instance Semigroup Integer where
     op a b = a + b
 
+-- Listentypen bilden eine Halbgruppe unter Listenkonkatenation
 instance Semigroup [a] where
     op xs ys = xs ++ ys -- Listenkonkatenation
