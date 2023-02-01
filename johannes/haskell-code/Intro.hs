@@ -192,4 +192,4 @@ natsFrom n = n : natsFrom (n+1)
 -- Vielfache einer Zahl streichen
 strikeMultiples :: Integer -> [Integer] -> [Integer]
 strikeMultiples n xs =
-    filter (\ n' -> n' `mod` n /= 0) xs
+    filter (\ n' -> n' `mod` n /= 0) xs -- /= ist "ungleich"
