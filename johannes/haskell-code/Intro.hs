@@ -167,5 +167,5 @@ myCons = 2 : [] -- Cons 2 Empty
 
 -- Listenelemente summieren
 listSum :: [Integer] -> Integer
-listSum [] = undefined
-listSum (x : xs) = undefined
+listSum [] = 0
+listSum (x : xs) = x + listSum xs
