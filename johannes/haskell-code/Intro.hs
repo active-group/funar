@@ -193,3 +193,8 @@ natsFrom n = n : natsFrom (n+1)
 strikeMultiples :: Integer -> [Integer] -> [Integer]
 strikeMultiples n xs =
     filter (\ n' -> n' `mod` n /= 0) xs -- /= ist "ungleich"
+
+-- Sieb der Eratosthenes
+sieve :: [Integer] -> [Integer]
+sieve [] = []
+sieve (x : xs) = x : (sieve (strikeMultiples x xs))
