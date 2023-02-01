@@ -287,6 +287,7 @@ Leider: Gesetze können (noch) nicht auf dem Typlevel ausgedrückt werden
 class Semigroup t where
     -- Es soll das Assoziativgesetz gelten
     op :: t -> t -> t
+    -- (<>) :: t -> t -> t
 
 -- Implementierung von Semigroup für den Typ Integer
 instance Semigroup Integer where
@@ -314,6 +315,7 @@ class Semigroup t => Monoid t where
 instance Monoid [a] where
     neutral :: [a]
     neutral = []
+    -- eingebaut: mempty
 
 -- Instanzen für:
 -- Semigroup (Optional a)
