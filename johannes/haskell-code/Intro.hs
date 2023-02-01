@@ -50,8 +50,8 @@ type Weight = Integer
 -- >>> :t MkDillo
 -- MkDillo :: Liveness -> (Weight -> Dillo)
 -- Geschw. Klammern sind Spezialsyntax für Records
-data Dillo = MkDillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
-    deriving Show
+-- data Dillo = MkDillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
+--     deriving Show
 
 dillo1 :: Dillo
 dillo1 = MkDillo Alive 10
