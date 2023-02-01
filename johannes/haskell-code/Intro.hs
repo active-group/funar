@@ -8,6 +8,7 @@ x = 7
 y :: Integer
 y = 12 * x + 5
 
-
+-- Eine Zahl verdoppeln
+f = \ n -> n * 2
 
 
