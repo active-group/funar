@@ -207,8 +207,16 @@ allPrimes = let ps = sieve [2..] in ps
     -- where
     --     sieve :: ....
 
+-- algebraische Datentypen
+-- Ein optionaler Wert ist entweder
+-- - vorhanden ("der Wert")
+-- - nicht vorhanden ("kein Wert")
+data Optional a =
+    Result a
+    | None
+
 -- Index eines Elements in einer Liste ermitteln
 listIndex :: Eq a => a -> [a] -> Integer
-listIndex elem [] = undefined
+listIndex elem [] = -1
 listIndex elem (x : xs) =
     if x == elem then undefined else undefined
