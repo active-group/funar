@@ -157,5 +157,10 @@ data ListOf a = -- ListOf a -> a ist "Typparameter"
 list1 :: [Integer]
 list1 = [5, 6, 7] -- kommasepariert
 
+-- die leere Liste
 emptyList :: [a]
 emptyList = []
+
+-- Cons?
+myCons = 2 : [] -- Cons 2 Empty
+-- myCons = [2]
