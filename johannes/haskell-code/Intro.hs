@@ -88,8 +88,7 @@ type Sentence = String
 -- - Dillo
 -- - Papagei
 data Animal =
-    Dillo
-    -- MkDillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
+    MkDillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
   | MkParrot { parrotSentence :: Sentence, parrotWeight :: Weight }
   deriving Show
 
