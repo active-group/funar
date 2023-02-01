@@ -18,7 +18,7 @@ f = \ n -> n * 2 -- \ ist Lambda!
 -- - Hund -ODER-
 -- - Schlange
 data Pet = Cat | Dog | Snake
-    deriving Show
+    deriving Show  -- denkt: toString()
 
 
 
