@@ -123,7 +123,7 @@ data ShowerProduct
     = MkSoap PhValue
     | MkShampoo HairType
     | MkShowerGel -- HairType PhValue
-    | Mixture ShowerProduct ShowerProduct Percentage
+    | Mixture Percentage ShowerProduct ShowerProduct
 
 type Percentage = Integer
 
