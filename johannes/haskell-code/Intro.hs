@@ -68,4 +68,4 @@ runOverDillo :: Dillo -> Dillo
 
 -- runOverDillo dillo = MkDillo Dead (dilloWeight dillo)
 runOverDillo (MkDillo Alive weight) = MkDillo Dead weight
-runOverDillo (MkDillo Dead weight) = MkDillo Dead weight
+runOverDillo dillo = dillo
