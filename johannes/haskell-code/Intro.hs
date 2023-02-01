@@ -151,3 +151,4 @@ soapPercentage (Mixture ratio p1 p2) =
 data ListOfNumbers =
     Empty
     | Cons Integer ListOfNumbers
+    deriving Show
