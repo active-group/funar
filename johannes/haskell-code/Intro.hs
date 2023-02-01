@@ -52,5 +52,3 @@ type Weight = Integer
 -- Geschw. Klammern sind Spezialsyntax für Records
 data Dillo = MkDillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
     deriving Show
-
-g :: Integer -> Integer -> 
