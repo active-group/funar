@@ -343,6 +343,7 @@ instance Semigroup a => Monoid (Optional a) where
     neutral = None
 
 
+-- Monoidhomomorphismus, strukturerhaltende Abbildung zw. Monoiden
 optionalToList :: Optional a -> [a]
 optionalToList None = []
 optionalToList (Result x) = [x]
