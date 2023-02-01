@@ -290,3 +290,6 @@ class Semigroup t where
 
 instance Semigroup Integer where
     op a b = a + b
+
+instance Semigroup Integer where
+    op a b = a * b
