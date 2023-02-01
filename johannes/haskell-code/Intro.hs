@@ -20,6 +20,11 @@ f = \ n -> n * 2 -- \ ist Lambda!
 data Pet = Cat | Dog | Snake
     deriving Show  -- denkt: toString()
 
-
+-- Ist ein Haustier niedlich?
+isCute :: Pet -> Bool
+-- 1 Gleichung pro Fall (Racket: eine cond-Klausel pro Fall)
+isCute Cat = True
+isCute Dog = True
+isCute Snake = False
 
 
