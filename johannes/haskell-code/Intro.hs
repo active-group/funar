@@ -277,5 +277,6 @@ Leider: Gesetze können (noch) nicht auf dem Typlevel ausgedrückt werden
                        a `op` (b `op` c) == (a `op` b) `op` c
 
                        Bsp.: a + (b + c) == (a + b) + c
+-> Halbgruppe
 
 -}
