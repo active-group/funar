@@ -1,6 +1,8 @@
 {-# LANGUAGE InstanceSigs #-}
 module Intro where
 
+import Prelude hiding (Semigroup(..), Monoid(..))
+
 -- Signatur:
 x :: Integer -- feste Typen: groß, Werte klein
 x = 7
@@ -280,3 +282,9 @@ Leider: Gesetze können (noch) nicht auf dem Typlevel ausgedrückt werden
 -> Halbgruppe
 
 -}
+
+class Semigroup
+
+
+
+
