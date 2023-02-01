@@ -219,4 +219,6 @@ data Optional a =
 listIndex :: Eq a => a -> [a] -> Optional Integer
 listIndex elem [] = None
 listIndex elem (x : xs) =
-    if x == elem then undefined else undefined
+    if x == elem
+        then Result 0
+        else undefined
