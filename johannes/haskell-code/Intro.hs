@@ -26,6 +26,6 @@ isCute :: Pet -> Bool
 -- Pattern Matching: matchen auf best. Werte von Pet
 isCute Cat = True
 isCute Dog = True
-isCute Snake = False
+-- isCute Snake = False
 
 
