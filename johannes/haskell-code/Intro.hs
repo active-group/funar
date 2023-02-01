@@ -206,3 +206,6 @@ allPrimes = let ps = sieve [2..] in ps
     -- in m + 1
     -- where
     --     sieve :: ....
+
+-- Index eines Elements in einer Liste ermitteln
+listIndex :: a -> [a] -> Integer
