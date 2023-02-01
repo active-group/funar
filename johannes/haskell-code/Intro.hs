@@ -216,10 +216,14 @@ data Optional a =
     | None
     deriving Show
 
+-- eingebaut!
+data Maybe a = Just a | Nothing
+
 -- Index eines Elements in einer Liste ermitteln
 -- >>> listIndex "a" ["b", "c", "f"]
 -- None
 -- >>> listIndex "a" ["b", "c", "a", "bla"]
+-- Result 2
 listIndex :: Eq a => a -> [a] -> Optional Integer
 listIndex elem [] = None
 listIndex elem (x : xs) =
