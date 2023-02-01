@@ -247,6 +247,9 @@ class Eq a where    -- denk: Interface
 
 -}
 
+class Eq a where    -- denk: Interface
+    (==) :: a -> a -> Bool
+
 -- brauchen Eq für Pet
 instance Eq Pet where
     (==) :: Pet -> Pet -> Bool
