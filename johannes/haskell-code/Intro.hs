@@ -105,4 +105,4 @@ feedAnimal dillo@(MkDillo liveness weight) amount =
     case liveness of
         Dead -> dillo
         Alive -> MkDillo Alive (weight + amount)
-feedAnimal (MkParrot _ weight) amount = undefined
+feedAnimal parrot amount = parrot { parrotWeight = parrotWeight parrot + amount }
