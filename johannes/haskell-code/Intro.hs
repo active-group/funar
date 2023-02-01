@@ -144,3 +144,10 @@ soapPercentage (Mixture ratio p1 p2) =
 
 -- Division?
 -- Selbstbezug?
+
+-- Eine Liste ist eines der Folgenden:
+-- - die leere Liste
+-- - eine Cons-Liste aus erstem Element und Rest-Liste
+data ListOfNumbers =
+    Empty
+    | Cons Integer ListOfNumbers
