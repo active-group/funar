@@ -47,5 +47,10 @@ type Weight = Integer
 -- MkDillo == make-dillo : Daten-Konstruktor
 -- dilloLiveness == dillo-alive? : Selektor, Accessor
 -- dilloWeight == dillo-weight
+-- >>> :t MkDillo
+-- MkDillo :: Liveness -> (Weight -> Dillo)
+-- Geschw. Klammern sind Spezialsyntax für Records
 data Dillo = MkDillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
     deriving Show
+
+g :: Integer -> Integer -> 
