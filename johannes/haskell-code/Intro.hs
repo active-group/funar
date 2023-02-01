@@ -34,4 +34,4 @@ isCute Cat = True
 isCute Dog = True
 isCute Snake = False
 
-
+-- g n = 2 * n
