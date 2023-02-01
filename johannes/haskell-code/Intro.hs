@@ -78,3 +78,8 @@ runOverDillo :: Dillo -> Dillo
 -- runOverDillo (MkDillo { dilloLiveness = _, dilloWeight = weight }) =
 runOverDillo (MkDillo { dilloWeight = weight }) =
     MkDillo Dead weight
+
+-- gemischte Daten:
+-- Ein Tier ist eins der Folgenden:
+-- - Dillo
+-- - Papagei
