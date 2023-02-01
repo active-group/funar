@@ -295,6 +295,7 @@ instance Semigroup Integer where
 
 -- Listentypen bilden eine Halbgruppe unter Listenkonkatenation
 instance Semigroup [a] where
+    op :: [a] -> [a] -> [a]
     op xs ys = xs ++ ys -- Listenkonkatenation
 
 -- prakt. Beispiel:
