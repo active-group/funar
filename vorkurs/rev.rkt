@@ -72,6 +72,9 @@
 ; Scala: @tailrec
 ; Clojure: loop / recur
 
+; list-map, list-reduce, extract endrekursiv schreiben
+
+
 
 
 
