@@ -44,5 +44,8 @@ data Liveness = Alive | Dead
 
 type Weight = Integer
 
+-- MkDillo == make-dillo : Daten-Konstruktor
+-- dilloLiveness == dillo-alive? : Selektor, Accessor
+-- dilloWeight == dillo-weight
 data Dillo = MkDillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
     deriving Show
