@@ -323,7 +323,7 @@ instance Monoid [a] where
     -- eingebaut: mempty
 
 -- Instanzen für:
--- Semigroup a => Semigroup (Optional a)
+-- instance Semigroup a => Semigroup (Optional a) where
 -- Monoid (Optional a)
 
 
