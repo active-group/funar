@@ -152,3 +152,7 @@ data ListOf a = -- ListOf a -> a ist "Typparameter"
     Empty
     | Cons a (ListOf a)
     deriving Show
+
+-- Listen in Haskell: eckige Klammern
+list1 :: [Integer]
+list1 = [5, 6, 7]
