@@ -198,3 +198,6 @@ strikeMultiples n xs =
 sieve :: [Integer] -> [Integer]
 sieve [] = []
 sieve (x : xs) = x : (sieve (strikeMultiples x xs))
+
+allPrimes :: [Integer]
+allPrimes = sieve [2..]
