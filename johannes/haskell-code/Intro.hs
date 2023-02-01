@@ -192,7 +192,8 @@ natsFrom :: Integer -> [Integer]
 natsFrom n = n : natsFrom (n+1)
 
 -- Vielfache einer Zahl streichen
-strikeMultiples :: Integer -> [Integer] -> [Integer]
+-- strikeMultiples :: Integer -> [Integer] -> [Integer]
+strikeMultiples :: Integral a => a -> [a] -> [a]
 strikeMultiples n xs =
     filter (\ n' -> n' `mod` n /= 0) xs -- /= ist "ungleich"
 
@@ -200,6 +201,7 @@ strikeMultiples n xs =
 
 -- Sieb der Eratosthenes
 -- sieve :: [Integer] -> [Integer]
+sieve :: Integral a => [a] -> [a]
 sieve [] = neutral -- neutral!
 sieve (x : xs) = x : (sieve (strikeMultiples x xs))
 
