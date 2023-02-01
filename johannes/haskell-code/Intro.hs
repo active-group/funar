@@ -164,3 +164,8 @@ emptyList = []
 -- Cons?
 myCons = 2 : [] -- Cons 2 Empty
 -- myCons = [2]
+
+-- Listenelemente summieren
+listSum :: [Integer] -> Integer
+listSum [] = undefined
+listSum (x : xs) = undefined
