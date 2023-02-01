@@ -88,7 +88,7 @@ type Sentence = String
 -- - Dillo
 -- - Papagei
 data Animal =
-    -- MkDillo Dillo
+    -- MkDillo Dillo -> Problem mit nicht-totalen Funktionen umgehen
     MkDillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
   | MkParrot { parrotSentence :: Sentence, parrotWeight :: Weight }
   deriving Show
