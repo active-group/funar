@@ -301,3 +301,17 @@ instance Semigroup [a] where
 -- String vs. Text vs. Text.Lazy vs. ByteString vs. ByteString.Lazy ...
 -- "abc" `op` "def" statt (++)
 
+
+-- ein Monoid ist eine Halbgruppe mit
+-- - neutralem Element:
+-- - op neutral x == op x neutral == x
+-- - (+) 0 x == x == x + 0
+
+class Semigroup t => Monoid t where
+    neutral :: t
+
+instance Monoid [a] where
+    neutral :: [a]
+    neutral = []
+
+
