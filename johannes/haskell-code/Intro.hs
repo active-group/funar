@@ -81,7 +81,8 @@ dillo2 = MkDillo { dilloLiveness = Dead, dilloWeight = 5 }
 
 type Sentence = String
 
-data Dillo = MkRawDillo Liveness Weight
+data Dillo = MkRawDillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
+    deriving Show
 
 -- gemischte Daten:
 -- Ein Tier ist eins der Folgenden:
