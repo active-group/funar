@@ -211,4 +211,5 @@ allPrimes = let ps = sieve [2..] in ps
 listIndex :: a -> [a] -> Integer
 listIndex elem [] = undefined
 listIndex elem (x : xs) =
-    if x == elem then undefined else undefined
+    undefined
+    -- if x == elem then undefined else undefined
