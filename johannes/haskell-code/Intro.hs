@@ -324,6 +324,6 @@ instance Monoid [a] where
 
 -- Instanzen für:
 -- instance Semigroup a => Semigroup (Optional a) where
--- Monoid (Optional a)
+-- ??? => Monoid (Optional a)
 
 
