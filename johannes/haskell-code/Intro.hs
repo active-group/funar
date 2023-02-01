@@ -94,3 +94,8 @@ data Animal =
 runOverAnimal :: Animal -> Animal
 runOverAnimal (MkDillo _ weight) = MkDillo Dead weight
 runOverAnimal (MkParrot _ weight) = MkParrot "" weight
+
+type Amount = Integer
+
+-- Tiere füttern
+feedAnimal :: Animal -> Amount -> Animal
