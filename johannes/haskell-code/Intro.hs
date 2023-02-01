@@ -283,6 +283,7 @@ Leider: Gesetze können (noch) nicht auf dem Typlevel ausgedrückt werden
 
 -}
 
+-- Definition einer Halbgruppe
 class Semigroup t where
     -- Es soll das Assoziativgesetz gelten
     op :: t -> t -> t
