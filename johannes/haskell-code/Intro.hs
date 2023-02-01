@@ -288,7 +288,9 @@ class Semigroup t where
     -- Es soll das Assoziativgesetz gelten
     op :: t -> t -> t
 
+-- Implementierung von Semigroup für den Typ Integer
 instance Semigroup Integer where
+    op :: Integer -> Integer -> Integer
     op a b = a + b
 
 -- Listentypen bilden eine Halbgruppe unter Listenkonkatenation
@@ -298,3 +300,4 @@ instance Semigroup [a] where
 -- prakt. Beispiel:
 -- String vs. Text vs. Text.Lazy vs. ByteString vs. ByteString.Lazy ...
 -- "abc" `op` "def" statt (++)
+
