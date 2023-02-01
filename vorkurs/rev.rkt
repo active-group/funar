@@ -88,6 +88,8 @@
 (define map-tail-rec*
   (lambda (f list acc)
     (cond
+      ; Invariante: acc enthält die bereits gesehenen Elemente,
+      ; auf die f angewendet wurde, aber in umgekehrter Reihenfolge
       ((empty? list) (rev acc))
       ((cons? list)
        (map-tail-rec*
