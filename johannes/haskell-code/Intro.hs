@@ -235,3 +235,5 @@ listIndex elem (x : xs) =
             Result index -> Result (index + 1)
 
 -- TODO/FIXME: geht das auch eleganter?
+
+-- Typklassen
