@@ -132,6 +132,8 @@ soapPercentage :: ShowerProduct -> Percentage
 soapPercentage (MkSoap _) = 100
 soapPercentage (MkShampoo _) = 0
 soapPercentage MkShowerGel = 50
+soapPercentage (Mixture ratio p1 p2) =
+    (soapPercentage p1) / 100 + soapPercentage p2
 
 -- 1) Datenanalyse + Datendefinition
 -- 2) Funktion, die den Seifenanteil eines Duschprodukts berechnet
