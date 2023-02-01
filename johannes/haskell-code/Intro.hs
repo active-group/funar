@@ -254,3 +254,28 @@ instance Eq Pet where
     (==) Dog Dog = True
     (==) Snake Snake = True
     (==) _ _ = False
+
+{-
+
+Sinnvoll: Typklassen für _universelle_ Abstraktionen/Konzepte
+
+- Show: "ausprinten"
+- Eq: Gleichheit
+- Ord: (totale) Ordnung
+- Num: "Zahlen mit Operationen"
+
+Algebra:
+- Typ T
+- Operationen (Methoden) mit Signaturen
+- Gesetze/Gleichungen
+
+Leider: Gesetze können (noch) nicht auf dem Typlevel ausgedrückt werden
+
+- Typ T
+- Operation:    op :: T -> T -> T ("binäre Operation")
+  Assoziativgesetz:    op a (op b c) == op (op a b) c
+                       a `op` (b `op` c) == (a `op` b) `op` c
+
+                       Bsp.: a + (b + c) == (a + b) + c
+
+-}
