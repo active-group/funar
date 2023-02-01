@@ -53,13 +53,13 @@ type Weight = Integer
 -- data Dillo = MkDillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
 --     deriving Show
 
--- dillo1 :: Dillo
+dillo1 :: Animal
 dillo1 = MkDillo Alive 10
 
-dillo2 :: Dillo
+dillo2 :: Animal
 dillo2 = MkDillo { dilloLiveness = Dead, dilloWeight = 5 }
 
-runOverDillo :: Dillo -> Dillo
+-- runOverDillo :: Dillo -> Dillo
 -- weiß noch nicht, was ich hinschreiben soll? -> undefined
 -- >>> runOverDillo dillo1
 -- MkDillo {dilloLiveness = Dead, dilloWeight = 10}
@@ -76,8 +76,8 @@ runOverDillo :: Dillo -> Dillo
 
 -- _ : "don't care"
 -- runOverDillo (MkDillo { dilloLiveness = _, dilloWeight = weight }) =
-runOverDillo (MkDillo { dilloWeight = weight }) =
-    MkDillo Dead weight
+-- runOverDillo (MkDillo { dilloWeight = weight }) =
+--     MkDillo Dead weight
 
 
 type Sentence = String
