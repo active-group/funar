@@ -181,4 +181,4 @@ listSum (x : xs) = x + listSum xs
 --   Funktionsargumente werden _vor_ dem Aufruf der Funktion ausgewertet
 --   dann erst wird zur Funktion gesprungen
 
--- in Haskell: Argumente werden erst dann ausgewertet, wenn sie benötigt werden
+-- in Haskell: Argumente werden erst dann ausgewertet, wenn sie "benötigt" werden
