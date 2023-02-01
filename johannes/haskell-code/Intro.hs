@@ -58,3 +58,7 @@ dillo1 = MkDillo Alive 10
 
 dillo2 :: Dillo
 dillo2 = MkDillo { dilloLiveness = Dead, dilloWeight = 5 }
+
+runOverDillo :: Dillo -> Dillo
+-- weiß noch nicht, was ich hinschreiben soll? -> undefined
+runOverDillo dillo = undefined
