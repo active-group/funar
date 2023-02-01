@@ -99,5 +99,9 @@ type Amount = Integer
 
 -- Tiere füttern
 feedAnimal :: Animal -> Amount -> Animal
-feedAnimal (MkDillo _ weight) amount = undefined
+feedAnimal (MkDillo liveness weight) amount =
+    -- Fallunterscheidung
+    case liveness of
+        Dead -> undefined
+        Alive -> undefined
 feedAnimal (MkParrot _ weight) amount = undefined
