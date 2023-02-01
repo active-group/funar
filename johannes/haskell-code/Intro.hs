@@ -72,4 +72,6 @@ runOverDillo :: Dillo -> Dillo
 -- runOverDillo dillo = dillo
 
 -- functional update syntax
-runOverDillo dillo = dillo { dilloLiveness = Dead }
+-- runOverDillo dillo = dillo { dilloLiveness = Dead }
+
+runOverDillo (MkDillo { dilloLiveness = Dead, dilloWeight = 5 }) = undefined
