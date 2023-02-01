@@ -241,4 +241,7 @@ listIndex elem (x : xs) =
 {-
 Eigenschaften eines Typs -> definiert durch Methoden
 
+class Eq a where    -- denk: Interface
+    (==) :: a -> a -> Bool
+
 -}
