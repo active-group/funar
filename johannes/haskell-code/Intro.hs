@@ -334,6 +334,5 @@ instance Semigroup a => Semigroup (Optional a) where
     -- op None (Result a) = None
     -- op (Result a) None = None
     -- op _ _ = None
-    op None (Result a) = Result a
+    op None res = res
     op (Result a) None = Result a
-    op None None = None
