@@ -215,3 +215,5 @@ execDB dbProgram = do
 
 -- TODO: Optional?
 -- Functor?
+
+runMonad :: (Monad m, Monad m') => m a -> m' a
