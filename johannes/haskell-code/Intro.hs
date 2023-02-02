@@ -376,4 +376,10 @@ instance Mappable [] where
     mmap = listMap
 
 instance Mappable Optional where
+    mmap :: (a -> b) -> Optional a -> Optional b
     mmap = optionalMap
+
+-- >>> mmap (2*) (Result 5)
+-- Result 10
+-- >>> mmap (5*) [2,3]
+-- [10,15]
