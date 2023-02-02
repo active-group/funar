@@ -87,6 +87,8 @@ instance Monad Game where
     (>>=) (Return value) next = next value
     (>>=) (IsCardValid player card callback) next =
         IsCardValid player card (\ value -> (>>=) (callback value) next)
+    (>>=) (RecordEvent event callback) next =
+        RecordEvent event (\ value -> (>>=) (callback value) next)
 
 -- _ein_ Command abarbeiten
 tableProcessCommand :: GameCommand -> Game (Maybe Player)
