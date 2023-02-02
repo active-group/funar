@@ -138,6 +138,7 @@ instance Monad DB where
 runDB :: Map String Int -> DB a -> a
 runDB m (Get key callback) =
     let value = m ! key
+     in runDB m (callback value)
 
 runDB m (Put key value callback) =
     let newMap = Map.insert key value m
