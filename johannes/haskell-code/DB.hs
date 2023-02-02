@@ -6,7 +6,9 @@ module DB where
 {-
 
   put "Johannes" 36
-  x = get "Johannes"
+  x = get "Johannes"       oben: DB Int
+
+  -- Int -> DB String
   put "Johannes" (x + 1)
   y = get "Johannes"
   return (show (x + y))      show ist toString()
@@ -60,4 +62,7 @@ put key value = Put key value (\ result -> Return result)
 -- ....
 
 -- Datenbankprogramme "verbinden"/"aneinanderkleben"
-foo :: DB a -> DB b -> DB (a, b)
+foo :: DB a -> (a -> DB b) -> DB (a, b)   -- Tupel
+foo (Get key callback) next = undefined
+foo (Put key value callback) next = undefined
+foo (Return value) next = undefined
