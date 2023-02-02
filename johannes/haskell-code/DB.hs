@@ -80,3 +80,7 @@ p1' = splice (put "Johannes" 36) (\ _ ->
       splice (put "Johannes" (x + 1)) (\ _ ->
       splice (get "Johannes") (\ y ->
       Return (show (x + y))))))
+
+--          v  Typkonstruktor
+class Monad m where
+    bind :: m a -> (a -> m b) -> m b
