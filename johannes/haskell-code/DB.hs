@@ -147,3 +147,6 @@ runDB m (Put key value callback) =
      in runDB newMap (callback ())
 
 runDB m (Return value) = (value, m)
+
+
+-- mit der echten Welt reden!!!
