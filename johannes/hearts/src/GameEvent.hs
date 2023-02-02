@@ -142,6 +142,8 @@ tableLoopM :: GameCommand -> Game Player
 tableLoopM command = do
     maybeWinner <- tableProcessCommand command
     case maybeWinner of
-        Nothing -> undefined
+        Nothing -> do
+            nextCommand <- getNextCommand
+            tableLoopM nextCommand
         Just winner ->
             return winner
