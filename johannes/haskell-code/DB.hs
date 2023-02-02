@@ -1,7 +1,7 @@
 {-# LANGUAGE InstanceSigs #-}
 module DB where
 
-import Data.Map (Map)
+import Data.Map (Map, (!))
 import qualified Data.Map as Map
 
 -- Key-Value-Store: String -> Int
@@ -136,7 +136,8 @@ instance Monad DB where
 -- Datenbankprogramm ausführen
 -- "Echte Datenbank + Ablauf -> Ergebnis"
 runDB :: Map String Int -> DB a -> a
-runDB m (Get key callback) = undefined
+runDB m (Get key callback) =
+    let value = m ! key
 
 runDB m (Put key value callback) =
     let newMap = Map.insert key value m
