@@ -50,3 +50,6 @@ get key = Get key (\ value -> Return value)
 -- einen einzelnen Wert in die DB schreiben
 put :: String -> Int -> DB ()   -- hier kommt nichts Sinnvolles zurück -> Seiteneffekt
 put key value = Put key value (\ result -> Return result)
+
+return :: a -> DB a
+return = Return
