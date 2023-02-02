@@ -46,3 +46,7 @@ p1 = Put "Johannes" 36 (\ _ ->
 -- einen einzelnen Wert aus der DB abrufen
 get :: String -> DB Int
 get key = Get key (\ value -> Return value)
+
+-- einen einzelnen Wert in die DB schreiben
+put :: String -> Int -> DB ()   -- hier kommt nichts Sinnvolles zurück -> Seiteneffekt
+put key = Get key (\ value -> Return value)
