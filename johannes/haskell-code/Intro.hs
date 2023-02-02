@@ -389,5 +389,5 @@ instance Mappable Optional where
 -- Mappable ist eingebaut: Functor
 
 --            v   der Funktor ist der Typkonstruktor
-class Functor f where
-    fmap :: (a -> b) -> f a -> f b
+-- class Functor f where
+--     fmap :: (a -> b) -> f a -> f b
