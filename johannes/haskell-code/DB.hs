@@ -170,6 +170,7 @@ greet = do
 -- Datenrepräsentation für SQLite-DB-Inhalt
 data Entry = MkEntry String Int
 
+-- wie lese ich eine Zeile aus der DB in `Entry` ein?
 instance FromRow Entry where
     fromRow :: RowParser Entry
     fromRow = do
@@ -177,6 +178,7 @@ instance FromRow Entry where
         value <- field
         return (MkEntry key value)
 
+-- wie transformiere ich `Entry` in DB-schreibbares Format?
 instance ToRow Entry where
     toRow :: Entry -> [SQLData]
     toRow (MkEntry key value) =
