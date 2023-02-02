@@ -229,6 +229,7 @@ execDB dbProgram = do
 --     (>>=) (Just a) next = next a
 --     (>>=) Nothing _ = Nothing
 
+opt :: Maybe String
 opt = do
     a <- Just "hallo"
     b <- Just "johannes"
