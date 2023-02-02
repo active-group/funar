@@ -1,75 +1,126 @@
-module Cards where
+-- Das französische Blatt
+module Cards(Suit(..), Rank(..), Card(..),
+             deck, cardBeats,
+             Player(..), 
+             Hand, makeHand, emptyHand, isHandEmpty, containsCard, removeCard, handCards,
+             Trick(..), emptyTrick,  trickEmpty, addToTrick, cardsOfTrick, leadingCardOfTrick,
+             Pile, emptyPile, pileEmpty, pileAddTrick, pileCards,
+             allSuits, allRanks)
+where
 
 import qualified Data.Set as Set
 import Data.Set (Set)
 
+import qualified Data.Map.Strict as Map
+import Data.Map.Strict (Map, (!))
+
 data Suit = Diamonds | Clubs | Spades | Hearts
   deriving (Show, Eq, Ord)
 
--- |list of all suits
+-- |Liste aller Farben
 allSuits :: [Suit]
 allSuits = [Spades, Hearts, Diamonds, Clubs]
 
-data Rank = Numeric Integer | Jack | Queen | King | Ace
+data Rank = Two | Three | Four | Five | Six | Seven | Eight | Nine | Ten
+         | Jack | Queen | King | Ace
   deriving (Show, Eq, Ord)
 
--- |rankBeats r1 r2 returns True, if r1 beats r2
-rankBeats :: Rank -> Rank -> Bool
-rankBeats r1 r2 = r1 > r2
-
--- |list of all ranks
+-- |Liste aller Werte
 allRanks :: [Rank]
-allRanks = [Numeric i | i <- [2..10]] ++ [Jack, Queen, King, Ace]
+allRanks = [Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, 
+            Jack, Queen, King, Ace]
 
--- |playing cards
+-- |Spielkarte
 data Card = Card { suit :: Suit, rank :: Rank }
   deriving (Show, Eq, Ord)
 
--- |cardBeats c1 c2 returns True, if c1 beats c2: they have the same suit and c1's rank is higher
-cardBeats :: Card -> Card -> Bool
-cardBeats givenCard c = suit givenCard == suit c
-                        && rankBeats (rank givenCard)
-                                     (rank c)
+-- |Eine Karte kann nur eine andere Karte gleicher Farbe nach Wert schlagen
+cardBeats :: Card -> Card -> Maybe Bool
+cardBeats c1 c2 = 
+  if suit c1 == suit c2
+  then Just (rank c1 > rank c2)
+  else Nothing
 
--- |full deck of all cards
+cartesianProduct :: [a] -> [b] -> [(a, b)]
+cartesianProduct list1 list2 =
+  concat (map (\ el1 -> map (\ el2 -> (el1, el2)) list2) list1)
+
+-- |Das ganze Kartenspiel
 deck :: [Card]
-deck = [Card suit rank | rank <- allRanks, suit <- allSuits]
+deck = map (uncurry Card) (cartesianProduct allSuits allRanks)
 
+-- |Karten, die jemand auf der Hand hält
+newtype Hand = Hand { unHand :: Set Card }
+  deriving (Eq, Show)
 
--- |during the game, a hand contains at least one card
-type Hand = Set Card
+makeHand :: [Card] -> Hand
+makeHand cards = Hand (Set.fromList cards)
 
--- |does a hand contain zero cards?
+handCards :: Hand -> [Card]
+handCards (Hand set) = Set.toList set
+
+-- |Ist die Hand leer?
 isHandEmpty :: Hand -> Bool
-isHandEmpty hand = Set.null hand
+isHandEmpty hand = Set.null (unHand hand)
 
--- |does a hand contain a specific card?
+-- |Enthält die Hand eine spezifische Karte?
 containsCard :: Card -> Hand -> Bool
-containsCard card hand = Set.member card hand
+containsCard card hand = Set.member card (unHand hand)
 
--- |remove a card from a hand
+-- |Karte aus der Hand entfernen
 removeCard :: Card -> Hand -> Hand
-removeCard card hand = Set.delete card hand
+removeCard card hand = Hand (Set.delete card (unHand hand))
 
--- |empty hand
+-- |Leere Hand
 emptyHand :: Hand
-emptyHand = Set.empty
+emptyHand = Hand Set.empty
 
--- |pretty-print card rank
-prettyRank :: Rank -> String
-prettyRank (Numeric i) = show i
-prettyRank r = show r
+-- Spieler
 
--- |pretty-print card suit
-prettySuit :: Suit -> String
-prettySuit s = show s
+data Player = Player { playerName :: String }
+  deriving (Show, Eq, Ord)
 
--- |pretty-print card
-prettyCard :: Card -> String
-prettyCard c = prettyRank (rank c) ++ " of " ++ prettySuit (suit c)
+-- * Stich
 
--- |pretty-print list of cards
-prettyCards :: [Card] -> String
-prettyCards [] = ""
-prettyCards [x] = prettyCard x
-prettyCards (x:xs) = prettyCard x ++ " and\n" ++ prettyCards xs
+-- Zuletzt gespielte Karte zuerst
+newtype Trick = Trick { trickToList :: [(Player, Card)] }
+  deriving (Show, Eq)
+
+-- leeren Stich herstellen
+emptyTrick :: Trick
+emptyTrick = Trick []
+
+--- ist Stich leer
+trickEmpty :: Trick -> Bool
+trickEmpty (Trick list) = null list
+
+-- alle Karten desStich
+cardsOfTrick :: Trick -> [Card]
+cardsOfTrick (Trick list) = map snd list
+
+-- Karte auf den Stich legen
+addToTrick :: Player -> Card -> Trick -> Trick
+addToTrick player card (Trick list) = Trick ((player, card) : list)
+
+-- die Karte des Stich, die bedient werden muß
+leadingCardOfTrick :: Trick -> Card
+leadingCardOfTrick (Trick list) = snd (last list)
+
+-- Haufen aufgenommener Karten
+newtype Pile = Pile { unPile :: Set Card }
+  deriving Show
+
+emptyPile :: Pile
+emptyPile = Pile Set.empty
+
+pileEmpty :: Pile -> Bool
+pileEmpty pile = Set.null (unPile pile)
+
+-- Stich auf den Haufen legen
+pileAddTrick :: Pile -> Trick -> Pile
+pileAddTrick pile trick =
+  Pile (Set.union (unPile pile) (Set.fromList (cardsOfTrick trick)))
+
+pileCards :: Pile -> [Card]
+pileCards pile = Set.toList (unPile pile)
+
