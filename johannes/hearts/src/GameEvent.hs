@@ -43,3 +43,17 @@ type GameId = String
 --     = PlayCard Player Card
 --     | DealHands (Map Player Hand)
 --     deriving (Eq, Show)
+
+data GameEvent
+  = HandDealt Player Hand
+  | PlayerTurnChanged Player
+  | LegalCardPlayed Player Card
+  | TrickTaken Player Trick
+  | IllegalCardAttempted Player Card
+  | GameEnded Player
+  deriving (Eq, Show)
+
+data GameCommand
+    = PlayCard Player Card
+    | DealHands (Map Player Hand)
+    deriving (Eq, Show)
