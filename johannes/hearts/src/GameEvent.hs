@@ -70,6 +70,7 @@ data Game a
     | RecordEvent GameEvent (() -> Game a)
     | TurnOverTrick (Maybe (Trick, Player) -> Game a)
     | PlayerAfter Player (Player -> Game a)
+    | IsGameOver (Maybe Player -> Game a)
     | Return a
 
 playerAfter :: Player -> Game Player
@@ -83,6 +84,8 @@ recordEvent event = RecordEvent event Return
 
 turnOverTrickM :: Game (Maybe (Trick, Player))
 turnOverTrickM = TurnOverTrick Return
+
+isGameOverM = IsGameOver Return
 
 instance Functor Game where
 instance Applicative Game where
