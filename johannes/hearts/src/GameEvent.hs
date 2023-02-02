@@ -118,7 +118,7 @@ tableProcessCommand (PlayCard player card) = do
                     recordEvent (PlayerTurnChanged nextPlayer)
                     return Nothing
                 Just (trick, trickTaker) -> do
-                    recordEvent (TrickTaken trick trickTaker)
+                    recordEvent (TrickTaken trickTaker trick)
                     undefined
         else do
             recordEvent (IllegalCardAttempted player card)
