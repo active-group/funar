@@ -30,4 +30,4 @@ module DB where
 -- gescheitert :(
 
 data DB a =
-    Get String (String -> b)
+    Get String (Int -> b)
