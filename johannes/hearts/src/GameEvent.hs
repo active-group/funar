@@ -140,4 +140,8 @@ tableProcessCommand (PlayCard player card) = do
 -- Gesamtes Spiel ablaufen lassen
 tableLoopM :: GameCommand -> Game Player
 tableLoopM command = do
-    undefined
+    maybeWinner <- tableProcessCommand command
+    case maybeWinner of
+        Nothing -> undefined
+        Just winner ->
+            return winner
