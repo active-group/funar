@@ -198,3 +198,6 @@ execDB :: DB a -> IO a
 execDB dbProgram = do
     conn <- open "entries.db"
     execute_ conn "create table if not exists entries (key text primary key, value integer)"
+    result <- runDBAsSQLite conn dbProgram
+    close conn
+    return result
