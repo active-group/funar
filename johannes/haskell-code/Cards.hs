@@ -18,6 +18,9 @@ data Rank = Two | Three | Four | Five | Six | Seven | Eight | Nine | Ten | Jack 
 data Card = MkCard Suit Rank
     deriving (Eq, Show)
 
+allValues :: (Enum a, Bounded a) => [a]
+allValues = [minBound .. maxBound]
+
 allCards :: [Card]
 allCards = undefined
 
