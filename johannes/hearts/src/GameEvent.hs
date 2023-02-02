@@ -117,7 +117,9 @@ tableProcessCommand (PlayCard player card) = do
                     nextPlayer <- playerAfter player
                     recordEvent (PlayerTurnChanged nextPlayer)
                     return Nothing
-                Just (trick, trickTaker) -> undefined
+                Just (trick, trickTaker) -> do
+                    recordEvent (TrickTaken trick trickTaker)
+                    undefined
         else do
             recordEvent (IllegalCardAttempted player card)
             return Nothing
