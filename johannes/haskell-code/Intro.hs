@@ -352,13 +352,19 @@ optionalToList (Result x) = [x]
 -- Funktion auf Listenelemente anwenden
 -- >>> listMap (\ n -> n * 17) [2..5]
 -- [34,51,68,85]
-listMap :: (a -> b) -> [a] -> [b]
+-- listMap :: (a -> b) -> [a] -> [b]
+listMap :: (a -> b) -> List a -> List b
 listMap _ [] = []
 listMap f (x : xs) =
     f x : listMap f xs
 
 type List a = [a]
 
+-- listMap ::  (a -> b) -> List     a -> List     b
 optionalMap :: (a -> b) -> Optional a -> Optional b
 optionalMap _ None = None
 optionalMap f (Result a) = Result (f a)
+
+-- Typen, über die ich mappen kann
+class Mappable m where
+    mmap :: (a -> b) -> m a -> m b
