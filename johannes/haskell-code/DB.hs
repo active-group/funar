@@ -138,4 +138,4 @@ instance Monad DB where
 runDB :: Map String Int -> DB a -> a
 runDB m (Get key callback) = undefined
 runDB m (Put key value callback) = undefined
-runDB m (Return value) = undefined
+runDB m (Return value) = value
