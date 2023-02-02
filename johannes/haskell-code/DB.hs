@@ -184,6 +184,7 @@ instance ToRow Entry where
     toRow (MkEntry key value) =
         toRow (key, value)
 
+-- Gegeben eine Verbindung zur SQLite-DB, führe ein Programm "in IO" aus
 runDBAsSQLite :: Connection -> DB a -> IO a
 runDBAsSQLite conn (Get key callback) = do
     -- OverloadedStrings macht aus SQL-Text ein "Query"-Objekt
