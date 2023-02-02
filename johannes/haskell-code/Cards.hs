@@ -25,7 +25,7 @@ allValues = [minBound .. maxBound]
 allCards = do
     rank <- allValues
     suit <- allValues
-    -- return (MkCard rank suit)
+    return (MkCard rank suit)
 
 -- type Card = (Farbe, Wert)
 -- data Card = MkCard
