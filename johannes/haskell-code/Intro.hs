@@ -356,3 +356,7 @@ listMap :: (a -> b) -> [a] -> [b]
 listMap _ [] = []
 listMap f (x : xs) =
     f x : listMap f xs
+
+optionalMap :: (a -> b) -> Optional a -> Optional b
+optionalMap _ None = None
+optionalMap f (Result a) = Result (f a)
