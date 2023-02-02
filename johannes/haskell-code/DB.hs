@@ -216,4 +216,5 @@ execDB dbProgram = do
 -- TODO: Optional?
 -- Functor?
 
+-- Natürliche Transformationen    (m  ~>  m')
 runMonad :: (Monad m, Monad m') => m a -> m' a
