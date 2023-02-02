@@ -27,6 +27,7 @@ type GameId = String
 data GameEvent
     = GameStarted GameId
     | RoundStarted
-    | StartingPlayerSelected Player
     | HandsDistributed (Map Player Hand)
+    | StartingPlayerSelected Player
+    | CardPlayed Player Card
     deriving (Eq, Show)
