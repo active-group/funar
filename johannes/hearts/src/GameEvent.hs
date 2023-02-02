@@ -73,3 +73,4 @@ tableProcessCommand (DealHands playerHands) = undefined
 tableProcessCommand (PlayCard player card) = do
     -- Daniel: müssen wir nicht erst prüfen, ob Karten ausgeteilt wurden?
     canPlay <- isCardValid player card
+    undefined
