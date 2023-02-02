@@ -198,6 +198,8 @@ runDBAsSQLite conn (Put key value callback) = do
 
 runDBAsSQLite conn (Return value) = return value -- a -> IO a
 
+-- Lege DB an falls nötig, erstelle Tabelle falls nötig,
+-- dann führe Programm aus
 execDB :: DB a -> IO a
 execDB dbProgram = do
     conn <- open "entries.db"
