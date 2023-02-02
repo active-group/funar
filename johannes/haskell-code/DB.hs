@@ -121,6 +121,7 @@ p1'' = do
 -- class Monad m where
 --     -- bind :: m a -> (a -> m b) -> m b
 --     (>>=) :: m a -> (a -> m b) -> m b
+--     return :: a -> m a
 
 instance Functor DB where
     -- Übung
@@ -168,4 +169,4 @@ greet = do
 runDBAsSQLite :: Connection -> DB a -> IO a
 runDBAsSQLite conn (Get key callback) = undefined
 runDBAsSQLite conn (Put key value callback) = undefined
-runDBAsSQLite conn (Return value) = value
+runDBAsSQLite conn (Return value) = return value -- a -> IO a
