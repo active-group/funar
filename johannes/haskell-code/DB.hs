@@ -65,4 +65,4 @@ put key value = Put key value (\ result -> Return result)
 foo :: DB a -> (a -> DB b) -> DB (a, b)   -- Tupel
 foo (Get key callback) next = undefined
 foo (Put key value callback) next = undefined
-foo (Return value) next = undefined
+foo (Return value) next = next value
