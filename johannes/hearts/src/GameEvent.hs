@@ -57,3 +57,8 @@ data GameCommand
     = PlayCard Player Card
     | DealHands (Map Player Hand)
     deriving (Eq, Show)
+
+
+
+
+-- Spielablauf modellieren
