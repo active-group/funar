@@ -127,3 +127,8 @@ instance Monad DB where
 
     return :: a -> DB a
     return = Return
+
+-- wollen was "Echtes" machen mit DB!
+
+-- Datenbankprogramm ausführen
+runDB :: Map String Int -> DB a -> a
