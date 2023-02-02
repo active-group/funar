@@ -154,3 +154,10 @@ runDB m (Return value) = (value, m)
 --             v   IO-Monade
 helloWorld :: IO ()
 helloWorld = putStrLn "Hello world"
+
+-- in IO geht do-Notation (weil es Monade ist)
+greet :: IO ()
+greet = do
+    putStr "Wie heißt du? "
+    name <- getLine
+    putStrLn ("Hello " <> name)
