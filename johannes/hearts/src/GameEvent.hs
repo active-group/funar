@@ -28,4 +28,5 @@ data GameEvent
     = GameStarted GameId
     | RoundStarted
     | StartingPlayerSelected Player
+    | HandsDistributed (Map Player Hand)
     deriving (Eq, Show)
