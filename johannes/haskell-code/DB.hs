@@ -133,3 +133,4 @@ instance Monad DB where
 -- Datenbankprogramm ausführen
 -- "Echte Datenbank + Ablauf -> Ergebnis"
 runDB :: Map String Int -> DB a -> a
+runDB = undefined
