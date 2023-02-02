@@ -30,4 +30,5 @@ data GameEvent
     | HandsDistributed (Map Player Hand)
     | StartingPlayerSelected Player
     | CardPlayed Player Card
+    | TrickCompleted Trick
     deriving (Eq, Show)
