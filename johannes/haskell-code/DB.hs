@@ -136,7 +136,7 @@ instance Monad DB where
 -- Datenbankprogramm ausführen
 -- "Echte Datenbank + Ablauf -> Ergebnis"
 -- runDB :: Map String Int -> DB a -> a
-runDB :: Map String Int -> DB a -> (a, Map String Int)
+runDB :: Map String Int -> DB a -> (a, Map String Int) -- Endzustand der "Datenbank" kommt mit zurück
 runDB m (Get key callback) =
     let value = m ! key
      in runDB m (callback value)
