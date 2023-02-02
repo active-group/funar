@@ -4,6 +4,9 @@ module DB where
 import Data.Map (Map, (!))
 import qualified Data.Map as Map
 
+import Database.SQLite.Simple
+import Database.SQLite.Simple.FromRow
+
 -- Key-Value-Store: String -> Int
 
 
