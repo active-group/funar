@@ -32,4 +32,4 @@ module DB where
 -- DB beschreibt ein Datenbankprogramm / einen Ablauf mit Ergebnis vom Typ a
 data DB a =
     Get String (Int -> DB a)
-  | Put String Int (() -> DB a)     -- () ist "Unit"
+  | Put String Int (() -> DB a)     -- () ist "Unit" (void)
