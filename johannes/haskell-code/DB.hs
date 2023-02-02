@@ -34,6 +34,7 @@ data DB a =
     Get String (Int -> DB a)
   | Put String Int (() -> DB a)     -- () ist "Unit" (void)
   | Return a
+  deriving Show
 
 p1 :: DB String
 p1 = Put "Johannes" 36 (\ _ ->
