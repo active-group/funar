@@ -12,3 +12,11 @@ module DB where
   return (show (x + y))      show ist toString()
 
 -}
+
+
+-- erster Versuch: Datentypen
+
+data DBCommand =
+    Put String Int
+  | Get String
+  | Return String
