@@ -346,3 +346,10 @@ instance Semigroup a => Monoid (Optional a) where
 optionalToList :: Optional a -> [a]
 optionalToList None = []
 optionalToList (Result x) = [x]
+
+------- TAG 3
+
+listMap :: (a -> b) -> [a] -> [b]
+listMap _ [] = []
+listMap f (x : xs) =
+    f x : listMap f xs
