@@ -69,3 +69,5 @@ data Game a
 
 -- _ein_ Command abarbeiten
 tableProcessCommand :: GameCommand -> Game (Maybe Player)
+tableProcessCommand (DealHands playerHands) = undefined
+tableProcessCommand (PlayCard player card) = undefined
