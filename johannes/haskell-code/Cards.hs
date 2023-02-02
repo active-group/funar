@@ -41,3 +41,5 @@ cartesianProduct = undefined
 
 -- 3 Funktion: schlägt eine Karte eine andere?
 --   (Karten anderer Farbe sind nicht vergleichbar)
+
+-- cardBeats :: Card -> Card -> Bool
