@@ -87,6 +87,8 @@ p1' = splice (put "Johannes" 36) (\ _ ->
 --     -- bind :: m a -> (a -> m b) -> m b
 --     (>>=) :: m a -> (a -> m b) -> m b
 
+instance Applicative DB where
+
 instance Monad DB where
     (>>=) :: DB a -> (a -> DB b) -> DB b
     (>>=) = splice
