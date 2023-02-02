@@ -56,6 +56,7 @@ put key value = Put key value (\ result -> Return result)
 
 -- put "Johannes" 36
 -- x = get "Johannes"
+-- put "Johannes" (x + 1)
 -- ....
 
 -- Datenbankprogramme "verbinden"/"aneinanderkleben"
