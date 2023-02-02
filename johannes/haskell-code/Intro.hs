@@ -349,6 +349,9 @@ optionalToList (Result x) = [x]
 
 ------- TAG 3
 
+-- Funktion auf Listenelemente anwenden
+-- >>> listMap (\ n -> n * 17) [2..5]
+-- [34,51,68,85]
 listMap :: (a -> b) -> [a] -> [b]
 listMap _ [] = []
 listMap f (x : xs) =
