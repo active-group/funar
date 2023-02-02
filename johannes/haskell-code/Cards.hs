@@ -9,6 +9,9 @@ module Cards where
 --   Wert (Rank) (2 bis Ass) (Jack, Queen, King, Ace)
 --   Karte  
 
+data Suit = Clubs | Spades | Hearts | Diamonds
+    deriving Show
+
 -- type Card = (Farbe, Wert)
 -- data Card = MkCard
 
