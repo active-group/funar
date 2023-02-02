@@ -377,6 +377,8 @@ instance Mappable [] where
 
 instance Mappable Optional where
     mmap :: (a -> b) -> Optional a -> Optional b
+    -- mmap f opt = optionalMap f opt
+    -- mmap f = optionalMap f
     mmap = optionalMap
 
 -- >>> mmap (2*) (Result 5)
