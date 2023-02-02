@@ -67,6 +67,7 @@ data GameCommand
 -- Spielablauf als Daten (wie DB)
 data Game a
     = IsCardValid Player Card (Bool -> Game a)
+    | RecordEvent GameEvent (() -> Game a)
     | Return a
 
 isCardValid :: Player -> Card -> Game Bool
