@@ -82,6 +82,7 @@ splice (Return value) next = next value
 --       splice (get "Johannes") (\ y ->
 --       Return (show (x + y))))))
 
+-- mit >>= statt splice
 p1' :: DB String
 p1' = put "Johannes" 36 >>= (\ _ ->
       get "Johannes" >>= (\ x ->
