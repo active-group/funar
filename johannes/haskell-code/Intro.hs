@@ -366,6 +366,7 @@ optionalMap _ None = None
 optionalMap f (Result a) = Result (f a)
 
 -- Typen, über die ich mappen kann
+--             v    Typkonstruktor
 class Mappable m where
     mmap :: (a -> b) -> m a -> m b
 
