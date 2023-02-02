@@ -167,6 +167,7 @@ greet = do
     name <- getLine
     putStrLn ("Hello " <> name)
 
+-- Datenrepräsentation für SQLite-DB-Inhalt
 data Entry = MkEntry String Int
 
 instance FromRow Entry where
