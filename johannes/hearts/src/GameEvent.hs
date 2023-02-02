@@ -89,6 +89,9 @@ turnOverTrickM = TurnOverTrick Return
 isGameOverM :: Game (Maybe Player)
 isGameOverM = IsGameOver Return
 
+getNextCommand :: Game GameCommand
+getNextCommand = GetNextCommand Return
+
 instance Functor Game where
 instance Applicative Game where
 
