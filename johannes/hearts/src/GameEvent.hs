@@ -21,3 +21,11 @@ import Data.Map (Map)
 -- - Bitte, dass etwas passieren soll (in der Zukunft)
 
 -- Event-Storming
+
+type GameId = String
+
+data GameEvent
+    = GameStarted GameId
+    | RoundStarted
+    | StartingPlayerSelected Player
+    deriving (Eq, Show)
