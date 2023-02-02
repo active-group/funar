@@ -1,3 +1,4 @@
+{-# LANGUAGE InstanceSigs #-}
 module GameEvent where
 
 import Cards
@@ -70,6 +71,14 @@ data Game a
 
 isCardValid :: Player -> Card -> Game Bool
 isCardValid player card = IsCardValid player card Return
+
+instance Monad Game where
+    return :: a -> Game a
+    return = Return
+
+    (>>=) :: Game a -> (a -> Game b) -> Game b
+    (>>=) (Return value) next = undefined
+    (>>=) (IsCardValid player card callback) next = undefined
 
 -- _ein_ Command abarbeiten
 tableProcessCommand :: GameCommand -> Game (Maybe Player)
