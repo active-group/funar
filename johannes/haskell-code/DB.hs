@@ -64,6 +64,7 @@ put key value = Put key value (\ result -> Return result)
 -- Datenbankprogramme "verbinden"/"aneinanderkleben"
 -- foo :: DB a -> (a -> DB b) -> DB (a, b)   -- Tupel
 splice :: DB a -> (a -> DB b) -> DB b   -- Tupel
-splice (Get key callback) next = undefined
+splice (Get key callback) next =
+    Get key (\ value -> callback value)       splice undefined next
 splice (Put key value callback) next = undefined
 splice (Return value) next = next value
