@@ -194,3 +194,7 @@ runDBAsSQLite conn (Put key value callback) = do
 
 runDBAsSQLite conn (Return value) = return value -- a -> IO a
 
+execDB :: DB a -> IO a
+execDB dbProgram = do
+    conn <- open "entries.db"
+    execute_ conn "create table if not exists entries (key text primary key, value integer)"
