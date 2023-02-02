@@ -161,3 +161,5 @@ greet = do
     putStr "Wie heißt du? "
     name <- getLine
     putStrLn ("Hello " <> name)
+
+runDBAsSQLite :: Connection -> DB a -> IO a
