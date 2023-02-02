@@ -78,7 +78,7 @@ emptyHand = Hand Set.empty
 
 -- Spieler
 
-data Player = Player { playerName :: String }
+newtype Player = Player { playerName :: String }
   deriving (Show, Eq, Ord)
 
 -- * Stich
