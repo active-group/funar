@@ -103,6 +103,7 @@ increaseAge name = do
 p1'' :: DB String
 p1'' = do
     put "Johannes" 36
+    increaseAge "Johannes"
     x <- get "Johannes"
     put "Johannes" (x + 1)
     y <- get "Johannes"
