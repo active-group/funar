@@ -224,5 +224,5 @@ instance Monad Maybe where
     return = Just
 
     (>>=) :: Maybe a -> (a -> Maybe b) -> Maybe b
-    (>>=) (Just a) next = undefined
-    (>>=) Nothing next = undefined
+    (>>=) (Just a) next = next a
+    (>>=) Nothing _ = Nothing
