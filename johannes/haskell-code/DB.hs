@@ -231,3 +231,5 @@ execDB dbProgram = do
 
 opt = do
     a <- Just "hallo"
+    b <- Just "johannes"
+    return (a <> " " <> b)
