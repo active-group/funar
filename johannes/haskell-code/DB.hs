@@ -20,3 +20,5 @@ data DBCommand =
     Put String Int
   | Get String
   | Return String
+
+type DBProgram = [DBCommand]
