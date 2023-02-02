@@ -87,3 +87,5 @@ p1' = splice (put "Johannes" 36) (\ _ ->
 --     (>>=) :: m a -> (a -> m b) -> m b
 
 instance Monad DB where
+    (>>=) :: DB a -> (a -> DB b) -> DB b
+    (>>=) = splice
