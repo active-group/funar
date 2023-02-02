@@ -33,3 +33,4 @@ module DB where
 data DB a =
     Get String (Int -> DB a)
   | Put String Int (() -> DB a)     -- () ist "Unit" (void)
+  | Return a
