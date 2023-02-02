@@ -28,8 +28,8 @@ allCards = do
     suit <- allValues
     return (MkCard rank suit)
 
-allCards :: [Card]
-allCards = [ MkCard r s | r <- allValues, s <- allValues ]
+allCards' :: [Card]
+allCards' = [ MkCard r s | r <- allValues, s <- allValues ]
 
 cartesianProduct :: [a] -> [b] -> [(a, b)]
 cartesianProduct = undefined
