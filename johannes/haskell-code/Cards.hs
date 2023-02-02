@@ -5,5 +5,5 @@ module Cards where
 -- Yaron Minski: make illegal states unrepresentable
 
 -- Datenmodell (Typen) für:
--- Farbe (Suit)
--- Wert (Rank)
+-- Farbe (Suit) (Kreuz, Pik, Herz, Karo; Clubs, Spades, Hearts, Diamonds)
+-- Wert (Rank) (2 bis Ass)
