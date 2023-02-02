@@ -17,4 +17,5 @@ import Data.Map (Map)
 -- - (keinen Zustand reinschreiben)
 -- - Events sind (einzige) Quelle der Wahrheit im System
 
--- 
+-- Command:
+-- - Bitte, dass etwas passieren soll (in der Zukunft)
