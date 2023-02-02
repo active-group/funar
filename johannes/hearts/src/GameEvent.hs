@@ -35,4 +35,5 @@ data GameEvent
     | NextPlayerSelected Player
     | RoundCompleted [Player] -- Gewinner der Runde
     | GameCompleted [Player]
+    | IllegalCardAttempted Player Card
     deriving (Eq, Show)
