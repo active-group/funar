@@ -12,3 +12,4 @@ module Cards where
 -- 2 Liste aller Karten, ohne alle Karten aufzuzählen
 
 -- 3 Funktion: schlägt eine Karte eine andere?
+--   (Karten anderer Farbe sind nicht vergleichbar)
