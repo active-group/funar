@@ -53,3 +53,6 @@ put key value = Put key value (\ result -> Return result)
 
 -- return :: a -> DB a
 -- return = Return
+
+-- put "Johannes" 36
+-- x = get "Johannes"
