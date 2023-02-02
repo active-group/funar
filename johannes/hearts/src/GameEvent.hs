@@ -77,8 +77,9 @@ instance Monad Game where
     return = Return
 
     (>>=) :: Game a -> (a -> Game b) -> Game b
-    (>>=) (Return value) next = undefined
-    (>>=) (IsCardValid player card callback) next = undefined
+    (>>=) (Return value) next = next value
+    (>>=) (IsCardValid player card callback) next =
+        IsCardValid player card (\ value -> (>>=) (callback value) next)
 
 -- _ein_ Command abarbeiten
 tableProcessCommand :: GameCommand -> Game (Maybe Player)
