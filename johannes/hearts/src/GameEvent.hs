@@ -38,3 +38,7 @@ data GameEvent
     | PlayerResigned Player
     | IllegalCardAttempted Player Card
     deriving (Eq, Show)
+
+data GameCommand
+    = PlayCard Player Card
+    | DealHands PlayerHands
