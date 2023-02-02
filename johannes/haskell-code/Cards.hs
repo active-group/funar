@@ -28,6 +28,8 @@ allCards = do
     suit <- allValues
     return (MkCard rank suit)
 
+cartesianProduct :: [a] -> [b] -> [(a, b)]
+
 -- type Card = (Farbe, Wert)
 -- data Card = MkCard
 
