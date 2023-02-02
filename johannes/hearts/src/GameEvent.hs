@@ -68,4 +68,4 @@ data Game a
     = Return a
 
 -- _ein_ Command abarbeiten
-tableProcessCommand :: GameCommand -> Game 
+tableProcessCommand :: GameCommand -> Game (Maybe Player)
