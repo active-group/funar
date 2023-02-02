@@ -177,13 +177,14 @@ instance FromRow Entry where
         return (MkEntry key value)
 
 instance ToRow Entry where
+    toRow :: Entry -> [SQLData]
     toRow (MkEntry key value) =
         toRow (key, value)
 
 runDBAsSQLite :: Connection -> DB a -> IO a
 runDBAsSQLite conn (Get key callback) = do
     -- OverloadedStrings macht aus SQL-Text ein "Query"-Objekt
-    [entry] <- 
+    [(MkEntry _ value)] <- 
         queryNamed conn "select key, value from entries where key = :key" [":key" := key]
     runDBAsSQLite conn (callback value)
 
