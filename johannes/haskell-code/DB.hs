@@ -69,3 +69,6 @@ splice (Get key callback) next =
 splice (Put key value callback) next =
     Put key value (\ value -> splice (callback value) next)
 splice (Return value) next = next value
+
+-- \ value -> splice (callback value)
+-- splice . callback     . ist o
