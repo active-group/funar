@@ -65,8 +65,8 @@ data GameCommand
 
 -- Spielablauf als Daten (wie DB)
 data Game a
-    | IsCardValid Player Card (Bool -> Game a)
-    = Return a
+    = IsCardValid Player Card (Bool -> Game a)
+    | Return a
 
 isCardValid :: Player -> Card -> Game Bool
 isCardValid player card = IsCardValid player card
