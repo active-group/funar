@@ -72,6 +72,9 @@ data Game a
 isCardValid :: Player -> Card -> Game Bool
 isCardValid player card = IsCardValid player card Return
 
+instance Functor Game where
+instance Applicative Game where
+
 instance Monad Game where
     return :: a -> Game a
     return = Return
