@@ -71,6 +71,7 @@ data Game a
     | TurnOverTrick (Maybe (Trick, Player) -> Game a)
     | PlayerAfter Player (Player -> Game a)
     | IsGameOver (Maybe Player -> Game a)
+    | GetNextCommand (GameCommand -> Game a)
     | Return a
 
 playerAfter :: Player -> Game Player
