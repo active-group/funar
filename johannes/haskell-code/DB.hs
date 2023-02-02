@@ -170,10 +170,15 @@ greet = do
 data Entry = MkEntry String Int
 
 instance FromRow Entry where
+    fromRow :: RowParser Entry
     fromRow = do
         key <- field
         value <- field
         return (MkEntry key value)
+
+instance ToRow Entry where
+    toRow (MkEntry key value) =
+        toRow (key, value)
 
 runDBAsSQLite :: Connection -> DB a -> IO a
 runDBAsSQLite conn (Get key callback) = do
