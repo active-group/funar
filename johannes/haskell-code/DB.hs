@@ -74,8 +74,8 @@ splice (Return value) next = next value
 -- splice . callback     . ist o
 
 p1' :: DB String
-p1' = Put "Johannes" 36 (\ _ ->
-       Get "Johannes" (\ x ->
-         Put "Johannes" (x + 1) (\ _ ->
-           Get "Johannes" (\ y ->
-             Return (show (x + y))))))
+p1' = splice (put "Johannes" 36) (\ _ ->
+      splice (get "Johannes") (\ x ->
+      splice (put "Johannes" (x + 1)) (\ _ ->
+      splice (get "Johannes") (\ y ->
+      Return (show (x + y))))))
