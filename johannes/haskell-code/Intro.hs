@@ -369,6 +369,7 @@ optionalMap f (Result a) = Result (f a)
 class Mappable m where
     mmap :: (a -> b) -> m a -> m b
 
-instance Mappable List where
+-- instance Mappable List where
+instance Mappable [] where
     mmap :: (a -> b) -> List a -> List b
     mmap = listMap
