@@ -219,10 +219,15 @@ execDB dbProgram = do
 -- Natürliche Transformationen    (m  ~>  m')
 -- runMonad :: (Monad m, Monad m') => m a -> m' a
 
-instance Monad Maybe where
-    return :: a -> Maybe a
-    return = Just
+-- Optional ist auch eine Monade:
 
-    (>>=) :: Maybe a -> (a -> Maybe b) -> Maybe b
-    (>>=) (Just a) next = next a
-    (>>=) Nothing _ = Nothing
+-- instance Monad Maybe where
+--     return :: a -> Maybe a
+--     return = Just
+
+--     (>>=) :: Maybe a -> (a -> Maybe b) -> Maybe b
+--     (>>=) (Just a) next = next a
+--     (>>=) Nothing _ = Nothing
+
+opt = do
+    a <- Just "hallo"
