@@ -90,6 +90,14 @@ p1' = put "Johannes" 36 >>= (\ _ ->
       get "Johannes" >>= (\ y ->
       return (show (x + y))))))
 
+-- do-Notation
+p1'' :: DB String
+p1'' = do
+    put "Johannes" 36
+    x <- get "Johannes"
+    put "Johannes" (x + 1)
+    return undefined
+
 --          v  Typkonstruktor
 -- class Monad m where
 --     -- bind :: m a -> (a -> m b) -> m b
