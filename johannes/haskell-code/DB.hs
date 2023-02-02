@@ -9,6 +9,6 @@ module DB where
   x = get "Johannes"
   put "Johannes" (x + 1)
   y = get "Johannes"
-  return (show (x + y))
+  return (show (x + y))      show ist toString()
 
 -}
