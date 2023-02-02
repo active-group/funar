@@ -51,6 +51,7 @@ deck = map (uncurry Card) (cartesianProduct allSuits allRanks)
 
 -- |Karten, die jemand auf der Hand hält
 newtype Hand = Hand { unHand :: Set Card }
+  -- unHand (Hand undefined) == undefined
   deriving (Eq, Show)
 
 makeHand :: [Card] -> Hand
