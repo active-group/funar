@@ -153,3 +153,6 @@ tableLoopM command = do
             tableLoopM nextCommand
         Just winner ->
             return winner
+
+
+-- runTable? runGame?
