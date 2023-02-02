@@ -107,7 +107,9 @@ tableProcessCommand (PlayCard player card) = do
             recordEvent (LegalCardPlayed player card)
             turnOverTrick <- turnOverTrickM
             case turnOverTrick of
-                Nothing -> undefined
+                Nothing -> do
+                    nextPlayer <- playerAfter player
+                    recordEvent (PlayerTurnChanged nextPlayer)
                 Just (trick, trickTaker) -> undefined
         else do
             recordEvent (IllegalCardAttempted player card)
