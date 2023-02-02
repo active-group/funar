@@ -29,6 +29,7 @@ allCards = do
     return (MkCard rank suit)
 
 cartesianProduct :: [a] -> [b] -> [(a, b)]
+cartesianProduct = undefined
 
 -- type Card = (Farbe, Wert)
 -- data Card = MkCard
