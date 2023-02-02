@@ -16,12 +16,17 @@ module DB where
 
 -- erster Versuch: Datentypen
 
-data DBCommand a =
-    Put String Int
-  | Get String
-  | Return a
+-- data DBCommand a =
+--     Put String Int
+--   | Get String
+--   | Return a
 
-type DBProgram = [DBCommand]
+-- type DBProgram = [DBCommand]
 
-p1 = [ Put "Johannes" 36
-     , Get "Johannes", ??????]
+-- p1 = [ Put "Johannes" 36
+--      , Get "Johannes", ??????] <- wie geben wir dem Ergebnis einen Namen?
+
+
+-- gescheitert :(
+
+
