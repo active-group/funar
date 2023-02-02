@@ -33,5 +33,5 @@ data GameEvent
     | TrickCompleted
     | TrickTaken Player Trick
     | NextPlayerSelected Player
-    | RoundCompleted Player
+    | RoundCompleted [Player]
     deriving (Eq, Show)
