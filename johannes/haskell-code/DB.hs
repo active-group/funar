@@ -83,10 +83,10 @@ splice (Return value) next = next value
 --       Return (show (x + y))))))
 
 p1' :: DB String
-p1' = (>>=) (put "Johannes" 36) (\ _ ->
-      (>>=) (get "Johannes") (\ x ->
-      (>>=) (put "Johannes" (x + 1)) (\ _ ->
-      (>>=) (get "Johannes") (\ y ->
+p1' = put "Johannes" 36 >>= (\ _ ->
+      get "Johannes" >>= (\ x ->
+      put "Johannes" (x + 1) >>= (\ _ ->
+      get "Johannes" >>= (\ y ->
       return (show (x + y))))))
 
 --          v  Typkonstruktor
