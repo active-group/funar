@@ -137,5 +137,9 @@ instance Monad DB where
 -- "Echte Datenbank + Ablauf -> Ergebnis"
 runDB :: Map String Int -> DB a -> a
 runDB m (Get key callback) = undefined
-runDB m (Put key value callback) = undefined
+
+runDB m (Put key value callback) =
+    let newMap = Map.insert key value
+     in runDB m (callback ())
+
 runDB m (Return value) = value
