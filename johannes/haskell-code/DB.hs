@@ -16,9 +16,12 @@ module DB where
 
 -- erster Versuch: Datentypen
 
-data DBCommand =
+data DBCommand a =
     Put String Int
   | Get String
-  | Return String
+  | Return a
 
 type DBProgram = [DBCommand]
+
+p1 = [ Put "Johannes" 36
+     , Get "Johannes", ??????]
