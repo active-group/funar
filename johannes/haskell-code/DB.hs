@@ -131,4 +131,5 @@ instance Monad DB where
 -- wollen was "Echtes" machen mit DB!
 
 -- Datenbankprogramm ausführen
+-- "Echte Datenbank + Ablauf -> Ergebnis"
 runDB :: Map String Int -> DB a -> a
