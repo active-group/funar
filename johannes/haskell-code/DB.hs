@@ -140,6 +140,7 @@ runDB m (Get key callback) = undefined
 
 runDB m (Put key value callback) =
     let newMap = Map.insert key value
-     in runDB m (callback ())
+         --    nicht m!
+     in runDB newMap (callback ())
 
 runDB m (Return value) = value
