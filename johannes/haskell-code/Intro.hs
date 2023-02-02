@@ -374,3 +374,6 @@ class Mappable m where
 instance Mappable [] where
     mmap :: (a -> b) -> List a -> List b
     mmap = listMap
+
+instance Mappable Optional where
+    mmap = optionalMap
