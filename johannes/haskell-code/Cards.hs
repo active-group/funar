@@ -22,6 +22,7 @@ allValues :: (Enum a, Bounded a) => [a]
 allValues = [minBound .. maxBound]
 
 -- allCards :: [Card]
+allCards :: [Card]
 allCards = do
     rank <- allValues
     suit <- allValues
