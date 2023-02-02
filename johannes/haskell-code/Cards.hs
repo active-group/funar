@@ -12,6 +12,9 @@ module Cards where
 data Suit = Clubs | Spades | Hearts | Diamonds
     deriving Show
 
+data Rank = Two | Three | Four | Five | Six | Seven | Eight | Nine | Ten | Jack | Queen | King | Ace
+    deriving Show
+
 -- type Card = (Farbe, Wert)
 -- data Card = MkCard
 
