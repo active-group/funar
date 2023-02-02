@@ -93,10 +93,12 @@ p1' = put "Johannes" 36 >>= (\ _ ->
       get "Johannes" >>= (\ y ->
       return (show (x + y))))))
     
-increaseAge :: String -> DB ()
+-- erhöhe Alter und gib vorheriges zurück
+increaseAge :: String -> DB Int
 increaseAge name = do
     age <- get name
     put name (age + 1)
+    return age
 
 -- do-Notation
 -- syntaktischer Zucker für genau p1'
