@@ -96,7 +96,8 @@ p1'' = do
     put "Johannes" 36
     x <- get "Johannes"
     put "Johannes" (x + 1)
-    return undefined
+    y <- get "Johannes"
+    return (show (x + y))
 
 --          v  Typkonstruktor
 -- class Monad m where
