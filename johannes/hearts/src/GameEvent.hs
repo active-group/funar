@@ -69,7 +69,7 @@ data Game a
     | Return a
 
 isCardValid :: Player -> Card -> Game Bool
-isCardValid player card = IsCardValid player card
+isCardValid player card = IsCardValid player card Return
 
 -- _ein_ Command abarbeiten
 tableProcessCommand :: GameCommand -> Game (Maybe Player)
