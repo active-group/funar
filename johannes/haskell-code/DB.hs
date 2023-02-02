@@ -83,4 +83,5 @@ p1' = splice (put "Johannes" 36) (\ _ ->
 
 --          v  Typkonstruktor
 class Monad m where
-    bind :: m a -> (a -> m b) -> m b
+    -- bind :: m a -> (a -> m b) -> m b
+    (>>=) :: m a -> (a -> m b) -> m b
