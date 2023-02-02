@@ -111,6 +111,8 @@ instance Monad Game where
         PlayerAfter player (\ value -> (>>=) (callback value) next)
     (>>=) (IsGameOver callback) next =
         IsGameOver (\ value -> (>>=) (callback value) next)
+    (>>=) (GetNextCommand callback) next =
+        GetNextCommand (\ value -> (>>=) (callback value) next)
 
 -- _ein_ Command abarbeiten
 tableProcessCommand :: GameCommand -> Game (Maybe Player)
