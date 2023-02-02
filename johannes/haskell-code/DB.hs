@@ -166,3 +166,6 @@ greet = do
     putStrLn ("Hello " <> name)
 
 runDBAsSQLite :: Connection -> DB a -> IO a
+runDBAsSQLite conn (Get key callback) = undefined
+runDBAsSQLite conn (Put key value callback) = undefined
+runDBAsSQLite conn (Return value) = value
