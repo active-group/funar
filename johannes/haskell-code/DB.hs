@@ -189,7 +189,7 @@ runDBAsSQLite conn (Get key callback) = do
     runDBAsSQLite conn (callback value)
 
 runDBAsSQLite conn (Put key value callback) = do
-    execute conn "replace into entries (key, value) value (?,?)" (MkEntry key value)
+    execute conn "replace into entries (key, value) values (?,?)" (MkEntry key value)
     runDBAsSQLite conn (callback ())
 
 runDBAsSQLite conn (Return value) = return value -- a -> IO a
