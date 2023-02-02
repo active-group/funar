@@ -69,7 +69,11 @@ data Game a
     = IsCardValid Player Card (Bool -> Game a)
     | RecordEvent GameEvent (() -> Game a)
     | TurnOverTrick (Maybe (Trick, Player) -> Game a)
+    | PlayerAfter Player (Player -> Game a)
     | Return a
+
+playerAfter :: Player -> Game Player
+playerAfter player = PlayerAfter player Return
 
 isCardValid :: Player -> Card -> Game Bool
 isCardValid player card = IsCardValid player card Return
@@ -95,6 +99,8 @@ instance Monad Game where
         RecordEvent event (\ value -> (>>=) (callback value) next)
     (>>=) (TurnOverTrick callback) next =
         TurnOverTrick (\ value -> (>>=) (callback value) next)
+    (>>=) (PlayerAfter player callback) next =
+        PlayerAfter player (\ value -> (>>=) (callback value) next)
 
 -- _ein_ Command abarbeiten
 tableProcessCommand :: GameCommand -> Game (Maybe Player)
