@@ -151,5 +151,6 @@ runDB m (Return value) = (value, m)
 
 -- mit der echten Welt reden!!!
 
+--             v   IO-Monade
 helloWorld :: IO ()
 helloWorld = putStrLn "Hello world"
