@@ -62,3 +62,10 @@ data GameCommand
 
 
 -- Spielablauf modellieren
+
+-- Spielablauf als Daten (wie DB)
+data Game a
+    = Return a
+
+-- _ein_ Command abarbeiten
+tableProcessCommand :: GameCommand -> Game 
