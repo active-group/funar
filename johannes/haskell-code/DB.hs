@@ -88,6 +88,7 @@ p1' = splice (put "Johannes" 36) (\ _ ->
 --     (>>=) :: m a -> (a -> m b) -> m b
 
 instance Functor DB where
+    -- Übung
 
 instance Applicative DB where
 
