@@ -119,7 +119,12 @@ tableProcessCommand (PlayCard player card) = do
                     return Nothing
                 Just (trick, trickTaker) -> do
                     recordEvent (TrickTaken trickTaker trick)
-                    undefined
+                    maybeWinner <- isGameOverM
+                    case maybeWinner of
+                        Nothing -> undefined
+                        Just winner -> do
+                            recordEvent (GameEnded winner)
+                            return (Just winner)
         else do
             recordEvent (IllegalCardAttempted player card)
             return Nothing
