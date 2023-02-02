@@ -135,7 +135,8 @@ instance Monad DB where
 
 -- Datenbankprogramm ausführen
 -- "Echte Datenbank + Ablauf -> Ergebnis"
-runDB :: Map String Int -> DB a -> a
+-- runDB :: Map String Int -> DB a -> a
+runDB :: Map String Int -> DB a -> (a, Map String Int)
 runDB m (Get key callback) =
     let value = m ! key
      in runDB m (callback value)
@@ -145,4 +146,4 @@ runDB m (Put key value callback) =
          --    nicht m!
      in runDB newMap (callback ())
 
-runDB m (Return value) = value
+runDB m (Return value) = (value, m)
