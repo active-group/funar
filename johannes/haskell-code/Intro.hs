@@ -385,3 +385,9 @@ instance Mappable Optional where
 -- Result 10
 -- >>> mmap (5*) [2,3]
 -- [10,15]
+
+-- Mappable ist eingebaut: Functor
+
+--            v   der Funktor ist der Typkonstruktor
+class Functor f where
+    fmap :: (a -> b) -> f a -> f b
