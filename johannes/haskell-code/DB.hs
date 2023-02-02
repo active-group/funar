@@ -139,7 +139,7 @@ runDB :: Map String Int -> DB a -> a
 runDB m (Get key callback) = undefined
 
 runDB m (Put key value callback) =
-    let newMap = Map.insert key value
+    let newMap = Map.insert key value m
          --    nicht m!
      in runDB newMap (callback ())
 
