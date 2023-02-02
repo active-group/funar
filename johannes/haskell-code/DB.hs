@@ -232,6 +232,7 @@ execDB dbProgram = do
 opt :: Maybe String
 opt = do
     a <- Just "hallo"
-    b <- Just "johannes"
+    -- b <- Just "johannes"
+    b <- Nothing
     c <- Just "!"
     return (a <> " " <> b <> c)
