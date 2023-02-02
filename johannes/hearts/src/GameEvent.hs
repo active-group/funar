@@ -68,6 +68,7 @@ data GameCommand
 data Game a
     = IsCardValid Player Card (Bool -> Game a)
     | RecordEvent GameEvent (() -> Game a)
+    | TurnOverTrick (Maybe (Trick, Player) -> Game a)
     | Return a
 
 isCardValid :: Player -> Card -> Game Bool
@@ -75,6 +76,9 @@ isCardValid player card = IsCardValid player card Return
 
 recordEvent :: GameEvent -> Game ()
 recordEvent event = RecordEvent event Return
+
+turnOverTrickM :: Game (Maybe (Trick, Player))
+turnOverTrickM = TurnOverTrick Return
 
 instance Functor Game where
 instance Applicative Game where
@@ -89,6 +93,8 @@ instance Monad Game where
         IsCardValid player card (\ value -> (>>=) (callback value) next)
     (>>=) (RecordEvent event callback) next =
         RecordEvent event (\ value -> (>>=) (callback value) next)
+    (>>=) (TurnOverTrick callback) next =
+        TurnOverTrick (\ value -> (>>=) (callback value) next)
 
 -- _ein_ Command abarbeiten
 tableProcessCommand :: GameCommand -> Game (Maybe Player)
@@ -99,6 +105,7 @@ tableProcessCommand (PlayCard player card) = do
     if canPlay
         then do
             recordEvent (LegalCardPlayed player card)
+            turnOverTrick <- turnOverTrickM
         else do
             recordEvent (IllegalCardAttempted player card)
             return Nothing
