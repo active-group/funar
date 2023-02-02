@@ -25,8 +25,8 @@ import Data.Map (Map)
 type GameId = String
 
 data GameEvent
-    = GameStarted GameId
-    | RoundStarted
+    = GameStarted GameId     -- Ein Spiel besteht aus mehreren Runden
+    | RoundStarted -- Jede Runde besteht aus 13 Stichen/Tricks
     | HandsDistributed (Map Player Hand)
     | StartingPlayerSelected Player
     | CardPlayed Player Card
@@ -35,5 +35,6 @@ data GameEvent
     | NextPlayerSelected Player
     | RoundCompleted [Player] -- Gewinner der Runde
     | GameCompleted [Player]
+    | PlayerResigned Player
     | IllegalCardAttempted Player Card
     deriving (Eq, Show)
