@@ -136,6 +136,10 @@ instance Monad DB where
     return :: a -> DB a
     return = Return
 
+-- Library-Funktion, die auf Monaden definiert ist
+foo :: Monad m => String -> m Int
+foo = undefined
+
 -- wollen was "Echtes" machen mit DB!
 
 -- Datenbankprogramm ausführen
@@ -207,3 +211,6 @@ execDB dbProgram = do
     result <- runDBAsSQLite conn dbProgram
     close conn
     return result
+
+-- TODO: Optional?
+-- Functor?
