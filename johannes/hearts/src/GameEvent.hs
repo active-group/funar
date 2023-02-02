@@ -136,3 +136,8 @@ tableProcessCommand (PlayCard player card) = do
         else do
             recordEvent (IllegalCardAttempted player card)
             return Nothing
+
+-- Gesamtes Spiel ablaufen lassen
+tableLoopM :: GameCommand -> Game Player
+tableLoopM command = do
+    undefined
