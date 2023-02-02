@@ -234,8 +234,8 @@ data Either a b =
     Left a
   | Right b
 
--- opt :: Maybe String
-opt :: Either Error String
+opt :: Maybe String
+-- opt :: Either Error String
 opt = do
     a <- Just "hallo"
     -- b <- Just "johannes"
