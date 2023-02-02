@@ -22,7 +22,10 @@ allValues :: (Enum a, Bounded a) => [a]
 allValues = [minBound .. maxBound]
 
 allCards :: [Card]
-allCards = undefined
+allCards = do
+    rank <- allValues
+    suit <- allValues
+    -- return (MkCard rank suit)
 
 -- type Card = (Farbe, Wert)
 -- data Card = MkCard
