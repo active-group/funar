@@ -229,6 +229,11 @@ execDB dbProgram = do
 --     (>>=) (Just a) next = next a
 --     (>>=) Nothing _ = Nothing
 
+-- besseres Modell für Fehlschlagen
+data Either a b =
+    Left a
+  | Right b
+
 opt :: Maybe String
 opt = do
     a <- Just "hallo"
@@ -238,3 +243,6 @@ opt = do
     return (a <> " " <> b <> c)
 
 -- Railway oriented programming
+--  ==== ==== ==== ==== ==== ==========     Werte existieren (alles ist Just)
+--      \    \    \    \    \
+--       ==== ==== ==== ==== ==========
