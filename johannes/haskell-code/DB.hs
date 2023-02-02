@@ -66,5 +66,6 @@ put key value = Put key value (\ result -> Return result)
 splice :: DB a -> (a -> DB b) -> DB b   -- Tupel
 splice (Get key callback) next =
     Get key (\ value -> splice (callback value) next)
-splice (Put key value callback) next = undefined
+splice (Put key value callback) next =
+    Put key value (\ _ -> splice (callback ()) next)
 splice (Return value) next = next value
