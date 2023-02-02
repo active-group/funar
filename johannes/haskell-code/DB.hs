@@ -91,6 +91,7 @@ p1' = put "Johannes" 36 >>= (\ _ ->
       return (show (x + y))))))
 
 -- do-Notation
+-- syntaktischer Zucker für genau p1'
 p1'' :: DB String
 p1'' = do
     put "Johannes" 36
