@@ -7,7 +7,10 @@ module Cards where
 -- 1 Datenmodell (Typen) für:
 --   Farbe (Suit) (Kreuz, Pik, Herz, Karo; Clubs, Spades, Hearts, Diamonds)
 --   Wert (Rank) (2 bis Ass)
---   Karte
+--   Karte  
+
+-- type Card = (Farbe, Wert)
+-- data Card = MkCard
 
 -- 2 Liste aller Karten, ohne alle Karten aufzuzählen
 
