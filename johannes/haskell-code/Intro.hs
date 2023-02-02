@@ -224,7 +224,7 @@ data Optional a =
     deriving Show
 
 -- eingebaut!
-data Maybe a = Just a | Nothing
+-- data Maybe a = Just a | Nothing
 
 -- Index eines Elements in einer Liste ermitteln
 -- >>> listIndex "a" ["b", "c", "f"]
@@ -391,3 +391,12 @@ instance Mappable Optional where
 --            v   der Funktor ist der Typkonstruktor
 -- class Functor f where
 --     fmap :: (a -> b) -> f a -> f b
+
+-- >>> fmap head (Just "abc")
+-- Ambiguous occurrence ‘Just’
+-- It could refer to
+--    either ‘Prelude.Just’,
+--           imported from ‘Prelude’ at /home/johannes/ag/funar-20230131/johannes/haskell-code/Intro.hs:4:1-49
+--           (and originally defined in ‘GHC.Maybe’)
+--        or ‘Intro.Just’,
+--           defined at /home/johannes/ag/funar-20230131/johannes/haskell-code/Intro.hs:227:16
