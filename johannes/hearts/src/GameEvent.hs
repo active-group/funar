@@ -97,7 +97,8 @@ tableProcessCommand (PlayCard player card) = do
     -- Daniel: müssen wir nicht erst prüfen, ob Karten ausgeteilt wurden?
     canPlay <- isCardValid player card
     if canPlay
-        then undefined
+        then do
+            recordEvent (LegalCardPlayed player card)
         else do
             recordEvent (IllegalCardAttempted player card)
             return Nothing
