@@ -19,3 +19,5 @@ import Data.Map (Map)
 
 -- Command:
 -- - Bitte, dass etwas passieren soll (in der Zukunft)
+
+-- Event-Storming
