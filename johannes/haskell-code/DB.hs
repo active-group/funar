@@ -92,6 +92,11 @@ p1' = put "Johannes" 36 >>= (\ _ ->
       put "Johannes" (x + 1) >>= (\ _ ->
       get "Johannes" >>= (\ y ->
       return (show (x + y))))))
+    
+increaseAge :: String -> DB ()
+increaseAge name = do
+    age <- get name
+    put name (age + 1)
 
 -- do-Notation
 -- syntaktischer Zucker für genau p1'
