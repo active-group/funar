@@ -70,4 +70,6 @@ data Game a
 -- _ein_ Command abarbeiten
 tableProcessCommand :: GameCommand -> Game (Maybe Player)
 tableProcessCommand (DealHands playerHands) = undefined
-tableProcessCommand (PlayCard player card) = undefined
+tableProcessCommand (PlayCard player card) = do
+    -- Daniel: müssen wir nicht erst prüfen, ob Karten ausgeteilt wurden?
+    canPlay <- isCardValid player card
