@@ -49,4 +49,4 @@ get key = Get key (\ value -> Return value)
 
 -- einen einzelnen Wert in die DB schreiben
 put :: String -> Int -> DB ()   -- hier kommt nichts Sinnvolles zurück -> Seiteneffekt
-put key = Get key (\ value -> Return value)
+put key value = Put key value (\ _ -> Return ())
