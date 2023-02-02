@@ -32,4 +32,5 @@ data GameEvent
     | CardPlayed Player Card
     | TrickCompleted
     | TrickTaken Player Trick
+    | NextPlayerSelected Player
     deriving (Eq, Show)
