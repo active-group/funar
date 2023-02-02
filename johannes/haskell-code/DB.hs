@@ -87,7 +87,7 @@ p1' = (>>=) (put "Johannes" 36) (\ _ ->
       (>>=) (get "Johannes") (\ x ->
       (>>=) (put "Johannes" (x + 1)) (\ _ ->
       (>>=) (get "Johannes") (\ y ->
-      Return (show (x + y))))))
+      return (show (x + y))))))
 
 --          v  Typkonstruktor
 -- class Monad m where
