@@ -42,3 +42,7 @@ p1 = Put "Johannes" 36 (\ _ ->
          Put "Johannes" (x + 1) (\ _ ->
            Get "Johannes" (\ y ->
              Return (show (x + y))))))
+
+-- einen einzelnen Wert aus der DB abrufen
+get :: String -> DB Int
+get key = Get key (\ value -> Return value)
