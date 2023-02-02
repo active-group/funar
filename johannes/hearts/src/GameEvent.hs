@@ -72,6 +72,9 @@ data Game a
 isCardValid :: Player -> Card -> Game Bool
 isCardValid player card = IsCardValid player card Return
 
+recordEvent :: GameEvent -> Game ()
+recordEvent event = RecordEvent event Return
+
 instance Functor Game where
 instance Applicative Game where
 
