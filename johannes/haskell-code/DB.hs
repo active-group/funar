@@ -236,3 +236,5 @@ opt = do
     b <- Nothing
     c <- Just "!"
     return (a <> " " <> b <> c)
+
+-- Railway oriented programming
