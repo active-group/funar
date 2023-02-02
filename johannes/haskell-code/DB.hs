@@ -56,3 +56,4 @@ put key value = Put key value (\ result -> Return result)
 
 -- put "Johannes" 36
 -- x = get "Johannes"
+-- ....
