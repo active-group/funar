@@ -168,6 +168,7 @@ greet = do
 
 runDBAsSQLite :: Connection -> DB a -> IO a
 runDBAsSQLite conn (Get key callback) = do
+    -- OverloadedStrings macht aus SQL-Text ein "Query"-Objekt
     queryNamed conn "select key, value from entries where key = :key" [":key" := key]
     undefined
 
