@@ -85,6 +85,7 @@ recordEvent event = RecordEvent event Return
 turnOverTrickM :: Game (Maybe (Trick, Player))
 turnOverTrickM = TurnOverTrick Return
 
+isGameOverM :: Game (Maybe Player)
 isGameOverM = IsGameOver Return
 
 instance Functor Game where
@@ -104,6 +105,8 @@ instance Monad Game where
         TurnOverTrick (\ value -> (>>=) (callback value) next)
     (>>=) (PlayerAfter player callback) next =
         PlayerAfter player (\ value -> (>>=) (callback value) next)
+    (>>=) (IsGameOver callback) next =
+        IsGameOver (\ value -> (>>=) (callback value) next)
 
 -- _ein_ Command abarbeiten
 tableProcessCommand :: GameCommand -> Game (Maybe Player)
