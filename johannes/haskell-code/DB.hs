@@ -167,6 +167,14 @@ greet = do
     name <- getLine
     putStrLn ("Hello " <> name)
 
+data Entry = MkEntry String Int
+
+instance FromRow Entry where
+    fromRow = do
+        key <- field
+        value <- field
+        return (MkEntry key value)
+
 runDBAsSQLite :: Connection -> DB a -> IO a
 runDBAsSQLite conn (Get key callback) = do
     -- OverloadedStrings macht aus SQL-Text ein "Query"-Objekt
