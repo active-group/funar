@@ -10,7 +10,7 @@ module Cards where
 --   Karte  
 
 data Suit = Clubs | Spades | Hearts | Diamonds
-    deriving (Eq, Show, Enum)
+    deriving (Eq, Show, Enum, Bounded)
 
 data Rank = Two | Three | Four | Five | Six | Seven | Eight | Nine | Ten | Jack | Queen | King | Ace
     deriving (Eq, Show, Enum)
