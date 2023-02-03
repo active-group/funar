@@ -19,6 +19,7 @@ import Servant
 import Player
 
 type PlayerAPI = "event" :> ReqBody '[JSON] GameEvent :> Post '[JSON] [GameCommand]
+                   :<|> "foo" :> ReqBody '[JSON, Html] :> Get '[JSON] String
 
 playerAPI :: Proxy PlayerAPI
 playerAPI = Proxy
@@ -27,7 +28,7 @@ mkApp :: (GameEvent -> IO [GameCommand]) -> Application
 mkApp eventProcessor =
   cors (const $ Just policy) $
     provideOptions playerAPI $
-      serve playerAPI (liftIO . eventProcessor)
+      serve playerAPI (liftIO . eventProcessor :<|> handleFoo)
   where
     policy = simpleCorsResourcePolicy {corsRequestHeaders = ["content-type"]}
 
