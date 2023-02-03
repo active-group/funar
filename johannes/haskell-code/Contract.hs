@@ -66,4 +66,4 @@ zeroCouponBond date amount curr = Delay date (Multiply amount (One curr))
 
 currencySwap :: Date -> Amount -> Currency -> Amount -> Currency -> Contract
 currencySwap date amount1 curr1 amount2 curr2 =
-    Both (zeroCouponBond date amount1 curr1) (zeroCouponBond date amount2 curr2)
+    Both (zeroCouponBond date amount1 curr1) (Reverse (zeroCouponBond date amount2 curr2))
