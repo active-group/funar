@@ -196,7 +196,7 @@ runGame (PlayerAfter player callback) state events =
 runGame (IsGameOver callback) state events =
   runGame (callback (gameOver state)) state events
 runGame (Return result) state events =
-  (state, reverse events, result)
+  (state, reverse events, Right result)
 runGame (RecordEvent event callback) state events =
   runGame (callback ()) (tableProcessEvent event state) (event:events)
 runGame (GetNextCommand callback) state events =
