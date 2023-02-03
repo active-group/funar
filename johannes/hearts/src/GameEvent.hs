@@ -154,5 +154,4 @@ tableLoopM command = do
         Just winner ->
             return winner
 
-
 -- runTable? runGame?
