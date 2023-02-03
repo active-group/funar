@@ -19,4 +19,5 @@ Bestandteile:
 
 -}
 
-data Date = MkDate String
+newtype Date = MkDate String
+    deriving (Ord, Show, Eq)
