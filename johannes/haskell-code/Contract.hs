@@ -42,7 +42,7 @@ data Contract
     -- Ich bekomme 1 "Currency" _jetzt_.
     = One Currency
     | MultiplyWith Amount Contract -- <- Selbstbezug
-    | Tomorrow Contract
+    | Delay Date Contract
     deriving Show
 
 -- >>> MultiplyWith 30 (One EUR)
