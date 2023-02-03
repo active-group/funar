@@ -49,6 +49,9 @@ data Contract
     | Zero
     deriving Show
 
+instance Semigroup Contract where
+    (<>) = Both
+
 -- >>> :t One
 -- One :: Currency -> Contract
 
