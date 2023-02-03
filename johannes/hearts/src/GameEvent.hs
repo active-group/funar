@@ -154,4 +154,10 @@ tableLoopM command = do
         Just winner ->
             return winner
 
--- runTable? runGame?
+-- TODOS letzter Tag:
+
+-- Wie lasse ich ein Spiel "laufen"? -> runTable/runGame wie bei runDB?
+-- "Effekte" komponieren?
+-- Makroarchitektur?
+--   -> wie bette ich die Anwendung in einen IO-Kontext ein?
+--   -> wie flexibel ist das?
