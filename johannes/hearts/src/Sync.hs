@@ -27,7 +27,7 @@ gameLoop :: (Player, IOStrategy)
          -> (Player, IOStrategy)
          -> (Player, IOStrategy)
          -> (Player, IOStrategy) 
-              -> IO (Maybe Player)
+              -> IO (Maybe Player)    --TODO: Maybe?
 gameLoop (player1, playerIO1) (player2, playerIO2) (player3, playerIO3) (player4, playerIO4) =
  do let players = [player1, player2, player3, player4]
     shuffledDeck <- shuffle deck
