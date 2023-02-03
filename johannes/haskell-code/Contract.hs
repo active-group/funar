@@ -46,6 +46,7 @@ data Contract
     deriving Show
 
 -- >>> :t One
+-- One :: Currency -> Contract
 
 -- >>> MultiplyWith 30 (One EUR)
 -- MultiplyWith 30.0 (One EUR)
