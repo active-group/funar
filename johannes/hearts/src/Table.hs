@@ -187,18 +187,18 @@ tableProcessEvent (GameEnded player) state = state
 --                                                v  neuer Zustand
 --                                                             v  neue Historie
 runGame :: Game a -> TableState -> [GameEvent] -> (TableState, [GameEvent], a)
-runGame (IsCardValid player card callback) state =
-  runGame (callback (playValid state player card)) state
-runGame (TurnOverTrick callback) state =
-  runGame (callback (turnOverTrick state)) state
-runGame (PlayerAfter player callback) state =
-  runGame (callback (Table.playerAfter state player)) state
-runGame (IsGameOver callback) state =
-  runGame (callback (gameOver state)) state
-runGame (Return result) state =
-  (state, result)
-runGame (RecordEvent event callback) state =
+runGame (IsCardValid player card callback) state events =
+  runGame (callback (playValid state player card)) state events
+runGame (TurnOverTrick callback) state events =
+  runGame (callback (turnOverTrick state)) state events
+runGame (PlayerAfter player callback) state events =
+  runGame (callback (Table.playerAfter state player)) state events
+runGame (IsGameOver callback) state events =
+  runGame (callback (gameOver state)) state events
+runGame (Return result) state events =
+  (state, events, result)
+runGame (RecordEvent event callback) state events =
   runGame (callback ()) (tableProcessEvent event state)
-runGame _ _ = undefined
+runGame _ _ events = undefined
 
 runTable = runGame
