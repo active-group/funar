@@ -75,5 +75,10 @@ currencySwap date amount1 curr1 amount2 curr2 =
 -- haben Syntax für Verträge
 -- brauchen: Semantik
 
+-- Long ist gut für mich!
+data Direction = Long | Short
+
+data Payment = MkPayment Direction Date Amount Currency
+
 -- Datum: "Zahlungen bis jetzt"
 semantics :: Contract -> Date -> ([Payment])
