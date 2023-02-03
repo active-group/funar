@@ -149,6 +149,8 @@ tableLoopM command = do
     maybeWinner <- tableProcessCommand command
     case maybeWinner of
         Nothing -> do
+            -- Spätestens hier hätte _ich_ mir in OOP überlegt, was "auf ein Command warten"
+            -- in meinem technischen Kontext bedeuten könnte
             nextCommand <- getNextCommand
             tableLoopM nextCommand
         Just winner ->
