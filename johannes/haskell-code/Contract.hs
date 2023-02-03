@@ -24,3 +24,5 @@ newtype Date = MkDate String
 
 data Currency = EUR | GBP | USD | YEN
     deriving (Eq, Show)
+
+type Amount = Float
