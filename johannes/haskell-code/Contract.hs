@@ -46,6 +46,7 @@ data Contract
     | Both Contract Contract
     | Negate Contract
     | Choice Contract Contract
+    | Zero
     deriving Show
 
 -- >>> :t One
