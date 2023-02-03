@@ -24,3 +24,8 @@ tableIO players =
                 Right _result -> return ()
               return events
      return processCommand
+
+test =
+  let x = 3
+      y = 5
+   in x + y
