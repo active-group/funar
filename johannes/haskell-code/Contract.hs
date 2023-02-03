@@ -94,6 +94,7 @@ data Payment = MkPayment Direction Date Amount Currency
 
 -- Datum: "Zahlungen bis jetzt"
 semantics :: Contract -> Date -> ([Payment], Contract) -- Residualvertrag
+-- "Ausmultiplizieren bei Negate"
 semantics (Negate Zero) now = ([], Zero)
 semantics (Negate contract) now =
     let (payments, restContract) = semantics contract now
