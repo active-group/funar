@@ -326,3 +326,7 @@ stateTtyPlayerIO player playerM =
 
 -- Effekte (_nicht nur_ Seiteneffekte) können wir über Monaden modellieren
 -- Aber: diese "komponieren" nicht gut
+
+-- Ansätze:
+-- - Monadentransformatoren    (m (n a))
+-- - Effektsystem
