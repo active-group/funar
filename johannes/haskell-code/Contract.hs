@@ -57,11 +57,11 @@ data Contract
 
 -- es geht: - um mich
 zcb1 :: Contract
-zcb1 = Delay (MkDate "24.12.2023") (MultiplyWith 100 (One EUR))
+zcb1 = Delay (MkDate "24.12.2023") (Multiply 100 (One EUR))
 
 -- Zero-coupon bond erstellen
 zeroCouponBond :: Date -> Amount -> Currency -> Contract
-zeroCouponBond date amount curr = Delay date (MultiplyWith amount (One curr))
+zeroCouponBond date amount curr = Delay date (Multiply amount (One curr))
 
 currencySwap :: Contract
 currencySwap =
