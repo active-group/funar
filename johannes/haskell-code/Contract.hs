@@ -41,7 +41,7 @@ type Amount = Float
 data Contract
     -- Ich bekomme 1 "Currency" _jetzt_.
     = One Currency
-    | MultiplyWith Amount Contract
+    | MultiplyWith Amount Contract -- <- Selbstbezug
 
 -- es geht: - um mich
 zcb1 :: Contract
