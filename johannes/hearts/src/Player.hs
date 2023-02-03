@@ -329,4 +329,4 @@ stateTtyPlayerIO player playerM =
 
 -- Ansätze:
 -- - Monadentransformatoren    (m (n a))
--- - Effektsystem
+-- - Effektsystem (algebraische Effekte)
