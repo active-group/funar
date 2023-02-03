@@ -28,4 +28,5 @@ tableIO players =
 test =
   let x = 3
       y = 5
-   in x + y
+      f n = n * 7
+   in f x + y
