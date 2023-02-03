@@ -199,6 +199,7 @@ runGame (Return result) state events =
   (state, reverse events, result)
 runGame (RecordEvent event callback) state events =
   runGame (callback ()) (tableProcessEvent event state) (event:events)
-runGame _ _ events = undefined
+runGame (GetNextCommand callback) state events =
+  runGame (callback cmd) state events
 
 runTable = runGame
