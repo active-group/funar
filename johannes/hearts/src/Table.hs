@@ -200,6 +200,7 @@ runGame (Return result) state events =
 runGame (RecordEvent event callback) state events =
   runGame (callback ()) (tableProcessEvent event state) (event:events)
 runGame (GetNextCommand callback) state events =
+  -- ich wüsste, wie es weiterginge, wenn ich ein Command hätte
   runGame (callback cmd) state events
 
 runTable = runGame
