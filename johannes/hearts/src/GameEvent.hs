@@ -165,3 +165,10 @@ tableLoopM command = do
 -- Makroarchitektur?
 --   -> wie bette ich die Anwendung in einen IO-Kontext ein?
 --   -> wie flexibel ist das?
+
+runGame :: Game a -> TableState -> a
+runGame (IsCardValid player card callback) = undefined
+runGame (TurnOverTrick callback) = undefined
+runGame (PlayerAfter player callback) = undefined
+runGame (IsGameOver callback) = undefined
+runGame _ = undefined
