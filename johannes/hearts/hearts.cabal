@@ -8,12 +8,12 @@ library
   exposed-modules:     Cards
                      , GameEvent
                      , Json.Decode
---                     , HeartsJson
---                     , Table
---                     , TableIO
---                     , Sync
---                     , Free
---                     , Player
+                     , HeartsJson
+                     , Table
+                     , TableIO
+                     , Sync
+                     , Free
+                     , Player
   other-modules:       MVar
                      , Shuffle
                      , Teletype
