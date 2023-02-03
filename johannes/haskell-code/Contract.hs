@@ -26,3 +26,8 @@ data Currency = EUR | GBP | USD | YEN
     deriving (Eq, Show)
 
 type Amount = Float
+
+-- Ein Vertrag ist ...
+-- 
+data Contract
+    = ZeroCouponBond Date Amount Currency
