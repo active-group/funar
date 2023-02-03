@@ -17,6 +17,9 @@ import TableIO
 
 type TableAPI = "command" :> ReqBody '[JSON] GameCommand :> Post '[JSON] [GameEvent]
 
+type BookAPI = "book" :> ( ReqBody '[JSON] Book :> Put '[JSON] ()
+                           :<|> Capture '[JSON] BookId :> Get ['JSON] (Maybe Book))
+
 server :: (GameCommand -> IO [GameEvent]) -> Server TableAPI
 server = (.) liftIO
 
