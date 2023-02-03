@@ -19,3 +19,4 @@ Bestandteile:
 
 -}
 
+data Date = MkDate String
