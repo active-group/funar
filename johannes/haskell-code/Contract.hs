@@ -17,6 +17,11 @@ Bestandteile:
 - Währung
 - Menge
 
+Currency swap:
+  Am 24.12.2023:
+    - Ich bekomme 100 Euro
+    - Ich erhalte 150 GBP
+
 -}
 
 newtype Date = MkDate String
