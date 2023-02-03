@@ -31,7 +31,7 @@ import Player
 
 playerIO ::
   Player ->
-  Strategy '[State (PlayerState player), Embed IO] ->
+  Strategy '[State (PlayerState player), Embed IO, Tty] ->
   IO (GameEvent -> IO [GameCommand])
 playerIO player strategy =
   do ref <- IORef.newIORef (makeEmptyPlayerStateFor player)
