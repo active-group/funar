@@ -45,6 +45,7 @@ data Contract
     | Delay Date Contract
     | Both Contract Contract
     | Reverse Contract
+    | Choice Contract Contract
     deriving Show
 
 -- >>> :t One
