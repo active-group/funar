@@ -42,10 +42,14 @@ data Contract
     -- Ich bekomme 1 "Currency" _jetzt_.
     = One Currency
     | MultiplyWith Amount Contract -- <- Selbstbezug
+    | Tomorrow Contract
     deriving Show
 
 -- >>> MultiplyWith 30 (One EUR)
--- No instance for (Show Contract) arising from a use of ‘evalPrint’
+-- MultiplyWith 30.0 (One EUR)
+
+-- >>> Tomorrow (Tomorrow (One EUR))
+-- Tomorrow (Tomorrow (One EUR))
 
 -- es geht: - um mich
 -- zcb1 :: Contract
