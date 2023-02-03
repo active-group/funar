@@ -34,8 +34,12 @@ type Amount = Float
 
 -- Ein Vertrag ist ...
 -- 
+-- data Contract
+--     = ZeroCouponBond Date Amount Currency
+--     | CurrencySwap Contract Contract
+
 data Contract
-    = ZeroCouponBond Date Amount Currency
+    = One Currency
 
 -- es geht: - um mich
 zcb1 :: Contract
