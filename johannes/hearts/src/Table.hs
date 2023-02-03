@@ -186,7 +186,8 @@ runGame (IsCardValid player card callback) state =
   runGame (callback (playValid state player card)) state
 runGame (TurnOverTrick callback) state =
   runGame (callback (turnOverTrick state)) state
-runGame (PlayerAfter player callback) state = undefined
+runGame (PlayerAfter player callback) state =
+  runGame (callback (Table.playerAfter state player)) state
 runGame (IsGameOver callback) state = undefined
 runGame _ _ = undefined
 
