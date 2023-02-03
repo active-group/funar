@@ -188,3 +188,5 @@ runGame (TurnOverTrick callback) state = undefined
 runGame (PlayerAfter player callback) state = undefined
 runGame (IsGameOver callback) state = undefined
 runGame _ _ = undefined
+
+runTable = runGame
