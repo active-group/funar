@@ -63,5 +63,6 @@ zcb1 = Delay (MkDate "24.12.2023") (Multiply 100 (One EUR))
 zeroCouponBond :: Date -> Amount -> Currency -> Contract
 zeroCouponBond date amount curr = Delay date (Multiply amount (One curr))
 
-currencySwap :: Contract
-currencySwap =
+currencySwap :: Date -> Amount -> Currency -> Amount -> Currency -> Contract
+currencySwap date amount1 curr1 amount2 curr2 =
+    Both (zeroCouponBond date amount1 curr1) (zeroCouponBond date amount2 curr2)
