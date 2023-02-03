@@ -152,6 +152,7 @@ tableLoopM command = do
             -- Spätestens hier hätte _ich_ mir in OOP überlegt, was "auf ein Command warten"
             -- in meinem technischen Kontext bedeuten könnte -> Kopplung?
             -- Vielleicht hätte ich diesen Aspekt dann über Interface rausgezogen
+            -- -> nicht mehr Teil des Spielablaufs
             nextCommand <- getNextCommand
             tableLoopM nextCommand
         Just winner ->
