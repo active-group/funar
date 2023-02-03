@@ -31,3 +31,6 @@ type Amount = Float
 -- 
 data Contract
     = ZeroCouponBond Date Amount Currency
+
+zcb1 :: Contract
+zcb1 = ZeroCouponBond (MkDate "24.12.2023") 100 EUR
