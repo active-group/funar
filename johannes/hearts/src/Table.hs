@@ -184,7 +184,8 @@ tableProcessEvent (GameEnded player) state = state
 runGame :: Game a -> TableState -> a
 runGame (IsCardValid player card callback) state =
   runGame (callback (playValid state player card)) state
-runGame (TurnOverTrick callback) state = undefined
+runGame (TurnOverTrick callback) state =
+  runGame (callback (turnOverTrick state)) state
 runGame (PlayerAfter player callback) state = undefined
 runGame (IsGameOver callback) state = undefined
 runGame _ _ = undefined
