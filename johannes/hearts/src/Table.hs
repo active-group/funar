@@ -186,7 +186,7 @@ tableProcessEvent (GameEnded player) state = state
 --                                 v  akt. Historie
 --                                                v  neuer Zustand
 --                                                             v  neue Historie
-runGame :: Game a -> TableState -> [GameEvent] -> (TableState, [GameEvent], a)
+runGame :: Game a -> TableState -> [GameEvent] -> (TableState, [GameEvent], Either (GameCommand -> Game a) a)
 runGame (IsCardValid player card callback) state events =
   runGame (callback (playValid state player card)) state events
 runGame (TurnOverTrick callback) state events =
@@ -201,6 +201,6 @@ runGame (RecordEvent event callback) state events =
   runGame (callback ()) (tableProcessEvent event state) (event:events)
 runGame (GetNextCommand callback) state events =
   -- ich wüsste, wie es weiterginge, wenn ich ein Command hätte
-  runGame (callback cmd) state events
+  (state, reverse events, Left callback)
 
 runTable = runGame
