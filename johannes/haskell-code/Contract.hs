@@ -40,10 +40,12 @@ type Amount = Float
 
 data Contract
     -- Ich bekomme 1 "Currency" _jetzt_.
-    = MkOne Currency
+    = One Currency
     | MultiplyWith Amount Contract -- <- Selbstbezug
     | Delay Date Contract
     deriving Show
+
+-- >>> :t One
 
 -- >>> MultiplyWith 30 (One EUR)
 -- MultiplyWith 30.0 (One EUR)
