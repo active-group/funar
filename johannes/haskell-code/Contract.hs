@@ -42,12 +42,14 @@ data Contract
     -- Ich bekomme 1 "Currency" _jetzt_.
     = One Currency
     | MultiplyWith Amount Contract -- <- Selbstbezug
+    deriving Show
 
 -- >>> MultiplyWith 30 (One EUR)
+-- No instance for (Show Contract) arising from a use of ‘evalPrint’
 
 -- es geht: - um mich
-zcb1 :: Contract
-zcb1 = ZeroCouponBond (MkDate "24.12.2023") 100 EUR
+-- zcb1 :: Contract
+-- zcb1 = ZeroCouponBond (MkDate "24.12.2023") 100 EUR
 
-currencySwap :: Contract
-currencySwap = undefined
+-- currencySwap :: Contract
+-- currencySwap = undefined
