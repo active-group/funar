@@ -52,6 +52,9 @@ data Contract
 instance Semigroup Contract where
     (<>) = Both
 
+instance Monoid Contract where
+    mempty = Zero
+
 -- >>> :t One
 -- One :: Currency -> Contract
 
