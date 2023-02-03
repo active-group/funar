@@ -190,6 +190,7 @@ runGame (PlayerAfter player callback) state =
   runGame (callback (Table.playerAfter state player)) state
 runGame (IsGameOver callback) state =
   runGame (callback (gameOver state)) state
-runGame _ _ = undefined
+runGame (Return result) state = undefined
+runGame _ state = undefined
 
 runTable = runGame
