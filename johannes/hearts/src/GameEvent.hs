@@ -165,3 +165,11 @@ tableLoopM command = do
 -- Makroarchitektur?
 --   -> wie bette ich die Anwendung in einen IO-Kontext ein?
 --   -> wie flexibel ist das?
+
+-- Steht in den Events, wer gewonnen hat?
+eventsWinner :: [GameEvent] -> Maybe Player
+eventsWinner [] = Nothing
+eventsWinner (first : rest) =
+  case first of
+    GameEnded winner -> Just winner
+    _ -> eventsWinner rest
