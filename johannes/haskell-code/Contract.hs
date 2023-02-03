@@ -43,7 +43,7 @@ data Contract
     = One Currency
     | MultiplyWith Amount Contract -- <- Selbstbezug
     | Delay Date Contract
-    | Add Contract Contract
+    | Both Contract Contract
     deriving Show
 
 -- >>> :t One
@@ -63,5 +63,5 @@ zcb1 = Delay (MkDate "24.12.2023") (MultiplyWith 100 (One EUR))
 zeroCouponBond :: Date -> Amount -> Currency -> Contract
 zeroCouponBond date amount curr = Delay date (MultiplyWith amount (One curr))
 
--- currencySwap :: Contract
--- currencySwap = undefined
+currencySwap :: Contract
+currencySwap =
