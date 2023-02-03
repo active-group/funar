@@ -40,3 +40,6 @@ data Contract
 -- es geht: - um mich
 zcb1 :: Contract
 zcb1 = ZeroCouponBond (MkDate "24.12.2023") 100 EUR
+
+currencySwap :: Contract
+currencySwap = undefined
