@@ -44,6 +44,7 @@ data Contract
     | Multiply Amount Contract -- <- Selbstbezug
     | Delay Date Contract
     | Both Contract Contract
+    | Reverse Contract
     deriving Show
 
 -- >>> :t One
