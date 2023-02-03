@@ -9,6 +9,9 @@ import Table
 
 tableIO :: [Player] -> IO (GameCommand -> IO [GameEvent])
 tableIO players =
+  -- Ich speichere:
+  -- - Den Restspielablauf
+  -- - den aktuellen Zustand
   do ref <- IORef.newIORef (tableLoopM, emptyTableState players)
      let processCommand command =          
            do (next, state) <- IORef.readIORef ref
