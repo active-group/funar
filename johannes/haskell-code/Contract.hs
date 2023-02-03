@@ -81,5 +81,5 @@ data Direction = Long | Short
 data Payment = MkPayment Direction Date Amount Currency
 
 -- Datum: "Zahlungen bis jetzt"
-semantics :: Contract -> Date -> ([Payment])
+semantics :: Contract -> Date -> ([Payment], Contract)
 semantics = undefined
