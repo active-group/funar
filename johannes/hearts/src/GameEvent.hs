@@ -117,7 +117,8 @@ instance Monad Game where
 -- _ein_ Command abarbeiten
 tableProcessCommand :: GameCommand -> Game (Maybe Player)
 tableProcessCommand (DealHands playerHands) = do
-    mapM_ (recordEvent . uncurry HandDealt) (Map.toList hands)
+    mapM_ (\(player, hand) -> recordEvent (HandDealt player hand))
+          (Map.toList playerHands)
     return Nothing
 tableProcessCommand (PlayCard player card) = do
     -- Daniel: müssen wir nicht erst prüfen, ob Karten ausgeteilt wurden?
