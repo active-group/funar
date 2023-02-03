@@ -39,6 +39,7 @@ type Amount = Float
 --     | CurrencySwap Contract Contract
 
 data Contract
+    -- Ich bekomme 1 "Currency" _jetzt_.
     = One Currency
 
 -- es geht: - um mich
