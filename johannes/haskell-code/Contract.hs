@@ -98,4 +98,5 @@ semantics (Negate Zero) now = ([], Zero)
 semantics (Negate contract) now =
     let (payments, restContract) = semantics contract now
      in (fmap (\ (MkPayment dir date amount currency) -> MkPayment (if dir == Short then Long else Short) date amount currency) payments, Negate restContract)
+-- TODO:
 semantics _ _ = undefined
