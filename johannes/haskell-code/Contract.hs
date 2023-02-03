@@ -72,3 +72,8 @@ currencySwap date amount1 curr1 amount2 curr2 =
 
 
 
+-- haben Syntax für Verträge
+-- brauchen: Semantik
+
+-- Datum: "Zahlungen bis jetzt"
+semantics :: 
