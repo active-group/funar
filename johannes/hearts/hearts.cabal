@@ -34,7 +34,7 @@ library
   default-language:    Haskell2010
 
 executable server
-  buildable:         False
+  -- buildable:         False
   main-is:             Main.hs
   other-modules:       Args
                      , PlayerServer
