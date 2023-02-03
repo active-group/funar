@@ -76,4 +76,4 @@ currencySwap date amount1 curr1 amount2 curr2 =
 -- brauchen: Semantik
 
 -- Datum: "Zahlungen bis jetzt"
-semantics :: 
+semantics :: Contract -> Date -> ([Payment])
