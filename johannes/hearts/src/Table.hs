@@ -181,7 +181,7 @@ tableProcessEvent (IllegalCardAttempted player card) state = state
 tableProcessEvent (GameEnded player) state = state
 
 -- Spielablauf interpretieren/ausführen
-runGame :: Game a -> TableState -> a
+runGame :: Game a -> TableState -> (TableState, a)
 runGame (IsCardValid player card callback) state =
   runGame (callback (playValid state player card)) state
 runGame (TurnOverTrick callback) state =
@@ -190,7 +190,8 @@ runGame (PlayerAfter player callback) state =
   runGame (callback (Table.playerAfter state player)) state
 runGame (IsGameOver callback) state =
   runGame (callback (gameOver state)) state
-runGame (Return result) state = undefined
+runGame (Return result) state =
+  ()
 runGame _ state = undefined
 
 runTable = runGame
