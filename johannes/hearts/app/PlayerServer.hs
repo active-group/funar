@@ -36,6 +36,7 @@ runServer port (Just name) =
   let player = Player name
    in do
         putStrLn ("Starting player server for player '" ++ name ++ "'  on port " ++ show port)
+        -- eventProcessor :: GameEvent -> IO (GameEvent -> IO [GameCommand])
         eventProcessor <- statePlayerIO player (alongStrategy player)
         Network.Wai.Handler.Warp.run port (mkApp eventProcessor)
 runServer _ _ = error "Missing player credentials"
