@@ -181,6 +181,11 @@ tableProcessEvent (IllegalCardAttempted player card) state = state
 tableProcessEvent (GameEnded player) state = state
 
 -- Spielablauf interpretieren/ausführen
+--          v Spielbeschreibung
+--                   v  akt. Zustand
+--                                 v  akt. Historie
+--                                                v  neuer Zustand
+--                                                             v  neue Historie
 runGame :: Game a -> TableState -> [GameEvent] -> (TableState, [GameEvent], a)
 runGame (IsCardValid player card callback) state =
   runGame (callback (playValid state player card)) state
