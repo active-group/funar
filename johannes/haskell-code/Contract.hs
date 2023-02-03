@@ -52,8 +52,8 @@ data Contract
 -- Tomorrow (Tomorrow (One EUR))
 
 -- es geht: - um mich
--- zcb1 :: Contract
--- zcb1 = ZeroCouponBond (MkDate "24.12.2023") 100 EUR
+zcb1 :: Contract
+zcb1 = Delay (MkDate "24.12.2023") (MultiplyWith 100 (One EUR))
 
 -- currencySwap :: Contract
 -- currencySwap = undefined
