@@ -24,6 +24,8 @@ tableIO players =
                 Right _result -> return ()
               return events
      return processCommand
+    --  where
+    --   myFunction n = n * 5
 
 test =
   let x = 3
