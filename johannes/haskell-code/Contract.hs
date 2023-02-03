@@ -43,6 +43,7 @@ data Contract
     = One Currency
     | MultiplyWith Amount Contract -- <- Selbstbezug
     | Delay Date Contract
+    | Add Contract Contract
     deriving Show
 
 -- >>> :t One
