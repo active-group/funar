@@ -180,6 +180,7 @@ tableProcessEvent (TrickTaken player trick) state =
 tableProcessEvent (IllegalCardAttempted player card) state = state
 tableProcessEvent (GameEnded player) state = state
 
+-- Spielablauf interpretieren/ausführen
 runGame :: Game a -> TableState -> a
 runGame (IsCardValid player card callback) = undefined
 runGame (TurnOverTrick callback) = undefined
