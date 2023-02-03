@@ -161,7 +161,7 @@ chooseAlong =
             firstSuit = suit firstCard
          in case filter ((== firstSuit) . suit) cards of
               [] ->
-                return (minimumBy compareCards cards) -- wir haben nix passendes, nimm große Karte
+                return (maximumBy compareCards cards) -- wir haben nix passendes, nimm große Karte
               matchingCards ->
                 return (minimumBy compareCards matchingCards) -- sonst kleine passende
 
