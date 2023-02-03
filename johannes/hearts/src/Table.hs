@@ -193,7 +193,7 @@ runGame (IsGameOver callback) state =
 runGame (Return result) state =
   (state, result)
 runGame (RecordEvent event callback) state =
-  runGame (callback undefined) (tableProcessEvent event state)
+  runGame (callback ()) (tableProcessEvent event state)
 runGame _ _ = undefined
 
 runTable = runGame
