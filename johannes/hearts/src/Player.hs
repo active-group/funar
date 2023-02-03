@@ -322,3 +322,7 @@ stateTtyPlayerIO player playerM =
               WaitingForLine cont -> error "this can't happen"
               StepDone a -> return commands
     return processEvent
+
+
+-- Effekte (_nicht nur_ Seiteneffekte) können wir über Monaden modellieren
+-- Aber: diese "komponieren" nicht gut
