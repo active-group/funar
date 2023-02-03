@@ -20,7 +20,7 @@ Bestandteile:
 Currency swap:
   Am 24.12.2023:
     - Ich bekomme 100 Euro
-    - Ich erhalte 150 GBP
+    - Ich bezahle 150 GBP
 
 -}
 
