@@ -41,7 +41,7 @@ type Amount = Float
 data Contract
     -- Ich bekomme 1 "Currency" _jetzt_.
     = One Currency
-    | MultiplyWith Amount Contract -- <- Selbstbezug
+    | Multiply Amount Contract -- <- Selbstbezug
     | Delay Date Contract
     | Both Contract Contract
     deriving Show
