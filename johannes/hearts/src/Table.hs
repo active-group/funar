@@ -188,7 +188,8 @@ runGame (TurnOverTrick callback) state =
   runGame (callback (turnOverTrick state)) state
 runGame (PlayerAfter player callback) state =
   runGame (callback (Table.playerAfter state player)) state
-runGame (IsGameOver callback) state = undefined
+runGame (IsGameOver callback) state =
+  runGame (callback (gameOver state)) state
 runGame _ _ = undefined
 
 runTable = runGame
