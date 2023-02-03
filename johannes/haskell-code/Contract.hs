@@ -87,12 +87,14 @@ currencySwap date amount1 curr1 amount2 curr2 =
 
 -- Long ist gut für mich!
 data Direction = Long | Short
+    deriving (Eq, Show)
 
 data Payment = MkPayment Direction Date Amount Currency
+    deriving (Eq, Show)
 
 -- Datum: "Zahlungen bis jetzt"
 semantics :: Contract -> Date -> ([Payment], Contract) -- Residualvertrag
 semantics (Negate contract) now =
     let (payments, restContract) = semantics contract now
-     in (fmap (\ (MkPayment dir date amount currency) -> if dir == Short then Long else Short) payments, restContract)
+     in (fmap (\ (MkPayment dir date amount currency) -> MkPayment (if dir == Short then Long else Short) date amount currency) payments, restContract)
 semantics _ _ = undefined
