@@ -92,5 +92,7 @@ data Payment = MkPayment Direction Date Amount Currency
 
 -- Datum: "Zahlungen bis jetzt"
 semantics :: Contract -> Date -> ([Payment], Contract) -- Residualvertrag
-semantics (Negate contract) now = undefined
+semantics (Negate contract) now =
+    let (payments, restContract) = semantics contract now
+     in (fmap (\ (MkPayment dir date amount currency) -> if dir == Short then Long else Short) payments, restContract)
 semantics _ _ = undefined
