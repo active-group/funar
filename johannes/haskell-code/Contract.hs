@@ -21,3 +21,6 @@ Bestandteile:
 
 newtype Date = MkDate String
     deriving (Ord, Show, Eq)
+
+data Currency = EUR | GBP | USD | YEN
+    deriving (Eq, Show)
