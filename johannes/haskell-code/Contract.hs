@@ -89,15 +89,55 @@ currencySwap date amount1 curr1 amount2 curr2 =
 data Direction = Long | Short
     deriving (Eq, Show)
 
-data Payment = MkPayment Direction Date Amount Currency
+-- Eine Zahlung besteht aus:
+-- - Richtung
+-- - Datum
+-- - Menge
+-- - Währung
+data Payment = MkPayment
+    { direction :: Direction
+    , date :: Date
+    , amount :: Amount
+    , currency :: Currency
+    }
     deriving (Eq, Show)
+
+-- Richtung einer Zahlung umkehren
+negatePayment :: Payment -> Payment
+negatePayment payment = payment { direction = toggleDirection (direction payment) }
+  where
+    toggleDirection Long = Short
+    toggleDirection Short = Long
+
+-- Zahlung skalieren
+scalePayment :: Amount -> Payment -> Payment
+scalePayment factor payment =
+  payment { amount = factor * (amount payment) }
 
 -- Datum: "Zahlungen bis jetzt"
 semantics :: Contract -> Date -> ([Payment], Contract) -- Residualvertrag
--- "Ausmultiplizieren bei Negate"
+-- Damit man das Negate auch wieder los wird
 semantics (Negate Zero) now = ([], Zero)
+-- "Ausmultiplizieren bei Negate"
 semantics (Negate contract) now =
     let (payments, restContract) = semantics contract now
-     in (fmap (\ (MkPayment dir date amount currency) -> MkPayment (if dir == Short then Long else Short) date amount currency) payments, Negate restContract)
--- TODO: Johannes
+     in (fmap negatePayment payments, Negate restContract)
+semantics Zero _ = ([], Zero)
+semantics (Multiply _ Zero) now = ([], Zero)
+semantics (Multiply amount contract) now =
+    let (payments, restContract) = semantics contract now
+     --             v    nicht vergessen, dass der Restvertrag auch multipliziert werden muss (Eva: "Ausmultiplizieren")
+     in (fmap (scalePayment amount) payments, Multiply amount restContract)
+semantics contract@(Delay date innerContract) now =
+    if now >= date
+    then semantics innerContract now
+    else ([], contract)
+-- Damit man das Both auch wieder los wird
+semantics (Both Zero Zero) = ([], Zero)
+semantics (Both c1 c2) now =
+  let (payments1, restContract1) = semantics c1 now
+      (payments2, restContract2) = semantics c2 now
+   in (payments1 <> payments2, Both restContract1 restContract2)
+-- Können Choice hier nicht implementieren, da Rückfrage erforderlich ist
+-- -> Siehe Paper
 semantics _ _ = undefined
