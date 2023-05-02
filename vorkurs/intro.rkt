@@ -94,3 +94,12 @@
   (lambda (time)
     (+ (* 60 (time-hour time))
        (time-minute time))))
+
+(: create-time-from-minutes (natural -> time))
+
+(check-expect (create-time-from-minutes 744)
+              time1)
+
+(define create-time-from-minutes
+  (lambda (min)
+    (make-time (quotient min 60) (remainder min 60))))
