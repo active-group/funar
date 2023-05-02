@@ -275,3 +275,34 @@
          (shower-product-soap (mixture-product1 product))
          (shower-product-soap (mixture-product2 product)))
         2)))))
+
+; Eine Liste ist eins der folgenden:
+; - die leere Liste -ODER-
+; - eine Cons-Liste, bestehend aus erstem Element und Rest-Liste
+;                                                          ^^^^^^
+(define list-of-numbers
+  (signature (mixed empty-list
+                    cons-list)))
+
+(define-record empty-list
+  make-empty
+  empty?)
+(define empty (make-empty))
+
+; Eine Cons-Liste besteht aus:
+; - erstes Element
+; - Rest-Liste
+(define-record cons-list
+  cons
+  cons?
+  (first number)
+  (rest list-of-numbers))
+
+; 1elementige Liste: 5
+(define list1 (cons 5 empty))
+; 2elementige Liste: 2 5
+(define list2 (cons 2 (cons 5 empty)))
+; 3elementige Liste: 7 2 5
+(define list3 (cons 7 (cons 2 (cons 5 empty))))
+; 4elementige Liste: 4 7 2 5
+(define list3 (cons 4 list3))
