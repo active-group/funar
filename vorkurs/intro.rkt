@@ -363,3 +363,19 @@
        (if (odd? (first list))
            (cons (first list) (extract-odds (rest list)))
            (extract-odds (rest list)))))))
+
+; Abstraktion:
+; - kopieren
+; - umbenennen (rekursive Aufrufe nicht vergessen!)
+; - den Unterschieden Namen geben
+; - die Namen in ein lambda aufnehmen (rekursive Aufrufe ...)
+(: extract-list ((number -> boolean) list-of-numbers -> list-of-numbers))
+
+(define extract-list
+  (lambda (p? list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (if (p? (first list))
+           (cons (first list) (extract-list p? (rest list)))
+           (extract-list p? (rest list)))))))
