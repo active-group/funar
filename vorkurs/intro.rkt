@@ -305,4 +305,49 @@
 ; 3elementige Liste: 7 2 5
 (define list3 (cons 7 (cons 2 (cons 5 empty))))
 ; 4elementige Liste: 4 7 2 5
-(define list3 (cons 4 list3))
+(define list4 (cons 4 list3))
+
+; Summe aller Listenelemente
+(: list-sum (list-of-numbers -> number))
+
+(check-expect (list-sum list4) 18)
+
+; Schablone:
+#;(define list-sum
+  (lambda (list)
+    (cond
+      ((empty? list) ...)
+      ((cons? list)
+       ...
+       (first list)
+       (list-sum (rest list))
+       ...))))
+
+(define list-sum
+  (lambda (list)
+    (cond
+      ((empty? list) 0) ; neutrales Element bezüglich +
+      ((cons? list)
+       (+ (first list)
+          (list-sum (rest list)))))))
+
+; Produkt aller Listenelemente
+(: list-product (list-of-numbers -> number))
+
+(check-expect (list-product list4)
+              280)
+
+(define list-product
+  (lambda (list)
+    (cond
+      ((empty? list) 1) ; neutrales Element bezüglich *
+      ((cons? list)
+       (*
+        (first list)
+        (list-product (rest list)))))))
+
+(define identity (lambda (x) x))
+
+
+; Aus einer Liste von Zahlen die geraden Elemente
+(: extract-evens (list-of-number -> list-of-number))
