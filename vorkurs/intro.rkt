@@ -141,6 +141,12 @@
     (dillo-weight dillo)
     ...))
 
-(define run-over-dillo
+#;(define run-over-dillo
   (lambda (dillo)
     (make-dillo #f (dillo-weight dillo))))
+
+(define run-over-dillo
+  (lambda (dillo)
+    (match dillo
+      ((make-dillo #t w) (make-dillo #f w))
+      ((make-dillo #f w) dillo))))
