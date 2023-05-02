@@ -376,7 +376,9 @@
 ; - die Namen in ein lambda aufnehmen (rekursive Aufrufe ...)
 
 ; Signaturvariable: %element -> parametrische Polymorphie
+; Higher-Order-Funktion
 (: extract-list ((%element -> boolean) (list-of %element) -> (list-of %element)))
+; heißt i.d.R. filter
 
 (define extract-list
   (lambda (p? list)
@@ -388,3 +390,4 @@
            (extract-list p? (rest list)))))))
 
 (extract-list dillo-alive? highway)
+
