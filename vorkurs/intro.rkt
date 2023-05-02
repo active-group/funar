@@ -374,7 +374,9 @@
 ; - umbenennen (rekursive Aufrufe nicht vergessen!)
 ; - den Unterschieden Namen geben
 ; - die Namen in ein lambda aufnehmen (rekursive Aufrufe ...)
-(: extract-list ((number -> boolean) list-of-numbers -> list-of-numbers))
+
+; Signaturvariable: %element -> parametrische Polymorphie
+(: extract-list ((%element -> boolean) (list-of %element) -> (list-of %element)))
 
 (define extract-list
   (lambda (p? list)
@@ -384,3 +386,5 @@
        (if (p? (first list))
            (cons (first list) (extract-list p? (rest list)))
            (extract-list p? (rest list)))))))
+
+(extract-list dillo-alive? highway)
