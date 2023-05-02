@@ -364,6 +364,8 @@
            (cons (first list) (extract-odds (rest list)))
            (extract-odds (rest list)))))))
 
+(define highway (cons dillo1 (cons dillo2 empty)))
+
 ; Abstraktion:
 ; - kopieren
 ; - umbenennen (rekursive Aufrufe nicht vergessen!)
