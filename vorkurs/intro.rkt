@@ -418,9 +418,8 @@
 (define list-inc
   (lambda (list)
     (cond
-      ((empty? list) ...)
+      ((empty? list) empty)
       ((cons? list)
-       ...
-       (first list)
-       (list-inc (rest list))
-       ...))))
+       (cons
+        (+ 1 (first list))
+        (list-inc (rest list)))))))
