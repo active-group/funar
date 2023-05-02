@@ -192,3 +192,7 @@
 ; Tier überfahren
 (: run-over-animal (animal -> animal))
 
+(check-expect (run-over-animal parrot1)
+              (run-over-parrot parrot1))
+(check-expect (run-over-animal dillo1)
+              (run-over-dillo dillo1))
