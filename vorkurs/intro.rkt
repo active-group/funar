@@ -210,6 +210,10 @@
 ; Ein Duschprodukt:
 ; - Seife -ODER-
 ; - Shampoo -ODER-
+; - Mixtur aus zwei Duschprodukten
+;                   ^^^^^^^^^^^^ Selbstbezug
+
+; gelöscht:
 ; - Duschgel (50% Seife, 50% Shampoo)
 
 ; Bei Seife interessiert der pH-Wert.
@@ -217,4 +221,57 @@
 
 ; Seife hat folgende Bestandteile:
 ; - pH-Wert
+(define-record soap
+  make-soap
+  soap?
+  (soap-ph number))
 
+(define hair-type
+  (signature (enum "normal" "oily" "dandruff")))
+
+(define-record shampoo
+  make-shampoo
+  shampoo?
+  (shampoo-hair-type hair-type))
+
+; Eine Mixtur besteht aus:
+; - einem Duschprodukt
+; - noch einem Duschprodukt
+
+(define-record mixture
+  make-mixture
+  mixture?
+  (mixture-product1 shower-product)
+  (mixture-product2 shower-product))
+
+(define shower-product
+  (signature (mixed shampoo soap mixture)))
+
+(define soap1 (make-soap 7))
+(define soap2 (make-soap 9))
+(define shampoo1 (make-shampoo "oily"))
+(define shampoo2 (make-shampoo "normal"))
+
+(define mix1 (make-mixture soap1 shampoo1))
+(define mix2 (make-mixture mix1 soap2))
+
+
+; Seifenanteil eines Duschprodukts berechnen
+(: shower-product-soap (shower-product -> number))
+
+(check-expect (shower-product-soap soap1) 1)
+(check-expect (shower-product-soap shampoo1) 0)
+(check-expect (shower-product-soap mix1) 0.5)
+(check-expect (shower-product-soap mix2) 0.75)
+
+(define shower-product-soap
+  (lambda (product)
+    (cond
+      ((soap? product) 1)
+      ((shampoo? product) 0)
+      ((mixture? product)
+       (/
+        (+
+         (shower-product-soap (mixture-product1 product))
+         (shower-product-soap (mixture-product2 product)))
+        2)))))
