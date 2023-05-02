@@ -207,3 +207,14 @@
       ((dillo? animal) (run-over-dillo animal))
       ((parrot? animal) (run-over-parrot animal)))))
 
+; Ein Duschprodukt:
+; - Seife -ODER-
+; - Shampoo -ODER-
+; - Duschgel (50% Seife, 50% Shampoo)
+
+; Bei Seife interessiert der pH-Wert.
+; Beim Shampoo der Haartyp (normal, fettig, Schuppen)
+
+; Seife hat folgende Bestandteile:
+; - pH-Wert
+
