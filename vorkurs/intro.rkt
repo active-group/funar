@@ -118,8 +118,11 @@
 ; zusammengesetzte Daten
 (define-record dillo
   make-dillo
+  dillo? ; Prädikat
   (dillo-alive? boolean)
   (dillo-weight number))
+
+(: dillo? (any -> boolean))
 
 (: make-dillo (boolean number -> dillo))
 (: dillo-alive? (dillo -> boolean))
