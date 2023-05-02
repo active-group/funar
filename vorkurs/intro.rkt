@@ -104,7 +104,13 @@
   (lambda (min)
     (make-time (quotient min 60) (remainder min 60))))
 
-; Tiere auf dem texanischen Highway
+; Ein Tier auf dem texanischen Highway ist eins der folgenden:
+; - Gürteltier -ODER-
+; - Papagei
+; gemischte Daten
+(define animal
+  (signature (mixed dillo
+                    parrot)))
 
 ; Gürteltier hat folgende Eigenschaften:
 ; - lebendig oder tot -UND-
