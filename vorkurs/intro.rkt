@@ -188,3 +188,7 @@
 (define run-over-parrot
   (lambda (parrot)
     (make-parrot "" (parrot-weight parrot))))
+
+; Tier überfahren
+(: run-over-animal (animal -> animal))
+
