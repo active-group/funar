@@ -150,3 +150,24 @@
     (match dillo
       ((make-dillo #t w) (make-dillo #f w))
       ((make-dillo #f w) dillo))))
+
+
+(define feed-dillo
+  (lambda (dillo w)
+    (if (dillo-alive? dillo)
+        (make-dillo #t (+ w (dillo-weight dillo)))
+        dillo)))
+
+; Papagei hat folgende Eigenschaften:
+; - Satz -UND-
+; - Gewicht
+(define-record parrot
+  make-parrot
+  (parrot-sentence string)
+  (parrot-weight number))
+
+; Begrüßungs-Papagei
+(define parrot1 (make-parrot "Welcome!" 1))
+; Rausschmeißer
+(define parrot2 (make-parrot "Goodbye!" 2))
+
