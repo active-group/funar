@@ -413,7 +413,6 @@
 
 (check-expect (list-inc list4)
               (cons 5 (cons 8 (cons 3 (cons 6 empty)))))
-                         
 
 (define list-inc
   (lambda (list)
