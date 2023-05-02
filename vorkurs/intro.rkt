@@ -376,7 +376,7 @@
 ; - die Namen in ein lambda aufnehmen (rekursive Aufrufe ...)
 
 ; Signaturvariable: %element -> parametrische Polymorphie
-; Higher-Order-Funktion
+; Higher-Order-Funktion ("Funktion mit mehr als einem Pfeil")
 (: extract-list ((%element -> boolean) (list-of %element) -> (list-of %element)))
 ; heißt i.d.R. filter
 
@@ -391,3 +391,21 @@
 
 (extract-list dillo-alive? highway)
 
+; Alle Tiere auf dem Highway überfahren
+(: run-over-animals ((list-of animal) -> (list-of animal)))
+
+(check-expect (run-over-animals highway)
+              (cons (run-over-animal dillo1)
+                    (cons (run-over-animal dillo2)
+                          empty)))
+
+(define run-over-animals
+  (lambda (list)
+    (cond
+      ((empty? list) ...)
+      ((cons? list)
+       ...
+       (first list)
+       (run-over-animals (rest list))
+       ...))))
+                         
