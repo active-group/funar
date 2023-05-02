@@ -350,4 +350,16 @@
 
 
 ; Aus einer Liste von Zahlen die geraden Elemente
-(: extract-evens (list-of-number -> list-of-number))
+(: extract-odds (list-of-numbers -> list-of-numbers))
+
+(check-expect (extract-odds list4)
+              (cons 7 (cons 5 empty)))
+
+(define extract-odds
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (if (odd? (first list))
+           (cons (first list) (extract-odds (rest list)))
+           (extract-odds (rest list)))))))
