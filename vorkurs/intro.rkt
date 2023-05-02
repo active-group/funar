@@ -447,3 +447,11 @@
        (operator
         (first list)
         (list-fold neutral operator (rest list)))))))
+
+
+(define list-map2
+  (lambda (f list)
+    (list-fold empty
+               (lambda (firstl recres) (cons (f firstl) recres))
+               list)))
+    
