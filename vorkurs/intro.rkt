@@ -420,5 +420,30 @@
       ((empty? list) empty)
       ((cons? list)
        (cons
-        (+ 1 (first list))
+        (inc (first list))
         (list-inc (rest list)))))))
+
+(define inc (lambda (x) (+ 1 x)))
+
+; Funktion auf jedes Element einer Liste anwenden
+(: list-map ((%a -> %b) (list-of %a) -> (list-of %b)))
+   
+(define list-map
+  (lambda (f list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cons
+        (f (first list))
+        (list-map f (rest list)))))))
+
+(: list-fold (%a (%b %a -> %a) (list-of %b) -> %a))
+
+(define list-fold
+  (lambda (neutral operator list)
+    (cond
+      ((empty? list) neutral)
+      ((cons? list)
+       (operator
+        (first list)
+        (list-fold neutral operator (rest list)))))))
