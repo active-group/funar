@@ -299,6 +299,8 @@
   (first element)
   (rest (list-of element)))
 
+(define list-of-numbers (signature (list-of number)))
+
 ; 1elementige Liste: 5
 (define list1 (cons 5 empty))
 ; 2elementige Liste: 2 5
