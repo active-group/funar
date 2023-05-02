@@ -407,4 +407,20 @@
        (cons
         (run-over-animal (first list))
         (run-over-animals (rest list)))))))
+
+; Alle Zahlen einer Liste inkrementieren
+(: list-inc ((list-of number) -> (list-of number)))
+
+(check-expect (list-inc list4)
+              (cons 5 (cons 8 (cons 3 (cons 6 empty)))))
                          
+
+(define list-inc
+  (lambda (list)
+    (cond
+      ((empty? list) ...)
+      ((cons? list)
+       ...
+       (first list)
+       (list-inc (rest list))
+       ...))))
