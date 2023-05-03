@@ -43,3 +43,9 @@ isCute pet =
         Dog -> True
         Cat -> True
         Snake -> False
+
+-- Ein Gürteltier hat folgende Eigenschaften:
+-- - tot oder lebendig
+-- - Gewicht
+data Liveness = Dead | Alive
+  deriving Show
