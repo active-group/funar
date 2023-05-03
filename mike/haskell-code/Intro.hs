@@ -242,3 +242,4 @@ listIndex y (x:xs) =
 --   (/=) :: a -> a -> Bool
 
 -- Typklasse: eher ein Interface
+-- Implementierung einer Typklasse: instance
