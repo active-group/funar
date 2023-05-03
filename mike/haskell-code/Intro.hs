@@ -209,5 +209,20 @@ listFold n f (x  :                xs) = -- f x (listFold n f xs)
 -- Funktionskomposition
 o :: (b -> c) -> (a -> b) -> (a -> c)
 o f g = \ a -> f (g a)
-
 -- eingebaut als .
+
+data Optional a =
+    Result a
+  | Null
+  deriving Show
+
+-- Position eines Elements in einer Liste finden
+listIndex :: a -> [a] -> Optional Integer
+listIndex y [] = Null
+listIndex y (x:xs) =
+    if y == x
+    then Result 0 
+    else 
+        case listIndex y xs of
+            Null -> Null
+            Result index -> Result (index+1)
