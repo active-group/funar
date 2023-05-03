@@ -31,14 +31,16 @@ data Pet = -- Typ
     Dog -- Konstruktor (hier 0stellig)
   | Cat
   | Snake
-  deriving Show
+  deriving (Eq, Show)
 
+{-
 instance Eq Pet where
     --- (==) :: Pet -> Pet -> Bool
     (==) Cat Cat = True
     (==) Dog Dog = True
     (==) Snake Snake = True
     (==) _ _ = False
+-}
 
 -- Abseitsregel: Bei mehrzeiligen Konstrukten müssen die
 -- Folgezeilen gegenüber der erste Zeile eingerückt sein.
@@ -250,3 +252,8 @@ listIndex y (x:xs) =
 
 -- Typklasse: eher ein Interface
 -- Implementierung einer Typklasse: instance
+
+-- >>> :info Show
+-- type Show :: * -> Constraint
+-- class Show a where
+--   show :: a -> String
