@@ -181,7 +181,13 @@ entschönfinkeln f = \ (a, b) -> f a b
 -- Eine Liste ist eins der folgenden:
 -- - die leere Liste
 -- - eine Cons-Liste aus erstem Element und Rest-Liste
-data ListOfIntegers =
+{-
+data ListOf a =
       Empty 
-    | Cons Integer ListOfIntegers
+    | Cons Integer (ListOf a)
     deriving Show
+-}
+
+-- In Haskell:
+-- leere Liste: []
+-- Cons-Liste:  first : rest
