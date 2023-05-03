@@ -184,3 +184,4 @@ entschönfinkeln f = \ (a, b) -> f a b
 data ListOfIntegers =
       Empty 
     | Cons Integer ListOfIntegers
+    deriving Show
