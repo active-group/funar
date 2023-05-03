@@ -144,6 +144,7 @@ feedAnimal (MkParrot sentence weight) amount =
 -- >>> (swap feedAnimal) 5 dillo1
 -- MkDillo {liveness = Alive, weight = 15}
 
+-- eingebaut als flip
 -- swap :: (Animal -> Weight -> Animal) -> (Weight -> Animal -> Animal)
 swap :: (a -> b -> c) -> (b -> a -> c) -- Typvariablen
 -- swap f = \ b -> \ a -> f a b
@@ -159,9 +160,11 @@ feedAnimal' (dillo@(MkDillo liveness weight), amount) =
 feedAnimal' ((MkParrot sentence weight), amount) =
   MkParrot sentence (weight + amount)
 
+-- eingebaut als curry
 schönfinkeln :: ((a, b) -> c) -> (a -> b -> c)
 schönfinkeln f = \ a -> \b -> f (a, b)
 
+-- eingebaut uncurry
 entschönfinkeln :: (a -> b -> c) -> ((a, b) -> c)
 entschönfinkeln f = \ (a, b) -> f a b
 
@@ -174,3 +177,10 @@ entschönfinkeln f = \ (a, b) -> f a b
 -- eine Funktion die für eine geometrische Figur und einen Punkt
 -- ermittelt, ob der Punkt innerhalb der außerhalb der geometrischen
 -- Figur ist.
+
+-- Eine Liste ist eins der folgenden:
+-- - die leere Liste
+-- - eine Cons-Liste aus erstem Element und Rest-Liste
+data ListOfIntegers =
+      Empty 
+    | Cons Integer ListOfIntegers
