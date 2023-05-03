@@ -144,7 +144,8 @@ feedAnimal (MkParrot sentence weight) amount =
 -- >>> (swap feedAnimal) 5 dillo1
 -- MkDillo {liveness = Alive, weight = 15}
 
-swap :: (Animal -> Weight -> Animal) -> (Weight -> Animal -> Animal)
+-- swap :: (Animal -> Weight -> Animal) -> (Weight -> Animal -> Animal)
+swap :: (a -> b -> c) -> (b -> a -> c)
 swap f = 
     \ weight -> \ animal -> f animal weight
 
