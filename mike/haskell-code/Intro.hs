@@ -162,6 +162,8 @@ feedAnimal' ((MkParrot sentence weight), amount) =
 schönfinkeln :: ((a, b) -> c) -> (a -> b -> c)
 schönfinkeln f = \ a -> \b -> f (a, b)
 
+entschönfinkeln :: (a -> b -> c) -> ((a, b) -> c)
+
 -- Eine geometrische Figur ("Shape") ist eins der folgenden:
 -- - ein Kreis
 -- - ein Quadrat
