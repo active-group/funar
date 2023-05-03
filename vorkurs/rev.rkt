@@ -43,5 +43,8 @@
        (cons
         (first list)
         (append-element (rest list) element))))))
-       
+
+; Laufzeit für Liste der Länge n
+; 1 + 2 + 3 + ... + (n-1) + n
+
        
