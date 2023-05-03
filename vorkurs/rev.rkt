@@ -65,7 +65,5 @@
     (cond
       ((empty? list) acc)
       ((cons? list)
-
-       (rev* (rest list) ... (first list) ... acc)
-       ...))))
+       (rev* (rest list) (cons (first list) acc))))))
     
