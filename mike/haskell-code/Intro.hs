@@ -123,6 +123,7 @@ runOverAnimal :: Animal -> Animal
 runOverAnimal (MkDillo _ w) = MkDillo Dead w
 runOverAnimal (MkParrot _ w) = MkParrot "" w
 
+-- In Haskell gibt es nur einstellige Funktionen.
 
 -- >>> feedAnimal dillo1 5
 -- MkDillo {liveness = Alive, weight = 15}
