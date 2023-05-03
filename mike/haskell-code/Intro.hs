@@ -133,13 +133,18 @@ runOverAnimal (MkParrot _ w) = MkParrot "" w
 
 -- >>> feedAnimal dillo1 5
 -- MkDillo {liveness = Alive, weight = 15}
-feedAnimal :: Animal -> (Weight -> Animal)
+feedAnimal :: Animal -> Weight -> Animal
 feedAnimal dillo@(MkDillo liveness weight) amount = 
     case liveness of
         Dead -> dillo
         Alive -> MkDillo liveness (weight+amount)
 feedAnimal (MkParrot sentence weight) amount =
     MkParrot sentence (weight+amount)
+
+swap :: (Animal -> Weight -> Animal) -> (Weight -> Animal -> Animal)
+swap f = 
+    \ weight -> \ animal -> f animal weight
+
 
 
 -- Eine geometrische Figur ("Shape") ist eins der folgenden:
