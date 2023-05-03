@@ -145,9 +145,9 @@ feedAnimal (MkParrot sentence weight) amount =
 -- MkDillo {liveness = Alive, weight = 15}
 
 -- swap :: (Animal -> Weight -> Animal) -> (Weight -> Animal -> Animal)
-swap :: (a -> b -> c) -> (b -> a -> c)
+swap :: (a -> b -> c) -> (b -> a -> c) -- Typvariablen
 swap f = 
-    \ weight -> \ animal -> f animal weight
+    \ b -> \ a -> f a b
 
 
 
