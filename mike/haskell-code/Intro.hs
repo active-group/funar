@@ -17,6 +17,8 @@ f' x = x * 2
 
 g :: Integer -> Integer -> Integer
 -- g x y =  (x + y) * 2
+-- >>> g 5 7
+-- 24
 g = \ x -> \ y -> (x + y) * 2
 
 -- Haustier ist eins der folgenden:
