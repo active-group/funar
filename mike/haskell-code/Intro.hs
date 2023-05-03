@@ -152,13 +152,15 @@ swap f b a = f a b
 feedAnimal' :: (Animal, Weight) -> Animal
 -- >>> feedAnimal'(dillo1, 5)
 -- MkDillo {liveness = Alive, weight = 15}
-feedAnimal'(dillo@(MkDillo liveness weight), amount) =
+feedAnimal' (dillo@(MkDillo liveness weight), amount) =
   case liveness of
     Dead -> dillo
     Alive -> MkDillo liveness (weight + amount)
 feedAnimal' ((MkParrot sentence weight), amount) =
   MkParrot sentence (weight + amount)
 
+schönfinkeln :: ((a, b) -> c) -> (a -> b -> c)
+schönfinkeln f = \ a -> \b -> f (a, b)
 
 -- Eine geometrische Figur ("Shape") ist eins der folgenden:
 -- - ein Kreis
