@@ -65,6 +65,7 @@
               (list 3 2 1))
 
 (define rev*
+  ; Schleifeninvariante:
   ; acc besteht aus den "schon gesehenen Elementen", umgedreht
   (lambda (list acc)
     (cond
@@ -73,5 +74,7 @@
        ; kein Kontext!
        ; tail call
        ; endrekursiver Aufruf
+       ; kein "Stack-Platz" notwendig
+       ; außer auf der JVM :-(
        (rev* (rest list) (cons (first list) acc))))))
     
