@@ -25,7 +25,7 @@ data Pet = -- Typ
     Dog -- Konstruktor (hier 0stellig)
   | Cat
   | Snake
-  -- deriving Show
+  deriving Show
 
 -- Abseitsregel: Bei mehrzeiligen Konstrukten müssen die
 -- Folgezeilen gegenüber der erste Zeile eingerückt sein.
