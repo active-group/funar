@@ -206,5 +206,6 @@ listFold n f [] = n
 listFold n f (x  :                xs) = -- f x (listFold n f xs)
               x `f` (listFold n f xs)
 
+-- Funktionskomposition
 o :: (b -> c) -> (a -> b) -> (a -> c)
-o f g = \ a -> f (g x)
+o f g = \ a -> f (g a)
