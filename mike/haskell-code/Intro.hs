@@ -68,3 +68,10 @@ dillo2 = MkDillo Dead 8 -- Abkürzung
 
 -- Gürteltier überfahren
 runOverDillo :: Dillo -> Dillo
+-- >>> runOverDillo dillo1
+-- >>> runOverDillo dillo2
+-- runOverDillo dillo = MkDillo { liveness = Dead, weight = weight dillo }
+-- runOverDillo dillo = MkDillo Dead (weight dillo)
+-- runOverDillo (MkDillo { liveness = l, weight = w}) = MkDillo Dead w
+-- runOverDillo (MkDillo _ w) = MkDillo Dead w -- _: don't care
+runOverDillo (MkDillo { weight = w}) = MkDillo Dead w
