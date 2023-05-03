@@ -38,11 +38,10 @@
 (define append-element
   (lambda (list element)
     (cond
-      ((empty? list) ...)
+      ((empty? list) (cons element empty))
       ((cons? list)
-       ...
-       (first list)
-       (append-element (rest list) element)
-       ...))))
+       (cons
+        (first list)
+        (append-element (rest list) element))))))
        
        
