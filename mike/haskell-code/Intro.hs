@@ -65,3 +65,6 @@ dillo1 = MkDillo { liveness = Alive, weight = 10 }
 
 dillo2 :: Dillo
 dillo2 = MkDillo Dead 8 -- Abkürzung
+
+-- Gürteltier überfahren
+runOverDillo :: Dillo -> Dillo
