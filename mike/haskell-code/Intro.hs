@@ -200,3 +200,7 @@ listSum (first : rest) = first + (listSum rest)
 listMap :: (a -> b) -> [a] -> [b]
 listMap f [] = []
 listMap f (x : xs) = f x : listMap f xs
+
+listFold :: a -> (b -> a -> a) -> [b] -> a 
+listFold n f [] = n
+listFold n f (x:xs) = f x (listFold n f xs)
