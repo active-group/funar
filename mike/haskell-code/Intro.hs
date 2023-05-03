@@ -149,6 +149,15 @@ swap :: (a -> b -> c) -> (b -> a -> c) -- Typvariablen
 -- swap f = \ b -> \ a -> f a b
 swap f b a = f a b
 
+feedAnimal' :: (Animal, Weight) -> Animal
+-- >>> feedAnimal'(dillo1, 5)
+-- MkDillo {liveness = Alive, weight = 15}
+feedAnimal'(dillo@(MkDillo liveness weight), amount) =
+  case liveness of
+    Dead -> dillo
+    Alive -> MkDillo liveness (weight + amount)
+feedAnimal' ((MkParrot sentence weight), amount) =
+  MkParrot sentence (weight + amount)
 
 
 -- Eine geometrische Figur ("Shape") ist eins der folgenden:
