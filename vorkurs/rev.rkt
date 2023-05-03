@@ -59,6 +59,11 @@
        (rev* (rest list) ... (first list) ... acc)
        ...))))
 
+(: rev* ((list-of %a) (list-of %a) -> (list-of %a)))
+
+(check-expect (rev* (list 1 2 3) empty)
+              (list 3 2 1))
+
 (define rev*
   ; acc besteht aus den "schon gesehenen Elementen", umgedreht
   (lambda (list acc)
