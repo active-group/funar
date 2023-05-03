@@ -34,6 +34,10 @@ data Pet = -- Typ
 
 -- Ist ein Haustier niedlich?
 isCute :: Pet -> Bool
+-- >>> isCute Dog
+-- True
+-- >>> isCute Snake
+-- False
 isCute pet =
     case pet of
         Dog -> True
