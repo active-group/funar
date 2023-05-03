@@ -257,3 +257,14 @@ listIndex y (x:xs) =
 -- type Show :: * -> Constraint
 -- class Show a where
 --   show :: a -> String
+
+-- >>> :info Ord
+-- type Ord :: * -> Constraint
+-- class Eq a => Ord a where
+--   compare :: a -> a -> Ordering
+--   (<) :: a -> a -> Bool
+--   (<=) :: a -> a -> Bool
+--   (>) :: a -> a -> Bool
+--   (>=) :: a -> a -> Bool
+--   max :: a -> a -> a
+--   min :: a -> a -> a
