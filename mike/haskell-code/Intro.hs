@@ -123,7 +123,10 @@ runOverAnimal :: Animal -> Animal
 runOverAnimal (MkDillo _ w) = MkDillo Dead w
 runOverAnimal (MkParrot _ w) = MkParrot "" w
 
--- feedAnimal ::
+
+-- >>> feedAnimal dillo1 5
+-- MkDillo {liveness = Alive, weight = 15}
+feedAnimal :: Animal -> (Weight -> Animal)
 feedAnimal dillo@(MkDillo liveness weight) amount = 
     case liveness of
         Dead -> dillo
