@@ -69,9 +69,18 @@ dillo2 = MkDillo Dead 8 -- Abkürzung
 -- Gürteltier überfahren
 runOverDillo :: Dillo -> Dillo
 -- >>> runOverDillo dillo1
+-- MkDillo {liveness = Dead, weight = 10}
+
 -- >>> runOverDillo dillo2
+-- MkDillo {liveness = Dead, weight = 8}
+
 -- runOverDillo dillo = MkDillo { liveness = Dead, weight = weight dillo }
 -- runOverDillo dillo = MkDillo Dead (weight dillo)
 -- runOverDillo (MkDillo { liveness = l, weight = w}) = MkDillo Dead w
 -- runOverDillo (MkDillo _ w) = MkDillo Dead w -- _: don't care
-runOverDillo (MkDillo { weight = w}) = MkDillo Dead w
+-- runOverDillo (MkDillo { weight = w}) = MkDillo Dead w
+-- runOverDillo dillo = dillo { liveness = Dead } -- "functional update", Kopie bis auf ...
+runOverDillo dillo@(MkDillo l w) = -- Alias-Pattern
+    case l of
+        Dead -> dillo
+        Alive -> MkDillo Dead w
