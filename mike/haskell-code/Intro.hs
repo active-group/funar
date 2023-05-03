@@ -56,6 +56,7 @@ data Liveness = Dead | Alive
 -- Typsynonym
 type Weight = Integer
 
+{-
 data Dillo = MkDillo { liveness :: Liveness, weight :: Weight }
   deriving Show
 
@@ -80,7 +81,14 @@ runOverDillo :: Dillo -> Dillo
 -- runOverDillo (MkDillo _ w) = MkDillo Dead w -- _: don't care
 -- runOverDillo (MkDillo { weight = w}) = MkDillo Dead w
 -- runOverDillo dillo = dillo { liveness = Dead } -- "functional update", Kopie bis auf ...
-runOverDillo dillo@(MkDillo l w) = -- Alias-Pattern
-    case l of
-        Dead -> dillo
-        Alive -> MkDillo Dead w
+
+-- runOverDillo dillo@(MkDillo l w) = -- Alias-Pattern
+--    case l of
+--        Dead -> dillo
+--        Alive -> MkDillo Dead w
+
+runOverDillo dillo@(MkDillo Dead _) = dillo
+runOverDillo (MkDillo Alive w) = MkDillo Dead w
+
+data Parrot = MkParrot String Weight
+-}
