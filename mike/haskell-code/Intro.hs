@@ -268,3 +268,14 @@ listIndex y (x:xs) =
 --   (>=) :: a -> a -> Bool
 --   max :: a -> a -> a
 --   min :: a -> a -> a
+
+-- >>> :info Num
+-- type Num :: * -> Constraint
+-- class Num a where
+--   (+) :: a -> a -> a
+--   (-) :: a -> a -> a
+--   (*) :: a -> a -> a
+--   negate :: a -> a
+--   abs :: a -> a
+--   signum :: a -> a
+--   fromInteger :: Integer -> a
