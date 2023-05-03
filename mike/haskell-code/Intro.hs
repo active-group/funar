@@ -8,4 +8,6 @@ y :: Integer
 y = x * 3
 
 f :: Integer -> Integer
-f = \ x -> x + 1
+-- >>> f 17 
+-- 34
+f = \ x -> x * 2
