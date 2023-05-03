@@ -209,3 +209,5 @@ listFold n f (x  :                xs) = -- f x (listFold n f xs)
 -- Funktionskomposition
 o :: (b -> c) -> (a -> b) -> (a -> c)
 o f g = \ a -> f (g a)
+
+-- eingebaut als .
