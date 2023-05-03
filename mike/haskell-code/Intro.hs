@@ -11,3 +11,6 @@ f :: Integer -> Integer
 -- >>> f 17 
 -- 34
 f = \ x -> x * 2
+
+f' :: Integer -> Integer
+f' x = x * 2
