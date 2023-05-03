@@ -122,3 +122,11 @@ runOverAnimal :: Animal -> Animal
 -- MkParrot "" 1
 runOverAnimal (MkDillo _ w) = MkDillo Dead w
 runOverAnimal (MkParrot _ w) = MkParrot "" w
+
+-- feedAnimal ::
+feedAnimal dillo@(MkDillo liveness weight) amount = 
+    case liveness of
+        Dead -> dillo
+        Alive -> MkDillo liveness (weight+amount)
+feedAnimal (MkParrot sentence weight) amount =
+    MkParrot sentence (weight+amount)
