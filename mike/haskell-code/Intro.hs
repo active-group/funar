@@ -92,3 +92,18 @@ runOverDillo (MkDillo Alive w) = MkDillo Dead w
 
 data Parrot = MkParrot String Weight
 -}
+
+-- Ein Tier ist eins der folgenden:
+-- - Gürteltier
+-- - Papagei
+
+data Animal =
+    MkDillo { liveness :: Liveness, weight :: Weight}
+  | MkParrot String Weight
+  deriving Show
+-- typisch: gemischte Daten, jeder Fall zusammengesetzte Daten
+-- algebraischer Datentyp
+
+runOverAnimal :: Animal -> Animal
+runOverAnimal (MkDillo _ w) = MkDillo Dead w
+runOverAnimal (MkParrot _ w) = MkParrot "" w
