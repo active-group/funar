@@ -55,3 +55,10 @@ type Weight = Integer
 
 data Dillo = MkDillo { liveness :: Liveness, weight :: Weight }
   deriving Show
+
+-- lebendiges Gürteltier, 10kg
+dillo1 :: Dillo
+dillo1 = MkDillo { liveness = Alive, weight = 10 }
+
+dillo2 :: Dillo
+dillo2 = MkDillo Dead 8 -- Abkürzung
