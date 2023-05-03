@@ -279,3 +279,5 @@ listIndex y (x:xs) =
 --   abs :: a -> a
 --   signum :: a -> a
 --   fromInteger :: Integer -> a
+
+-- deriving funktioniert für Show, Eq, Ord
