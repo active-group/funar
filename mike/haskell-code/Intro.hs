@@ -193,4 +193,6 @@ data ListOf a =
 -- Cons-Liste:  first : rest
 
 -- Summe aller Listenelemente berechnen
-listSum :: 
+listSum :: [Integer] -> Integer
+listSum [] = 0
+listSum (first : rest) = first + (listSum rest)
