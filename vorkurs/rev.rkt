@@ -1,7 +1,7 @@
 #lang deinprogramm/sdp
 
 ; Summe aller Listenelemente
-(: list-sum (list-of-numbers -> number))
+(: list-sum ((list-of number) -> number))
 
 (check-expect (list-sum (list 1 2 3 4 5)) 15)
 
