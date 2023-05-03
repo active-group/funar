@@ -203,4 +203,8 @@ listMap f (x : xs) = f x : listMap f xs
 
 listFold :: a -> (b -> a -> a) -> [b] -> a 
 listFold n f [] = n
-listFold n f (x:xs) = f x (listFold n f xs)
+listFold n f (x  :                xs) = -- f x (listFold n f xs)
+              x `f` (listFold n f xs)
+
+o :: (b -> c) -> (a -> b) -> (a -> c)
+o f g = \ a -> f (g x)
