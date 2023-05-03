@@ -191,3 +191,6 @@ data ListOf a =
 -- In Haskell:
 -- leere Liste: []
 -- Cons-Liste:  first : rest
+
+-- Summe aller Listenelemente berechnen
+listSum :: 
