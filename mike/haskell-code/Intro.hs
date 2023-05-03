@@ -38,11 +38,14 @@ isCute :: Pet -> Bool
 -- True
 -- >>> isCute Snake
 -- False
-isCute pet =
-    case pet of
-        Dog -> True
-        Cat -> True
-        Snake -> False
+-- isCute pet =
+--    case pet of
+--        Dog -> True
+--        Cat -> True
+--        Snake -> False
+isCute Dog = True
+isCute Cat = True
+isCute Snake = False
 
 -- Ein Gürteltier hat folgende Eigenschaften:
 -- - tot oder lebendig
