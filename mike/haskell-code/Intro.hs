@@ -21,11 +21,21 @@ f' x = x * 2
 -- - Schlange
 
 -- neuer Datentyp:
-data Pet =
-    Dog
+data Pet = -- Typ
+    Dog -- Konstruktor (hier 0stellig)
   | Cat
   | Snake
   deriving Show
 
 -- Abseitsregel: Bei mehrzeiligen Konstrukten müssen die
 -- Folgezeilen gegenüber der erste Zeile eingerückt sein.
+
+-- Intuition: Kleinbuchstaben = Variablen, Großbuchstaben = Konstanten
+
+-- Ist ein Haustier niedlich?
+isCute :: Pet -> Bool
+isCute pet =
+    case pet of
+        Dog -> True
+        Cat -> True
+        Snake -> False
