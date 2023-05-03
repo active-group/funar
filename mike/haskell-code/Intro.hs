@@ -15,6 +15,10 @@ f = \ x -> x * 2
 f' :: Integer -> Integer
 f' x = x * 2
 
+g :: Integer -> Integer -> Integer
+-- g x y =  (x + y) * 2
+g = \ x -> \ y -> (x + y) * 2
+
 -- Haustier ist eins der folgenden:
 -- - Hund -ODER-
 -- - Katze -ODER-
