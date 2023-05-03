@@ -217,7 +217,13 @@ data Optional a =
   deriving Show
 
 -- Position eines Elements in einer Liste finden
-listIndex :: a -> [a] -> Optional Integer
+listIndex :: Eq a => a -> [a] -> Optional Integer
+-- >>> listIndex 3 [5, 7, 2, 1, 3, 9, 3]
+-- Result 4
+
+-- >>> listIndex 3 [5, 7, 2]
+-- Null
+
 listIndex y [] = Null
 listIndex y (x:xs) =
     if y == x
@@ -226,3 +232,5 @@ listIndex y (x:xs) =
         case listIndex y xs of
             Null -> Null
             Result index -> Result (index+1)
+
+-- Eq a: Constraint
