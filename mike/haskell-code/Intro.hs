@@ -234,3 +234,11 @@ listIndex y (x:xs) =
             Result index -> Result (index+1)
 
 -- Eq a: Constraint
+
+-- >>> :info Eq
+-- type Eq :: * -> Constraint
+-- class Eq a where
+--   (==) :: a -> a -> Bool
+--   (/=) :: a -> a -> Bool
+
+-- Typklasse: eher ein Interface
