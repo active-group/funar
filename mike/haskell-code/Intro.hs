@@ -49,3 +49,9 @@ isCute pet =
 -- - Gewicht
 data Liveness = Dead | Alive
   deriving Show
+
+-- Typsynonym
+type Weight = Integer
+
+data Dillo = MkDillo { liveness :: Liveness, weight :: Weight }
+  deriving Show
