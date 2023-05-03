@@ -46,5 +46,26 @@
 
 ; Laufzeit für Liste der Länge n
 ; 1 + 2 + 3 + ... + (n-1) + n
+; Gauß'sche Summenformel: (n+1)*n/2 = n^2 ...
 
-       
+; Schablone:
+#;(define rev*
+  ; acc besteht aus den "schon gesehenen Elementen", umgedreht
+  (lambda (list acc)
+    (cond
+      ((empty? list) acc)
+      ((cons? list)
+
+       (rev* (rest list) ... (first list) ... acc)
+       ...))))
+
+(define rev*
+  ; acc besteht aus den "schon gesehenen Elementen", umgedreht
+  (lambda (list acc)
+    (cond
+      ((empty? list) acc)
+      ((cons? list)
+
+       (rev* (rest list) ... (first list) ... acc)
+       ...))))
+    
