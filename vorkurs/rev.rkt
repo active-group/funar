@@ -70,5 +70,8 @@
     (cond
       ((empty? list) acc)
       ((cons? list)
+       ; kein Kontext!
+       ; tail call
+       ; endrekursiver Aufruf
        (rev* (rest list) (cons (first list) acc))))))
     
