@@ -110,6 +110,8 @@ instance Monad Game where
       ( \won ->
           cont won >>= next
       )
+  (GetCommand cont) >>= next =
+    GetCommand (\command -> cont command >>= next)
   (Done result) >>= next = next result
 
 
