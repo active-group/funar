@@ -122,14 +122,31 @@ tableProcessCommandM (DealHands hands) =
     in do mapM_ recordEventM events
           return Nothing
 tableProcessCommandM (PlayCard player card) =
-    do isValid <- playValidM player card
-       if isValid 
-       then 
-        do recordEventM (LegalCardPlayed player card)
-           maybeTrick <- turnOverTrickM
-           case maybeTrick of
-            Just (trick, trickTaker) -> undefined
-            Nothing -> undefined
-       else 
-        do recordEventM (IllegalCardAttempted player card)
-           return Nothing
+  do
+    valid <- playValidM player card
+    if valid
+      then do
+        recordEventM (LegalCardPlayed player card)
+        turnOverTrick <- turnOverTrickM
+        case turnOverTrick of
+          Just (trick, trickTaker) ->
+            do
+              recordEventM (TrickTaken trickTaker trick)
+              over <- gameOverM
+              case over of
+                Just winner ->
+                  do
+                    recordEventM (GameEnded winner)
+                    return (Just winner)
+                Nothing ->
+                  do
+                    recordEventM (PlayerTurnChanged trickTaker)
+                    return Nothing
+          Nothing ->
+            do
+              nextPlayer <- playerAfterM player
+              recordEventM (PlayerTurnChanged nextPlayer)
+              return Nothing
+      else do
+        recordEventM (IllegalCardAttempted player card)
+        return Nothing
