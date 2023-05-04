@@ -45,5 +45,5 @@ p1 =
 runDB :: DB a -> Map Key Value -> a
 runDB (Put key value callback) mp = undefined
 runDB (Get key callback) mp =
-    
+    mp ! key
 runDB (Return result) mp = result
