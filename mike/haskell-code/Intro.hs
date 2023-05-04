@@ -315,6 +315,11 @@ listIndex y (x:xs) =
 -- a * (b * c) == (a * b) * c    Assoziativität
 -- Halbgruppe / Semigroup
 
+class Semigroup m where
+  -- op a (op b c) == op (op a b) c
+  op :: m -> m -> m
 
+instance Semigroup [a] where
+  op list1 list2 = list1 ++ list2
 
 
