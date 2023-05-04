@@ -65,7 +65,7 @@ p1' = splice (put "Mike" 100) (\() ->
 -- >>> :info Monad
 -- type Monad :: (* -> *) -> Constraint
 -- class Applicative m => Monad m where
---   (>>=) :: m a -> (a -> m b) -> m b
+--   (>>=) :: m a -> (a -> m b) -> m b   --- "bind" / "flatMap"
 --   return :: a -> m a
 
 -- >>> :type Return
