@@ -20,4 +20,4 @@ type DBProgram result = [DBCommand result]
 
 p1 = [
     Put "Mike" 100
-]
+ ]
