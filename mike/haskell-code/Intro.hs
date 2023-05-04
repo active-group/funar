@@ -322,6 +322,14 @@ class Semigroup m where
 -- >>> op [1,2,3] [4,5,6]
 -- [1,2,3,4,5,6]
 
+-- >>> op [1,2,3] (op [4,5,6] [7,8,9])
+-- [1,2,3,4,5,6,7,8,9]
+-- >>> op (op [1,2,3] [4,5,6]) [7,8,9]
+-- [1,2,3,4,5,6,7,8,9]
+
+-- Kommutativität:
+-- op a b == op b a
+
 instance Semigroup [a] where
   op list1 list2 = list1 ++ list2
 
@@ -330,5 +338,6 @@ instance Semigroup [a] where
 -- op neutral a == op a neutral = a
 -- Monoid
 
+-- "m muß eine "
 class Semigroup m => Monoid m where
 
