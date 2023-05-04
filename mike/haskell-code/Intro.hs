@@ -341,3 +341,9 @@ instance Semigroup [a] where
 -- "m muß eine "
 class Semigroup m => Monoid m where
   neutral :: m
+
+-- >>> op [1,2,3] neutral
+-- [1,2,3]
+
+instance Monoid [a] where
+  neutral = []
