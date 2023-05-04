@@ -11,6 +11,7 @@ return (show (x+y))
 type Key = String
 type Value = Integer
 
+{-
 data DBCommand result =
     Put Key Value
   | Get Key
@@ -19,5 +20,11 @@ data DBCommand result =
 type DBProgram result = [DBCommand result]
 
 p1 = [
-    Put "Mike" 100
+    Put "Mike" 100,
+    Get "Mike",
+    Put "Mike" (x+1)
  ]
+-}
+
+data DB a =
+    Get Key (Value -> DB a)
