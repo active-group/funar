@@ -285,6 +285,10 @@ optionalMap f o =
 instance Functor Optional where
   fmap = optionalMap
 
+instance Applicative Optional where
+
+instance Monad Optional where
+
 -- Eq a: Constraint
 
 -- >>> :info Eq
