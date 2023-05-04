@@ -298,3 +298,15 @@ listIndex y (x:xs) =
 --   fromInteger :: Integer -> a
 
 -- deriving funktioniert für Show, Eq, Ord
+
+-- ... neutrales Element ...
+
+-- Menge + Operationen + Gleichungen
+
+-- Zahlen, *, a * 1 = 1 * a = a
+
+-- Menge M (in der Programmierung: Typ)
+-- op :: M -> M -> M   (Kombinator, binäre Operation)
+-- (Beispiele: *, +, Duschgel, Shape, overlay, beside, above)
+-- op a (op b c) == op (op a b) c
+-- a * (b * c) == (a * b) * c    Assoziativität
