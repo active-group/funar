@@ -30,3 +30,11 @@ data DB a =
     Get Key (Value -> DB a) -- Callback / Continuation
   | Put Key Value (() -> DB a)
   | Return a
+
+p1 :: DB String
+p1 =
+    Put "Mike" 100 (\() ->
+    Get "Mike" (\x ->
+    Put "Mike" (x+1) (\() ->
+    Get "Mike" (\y ->
+    Return (show (x+y))))))
