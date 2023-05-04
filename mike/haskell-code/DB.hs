@@ -68,6 +68,9 @@ p1' = splice (put "Mike" 100) (\() ->
 --   (>>=) :: m a -> (a -> m b) -> m b   --- "bind" / "flatMap"
 --   return :: a -> m a
 
+-- Methode Stream<A>
+-- <B> Stream<B> 	flatMap((A -> Stream<B>) mapper)
+
 -- >>> :type Return
 -- Return :: a -> DB a
 
