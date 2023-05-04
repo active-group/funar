@@ -38,3 +38,5 @@ p1 =
     Put "Mike" (x+1) (\() ->
     Get "Mike" (\y ->
     Return (show (x+y))))))
+
+runDB :: DB a -> Map Key Value -> a
