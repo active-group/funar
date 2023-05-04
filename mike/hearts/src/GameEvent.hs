@@ -56,7 +56,6 @@ eventsWinner (first : rest) =
 data Game a
   = PlayValid Player Card (Bool -> Game a)
   | RecordEvent GameEvent (() -> Game a)
-  | GetCommand (GameCommand -> Game a)
   | TurnOverTrick (Maybe (Trick, Player) -> Game a)
   | PlayerAfter Player (Player -> Game a)
   | GameOver (Maybe Player -> Game a)
@@ -80,18 +79,38 @@ instance Functor Game where
 instance Applicative Game where
 
 instance Monad Game where
-    return = Done
-    (>>=) (RecordEvent event callback) next = 
-        RecordEvent event (\() -> 
-            -- (>>=) (callback ()) next)
-            callback () >>= next)
-    (>>=) (PlayValid player card callback) next =
-        PlayValid player card (\isValid ->
-            callback isValid >>= next)
-    (>>=) (TurnOverTrick callback) next =
-        TurnOverTrick (\maybeTrick ->
-            callback maybeTrick >>= next)
-    (>>=) (Done result) next = next result
+  return = Done
+  (PlayValid player card cont) >>= next =
+    PlayValid
+      player
+      card
+      ( \valid ->
+          cont valid >>= next
+      )
+  (RecordEvent event cont) >>= next =
+    RecordEvent
+      event
+      ( \() ->
+          cont () >>= next
+      )
+  (TurnOverTrick cont) >>= next =
+    TurnOverTrick
+      ( \over ->
+          cont over >>= next
+      )
+  (PlayerAfter player cont) >>= next =
+    PlayerAfter
+      player
+      ( \player ->
+          cont player >>= next
+      )
+  (GameOver cont) >>= next =
+    GameOver
+      ( \won ->
+          cont won >>= next
+      )
+  (Done result) >>= next = next result
+
 
 -- data Maybe a = Nothing | Just a
 
