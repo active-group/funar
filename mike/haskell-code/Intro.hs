@@ -319,7 +319,14 @@ class Semigroup m where
   -- op a (op b c) == op (op a b) c
   op :: m -> m -> m
 
+-- >>> op [1,2,3] [4,5,6]
+-- [1,2,3,4,5,6]
+
 instance Semigroup [a] where
   op list1 list2 = list1 ++ list2
 
+-- Halbgruppe + neutrales Element:
+-- neutral :: M
+-- op neutral a == op a neutral = a
+-- Monoid
 
