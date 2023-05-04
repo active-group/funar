@@ -56,6 +56,12 @@ splice (Put key value callback) next =
     Put key value (\() -> splice (callback ()) next)
 splice (Return result)          next = next result
 
+p1' = splice (put "Mike" 100) (\() ->
+      splice (get "Mike") (\x ->
+      splice (put "Mike" (x+1)) (\() ->
+      splice (get "Mike") (\y ->
+      Return (show (x+y))))))
+
 runDB :: DB a -> Map Key Value -> a
 
 -- >>> runDB p1 Map.empty
