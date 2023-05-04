@@ -1,7 +1,7 @@
 module Intro where
 
 -- Prelude: Haskell-Standardbibliothek
-import Prelude hiding (Semigroup)
+import Prelude hiding (Semigroup, Monoid)
 
 -- Groß-/Kleinschreibung signifikant
 x :: Integer
