@@ -310,3 +310,8 @@ listIndex y (x:xs) =
 -- (Beispiele: *, +, Duschgel, Shape, overlay, beside, above)
 -- op a (op b c) == op (op a b) c
 -- a * (b * c) == (a * b) * c    Assoziativität
+-- Halbgruppe / Semigroup
+
+
+
+
