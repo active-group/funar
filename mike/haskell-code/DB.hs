@@ -43,3 +43,6 @@ p1 =
     Return (show (x+y))))))
 
 runDB :: DB a -> Map Key Value -> a
+runDB (Put key value callback) mp = undefined
+runDB (Get key callbak) mp = undefined
+runDB (Return result) mp = undefined
