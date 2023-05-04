@@ -1,5 +1,4 @@
-module Table(TableState, emptyTableState,
-             runTable)
+module Table(TableState, emptyTableState)
 where
 
 import qualified Data.Foldable as Foldable
@@ -154,46 +153,3 @@ addTrickToPile playerPiles player trick =
 
 dealHand :: Player -> Hand -> PlayerHands -> PlayerHands
 dealHand player hand hands = Map.insert player hand hands
-
--- Ereignis in den Zustand einarbeiten
-tableProcessEvent :: GameEvent -> TableState -> TableState
--- processGameEvent event state | trace ("processGameEvent " ++ show state ++ " " ++ show event) False = undefined
-tableProcessEvent (HandDealt player hand) state =
-  state {
-    tableStateHands = dealHand player hand (tableStateHands state)
-  }
-tableProcessEvent (PlayerTurnChanged player) state =
-  state {
-    tableStatePlayers  = rotateTo player (tableStatePlayers state)
-  }
-tableProcessEvent (LegalCardPlayed player card) state =
-  state {
-    tableStateHands = playCard (tableStateHands state) player card,
-    tableStateTrick = addToTrick player card (tableStateTrick state)
-  }
-tableProcessEvent (TrickTaken player trick) state =
-  state {
-    tableStatePiles =
-      addTrickToPile (tableStatePiles state) player trick,
-    tableStateTrick = emptyTrick
-  }
-tableProcessEvent (IllegalCardAttempted player card) state = state
-tableProcessEvent (GameEnded player) state = state
-
-runTable :: Game a -> TableState -> [GameEvent] -> 
-             (TableState, [GameEvent], Either (GameCommand -> Game a) a)
-runTable (PlayValid player card cont) state revents =
-  runTable (cont (playValid state player card)) state revents
-runTable (TurnOverTrick cont) state revents =
-  runTable (cont (turnOverTrick state)) state revents
-runTable (PlayerAfter player cont) state revents =
-  runTable (cont (playerAfter state player)) state revents
-runTable (GameOver cont) state revents =
-  runTable (cont (gameOver state)) state revents
-
-runTable (RecordEvent event cont) state revents =
-  runTable (cont ()) (tableProcessEvent event state) (event:revents)
-runTable (GetCommand cont) state revents =
-  (state, reverse revents, Left cont)
-runTable (Done result) state revents =
-  (state, reverse revents, Right result)

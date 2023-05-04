@@ -49,6 +49,8 @@ cartesianProduct list1 list2 =
 deck :: [Card]
 deck = map (uncurry Card) (cartesianProduct allSuits allRanks)
 
+-- newtype: wie data mit 1 Fall, 1 Attribut, kein Laufzeit-Overhead
+
 -- |Karten, die jemand auf der Hand hält
 newtype Hand = Hand { unHand :: Set Card }
   deriving (Eq, Show)
