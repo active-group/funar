@@ -225,6 +225,15 @@ data Optional a =
   | Null
   deriving Show
 
+-- >>> Result 15 == Result 15
+-- True
+
+-- >>> Result 15 == Null
+-- False
+
+-- >>> Result 15 == Result 17
+-- False
+
 instance Eq a => Eq (Optional a) where
   (==) Null Null = True
   (==) (Result a) (Result a') = a == a'
