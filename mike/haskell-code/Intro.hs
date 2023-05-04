@@ -209,7 +209,9 @@ listSum :: [Integer] -> Integer
 listSum [] = 0
 listSum (first : rest) = first + (listSum rest)
 
-listMap :: (a -> b) -> [a] -> [b]
+type List a = [a]
+
+listMap :: (a -> b) -> List a -> List b
 listMap f [] = []
 listMap f (x : xs) = f x : listMap f xs
 
@@ -258,9 +260,30 @@ listIndex y (x:xs) =
     if y == x
     then Result 0 
     else 
+      optionalMap (\ index -> index + 1) (listIndex y xs)
+{-
         case listIndex y xs of
             Null -> Null
             Result index -> Result (index+1)
+-}
+
+optionalMap :: (a -> b) -> Optional a -> Optional b
+{-
+optionalMap f Null = Null
+optionalMap f (Result a) = Result (f a)
+-}
+optionalMap f o =
+  case o of
+    Null -> Null
+    Result a -> Result (f a)
+
+-- >>> :info Functor
+-- type Functor :: (* -> *) -> Constraint
+-- class Functor f where
+--   fmap :: (a -> b) -> f a -> f b
+
+instance Functor Optional where
+  fmap = optionalMap
 
 -- Eq a: Constraint
 
