@@ -53,20 +53,27 @@ eventsWinner (first : rest) =
     GameEnded winner -> Just winner
     _ -> eventsWinner rest
 
-data Game a =
-    RecordEvent GameEvent (() -> Game a)
-  | PlayValid Player Card (Bool -> Game a)
+data Game a
+  = PlayValid Player Card (Bool -> Game a)
+  | RecordEvent GameEvent (() -> Game a)
+  | GetCommand (GameCommand -> Game a)
   | TurnOverTrick (Maybe (Trick, Player) -> Game a)
+  | PlayerAfter Player (Player -> Game a)
+  | GameOver (Maybe Player -> Game a)
   | Done a
-
-recordEventM :: GameEvent -> Game ()
-recordEventM event = RecordEvent event Done
 
 playValidM :: Player -> Card -> Game Bool
 playValidM player card = PlayValid player card Done
 
+recordEventM :: GameEvent -> Game ()
+recordEventM event = RecordEvent event Done
+
 turnOverTrickM :: Game (Maybe (Trick, Player))
 turnOverTrickM = TurnOverTrick Done
+
+playerAfterM player = PlayerAfter player Done
+
+gameOverM = GameOver Done
 
 instance Functor Game where
 
