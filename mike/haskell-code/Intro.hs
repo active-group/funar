@@ -289,6 +289,8 @@ instance Applicative Optional where
 
 instance Monad Optional where
   (>>=) Null next = Null
+  (>>=) (Result a) next = next a
+  return = Result
 
 -- Eq a: Constraint
 
