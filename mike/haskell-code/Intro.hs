@@ -350,3 +350,18 @@ instance Monoid [a] where
 
 -- Übung:
 -- Instanzen für Monoid (a, b), Monoid (Optional a)
+
+instance (Semigroup a, Semigroup b) => Semigroup (a, b) where
+  op (a, b) (a', b') = (op a a', op b b')
+
+instance (Monoid a, Monoid b) => Monoid (a, b) where
+  neutral = (neutral, neutral)
+
+instance Semigroup a => Semigroup (Optional a) where
+  op Null Null = Null
+  op (Result a) Null = Result a
+  op Null (Result a) = Result a
+  op (Result a) (Result a') = Result (op a a')
+
+instance Semigroup a => Monoid (Optional a) where
+  neutral = Null
