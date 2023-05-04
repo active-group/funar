@@ -5,6 +5,8 @@ let
   # nix-shell -p niv --run 'niv update --help'
   sources = import ./nix/sources.nix;
   pkgs = import sources.nixpkgs { config.allowUnfree = withVSCode; };
+  hearts =
+    pkgs.haskellPackages.callCabal2nix "hearts" (pkgs.lib.cleanSource ./hearts) { };
   haskell-code =
     pkgs.haskellPackages.callCabal2nix "haskell-code" (pkgs.lib.cleanSource ./haskell-code) { };
   vscodeFunar = pkgs.vscode-with-extensions.override {
@@ -15,7 +17,7 @@ let
     ];
   };
 in pkgs.haskellPackages.shellFor {
-  packages = _: [ haskell-code ];
+  packages = _: [ hearts haskell-code ];
   buildInputs = (with pkgs; [ cabal-install ghcid haskell-language-server ])
     ++ pkgs.lib.optional withVSCode vscodeFunar;
   shellHook = ''
