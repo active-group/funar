@@ -59,6 +59,7 @@ data Game a
   | TurnOverTrick (Maybe (Trick, Player) -> Game a)
   | PlayerAfter Player (Player -> Game a)
   | GameOver (Maybe Player -> Game a)
+  |
   | Done a
 
 playValidM :: Player -> Card -> Game Bool
