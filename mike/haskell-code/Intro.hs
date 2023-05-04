@@ -1,5 +1,7 @@
 module Intro where
 
+import Prelude hiding (Semigroup)
+
 -- Groß-/Kleinschreibung signifikant
 x :: Integer
 x = 43
