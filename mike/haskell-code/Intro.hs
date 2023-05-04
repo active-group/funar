@@ -225,6 +225,14 @@ data Optional a =
   | Null
   deriving Show
 
+instance Eq a => Eq (Optional a) where
+  (==) Null Null = True
+  (==) (Result a) (Result a') = a == a'
+  (==) Null (Result a) = False
+  (==) (Result a) Null = False
+
+-- data Maybe a = Nothing | Just a
+
 -- Position eines Elements in einer Liste finden
 listIndex :: Eq a => a -> [a] -> Optional Integer
 -- >>> listIndex 3 [5, 7, 2, 1, 3, 9, 3]
