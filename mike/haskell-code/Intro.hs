@@ -288,6 +288,7 @@ instance Functor Optional where
 instance Applicative Optional where
 
 instance Monad Optional where
+  (>>=) Null next = Null
 
 -- Eq a: Constraint
 
