@@ -1,5 +1,6 @@
 module Intro where
 
+-- Prelude: Haskell-Standardbibliothek
 import Prelude hiding (Semigroup)
 
 -- Groß-/Kleinschreibung signifikant
