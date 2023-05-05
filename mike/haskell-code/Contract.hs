@@ -70,4 +70,13 @@ zcb1' = zeroCouponBond (MkDate "2023-12-24") 100 EUR
 swap = Both (zeroCouponBond (MkDate "2023-12-24") 100 EUR)
             (Inverse (zeroCouponBond (MkDate "2023-12-24") 100 GBP))
 
--- Semantik
+data Payment = MkPayment {
+    paymentDate :: Date,
+    paymentDirection :: Direction,
+    paymentAmount :: Amount,
+    paymentCurrency :: Currency
+}
+
+-- (operationelle) Semantik
+semantics :: Contract -> Date -> ([Payment], Contract) 
+-- Zahlungen bis zu diesem Datum, "Residualvertag"
