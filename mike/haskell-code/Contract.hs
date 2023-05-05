@@ -113,9 +113,13 @@ cd = Both (zeroCouponBond (MkDate "2023-06-01") 100 EUR)
           (zeroCouponBond (MkDate "2023-12-24") 100 EUR)
 
 -- >>> semantics cd (MkDate "2023-08-01")
--- ([MkPayment {paymentDate = MkDate "2023-08-01", paymentDirection = Long, paymentAmount = 100.0, paymentCurrency = EUR}],Both (Many 100.0 Zero) (Later (MkDate "2023-12-24") (Many 100.0 (One EUR))))
+-- ([MkPayment {paymentDate = MkDate "2023-08-01", paymentDirection = Long, paymentAmount = 100.0, paymentCurrency = EUR}],Both Zero (Later (MkDate "2023-12-24") (Many 100.0 (One EUR))))
 
 -- smart constructor
 many :: Amount -> Contract -> Contract
 many amount Zero = Zero
 many amount contract = Many amount contract
+
+both Zero c = c
+both c Zero = c
+both c1 c2 = Both c1 c2
