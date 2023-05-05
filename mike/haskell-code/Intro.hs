@@ -286,6 +286,8 @@ instance Functor Optional where
   fmap = optionalMap
 
 instance Applicative Optional where
+  pure = Result
+  (<*>) 
 
 instance Monad Optional where
   (>>=) Null next = Null
