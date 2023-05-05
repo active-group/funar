@@ -45,7 +45,7 @@ data Contract =
   | Many Amount Contract
   | Later Date Contract
   | Both Contract Contract
-  | WithDirection Direction Contract
+--  | WithDirection Direction Contract
   deriving Show
 
 c1 = One EUR
@@ -65,6 +65,6 @@ zcb1' = zeroCouponBond (MkDate "2023-12-24") 100 EUR
 -- swap = Both (Later (MkDate "2023-12-24") (Many 100 (One EUR)))
 --            (Later (MkDate "2023-12-24") (Many (-100) (One GBP)))
 
-swap = WithDirection Long
+swap = 
        (Both (zeroCouponBond (MkDate "2023-12-24") 100 EUR)
              (WithDirection Short (zeroCouponBond (MkDate "2023-12-24") 100 GBP)))
