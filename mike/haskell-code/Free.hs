@@ -26,6 +26,10 @@ data DB' self =
     Get Key (Value -> self)
   | Put Key Value (() -> self)
 
+instance Functor DB' where
+    fmap f (Get key callback) =
+        Get key (\value -> fmap f (callback value))
+    fmap f (Put key value callback) = undefined
 
 
 data Free m' a =
