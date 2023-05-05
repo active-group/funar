@@ -14,7 +14,14 @@ module Contract where
     "Ich bekomme 100€ jetzt."
   - "Später"
 
+- Selbstbezüge / Kombinatoren
 
+- nächstes Beispiel
+
+Currency Swap:
+Am 24.12.2023:
+- Ich bekomme 100€.
+- Ich bezahle 100GBP.
 -}
 
 type Amount = Double
@@ -34,6 +41,7 @@ data Contract =
     One Currency -- "Ich bekomme 1€ jetzt."
   | Many Amount Contract
   | Later Date Contract
+  | Both Contract Contract
   deriving Show
 
 c1 = One EUR
@@ -49,3 +57,6 @@ zeroCouponBond date amount currency =
     Later date (Many amount (One currency))
 
 zcb1' = zeroCouponBond (MkDate "2023-12-24") 100 EUR
+
+swap = Both (Later (MkDate "2023-12-24") (Many 100 (One EUR)))
+            (Later (MkDate "2023-12-24") (Many (-100) (One GBP)))
