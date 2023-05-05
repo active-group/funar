@@ -28,9 +28,9 @@ data DB' self =
 
 instance Functor DB' where
     fmap f (Get key callback) =
-        Get key (\value -> fmap f (callback value))
-    fmap f (Put key value callback) = undefined
-
+        Get key (\value -> f (callback value))
+    fmap f (Put key value callback) =
+        Put key value (\() -> f (callback ()))
 
 data Free m' a =
     Pure a -- für Done/Return
