@@ -42,10 +42,12 @@ data Direction = Long | Short
 
 data Contract =
     One Currency -- "Ich bekomme 1€ jetzt."
+  | Zero
   | Many Amount Contract
   | Later Date Contract
   | Both Contract Contract
 --  | WithDirection Direction Contract
+  | Inverse Contract -- vertauscht Rechte und Pflichten
   deriving Show
 
 c1 = One EUR
@@ -67,4 +69,4 @@ zcb1' = zeroCouponBond (MkDate "2023-12-24") 100 EUR
 
 swap = 
        (Both (zeroCouponBond (MkDate "2023-12-24") 100 EUR)
-             (WithDirection Short (zeroCouponBond (MkDate "2023-12-24") 100 GBP)))
+             (Inverse (zeroCouponBond (MkDate "2023-12-24") 100 GBP)))
