@@ -1,4 +1,4 @@
-module Table(TableState, emptyTableState)
+module Table(TableState, emptyTableState, runTable)
 where
 
 import qualified Data.Foldable as Foldable
@@ -178,3 +178,24 @@ tableProcessEvent (TrickTaken player trick) state =
   }
 tableProcessEvent (IllegalCardAttempted player card) state = state
 tableProcessEvent (GameEnded player) state = state
+
+-- data Either left right = Left left | Right rights
+
+-- Spielablauf ausführen
+-- runTable :: Game a -> TableState -> [GameEvent] -> a
+runTable :: Game b -> TableState -> [GameEvent] 
+               -> (TableState, [GameEvent], Either (GameCommand -> Game b) b)
+runTable (PlayValid player card cont) state revents =
+  runTable (cont (playValid state player card)) state revents
+runTable (TurnOverTrick cont) state revents =
+  runTable (cont (turnOverTrick state)) state revents
+runTable (PlayerAfter player cont) state revents =
+  runTable (cont (playerAfter state player)) state revents
+runTable (GameOver cont) state revents =
+  runTable (cont (gameOver state)) state revents
+runTable (RecordEvent event cont) state revents =
+  runTable (cont ()) (tableProcessEvent event state) (event : revents)
+
+runTable (Done result) state revents = (state, reverse revents, Right result)
+
+runTable (GetCommand cont) state revents = (state, reverse revents, Left cont)
