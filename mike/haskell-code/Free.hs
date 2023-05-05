@@ -30,4 +30,14 @@ data Free m' a =
     Pure a -- für Done/Return
   | Impure (m' (Free m' a)) 
 
+instance Functor (Free m') where
+
+instance Applicative (Free m') where
+
+instance Functor m' => Monad (Free m') where
+    return = Pure
+
+    (>>=) (Pure a) next = next a
+    (>>=) (Impure f) next = 
+        Impure (fmap (>>= next) f)
 
