@@ -395,3 +395,9 @@ instance Semigroup a => Semigroup (Optional a) where
 
 instance Semigroup a => Monoid (Optional a) where
   neutral = Null
+
+-- >>> :info Applicative
+-- type Applicative :: (* -> *) -> Constraint
+-- class Functor f => Applicative f where
+--   pure :: a -> f a
+--   (<*>) :: f (a -> b) -> f a -> f b
