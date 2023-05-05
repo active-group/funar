@@ -106,7 +106,7 @@ semantics (Inverse contract) now =
 semantics (Both contract1 contract2) now =
   let (payments1, residualContract1) = semantics contract1 now
       (payments2, residualContract2) = semantics contract2 now
-   in (payments1 ++ payments2, Both residualContract1 residualContract2)
+   in (payments1 ++ payments2, both residualContract1 residualContract2)
 semantics Zero now = ([], Zero)
 
 cd = Both (zeroCouponBond (MkDate "2023-06-01") 100 EUR)
@@ -120,6 +120,7 @@ many :: Amount -> Contract -> Contract
 many amount Zero = Zero
 many amount contract = Many amount contract
 
+both :: Contract -> Contract -> Contract
 both Zero c = c
 both c Zero = c
 both c1 c2 = Both c1 c2
