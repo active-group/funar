@@ -47,3 +47,8 @@ instance Functor m' => Monad (Free m') where
     (>>=) (Impure f) next = 
         Impure (fmap (>>= next) f)
 
+type DB a = Free DB' a
+
+-- get
+-- put
+-- runDB
