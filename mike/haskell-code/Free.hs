@@ -19,3 +19,13 @@ data Game a
   | Done a
 -}
 
+type Key = String
+type Value = Integer
+
+data DB' self =
+    Get Key (Value -> self)
+  | Put Key Value (() -> self)
+
+
+
+
