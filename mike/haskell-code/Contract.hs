@@ -37,11 +37,15 @@ data Contract =
     ZeroCouponBond Date Amount Currency
 -}
 
+data Direction = Long | Short
+  deriving Show
+
 data Contract =
     One Currency -- "Ich bekomme 1€ jetzt."
   | Many Amount Contract
   | Later Date Contract
   | Both Contract Contract
+  | WithDirection Direction Contract
   deriving Show
 
 c1 = One EUR
@@ -58,5 +62,8 @@ zeroCouponBond date amount currency =
 
 zcb1' = zeroCouponBond (MkDate "2023-12-24") 100 EUR
 
-swap = Both (Later (MkDate "2023-12-24") (Many 100 (One EUR)))
-            (Later (MkDate "2023-12-24") (Many (-100) (One GBP)))
+-- swap = Both (Later (MkDate "2023-12-24") (Many 100 (One EUR)))
+--            (Later (MkDate "2023-12-24") (Many (-100) (One GBP)))
+
+swap = Both (zeroCouponBond (MkDate "2023-12-24") 100 EUR)
+            (zeroCouponBond (MkDate "2023-12-24") (-100) GBP)
