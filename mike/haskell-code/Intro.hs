@@ -396,8 +396,23 @@ instance Semigroup a => Semigroup (Optional a) where
 instance Semigroup a => Monoid (Optional a) where
   neutral = Null
 
+-- >>> :info Functor
+-- type Functor :: (* -> *) -> Constraint
+-- class Functor f where
+--   fmap :: (a -> b) -> f a -> f b
+
 -- >>> :info Applicative
 -- type Applicative :: (* -> *) -> Constraint
 -- class Functor f => Applicative f where
---   pure :: a -> f a
+--   pure :: a -> f a  -- das gleiche wie return
 --   (<*>) :: f (a -> b) -> f a -> f b
+
+-- >>> :info Monad
+-- type Monad :: (* -> *) -> Constraint
+-- class Applicative m => Monad m where
+--   (>>=) :: m a -> (a -> m b) -> m b
+--   return :: a -> m a
+
+--   fmap ::       (a ->   b) -> f a -> f b
+--   (<*>) ::    f (a ->   b) -> f a -> f b
+-- (flip (>>=)) :: (a -> m b) -> m a -> m b
