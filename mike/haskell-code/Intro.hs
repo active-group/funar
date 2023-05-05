@@ -289,9 +289,9 @@ instance Applicative Optional where
   pure = Result
   -- (<*>) :: Optional (a -> b) -> Optional a -> Optional b
   (<*>) Null Null = Null
-  (<*>) Null (Result a) = Result a
-  (<*>) (Result a) Null = undefined
-  (<*>) (Result f) (Result a) = undefined
+  (<*>) Null (Result a) = Null
+  (<*>) (Result f) Null = Null
+  (<*>) (Result f) (Result a) = Result (f a)
 
 
 instance Monad Optional where
