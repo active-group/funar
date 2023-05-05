@@ -293,6 +293,22 @@ instance Applicative Optional where
   (<*>) (Result f) Null = Null
   (<*>) (Result f) (Result a) = Result (f a)
 
+average2 :: Double -> Double -> Double
+average2 a b = (a+b) / 2
+
+average3 :: Double -> Double -> Double -> Double
+average3 a b c = (a + b + c) / 2 
+
+av2 :: Optional Double -> Optional Double -> Optional Double
+av2 o1 o2 =
+  fmap average2 o1 <*> o2
+
+-- <$> anderer Name für fmap
+
+av3 :: Applicative f => f Double -> f Double -> f Double -> f Double
+av3 o1 o2 o3 = average3 <$> o1 <*> o2 <*> o3
+
+
 
 instance Monad Optional where
   (>>=) Null next = Null
