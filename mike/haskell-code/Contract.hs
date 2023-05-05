@@ -95,7 +95,7 @@ semantics :: Contract -> Date -> ([Payment], Contract)
 semantics (One currency) now = ([MkPayment now Long 1 currency], Zero)
 semantics (Many amount contract) now =
   let (payments, residualContract) = semantics contract now
-   in (map (scalePayment amount) payments, Many amount residualContract)
+   in (map (scalePayment amount) payments, many amount residualContract)
 semantics c@(Later date contract) now =
   if now >= date
     then semantics contract now
@@ -113,4 +113,9 @@ cd = Both (zeroCouponBond (MkDate "2023-06-01") 100 EUR)
           (zeroCouponBond (MkDate "2023-12-24") 100 EUR)
 
 -- >>> semantics cd (MkDate "2023-08-01")
--- No instance for (Show Payment) arising from a use of ‘evalPrint’
+-- ([MkPayment {paymentDate = MkDate "2023-08-01", paymentDirection = Long, paymentAmount = 100.0, paymentCurrency = EUR}],Both (Many 100.0 Zero) (Later (MkDate "2023-12-24") (Many 100.0 (One EUR))))
+
+-- smart constructor
+many :: Amount -> Contract -> Contract
+many amount Zero = Zero
+many amount contract = Many amount contract
