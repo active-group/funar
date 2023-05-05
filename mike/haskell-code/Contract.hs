@@ -67,6 +67,7 @@ zcb1' = zeroCouponBond (MkDate "2023-12-24") 100 EUR
 -- swap = Both (Later (MkDate "2023-12-24") (Many 100 (One EUR)))
 --            (Later (MkDate "2023-12-24") (Many (-100) (One GBP)))
 
-swap = 
-       (Both (zeroCouponBond (MkDate "2023-12-24") 100 EUR)
-             (Inverse (zeroCouponBond (MkDate "2023-12-24") 100 GBP)))
+swap = Both (zeroCouponBond (MkDate "2023-12-24") 100 EUR)
+            (Inverse (zeroCouponBond (MkDate "2023-12-24") 100 GBP))
+
+-- Semantik
