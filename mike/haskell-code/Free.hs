@@ -47,6 +47,10 @@ instance Functor m' => Monad (Free m') where
     (>>=) (Impure f) next = 
         Impure (fmap (>>= next) f)
 
+runFree :: Monad m => (f (Free f a) -> (Free f a -> m a) -> m a) -> Free f a -> m a
+runFree _ (Pure result) = return result
+runFree rrr (Impure command) = rrr command (runFree rrr)
+
 type DB a = Free DB' a
 
 -- get
