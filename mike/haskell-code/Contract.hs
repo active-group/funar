@@ -80,3 +80,19 @@ data Payment = MkPayment {
 -- (operationelle) Semantik
 semantics :: Contract -> Date -> ([Payment], Contract) 
 -- Zahlungen bis zu diesem Datum, "Residualvertag"
+semantics (One currency) now = ([MkPayment Long now 1 currency], Zero)
+semantics (Many amount contract) now =
+  let (payments, residualContract) = semantics contract now
+   in (map (scalePayment amount) payments, Many amount residualContract)
+semantics c@(Later date contract) now =
+  if now >= date
+    then semantics contract now
+    else ([], c)
+semantics (Inverse contract) now =
+  let (payments, residualContract) = semantics contract now
+   in (map invertPayment payments, Give residualContract)
+semantics (Both contract1 contract2) now =
+  let (payments1, residualContract1) = semantics contract1 now
+      (payments2, residualContract2) = semantics contract2 now
+   in (payments1 ++ payments2, and' residualContract1 residualContract2)
+semantics Zero now = ([], Zero)
