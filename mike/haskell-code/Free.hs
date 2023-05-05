@@ -26,6 +26,8 @@ data DB' self =
     Get Key (Value -> self)
   | Put Key Value (() -> self)
 
-
+data Free m' a =
+    Pure a -- für Done/Return
+  | Impure (m' (Free m' a)) 
 
 
