@@ -79,3 +79,60 @@ Falls Model-View-Update drankommt, werden wir Elm brauchen.  Anleitung
 hier:
 
 https://guide.elm-lang.org/install/
+
+# Shared Notes
+
+## Anfängerausbildung:
+    
+https://www.deinprogramm.de/
+
+Konstruktionsanleitungen:
+https://docs.racket-lang.org/deinprogramm/Konstruktionsanleitungen.html
+
+## Haskell:
+    
+REPL starten: cabal repl lib:haskell-code
+
+in der REPL: :r wie Reload
+
+## Hearts:
+    
+https://cardgames.io/hearts/
+
+bauen:
+
+    cabal build exe:server
+
+interaktives Spiel:
+
+   cabal repl lib:hearts
+dadrin:
+   :module Sync
+   gameInteractiveIO
+
+## Hoogle:
+https://hoogle.haskell.org/
+
+## Functional Programming in C
+
+https://maldus512.medium.com/functional-programming-in-c-fa0d7baad2ae
+
+Repo timer in C: https://github.com/Maldus512/EmbeddedGenericTimer
+
+## Zusammengesetzte Daten in Elixir:
+https://github.com/active-group/quick-struct
+
+## Secure by Design:
+https://www.manning.com/books/secure-by-design
+
+## XMonad:
+https://xmonad.org/
+
+## Property-based Testing in Erlang/Elixir:
+https://propertesting.com/
+
+## Pure Variants:
+https://www.pure-systems.com/pv-update/additions/doc/5.0.8/com.ps.consul.eclipse.ui.doc/ch09s07.html
+
+## C Code aus funktionaler DSL generieren:
+https://raw.githubusercontent.com/GaloisInc/smaccmpilot-experiencereport/master/embedded-experience.pdf
