@@ -76,11 +76,23 @@ data Payment = MkPayment {
     paymentAmount :: Amount,
     paymentCurrency :: Currency
 }
+ deriving Show
+
+scalePayment :: Amount -> Payment -> Payment
+scalePayment factor payment = 
+    payment { paymentAmount = factor * paymentAmount payment }
+
+invertDirection Long = Short 
+invertDirection Short = Long
+
+invertPayment :: Payment -> Payment
+invertPayment payment =
+    payment { paymentDirection = invertDirection (paymentDirection payment)}
 
 -- (operationelle) Semantik
 semantics :: Contract -> Date -> ([Payment], Contract) 
 -- Zahlungen bis zu diesem Datum, "Residualvertag"
-semantics (One currency) now = ([MkPayment Long now 1 currency], Zero)
+semantics (One currency) now = ([MkPayment now Long 1 currency], Zero)
 semantics (Many amount contract) now =
   let (payments, residualContract) = semantics contract now
    in (map (scalePayment amount) payments, Many amount residualContract)
@@ -90,9 +102,15 @@ semantics c@(Later date contract) now =
     else ([], c)
 semantics (Inverse contract) now =
   let (payments, residualContract) = semantics contract now
-   in (map invertPayment payments, Give residualContract)
+   in (map invertPayment payments, Inverse residualContract)
 semantics (Both contract1 contract2) now =
   let (payments1, residualContract1) = semantics contract1 now
       (payments2, residualContract2) = semantics contract2 now
-   in (payments1 ++ payments2, and' residualContract1 residualContract2)
+   in (payments1 ++ payments2, Both residualContract1 residualContract2)
 semantics Zero now = ([], Zero)
+
+cd = Both (zeroCouponBond (MkDate "2023-06-01") 100 EUR)
+          (zeroCouponBond (MkDate "2023-12-24") 100 EUR)
+
+-- >>> semantics cd (MkDate "2023-08-01")
+-- No instance for (Show Payment) arising from a use of ‘evalPrint’
