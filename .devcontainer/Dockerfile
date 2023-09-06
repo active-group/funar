@@ -19,6 +19,8 @@ RUN sed -i 's/%sudo.*ALL/%sudo ALL=(ALL:ALL) NOPASSWD:ALL/' /etc/sudoers
 RUN mkdir -p /etc/nix && \
     echo 'experimental-features = nix-command flakes' >> /etc/nix/nix.conf
 
+# Necessary for ARM64 for some reason
+RUN mkdir -m 0755 /nix && chown code /nix
 USER code
 
 # Install Nix

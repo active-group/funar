@@ -1,6 +1,6 @@
 {
   "name": "haskell",
-  "image": "docker.active-group.de/funar-devcontainer:1.1.0",
+  "image": "docker.active-group.de/funar-devcontainer:2.0.0",
   // "dockerFile": "Dockerfile",
   "context": "..",
   "appPort": [
