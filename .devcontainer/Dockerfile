@@ -31,7 +31,14 @@ RUN curl -L https://nixos.org/nix/install | sh
 # environments don't propagate to the "final" session.
 ENV PATH=/home/code/.nix-profile/bin:$PATH
 
-# Install git and direnv
-RUN nix-env -iA nixpkgs.direnv nixpkgs.gitMinimal
+# Install git
+RUN nix profile install nixpkgs#gitMinimal
+
+# Pre-install/load GHC and HLS in a very hacky way
+WORKDIR /tmp
+COPY haskell-code haskell-code
+COPY hearts hearts
+COPY flake.nix flake.lock ./
+RUN nix profile install .#ghcForFunar .#hls .#cabal-install
 
 WORKDIR /home/code

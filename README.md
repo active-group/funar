@@ -34,16 +34,13 @@ Setups Probleme durch UID-Mapping bereitet.
 - das Top-Level-Verzeichnis (Ort des geklonten Repos) selektieren
 
 Da sollte jetzt eine Meldung erscheinen, dass ein Docker-Image gebaut
-wird.  Das kann eine Weile dauern, sollte aber ohne Fehlermeldung
+bzw. geladen wird.  Das kann eine Weile dauern, sollte aber ohne Fehlermeldung
 vonstatten gehen.
 
-- wenn das `direnv`-Plugin nachfragt, auf `Allow` klicken, und
-  evtl. danach den Reload akzeptieren
 - In der Datei `haskell-code/Intro.hs` das `module` verunstalten (z. B. einen
   Buchstaben entfernen)
 
-Nach etwas Ladezeit (die erforderlichen Haskell-Pakete müssen
-heruntergeladen werden) sollten in der Datei Anmerkungen des Linters
+Nach etwas initialer Ladezeit sollten in der Datei Anmerkungen des Linters
 erscheinen.
 
 #### UID-Remapping-Problem (u. U. nur Linux)
