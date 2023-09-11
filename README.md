@@ -81,11 +81,11 @@ es helfen, das Image bauen zu lassen (statt herunterzuladen).  Dazu:
 
 ### Fallback: Gitpod
 
-Falls lokale Installation nicht funktionieren oder beschränkt sind, ist Gitpod
-eine mögliche Alternative. Bei Klick auf den Button öffnet sich eine
-browserbasierte VSCode-Umgebung, in der FUNAR lauffähig sein sollte. Falls ein
-Popup erscheint, das fragt, wie der Haskell-Language-Server gefunden werden
-soll, dann bitte "Manually via PATH" auswählen!
+Falls lokale Installationen (z. B. Docker) nicht funktionieren oder nicht
+erlaubt sind, ist Gitpod eine mögliche Alternative. Bei Klick auf den Button
+öffnet sich eine browserbasierte VSCode-Umgebung, in der FUNAR lauffähig sein
+sollte. Falls ein Popup erscheint, das fragt, wie der Haskell-Language-Server
+gefunden werden soll, dann bitte "Manually via PATH" auswählen!
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/active-group/funar)
 
