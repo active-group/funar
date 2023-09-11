@@ -1,4 +1,3 @@
-
 {
   description = "FUNAR";
 
@@ -21,15 +20,14 @@
             })
           ];
         };
-        # hearts = pkgs.haskellPackages.callCabal2nix "hearts"
-        #   (pkgs.lib.cleanSource ./hearts) { };
+        hearts = pkgs.haskellPackages.callCabal2nix "hearts"
+          (pkgs.lib.cleanSource ./hearts) { };
         haskell-code = pkgs.haskellPackages.callCabal2nix "haskell-code"
           (pkgs.lib.cleanSource ./haskell-code) { };
       in {
         devShells = {
           default = pkgs.haskellPackages.shellFor {
-            packages = _: [ # hearts
-                            haskell-code ];
+            packages = _: [ hearts haskell-code ];
             buildInputs = [
               pkgs.cabal-install
               self.packages.${system}.hls
@@ -60,16 +58,15 @@
         };
 
         packages = {
-          inherit # hearts
-            haskell-code;
+          inherit hearts haskell-code;
           inherit (pkgs) cabal-install;
           hls = pkgs.haskell-language-server.override {
             supportedGhcVersions = [ ghcVersion ];
           };
           # HACK: We rely on how `shellFor` constructs its `nativeBuildInputs`
-          # in order to grab the `ghcWithPackages` from out of there.  That way
+          # in order to grab the `ghcWithPackages` from out of there. That way
           # we're able to globally install this GHC in the Docker image and get
-          # rid of direnv as a necessity.
+          # rid of direnv as a dependency.
           ghcForFunar =
             builtins.head self.devShells.${system}.default.nativeBuildInputs;
         };

@@ -1,0 +1,8 @@
+cradle:
+  cabal:
+    - component: "lib:hearts"
+      path: "./src"
+    - component: "exe:server"
+      path: "./app"
+    - component: "test:hearts-spec"
+      path: "./test"
