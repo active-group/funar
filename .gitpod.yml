@@ -1,8 +1,7 @@
 image: docker.active-group.de/funar-gitpod:3.0.0
 tasks:
   - init: |
-      mkdir -p /home/gitpod/.config/nix
-      && echo 'sandbox = false' >> /home/gitpod/.config/nix/nix.conf
+      mkdir -p /home/gitpod/.config/nix && echo 'sandbox = false' >> /home/gitpod/.config/nix/nix.conf
 vscode:
   extensions:
     - haskell.haskell
