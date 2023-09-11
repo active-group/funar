@@ -79,6 +79,14 @@ es helfen, das Image bauen zu lassen (statt herunterzuladen).  Dazu:
 - Diese Instruktionen funktionieren auch auf macOS, allerdings ist
   dort keine Single-User-Installation von Nix (mehr) möglich.
 
+### Fallback: Gitpod
+
+Falls lokale Installation nicht funktionieren oder beschränkt sind, ist Gitpod
+eine mögliche Alternative. Bei Klick auf den Button öffnet sich eine
+browserbasierte VSCode-Umgebung, in der FUNAR lauffähig sein sollte:
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/active-group/funar)
+
 # Bei Problemen:
 
 ... bitte Mike Sperber oder Johannes Maier kontaktieren.
