@@ -1,3 +1,4 @@
+
 {
   description = "FUNAR";
 
@@ -20,14 +21,15 @@
             })
           ];
         };
-        hearts = pkgs.haskellPackages.callCabal2nix "hearts"
-          (pkgs.lib.cleanSource ./hearts) { };
+        # hearts = pkgs.haskellPackages.callCabal2nix "hearts"
+        #   (pkgs.lib.cleanSource ./hearts) { };
         haskell-code = pkgs.haskellPackages.callCabal2nix "haskell-code"
           (pkgs.lib.cleanSource ./haskell-code) { };
       in {
         devShells = {
           default = pkgs.haskellPackages.shellFor {
-            packages = _: [ hearts haskell-code ];
+            packages = _: [ # hearts
+                            haskell-code ];
             buildInputs = [
               pkgs.cabal-install
               self.packages.${system}.hls
@@ -58,7 +60,8 @@
         };
 
         packages = {
-          inherit hearts haskell-code;
+          inherit # hearts
+            haskell-code;
           inherit (pkgs) cabal-install;
           hls = pkgs.haskell-language-server.override {
             supportedGhcVersions = [ ghcVersion ];
