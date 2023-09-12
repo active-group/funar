@@ -176,6 +176,27 @@ class Dillo {
                   (else
                    (dillo-weight dillo))))))
 
-    
 
-                          
+; Ein Papagei hat folgende Eigenschaften:
+; - Satz
+; - Gewicht
+(define-record parrot
+  make-parrot
+  (parrot-sentence string)
+  (parrot-weight number))
+
+; Begrüßungs-Papagei
+(define parrot1 (make-parrot "Hello!" 1)) 
+
+; Verabschiedungs-Papagei
+(define parrot2 (make-parrot "Goodbye!" 2))
+
+; Papagei überfahren
+(: run-over-parrot (parrot -> parrot))
+
+(check-expect (run-over-parrot parrot1)
+              (make-parrot "" 1))
+
+(define run-over-parrot
+  (lambda (parrot)
+    (make-parrot "" (parrot-weight parrot))))
