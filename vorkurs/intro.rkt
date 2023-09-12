@@ -46,7 +46,10 @@
 ; - Minute
 ; zusammengesetzte Daten
 ; OOP: Klasse, Java: auch "Record", Kotlin: "data class"
-(define-record time
-  make-time
+(define-record time ; Signatur
+  make-time ; Konstruktor
   (time-hour natural)
   (time-minute natural))
+
+; 12 Uhr 24 Minuten
+(define time1 (make-time 12 24))
