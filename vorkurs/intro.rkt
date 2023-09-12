@@ -19,3 +19,15 @@
 (check-expect (cute? "dog") #t)
 (check-expect (cute? "cat") #t)
 (check-expect (cute? "snake") #f)
+
+; Gerüst
+#;(define cute?
+  (lambda (pet)
+    ...))
+
+(define cute?
+  (lambda (pet)
+    (cond ; Fallunterscheidung => Verzweigung, 1 Zweig pro Fall
+      ((string=? pet "dog") ...)
+      ((string=? pet "cat") ...)
+      ((string=? pet "snake") ...))))
