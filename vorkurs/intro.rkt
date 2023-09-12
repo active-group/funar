@@ -378,6 +378,7 @@ class Dillo {
 
 ; Elemente einer Liste extrahieren, bei denen das Prädikat #t liefert
 (: list-extract ((number -> boolean) list-of-numbers -> list-of-numbers))
+; heißt i.d.R. filter
 
 ; Higher-Order-Funktion / Funktion höherer Ordnung
 ; - mehr als 1 Pfeil in der Signatur
@@ -396,4 +397,12 @@ class Dillo {
        (if (p? (first list))
            (cons (first list) (list-extract p? (rest list)))
            (list-extract p? (rest list)))))))
-              
+
+
+(define list-xxx
+  (lambda (neutral-element-of-operator operator list)
+    (cond
+      ((empty? list) neutral-element-of-operator)
+      ((cons? list)
+       (operator (first list)
+                 (list-xxx neutral-element-of-operator operator (rest list)))))))
