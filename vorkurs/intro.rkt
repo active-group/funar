@@ -89,4 +89,58 @@
        (time-minute time))))
 
 ; (natural -> time)
+
+; Aus Minuten seit Mitternacht Zeit machen
+(: msm->time (natural -> time))
+
+(check-property
+ (for-all ((t time))
+   (expect (msm->time (msm t))
+           t)))
+
+(define msm->time
+  (lambda (minutes)
+    (make-time
+     (quotient minutes 60)
+     (modulo minutes 60))))
+
+; Tiere auf dem texanischen Highway
+
+; Gürteltier hat folgende Eigenschaften:
+; - lebendig oder tot? -UND-
+; - Gewicht
+; => zusammengesetzt
+(define-record dillo
+  make-dillo
+  (dillo-alive? boolean)
+  (dillo-weight number))
+
+; lebendiges Gürteltier, 10kg
+(define dillo1 (make-dillo #t 10))
+; totes Gürteltier, 8kg
+(define dillo2 (make-dillo #f 8))
+
+; Gürteltier überfahren
+#|
+class Dillo {
+  bool isAlive;
+  double weight;
+
+  void runOver() {
+    this.isAlive = false;
+  }
+}
+|#
+
+(: run-over-dillo (dillo -> dillo))
+
+(check-expect (run-over-dillo dillo1)
+              (make-dillo #f 10))
+(check-expect (run-over-dillo dillo2)
+              dillo2)
+
+(define run-over-dillo
+  (lambda (dillo)
+    ...))
+
                           
