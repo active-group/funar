@@ -48,7 +48,7 @@
 ; OOP: Klasse, Java: auch "Record", Kotlin: "data class"
 (define-record time ; Signatur
   make-time ; Konstruktor
-  (time-hour natural)
+  (time-hour natural) ; Selektor / "Getter-Funktion"
   (time-minute natural))
 
 ; 12 Uhr 24 Minuten
