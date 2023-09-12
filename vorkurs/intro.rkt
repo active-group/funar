@@ -355,4 +355,18 @@ class Dillo {
        (* (first list)
           (list-product (rest list)))))))
 
-; Aufgabe: Liste rein, Liste aller gerade Zahlen
+; Liste rein, Liste aller ungeraden Zahlen raus
+(: list-odds (list-of-number -> list-of-number))
+
+(check-expect (list-odds list4)
+              (cons 7 (cons 5 empty)))
+
+(define list-odds
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (if (odd? (first list))
+           (cons (first list) (list-odds (rest list)))
+           (list-odds (rest list)))))))
+              
