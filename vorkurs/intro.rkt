@@ -41,6 +41,10 @@
       ((string=? pet "cat") #t)
       ((string=? pet "snake") #f))))
 
+; lexikalische/statische Bindung
+; von der Benutzung einer Variable von innen nach außen suchen
+; die erste Definition/Bindung (lambda / define) ist zuständig.
+
 ; Uhrzeit besteht aus/hat folgende Eigenschaften:
 ; - Stunde -UND-
 ; - Minute
