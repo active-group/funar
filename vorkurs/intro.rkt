@@ -245,3 +245,49 @@ class Dillo {
 ; 2. Mixtur, die aus zwei Duschprodukten besteht
 ; Funktion entsprechend anpassen.
 
+(define-record soap
+  make-soap
+  soap?
+  (soap-ph number))
+
+; Ein Haartyp ist eins der folgenden:
+; - normal
+; - fettig
+; - Schuppen
+(define hairtype
+  (signature (enum "normal" "oily" "dandruff")))
+
+(define-record shampoo
+  make-shampoo
+  shampoo?
+  (shampoo-hairtype hairtype))
+
+(define-record shower-gel
+  make-shower-gel
+  shower-gel?
+  (shower-gel-soap soap)
+  (shower-gel-shampoo shampoo))
+
+(define-record mixture
+  make-mixture
+  mixture?
+  (mixture-product1 shower-product)
+  (mixture-product2 shower-product))
+
+; Ein Duschprodukt ist eins der folgenden:
+; - Seife
+; - Shampoo
+; - Mixtur
+(define shower-product
+  (signature (mixed soap shampoo mixture)))
+
+; Seifenanteil eines Duschprodukts, normiert auf 1
+(: shower-product-soap (shower-product -> number))
+
+(define shower-product-soap
+  (lambda (product)
+    (cond
+      ((soap? product) 1)
+      ((shampoo? product) 0)
+      ((mixture? product)
+       ...))))
