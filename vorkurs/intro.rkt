@@ -271,8 +271,8 @@ class Dillo {
 (define-record mixture
   make-mixture
   mixture?
-  (mixture-product1 shower-product)
-  (mixture-product2 shower-product))
+  (mixture-product1 shower-product) ; Selbstbezug
+  (mixture-product2 shower-product)) ; Selbtbezug
 
 ; Ein Duschprodukt ist eins der folgenden:
 ; - Seife
@@ -290,4 +290,7 @@ class Dillo {
       ((soap? product) 1)
       ((shampoo? product) 0)
       ((mixture? product)
-       ...))))
+       (/
+        (+ (shower-product-soap (mixture-product1 product))
+           (shower-product-soap (mixture-product2 procuct)))
+        2)))))
