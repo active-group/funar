@@ -139,8 +139,13 @@ class Dillo {
 (check-expect (run-over-dillo dillo2)
               dillo2)
 
+(check-property
+ (for-all ((d dillo))
+   (expect (dillo-alive? (run-over-dillo d))
+           #f)))
+
 (define run-over-dillo
   (lambda (dillo)
-    ...))
+    (make-dillo #f (dillo-weight dillo))))
 
                           
