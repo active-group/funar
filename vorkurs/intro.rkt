@@ -51,5 +51,9 @@
   (time-hour natural) ; Selektor / "Getter-Funktion"
   (time-minute natural))
 
+(: make-time (natural natural -> time))
+(: time-hour (time -> natural))
+(: time-minute (time -> natural))
+
 ; 12 Uhr 24 Minuten
 (define time1 (make-time 12 24))
