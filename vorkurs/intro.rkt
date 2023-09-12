@@ -326,3 +326,33 @@ class Dillo {
 (define list3 (cons 4 (cons 5 (cons 2 empty))))
 ; 4elementige Liste: 7 4 5 2
 (define list4 (cons 7 list3))
+
+; Elemente einer Liste aufsummieren
+(: list-sum (list-of-numbers -> number))
+
+(check-expect (list-sum list4)
+              18)
+
+(define list-sum
+  (lambda (list)
+    (cond
+      ((empty? list) 0) ; das neutrale Element der Addition
+      ((cons? list)
+       (+ (first list)
+          (list-sum (rest list)))))))
+
+; Elemente einer Liste aufmultiplizieren
+(: list-product (list-of-numbers -> number))
+
+(check-expect (list-product list4)
+              280)
+
+(define list-product
+  (lambda (list)
+    (cond
+      ((empty? list) 1) ; das neutrale Element der Multiplikation
+      ((cons? list)
+       (* (first list)
+          (list-product (rest list)))))))
+
+; Aufgabe: Liste rein, Liste aller gerade Zahlen
