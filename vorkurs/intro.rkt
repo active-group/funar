@@ -112,8 +112,12 @@
 ; => zusammengesetzt
 (define-record dillo
   make-dillo
+  dillo?
   (dillo-alive? boolean)
   (dillo-weight number))
+
+; Ist ein Wert ein Gürteltier?
+(: dillo? (any -> boolean))
 
 ; lebendiges Gürteltier, 10kg
 (define dillo1 (make-dillo #t 10))
