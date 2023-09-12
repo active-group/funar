@@ -229,3 +229,19 @@ class Dillo {
     (cond
       ((dillo? animal) (run-over-dillo animal))
       ((parrot? animal) (run-over-parrot animal)))))
+
+; Duschprodukte
+
+; - Seife (hat pH-Wert)
+; - Shampoo (hat Haartyp)
+
+; Ein Duschgel besteht aus:
+; - Seife
+; - Shampoo
+
+; 1. Datenanalyse + Beispiele
+; Funktion, die den Seifenanteil ermittelt.
+
+; 2. Mixtur, die aus zwei Duschprodukten besteht
+; Funktion entsprechend anpassen.
+
