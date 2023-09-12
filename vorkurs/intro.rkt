@@ -148,4 +148,34 @@ class Dillo {
   (lambda (dillo)
     (make-dillo #f (dillo-weight dillo))))
 
+; Gürteltier füttern
+(: feed-dillo (dillo number -> dillo))
+
+(check-expect
+ (feed-dillo dillo1 2)
+ (make-dillo #t 12))
+(check-expect
+ (feed-dillo dillo2 2)
+ dillo2)
+
+(define feed-dillo
+  (lambda (dillo amount)
+    (define alive? (dillo-alive? dillo))
+    (define weight (dillo-weight dillo))
+    (make-dillo (dillo-alive? dillo)
+                ; binäre Verzweigung
+                (if (dillo-alive? dillo)
+                    (+ (dillo-weight dillo) amount)
+                    (dillo-weight dillo))
+                #;(if (dillo-alive? dillo)
+                    (+ (dillo-weight dillo) amount)
+                    (dillo-weight dillo))
+                #;(cond
+                  ((dillo-alive? dillo)
+                   (+ (dillo-weight dillo) amount))
+                  (else
+                   (dillo-weight dillo))))))
+
+    
+
                           
