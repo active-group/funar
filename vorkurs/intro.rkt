@@ -10,3 +10,12 @@
 ; - Schlange
 ; Fallunterscheidung
 ; hier speziell Aufzählung
+(define pet
+  (signature (enum "dog" "cat" "snake")))
+
+; Ist Haustier niedlich?
+(: cute? (pet -> boolean))
+
+(check-expect (cute? "dog") #t)
+(check-expect (cute? "cat") #t)
+(check-expect (cute? "snake") #f)
