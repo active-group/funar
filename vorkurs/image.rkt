@@ -26,6 +26,15 @@
 ; Unterschiede -> Name
 ; lambda
 
+; Konstruktionsanleitungen / design recipes
+
+; Kurzbeschreibung
+; quadratisches Kachelmuster aus 2 Bildern
+
+; Signatur
+(: tile (image image -> image))
+
+
 (define tile
   (lambda (image1 image2)
     (above
