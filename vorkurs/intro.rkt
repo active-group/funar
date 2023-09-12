@@ -356,7 +356,7 @@ class Dillo {
           (list-product (rest list)))))))
 
 ; Liste rein, Liste aller ungeraden Zahlen raus
-(: list-odds (list-of-number -> list-of-number))
+(: list-odds (list-of-numbers -> list-of-numbers))
 
 (check-expect (list-odds list4)
               (cons 7 (cons 5 empty)))
