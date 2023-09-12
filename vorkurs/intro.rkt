@@ -292,5 +292,29 @@ class Dillo {
       ((mixture? product)
        (/
         (+ (shower-product-soap (mixture-product1 product))
-           (shower-product-soap (mixture-product2 procuct)))
+           (shower-product-soap (mixture-product2 product)))
         2)))))
+
+
+; Eine Liste ist eins der folgenden:
+; - die leere Liste
+; - eine Cons-Liste bestehend aus erstem Element und Rest-Liste
+;                                                         ^^^^^ Selbstbezug
+(define list-of-numbers
+  (signature (mixed empty-list
+                    #;cons-list)))
+
+; Die leere Liste ist ... die einzige wahre leere Liste
+(define-singleton empty-list ; Signatur
+  empty ; einzig wahrer Wert
+  empty?) ; Prädikat
+
+; Eine Cons-Liste besteht aus:
+; - erstes Element
+; - Rest-Liste
+(define-record cons-list
+  cons
+  cons?
+  (first number)
+  (rest list-of-numbers)) ; Selbstbezug
+  
