@@ -302,7 +302,7 @@ class Dillo {
 ;                                                         ^^^^^ Selbstbezug
 (define list-of-numbers
   (signature (mixed empty-list
-                    #;cons-list)))
+                    cons-list)))
 
 ; Die leere Liste ist ... die einzige wahre leere Liste
 (define-singleton empty-list ; Signatur
