@@ -162,11 +162,11 @@ class Dillo {
   (lambda (dillo amount)
     (define alive? (dillo-alive? dillo))
     (define weight (dillo-weight dillo))
-    (make-dillo (dillo-alive? dillo)
+    (make-dillo alive?
                 ; binäre Verzweigung
-                (if (dillo-alive? dillo)
-                    (+ (dillo-weight dillo) amount)
-                    (dillo-weight dillo))
+                (if alive?
+                    (+ weight amount)
+                    weight)
                 #;(if (dillo-alive? dillo)
                     (+ (dillo-weight dillo) amount)
                     (dillo-weight dillo))
