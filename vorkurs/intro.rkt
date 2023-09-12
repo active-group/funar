@@ -186,8 +186,11 @@ class Dillo {
 ; - Gewicht
 (define-record parrot
   make-parrot
+  parrot?
   (parrot-sentence string)
   (parrot-weight number))
+
+(: parrot? (any -> boolean))
 
 ; Begrüßungs-Papagei
 (define parrot1 (make-parrot "Hello!" 1)) 
@@ -213,6 +216,7 @@ class Dillo {
 (define animal
   (signature (mixed dillo parrot)))
 
+#|
 ; Tier überfahren
 (: run-over-animal (animal -> animal))
 
@@ -226,3 +230,4 @@ class Dillo {
     (cond
       (... ...)
       (... ...))))
+|#
