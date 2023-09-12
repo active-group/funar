@@ -13,11 +13,11 @@
 (define star1 (star 50 "solid" "gold"))
 (define overlay1 (overlay star1 circle1))
 
-(above
+#;(above
  (beside star1 circle1)
  (beside circle1 star1))
 
-(above
+#;(above
  (beside square1 star1)
  (beside star1 square1))
 
@@ -31,9 +31,16 @@
 ; Kurzbeschreibung
 ; quadratisches Kachelmuster aus 2 Bildern
 
-; Signatur
+; Signaturdeklaration
 (: tile (image image -> image))
 
+; Beispiele/Testfälle
+
+(check-expect
+ (tile circle1 star1)
+ (above
+  (beside circle1 star1)
+  (beside star1 circle1)))
 
 (define tile
   (lambda (image1 image2)
