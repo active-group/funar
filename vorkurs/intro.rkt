@@ -369,4 +369,25 @@ class Dillo {
        (if (odd? (first list))
            (cons (first list) (list-odds (rest list)))
            (list-odds (rest list)))))))
+
+; Abstraktion über zwei Definitionen
+; - letztes Mal kopieren
+; - umbenennen (wichtig: rekursive Aufrufe auch)
+; - Unterschiede durch abstrakte Namen ersetzen
+; - abstrake Namen in lambda unterbringen (wichtig: rekursive Aufrufe erweitern)
+(: list-extract ((number -> boolean) list-of-numbers -> list-of-numbers))
+
+(check-expect (list-extract even? list4)
+              (cons 4 (cons 2 empty)))
+(check-expect (list-extract odd? list4)
+              (cons 7 (cons 5 empty)))
+
+(define list-extract
+  (lambda (p? list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (if (p? (first list))
+           (cons (first list) (list-extract p? (rest list)))
+           (list-extract p? (rest list)))))))
               
