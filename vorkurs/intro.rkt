@@ -375,7 +375,13 @@ class Dillo {
 ; - umbenennen (wichtig: rekursive Aufrufe auch)
 ; - Unterschiede durch abstrakte Namen ersetzen
 ; - abstrake Namen in lambda unterbringen (wichtig: rekursive Aufrufe erweitern)
+
+; Elemente einer Liste extrahieren, bei denen das Prädikat #t liefert
 (: list-extract ((number -> boolean) list-of-numbers -> list-of-numbers))
+
+; Higher-Order-Funktion / Funktion höherer Ordnung
+; - mehr als 1 Pfeil in der Signatur
+; - Funktion, die eine Funktion als Argument akzeptiert oder als Ergebnis liefert.
 
 (check-expect (list-extract even? list4)
               (cons 4 (cons 2 empty)))
