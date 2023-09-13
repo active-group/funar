@@ -300,9 +300,10 @@ class Dillo {
 ; - die leere Liste
 ; - eine Cons-Liste bestehend aus erstem Element und Rest-Liste
 ;                                                         ^^^^^ Selbstbezug
-(define list-of-numbers
-  (signature (mixed empty-list
-                    cons-list)))
+(define list-of ; parametrische Polymorphie
+  (lambda (element)
+    (signature (mixed empty-list
+                      (cons-list-of element)))))
 
 ; Die leere Liste ist ... die einzige wahre leere Liste
 (define-singleton empty-list ; Signatur
@@ -312,11 +313,11 @@ class Dillo {
 ; Eine Cons-Liste besteht aus:
 ; - erstes Element
 ; - Rest-Liste
-(define-record cons-list
+(define-record (cons-list-of element) ; macht im Hintergrund ein lambda
   cons
   cons?
-  (first number)
-  (rest list-of-numbers)) ; Selbstbezug
+  (first element)
+  (rest (list-of element))) ; Selbstbezug
 
 ; 1elementige Liste: 5
 (define list1 (cons 5 empty))
@@ -326,6 +327,8 @@ class Dillo {
 (define list3 (cons 4 (cons 5 (cons 2 empty))))
 ; 4elementige Liste: 7 4 5 2
 (define list4 (cons 7 list3))
+
+(define list-of-numbers (signature (list-of number)))
 
 ; Elemente einer Liste aufsummieren
 (: list-sum (list-of-numbers -> number))
