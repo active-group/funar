@@ -214,6 +214,11 @@ listMap f (first:rest) = (cons (f first) (listMap f rest))
 
 cons = (:)
 
+data Optional a = -- ein a oder halt keins
+    Result a
+  | Null
+  deriving Show
+
 -- Index eines Elements in einer Liste liefern (0-basiert)
 -- >>> listIndex 5 [1,2,3,4,5,6]
 -- 4
