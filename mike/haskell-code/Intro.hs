@@ -30,3 +30,15 @@ data Pet =
 -- >>> Dog
 -- Dog
 
+-- Ist ein Haustier niedlich?
+isCute :: Pet -> Bool
+
+-- >>> isCute Dog
+-- True
+
+-- >>> isCute Snake
+-- False
+
+isCute Dog = undefined 
+isCute Cat = undefined
+isCute Snake = undefined
