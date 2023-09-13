@@ -223,6 +223,7 @@ data Optional a = -- ein a oder halt keins
 -- >>> listIndex 5 [1,2,3,4,5,6]
 -- Result 4
 -- links vom =>: Kontext, da stehen Constraints
+-- listIndex funktioniert nur für Typen a mit Eq a, "Werte vom Typ a sind vergleichbar"
 listIndex :: Eq a => a -> [a] -> Optional Integer
 listIndex element [] = Null
 listIndex element (first:rest) = 
