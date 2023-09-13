@@ -25,6 +25,8 @@
 ; - Stack ist in der Größe begrenzt
 ; - viel kleiner als der Hauptspeicher
 ; - auf der JVM verbrauchen auch endrekursive Aufrufe Platz auf dem Stack
+; -> Clojure: loop, Kotlin: tailrec, Scala @tailrec
+
 
 ; Auch Liste umdrehen
 (: rev2 ((list-of %a) (list-of %a) -> (list-of %a)))
@@ -51,3 +53,27 @@
        (cons
         (first list)
         (append-element (rest list) element))))))
+
+; Elemente einer Liste aufsummieren, endrekursiv
+(: list-sum2 ((list-of number) number -> number))
+
+(check-expect (list-sum2 (list 1 2 3 4) 0)
+              10)
+
+; Schablone
+#;(define list-sum2
+  (lambda (list acc)
+    (cond
+      ((empty? list) acc)
+      ((cons? list)
+       (list-sum2 (rest list)
+                  ... (first list) ... acc)))))
+
+(define list-sum2
+  ; acc ist die Summe der "bisher gesehenen Elemente"
+  (lambda (list acc)
+    (cond
+      ((empty? list) acc)
+      ((cons? list)
+       (list-sum2 (rest list)
+                  (+ (first list) acc))))))
