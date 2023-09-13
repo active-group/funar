@@ -153,6 +153,7 @@ swap f b a = f a b
 -- Datentyp dazu
 -- Funktion, die den Seifengehalt berechnet
 
+feedAnimal' :: (Animal, Weight) -> Animal
 feedAnimal'(dillo@(MkDillo liveness weight), amount) =
   -- Alias-Pattern
   case liveness of
