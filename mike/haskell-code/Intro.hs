@@ -172,4 +172,12 @@ entschönfinkeln f = \ (a, b) -> f a b
 -- aus einer Funktion mit Tupeln eine "gestufte" machen
 schönfinkeln :: ((a, b) -> c) -> (a -> b -> c)
 schönfinkeln f = \a -> \b -> f (a, b)
--- eingebaut als curry,
+-- eingebaut als curry
+
+data ListOf element =
+    Empty 
+  | Cons Integer (ListOf element)
+
+-- Listen in Haskell:
+-- - leere Liste: []
+-- - Cons-Listen: cons wird infix als : geschrieben
