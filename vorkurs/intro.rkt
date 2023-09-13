@@ -380,7 +380,7 @@ class Dillo {
 ; - abstrake Namen in lambda unterbringen (wichtig: rekursive Aufrufe erweitern)
 
 ; Elemente einer Liste extrahieren, bei denen das Prädikat #t liefert
-(: list-extract ((number -> boolean) list-of-numbers -> list-of-numbers))
+(: list-extract ((%a -> boolean) (list-of %a) -> (list-of %a)))
 ; heißt i.d.R. filter
 
 ; Higher-Order-Funktion / Funktion höherer Ordnung
