@@ -154,9 +154,9 @@ swap f b a = f a b
 -- Funktion, die den Seifengehalt berechnet
 
 feedAnimal' :: (Animal, Weight) -> Animal
-feedAnimal'(dillo@(MkDillo liveness weight), amount) =
+feedAnimal' (dillo@(MkDillo liveness weight), amount) =
   -- Alias-Pattern
   case liveness of
     Alive -> MkDillo liveness (weight + amount)
     Dead -> dillo -- MkDillo liveness weight
-feedAnimal'(MkParrot sentence weight, amount) = MkParrot sentence (weight + amount)
+feedAnimal' (MkParrot sentence weight, amount) = MkParrot sentence (weight + amount)
