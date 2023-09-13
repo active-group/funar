@@ -39,6 +39,6 @@ isCute :: Pet -> Bool
 -- >>> isCute Snake
 -- False
 
-isCute Dog = undefined 
-isCute Cat = undefined
-isCute Snake = undefined
+isCute Dog = True 
+isCute Cat = True
+isCute Snake = False
