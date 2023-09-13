@@ -53,6 +53,7 @@ data Liveness = Alive | Dead
 -- Typsynonym
 type Weight = Integer
 
+{-
 -- Record-Typ
 data Dillo = MkDillo { dilloLiveness :: Liveness,
                        dilloWeight :: Weight }
@@ -85,3 +86,9 @@ runOverDillo :: Dillo -> Dillo
 -- macht Kopie von dillo, bis auf dilloLiveness
 -- "functional update"
 runOverDillo dillo = dillo { dilloLiveness = Dead }
+-}
+
+-- Ein Tier ist eins der folgenden:
+-- - Gürteltier
+-- - Papagei
+-- algebraischer Datentyp
