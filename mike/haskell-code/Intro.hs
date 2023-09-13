@@ -208,4 +208,8 @@ listFold forEmpty forCons [] = forEmpty
 listFold forEmpty forCons (first:rest) =
     forCons first (listFold forEmpty forCons rest)
 
--- 
+listMap :: (a -> b) -> [a] -> [b]
+listMap f [] = []
+listMap f (first:rest) = (cons (f first) (listMap f rest))
+
+cons = (:)
