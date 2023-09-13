@@ -224,4 +224,10 @@ data Optional a = -- ein a oder halt keins
 -- Result 4
 listIndex :: a -> [a] -> Optional Integer
 listIndex element [] = Null
-listIndex element (first:rest) = undefined
+listIndex element (first:rest) = 
+    if first == element 
+    then Result 0
+    else
+       case listIndex element rest of
+        Null -> Null
+        Result index -> Result (index + 1)
