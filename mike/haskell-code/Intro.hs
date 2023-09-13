@@ -235,3 +235,4 @@ listIndex element (first:rest) =
         Result index -> Result (index + 1)
 
 -- Eq ist eine Typklasse (sowas wie ein Interface)
+-- Implementierung einer Typklasse heißt "instance"
