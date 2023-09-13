@@ -213,3 +213,10 @@ listMap f [] = []
 listMap f (first:rest) = (cons (f first) (listMap f rest))
 
 cons = (:)
+
+-- Index eines Elements in einer Liste liefern (0-basiert)
+-- >>> listIndex 5 [1,2,3,4,5,6]
+-- 4
+listIndex :: a -> [a] -> Integer
+listIndex element [] = undefined
+listIndex element (first:rest) = undefined
