@@ -21,6 +21,11 @@
         (first list) ; 1
         )))))
 
+; bei Implementierungen mit Stack oft:
+; - Stack ist in der Größe begrenzt
+; - viel kleiner als der Hauptspeicher
+; - auf der JVM verbrauchen auch endrekursive Aufrufe Platz auf dem Stack
+
 ; Auch Liste umdrehen
 (: rev2 ((list-of %a) (list-of %a) -> (list-of %a)))
 
@@ -32,6 +37,7 @@
     (cond
       ((empty? list) acc)
       ((cons? list)
+       ; kein Kontext: tail call / endrekursiver Aufruf
        (rev2 (rest list)
              (cons (first list) acc))))))
 
