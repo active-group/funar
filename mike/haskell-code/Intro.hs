@@ -160,3 +160,5 @@ feedAnimal' (dillo@(MkDillo liveness weight), amount) =
     Alive -> MkDillo liveness (weight + amount)
     Dead -> dillo -- MkDillo liveness weight
 feedAnimal' (MkParrot sentence weight, amount) = MkParrot sentence (weight + amount)
+
+tuplify :: (a -> b -> c) -> ((a, b) -> c)
