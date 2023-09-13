@@ -122,5 +122,7 @@ runOverAnimal (MkParrot _ weight) = MkParrot "" weight
 
 -- Tier füttern
 feedAnimal (MkDillo liveness weight) amount =
-    
+    case liveness of
+        Alive -> undefined
+        Dead -> undefined
 feedAnimal (MkParrot sentence weight) amount = undefined
