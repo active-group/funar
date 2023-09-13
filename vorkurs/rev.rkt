@@ -77,3 +77,5 @@
       ((cons? list)
        (list-sum2 (rest list)
                   (+ (first list) acc))))))
+
+; Aus einer Liste von Zahlen die geraden Zahlen extrahieren, endrekursiv
