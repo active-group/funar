@@ -463,3 +463,5 @@ class Dillo {
        (cons
         (f (first list))
         (list-map f (rest list)))))))
+
+(define highway (cons dillo1 (cons dillo2 (cons parrot1 (cons parrot2 empty)))))
