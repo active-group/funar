@@ -453,6 +453,8 @@ class Dillo {
   (lambda (x)
     (+ 1 x)))
 
+(: list-map ((number -> number) list-of-numbers -> list-of-numbers))
+
 (define list-map
   (lambda (f list)
     (cond
