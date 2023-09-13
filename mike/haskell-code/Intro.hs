@@ -174,9 +174,11 @@ schönfinkeln :: ((a, b) -> c) -> (a -> b -> c)
 schönfinkeln f = \a -> \b -> f (a, b)
 -- eingebaut als curry
 
+{-
 data ListOf element =
     Empty 
   | Cons Integer (ListOf element)
+-}
 
 -- Listen in Haskell:
 -- - leere Liste: []
@@ -197,7 +199,9 @@ listSum :: [Integer] -> Integer
 listSum [] = 0
 listSum (first : rest) = first + (listSum rest)
 
-listFold :: b -> (a -> b -> b) -> [a] -> b
+type ListOf a = [a]
+
+listFold :: b -> (a -> b -> b) -> ListOf a -> b
 listFold forEmpty forCons [] = forEmpty
 listFold forEmpty forCons (first:rest) =
     forCons first (listFold forEmpty forCons rest)
