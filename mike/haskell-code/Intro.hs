@@ -27,6 +27,8 @@ data Pet =
   | Snake
   deriving Show
 
+
+
 -- >>> Dog
 -- Dog
 
