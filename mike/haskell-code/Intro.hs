@@ -124,6 +124,7 @@ runOverAnimal (MkParrot _ weight) = MkParrot "" weight
 
 -- >>> feedAnimal dillo1 5
 -- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
+
 -- gibt nur einstellige Funktionen
 feedAnimal :: Animal -> (Weight -> Animal)
 feedAnimal dillo@(MkDillo liveness weight) amount = -- Alias-Pattern
