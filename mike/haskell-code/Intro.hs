@@ -107,3 +107,15 @@ parrot1 :: Animal
 parrot1 = MkParrot "Hello!" 1
 parrot2 :: Animal
 parrot2 = MkParrot "Goodbye!" 2
+
+-- >>> dilloLiveness parrot1
+-- No match in record selector dilloLiveness
+
+-- Tier überfahren
+runOverAnimal :: Animal -> Animal
+-- >>> runOverAnimal dillo1
+-- MkDillo {dilloLiveness = Dead, dilloWeight = 10}
+-- >>> runOverAnimal parrot1
+-- MkParrot "" 1
+runOverAnimal (MkDillo _ weight) = MkDillo Dead weight
+runOverAnimal (MkParrot _ weight) = MkParrot "" weight
