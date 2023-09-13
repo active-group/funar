@@ -222,7 +222,7 @@ data Optional a = -- ein a oder halt keins
 -- Index eines Elements in einer Liste liefern (0-basiert)
 -- >>> listIndex 5 [1,2,3,4,5,6]
 -- Result 4
-listIndex :: a -> [a] -> Optional Integer
+listIndex :: Eq a => a -> [a] -> Optional Integer
 listIndex element [] = Null
 listIndex element (first:rest) = 
     if first == element 
