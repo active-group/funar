@@ -17,3 +17,16 @@ f :: Integer -> Integer
 -- Abkürzung:
 f x = x * 2
 
+-- Ein Haustier ist eins der folgenden:
+-- - Hund
+-- - Katze
+-- - Schlange
+data Pet =
+    Dog 
+  | Cat
+  | Snake
+  deriving Show
+
+-- >>> Dog
+-- Dog
+
