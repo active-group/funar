@@ -121,8 +121,11 @@ runOverAnimal (MkDillo _ weight) = MkDillo Dead weight
 runOverAnimal (MkParrot _ weight) = MkParrot "" weight
 
 -- Tier füttern
-feedAnimal (MkDillo liveness weight) amount =
+
+-- >>> feedAnimal dillo1 5
+
+feedAnimal dillo@(MkDillo liveness weight) amount = -- Alias-Pattern
     case liveness of
         Alive -> MkDillo liveness (weight + amount)
-        Dead -> undefined
-feedAnimal (MkParrot sentence weight) amount = undefined
+        Dead -> dillo -- MkDillo liveness weight
+feedAnimal (MkParrot sentence weight) amount = MkParrot sentence (weight+amount)
