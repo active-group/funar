@@ -190,4 +190,9 @@ list3 = 7 : 8 : 5 : []
 list4 :: [Integer]
 list4 = 4 : list3
 
---
+-- Elemente einer Liste addiert
+listSum :: [Integer] -> Integer
+-- >>> listSum [1,2,3,4]
+-- 10
+listSum [] = 0
+listSum (first : rest) = first + (listSum rest)
