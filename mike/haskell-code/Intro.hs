@@ -143,6 +143,7 @@ feedAnimal (MkParrot sentence weight) amount = MkParrot sentence (weight + amoun
 swap :: (a -> b -> c) -> (b -> a -> c)
 -- swap f = \ b -> \ a -> f a b
 swap f b a = f a b
+-- eingebaut als "flip"
 
 -- Ein Duschprodukt ist eins der folgenden:
 -- - Seife (mit pH-Wert)
