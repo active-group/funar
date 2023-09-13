@@ -201,4 +201,5 @@ listFold :: b -> (a -> b -> b) -> [a] -> b
 listFold forEmpty forCons [] = forEmpty
 listFold forEmpty forCons (first:rest) =
     forCons first (listFold forEmpty forCons rest)
-    
+
+-- 
