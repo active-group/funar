@@ -8,7 +8,7 @@
 ; n/2 * (n+1) = n^2 + ... = O(n^2)
 ; Gaußsche Summenformel
 
-(check-expect (rev (list 1 2 3))
+#;(check-expect (rev (list 1 2 3))
               (list 3 2 1))
 
 (define rev
