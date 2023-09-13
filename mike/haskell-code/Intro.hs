@@ -136,7 +136,9 @@ feedAnimal dillo@(MkDillo liveness weight) amount = -- Alias-Pattern
 --   dillo -- MkDillo liveness weight
 feedAnimal (MkParrot sentence weight) amount = MkParrot sentence (weight + amount)
 
-
+-- Argumente einer zweistelligen Funktion vertauschen
+swap :: (Animal -> Weight -> Animal) -> (Weight -> Animal -> Animal)
+swap f = \ weight -> \ animal -> f animal weight
 
 -- Ein Duschprodukt ist eins der folgenden:
 -- - Seife (mit pH-Wert)
