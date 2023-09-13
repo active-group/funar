@@ -161,5 +161,15 @@ feedAnimal' (dillo@(MkDillo liveness weight), amount) =
     Dead -> dillo -- MkDillo liveness weight
 feedAnimal' (MkParrot sentence weight, amount) = MkParrot sentence (weight + amount)
 
-tuplify :: (a -> b -> c) -> ((a, b) -> c)
-tuplify f = \ (a, b) -> f a b
+-- Haskell Curry
+-- Moses Schönfinkel
+
+-- aus einer "gestuften" Funktion eine mit Tupeln machen
+entschönfinkeln :: (a -> b -> c) -> ((a, b) -> c)
+entschönfinkeln f = \ (a, b) -> f a b
+-- eingebaut als uncurry
+
+-- aus einer Funktion mit Tupeln eine "gestufte" machen
+schönfinkeln :: ((a, b) -> c) -> (a -> b -> c)
+schönfinkeln f = \a -> \b -> f (a, b)
+-- eingebaut als curry
