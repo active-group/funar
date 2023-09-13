@@ -402,7 +402,7 @@ class Dillo {
            (list-extract p? (rest list)))))))
 
 
-(define list-fold
+#;(define list-fold
   (lambda (neutral-element-of-operator operator list)
     (cond
       ((empty? list) neutral-element-of-operator)
@@ -410,13 +410,15 @@ class Dillo {
        (operator (first list)
                  (list-fold neutral-element-of-operator operator (rest list)))))))
 
-(define list-xxx
+(: list-fold (%b (%a %b -> %b) (list-of %a) -> %b))
+   
+(define list-fold
   (lambda (for-empty for-cons list)
     (cond
       ((empty? list) for-empty)
       ((cons? list)
        (for-cons (first list)
-                 (list-xxx for-empty for-cons (rest list)))))))
+                 (list-fold for-empty for-cons (rest list)))))))
 
 ; Elemente einer Liste verdoppeln
 (: list-double (list-of-numbers -> list-of-numbers))
