@@ -16,7 +16,7 @@
     (cond
       ((empty? list) empty)
       ((cons? list)
-       (append-element
+       (append-element ; Kontext vom Aufruf von rev
         (rev (rest list)) ; 3 2
         (first list) ; 1
         )))))
