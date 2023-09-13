@@ -92,3 +92,7 @@ runOverDillo dillo = dillo { dilloLiveness = Dead }
 -- - Gürteltier
 -- - Papagei
 -- algebraischer Datentyp
+data Animal =
+    MkDillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
+  | MkParrot String Weight
+  deriving Show 
