@@ -138,8 +138,10 @@ feedAnimal (MkParrot sentence weight) amount = MkParrot sentence (weight + amoun
 
 -- Argumente einer zweistelligen Funktion vertauschen
 -- >>> (swap feedAnimal) 5 dillo1
-swap :: (Animal -> Weight -> Animal) -> (Weight -> Animal -> Animal)
-swap f = \ weight -> \ animal -> f animal weight
+-- swap :: (Animal -> Weight -> Animal) -> (Weight -> Animal -> Animal)
+-- Kleinbuchstaben: Typvariablen
+swap :: (a -> b -> c) -> (b -> a -> c)
+swap f = \ b -> \ a -> f a b
 
 -- Ein Duschprodukt ist eins der folgenden:
 -- - Seife (mit pH-Wert)
