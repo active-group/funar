@@ -7,6 +7,7 @@ module Cards where
 -- 2. Liste aller 52 Spielkarten
 -- berechnet aus einer Liste der Farben und einer
 -- Liste der Wertigkeiten
+-- Hilfsfunktionen!
 
 -- 3. Funktion, die zwei Karten vergleicht mit gleicher Farbe
 -- 2 ... 10 Bube Dame König As
