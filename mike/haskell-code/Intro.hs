@@ -233,3 +233,5 @@ listIndex element (first:rest) =
        case listIndex element rest of
         Null -> Null
         Result index -> Result (index + 1)
+
+-- Eq ist eine Typklasse (sowas wie ein Interface)
