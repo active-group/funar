@@ -136,6 +136,8 @@ feedAnimal dillo@(MkDillo liveness weight) amount = -- Alias-Pattern
 --   dillo -- MkDillo liveness weight
 feedAnimal (MkParrot sentence weight) amount = MkParrot sentence (weight + amount)
 
+
+
 -- Ein Duschprodukt ist eins der folgenden:
 -- - Seife (mit pH-Wert)
 -- - Shampoo (mit Haartyp)
