@@ -196,3 +196,9 @@ listSum :: [Integer] -> Integer
 -- 10
 listSum [] = 0
 listSum (first : rest) = first + (listSum rest)
+
+listFold :: b -> (a -> b -> b) -> [a] -> b
+listFold forEmpty forCons [] = forEmpty
+listFold forEmpty forCons (first:rest) =
+    forCons first (listFold forEmpty forCons rest)
+    
