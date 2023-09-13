@@ -119,3 +119,8 @@ runOverAnimal :: Animal -> Animal
 -- MkParrot "" 1
 runOverAnimal (MkDillo _ weight) = MkDillo Dead weight
 runOverAnimal (MkParrot _ weight) = MkParrot "" weight
+
+-- Tier füttern
+feedAnimal (MkDillo liveness weight) amount =
+    
+feedAnimal (MkParrot sentence weight) amount = undefined
