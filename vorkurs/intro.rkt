@@ -399,10 +399,56 @@ class Dillo {
            (list-extract p? (rest list)))))))
 
 
-(define list-xxx
+(define list-fold
   (lambda (neutral-element-of-operator operator list)
     (cond
       ((empty? list) neutral-element-of-operator)
       ((cons? list)
        (operator (first list)
-                 (list-xxx neutral-element-of-operator operator (rest list)))))))
+                 (list-fold neutral-element-of-operator operator (rest list)))))))
+
+(define list-xxx
+  (lambda (for-empty for-cons list)
+    (cond
+      ((empty? list) for-empty)
+      ((cons? list)
+       (for-cons (first list)
+                 (list-xxx for-empty for-cons (rest list)))))))
+
+; Elemente einer Liste verdoppeln
+(: list-double (list-of-numbers -> list-of-numbers))
+
+(check-expect (list-double list4)
+              (cons 14 (cons 8 (cons 10 (cons 4 empty)))))
+
+(define list-double
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cons
+        (double (first list))
+        (list-double (rest list)))))))
+
+(define double
+  (lambda (x)
+    (* x 2)))
+
+; Elemente einer Liste inkrementieren
+(: list-inc (list-of-numbers -> list-of-numbers))
+
+(check-expect (list-inc list4)
+              (cons 8 (cons 5 (cons 6 (cons 3 empty)))))
+
+(define list-inc
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cons
+        (inc (first list))
+        (list-inc (rest list)))))))
+
+(define inc
+  (lambda (x)
+    (+ 1 x)))
