@@ -181,3 +181,13 @@ data ListOf element =
 -- Listen in Haskell:
 -- - leere Liste: []
 -- - Cons-Listen: cons wird infix als : geschrieben
+list1 :: [Integer]
+list1 = 5 : []
+list2 :: [Integer]
+list2 = 8 : (5 : [])
+list3 :: [Integer]
+list3 = 7 : 8 : 5 : []
+list4 :: [Integer]
+list4 = 4 : list3
+
+--
