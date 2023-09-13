@@ -137,6 +137,7 @@ feedAnimal dillo@(MkDillo liveness weight) amount = -- Alias-Pattern
 feedAnimal (MkParrot sentence weight) amount = MkParrot sentence (weight + amount)
 
 -- Argumente einer zweistelligen Funktion vertauschen
+-- >>> (swap feedAnimal) 5 dillo1
 swap :: (Animal -> Weight -> Animal) -> (Weight -> Animal -> Animal)
 swap f = \ weight -> \ animal -> f animal weight
 
