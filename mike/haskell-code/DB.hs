@@ -53,11 +53,15 @@ p1 = Put "Mike" 100 (\() ->
 
 p1' = splice (put "Mike" 100) (\() ->
       splice (get "Mike") (\x ->
-      splice (put "Mike" (x+1)) (\y ->
+      splice (put "Mike" (x+1)) (\() ->
+      splice (get "Mike") (\y ->
+      Return (show (x+y))))))
     
 
 runDB :: DB a -> Map Key Value -> (Map Key Value, a)
 -- >>> runDB p1 Map.empty
+-- (fromList [("Mike",101)],"201")
+-- >>> runDB p1' Map.empty
 -- (fromList [("Mike",101)],"201")
 runDB (Put key value callback) mp =
     runDB (callback ()) (Map.insert key value mp)
