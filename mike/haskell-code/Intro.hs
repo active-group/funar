@@ -264,3 +264,25 @@ listIndex element (first:rest) =
 
 -- Eq ist eine Typklasse (sowas wie ein Interface)
 -- Implementierung einer Typklasse heißt "instance"
+
+-- Verwendung von Typklassen
+-- am besten domänenunabhängig, am besten was aus der Mathematik
+
+-- Begriffe aus der Mathematik in der Schulung:
+-- ...
+-- Funktor, applikativer Funktor, Monade
+
+-- Algebra
+
+-- Assoziativgesetz
+-- (a + b) + c = a + (b + c)
+-- (a * b) * c = a * (b * c)
+-- (a /\ b) /\ c = a /\ (b /\ c)
+-- nötig:
+-- Typ a
+-- op :: a -> a -> a
+-- Assoziativgesetz
+-- op (op a b) c = op a (op b c)
+-- Halbgruppe / Semigroup
+
+-- neutrales Element
