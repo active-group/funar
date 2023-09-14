@@ -300,4 +300,5 @@ instance Semigroup [a] where
 -- op n a = op a n = a
 -- Monoid
 class Semigroup a => Monoid a where -- "ein Monoid muß eine Halbgruppe sein"
+  -- op n a == op a n == a
   neutral :: a
