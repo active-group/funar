@@ -236,6 +236,9 @@ sieve :: [Integer] -> [Integer]
 sieve (prime:rest) =
     prime : (sieve (strikeMultiples prime rest)) 
 
+primes :: [Integer]
+primes = sieve (listFrom 2)
+
 data Optional a = -- ein a oder halt keins
     Result a
   | Null
