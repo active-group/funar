@@ -43,7 +43,10 @@ get key = Get key (\value -> Return value)
 --   (>>=) :: m a -> (a -> m b) -> m b
 --   return :: a -> m a
 
-<R> Stream<R>	flatMap(Function<? super T,? extends Stream<? extends R>> mapper)
+{-
+in Stream<A>:
+ <B> Stream<B>	flatMap(Function<A, Stream<B>> mapper)
+-}
 splice :: DB a -> (a -> DB b) -> DB b
 splice (Put key value callback) next =
     Put key value (\() -> splice (callback ()) next)
