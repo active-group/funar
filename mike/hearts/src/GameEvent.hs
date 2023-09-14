@@ -12,6 +12,7 @@ import Data.Map (Map)
 -- - Events erzählen die vollständige Geschichte der Domäne.
 -- - Redundanz ist OK.
 
+{-
 type Points = Integer
 
 data GameEvent = 
@@ -22,3 +23,4 @@ data GameEvent =
   | PlayerTookTrick Player Trick Points
   | AllCardsPlayed (Map Player Points)
   | TurnChanged Player
+-}
