@@ -24,3 +24,15 @@ data GameEvent =
   | AllCardsPlayed (Map Player Points)
   | TurnChanged Player
 -}
+
+data GameEvent
+  = HandDealt Player Hand
+  | PlayerTurnChanged Player
+  | LegalCardPlayed Player Card
+  | TrickTaken Player Trick
+  | IllegalCardAttempted Player Card
+  | GameEnded Player
+  deriving (Show, Eq)
+
+-- Commands
+-- Repräsentation eines Wunsches, dass etwas in der Zukunft passiert.
