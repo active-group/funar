@@ -25,6 +25,6 @@ p1 = [Put "Mike" 100,
 -}
 
 data DB a =
-    Put Key Value (() -> DB a)
-  | Get Key (Value -> DB a)
+    Put Key Value (()    -> DB a)
+  | Get Key       (Value -> DB a)
   | Return a
