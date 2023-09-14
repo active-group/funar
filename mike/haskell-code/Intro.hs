@@ -292,7 +292,8 @@ instance Applicative Optional where
   (<*>) Null (Result a) = Null
   (<*>) (Result f) (Result a) = Result (f a)
 
-optionalPlus :: Optional Integer -> Optional Integer -> Optional Integer
+-- optionalPlus :: Optional Integer -> Optional Integer -> Optional Integer
+optionalPlus :: (Applicative f, Num b) => f b -> f b -> f b
 optionalPlus o1 o2 =
   pure (+) <*> o1 <*> o2
 
