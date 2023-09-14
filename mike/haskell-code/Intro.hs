@@ -279,8 +279,12 @@ instance Functor Optional where
 {-
 class Functor f => Applicative f where
   pure :: a -> f a
-  -- fmap :: (a -> b) -> f a -> f b
-  (<*>) :: f (a -> b) -> f a -> f b
+  -- fmap ::      (a ->   b) -> f a -> f b
+       (<*>) :: f (a ->   b) -> f a -> f b
+  (flip (>>=)) :: (a -> f b) -> f a -> f b
+
+  (>>=) :: f a -> (a -> f b) -> f b
+
 -}
 
 instance Applicative Optional where
