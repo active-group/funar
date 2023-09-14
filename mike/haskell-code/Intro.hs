@@ -334,6 +334,7 @@ soapProportion (Shampoo _) = 0
 soapProportion (Mixture product1 product2) =
   (soapProportion product1 + soapProportion product2) / 2.0
 
+-- Mike kommt in die Hölle
 instance Semigroup ShowerProduct where
   op :: ShowerProduct -> ShowerProduct -> ShowerProduct
   op = Mixture
