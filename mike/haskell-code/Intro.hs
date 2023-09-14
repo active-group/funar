@@ -226,6 +226,10 @@ cons = (:)
 listFrom :: Integer -> [Integer]
 listFrom n = n : (listFrom (n + 1))
 
+-- alle Vielfachen einer Zahl streichen
+strikeMultiples :: Integer -> [Integer] -> [Integer]
+strikeMultiples n 
+
 data Optional a = -- ein a oder halt keins
     Result a
   | Null
