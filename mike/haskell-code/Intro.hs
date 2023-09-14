@@ -218,10 +218,6 @@ listFold forEmpty forCons [] = forEmpty
 listFold forEmpty forCons (first:rest) =
     forCons first (listFold forEmpty forCons rest)
 
-listMap :: (a -> b) -> [a] -> [b]
-listMap f [] = []
-listMap f (first:rest) = (cons (f first) (listMap f rest))
-
 cons = (:)
 
 -- alle Zahlen ab n listen
@@ -259,10 +255,17 @@ listIndex element [] = Null
 listIndex element (first:rest) = 
     if first == element 
     then Result 0
-    else
+    else 
+      optionalMap (\index -> index + 1) (listIndex element rest)
+      {-
        case listIndex element rest of
         Null -> Null
         Result index -> Result (index + 1)
+        -}
+
+listMap ::     (a -> b) -> ListOf a   -> ListOf b
+listMap f [] = []
+listMap f (first : rest) = (cons (f first) (listMap f rest))
 
 optionalMap :: (a -> b) -> Optional a -> Optional b
 optionalMap f Null = Null
