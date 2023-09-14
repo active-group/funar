@@ -294,7 +294,7 @@ instance Applicative Optional where
 
 optionalPlus :: Optional Integer -> Optional Integer -> Optional Integer
 optionalPlus o1 o2 =
-  
+  pure (+) <*> o1 <*> o2
 
 -- Eq ist eine Typklasse (sowas wie ein Interface)
 -- Implementierung einer Typklasse heißt "instance"
