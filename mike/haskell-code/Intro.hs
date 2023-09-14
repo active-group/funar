@@ -306,3 +306,6 @@ class Semigroup a => Monoid a where -- "ein Monoid muß eine Halbgruppe sein"
 instance Monoid [a] where
   neutral :: [a]
   neutral = []
+
+boilDown :: Monoid a => [a] -> a
+boilDown list = listFold neutral op list
