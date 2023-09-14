@@ -222,6 +222,10 @@ listMap f (first:rest) = (cons (f first) (listMap f rest))
 
 cons = (:)
 
+-- alle Zahlen ab n listen
+listFrom :: Integer -> [Integer]
+listFrom n = n : (listFrom (n + 1))
+
 data Optional a = -- ein a oder halt keins
     Result a
   | Null
