@@ -378,3 +378,7 @@ shape1 = op (op circle1 circle2) circle3
 shape2 = op circle1 (op circle2 circle3)
 
 -- 1 + 2 = 2 + 1
+
+instance (Semigroup a, Semigroup b) => Semigroup (a, b) where
+  op :: (a, b) -> (a, b) -> (a, b)
+  op (a1, b1) (a2, b2) = (op a1 a2, op b1 b2)
