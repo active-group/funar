@@ -276,6 +276,13 @@ instance Functor Optional where
   fmap :: (a -> b) -> Optional a -> Optional b
   fmap = optionalMap
 
+{-
+class Functor f => Applicative f where
+  pure :: a -> f a
+  -- fmap :: (a -> b) -> f a -> f b
+  (<*>) :: f (a -> b) -> f a -> f b
+-}
+
 -- Eq ist eine Typklasse (sowas wie ein Interface)
 -- Implementierung einer Typklasse heißt "instance"
 
