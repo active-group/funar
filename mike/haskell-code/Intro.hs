@@ -283,6 +283,11 @@ class Functor f => Applicative f where
   (<*>) :: f (a -> b) -> f a -> f b
 -}
 
+instance Applicative Optional where
+  pure :: a -> Optional a
+  
+
+
 -- Eq ist eine Typklasse (sowas wie ein Interface)
 -- Implementierung einer Typklasse heißt "instance"
 
