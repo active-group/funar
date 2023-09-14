@@ -1,7 +1,7 @@
 module DB where
 
 import qualified Data.Map as Map
-import Data.Map (Map)
+import Data.Map (Map, (!))
 
 type Key = String
 type Value = Integer
@@ -41,5 +41,5 @@ p1 = Put "Mike" 100 (\() ->
 runDB :: DB a -> Map Key Value -> (Map Key Value, a)
 runDB (Put key value callback) mp = undefined
 runDB (Get key callback) mp =
-    key (callback 
+    runDB (callback (mp ! key)) mp
 runDB (Return result) mp = (mp, result)
