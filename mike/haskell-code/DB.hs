@@ -31,6 +31,19 @@ data DB a =
   | Get Key       (Value -> DB a)
   | Return a
 
+put :: Key -> Value -> DB ()
+put key value = Put key value (\() -> Return ())
+
+get :: Key -> DB Value
+get key = Get key (\value -> Return value)
+
+splice :: DB a -> (a -> DB b) -> DB b
+splice (Put key value callback) next =
+    Put key value (\() -> splice (callback ()) next)
+splice (Get key callback) next =
+    Get key (\value -> splice (callback value) next)
+splice (Return result) next = next result
+
 p1 :: DB String
 p1 = Put "Mike" 100 (\() ->
      Get "Mike" (\x ->
@@ -39,6 +52,8 @@ p1 = Put "Mike" 100 (\() ->
      Return (show (x + y))))))
 
 runDB :: DB a -> Map Key Value -> (Map Key Value, a)
+-- >>> runDB p1 Map.empty
+-- (fromList [("Mike",101)],"201")
 runDB (Put key value callback) mp =
     runDB (callback ()) (Map.insert key value mp)
 runDB (Get key callback) mp =
