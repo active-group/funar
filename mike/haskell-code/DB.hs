@@ -36,3 +36,5 @@ p1 = Put "Mike" 100 (\() ->
      Get "Mike" (\y ->
      Return (show (x + y))))))
 
+runDB :: DB a -> a
+
