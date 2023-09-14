@@ -340,3 +340,5 @@ instance Semigroup ShowerProduct where
 
 mixture1 :: ShowerProduct
 mixture1 = Mixture soap1 (Mixture shampoo1 shampoo2)
+
+mixture2 = Mixture (Mixture soap1 shampoo1) shampoo2
