@@ -51,6 +51,11 @@ p1 = Put "Mike" 100 (\() ->
      Get "Mike" (\y ->
      Return (show (x + y))))))
 
+p1' = splice (put "Mike" 100) (\() ->
+      splice (get "Mike") (\x ->
+      splice (put "Mike" (x+1)) (\y ->
+    
+
 runDB :: DB a -> Map Key Value -> (Map Key Value, a)
 -- >>> runDB p1 Map.empty
 -- (fromList [("Mike",101)],"201")
