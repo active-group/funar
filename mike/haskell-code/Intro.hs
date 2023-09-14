@@ -309,3 +309,14 @@ instance Monoid [a] where
 
 boilDown :: Monoid a => [a] -> a
 boilDown list = listFold neutral op list
+
+type PH = Double
+
+data Hairtype = Oily | Dandruff | Regular
+  deriving Show
+
+data ShowerProduct =
+    Soap PH
+  | Shampoo Hairtype 
+  | Mixture ShowerProduct ShowerProduct
+  deriving Show
