@@ -382,3 +382,7 @@ shape2 = op circle1 (op circle2 circle3)
 instance (Semigroup a, Semigroup b) => Semigroup (a, b) where
   op :: (a, b) -> (a, b) -> (a, b)
   op (a1, b1) (a2, b2) = (op a1 a2, op b1 b2)
+
+instance (Monoid a, Monoid b) => Monoid (a, b) where
+  neutral :: (a, b)
+  neutral = (neutral, neutral)
