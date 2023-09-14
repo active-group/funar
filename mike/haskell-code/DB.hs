@@ -55,6 +55,7 @@ splice (Get key callback) next =
 splice (Return result) next = next result
 
 instance Functor DB where
+    -- Übung
 
 instance Applicative DB where
 
