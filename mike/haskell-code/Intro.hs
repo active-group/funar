@@ -231,6 +231,9 @@ strikeMultiples :: Integer -> [Integer] -> [Integer]
 strikeMultiples n ints =
     filter (\n' -> mod n' n /= 0) ints
 
+-- Sieb des Eratosthenes
+sieve :: [Integer] -> [Integer]
+
 data Optional a = -- ein a oder halt keins
     Result a
   | Null
