@@ -272,6 +272,7 @@ optionalMap f Null = Null
 optionalMap f (Result a) = Result (f a)
 
 instance Functor Optional where
+  fmap :: (a -> b) -> Optional a -> Optional b
   fmap = optionalMap
 
 -- Eq ist eine Typklasse (sowas wie ein Interface)
