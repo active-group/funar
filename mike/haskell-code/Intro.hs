@@ -2,6 +2,8 @@
 
 module Intro where
 
+import Prelude hiding (Semigroup)
+
 -- Groß/Kleinschreibung relevant
 
 x :: Integer
