@@ -36,3 +36,7 @@ data GameEvent
 
 -- Commands
 -- Repräsentation eines Wunsches, dass etwas in der Zukunft passiert.
+data GameCommand =
+    PlayCard Player Card
+  | DealHands (Map Player Hand)
+  deriving (Show, Eq)
