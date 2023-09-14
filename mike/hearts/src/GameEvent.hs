@@ -40,3 +40,11 @@ data GameCommand =
     PlayCard Player Card
   | DealHands (Map Player Hand)
   deriving (Show, Eq)
+
+-- Steht in den Events, wer gewonnen hat?
+eventsWinner :: [GameEvent] -> Maybe Player
+eventsWinner [] = Nothing
+eventsWinner (first : rest) =
+  case first of
+    GameEnded winner -> Just winner
+    _ -> eventsWinner rest
