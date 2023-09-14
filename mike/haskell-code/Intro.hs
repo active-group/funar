@@ -271,7 +271,7 @@ listIndex element (first:rest) =
 -- am besten domänenunabhängig, am besten was aus der Mathematik
 
 -- Begriffe aus der Mathematik in der Schulung:
--- ...
+-- Halbgruppe, Monoid
 -- Funktor, applikativer Funktor, Monade
 
 -- Algebra
@@ -376,3 +376,5 @@ circle3 = Circle (7, 3) 12
 
 shape1 = op (op circle1 circle2) circle3
 shape2 = op circle1 (op circle2 circle3)
+
+-- 1 + 2 = 2 + 1
