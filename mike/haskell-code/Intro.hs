@@ -299,3 +299,5 @@ instance Semigroup [a] where
 -- neutrales Element n aus a
 -- op n a = op a n = a
 -- Monoid
+class Semigroup a => Monoid a where -- "ein Monoid muß eine Halbgruppe sein"
+  neutral :: a
