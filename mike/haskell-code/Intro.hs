@@ -239,6 +239,9 @@ sieve (prime:rest) =
 primes :: [Integer]
 primes = sieve (listFrom 2)
 
+-- eingebaut als:
+-- data Maybe a = Just a | Nothing
+
 data Optional a = -- ein a oder halt keins
     Result a
   | Null
