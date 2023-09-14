@@ -342,4 +342,25 @@ instance Semigroup ShowerProduct where
 mixture1 :: ShowerProduct
 mixture1 = Mixture soap1 (Mixture shampoo1 shampoo2)
 
+mixture2 :: ShowerProduct
 mixture2 = Mixture (Mixture soap1 shampoo1) shampoo2
+
+-- Eine geometrische Figur ist eins der folgenden:
+-- - ein Kreis
+-- - eine Überlappung zweier geometrischer Figuren
+-- Funktion, die ermittelt, ob ein Punkt innerhalb einer Figur ist
+
+type Point = (Double, Double)
+
+data Shape =
+    Circle Point Double
+  | Overlay Shape Shape
+  deriving Show
+
+isInShape :: Point -> Shape -> Bool
+isInShape point (Circle center radius) =
+  (distance point center) <= radius
+isInShape point (Overlay shape1 shape2) = undefined
+
+distance :: Point -> Point -> Double
+distance (x1, y1) (x2, y2) = sqrt ((x1 - x2)^2 + (y1 - y2)^2)
