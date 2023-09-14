@@ -360,7 +360,19 @@ data Shape =
 isInShape :: Point -> Shape -> Bool
 isInShape point (Circle center radius) =
   (distance point center) <= radius
-isInShape point (Overlay shape1 shape2) = undefined
+isInShape point (Overlay shape1 shape2) =
+  (isInShape point shape1) ||
+  (isInShape point shape2)
 
 distance :: Point -> Point -> Double
 distance (x1, y1) (x2, y2) = sqrt ((x1 - x2)^2 + (y1 - y2)^2)
+
+instance Semigroup Shape where
+  op = Overlay
+
+circle1 = Circle (1,2) 5
+circle2 = Circle (5,5) 7
+circle3 = Circle (7, 3) 12
+
+shape1 = op (op circle1 circle2) circle3
+shape2 = op circle1 (op circle2 circle3)
