@@ -292,6 +292,9 @@ instance Applicative Optional where
   (<*>) Null (Result a) = Null
   (<*>) (Result f) (Result a) = Result (f a)
 
+optionalPlus :: Optional Integer -> Optional Integer -> Optional Integer
+optionalPlus o1 o2 =
+  
 
 -- Eq ist eine Typklasse (sowas wie ein Interface)
 -- Implementierung einer Typklasse heißt "instance"
