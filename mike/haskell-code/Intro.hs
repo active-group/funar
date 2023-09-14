@@ -231,8 +231,10 @@ strikeMultiples :: Integer -> [Integer] -> [Integer]
 strikeMultiples n ints =
     filter (\n' -> mod n' n /= 0) ints
 
--- Sieb des Eratosthenes
+-- Sieb des Eratosthenes: erste Zahl ist eine Primzahl
 sieve :: [Integer] -> [Integer]
+sieve (prime:rest) =
+    prime : (sieve (strikeMultiples prime rest)) 
 
 data Optional a = -- ein a oder halt keins
     Result a
