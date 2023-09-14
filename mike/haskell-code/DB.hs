@@ -1,5 +1,7 @@
 module DB where
 
+import qualified Data.Map as Map
+import Data.Map (Map)
 
 type Key = String
 type Value = Integer
