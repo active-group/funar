@@ -285,7 +285,12 @@ class Functor f => Applicative f where
 
 instance Applicative Optional where
   pure :: a -> Optional a
-  
+  pure a = Result a
+  (<*>) :: Optional (a -> b) -> Optional a -> Optional b
+  (<*>) Null Null = Null
+  (<*>) (Result f) Null = Null
+  (<*>) Null (Result a) = Null
+  (<*>) (Result f) (Result a) = Result (f a)
 
 
 -- Eq ist eine Typklasse (sowas wie ein Interface)
