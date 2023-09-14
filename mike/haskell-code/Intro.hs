@@ -304,4 +304,5 @@ class Semigroup a => Monoid a where -- "ein Monoid muß eine Halbgruppe sein"
   neutral :: a
 
 instance Monoid [a] where
+  neutral :: [a]
   neutral = []
