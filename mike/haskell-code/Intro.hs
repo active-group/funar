@@ -388,8 +388,12 @@ instance (Monoid a, Monoid b) => Monoid (a, b) where
   neutral = (neutral, neutral)
 
 -- Übung:
-instance Semigroup (Optional a) where
-  op = undefined
+instance Semigroup a => Semigroup (Optional a) where
+  op :: Optional a -> Optional a -> Optional a
+  op Null Null = Null
+  op Null (Result b) = Result b
+  op (Result a) Null = Result a
+  op (Result a) (Result b) = Result (op a b)
 
-instance Monoid (Optional a) where
-  neutral = undefined
+instance Semigroup a => Monoid (Optional a) where
+  neutral = Null
