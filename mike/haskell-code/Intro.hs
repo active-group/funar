@@ -320,3 +320,23 @@ data ShowerProduct =
   | Shampoo Hairtype 
   | Mixture ShowerProduct ShowerProduct
   deriving Show
+
+soap1 :: ShowerProduct
+soap1 = Soap 7
+shampoo1 :: ShowerProduct
+shampoo1 = Shampoo Dandruff
+shampoo2 :: ShowerProduct
+shampoo2 = Shampoo Oily
+
+soapProportion :: ShowerProduct -> Double -- zwischen 0 und 1
+soapProportion (Soap _) = 1
+soapProportion (Shampoo _) = 0
+soapProportion (Mixture product1 product2) =
+  (soapProportion product1 + soapProportion product2) / 2.0
+
+instance Semigroup ShowerProduct where
+  op :: ShowerProduct -> ShowerProduct -> ShowerProduct
+  op = Mixture
+
+mixture1 :: ShowerProduct
+mixture1 = Mixture soap1 (Mixture shampoo1 shampoo2)
