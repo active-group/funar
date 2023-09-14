@@ -298,3 +298,4 @@ instance Semigroup [a] where
 -- Halbgruppe a +
 -- neutrales Element n aus a
 -- op n a = op a n = a
+-- Monoid
