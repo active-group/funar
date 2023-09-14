@@ -272,6 +272,7 @@ optionalMap f Null = Null
 optionalMap f (Result a) = Result (f a)
 
 instance Functor Optional where
+  -- fmap id = id
   fmap :: (a -> b) -> Optional a -> Optional b
   fmap = optionalMap
 
