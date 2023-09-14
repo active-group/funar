@@ -286,5 +286,10 @@ listIndex element (first:rest) =
 -- Assoziativgesetz
 -- op (op a b) c = op a (op b c)
 -- Halbgruppe / Semigroup
+class Semigroup a where
+  -- op (op a b) c == op a (op b c)
+  op :: a -> a -> a
+
+
 
 -- neutrales Element
