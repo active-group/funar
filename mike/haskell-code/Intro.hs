@@ -386,3 +386,10 @@ instance (Semigroup a, Semigroup b) => Semigroup (a, b) where
 instance (Monoid a, Monoid b) => Monoid (a, b) where
   neutral :: (a, b)
   neutral = (neutral, neutral)
+
+-- Übung:
+instance Semigroup (Optional a) where
+  op = undefined
+
+instance Monoid (Optional a) where
+  neutral = undefined
