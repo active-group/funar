@@ -290,6 +290,11 @@ class Semigroup a where
   -- op (op a b) c == op a (op b c)
   op :: a -> a -> a
 
-
+instance Semigroup [a] where
+  op :: [a] -> [a] -> [a]
+  op list1 list2 = list1 ++ list2
 
 -- neutrales Element
+-- Halbgruppe a +
+-- neutrales Element n aus a
+-- op n a = op a n = a
