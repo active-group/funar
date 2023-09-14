@@ -2,7 +2,7 @@
 
 module Intro where
 
-import Prelude hiding (Semigroup)
+import Prelude hiding (Semigroup, Monoid)
 
 -- Groß/Kleinschreibung relevant
 
