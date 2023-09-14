@@ -271,6 +271,9 @@ optionalMap :: (a -> b) -> Optional a -> Optional b
 optionalMap f Null = Null
 optionalMap f (Result a) = Result (f a)
 
+instance Functor Optional where
+  fmap = optionalMap
+
 -- Eq ist eine Typklasse (sowas wie ein Interface)
 -- Implementierung einer Typklasse heißt "instance"
 
