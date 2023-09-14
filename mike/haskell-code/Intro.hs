@@ -302,3 +302,6 @@ instance Semigroup [a] where
 class Semigroup a => Monoid a where -- "ein Monoid muß eine Halbgruppe sein"
   -- op n a == op a n == a
   neutral :: a
+
+instance Monoid [a] where
+  neutral = []
