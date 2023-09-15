@@ -73,7 +73,10 @@ instance Applicative Game where
 instance Monad Game where
   return :: a -> Game a
   return = Done
-  (>>=) (Done result) next = 
+  (>>=) :: Game a -> (a -> Game b) -> Game b
+  (>>=) (Done result) next = next result
+  (>>=) (RecordEvent event callback) next =
+    
 
 
 -- Spielregeln / "Tisch"
