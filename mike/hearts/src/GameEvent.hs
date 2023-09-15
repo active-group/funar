@@ -61,7 +61,7 @@ class Monad m where
 data Game a =
     Done a -- gibt es immer
   | RecordEvent GameEvent (() -> Game a)
-
+  | PlayValid Player Card 
 recordEventM :: GameEvent -> Game ()
 recordEventM event =
   RecordEvent event (\() -> Done ())
@@ -89,4 +89,5 @@ tableProcessCommandM (DealHands hands) =
            (Map.toList hands)
      return Nothing
   
-tableProcessCommandM (PlayCard player card) = undefined
+tableProcessCommandM (PlayCard player card) =
+  undefined
