@@ -117,7 +117,7 @@ semantics (Invert contract) now =
 semantics (Together contract1 contract2) now =
   let (payments1, residualContract1) = semantics contract1 now
       (payments2, residualContract2) = semantics contract2 now
-   in (payments1 ++ payments2, Together residualContract1 residualContract2)
+   in (payments1 ++ payments2, together residualContract1 residualContract2)
 semantics Zero now = ([], Zero)
 
 -- smart constructor
