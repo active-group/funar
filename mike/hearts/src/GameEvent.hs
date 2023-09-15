@@ -62,7 +62,9 @@ data Game a =
     Done a -- gibt es immer
   | RecordEvent GameEvent (() -> Game a)
   | PlayValid Player Card (Bool -> Game a)
-  | TurnOver 
+  -- wenn die Runde vorbei ist, bekommen wir Stich
+  -- und Spieler:in, die ihn aufnehmen musste
+  | TurnOverTrick (Maybe (Trick, Player) -> Game a)
 
 recordEventM :: GameEvent -> Game ()
 recordEventM event =
@@ -71,6 +73,9 @@ recordEventM event =
 playValidM :: Player -> Card -> Game Bool
 playValidM player card =
   PlayValid player card Done
+
+turnOverTrickM :: Game (Maybe (Trick, Player))
+turnOverTrickM = TurnOverTrick Done
 
 instance Functor Game where
 
@@ -85,7 +90,8 @@ instance Monad Game where
     RecordEvent event     (\() ->      callback ()      >>= next)
   (>>=) (PlayValid player card callback) next =
     PlayValid player card (\isValid -> callback isValid >>= next)
-
+  (>>=) (TurnOverTrick callback) next =
+    TurnOverTrick (\maybeTrick ->     callback maybeTrick >>= next)
 -- data Maybe a = Just a | Nothing
 
 -- Spielregeln / "Tisch"
