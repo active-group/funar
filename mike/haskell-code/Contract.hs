@@ -44,6 +44,7 @@ data Contract =
   | WithAmount Amount Contract -- Selbstbezug
   | DueDate Date Contract
   | Invert Contract -- dreht alle Zahlungen um
+  | Together Contract Contract
   deriving Show
 
 c1 = One EUR -- "Ich bekomme einen Euro jetzt."
@@ -60,3 +61,6 @@ zcb1' = zeroCouponBond (Date "2023-12-23") 100 EUR
 
 -- Ich zahle Weihnachten $100
 c3 = Invert (zeroCouponBond (Date "2023-12-23") 100 USD)
+
+fxSwap :: Contract
+fxSwap = Together zcb1 c3
