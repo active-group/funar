@@ -81,6 +81,10 @@ data Payment = MkPayment {
  }
  deriving Show
 
+f x =
+    let y = x +1
+        z = y * 2
+    in x + y z 
 
 -- Welche Zahlungen bis heute?
 -- Und welcher Vertrag bleibt übrig?
