@@ -73,6 +73,7 @@ instance Applicative Game where
 instance Monad Game where
   return :: a -> Game a
   return = Done
+  (>>=) (Done result) next = 
 
 
 -- Spielregeln / "Tisch"
@@ -81,4 +82,5 @@ tableProcessCommandM :: GameCommand -> Game (Maybe Player)
 tableProcessCommandM (DealHands hands) = 
   -- HandDeal-Events
   -- Map.toList hands
+  undefined
 tableProcessCommandM (PlayCard player card) = undefined
