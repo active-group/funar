@@ -89,3 +89,4 @@ f x =
 -- Welche Zahlungen bis heute?
 -- Und welcher Vertrag bleibt übrig?
 semantics :: Contract -> Date -> ([Payment], Contract)
+semantics = undefined
