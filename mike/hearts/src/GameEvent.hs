@@ -1,3 +1,4 @@
+{-# LANGUAGE InstanceSigs #-}
 module GameEvent where
 
 import Cards
@@ -57,8 +58,16 @@ class Monad m where
 -}
 
 -- Spiel(regel)-Monade
-data Game a = Game
+data Game a =
+  Done a -- gibt es immer
 
+instance Functor Game where
+
+instance Applicative Game where
+
+instance Monad Game where
+  return :: a -> Game a
+  return = Done
 
 -- Spielregeln / "Tisch"
 -- Commands rein, Events raus, Spiel vorbei?
