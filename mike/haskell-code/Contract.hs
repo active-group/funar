@@ -106,14 +106,14 @@ semantics :: Contract -> Date -> ([Payment], Contract)
 semantics (One currency) now = ([MkPayment now Long 1 currency], Zero)
 semantics (WithAmount amount contract) now =
   let (payments, residualContract) = semantics contract now
-   in (map (scalePayment amount) payments, WithAmount amount residualContract)
+   in (map (scalePayment amount) payments, residualContract)
 semantics c@(DueDate date contract) now =
   if now >= date
     then semantics contract now
     else ([], c)
 semantics (Invert contract) now =
   let (payments, residualContract) = semantics contract now
-   in (map invertPayment payments, Invert residualContract)
+   in (map invertPayment payments, residualContract)
 semantics (Together contract1 contract2) now =
   let (payments1, residualContract1) = semantics contract1 now
       (payments2, residualContract2) = semantics contract2 now
