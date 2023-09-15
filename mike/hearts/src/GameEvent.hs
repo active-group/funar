@@ -72,5 +72,5 @@ instance Monad Game where
 -- Spielregeln / "Tisch"
 -- Commands rein, Events raus, Spiel vorbei?
 tableProcessCommandM :: GameCommand -> Game (Maybe Player)
-tableProcessCommandM (DealHands hands)= undefined
+tableProcessCommandM (DealHands hands) = undefined
 tableProcessCommandM (PlayCard player card) = undefined
