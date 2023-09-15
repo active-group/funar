@@ -62,7 +62,9 @@ data Game a =
     Done a -- gibt es immer
   | RecordEvent GameEvent (() -> Game a)
 
-recordEventM :: GameEvent -> Game 
+recordEventM :: GameEvent -> Game ()
+recordEventM event =
+  RecordEvent event (\() -> Done ())
 
 instance Functor Game where
 
