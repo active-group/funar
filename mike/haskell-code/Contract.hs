@@ -113,7 +113,7 @@ semantics c@(DueDate date contract) now =
     else ([], c)
 semantics (Invert contract) now =
   let (payments, residualContract) = semantics contract now
-   in (map invertPayment payments, residualContract)
+   in (map invertPayment payments, Invert residualContract)
 semantics (Together contract1 contract2) now =
   let (payments1, residualContract1) = semantics contract1 now
       (payments2, residualContract2) = semantics contract2 now
