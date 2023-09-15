@@ -61,10 +61,15 @@ class Monad m where
 data Game a =
     Done a -- gibt es immer
   | RecordEvent GameEvent (() -> Game a)
-  | PlayValid Player Card 
+  | PlayValid Player Card (Bool -> Game a)
+
 recordEventM :: GameEvent -> Game ()
 recordEventM event =
-  RecordEvent event (\() -> Done ())
+  RecordEvent event Done
+
+playValidM :: Player -> Card -> Game Bool
+playValidM player card =
+  PlayValid player card Done
 
 instance Functor Game where
 
@@ -76,7 +81,9 @@ instance Monad Game where
   (>>=) :: Game a -> (a -> Game b) -> Game b
   (>>=) (Done result) next = next result
   (>>=) (RecordEvent event callback) next =
-    RecordEvent event (\() -> callback () >>= next)
+    RecordEvent event     (\() ->      callback ()      >>= next)
+  (>>=) (PlayValid player card callback) next =
+    PlayValid player card (\isValid -> callback isValid >>= next)
 
 -- data Maybe a = Just a | Nothing
 
@@ -90,4 +97,8 @@ tableProcessCommandM (DealHands hands) =
      return Nothing
   
 tableProcessCommandM (PlayCard player card) =
-  undefined
+  do isValid <- playValidM player card
+     if isValid
+     then undefined
+     else undefined
+     return undefined
