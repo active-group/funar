@@ -81,6 +81,17 @@ data Payment = MkPayment {
  }
  deriving Show
 
+scalePayment :: Amount -> Payment -> Payment
+scalePayment factor payment = payment { paymentAmount = paymentAmount payment * factor}
+
+invertDirection :: Direction -> Direction
+invertDirection Long = Short
+invertDirection Short = Long
+
+invertPayment :: Payment -> Payment
+invertPayment payment =
+    payment { paymentDirection = invertDirection (paymentDirection payment)}
+
 f x =
     let y = x +1
         z = y * 2
@@ -92,4 +103,19 @@ foo = (23, 42)
 -- Welche Zahlungen bis heute?
 -- Und welcher Vertrag bleibt übrig?
 semantics :: Contract -> Date -> ([Payment], Contract)
-semantics = undefined
+semantics (One currency) now = ([MkPayment now Long 1 currency], Zero)
+semantics (WithAmount amount contract) now =
+  let (payments, residualContract) = semantics contract now
+   in (map (scalePayment amount) payments, WithAmount amount residualContract)
+semantics c@(DueDate date contract) now =
+  if now >= date
+    then semantics contract now
+    else ([], c)
+semantics (Invert contract) now =
+  let (payments, residualContract) = semantics contract now
+   in (map invertPayment payments, Invert residualContract)
+semantics (Together contract1 contract2) now =
+  let (payments1, residualContract1) = semantics contract1 now
+      (payments2, residualContract2) = semantics contract2 now
+   in (payments1 ++ payments2, Together residualContract1 residualContract2)
+semantics Zero now = ([], Zero)
