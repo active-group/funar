@@ -44,6 +44,14 @@ get key = Get key Return
 --   (>>=) :: m a -> (a -> m b) -> m b
 --   return :: a -> m a
 
+o :: (b -> c) -> (a -> b) -> (a -> c)
+o f g = \ a -> f (g a)
+
+-- "Kleisli arrow"
+-- (>>>) :: (b -> m c) -> (a -> m b) -> (a -> m c)
+
+-- a -> m b
+
 {-
 in Stream<A>:
  <B> Stream<B>	flatMap(Function<A, Stream<B>> mapper)
