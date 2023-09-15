@@ -78,13 +78,11 @@ instance Monad Game where
   (>>=) (RecordEvent event callback) next =
     RecordEvent event (\() -> callback () >>= next)
 
-
-
 -- Spielregeln / "Tisch"
 -- Commands rein, Events raus, Spiel vorbei?
 tableProcessCommandM :: GameCommand -> Game (Maybe Player)
 tableProcessCommandM (DealHands hands) = 
   -- HandDeal-Events
-  -- Map.toList hands
-  undefined
+  map (\(player, hand) -> recordEventM (HandDealt player hand)) (Map.toList hands)
+  
 tableProcessCommandM (PlayCard player card) = undefined
