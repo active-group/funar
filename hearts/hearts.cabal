@@ -11,10 +11,10 @@ library
                        , HeartsJson
                        , Json.Decode
                        , Table
-                    -- , TableIO
-                    -- , Sync
+                       , TableIO
+                       , Sync
                        , Free
-                    -- , Player
+                       , Player
   other-modules:       MVar
                      , Shuffle
                      , Teletype
@@ -37,9 +37,9 @@ library
 executable server
   main-is:             Main.hs
   other-modules:    
---   Args
-                    -- , PlayerServer
-                    -- , TableServer
+                       Args
+                     , PlayerServer
+                     , TableServer
   build-depends:       base
                      , aeson
                      , containers
