@@ -76,7 +76,8 @@ instance Monad Game where
   (>>=) :: Game a -> (a -> Game b) -> Game b
   (>>=) (Done result) next = next result
   (>>=) (RecordEvent event callback) next =
-    
+    RecordEvent event (\() -> callback () >>= next)
+
 
 
 -- Spielregeln / "Tisch"
