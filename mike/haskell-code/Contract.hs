@@ -120,5 +120,11 @@ semantics (Together contract1 contract2) now =
    in (payments1 ++ payments2, Together residualContract1 residualContract2)
 semantics Zero now = ([], Zero)
 
+-- smart constructor
+together :: Contract -> Contract -> Contract
+together Zero contract = contract
+together contract Zero = contract
+together contract1 contract2 = Together contract1 contract2
+
 -- >>> semantics c5 (Date "2023-09-15")
 c5 = WithAmount 100 (Together (One EUR) (DueDate (Date "2023-12-25") (One EUR)))
