@@ -84,7 +84,10 @@ data Payment = MkPayment {
 f x =
     let y = x +1
         z = y * 2
-    in x + y z 
+        (a, b) = foo
+    in x + y + z + a + b
+
+foo = (23, 42)
 
 -- Welche Zahlungen bis heute?
 -- Und welcher Vertrag bleibt übrig?
