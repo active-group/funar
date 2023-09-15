@@ -182,10 +182,26 @@ tableProcessEvent (GameEnded player) state = state
 
 -- runDB :: DB a ->   Map Key Value -> (Map Key Value, a)
 
+-- data Either a b = Left a | Right b
+-- Konvention: Right heißt "fertig"
+
 -- Eingabe-Events sind in umgekehrter Reihenfolge
-runTable :: Game a -> TableState -> [GameEvent] -> (TableState, [GameEvent], a)
+runTable :: Game a -> TableState -> [GameEvent] -> 
+              (TableState, [GameEvent], Either (GameCommand -> Game a) a)
 runTable (PlayValid player card callback) state events =
   runTable (callback (playValid state player card)) state events
+runTable (TurnOverTrick cont) state revents =
+  runTable (cont (turnOverTrick state)) state revents
+runTable (PlayerAfter player cont) state revents =
+  runTable (cont (playerAfter state player)) state revents
+runTable (GameOver cont) state revents =
+  runTable (cont (gameOver state)) state revents
 
 runTable (RecordEvent event callback) state events =
-  runTable (callback ()) state (event:events)
+  runTable (callback ()) (tableProcessEvent event state) (event:events)
+
+runTable (GetCommand callback) state events =
+  (state, events, Left callback)
+
+runTable (Done result) state events =
+  (state, reverse events, Right result)
