@@ -32,3 +32,12 @@ zcb1 = ZeroCouponBond (Date "2023-12-23") 100 EUR
 
 data Contract =
     One Currency
+  | WithAmount Amount Contract -- Selbstbezug
+  | DueDate Date Contract
+  deriving Show
+
+c1 = One EUR -- "Ich bekomme einen Euro jetzt."
+
+c2 = WithAmount 100 (One EUR) -- "Ich bekomme 100€ jetzt."
+
+zcb1 = DueDate (Date "2023-12-23") (WithAmount 100 (One EUR))
