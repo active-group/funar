@@ -107,7 +107,9 @@ tableProcessCommandM (PlayCard player card) =
   do isValid <- playValidM player card
      if isValid
      then do recordEventM (LegalCardPlayed player card)
-             
-             return undefined
+             turnOverTrick <- turnOverTrickM
+             case turnOverTrick of
+              Nothing -> do undefined
+              Just (trick, trickTaker) -> do undefined
      else do recordEventM (IllegalCardAttempted player card)
              return Nothing
