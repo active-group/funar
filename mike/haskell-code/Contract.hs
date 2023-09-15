@@ -72,3 +72,16 @@ fxSwap :: Contract
 fxSwap = Together zcb1 c3
 
 -- Semantik
+
+data Payment = MkPayment {
+    paymentDate :: Date,
+    paymentDirection :: Direction,
+    paymentAmount :: Amount,
+    paymentCurrency :: Currency
+ }
+ deriving Show
+
+
+-- Welche Zahlungen bis heute?
+-- Und welcher Vertrag bleibt übrig?
+semantics :: Contract -> Date -> ([Payment], Contract)
