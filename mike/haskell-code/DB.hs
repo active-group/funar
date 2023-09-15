@@ -32,10 +32,10 @@ data DB a =
   | Return a
 
 put :: Key -> Value -> DB ()
-put key value = Put key value (\() -> Return ())
+put key value = Put key value Return
 
 get :: Key -> DB Value
-get key = Get key (\value -> Return value)
+get key = Get key Return
 
 -- >>> :info Monad
 -- type Monad :: (* -> *) -> Constraint
