@@ -1,3 +1,4 @@
+{-# LANGUAGE InstanceSigs #-}
 module DB where
 
 import qualified Data.Map as Map
@@ -56,6 +57,7 @@ splice (Return result) next = next result
 
 instance Functor DB where
     -- Übung
+  fmap :: (a -> b) -> DB a -> DB b
   fmap f (Get key callback) =
     Get key (\value -> fmap f (callback value))
   fmap f (Put key value callback) =
