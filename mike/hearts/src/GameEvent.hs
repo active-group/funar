@@ -60,7 +60,7 @@ class Monad m where
 -- Spiel(regel)-Monade
 data Game a =
     Done a -- gibt es immer
-  | RecordEvent GameEvent 
+  | RecordEvent GameEvent (() -> Game a)
 
 instance Functor Game where
 
@@ -75,6 +75,6 @@ instance Monad Game where
 -- Commands rein, Events raus, Spiel vorbei?
 tableProcessCommandM :: GameCommand -> Game (Maybe Player)
 tableProcessCommandM (DealHands hands) = 
-  -- 
-  undefined
+  -- HandDeal-Events
+  -- Map.toList hands
 tableProcessCommandM (PlayCard player card) = undefined
