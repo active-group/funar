@@ -47,6 +47,9 @@ data Contract =
   | Together Contract Contract
   deriving Show
 
+-- Together assoziativ? Ja!
+-- Verträge bilden eine Halbgruppe!
+
 c1 = One EUR -- "Ich bekomme einen Euro jetzt."
 
 c2 = WithAmount 100 (One EUR) -- "Ich bekomme 100€ jetzt."
