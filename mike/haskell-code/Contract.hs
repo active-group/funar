@@ -48,8 +48,10 @@ data Contract =
   | Zero
   deriving Show
 
+-- im Paper: Obs Amount statt Amount
+
 -- Together assoziativ? Ja!
--- Verträge bilden eine Halbgruppe!
+-- Verträge bilden eine Halbgruppe! Und einen Monoid!
 
 c1 = One EUR -- "Ich bekomme einen Euro jetzt."
 
@@ -68,3 +70,5 @@ c3 = Invert (zeroCouponBond (Date "2023-12-23") 100 USD)
 
 fxSwap :: Contract
 fxSwap = Together zcb1 c3
+
+-- Semantik
