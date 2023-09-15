@@ -48,3 +48,18 @@ eventsWinner (first : rest) =
   case first of
     GameEnded winner -> Just winner
     _ -> eventsWinner rest
+
+{-
+class Monad m where
+  return :: a -> m a
+  (>>=) :: m a -> (a -> m b) -> m b
+-}
+
+-- Spiel(regel)-Monade
+data Game a = Game
+
+
+-- Spielregeln / "Tisch"
+-- Commands rein, Events raus, Spiel vorbei?
+tableProcessCommandM :: GameCommand -> Game (Maybe Player)
+tableProcessCommandM = undefined
