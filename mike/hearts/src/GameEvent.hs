@@ -60,7 +60,7 @@ class Monad m where
 -- Spiel(regel)-Monade
 data Game a =
     Done a -- gibt es immer
-  | RecordEvent 
+  | RecordEvent GameEvent 
 
 instance Functor Game where
 
