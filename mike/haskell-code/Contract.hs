@@ -45,6 +45,7 @@ data Contract =
   | DueDate Date Contract
   | Invert Contract -- dreht alle Zahlungen um
   | Together Contract Contract
+  | Zero
   deriving Show
 
 -- Together assoziativ? Ja!
