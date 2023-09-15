@@ -62,6 +62,7 @@ data Game a =
     Done a -- gibt es immer
   | RecordEvent GameEvent (() -> Game a)
   | PlayValid Player Card (Bool -> Game a)
+  | TurnOver 
 
 recordEventM :: GameEvent -> Game ()
 recordEventM event =
