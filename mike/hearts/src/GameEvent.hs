@@ -52,6 +52,7 @@ eventsWinner (first : rest) =
 {-
 class Monad m where
   return :: a -> m a
+  -- "bind" bzw. "flatMap"
   (>>=) :: m a -> (a -> m b) -> m b
 -}
 
