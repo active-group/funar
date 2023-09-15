@@ -201,7 +201,7 @@ runTable (RecordEvent event callback) state events =
   runTable (callback ()) (tableProcessEvent event state) (event:events)
 
 runTable (GetCommand callback) state events =
-  (state, events, Left callback)
+  (state, reverse events, Left callback)
 
 runTable (Done result) state events =
   (state, reverse events, Right result)
