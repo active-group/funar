@@ -153,6 +153,6 @@ tableLoopM command =
   do maybeWinner <- tableProcessCommandM command
      case maybeWinner of
       Just winner -> return winner
-      Nothing -> GetCommand tableCommand
+      Nothing -> GetCommand tableLoopM
 --                 do command <- GetCommand Done
 --                    tableLoopM command

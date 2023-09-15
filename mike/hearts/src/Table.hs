@@ -180,4 +180,12 @@ tableProcessEvent (TrickTaken player trick) state =
 tableProcessEvent (IllegalCardAttempted player card) state = state
 tableProcessEvent (GameEnded player) state = state
 
-runTable = undefined
+-- runDB :: DB a ->   Map Key Value -> (Map Key Value, a)
+
+-- Eingabe-Events sind in umgekehrter Reihenfolge
+runTable :: Game a -> TableState -> [GameEvent] -> (TableState, [GameEvent], a)
+runTable (PlayValid player card callback) state events =
+  runTable (callback (playValid state player card)) state events
+
+runTable (RecordEvent event callback) state events =
+  runTable (callback ()) state (event:events)
