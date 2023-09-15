@@ -65,6 +65,8 @@ data Game a =
   -- wenn die Runde vorbei ist, bekommen wir Stich
   -- und Spieler:in, die ihn aufnehmen musste
   | TurnOverTrick (Maybe (Trick, Player) -> Game a)
+  | PlayerAfter Player (Player -> Game a)
+  | GameOver (Maybe Player -> Game a)
 
 recordEventM :: GameEvent -> Game ()
 recordEventM event =
@@ -76,6 +78,12 @@ playValidM player card =
 
 turnOverTrickM :: Game (Maybe (Trick, Player))
 turnOverTrickM = TurnOverTrick Done
+
+playerAfterM :: Player -> Game Player
+playerAfterM player = PlayerAfter player Done
+
+gameOverM :: Game (Maybe Player)
+gameOverM = GameOver Done
 
 instance Functor Game where
 
@@ -92,6 +100,11 @@ instance Monad Game where
     PlayValid player card (\isValid -> callback isValid >>= next)
   (>>=) (TurnOverTrick callback) next =
     TurnOverTrick (\maybeTrick ->     callback maybeTrick >>= next)
+  (>>=) (PlayerAfter player cont) next =
+    PlayerAfter player (\player -> cont player >>= next)
+  (>>=) (GameOver cont) next =
+    GameOver (\won -> cont won >>= next)
+
 -- data Maybe a = Just a | Nothing
 
 -- Spielregeln / "Tisch"
@@ -109,7 +122,24 @@ tableProcessCommandM (PlayCard player card) =
      then do recordEventM (LegalCardPlayed player card)
              turnOverTrick <- turnOverTrickM
              case turnOverTrick of
-              Nothing -> do undefined
-              Just (trick, trickTaker) -> do undefined
+              Nothing -> 
+                do 
+                  nextPlayer <- playerAfterM player
+                  recordEventM (PlayerTurnChanged nextPlayer)
+                  return Nothing
+              Just (trick, trickTaker) ->
+                do
+                  recordEventM (TrickTaken trickTaker trick)
+                  over <- gameOverM
+                  case over of
+                    Just winner ->
+                      do
+                        recordEventM (GameEnded winner)
+                        return (Just winner)
+                    Nothing ->
+                      do
+                        recordEventM (PlayerTurnChanged trickTaker)
+                        return Nothing
+              
      else do recordEventM (IllegalCardAttempted player card)
              return Nothing
