@@ -1,0 +1,5 @@
+dist-newstyle/
+.direnv/
+
+# Default nix symlinks
+/result*
