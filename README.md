@@ -63,9 +63,11 @@ es helfen, das Image bauen zu lassen (statt herunterzuladen).  Dazu:
   System zu entfernen, falls man das möchte)
 - [Flakes einschalten](https://nixos.wiki/wiki/Flakes): in der Regel bedeutet
   das, in `~/.config/nix/nix.conf` die folgende Zeile einzutragen:
+
   ```
   experimental-features = nix-command flakes
   ```
+
 - `cd <path-to>/funar`
 - `nix develop .#withVSCode` ausführen -> Sie befinden sich nun in
   einer projektspezifischen, entsprechend gekennzeichneten Umgebung
