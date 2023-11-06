@@ -182,6 +182,7 @@
 (define list-sum
   (lambda (list)
     (cond
+      ; x + 0 = 0 + x = x
       ((empty? list) 0) ; das neutrale Element der Addition
       ((cons? list)
        (+ (first list)
