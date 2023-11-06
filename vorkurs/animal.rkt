@@ -275,3 +275,12 @@
                           (cons (run-over-animal parrot1)
                                 (cons (run-over-animal parrot2)
                                       empty)))))
+
+(define run-over-animals
+  (lambda (animals)
+    (cond
+      ((empty? animals) empty)
+      ((cons? animals)
+       (cons
+        (run-over-animal (first animals))
+        (run-over-animals (rest animals)))))))
