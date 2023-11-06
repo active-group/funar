@@ -235,6 +235,8 @@
            (cons (first list) (extract-odds (rest list)))
            (extract-odds (rest list)))))))
 
+(define dillos (cons dillo1 (cons dillo2 empty)))
+
 ; Über Definitionen abstrahieren:
 ; - letztes Mal kopieren
 ; - umbenennen (rekursive Aufrufe!)
