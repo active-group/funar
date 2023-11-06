@@ -187,3 +187,17 @@
       ((cons? list)
        (+ (first list)
           (list-sum (rest list)))))))
+
+; Alle Elemente einer Liste multiplizieren
+(: list-product (list-of-numbers -> number))
+
+(check-expect (list-product list4)
+              320)
+
+(define list-product
+  (lambda (list)
+    (cond
+      ((empty? list) 1) ; neutrales Element der Multiplikation
+      ((cons? list)
+       (* (first list)
+          (list-product (rest list)))))))
