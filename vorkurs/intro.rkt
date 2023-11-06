@@ -59,6 +59,8 @@
   (time-minute natural))
 
 (: make-time (natural natural -> time))
+(: time-hour (time -> natural))
+(: time-minute (time -> natural))
 
 ; 11 Uhr 31
 (define time1 (make-time 11 31))
