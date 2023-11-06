@@ -22,6 +22,16 @@
 (check-expect (run-over-dillo dillo2)
               dillo2)
 
+; Gilt nicht:
+#;(check-property
+ (for-all ((d dillo))
+   (equal? (run-over-dillo d)
+           d)))
+
+(check-property
+ (for-all ((d dillo))
+   (not (dillo-alive? (run-over-dillo d)))))
+
 #;(define run-over-dillo
     (lambda (dillo)
       (make-dillo ... ...)
