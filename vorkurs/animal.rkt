@@ -162,6 +162,8 @@
 ; 4elementige: 4 2 5 8
 (define list4 (cons 4 list3))
 
+(define list5 (cons 4 (cons 2 (cons 5 (cons 8 (cons 3 empty))))))
+
 ; Alle Elemente einer Liste addieren
 (: list-sum (list-of-numbers -> number))
 
@@ -208,4 +210,27 @@
 (check-expect (extract-evens list4)
               (cons 4 (cons 2 (cons 8 empty))))
 
-              
+
+(define extract-evens
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (if (even? (first list))
+           (cons (first list) (extract-evens (rest list)))
+           (extract-evens (rest list)))))))
+
+; Aus einer Liste die ungeraden Elemente extrahieren
+(: extract-odds (list-of-numbers -> list-of-numbers))
+
+(check-expect (extract-odds list4)
+              (cons 5 empty))
+
+(define extract-odds
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (if (odd? (first list))
+           (cons (first list (extract-odds (rest list))))
+           (extract-odds (rest list)))))))
