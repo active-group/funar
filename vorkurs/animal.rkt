@@ -50,7 +50,7 @@
 (check-expect (feed-dillo dillo2 5)
               dillo2)
 
-(define feed-dillo
+#;(define feed-dillo
   (lambda (dillo amount)
     ; Fallunterscheidung
     ; zusammengesetzte Daten
@@ -70,6 +70,12 @@
     (if (dillo-alive? dillo)
         (make-dillo #t (+ (dillo-weight dillo) amount))
         dillo)))
+
+(define feed-dillo
+  (lambda (dillo amount)
+    (match dillo
+      ((make-dillo #t weight) (make-dillo #t (+ weight amount)))
+      ((make-dillo #f weight) dillo))))
 
 ; lexikalische Bindung:
 ; vom Vorkommen aus von innen nach außen suchen, nach lambda oder define
