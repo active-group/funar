@@ -297,5 +297,7 @@
       ((empty? list) empty)
       ((cons? list)
        (cons
-        (+ 1 (first list))
+        (inc (first list))
         (inc-list (rest list)))))))
+
+(define inc (lambda (x) (+ 1 x)))
