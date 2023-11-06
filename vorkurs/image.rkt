@@ -21,6 +21,21 @@
  (beside star1 circle1)
  (beside circle1 star1))
 
+; Konstruktionsanleitungen
+
+; Kurzbeschreibung:
+; quadratisches Kachelmuster berechnen
+
+; Signatur(deklaration):
+(: tile (image image -> image))
+
+; Beispiel/Test:
+(check-expect (tile star1 circle1)
+              (above
+               (beside star1 circle1)
+               (beside circle1 star1)))
+              
+
 (define tile
   (lambda (image1 image2)
     (above
