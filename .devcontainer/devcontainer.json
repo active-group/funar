@@ -1,8 +1,8 @@
 {
   "name": "haskell",
-  "image": "docker.active-group.de/funar-devcontainer:2.0.0",
-  // "dockerFile": "Dockerfile",
-  "context": "..",
+  "image": "docker.active-group.de/funar-devcontainer:3.0.0",
+  // "dockerFile": "../Dockerfile",
+  // "context": "..",
   "appPort": [
     "8001:8001",
     "8002:8002",
@@ -26,6 +26,5 @@
   },
   "extensions": [
     "haskell.haskell",
-    "mkhl.direnv"
   ]
 }

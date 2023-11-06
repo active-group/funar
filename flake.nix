@@ -10,7 +10,7 @@
     inputs.flake-utils.lib.eachDefaultSystem (system:
       let
         # Pin GHC version for easier, explicit upgrades later
-        ghcVersion = "928";
+        ghcVersion = "927";
         pkgs = import inputs.nixpkgs {
           inherit system;
           config.allowUnfree = true;
@@ -32,9 +32,6 @@
               pkgs.cabal-install
               self.packages.${system}.hls
               pkgs.elmPackages.elm
-            ];
-            nativeBuildInputs = [
-              pkgs.haskellPackages.doctest
             ];
             shellHook = ''
               export PS1="\n\[\033[1;32m\][nix-shell:\W \[\033[1;31m\]FUNAR\[\033[1;32m\]]\$\[\033[0m\] "
@@ -62,10 +59,16 @@
 
         packages = {
           inherit hearts haskell-code;
-          inherit (pkgs) ghc cabal-install;
+          inherit (pkgs) cabal-install;
           hls = pkgs.haskell-language-server.override {
             supportedGhcVersions = [ ghcVersion ];
           };
+          # HACK: We rely on how `shellFor` constructs its `nativeBuildInputs`
+          # in order to grab the `ghcWithPackages` from out of there. That way
+          # we're able to globally install this GHC in the Docker image and get
+          # rid of direnv as a dependency.
+          ghcForFunar =
+            builtins.head self.devShells.${system}.default.nativeBuildInputs;
         };
       });
 }
