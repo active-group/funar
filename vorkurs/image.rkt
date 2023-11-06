@@ -11,11 +11,13 @@
 (define star1 (star 50 "solid" "green"))
 (define overlay1 (overlay star1 circle1))
 
-(above
+; Zeilenkommentar
+
+#;(above
  (beside circle1 square1)
  (beside square1 circle1))
 
-(above
+#;(above
  (beside star1 circle1)
  (beside circle1 star1))
 
