@@ -86,4 +86,17 @@
   (lambda (time)
     (+ (* 60 (time-hour time))
        (time-minute time))))
-   
+
+; Aus Minuten seit Mitternacht die Zeit berechnen
+(: msm->time (natural -> time))
+
+(check-expect (msm->time 691)
+              time1)
+(check-expect (msm->time 914)
+              time2)
+
+(define msm->time
+  (lambda (minutes)
+    (make-time (quotient minutes 60)
+               (remainder minutes 60))))
+
