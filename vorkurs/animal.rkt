@@ -243,6 +243,9 @@
 
 (: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
 
+(check-expect (extract even? list4)
+              (cons 4 (cons 2 (cons 8 empty))))
+                       
 (define extract
   (lambda (p? list)
     (cond
