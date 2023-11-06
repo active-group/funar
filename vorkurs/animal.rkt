@@ -201,3 +201,11 @@
       ((cons? list)
        (* (first list)
           (list-product (rest list)))))))
+
+; Aus einer Liste die geraden Elemente extrahieren
+(: extract-evens (list-of-numbers -> list-of-numbers))
+
+(check-expect (extract-evens list4)
+              (cons 4 (cons 2 (cons 8 empty))))
+
+              
