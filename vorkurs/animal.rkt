@@ -232,5 +232,5 @@
       ((empty? list) empty)
       ((cons? list)
        (if (odd? (first list))
-           (cons (first list (extract-odds (rest list))))
+           (cons (first list) (extract-odds (rest list)))
            (extract-odds (rest list)))))))
