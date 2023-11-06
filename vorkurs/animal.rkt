@@ -77,5 +77,15 @@
       ((make-dillo #t weight) (make-dillo #t (+ weight amount)))
       ((make-dillo #f weight) dillo))))
 
+; Papagei hat folgende Eigenschaften:
+; - Satz -UND-
+; - Gewicht
+(define-record parrot
+  make-parrot
+  (parrot-sentence string)
+  (parrot-weight number))
+
+
+
 ; lexikalische Bindung:
 ; vom Vorkommen aus von innen nach außen suchen, nach lambda oder define
