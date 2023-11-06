@@ -85,7 +85,20 @@
   (parrot-sentence string)
   (parrot-weight number))
 
+; Begrüßungs-Papagei
+(define parrot1 (make-parrot "Hallo!" 1))
+; Verabschiedungs-Papagei
+(define parrot2 (make-parrot "Tschüss!" 2))
 
+; Papagei überfahren
+(: run-over-parrot (parrot -> parrot))
+
+(check-expect (run-over-parrot parrot1)
+              (make-parrot "" 1))
+
+(define run-over-parrot
+  (lambda (parrot)
+    (make-parrot "" (parrot-weight parrot))))
 
 ; lexikalische Bindung:
 ; vom Vorkommen aus von innen nach außen suchen, nach lambda oder define
