@@ -128,3 +128,61 @@
     (cond
       ((dillo? animal) (run-over-dillo animal))
       ((parrot? animal) (run-over-parrot animal)))))
+
+; Eine Liste ist eins der folgenden:
+; - die leere Liste
+; - eine Cons-Liste, bestehend aus:
+;     erstem Element und Rest-Liste
+;                             ^^^^^ Selbstbezug
+(define list-of-numbers
+  (signature (mixed empty-list cons-list)))
+
+; die leere Liste
+(define-singleton empty-list ; Signatur
+  empty empty?) 
+
+; Ein Cons-Liste besteht aus:
+; - erstes Element
+; - Rest-Liste
+(define-record cons-list
+  cons
+  cons?
+  (first number)
+  (rest list-of-numbers))
+
+; 1elementige Liste: 5
+(define list1 (cons 5 empty))
+
+; 2elementige Liste: 5 8
+(define list2 (cons 5 (cons 8 empty)))
+
+; 3elementige Liste: 2 5 8
+(define list3 (cons 2 (cons 5 (cons 8 empty))))
+
+; 4elementige: 4 2 5 8
+(define list4 (cons 4 list3))
+
+; Alle Elemente einer Liste addieren
+(: list-sum (list-of-numbers -> number))
+
+(check-expect (list-sum list4)
+              19)
+
+; Schablone:
+#;(define list-sum
+  (lambda (list)
+    (cond
+      ((empty? list) ...)
+      ((cons? list)
+       ...
+       (first list)
+       (list-sum (rest list))
+       ...))))
+
+(define list-sum
+  (lambda (list)
+    (cond
+      ((empty? list) 0)
+      ((cons? list)
+       (+ (first list)
+          (list-sum (rest list)))))))
