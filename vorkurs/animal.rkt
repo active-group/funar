@@ -262,3 +262,16 @@
        (if (p? (first list))
            (cons (first list) (extract p? (rest list)))
            (extract p? (rest list)))))))
+
+(define highway
+  (cons dillo1 (cons dillo2 (cons parrot1 (cons parrot2 empty)))))
+
+; Alle Tiere überfahren
+(: run-over-animals ((list-of animal) -> (list-of animal)))
+
+(check-expect (run-over-animals highway)
+              (cons (run-over-animal dillo1)
+                    (cons (run-over-animal dillo2)
+                          (cons (run-over-animal parrot1)
+                                (cons (run-over-animal parrot2)
+                                      empty)))))
