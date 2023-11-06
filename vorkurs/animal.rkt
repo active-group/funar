@@ -102,3 +102,11 @@
 
 ; lexikalische Bindung:
 ; vom Vorkommen aus von innen nach außen suchen, nach lambda oder define
+
+; Ein Tier ist eins der folgenden:
+; - Gürteltier -ODER-
+; - Papagei
+; Fallunterscheidung
+; hier speziell: gemischte Daten
+(define animal
+  (signature (mixed dillo parrot)))
