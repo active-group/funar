@@ -234,3 +234,20 @@
        (if (odd? (first list))
            (cons (first list) (extract-odds (rest list)))
            (extract-odds (rest list)))))))
+
+; Über Definitionen abstrahieren:
+; - letztes Mal kopieren
+; - umbenennen (rekursive Aufrufe!)
+; - für die Unterschiede abstrakte Namen
+; - abstrakte Namen in lambda aufnehmen (rekursive Aufrufe!)
+
+(: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
+
+(define extract
+  (lambda (p? list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (if (p? (first list))
+           (cons (first list) (extract p? (rest list)))
+           (extract p? (rest list)))))))
