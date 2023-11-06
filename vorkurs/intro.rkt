@@ -55,7 +55,7 @@
 ; zusammengesetzte Daten
 (define-record time ; Signatur
   make-time ; Konstruktor
-  (time-hour natural)
+  (time-hour natural) ; Selektoren / Getter-Funktionen
   (time-minute natural))
 
 (: make-time (natural natural -> time))
