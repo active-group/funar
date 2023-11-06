@@ -247,7 +247,9 @@
 ; - für die Unterschiede abstrakte Namen
 ; - abstrakte Namen in lambda aufnehmen (rekursive Aufrufe!)
 
-(: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
+; %element: Signaturvariable
+
+(: extract ((%element -> boolean) (list-of %element) -> (list-of %element)))
 
 (check-expect (extract even? list4)
               (cons 4 (cons 2 (cons 8 empty))))
