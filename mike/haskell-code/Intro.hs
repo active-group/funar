@@ -333,7 +333,7 @@ listIndex a (x:xs) =
     if x == a 
     then Result 0
     else 
-        optionalMap (\index -> index + 1) (listIndex a xs)
+        fmap (\index -> index + 1) (listIndex a xs)
 {-        
         case listIndex a xs of
             Null -> Null
@@ -349,6 +349,7 @@ optionalMap f (Result a) = Result (f a)
 -- class Functor f where
 --   fmap :: (a -> b) -> f a -> f b
 
+-- aus der Kategorientheorie:
 instance Functor Optional where
     fmap = optionalMap
 
