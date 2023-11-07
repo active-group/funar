@@ -175,3 +175,5 @@ tuplify :: (a -> b -> c) -> ((a, b) -> c)
 -- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
 tuplify f =
     \(a, b) -> f a b
+
+untuplify :: ((a, b) -> c) -> (a -> b -> c)
