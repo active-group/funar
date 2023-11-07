@@ -333,3 +333,15 @@ listIndex a (x:xs) =
     else case listIndex a xs of
             Null -> Null
             Result index -> Result (index + 1)
+
+-- >>> :info Ord
+-- type Ord :: * -> Constraint
+-- class Eq a => Ord a where
+--   compare :: a -> a -> Ordering
+--   (<) :: a -> a -> Bool
+--   (<=) :: a -> a -> Bool
+--   (>) :: a -> a -> Bool
+--   (>=) :: a -> a -> Bool
+--   max :: a -> a -> a
+--   min :: a -> a -> a
+--   {-# MINIMAL compare | (<=) #-}
