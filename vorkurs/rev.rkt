@@ -33,5 +33,15 @@
 #|
 Laufzeitkomplexität bei Liste der Länge n:
 
-1 + 2 + 3 + 4 ... + (n-2) + (n-1) + n
+Gauß'sche Summenformel:
+1 + 2 + 3 + 4 ... + (n-2) + (n-1) + n = n*(n+1)/2 = O(n^2)
+
 |#
+
+(define rev2
+  (lambda (list acc)
+    (cond
+      ((empty? list) acc)
+      ((cons? list)
+       (rev2 (rest list)
+             (cons (first list) acc))))))
