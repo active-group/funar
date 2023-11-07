@@ -138,8 +138,11 @@ feedAnimal (MkParrot sentence weight) amount =
     MkParrot sentence (weight + amount)
 
 -- eingebaut als flip
-swap :: (Animal -> Weight -> Animal) -> (Weight -> Animal -> Animal)
-swap f =                              \ weight -> \ animal -> f animal weight 
+-- swap :: (Animal -> Weight -> Animal) -> (Weight -> Animal -> Animal)
+-- Kleinbuchstaben auf Typebene: Typvariablen
+swap :: (a -> b -> c) -> (b -> a -> c)
+-- swap f =                              \ weight -> \ animal -> f animal weight 
+swap f= \ b -> \ a -> f a b
 
 feedAnimal2 :: Weight -> Animal -> Animal
 feedAnimal2 = swap feedAnimal
