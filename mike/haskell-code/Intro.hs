@@ -109,5 +109,9 @@ runOverAnimal :: Animal -> Animal
 -- >>> runOverAnimal dillo1
 -- MkDillo {dilloLiveness = Dead, dilloWeight = 10}
 
-runOverAnimal (MkDillo liveness weight) = MkDillo Dead weight
+-- Alias-Pattern
+runOverAnimal dillo@(MkDillo liveness weight) = 
+    case liveness of
+        Dead -> dillo
+        Alive -> MkDillo Dead weight
 runOverAnimal (MkParrot sentence weight) = MkParrot "" weight
