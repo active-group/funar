@@ -25,6 +25,13 @@ add :: Integer -> Integer -> Integer
 -- 12
 add = \ x -> \ y -> x + y
 
+foo :: Integer -> Integer -> Integer
+-- >>> foo 5 7
+-- 24
+foo x y =
+    let z = x + y
+    in z * 2
+
 -- Ein Haustier ist eins der folgenden:
 -- - Hund
 -- - Katze
