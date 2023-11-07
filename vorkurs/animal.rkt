@@ -322,3 +322,12 @@
       ((cons? list)
        (f (first list)
           (list-fold e f (rest list)))))))
+
+(define extract2
+  (lambda (p? list)
+    (list-fold empty
+               (lambda (first-list rec-result)
+                 (if (p? first-list)
+                     (cons first-list rec-result)
+                     rec-result))
+               list)))
