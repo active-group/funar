@@ -29,6 +29,12 @@
        (cons
         (first list)
         (append-element (rest list) element))))))
+#|
+tail call muß keinen Kontext akkumulieren
+
+JVM: Kontext kommt auf den Stack, Stack ist klein und hat feste Größe
+Bug in der JVM: auch tail calls verbrauchen Speicher
+|#
 
 #|
 Laufzeitkomplexität bei Liste der Länge n:
@@ -46,5 +52,5 @@ Gauß'sche Summenformel:
     (cond
       ((empty? list) acc)
       ((cons? list)
-       (rev2 (rest list)
+       (rev2 (rest list) ; kein Kontext, tail call, endrekursiver Aufruf
              (cons (first list) acc))))))
