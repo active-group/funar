@@ -345,6 +345,13 @@ optionalMap :: (a -> b) -> Optional a -> Optional b
 optionalMap f Null = Null
 optionalMap f (Result a) = Result (f a)
 
+-- >>> :info Functor
+-- class Functor f where
+--   fmap :: (a -> b) -> f a -> f b
+
+instance Functor Optional where
+    fmap = optionalMap
+
 -- >>> :info Ord
 -- type Ord :: * -> Constraint
 -- class Eq a => Ord a where
