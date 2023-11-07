@@ -203,7 +203,7 @@ entschönfinkeln = tuplify
 -- - Funktion schreiben, die feststellt, ob ein Punkt
 --   innerhalb oder außerhalb einer geometrischen Figur liegt
 
-data Point = MkPoint {x :: Double, y :: Double}
+data Point = MkPoint Double Double
 
 point1 = MkPoint 1 1
 
