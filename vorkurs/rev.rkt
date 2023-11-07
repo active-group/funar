@@ -38,6 +38,9 @@ Gauß'sche Summenformel:
 
 |#
 
+(check-expect (rev2 (list 1 2 3 4) empty)
+              (list 4 3 2 1))
+
 (define rev2
   (lambda (list acc)
     (cond
