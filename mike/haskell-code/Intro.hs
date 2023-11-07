@@ -192,3 +192,13 @@ untuplify f a b = f (a,b)
 schönfinkeln = untuplify
 -- eingebaut als uncurry
 entschönfinkeln = tuplify
+
+-- Eine geometrische Figur ("Shape") in der Ebene ist eins der folgenden:
+-- - ein Kreis
+-- - ein Quadrat
+-- - eine Überlagerung zweiter geometrischer Figuren
+
+-- Aufgabe:
+-- - Datendefinition in Code übersetzen
+-- - Funktion schreiben, die feststellt, ob ein Punkt
+--   innerhalb oder außerhalb einer geometrischen Figur liegt
