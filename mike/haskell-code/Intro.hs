@@ -275,4 +275,7 @@ listFilter p (x:xs) =
 
 listMap :: (a -> b) -> [a] -> [b]
 listMap f [] = undefined
-listMap f (x:xs) = (f x) :_(listMap f xs)
+listMap f (x:xs) = (f x) : (listMap f xs)
+
+natsFrom :: Integer -> [Integer]
+natsFrom n = n : (natsFrom (n+1))
