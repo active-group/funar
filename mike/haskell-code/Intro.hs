@@ -295,3 +295,37 @@ sieve (x:xs) =
 
 primes :: [Integer]
 primes = sieve (natsFrom 2)
+
+data Optional a =
+    Null
+  | Result a
+  deriving Show
+
+-- Eq a: Constraint, Eq: Eigenschaft
+
+-- >>> :info Eq
+-- type Eq :: * -> Constraint
+-- Typklasse, "Interface", Implementierung: instance
+-- class Eq a where
+--   -- Methode
+--   (==) :: a -> a -> Bool
+--   (/=) :: a -> a -> Bool
+--   {-# MINIMAL (==) | (/=) #-}
+
+-- Index eines Elements in einer Liste finden
+listIndex :: Eq a => a -> [a] -> Optional Integer
+-- >>> listIndex 3 [2,9,4,7,3,5]
+-- Result 4
+-- >>> listIndex Dog [Cat, Snake, Dog, Snake, Cat]
+-- No instance for (Eq Pet) arising from a use of `listIndex'
+-- In the expression: listIndex Dog [Cat, Snake, Dog, Snake, Cat]
+-- In an equation for `it_a87js':
+--     it_a87js = listIndex Dog [Cat, Snake, Dog, Snake, Cat]
+
+listIndex a [] = Null
+listIndex a (x:xs) =
+    if x == a 
+    then Result 0
+    else case listIndex a xs of
+            Null -> Null
+            Result index -> Result (index + 1)
