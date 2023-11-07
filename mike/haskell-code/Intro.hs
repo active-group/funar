@@ -183,5 +183,5 @@ untuplify f a b = f (a,b)
 
 -- eingebaut als curry
 schönfinkeln = untuplify
--- eingebaut als curry
+-- eingebaut als uncurry
 entschönfinkeln = tuplify
