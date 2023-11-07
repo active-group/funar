@@ -280,7 +280,9 @@ listFilter p (x:xs) =
     then x : (listFilter p xs)
     else listFilter p xs
 
-listMap :: (a -> b) -> [a] -> [b]
+type List a = [a]
+
+listMap :: (a -> b) -> List a -> List b
 listMap f [] = []
 listMap f (x:xs) = (f x) : (listMap f xs)
 
@@ -337,6 +339,7 @@ listIndex a (x:xs) =
             Null -> Null
             Result index -> Result (index + 1)
 -}
+
 
 optionalMap :: (a -> b) -> Optional a -> Optional b
 optionalMap f Null = Null
