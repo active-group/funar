@@ -281,7 +281,7 @@ listFilter p (x:xs) =
     else listFilter p xs
 
 listMap :: (a -> b) -> [a] -> [b]
-listMap f [] = undefined
+listMap f [] = []
 listMap f (x:xs) = (f x) : (listMap f xs)
 
 natsFrom :: Integer -> [Integer]
@@ -330,9 +330,17 @@ listIndex a [] = Null
 listIndex a (x:xs) =
     if x == a 
     then Result 0
-    else case listIndex a xs of
+    else 
+        optionalMap (\index -> index + 1) (listIndex a xs)
+{-        
+        case listIndex a xs of
             Null -> Null
             Result index -> Result (index + 1)
+-}
+
+optionalMap :: (a -> b) -> Optional a -> Optional b
+optionalMap f Null = Null
+optionalMap f (Result a) = Result (f a)
 
 -- >>> :info Ord
 -- type Ord :: * -> Constraint
