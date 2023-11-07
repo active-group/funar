@@ -137,5 +137,30 @@ feedAnimal dillo@(MkDillo liveness weight) amount =
 feedAnimal (MkParrot sentence weight) amount =
     MkParrot sentence (weight + amount)
 
+-- eingebaut als flip
+swap :: (Animal -> Weight -> Animal) -> (Weight -> Animal -> Animal)
+swap f =                              \ weight -> \ animal -> f animal weight 
+
+feedAnimal2 :: Weight -> Animal -> Animal
+feedAnimal2 = swap feedAnimal
+
+feed1 :: Animal -> Animal
+-- >>> feed1 dillo1
+-- MkDillo {dilloLiveness = Alive, dilloWeight = 11}
+-- >>> feed1 parrot1
+-- MkParrot "Hallo!" 2
+feed1 = feedAnimal2 1
+
 fdillo1 :: Weight -> Animal
 fdillo1 = feedAnimal dillo1
+
+--- >>> feedAnimal'(dillo1, 1)
+-- MkDillo {dilloLiveness = Alive, dilloWeight = 11}
+feedAnimal' :: (Animal, Weight) -> Animal
+feedAnimal'(dillo@(MkDillo liveness weight), amount) = 
+  case liveness of
+    Alive -> MkDillo liveness (weight + amount)
+    Dead -> dillo
+
+feedAnimal'(MkParrot sentence weight, amount) =
+    MkParrot sentence (weight + amount)
