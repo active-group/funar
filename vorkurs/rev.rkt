@@ -58,10 +58,11 @@ Gauß'sche Summenformel:
 
 ; Schablone
 #;(define f
-    (lambda (list acc)
+    (lambda (... list acc)
       ; Schleifeninvariante
       (cond
         ((empty? list) ... acc ...)
         ((cons? list)
-         (f (rest list)
+         (f ...
+            (rest list)
             ... (first list) acc ...)))))
