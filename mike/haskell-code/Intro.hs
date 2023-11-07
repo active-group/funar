@@ -114,4 +114,6 @@ runOverAnimal dillo@(MkDillo liveness weight) =
     case liveness of
         Dead -> dillo
         Alive -> MkDillo Dead weight
+-- runOverAnimal (MkDillo Alive weight) = MkDillo Dead weight
+-- runOverAnimal dillo@(MkDillo Dead weight) = dillo
 runOverAnimal (MkParrot sentence weight) = MkParrot "" weight
