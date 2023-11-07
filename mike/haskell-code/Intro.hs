@@ -272,3 +272,7 @@ listFilter p (x:xs) =
     if p x 
     then x : (listFilter p xs)
     else listFilter p xs
+
+listMap :: (a -> b) -> [a] -> [b]
+listMap f [] = undefined
+listMap f (x:xs) = (f x) :_(listMap f xs)
