@@ -56,6 +56,7 @@ Gauß'sche Summenformel:
        (rev2 (rest list) ; kein Kontext, tail call, endrekursiver Aufruf
              (cons (first list) acc))))))
 
+; Schablone
 #;(define f
     (lambda (list acc)
       ; Schleifeninvariante
