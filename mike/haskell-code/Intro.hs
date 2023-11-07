@@ -256,3 +256,19 @@ list3 = 3 : 2 : 5 : []
 list4 :: [Integer]
 list4 = 8 : list3
 
+list5 :: [Integer]
+list5 = [1, 8, 3, 2, 5]
+
+-- Elemente einer Liste addieren
+listSum :: [Integer] -> Integer
+-- >>> listSum list5
+-- 19
+listSum [] = 0
+listSum (first:rest) = first + (listSum rest)
+
+listFilter :: (a -> Bool) -> [a] -> [a]
+listFilter p [] = []
+listFilter p (x:xs) =
+    if p x 
+    then x : (listFilter p xs)
+    else listFilter p xs
