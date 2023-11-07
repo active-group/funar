@@ -176,4 +176,6 @@ tuplify :: (a -> b -> c) -> ((a, b) -> c)
 tuplify f =
     \(a, b) -> f a b
 
+-- >>> (untuplify feedAnimal') dillo1 5
+-- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
 untuplify :: ((a, b) -> c) -> (a -> b -> c)
