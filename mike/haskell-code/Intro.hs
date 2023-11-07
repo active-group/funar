@@ -149,7 +149,9 @@ feed1 :: Animal -> Animal
 -- MkDillo {dilloLiveness = Alive, dilloWeight = 11}
 -- >>> feed1 parrot1
 -- MkParrot "Hallo!" 2
-feed1 = feedAnimal2 1
+--- feed1 = feedAnimal2 1
+-- feed1 = swap feedAnimal 1
+feed1 = flip feedAnimal 1
 
 fdillo1 :: Weight -> Animal
 fdillo1 = feedAnimal dillo1
