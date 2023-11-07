@@ -117,3 +117,11 @@ runOverAnimal dillo@(MkDillo liveness weight) =
 -- runOverAnimal (MkDillo Alive weight) = MkDillo Dead weight
 -- runOverAnimal dillo@(MkDillo Dead weight) = dillo
 runOverAnimal (MkParrot sentence weight) = MkParrot "" weight
+
+-- Tier füttern
+feedAnimal dillo@(MkDillo liveness weight) amount =
+    case liveness of
+        Alive -> MkDillo liveness (weight + amount)
+        Dead -> dillo
+feedAnimal (MkParrot sentence weight) amount =
+    MkParrot sentence (weight + amount)
