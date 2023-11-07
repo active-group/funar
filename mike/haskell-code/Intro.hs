@@ -202,3 +202,34 @@ entschönfinkeln = tuplify
 -- - Datendefinition in Code übersetzen
 -- - Funktion schreiben, die feststellt, ob ein Punkt
 --   innerhalb oder außerhalb einer geometrischen Figur liegt
+
+data Point = MkPoint {x :: Double, y :: Double}
+
+point1 = MkPoint 1 1
+
+point2 = MkPoint 3 3
+
+point3 = MkPoint 10 4
+
+data Shape
+  = MkCircle {center :: Point, radius :: Double}
+  | MkSquare {leftBottom :: Point, sideLength :: Double}
+  | MkOverlap {shape1 :: Shape, shape2 :: Shape}
+
+circle1 = MkCircle (MkPoint 2 2) 2.0
+
+square1 = MkSquare (MkPoint 3 3) 4.0
+
+within :: Shape -> Point -> Bool
+within (MkCircle (MkPoint centerX centerY) radius) (MkPoint x y) =
+  let distanceX = (x - centerX) ^ 2
+      distanceY = (y - centerY) ^ 2
+      difference = sqrt (distanceX + distanceY)
+   in difference <= radius
+within (MkSquare (MkPoint squareX squareY) sideLength) (MkPoint x y) =
+  let rightTopX = squareX + sideLength
+      rightTopY = squareY + sideLength
+   in ((x >= squareX) && (x <= rightTopX))
+        && ((y >= squareY) && (y <= rightTopY))
+within overlap@(MkOverlap shape1 shape2) point =
+  within shape1 point || within shape2 point
