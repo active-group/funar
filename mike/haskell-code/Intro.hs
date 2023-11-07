@@ -122,6 +122,7 @@ runOverAnimal (MkParrot sentence weight) = MkParrot "" weight
 
 -- >>> feedAnimal dillo1 5
 
+feedAnimal :: Animal -> (Weight -> Animal)
 feedAnimal dillo@(MkDillo liveness weight) amount =
     case liveness of
         Alive -> MkDillo liveness (weight + amount)
