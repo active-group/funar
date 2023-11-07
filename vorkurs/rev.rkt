@@ -29,3 +29,9 @@
        (cons
         (first list)
         (append-element (rest list) element))))))
+
+#|
+Laufzeitkomplexität bei Liste der Länge n:
+
+1 + 2 + 3 + 4 ... + (n-2) + (n-1) + n
+|#
