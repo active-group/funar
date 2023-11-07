@@ -279,3 +279,16 @@ listMap f (x:xs) = (f x) : (listMap f xs)
 
 natsFrom :: Integer -> [Integer]
 natsFrom n = n : (natsFrom (n+1))
+
+-- Vielfache einer Zahl aus einer Liste streichen
+strikeMultiples :: Integer -> [Integer] -> [Integer]
+-- >>> strikeMultiples 2 [1,2,3,4,5,6,7,8]
+-- [1,3,5,7]
+strikeMultiples x list =
+    filter (\x' -> x' `mod` x /= 0) list
+
+-- Sieb des Eratosthenes
+sieve :: [Integer] -> [Integer]
+sieve [] = []
+sieve (x:xs) =
+    x : sieve (strikeMultiples x xs)
