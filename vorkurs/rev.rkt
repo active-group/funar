@@ -66,3 +66,19 @@ Gauß'sche Summenformel:
          (f ...
             (rest list)
             ... (first list) acc ...)))))
+
+(: list-map2 ((%a -> %b) (list-of %a) (list-of %b) -> (list-of %b)))
+
+(check-expect (list-map2 (lambda (x) (* x 2)) (list 1 2 3) empty)
+              (list 2 4 6))
+
+(define list-map2
+  ; Schleifeninvariante:
+  ; acc enthält die Ergebisse der Anwendung von f auf bisher gesehenen Elemente der Liste
+  (lambda (f list acc)
+    (cond
+      ((empty? list) (rev2 acc empty)) ; typisch für endrekursive Funktionen, die Listen generieren
+      ((cons? list)
+       (list-map2 f
+                  (rest list)
+                  (cons (f (first list)) acc))))))
