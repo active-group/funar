@@ -200,6 +200,15 @@ schönfinkeln = untuplify
 -- eingebaut als uncurry
 entschönfinkeln = tuplify
 
+-- Funktionskomposition
+-- eingebaut .
+o :: (b -> c) -> (a -> b) -> (a -> c)
+o f g =
+    \ a -> f (g a)
+
+bar :: Animal -> Animal
+bar = runOverAnimal `o` (flip feedAnimal 5)
+
 -- Eine geometrische Figur ("Shape") in der Ebene ist eins der folgenden:
 -- - ein Kreis
 -- - ein Quadrat
