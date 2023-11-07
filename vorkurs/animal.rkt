@@ -303,7 +303,10 @@
 (define inc (lambda (x) (+ 1 x)))
 
 (: list-map ((%a -> %b) (list-of %a) -> (list-of %b)))
-             
+
+(check-expect (list-map inc list4)
+              (cons 5 (cons 3 (cons 6 (cons 9 empty)))))
+
 (define list-map
   (lambda (f list)
     (cond
