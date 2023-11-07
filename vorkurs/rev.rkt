@@ -14,3 +14,5 @@
        (append-element
         (rev (rest list)) ; 4 3 2
         (first list)))))) ; 1
+
+; Element ans Ende einer Liste anhängen
