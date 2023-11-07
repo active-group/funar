@@ -19,6 +19,12 @@ inc :: Integer -> Integer
 -- inc x = x + 1
 inc = \ x -> x + 1
 
+add :: Integer -> Integer -> Integer
+-- add x y = x + y
+-- >>> add 5 7
+-- 12
+add = \ x -> \ y -> x + y
+
 -- Ein Haustier ist eins der folgenden:
 -- - Hund
 -- - Katze
@@ -122,6 +128,7 @@ runOverAnimal (MkParrot sentence weight) = MkParrot "" weight
 
 -- >>> feedAnimal dillo1 5
 
+-- nur 1stellige Funktionen
 feedAnimal :: Animal -> (Weight -> Animal)
 feedAnimal dillo@(MkDillo liveness weight) amount =
     case liveness of
@@ -129,3 +136,6 @@ feedAnimal dillo@(MkDillo liveness weight) amount =
         Dead -> dillo
 feedAnimal (MkParrot sentence weight) amount =
     MkParrot sentence (weight + amount)
+
+fdillo1 :: Weight -> Animal
+fdillo1 = feedAnimal dillo1
