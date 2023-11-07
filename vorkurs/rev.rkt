@@ -49,8 +49,18 @@ Gauß'sche Summenformel:
 
 (define rev2
   (lambda (list acc)
+    ; acc ist eine Liste der bisher gesehenen Elemente, umgedreht
     (cond
       ((empty? list) acc)
       ((cons? list)
        (rev2 (rest list) ; kein Kontext, tail call, endrekursiver Aufruf
              (cons (first list) acc))))))
+
+#;(define f
+    (lambda (list acc)
+      ; Schleifeninvariante
+      (cond
+        ((empty? list) ... acc ...)
+        ((cons? list)
+         (f (rest list)
+            ... (first list) acc ...)))))
