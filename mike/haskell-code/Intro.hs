@@ -293,4 +293,5 @@ sieve [] = []
 sieve (x:xs) =
     x : sieve (strikeMultiples x xs)
 
+primes :: [Integer]
 primes = sieve (natsFrom 2)
