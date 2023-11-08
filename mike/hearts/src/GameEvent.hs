@@ -59,6 +59,7 @@ data Game a =
   | TurnOverTrick (Maybe (Trick, Player) -> Game a)
   | NextPlayer Player (Player -> Game a)
   | IsGameOver (Maybe Player -> Game a)  
+  | GetCommand (GameCommand -> Game a)
   | Done a
 
 recordEventM :: GameEvent -> Game ()
@@ -93,6 +94,8 @@ instance Monad Game where
         NextPlayer player (\player' -> callback player' >>= next)
     (>>=) (IsGameOver callback) next =
         IsGameOver (\winner -> callback winner >>= next)
+    (>>=) (GetCommand callback) next =
+        GetCommand (\command -> callback command >>= next)
 
 -- Rückgabe: Gewinner:in, falls Spiel vorbei
 tableProcessCommandM :: GameCommand -> Game (Maybe Player)
@@ -124,3 +127,12 @@ tableProcessCommandM (PlayCard player card) =
                                return (Just winner)
        else do recordEventM (IllegalCardAttempted player card)
                return Nothing
+
+tableLoopM :: GameCommand -> Game Player
+tableLoopM command =
+    do maybeWinner <- tableProcessCommandM command
+       case maybeWinner of
+        Nothing -> GetCommand tableLoopM
+--            do nextCommand <- GetCommand Done
+--               tableLoopM nextCommand
+        Just winner -> return winner
