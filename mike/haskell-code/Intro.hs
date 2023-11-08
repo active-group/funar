@@ -340,6 +340,21 @@ baz list =
      index2 <- listIndex Cat list
      return (index1, index2)
 
+baz' list =
+  case listIndex Dog list of
+    Null -> Null
+    Result index1 ->
+      case listIndex Cat list of
+        Null -> Null
+        Result index2 -> Result (index1, index2)
+
+returnList :: a -> [a]
+returnList a = [a]
+
+bindList :: [a] -> (a -> [b]) -> [b]
+bindList as f =
+  concat (map f as)
+  
 -- Eq a: Constraint, Eq: Eigenschaft
 
 -- >>> :info Eq
