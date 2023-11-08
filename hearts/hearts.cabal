@@ -10,10 +10,10 @@ library
 --                     , HeartsJson
                      , Json.Decode
                      , Table
---                     , TableIO
---                     , Sync
---                     , Free
---                     , Player
+                     , TableIO
+                     , Sync
+                     , Free
+                     , Player
                      -- , Concurrency
   other-modules:       MVar
                      , Shuffle
