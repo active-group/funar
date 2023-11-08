@@ -1,4 +1,5 @@
 {-# LANGUAGE InstanceSigs #-}
+{-# LANGUAGE DeriveFunctor #-}
 {-# OPTIONS_GHC -fwarn-incomplete-patterns #-}
 module Intro where
 
@@ -317,7 +318,7 @@ primes = sieve (natsFrom 2)
 data Optional a =
     Null
   | Result a
-  deriving Show
+  deriving (Show, Functor)
 
 instance Applicative Optional where
 
@@ -395,8 +396,19 @@ optionalMap f (Result a) = Result (f a)
 --   fmap :: (a -> b) -> f a -> f b
 
 -- aus der Kategorientheorie:
-instance Functor Optional where
-    fmap = optionalMap
+-- instance Functor Optional where
+--    fmap = optionalMap
+
+-- >>> fmap (+1) [1,2,3,4,5]
+-- [2,3,4,5,6]
+-- >>> fmap (+1) (Result 5)
+-- Result 6
+
+-- >>> :info Applicative
+-- type Applicative :: (* -> *) -> Constraint
+-- class Functor f => Applicative f where
+--   pure :: a -> f a
+--   (<*>) :: f (a -> b) -> f a -> f b
 
 -- >>> :info Ord
 -- type Ord :: * -> Constraint
