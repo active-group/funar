@@ -49,3 +49,5 @@ splice (Get key callback) next =
 splice (Put key value callback) next =
     Put key value (\() -> splice (callback ()) next)
 splice (Return result) next = next result
+
+
