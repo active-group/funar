@@ -435,3 +435,17 @@ instance (Semigroup a, Semigroup b) => Semigroup (a, b) where
 instance (Monoid a, Monoid b) => Monoid (a, b) where
   neutral = (neutral, neutral)
 
+listFold :: a -> (b -> a -> a) -> [b] -> a
+listFold e f [] = e
+listFold e f (x:xs) = f x (listFold e f xs)
+
+listCombine :: Monoid a => [a] -> a
+listCombine list = listFold neutral combine list
+
+data AdditiveNumbers = MkAdditive Integer
+
+instance Semigroup AdditiveNumbers where
+  combine (MkAdditive a) (MkAdditive a') = MkAdditive (a + a')
+
+instance Monoid AdditiveNumbers where
+  neutral = MkAdditive 0
