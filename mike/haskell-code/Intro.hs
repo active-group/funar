@@ -322,8 +322,23 @@ data Optional a =
 instance Applicative Optional where
 
 instance Monad Optional where
-  return = undefined
-  (>>=) = undefined
+  return :: a -> Optional a
+  return a = Result a
+  (>>=) :: Optional a -> (a -> Optional b) -> Optional b
+  (>>=) Null next = Null
+  (>>=) (Result a) next = next a
+
+-- >>> baz [Dog, Cat, Snake]
+-- Result (0,1)
+-- >>> baz [Snake, Snake, Snake]
+-- Null
+-- >>> baz [Dog, Snake]
+-- Null
+baz :: [Pet] -> Optional (Integer, Integer)
+baz list =
+  do index1 <- listIndex Dog list
+     index2 <- listIndex Cat list
+     return (index1, index2)
 
 -- Eq a: Constraint, Eq: Eigenschaft
 
