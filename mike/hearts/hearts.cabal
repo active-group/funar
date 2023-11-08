@@ -7,13 +7,13 @@ maintainer:          michael.sperber@active-group.de
 library
   exposed-modules:     Cards
                      , GameEvent
---                     , HeartsJson
+                     , HeartsJson
                      , Json.Decode
                      , Table
---                     , TableIO
---                     , Sync
---                     , Free
---                     , Player
+                     , TableIO
+                     , Sync
+                     , Free
+                     , Player
                      -- , Concurrency
   other-modules:       MVar
                      , Shuffle

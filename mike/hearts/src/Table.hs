@@ -180,5 +180,37 @@ tableProcessEvent (TrickTaken player trick) state =
 tableProcessEvent (IllegalCardAttempted player card) state = state
 tableProcessEvent (GameEnded player) state = state
 
-runTable :: Game a -> TableState -> [GameEvent] -> (TableState, [GameEvent], a)
-runTable game state revents = undefined
+-- data Either left right = Left left | Right right
+-- Konvention: Right steht für "fertig"
+
+mike = Player "Mike"
+daniel = Player "Daniel"
+markus = Player "Markus"
+dac = Player "Dac"
+mikesHand = makeHand [Card Clubs Two]
+danielsHand = makeHand [Card Diamonds Ten]
+foo = runTable (do recordEventM (HandDealt mike mikesHand)
+                   recordEventM (HandDealt daniel danielsHand))
+               (emptyTableState [mike, daniel, markus, dac])
+               []
+-- >>> let (state, events, Right result) = foo in (state, events, result)
+-- (TableState {tableStatePlayers = [Player {playerName = "Mike"},Player {playerName = "Daniel"},Player {playerName = "Markus"},Player {playerName = "Dac"}], tableStateHands = fromList [(Player {playerName = "Dac"},Hand {unHand = fromList []}),(Player {playerName = "Daniel"},Hand {unHand = fromList [Card {suit = Diamonds, rank = Ten}]}),(Player {playerName = "Markus"},Hand {unHand = fromList []}),(Player {playerName = "Mike"},Hand {unHand = fromList [Card {suit = Clubs, rank = Two}]})], tableStatePiles = fromList [(Player {playerName = "Dac"},Pile {unPile = fromList []}),(Player {playerName = "Daniel"},Pile {unPile = fromList []}),(Player {playerName = "Markus"},Pile {unPile = fromList []}),(Player {playerName = "Mike"},Pile {unPile = fromList []})], tableStateTrick = Trick {trickToList = []}},[HandDealt (Player {playerName = "Mike"}) (Hand {unHand = fromList [Card {suit = Clubs, rank = Two}]}),HandDealt (Player {playerName = "Daniel"}) (Hand {unHand = fromList [Card {suit = Diamonds, rank = Ten}]})],())
+runTable :: Game a
+  -> TableState
+  -> [GameEvent]
+  -> (TableState, [GameEvent], Either (GameCommand -> Game a) a)
+runTable (RecordEvent gameEvent callback) state revents =
+  runTable (callback ()) (tableProcessEvent gameEvent state) (gameEvent:revents)
+runTable (PlayValid player card callback) state revents =
+  runTable (callback (playValid state player card)) state revents
+runTable (TurnOverTrick callback) state revents =
+  runTable (callback (turnOverTrick state)) state revents
+runTable (NextPlayer player callback) state revents = 
+  runTable (callback (playerAfter state player)) state revents
+runTable (IsGameOver callback) state revents =
+  runTable (callback (gameOver state)) state revents
+
+runTable (GetCommand callback) state revents =
+  (state, reverse revents, Left callback)
+runTable (Done result) state revents = 
+  (state, reverse revents, Right result)
