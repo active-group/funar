@@ -93,7 +93,10 @@ in Stream<A>:
 -- ("201",fromList [("Mike",101)])
 runDB :: Map Key Value -> DB a -> (a, Map Key Value)
 runDB mp (Get key callback) = 
-    runDB mp (callback (mp ! key))
+    let value = mp ! key
+        next = callback value
+    in runDB mp next
+    -- runDB mp (callback (mp ! key))
 runDB mp (Put key value callback) =
     runDB (Map.insert key value mp)
           (callback ())
