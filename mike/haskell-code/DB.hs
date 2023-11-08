@@ -36,3 +36,11 @@ p1 = Put "Mike" 100 (\() ->
      Put "Mike" (x+1) (\() ->
      Get "Mike" (\y ->
      Return (show (x+y))))))
+
+get :: Key -> DB Value
+get key = Get key Return -- (\value -> Return value)
+
+put :: Key -> Value -> DB ()
+put key value = Put key value Return
+
+splice :: DB a -> DB b -> DB b 
