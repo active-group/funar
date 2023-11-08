@@ -373,3 +373,65 @@ instance Functor Optional where
 --   max :: a -> a -> a
 --   min :: a -> a -> a
 --   {-# MINIMAL compare | (<=) #-}
+
+-- Algebra
+-- ... neutrales Element ...
+
+-- >>> :type (+)
+-- (+) :: Num a => a -> a -> a
+
+-- overlay :: Image -> Image -> Image
+-- beside :: Image -> Image -> Image
+
+-- >>> :type MkOverlap
+-- MkOverlap :: Shape -> Shape -> Shape
+
+-- Algebra:
+-- Pakete bestehend Typ(en), Operation(en), Gesetze
+
+-- Image, overlay, ...?
+
+-- Assoziativgesetz
+-- (a + b) + c == a + (b + c)
+
+-- (overlay (overlay a b) c) == (overlay a (overlay b c))
+
+-- Halbgruppe:
+-- Typ a
+-- combine :: a -> a -> a -- binärer Kombinator
+-- combine (combine a b) c == combine a (combine b c)
+
+class Semigroup a where
+   -- combine (combine a b) c == combine a (combine b c)
+   combine :: a -> a -> a
+
+instance Semigroup Shape where
+  combine :: Shape -> Shape -> Shape
+  combine = MkOverlap
+
+instance Semigroup [a] where
+  combine :: [a] -> [a] -> [a]
+  combine list1 list2 = list1 ++ list2
+
+-- Halbgruppe + neutrales Element
+-- neutral :: a
+-- combine neutral a == combine a neutral == a
+-- Monoid
+
+class Semigroup a => Monoid a where
+  -- combine neutral a == combine a neutral == a
+  neutral :: a
+
+instance Monoid [a] where
+  neutral :: [a]
+  neutral = []
+
+-- DDD: Closure of operations
+
+instance (Semigroup a, Semigroup b) => Semigroup (a, b) where
+  combine (a1, b1) (a2, b2) =
+    (combine a1 a2, combine b1 b2)
+
+instance (Monoid a, Monoid b) => Monoid (a, b) where
+  neutral = (neutral, neutral)
+
