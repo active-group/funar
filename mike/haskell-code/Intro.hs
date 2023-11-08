@@ -410,6 +410,13 @@ optionalMap f (Result a) = Result (f a)
 --   pure :: a -> f a
 --   (<*>) :: f (a -> b) -> f a -> f b
 
+-- fmap ::       (a ->   b) -> f a -> f b
+-- (<*>) ::    f (a ->   b) -> f a -> f b
+-- flip (>>=) :: (a -> f b) -> f a -> f b
+
+-- Wunsch:
+-- fmap2 :: (a -> b -> c) -> f a -> f b -> f c
+
 -- >>> :info Ord
 -- type Ord :: * -> Constraint
 -- class Eq a => Ord a where
