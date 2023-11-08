@@ -9,7 +9,7 @@ library
                      , GameEvent
 --                     , HeartsJson
                      , Json.Decode
---                     , Table
+                     , Table
 --                     , TableIO
 --                     , Sync
 --                     , Free
