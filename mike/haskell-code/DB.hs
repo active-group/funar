@@ -1,7 +1,7 @@
 module DB where
 
 import qualified Data.Map as Map
-import Data.Map (Map)
+import Data.Map (Map, (!))
 
 {-
 put "Mike" 100
@@ -86,3 +86,11 @@ in Java:
 in Stream<A>:
 <B> Stream<B> 	flatMap(Function<A, Stream<B>> mapper)
 -}
+
+runDB :: Map Key Value -> DB a -> (a, Map Key Value)
+runDB mp (Get key callback) = 
+    runDB mp (callback (mp ! key))
+runDB mp (Put key value callback) =
+    runDB (Map.insert key value mp)
+          (callback ())
+runDB mp (Return result) = (result, mp)
