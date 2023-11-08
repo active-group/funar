@@ -1,3 +1,4 @@
+{-# OPTIONS_GHC -fwarn-incomplete-patterns #-}
 module GameEvent where
 
 import Cards
@@ -50,3 +51,24 @@ eventsWinner (first : rest) =
   case first of
     GameEnded winner -> Just winner
     _ -> eventsWinner rest
+
+-- Spielregel-Monade
+data Game a =
+    RecordEvent GameEvent (() -> Game a)
+  | Done a
+
+recordEventM :: GameEvent -> Game ()
+recordEventM event = RecordEvent event Done
+
+instance Functor Game where
+
+instance Applicative Game where
+
+instance Monad Game where
+    return = Done
+    (>>=) (Done result) next = next result
+
+-- Rückgabe: Gewinner:in, falls Spiel vorbei
+tableProcessCommandM :: GameCommand -> Game (Maybe Player)
+tableProcessCommandM (DealHands hands) = undefined
+tableProcessCommandM (PlayCard player card) = undefined
