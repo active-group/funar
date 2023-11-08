@@ -87,6 +87,10 @@ in Stream<A>:
 <B> Stream<B> 	flatMap(Function<A, Stream<B>> mapper)
 -}
 
+-- >>> runDB Map.empty p1
+-- ("201",fromList [("Mike",101)])
+-- >>> runDB Map.empty p1''
+-- ("201",fromList [("Mike",101)])
 runDB :: Map Key Value -> DB a -> (a, Map Key Value)
 runDB mp (Get key callback) = 
     runDB mp (callback (mp ! key))
