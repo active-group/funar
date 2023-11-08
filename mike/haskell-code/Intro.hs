@@ -319,6 +319,12 @@ data Optional a =
   | Result a
   deriving Show
 
+instance Applicative Optional where
+
+instance Monad Optional where
+  return = undefined
+  (>>=) = undefined
+
 -- Eq a: Constraint, Eq: Eigenschaft
 
 -- >>> :info Eq
