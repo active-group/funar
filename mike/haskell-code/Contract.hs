@@ -88,7 +88,12 @@ multiplyPayment :: Payment -> Amount -> Payment
 multiplyPayment payment amount =
     payment { paymentAmount = (paymentAmount payment) * amount }
 
+toggleDirection :: Direction -> Direction
+toggleDirection Long = Short
+toggleDirection Short = Long
 
+togglePayment :: Payment -> Payment
+togglePayment payment = payment { paymentDirection = toggleDirection (paymentDirection payment) }
 
 -- operationelle Semantik
 semantics :: Contract -> Date -> ([Payment], Contract)
@@ -102,3 +107,12 @@ semantics laterContract@(Later date contract) checkDate =
     if date <= checkDate
     then semantics contract checkDate
     else ([], laterContract)
+semantics (Pay contract) checkDate =
+    let (payments, updatedContract) = semantics contract checkDate
+        updatedPayments = map togglePayment payments
+    in (updatedPayments, updatedContract)
+semantics (Combine contractLeft contractRight) checkDate =
+  let (paymentsLeft, updatedContractLeft) = semantics contractLeft checkDate
+      (paymentsRight, updatedContractRight) = semantics contractRight checkDate
+  in (paymentsLeft ++ paymentsRight, Combine updatedContractLeft updatedContractRight)
+semantics Empty checkDate = ([], Empty)
