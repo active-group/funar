@@ -109,3 +109,10 @@ https://guide.elm-lang.org/install/
 
 Falls Sie `nix` verwenden, dann ist `elm` bereits in der
 Entwicklungsumgebung (`nix develop`) vorhanden.
+
+# Referenzen
+
+- [Nix](https://nixos.org/)
+- [Haskell Discourse](https://discourse.haskell.org/)
+- [CodeWorld](https://code.world/haskell)
+- Tutorial [Haskell via Sokoban](https://haskell-via-sokoban.nomeata.de/)
