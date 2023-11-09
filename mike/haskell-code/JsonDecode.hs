@@ -1,3 +1,4 @@
+{-# LANGUAGE OverloadedStrings #-}
 module JsonDecode where
 
 import qualified Data.Aeson as Json
@@ -16,7 +17,19 @@ data DecodeError
   | Failure String Json.Value
   deriving (Show, Eq)
 
+error1 = Failure "expected string, but got number" (Json.Number 5)
+-- { "foo": 5 }
+error2 = Field "foo" error1
+
+-- >>> Json.decode "{\"foo\": 123}" :: Maybe Json.Value
+-- Just (Object (fromList [("foo",Number 123.0)]))
+
+-- data Either left right = Left left | Right right
 newtype Decoder a = Decoder {runDecoder :: Json.Value -> Either DecodeError a}
+
+instance Functor Decoder where
+
+instance Applicative Decoder where
 
 string :: Decoder String
 string = Decoder (\ json ->
@@ -52,4 +65,61 @@ jsonNull val = Decoder (\ json ->
 faild :: String -> Decoder a
 faild message = Decoder (\ json ->
   Left (Failure message json))
+
+list :: Decoder a -> Decoder [a]
+list (Decoder decodeElement) =
+  Decoder (\json ->
+    case json of
+      Json.Array arr -> traverse decodeElement (Vector.toList arr)
+      _ -> Left (Failure "not a json array" json)
+    )
+
+data Example = Example { exampleFoo :: Int, exampleBaz :: String}
+-- { "foo" : 15, "bar": "baz" }
+
+decodeExample json =
+  let fooDecoder = field "foo" int
+      barDecoder = field "bar" string
+      fooResult = runDecoder fooDecoder json
+      barResult = runDecoder barDecoder json
+  in
+    case (fooResult, barResult) of
+      (Right fooValue, Right barValue) ->
+        Right (Example fooValue barValue)
+      (Left error, _) -> Left error
+      (_, Left error) -> Left error
+
+field :: String -> Decoder a -> Decoder a
+field name (Decoder decodeField) =
+  Decoder (\json ->
+    case json of
+      Json.Object fields ->
+        case KeyMap.lookup (fromString name) fields of
+          Just val ->
+            mapLeft (Field name) (decodeField val)
+          Nothing -> Left (Failure ("Field " ++ name ++ " not found") json)
+      _ -> Left (Failure "not a JSON object" json))
+
+index :: Int -> Decoder a -> Decoder a
+index n (Decoder decodeElement) = Decoder (\ json ->
+  case json of
+    Json.Array arr ->
+      if n < length arr
+        then mapLeft (Index n) (decodeElement (arr Vector.! n))
+        else Left (Failure ("Index out of bounds: " ++ show n) json)
+    _ -> Left (Failure "Not a JSON array" json))
+
+oneOf :: [Decoder a] -> Decoder a
+oneOf decoders = Decoder (\ json ->
+  let results = map (\(Decoder f) -> f json) decoders
+   in case Either.rights results of
+        [] -> Left (OneOf (Either.lefts results))
+        (x : _) -> Right x)
+
+{-
+optional :: Decoder a -> Decoder (Maybe a)
+optional decoder =
+  oneOf [fmap Just decoder, pure Nothing]
+-}
+
 
