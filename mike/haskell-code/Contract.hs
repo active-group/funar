@@ -13,6 +13,7 @@ module Contract where
 - Selbstbezüge einbauen
 
 - wieder von vorn:
+  FX-Swap:
   "Am 24.12.2023 bekomme ich 100€ und zahle $100."
 
 -}
@@ -42,7 +43,16 @@ data Contract =
   | Amount Amount Contract -- <- Selbstbezug
   | Later Date Contract
   | Pay Contract
+  | Combine Contract Contract
+  -- Und vs. Oder
+  | Empty 
   deriving Show
+
+instance Semigroup Contract where
+    (<>) = Combine
+
+instance Monoid Contract where
+    mempty = Empty
 
 -- "Ich bekomme einen Euro jetzt."
 c1 = One EUR
@@ -60,3 +70,5 @@ zeroCouponBond date amount currency =
     Later date (Amount amount (One currency))
 
 zcb1' = zeroCouponBond (Date "2023-12-24") 100 EUR 
+
+fxSwap = Combine zcb1 (Pay (zeroCouponBond (Date "2023-12-24") 100 GBP))
