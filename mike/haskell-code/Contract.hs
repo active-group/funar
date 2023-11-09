@@ -102,7 +102,8 @@ semantics (One currency) checkDate =
 semantics (Amount amount contract) checkDate =
     let (payments, updatedContract) = semantics contract checkDate
         updatedPayments = map (flip multiplyPayment amount) payments
-    in (updatedPayments, updatedContract)
+        updatedContract' = Amount amount updatedContract
+    in (updatedPayments, updatedContract')
 semantics laterContract@(Later date contract) checkDate =
     if date <= checkDate
     then semantics contract checkDate
