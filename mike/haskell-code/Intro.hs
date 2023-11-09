@@ -320,8 +320,6 @@ data Optional a =
   | Result a
   deriving (Show, Functor)
 
-instance Applicative Optional where
-
 instance Monad Optional where
   return :: a -> Optional a
   return a = Result a
@@ -348,6 +346,9 @@ baz' list =
       case listIndex Cat list of
         Null -> Null
         Result index2 -> Result (index1, index2)
+
+baz'' list =
+  fmap2 (\ a -> \ b -> (a, b)) (listIndex Dog list) (listIndex Cat list)
 
 returnList :: a -> [a]
 returnList a = [a]
@@ -415,7 +416,20 @@ optionalMap f (Result a) = Result (f a)
 -- flip (>>=) :: (a -> f b) -> f a -> f b
 
 -- Wunsch:
--- fmap2 :: (a -> b -> c) -> f a -> f b -> f c
+fmap2 :: Applicative f => (a -> b -> c) -> f a -> f b -> f c
+fmap2 f fa fb =
+  (pure f) <*> fa <*> fb
+
+fmap3 :: Applicative f => (a1 -> a2 -> a3 -> b) -> f a1 -> f a2 -> f a3 -> f b
+fmap3 f fa fb fc =
+  -- fmap f fa <*> fb <*> fc
+  f <$> fa <*> fb <*> fc
+
+instance Applicative Optional where
+  pure = Result
+  (<*>) (Result f) (Result a) = Result (f a)
+  (<*>) _ _ = Null
+
 
 -- >>> :info Ord
 -- type Ord :: * -> Constraint
