@@ -28,8 +28,22 @@ error2 = Field "foo" error1
 newtype Decoder a = Decoder {runDecoder :: Json.Value -> Either DecodeError a}
 
 instance Functor Decoder where
+  fmap f (Decoder decode) = Decoder (\ json ->
+    fmap f (decode json))
 
 instance Applicative Decoder where
+  pure = Decoder . const . Right
+  Decoder decodeF <*> Decoder decodeA = Decoder (\ json ->
+    case decodeA json of
+      Right a ->
+        case decodeF json of
+          Right f -> Right (f a)
+          Left err -> Left err
+      Left err -> Left err)
+
+instance Monad Decoder where
+  Decoder decode >>= f = Decoder (\ json ->
+    decode json >>= (\a -> runDecoder (f a) json))
 
 string :: Decoder String
 string = Decoder (\ json ->
@@ -77,7 +91,9 @@ list (Decoder decodeElement) =
 data Example = Example { exampleFoo :: Int, exampleBaz :: String}
 -- { "foo" : 15, "bar": "baz" }
 
-decodeExample json =
+decodeExample = Example <$> (field "foo" int) <*> (field "bar" string)
+
+decodeExample' json =
   let fooDecoder = field "foo" int
       barDecoder = field "bar" string
       fooResult = runDecoder fooDecoder json
@@ -116,10 +132,8 @@ oneOf decoders = Decoder (\ json ->
         [] -> Left (OneOf (Either.lefts results))
         (x : _) -> Right x)
 
-{-
 optional :: Decoder a -> Decoder (Maybe a)
 optional decoder =
   oneOf [fmap Just decoder, pure Nothing]
--}
 
 
