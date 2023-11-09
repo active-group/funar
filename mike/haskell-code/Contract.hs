@@ -72,3 +72,17 @@ zeroCouponBond date amount currency =
 zcb1' = zeroCouponBond (Date "2023-12-24") 100 EUR 
 
 fxSwap = Combine zcb1 (Pay (zeroCouponBond (Date "2023-12-24") 100 GBP))
+
+data Direction = Long | Short
+  deriving Show
+
+data Payment = Payment {
+    paymentDate :: Date,
+    paymentDirection :: Direction,
+    paymentAmount :: Amount,
+    paymentCurrency :: Currency
+  }
+  deriving Show
+
+-- operationelle Semantik
+semantics :: Contract -> Date -> ([Payment], Contract)
