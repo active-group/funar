@@ -84,5 +84,21 @@ data Payment = Payment {
   }
   deriving Show
 
+multiplyPayment :: Payment -> Amount -> Payment
+multiplyPayment payment amount =
+    payment { paymentAmount = (paymentAmount payment) * amount }
+
+
+
 -- operationelle Semantik
 semantics :: Contract -> Date -> ([Payment], Contract)
+semantics (One currency) checkDate =
+    ([Payment checkDate Long 1 currency], Empty)
+semantics (Amount amount contract) checkDate =
+    let (payments, updatedContract) = semantics contract checkDate
+        updatedPayments = map (flip multiplyPayment amount) payments
+    in (updatedPayments, updatedContract)
+semantics laterContract@(Later date contract) checkDate =
+    if date <= checkDate
+    then semantics contract checkDate
+    else ([], laterContract)
