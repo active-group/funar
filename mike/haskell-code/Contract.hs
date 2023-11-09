@@ -111,7 +111,8 @@ semantics laterContract@(Later date contract) checkDate =
 semantics (Pay contract) checkDate =
     let (payments, updatedContract) = semantics contract checkDate
         updatedPayments = map togglePayment payments
-    in (updatedPayments, updatedContract)
+        updatedContract' = Pay updatedContract
+    in (updatedPayments, updatedContract')
 semantics (Combine contractLeft contractRight) checkDate =
   let (paymentsLeft, updatedContractLeft) = semantics contractLeft checkDate
       (paymentsRight, updatedContractRight) = semantics contractRight checkDate
