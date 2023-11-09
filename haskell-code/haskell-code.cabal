@@ -13,6 +13,7 @@ library
                        parallel,
                        sqlite-simple,
                        text,
+                       aeson, either, scientific, vector,
                        polysemy, polysemy-plugin
 
 
