@@ -48,6 +48,15 @@ data Contract =
   | Empty 
   deriving Show
 
+amount :: Amount -> Contract -> Contract
+amount _ Empty = Empty
+amount amount contract = Amount amount contract
+
+combine :: Contract -> Contract -> Contract
+combine Empty contract = contract
+combine contract Empty = contract
+combine contract1 contract2 = Combine contract1 contract2
+
 instance Semigroup Contract where
     (<>) = Combine
 
@@ -99,10 +108,10 @@ togglePayment payment = payment { paymentDirection = toggleDirection (paymentDir
 semantics :: Contract -> Date -> ([Payment], Contract)
 semantics (One currency) checkDate =
     ([Payment checkDate Long 1 currency], Empty)
-semantics (Amount amount contract) checkDate =
+semantics (Amount amount' contract) checkDate =
     let (payments, updatedContract) = semantics contract checkDate
-        updatedPayments = map (flip multiplyPayment amount) payments
-        updatedContract' = Amount amount updatedContract
+        updatedPayments = map (flip multiplyPayment amount') payments
+        updatedContract' = amount amount' updatedContract
     in (updatedPayments, updatedContract')
 semantics laterContract@(Later date contract) checkDate =
     if date <= checkDate
@@ -116,5 +125,5 @@ semantics (Pay contract) checkDate =
 semantics (Combine contractLeft contractRight) checkDate =
   let (paymentsLeft, updatedContractLeft) = semantics contractLeft checkDate
       (paymentsRight, updatedContractRight) = semantics contractRight checkDate
-  in (paymentsLeft ++ paymentsRight, Combine updatedContractLeft updatedContractRight)
+  in (paymentsLeft ++ paymentsRight, combine updatedContractLeft updatedContractRight)
 semantics Empty checkDate = ([], Empty)
