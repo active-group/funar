@@ -199,4 +199,22 @@
     (cond
       ((dillo? animal) (run-over-dillo animal))
       ((parrot? animal) (run-over-parrot animal)))))
+
+
+; Eine Liste ist eins der folgenden:
+; - die leere Liste -ODER-
+; - eine Cons-Liste bestehend aus erstem Element und Rest-Liste
+;                                                         ^^^^^ Selbstbezug
+(define list-of-numbers
+  (signature (mixed empty-list cons-list)))
+
+; die leere Liste
+(define-singleton empty-list ; Signatur
+  empty ; Wert
+  empty?)
+
+; Eine Cons-Liste besteht aus:
+; - erstes Element
+; - Rest-Liste
+
   
