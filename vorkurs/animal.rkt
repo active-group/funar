@@ -306,3 +306,19 @@
 (define highway (cons dillo1 (cons dillo2 empty)))
 
 ; Liste von Tieren überfahren
+
+; Liste von Zahlen inkrementieren
+(: inc-list ((list-of number) -> (list-of number)))
+
+(check-expect (inc-list list4)
+              (cons 8 (cons 3 (cons 6 (cons 9 empty)))))
+
+(define inc (lambda (n) (+ 1 n)))
+
+(define inc-list
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cons (inc (first list))
+             (inc-list (rest list)))))))
