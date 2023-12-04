@@ -214,7 +214,12 @@
   empty?)
 
 ; Eine Cons-Liste besteht aus:
-; - erstes Element
+; - erstes Element -UND-
 ; - Rest-Liste
+(define-record cons-list
+  cons
+  cons?
+  (first number)
+  (rest list-of-numbers))
 
   
