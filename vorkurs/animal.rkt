@@ -20,6 +20,7 @@
 (check-expect (cute? "dog") #t)
 (check-expect (cute? "cat") #t)
 (check-expect (cute? "snake") #f)
+;(check-expect (cute? "mouse") #t)
 
 ; Gerüst
 #;(define cute?
@@ -39,4 +40,5 @@
     (cond ; Verzweigung
       ((equal? pet "dog") #t) ; (<Bedingung> <Ergebnis>)
       ((equal? pet "cat") #t)
-      ((equal? pet "snake") #f))))
+      ((equal? pet "snake") #f)
+      #;(else #t)))) ; macht das nicht ...
