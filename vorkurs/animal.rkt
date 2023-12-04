@@ -22,7 +22,14 @@
 (check-expect (cute? "snake") #f)
 
 ; Gerüst
-(define cute?
+#;(define cute?
   (lambda (pet)
     ...))
 
+; Schablone
+(define cute?
+  (lambda (pet)
+    (cond ; Verzweigung
+      ((equal? pet "dog") ...) ; (<Bedingung> <Ergebnis>)
+      ((equal? pet "cat") ...)
+      ((equal? pet "snake") ...))))
