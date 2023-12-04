@@ -13,7 +13,9 @@
 (define pet
   (signature (enum "dog" "cat" "snake")))
 
-(: cute? ((enum "dog" "cat" "snake") -> boolean))
+;(: cute? ((enum "dog" "cat" "snake") -> boolean))
+
+(: cute? (pet -> boolean))
 
 (check-expect (cute? "dog") #t)
 (check-expect (cute? "cat") #t)
