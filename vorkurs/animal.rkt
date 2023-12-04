@@ -74,4 +74,4 @@
     (+ (* 60 (time-hour time))
        (time-minute time))))
 
-; Minuten seit Mitternacht rein -> Uhrzeit raus
+; (Minuten seit Mitternacht) rein -> Uhrzeit raus
