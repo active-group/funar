@@ -7,6 +7,7 @@
 
 (define y (- x 7))
 
+(: circle1 image)
 (define circle1 (circle 50 "solid" "red"))
 (define star1 (star 50 "solid" "gold"))
 (define square1 (square 100 "outline" "blue"))
