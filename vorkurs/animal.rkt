@@ -10,5 +10,6 @@
 ; - Schlange
 ; Fallunterscheidung
 ; hier speziell: Aufzählung
+(: pet signature)
 (define pet
   (signature (enum "dog" "cat" "snake")))
