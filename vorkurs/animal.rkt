@@ -237,8 +237,10 @@
 ; 4elementige Liste: 7 2 5 8
 (define list4 (cons 7 list3))
 
+(define list-of-numbers (signature (list-of number)))
+
 ; Elemente einer Liste aufsummieren
-(: list-sum (list-of-numbers -> number))
+(: list-sum ((list-of number) -> number))
 
 (check-expect (list-sum list4)
               22)
