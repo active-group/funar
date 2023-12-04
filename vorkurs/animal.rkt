@@ -102,7 +102,7 @@
 ; zusammengesetzte Daten
 (define-record dillo
   make-dillo
-  dillo?
+  dillo? ; Prädikat
   (dillo-alive? boolean)
   (dillo-weight number))
 
@@ -185,6 +185,7 @@
   (lambda (parrot)
     (make-parrot "" (parrot-weight parrot))))
 
+#|
 ; Tier überfahren
 (: run-over-animal (animal -> animal))
 
@@ -199,3 +200,4 @@
       (... ...)
       (... ...))))
   
+|#
