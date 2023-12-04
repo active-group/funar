@@ -24,6 +24,15 @@
 ; - noch einmal kopieren
 ; - für Unterschiede abstrakte Namen
 ; - Namen -> Parameter in lambda-Ausdruck
+
+; Konstruktionsanleitungen / design recipes
+
+; Kurzbeschreibung
+; quadratisches Kachelmuster erzeugen
+
+; Signatur
+(: tile (image image -> image))
+
 (define tile
   (lambda (image1 image2)
     (above
@@ -31,3 +40,18 @@
      (beside image2 image1))))
 
 (tile star1 circle1)
+
+#|
+class C {
+   int y;
+   int m(int x) {
+      ... x ...
+      x = x + 1;
+      y = y + 1;
+      f(z -> x ... y)
+      ... x ...
+   }
+}
+
+  C.m(42)
+|#
