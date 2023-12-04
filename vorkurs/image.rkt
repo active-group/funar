@@ -23,6 +23,9 @@
 ; abstrahieren:
 ; - noch einmal kopieren
 ; - für Unterschiede abstrakte Namen
-(above
- (beside image1 image2)
- (beside image2 image1))
+; - Namen -> Parameter in lambda-Ausdruck
+(define tile
+  (lambda (image1 image2)
+    (above
+     (beside image1 image2)
+     (beside image2 image1))))
