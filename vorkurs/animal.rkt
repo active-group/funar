@@ -42,3 +42,21 @@
       ((equal? pet "cat") #t)
       ((equal? pet "snake") #f)
       #;(else #t)))) ; macht das nicht ...
+
+; Uhrzeit besteht aus / hat folgende Eigenschaften:
+; - Stunde -UND-
+; - Minute
+; zusammengesetzte Daten
+(define-record time ; Signatur
+  make-time ; Konstruktor
+  (time-hour natural) ; Selektor / "Getter-Funktion"
+  (time-minute natural))
+
+(: make-time (natural natural -> time))
+(: time-hour (time -> natural))
+(: time-minute (time -> natural))
+
+; 11 Uhr 35
+(define time1 (make-time 11 35))
+; 14:11 Uhr
+(define time2 (make-time 14 11))
