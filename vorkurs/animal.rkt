@@ -12,3 +12,10 @@
 ; hier speziell: Aufzählung
 (define pet
   (signature (enum "dog" "cat" "snake")))
+
+(: cute? ((enum "dog" "cat" "snake") -> boolean))
+
+(check-expect (cute? "dog") #t)
+(check-expect (cute? "cat") #t)
+(check-expect (cute? "snake") #f)
+
