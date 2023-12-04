@@ -75,3 +75,5 @@
        (time-minute time))))
 
 ; (Minuten seit Mitternacht) rein -> Uhrzeit raus
+(: msm->time (natural -> time))
+
