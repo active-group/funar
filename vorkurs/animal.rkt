@@ -27,9 +27,16 @@
     ...))
 
 ; Schablone
-(define cute?
+#;(define cute?
   (lambda (pet)
     (cond ; Verzweigung
       ((equal? pet "dog") ...) ; (<Bedingung> <Ergebnis>)
       ((equal? pet "cat") ...)
       ((equal? pet "snake") ...))))
+
+(define cute?
+  (lambda (pet)
+    (cond ; Verzweigung
+      ((equal? pet "dog") #t) ; (<Bedingung> <Ergebnis>)
+      ((equal? pet "cat") #t)
+      ((equal? pet "snake") #f))))
