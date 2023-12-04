@@ -279,6 +279,10 @@
 ; - Unterschiede -> abstrakte Namen
 ; - abstrakte Namen -> Parameter in einem lambda
 ;   (rekursive Aufrufe nicht vergessen!)
+
+; Elemente einer Liste extrahieren, die ein bestimmtes Kriterium erfüllen
+(: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
+
 (define extract
   (lambda (p? list)
     (cond
