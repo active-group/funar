@@ -5,4 +5,8 @@
      (* 23
         4)))
 
-(define y (- x 5))
+(define y (- x 7))
+
+(define circle1 (circle 50 "solid" "red"))
+(define star1 (star 50 "solid" "gold"))
+(define square1 (square 100 "outline" "blue"))
