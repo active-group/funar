@@ -75,5 +75,15 @@
        (time-minute time))))
 
 ; (Minuten seit Mitternacht) rein -> Uhrzeit raus
-(: msm->time (natural -> time))
+(: msm-to-time (natural -> time))
 
+(check-expect (msm-to-time 14)
+              (make-time 0 14))
+
+(define msm-to-time
+  (lambda (minutes)
+    (define hours (quotient minutes 60))
+    (make-time
+     hours
+     (- minutes (* 60 hours))
+     #;(remainder minutes 60))))
