@@ -92,6 +92,9 @@
 ; Tier (auf dem texanischen Highway) ist eins der folgenden:
 ; - Gürteltier -ODER-
 ; - Papagei
+; gemischte Daten
+(define animal
+  (signature (mixed dillo parrot)))
 
 ; Gürteltiere hat folgende Eigenschaften: 
 ; - lebendig oder tot? -UND-
@@ -179,4 +182,7 @@
 (define run-over-parrot
   (lambda (parrot)
     (make-parrot "" (parrot-weight parrot))))
+
+; Tier überfahren
+
   
