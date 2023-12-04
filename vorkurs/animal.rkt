@@ -304,3 +304,5 @@
            (extract p? (rest list)))))))
 
 (define highway (cons dillo1 (cons dillo2 empty)))
+
+; Liste von Tieren überfahren
