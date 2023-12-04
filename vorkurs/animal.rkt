@@ -258,4 +258,6 @@
        (+ (first list) 
           (list-sum (rest list)))))))
 
+; Aus einer Liste die geraden Elemente extrahieren
+
   
