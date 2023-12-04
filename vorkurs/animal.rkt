@@ -129,4 +129,4 @@
   (lambda (dillo)
     (make-dillo #f (dillo-weight dillo))))
 
-; Gürteltier füttern
+; Gürteltier füttern (Futtermenge variabel)
