@@ -19,3 +19,10 @@
 (above
  (beside square1 circle1)
  (beside circle1 square1))
+
+; abstrahieren:
+; - noch einmal kopieren
+; - für Unterschiede abstrakte Namen
+(above
+ (beside image1 image2)
+ (beside image2 image1))
