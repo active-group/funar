@@ -209,7 +209,11 @@
   (signature (mixed empty-list cons-list)))
 
 ; die leere Liste
-(define-singleton empty-list ; Signatur
+(define-record empty-list
+  make-empty
+  empty?)
+(define empty (make-empty))
+#;(define-singleton empty-list ; Signatur
   empty ; Wert
   empty?)
 
