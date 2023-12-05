@@ -45,8 +45,9 @@
 (define rev2
   (lambda (list acc)
     (cond
-      ((empty? list) ...)
+      ((empty? list) acc)
       ((cons? list)
-       ... (first list) ...
-       ... (rev2 (rest list) ...) ...
-       ))))
+       (rev2 (rest list)
+             ; neues Zwischenergebnis:
+             (cons (first list) acc)
+       )))))
