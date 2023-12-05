@@ -294,7 +294,7 @@
 (check-expect (extract odd? list4)
               (cons 7 (cons 5 empty)))
               
-(define extract
+(define extract ; oft gibt's das schon als filter
   (lambda (p? list)
     (cond
       ((empty? list) empty)
