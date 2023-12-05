@@ -280,6 +280,14 @@
 ; n * x = x * n = x
 ; neutrales Element: Gruppentheorie
 
+(define list-fold
+  (lambda (neutral f list)
+    (cond
+      ((empty? list) neutral) ; das neutrale Element der Multiplikation
+      ((cons? list)
+       (f (first list)
+          (list-fold neutral f (rest list)))))))
+
 ; Aus einer Liste die ungeraden Elemente extrahieren
 (: extract-odds (list-of-numbers -> list-of-numbers))
 
