@@ -44,6 +44,8 @@
 
 (define rev2
   (lambda (list acc)
+    ; Schleifeninvariante:
+    ; acc enthält "die bisher gesehenen Listenelemente" in umgekehrter Reihenfolge
     (cond
       ((empty? list) acc)
       ((cons? list)
