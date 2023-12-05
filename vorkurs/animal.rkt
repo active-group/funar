@@ -278,6 +278,7 @@
 
 ; für alle x:
 ; n * x = x * n = x
+; neutrales Element: Gruppentheorie
 
 ; Aus einer Liste die ungeraden Elemente extrahieren
 (: extract-odds (list-of-numbers -> list-of-numbers))
