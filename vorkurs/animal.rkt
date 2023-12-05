@@ -262,6 +262,9 @@
        (+ (first list) 
           (list-sum (rest list)))))))
 
+; für alle x:
+; n + x = x + n = x
+
 ; alle Elemente einer Liste multiplizieren
 (: list-product ((list-of number) -> number))
 
@@ -272,6 +275,9 @@
       ((cons? list)
        (* (first list)
           (list-product (rest list)))))))
+
+; für alle x:
+; n * x = x * n = x
 
 ; Aus einer Liste die ungeraden Elemente extrahieren
 (: extract-odds (list-of-numbers -> list-of-numbers))
