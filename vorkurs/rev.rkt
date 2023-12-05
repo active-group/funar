@@ -49,6 +49,8 @@
     (cond
       ((empty? list) acc)
       ((cons? list)
+       ; Aufruf ohne Kontext: tail call
+       ; "Endrekursion"
        (rev2 (rest list)
              ; neues Zwischenergebnis:
              (cons (first list) acc)
