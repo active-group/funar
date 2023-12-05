@@ -17,7 +17,8 @@
 
 ; Liste hat Länge n
 ; # der rekursiven Aufrufe:
-; 1 + 2 + 3 ... + n
+; 1 + 2 + 3 ... + (n-1) + n
+; = n(n+1)/2 = O(n^2)
 ; Gaußsche Summenformel
 
 ; Element an eine Liste anhängen
