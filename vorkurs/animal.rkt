@@ -257,7 +257,7 @@
 (define list-sum
   (lambda (list)
     (cond
-      ((empty? list) 0)
+      ((empty? list) 0) ; das neutrale Element der Addition
       ((cons? list)
        (+ (first list) 
           (list-sum (rest list)))))))
