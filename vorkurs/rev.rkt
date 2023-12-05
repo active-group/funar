@@ -21,3 +21,11 @@
 (check-expect (append-element (list 4 3 2) 1)
               (list 4 3 2 1))
 
+(define append-element
+  (lambda (list element)
+    (cond
+      ((empty? list) ...)
+      ((cons? list)
+       ... (first list) ...
+       ... (append-element (rest list) element) ...
+       ))))
