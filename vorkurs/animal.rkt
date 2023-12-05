@@ -280,10 +280,12 @@
 ; n * x = x * n = x
 ; neutrales Element: Gruppentheorie
 
+(: list-fold (%b (%a %b -> %b) (list-of %a) -> %b))
+
 (define list-fold
   (lambda (neutral f list)
     (cond
-      ((empty? list) neutral) ; das neutrale Element der Multiplikation
+      ((empty? list) neutral)
       ((cons? list)
        (f (first list)
           (list-fold neutral f (rest list)))))))
