@@ -262,6 +262,17 @@
        (+ (first list) 
           (list-sum (rest list)))))))
 
+; alle Elemente einer Liste multiplizieren
+(: list-product ((list-of number) -> number))
+
+(define list-product
+  (lambda (list)
+    (cond
+      ((empty? list) 1) ; das neutrale Element der Multiplikation
+      ((cons? list)
+       (* (first list)
+          (list-product (rest list)))))))
+
 ; Aus einer Liste die ungeraden Elemente extrahieren
 (: extract-odds (list-of-numbers -> list-of-numbers))
 
