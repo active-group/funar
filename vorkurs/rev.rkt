@@ -15,6 +15,11 @@
                        (first list); 1
        )))))
 
+; Liste hat Länge n
+; # der rekursiven Aufrufe:
+; 1 + 2 + 3 ... + n
+; Gaußsche Summenformel
+
 ; Element an eine Liste anhängen
 (: append-element ((list-of %a) %a -> (list-of %a)))
 
