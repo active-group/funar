@@ -288,6 +288,21 @@
        (f (first list)
           (list-fold neutral f (rest list)))))))
 
+; Assoziativgesetz:
+; (a + b) + c = a + (b + c)
+
+; "Paket":
+; Menge M
+; (: f (M M -> M)
+; für alle a, b, c aus M:
+; (f (f a b) c) = (f a (f b c))
+; Halbgruppe / semigroup
+
+; Halbgruppe +
+; für alle x aus M:
+; (f neutral x) = (f x neutral) = x
+; Monoid
+
 ; Aus einer Liste die ungeraden Elemente extrahieren
 (: extract-odds (list-of-numbers -> list-of-numbers))
 
