@@ -24,8 +24,8 @@
 (define append-element
   (lambda (list element)
     (cond
-      ((empty? list) ...)
+      ((empty? list) (cons element empty))
       ((cons? list)
-       ... (first list) ...
-       ... (append-element (rest list) element) ...
-       ))))
+       (cons (first list)  ; 4
+             (append-element (rest list) element) ; 3 2 1
+       )))))
