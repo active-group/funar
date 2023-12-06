@@ -536,10 +536,17 @@ listIndex a (first:rest) =
     if first == a
     then Result 0 
     else 
+--      optionalMap (\index -> index + 1) (listIndex a rest)
+      optionalMap (+1) (listIndex a rest)
+{-
         case listIndex a rest of
           Empty -> Empty
           Result index -> Result (index + 1)
+-}
 
+optionalMap :: (a -> b) -> Optional a -> Optional b
+optionalMap f Empty = Empty
+optionalMap f (Result a) = Result (f a)
 
 -- >>> :info Num
 -- type Num :: * -> Constraint
