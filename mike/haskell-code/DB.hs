@@ -41,7 +41,14 @@ p1 =
     Return (show (x+y))))))
 
 runDB :: DB a -> Map Key Value -> a
-runDB (Get key callback) mp = 
 
-runDB (Put key value callback) mp = undefined
+-- >>> runDB p1 Map.empty
+-- "201"
+
+runDB (Get key callback) mp = 
+    let value = mp ! key
+    in runDB (callback value) mp
+runDB (Put key value callback) mp = 
+    let mp' = Map.insert key value mp
+    in runDB (callback ()) mp'
 runDB (Return result) mp = result
