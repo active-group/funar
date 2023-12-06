@@ -71,6 +71,13 @@ instance Monad DB where
     (>>=) = splice
     return = Return
 
+p1'' :: DB String
+p1'' = do put "Mike" 100
+          x <- get "Mike"
+          put "Mike" (x+1)
+          y <- get "Mike"
+          return (show (x+y))
+
 -- >>> :info Monad
 -- type Monad :: (* -> *) -> Constraint
 -- class Applicative m => Monad m where
@@ -104,3 +111,8 @@ runDB (Put key value callback) mp =
     let mp' = Map.insert key value mp
     in runDB (callback ()) mp'
 runDB (Return result) mp = (result, mp)
+
+
+-- fmap ::        (a ->   b) -> f a -> f b
+-- (<*>) ::    f  (a ->   b) -> f a -> f b
+-- flip (>>=) ::  (a -> f b) -> f a -> f b
