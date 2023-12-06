@@ -41,10 +41,11 @@ p1 =
     Return (show (x+y))))))
 
 put :: Key -> Value -> DB ()
-put key value = Put key value (\() -> Return ())
+-- put key value = Put key value (\() -> Return ())
+put key value = Put key value Return
 
 get :: Key -> DB Value
-get key = Get key (\value -> Return value)
+get key = Get key Return
 
 splice :: DB a -> (a -> DB b) -> DB b
 splice (Get key callback) next =
