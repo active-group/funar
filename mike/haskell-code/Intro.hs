@@ -701,3 +701,14 @@ instance Semigroup a => Semigroup (Optional a) where
 
 instance Semigroup a => Monoid (Optional a) where
   neutral = Empty  
+
+
+listFold :: b -> (a -> b -> b) -> [a] -> b
+listFold neutral f [] = neutral
+listFold neutral f (first:rest) = f first (listFold neutral f rest)
+
+monoidFold :: Monoid a => [a] -> a
+monoidFold list = listFold neutral combine list
+
+-- >>> monoidFold [[1,2,3], [4,5,6], [7,8,9]]
+-- [1,2,3,4,5,6,7,8,9]
