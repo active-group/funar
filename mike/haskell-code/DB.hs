@@ -46,7 +46,30 @@ put key value = Put key value (\() -> Return ())
 get :: Key -> DB Value
 get key = Get key (\value -> Return value)
 
--- splice :: DB a -> (a -> DB b) -> DB b
+splice :: DB a -> (a -> DB b) -> DB b
+splice (Get key callback) next =
+    Get key (\ value -> splice (callback value) next)
+splice (Put key value callback) next =
+    Put key value (\() -> splice (callback ()) next)
+splice (Return result) next = next result
+
+p1' = splice (put "Mike" 100) (\() ->
+      splice (get "Mike") (\x ->
+      splice (put "Mike" (x+1)) (\() ->
+      splice (get "Mike") (\y ->
+      Return (show (x+y))))))
+
+-- >>> runDB p1' Map.empty
+-- ("201",fromList [("Mike",101)])
+
+instance Functor DB where
+
+instance Applicative DB where
+
+instance Monad DB where
+    -- "bind"
+    (>>=) = splice
+    return = Return
 
 -- >>> :info Monad
 -- type Monad :: (* -> *) -> Constraint
