@@ -40,3 +40,7 @@ p1 =
     Get "Mike" (\y -> 
     Return (show (x+y))))))
 
+runDB :: DB a -> Map Key Value -> a
+runDB (Get key callback) = undefined
+runDB (Put key value callback) = undefined
+runDB (Return result) = undefined
