@@ -55,4 +55,46 @@ eventsWinner (first : rest) =
 
 -- Monade für den Spielablauf
 data Game a =
-    
+    RecordEvent GameEvent (() -> Game a) 
+  | PlayValid Player Card (Bool -> Game a)
+  | TurnOverTrick (Maybe (Player, Trick) -> Game a)
+  | Done a
+
+recordEventM :: GameEvent -> Game ()
+recordEventM event = RecordEvent event Done
+
+playValidM :: Player -> Card -> Game Bool
+playValidM player card = PlayValid player card Done
+
+turnOverTrickM :: Game (Maybe (Player, Trick))
+turnOverTrickM = TurnOverTrick Done
+
+instance Functor Game where
+
+instance Applicative Game where
+
+instance Monad Game where
+    return = Done
+
+    (>>=) (RecordEvent event callback) next =
+      RecordEvent event (\() -> callback () >>= next )
+    (>>=) (PlayValid player card callback) next =
+      PlayValid player card (\ valid -> callback valid >>= next)
+    (>>=) (TurnOverTrick callback) next =
+      TurnOverTrick (\ playerTrick -> callback playerTrick >>= next)
+    (>>=) (Done result) next = next result
+
+
+tableProcessCommandM :: GameCommand -> Game (Maybe Player)
+tableProcessCommandM (DealHands hands) =
+    do mapM_ (recordEventM . uncurry HandDealt) (Map.toList hands)
+       return Nothing
+tableProcessCommandM (PlayCard player card) =
+    do valid <- playValidM player card
+       if valid
+       then
+        do recordEventM (LegalCardPlayed player card)
+           return undefined
+       else
+        do recordEventM (IllegalCardAttempted player card)
+           return Nothing
