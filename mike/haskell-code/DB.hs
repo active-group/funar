@@ -40,10 +40,39 @@ p1 =
     Get "Mike" (\y -> 
     Return (show (x+y))))))
 
-runDB :: DB a -> Map Key Value -> a
+put :: Key -> Value -> DB ()
+put key value = Put key value (\() -> Return ())
+
+get :: Key -> DB Value
+get key = Get key (\value -> Return value)
+
+-- splice :: DB a -> (a -> DB b) -> DB b
+
+-- >>> :info Monad
+-- type Monad :: (* -> *) -> Constraint
+-- class Applicative m => Monad m where
+--   (>>=) :: m a -> (a -> m b) -> m b
+--   (>>) :: m a -> m b -> m b
+--   return :: a -> m a
+--   {-# MINIMAL (>>=) #-}
+--   	-- Defined in ‘GHC.Base’
+-- instance Monad (Either e) -- Defined in ‘Data.Either’
+-- instance Monad [] -- Defined in ‘GHC.Base’
+-- instance Monad Solo -- Defined in ‘GHC.Base’
+-- instance Monad Maybe -- Defined in ‘GHC.Base’
+-- instance Monad IO -- Defined in ‘GHC.Base’
+-- instance Monad ((->) r) -- Defined in ‘GHC.Base’
+-- instance (Monoid a, Monoid b, Monoid c) => Monad ((,,,) a b c)
+--   -- Defined in ‘GHC.Base’
+-- instance (Monoid a, Monoid b) => Monad ((,,) a b)
+--   -- Defined in ‘GHC.Base’
+-- instance Monoid a => Monad ((,) a) -- Defined in ‘GHC.Base’
+
+
+runDB :: DB a -> Map Key Value -> (a, Map Key Value)
 
 -- >>> runDB p1 Map.empty
--- "201"
+-- ("201",fromList [("Mike",101)])
 
 runDB (Get key callback) mp = 
     let value = mp ! key
@@ -51,4 +80,4 @@ runDB (Get key callback) mp =
 runDB (Put key value callback) mp = 
     let mp' = Map.insert key value mp
     in runDB (callback ()) mp'
-runDB (Return result) mp = result
+runDB (Return result) mp = (result, mp)
