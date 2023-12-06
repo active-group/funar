@@ -667,3 +667,11 @@ instance (Monoid a, Monoid b) => Monoid (a, b) where
   neutral :: (Monoid a, Monoid b) => (a, b)
   neutral = (neutral, neutral)
 
+instance Semigroup a => Semigroup (Optional a) where
+  combine Empty Empty = Empty
+  combine Empty (Result a) = Result a
+  combine (Result a) Empty = Result a
+  combine (Result a) (Result a') = Result (combine a a')
+
+instance Semigroup a => Monoid (Optional a) where
+  neutral = Empty  
