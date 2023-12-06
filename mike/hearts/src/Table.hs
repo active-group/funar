@@ -107,14 +107,6 @@ whoTakesTrick (Trick list) =
       let (player, _) = foldl replaceIfHigher p0 rest'
       in Just player
 
-turnOverTrick :: TableState -> Maybe (Trick, Player)
-turnOverTrick state =
-  if turnOver state
-  then
-    let trick = tableStateTrick state
-    in fmap (\player -> (trick, player)) (whoTakesTrick trick)
-  else Nothing
-
 -- Wert eines Stapels
 pileScore :: Pile -> Integer
 pileScore pile = sum (map cardScore (pileCards pile))
