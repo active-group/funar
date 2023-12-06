@@ -1,7 +1,7 @@
 module DB where
 
 import qualified Data.Map.Strict as Map
-import Data.Map.Strict (Map)
+import Data.Map.Strict (Map, (!))
 
 type Key = String
 type Value = Integer
@@ -41,6 +41,7 @@ p1 =
     Return (show (x+y))))))
 
 runDB :: DB a -> Map Key Value -> a
-runDB (Get key callback) = undefined
-runDB (Put key value callback) = undefined
-runDB (Return result) = undefined
+runDB (Get key callback) mp = 
+
+runDB (Put key value callback) mp = undefined
+runDB (Return result) mp = result
