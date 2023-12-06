@@ -632,3 +632,38 @@ listIndex a (first:rest) =
 -- instance Ord a => Ord (Maybe a) -- Defined in ‘GHC.Maybe’
 -- instance (Ord a, Ord b) => Ord (Either a b)
 --   -- Defined in ‘Data.Either’
+
+-- Halbgruppe:
+-- Typ m
+-- Operation  combine :: m -> m -> m
+-- Assoziativgesetz:
+-- combine (combine a b) c = combine a (combine b c)
+
+class Semigroup m where
+  -- combine (combine a b) c == combine a (combine b c)
+  combine :: m -> m -> m
+
+instance Semigroup [a] where
+  combine :: [a] -> [a] -> [a]
+  combine list1 list2 = list1 ++ list2
+
+instance (Semigroup a, Semigroup b) => Semigroup (a, b) where
+  combine :: (a, b) -> (a, b) -> (a, b)
+  combine (a1, b1) (a2, b2) = (combine a1 a2, combine b1 b2)
+
+-- >>> combine [1,2,3] [4,5,6]
+-- [1,2,3,4,5,6]
+
+-- "Ein Monoid muß auch eine Halbgruppe sein."
+class Semigroup m => Monoid m where
+  -- combine a neutral == combine neutral a == a
+  neutral :: m
+
+instance Monoid [a] where
+  neutral :: [a]
+  neutral = []
+
+instance (Monoid a, Monoid b) => Monoid (a, b) where
+  neutral :: (Monoid a, Monoid b) => (a, b)
+  neutral = (neutral, neutral)
+
