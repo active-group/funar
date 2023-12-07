@@ -379,7 +379,9 @@ oplus o1 o2 =
 -- fmap2 :: (a -> b -> c) -> Optional a -> Optional b -> Optional c
 fmap2 :: Applicative f => (a -> b -> c) -> f a -> f b -> f c
 fmap2 f oa ob = 
-  pure f <*> oa <*> ob
+  -- pure f <*> oa <*> ob
+  -- fmap f oa <*> ob
+  f <$> oa <*> ob
 
 -- >>> :info Applicative
 -- type Applicative :: (* -> *) -> Constraint
