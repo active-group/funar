@@ -755,3 +755,6 @@ monoidFold list = listFold neutral combine list
 
 -- >>> monoidFold [[1,2,3], [4,5,6], [7,8,9]]
 -- [1,2,3,4,5,6,7,8,9]
+
+intsFrom :: Integer -> [Integer]
+intsFrom n = n : intsFrom (n+1)
