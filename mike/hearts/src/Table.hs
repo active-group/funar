@@ -70,7 +70,6 @@ rotateTo y xs@(x : xs') | x == y = xs
                         | otherwise = rotateTo y (xs' ++ [x])
 rotateTo y [] = undefined
 
-‘
 -- wer ist gerade dran?
 currentPlayer :: TableState -> Player
 currentPlayer state =
