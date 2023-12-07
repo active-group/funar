@@ -164,3 +164,4 @@ tableProcessEvent (GameEnded player) state = state
 
 runTable :: Game a -> (TableState, [GameEvent]) -> (a, TableState, [GameEvent])
 --                                ^^^^^^^^^^^ umgekehrte Reihenfolge
+-- Eine Hilfsfunktion fehlt ...
