@@ -46,6 +46,7 @@ data Contract =
     | Multiple Amount Contract
     | At Date Contract
     | Negative Contract
+    | Combine Contract Contract
     deriving Show
 
 -- "Ich bekomme 1€ jetzt"
@@ -72,3 +73,7 @@ c4 = Negative (One EUR)
 
 -- "Ich bekomme 1€ jetzt."
 c5 = Negative c4
+
+swap1 :: Contract
+swap1 = Combine (zeroCouponBond (MkDate "2023-12-24") 100 EUR)
+                (Negative (zeroCouponBond (MkDate "2023-12-24") 100 USD))
