@@ -81,7 +81,8 @@ rankDecoder = do
 -- >>> runDecoder cardDecoder (fromJust ((Json.decode "{\"rank\":\"Ten\",\"suit\":\"Diamonds\"}") :: Maybe Json.Value))
 -- Right (Card {suit = Diamonds, rank = Ten})
 cardDecoder :: Decoder Cards.Card
-cardDecoder = undefined
+cardDecoder = 
+  Cards.Card <$> (Decode.field "suit" suitDecoder) <*> (Decode.field "rank" rankDecoder)
 
 handDecoder :: Decoder Cards.Hand
 handDecoder = Cards.makeHand <$> Decode.list cardDecoder
