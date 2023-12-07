@@ -363,6 +363,47 @@ data Optional a =
   | Result a
   deriving Show
 
+instance Applicative Optional where
+  pure :: a -> Optional a
+  pure a = Result a
+  (<*>) :: Optional (a -> b) -> Optional a -> Optional b
+  Empty <*> Empty = Empty
+  Empty <*> (Result a) = Empty
+  (Result fa) <*> Empty = Empty
+  (Result fa) <*> (Result a) = Result (fa a)
+
+oplus :: Optional Integer -> Optional Integer -> Optional Integer
+oplus o1 o2 =
+  fmap2 (+) o1 o2 
+
+-- fmap2 :: (a -> b -> c) -> Optional a -> Optional b -> Optional c
+fmap2 :: Applicative f => (a -> b -> c) -> f a -> f b -> f c
+fmap2 f oa ob = 
+  pure f <*> oa <*> ob
+
+-- >>> :info Applicative
+-- type Applicative :: (* -> *) -> Constraint
+-- class Functor f => Applicative f where
+--   pure :: a -> f a
+--   (<*>) :: f (a -> b) -> f a -> f b
+--   liftA2 :: (a -> b -> c) -> f a -> f b -> f c
+--   (*>) :: f a -> f b -> f b
+--   (<*) :: f a -> f b -> f a
+--   {-# MINIMAL pure, ((<*>) | liftA2) #-}
+--   	-- Defined in ‘GHC.Base’
+-- instance Applicative (Either e) -- Defined in ‘Data.Either’
+-- instance Applicative [] -- Defined in ‘GHC.Base’
+-- instance Applicative Solo -- Defined in ‘GHC.Base’
+-- instance Applicative Maybe -- Defined in ‘GHC.Base’
+-- instance Applicative IO -- Defined in ‘GHC.Base’
+-- instance Applicative ((->) r) -- Defined in ‘GHC.Base’
+-- instance (Monoid a, Monoid b, Monoid c) =>
+--          Applicative ((,,,) a b c)
+--   -- Defined in ‘GHC.Base’
+-- instance (Monoid a, Monoid b) => Applicative ((,,) a b)
+--   -- Defined in ‘GHC.Base’
+-- instance Monoid a => Applicative ((,) a) -- Defined in ‘GHC.Base’
+
 {-
 data Maybe a = Nothing | Just a
 -}
