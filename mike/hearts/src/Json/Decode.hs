@@ -53,7 +53,7 @@ double :: Decoder Double
 double = Decoder (\ json ->
   case json of
     Json.Number s -> Right (Scientific.toRealFloat s)
-    json -> Left (Failure "Not an int" json))
+    json -> Left (Failure "Not a double" json))
 
 bool :: Decoder Bool
 bool = Decoder (\ json ->
