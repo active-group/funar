@@ -767,3 +767,5 @@ sieve :: [Integer] -> [Integer]
 sieve [] = []
 sieve (p:rest) =
   p : strikeMultiples p rest
+
+primes = sieve (intsFrom 2)
