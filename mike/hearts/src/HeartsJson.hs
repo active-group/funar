@@ -32,6 +32,8 @@ import qualified Data.Vector as Vector
 import GameEvent (GameCommand (..), GameEvent (..))
 import Json.Decode (Decoder (..))
 import qualified Json.Decode as Decode
+import qualified Cards
+import Data.Maybe (fromJust)
 
 tuple2Decoder :: Decoder a -> Decoder b -> Decoder (a, b)
 tuple2Decoder first second = do
@@ -76,13 +78,10 @@ rankDecoder = do
     "Ace" -> return Cards.Ace
     s -> Decode.faild ("Not a rank: " <> s)
 
+-- >>> runDecoder cardDecoder (fromJust ((Json.decode "{\"rank\":\"Ten\",\"suit\":\"Diamonds\"}") :: Maybe Json.Value))
+-- Right (Card {suit = Diamonds, rank = Ten})
 cardDecoder :: Decoder Cards.Card
-cardDecoder =
-  -- same as:
-  -- liftA2 Cards.Card (Decode.field "suit" suitDecoder) (Decode.field "rank" rankDecoder)
-  Cards.Card
-    <$> Decode.field "suit" suitDecoder
-    <*> Decode.field "rank" rankDecoder
+cardDecoder = undefined
 
 handDecoder :: Decoder Cards.Hand
 handDecoder = Cards.makeHand <$> Decode.list cardDecoder
@@ -203,6 +202,8 @@ encodeRank rank =
         Cards.Ace -> "Ace"
     )
 
+-- >>> Json.encode (encodeCard (Cards.Card Cards.Diamonds Cards.Ten))
+-- "{\"rank\":\"Ten\",\"suit\":\"Diamonds\"}"
 encodeCard :: Cards.Card -> Json.Value
 encodeCard (Cards.Card suit rank) =
   Json.object
