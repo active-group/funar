@@ -62,4 +62,5 @@ zeroCouponBond :: Date -> Amount -> Currency -> Contract
 zeroCouponBond date amount currency =
     At date (Multiple amount (One currency))
 
+zcb1' :: Contract
 zcb1' = zeroCouponBond (MkDate "2023-12-24") 100 EUR
