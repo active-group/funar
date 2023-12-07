@@ -1,5 +1,20 @@
 module Free where 
 
+{-
+data DB a
+  = Get Key (Value -> DB a)
+  | Put Key Value (() -> DB a)
+                         ^^^^
+  | Return a
+    ^^^^^^^^
+->
+
+data DB' self =
+  = Get Key (Value -> self)
+  | Put Key Value (() -> self)
+
+
+-}
 data Free f a =
      Pure a
    | Impure (f (Free f a))
