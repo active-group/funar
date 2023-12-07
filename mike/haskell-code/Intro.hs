@@ -762,3 +762,8 @@ intsFrom n = n : intsFrom (n+1)
 strikeMultiples :: Integer -> [Integer] -> [Integer]
 strikeMultiples n list =
   filter (\n' -> n' `mod` n /= 0) list
+
+sieve :: [Integer] -> [Integer]
+sieve [] = []
+sieve (p:rest) =
+  p : strikeMultiples p rest
