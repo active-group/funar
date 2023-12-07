@@ -113,12 +113,12 @@ whoTakesTrick (Trick list) =
       let (player, _) = foldl replaceIfHigher p0 rest'
       in Just player
 
-turnOverTrick :: TableState -> Maybe (Trick, Player)
+turnOverTrick :: TableState -> Maybe (Player, Trick)
 turnOverTrick state =
   if turnOver state
     then
       let trick = tableStateTrick state
-       in fmap (\player -> (trick, player)) (whoTakesTrick trick)
+       in fmap (\player -> (player, trick)) (whoTakesTrick trick)
     else Nothing
 
 -- Wert eines Stapels
@@ -175,8 +175,31 @@ tableProcessEvent (TrickTaken player trick) state =
 tableProcessEvent (IllegalCardAttempted player card) state = state
 tableProcessEvent (GameEnded player) state = state
 
+-- data Either left right = Left left | Right right
+-- Konvention: Right ist für "korrekt" / "fertig"
+-- Left: "fehlerhaft" / "unfertig"
 
-runTable :: Game a -> (TableState, [GameEvent]) -> (a, TableState, [GameEvent])
+-- runTable :: Game a -> (TableState, [GameEvent]) -> (a, TableState, [GameEvent])
 --                                ^^^^^^^^^^^ umgekehrte Reihenfolge
--- Eine Hilfsfunktion fehlt ...
-runTable = undefined
+runTable :: Game a
+  -> (TableState, [GameEvent])
+  -> (Either (GameCommand -> Game a) a, TableState, [GameEvent])
+runTable (PlayValid player card callback) s@(state, _) =
+  runTable (callback (playValid state player card)) s
+runTable (TurnOverTrick callback) s@(state, _) =
+  runTable (callback (turnOverTrick state)) s
+runTable (PlayerAfter player callback) s@(state, _) =
+  runTable (callback (playerAfter state player)) s
+runTable (GameOver callback) s@(state, _) =
+  runTable (callback (gameOver state)) s
+
+runTable (RecordEvent event callback) s@(state, revents) =
+  runTable (callback ()) (tableProcessEvent event state, event:revents)
+
+runTable (Done result) (state, revents) =
+  (Right result, state, reverse revents)
+
+runTable (GetCommand callback) s@(state, revents) =
+  (Left callback, state, reverse revents)
+
+
