@@ -6,6 +6,18 @@ Modellierungsprozeß:
 - einfaches Beispiel
   Zero-Coupon Bond / Zero-Bond
   "Ich bekomme am 24.12.2023 100€."
+
+- einfaches Beispiel in "atomare Bestandteile"/"Ideen" zerlegen
+  z.B. entlang der Attribute
+
+  - "Währung": "Ich bekomme 1€ jetzt."
+  - "Betrag": "Ich bekomme 100€ jetzt."
+
+  - "Später": "Ich bekomme 100€ am 24.12.2023"
+
+- Currency Swap:
+  Am 24.2.2023:
+  "Ich bekomme 100€ und ich zahle $100."
 -}
 
 data Date = MkDate String
@@ -16,6 +28,7 @@ type Amount = Double
 data Currency = EUR | GBP | USD | YEN
   deriving Show
 
+{-
 data Contract =
       ZeroCouponBond Date Amount Currency 
     | Call
@@ -26,3 +39,27 @@ data Contract =
 
 zcb1 :: Contract
 zcb1 = ZeroCouponBond (MkDate "2023-12-24") 100 EUR
+-}
+
+data Contract =
+      One Currency
+    | Multiple Amount Contract
+    | At Date Contract
+    deriving Show
+
+-- "Ich bekomme 1€ jetzt"
+c1 = One EUR
+
+-- "Ich bekomme 100€ jetzt"
+c2 = Multiple 100 (One EUR)
+
+c3 = Multiple 100.5 (One EUR)
+
+zcb1 :: Contract
+zcb1 = At (MkDate "2023-12-24") (Multiple 100 (One EUR))
+
+zeroCouponBond :: Date -> Amount -> Currency -> Contract
+zeroCouponBond date amount currency =
+    At date (Multiple amount (One currency))
+
+zcb1' = zeroCouponBond (MkDate "2023-12-24") 100 EUR
