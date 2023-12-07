@@ -138,5 +138,5 @@ meaning (Negative contract) now =
 meaning (Combine contract1 contract2) now =
     let (payments1, residualContract1) = meaning contract1 now
         (payments2, residualContract2) = meaning contract2 now
-    in (payments1 ++ payments2, Combine residualContract1 residualContract2)
+    in (payments1 ++ payments2, combine residualContract1 residualContract2)
 meaning Zero now = ([], Zero)
