@@ -84,3 +84,12 @@ c5 = Negative c4
 swap1 :: Contract
 swap1 = Combine (zeroCouponBond (MkDate "2023-12-24") 100 EUR)
                 (Negative (zeroCouponBond (MkDate "2023-12-24") 100 USD))
+
+data Direction = Long | Short 
+  deriving Show
+
+data Payment = MkAmount Date Direction Amount Currency
+  deriving Show 
+
+-- alle Zahlungen bis zu einem bestimmten Zeitpunkt, "jetzt"
+meaning :: Contract -> Date -> ([Payment], Contract)
