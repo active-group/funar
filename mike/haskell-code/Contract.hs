@@ -88,12 +88,17 @@ swap1 = Combine (zeroCouponBond (MkDate "2023-12-24") 100 EUR)
 c6 = Multiple 100 (Combine (zeroCouponBond (MkDate "2023-1-24") 200 EUR)
                            (zeroCouponBond (MkDate "2024-1-24") 300 EUR))
 -- >>> meaning c6 (MkDate "2023-31-01")
--- ([MkPayment (MkDate "2023-31-01") Long 20000.0 EUR],Multiple 100.0 (Combine (Multiple 200.0 Zero) (At (MkDate "2024-1-24") (Multiple 300.0 (One EUR)))))
+-- ([MkPayment (MkDate "2023-31-01") Long 20000.0 EUR],Multiple 100.0 (Combine Zero (At (MkDate "2024-1-24") (Multiple 300.0 (One EUR)))))
 
 -- "smart constructor"
 multiple :: Amount -> Contract -> Contract
 multiple _ Zero = Zero
 multiple factor contract = Multiple factor contract
+
+combine :: Contract -> Contract -> Contract
+combine Zero contract = contract
+combine contract Zero = contract
+combine contract1 contract2 = Combine contract1 contract2
 
 data Direction = Long | Short 
   deriving Show
@@ -122,7 +127,7 @@ meaning :: Contract -> Date -> ([Payment], Contract)
 meaning (One currency) now = ([MkPayment now Long 1 currency], Zero)
 meaning (Multiple amount contract) now =
     let (payments, residualContract) = meaning contract now
-    in (map (scalePayment amount) payments, Multiple amount residualContract)
+    in (map (scalePayment amount) payments, multiple amount residualContract)
 meaning c@(At date contract) now =
     if now >= date
     then meaning contract now
