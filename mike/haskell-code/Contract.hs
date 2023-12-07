@@ -47,7 +47,14 @@ data Contract =
     | At Date Contract
     | Negative Contract
     | Combine Contract Contract
+    | Zero
     deriving Show
+
+instance Semigroup Contract where
+    (<>) = Combine
+
+instance Monoid Contract where
+    mempty = Zero
 
 -- "Ich bekomme 1€ jetzt"
 c1 = One EUR
