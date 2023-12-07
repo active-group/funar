@@ -85,11 +85,31 @@ swap1 :: Contract
 swap1 = Combine (zeroCouponBond (MkDate "2023-12-24") 100 EUR)
                 (Negative (zeroCouponBond (MkDate "2023-12-24") 100 USD))
 
+c6 = Multiple 100 (Combine (zeroCouponBond (MkDate "2023-1-24") 100 EUR)
+                           (zeroCouponBond (MkDate "2024-1-24") 100 EUR))
+-- >>> meaning c6 (MkDate "2024-31-01")
+
 data Direction = Long | Short 
   deriving Show
 
+invertDirection :: Direction -> Direction
+invertDirection Long = Short
+invertDirection Short = Long
+
 data Payment = MkPayment Date Direction Amount Currency
   deriving Show 
+
+scalePayment :: Amount -> Payment -> Payment
+scalePayment factor (MkPayment date direction amount currency) =
+    MkPayment date direction (factor * amount) currency
+
+invertPayment :: Payment -> Payment
+invertPayment (MkPayment date direction amount currency) =
+    MkPayment date (invertDirection direction) amount currency
+
+
+-- >>> (MkDate "2023-12-24") < (MkDate "2023-12-25")
+-- True
 
 -- alle Zahlungen bis zu einem bestimmten Zeitpunkt, "jetzt"
 meaning :: Contract -> Date -> ([Payment], Contract)
