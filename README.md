@@ -109,3 +109,10 @@ https://guide.elm-lang.org/install/
 
 Falls Sie `nix` verwenden, dann ist `elm` bereits in der
 Entwicklungsumgebung (`nix develop`) vorhanden.
+
+# Literatur
+
+- [CodeWorld](https://code.world/haskell)
+- Tutorial [Haskell via Sokoban](https://haskell-via-sokoban.nomeata.de/)
+- Sandy Maguire: [Algebra-Driven Design](https://leanpub.com/algebra-driven-design)
+- Michael Pilquist, Rúnar Bjarnason, and Paul Chiusano [Functional Programming in Scala](https://www.manning.com/books/functional-programming-in-scala-second-edition)
