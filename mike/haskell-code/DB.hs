@@ -1,3 +1,4 @@
+{-# LANGUAGE InstanceSigs #-}
 module DB where
 
 import qualified Data.Map.Strict as Map
@@ -63,7 +64,13 @@ p1' = splice (put "Mike" 100) (\() ->
 -- >>> runDB p1' Map.empty
 -- ("201",fromList [("Mike",101)])
 
+
+-- flip splice :: (a -> DB b) -> DB a -> DB b
+
 instance Functor DB where
+    fmap ::       (a ->    b) -> DB a -> DB b
+    fmap f dba = splice dba (return . f) 
+
 
 instance Applicative DB where
 
