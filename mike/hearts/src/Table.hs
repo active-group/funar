@@ -96,6 +96,13 @@ turnOver :: TableState -> Bool
 turnOver state =
   length (tableStatePlayers state) == length (trickToList (tableStateTrick state))
 
+-- | Eine Karte kann nur eine andere Karte gleicher Farbe nach Wert schlagen
+replaceIfHigher :: (a, Card) -> (a, Card) -> (a, Card)
+replaceIfHigher p1@(marker1, c1) p2@(marker2, c2) =
+  case cardOrder c1 c2 of
+    Just LT -> p2
+    _ -> p1
+
 -- wer muß den Stich einziehen?
 whoTakesTrick :: Trick -> Maybe Player
 whoTakesTrick (Trick []) = Nothing
@@ -164,3 +171,4 @@ tableProcessEvent (GameEnded player) state = state
 runTable :: Game a -> (TableState, [GameEvent]) -> (a, TableState, [GameEvent])
 --                                ^^^^^^^^^^^ umgekehrte Reihenfolge
 -- Eine Hilfsfunktion fehlt ...
+runTable = undefined
