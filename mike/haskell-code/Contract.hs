@@ -88,7 +88,7 @@ swap1 = Combine (zeroCouponBond (MkDate "2023-12-24") 100 EUR)
 data Direction = Long | Short 
   deriving Show
 
-data Payment = MkAmount Date Direction Amount Currency
+data Payment = MkPayment Date Direction Amount Currency
   deriving Show 
 
 -- alle Zahlungen bis zu einem bestimmten Zeitpunkt, "jetzt"
