@@ -766,6 +766,6 @@ strikeMultiples n list =
 sieve :: [Integer] -> [Integer]
 sieve [] = []
 sieve (p:rest) =
-  p : strikeMultiples p rest
+  p : sieve (strikeMultiples p rest)
 
 primes = sieve (intsFrom 2)
