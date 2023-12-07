@@ -45,6 +45,7 @@ data Contract =
       One Currency
     | Multiple Amount Contract
     | At Date Contract
+    | Negative Contract
     deriving Show
 
 -- "Ich bekomme 1€ jetzt"
@@ -64,3 +65,10 @@ zeroCouponBond date amount currency =
 
 zcb1' :: Contract
 zcb1' = zeroCouponBond (MkDate "2023-12-24") 100 EUR
+
+
+-- "Ich zahle 1€ jetzt."
+c4 = Negative (One EUR)
+
+-- "Ich bekomme 1€ jetzt."
+c5 = Negative c4
