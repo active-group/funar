@@ -1,0 +1,30 @@
+{
+  "name": "haskell",
+  "image": "docker.active-group.de/funar-devcontainer:4.0",
+  // "dockerFile": "../Dockerfile",
+  // "context": "..",
+  "appPort": [
+    "8001:8001",
+    "8002:8002",
+    "8003:8003",
+    "8004:8004",
+    "8080:8080"
+  ],
+  "settings": {
+    "terminal.integrated.profiles.linux": {
+      "nix-shell": {
+        "path": "nix",
+        "args": [ "develop" ],
+        "icon": "terminal-linux"
+      },
+      "bash": {
+        "path": "/bin/bash",
+        "icon": "terminal-linux"
+      }
+    },
+    "terminal.integrated.defaultProfile.linux": "nix-shell"
+  },
+  "extensions": [
+    "haskell.haskell",
+  ]
+}
