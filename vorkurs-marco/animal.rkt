@@ -286,6 +286,39 @@ Expression Problem:
 ; Aufgabe 1: Produkt der Listenelemente.
 (: list-product (list-of-numbers -> number))
 
+(check-expect (list-product empty)
+              1) ; neutrales element im monoid (natural, *)
+(check-expect (list-product list1)
+              5)
+(check-expect (list-product list3)
+              40)
+
+(define list-product
+  (lambda (list)
+    (cond
+      ((empty? list) 1)
+      ((cons? list)
+       (* (first list)
+          (list-product (rest list)))))))
+
+; Abstraktion:
+; 1. letztes Mal kopieren
+; 2. Unterschieden Namen geben
+; 3. lambda
+
+; Eine Liste zusammenfalten
+(: list-fold
+   (list-of-numbers number (number number -> number)
+                    -> number))
+
+(define list-fold
+  (lambda (list zero op)
+    (cond
+      ((empty? list) zero)
+      ((cons? list)
+       (op (first list)
+           (list-fold (rest list)))))))
+
 ; Aufgabe 2: Aus einer Liste alle geraden Zahlen extrahieren.
 ;(: extract-evens (list-of-numbers -> list-of-numbers))
 
