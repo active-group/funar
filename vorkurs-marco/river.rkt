@@ -3,6 +3,8 @@
 ; Ein Fluss ist eins der folgenden:
 ; - ein Bach
 ; - ein Zusammenfluss
+(define river
+  (signature (mixed creek confluence)))
 
 ; Ein Bach hat folgende Eigenschaften
 ; - Ursprungsort
@@ -23,5 +25,5 @@
   make-confluence
   confluence?
   (confluence-location string)
-  (confluence-hauptfluss creek)
-  (confluence-nebenfluss creek))
+  (confluence-hauptfluss river)
+  (confluence-nebenfluss river))
