@@ -104,7 +104,10 @@
 
 
 
-; Tiere auf dem texanischen Highway
+; Tiere auf dem texanischen Highway sind eines der folgenden
+; - ein Gürteltier - ODER -
+; - ein Papagei
+; gemischte Daten
 
 ; Ein Gürteltier besteht aus
 ; - lebendig oder tot? - UND -
@@ -163,4 +166,25 @@
 ; Papagei besteht aus
 ; - ein Satz den er sprechen kann - UND -
 ; - Gewicht
-    
+; zusammengesetzte Daten
+(define-record parrot
+  make-parrot
+  (parrot-sentence string)
+  (parrot-weight number))
+
+(define hallo (make-parrot "Hi!" 3))
+(define ciao (make-parrot "Ciao!" 2))
+
+; Einen Papagei überfahren
+(: run-over-parrot (parrot -> parrot))
+(check-expect (run-over-parrot hallo)
+              (make-parrot ""
+                           3))
+(check-expect (run-over-parrot ciao)
+              (make-parrot ""
+                           2))
+
+(define run-over-parrot
+  (lambda (parrot)
+    (make-parrot "" (parrot-weight parrot))))
+
