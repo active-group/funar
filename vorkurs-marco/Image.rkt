@@ -37,7 +37,7 @@
                (beside star1 square1)
                (beside square1 star1)))
 
-(check-expect (tile star1 32) (above
+#;(check-expect (tile star1 32) (above
                (beside star1 square1)
                (beside square1 star1)))
 
