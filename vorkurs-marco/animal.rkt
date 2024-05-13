@@ -261,3 +261,28 @@ Expression Problem:
 (define list1 (cons 5 empty))
 ; [5 8]
 (define list2 (cons 5 (cons 8 empty)))
+(define list3 (cons 1 list2))
+
+; Summe der Listenelemente
+(: list-sum (list-of-numbers -> number))
+
+(check-expect (list-sum empty)
+              0) ; neutrales element im monoid (natural, +)
+(check-expect (list-sum list1)
+              5)
+(check-expect (list-sum list3)
+              14)
+
+(define list-sum
+  ; gemischte daten
+  ; -> zusammengesetzte daten mit selbstbezug
+  (lambda (list)
+    (cond
+      ((empty? list) 0)
+      ((cons? list)
+       (+ (cons-first list)
+          (list-sum (cons-rest list)))))))
+
+
+
+
