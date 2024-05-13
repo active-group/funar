@@ -326,10 +326,10 @@ Expression Problem:
 
 ; Eine Liste zusammenfalten
 (: list-fold
-   ((number number -> number)
-    number
-    list-of-numbers
-    -> number))
+   ((... ... -> ...)
+    ...
+    (list-of ...)
+    -> ...))
 
 (check-expect (list-fold + 0 empty)
               0)
