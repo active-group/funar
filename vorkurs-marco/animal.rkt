@@ -336,7 +336,7 @@ Expression Problem:
                          list3)
               40)
 
-(define list-fold
+(define list-fold ; auch bekannt als reduce, ...
   (lambda (op zero list)
     (cond
       ((empty? list) zero)
