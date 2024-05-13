@@ -336,7 +336,9 @@ Expression Problem:
               1)
 (check-expect (list-fold * 1 list3)
               40)
-(check-expect (list-fold string-append "" (cons "Marco" (cons "Schneider" empty)))
+(check-expect (list-fold string-append
+                         ""
+                         (cons "Marco" (cons "Schneider" empty)))
               "MarcoSchneider")
 
 (define list-fold ; auch bekannt als reduce, ...
