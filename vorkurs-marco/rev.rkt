@@ -10,5 +10,5 @@
 (define rev
   (lambda (list)
     (cond
-      ((empty? list) ...)
+      ((empty? list) empty) ; oder list
       ((cons? list) ...))))
