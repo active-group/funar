@@ -52,6 +52,8 @@
 ; Eine Uhrzeite besteht aus
 ; - Stunde - UND -
 ; - Minuten
-
-
-
+; zusammengesetzte Daten
+(define-record time  ; <- signatur
+  make-time ; <- Konstruktor
+  (time-hour hour) ; <- Selektoren
+  (time-minute minute))
