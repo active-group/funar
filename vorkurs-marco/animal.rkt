@@ -230,3 +230,20 @@ Expression Problem:
 - FP: neue Fälle schwierig, neue Funktion weniger aufwändig
 |#
 
+
+
+; listen
+
+; Liste ist eines der folgenden:
+; - die leere Liste
+; - Cons-Liste, besteht aus erstem element und rest-liste
+;                                                   ^^^^^
+; daten mit selbstbezug
+; gemischte daten
+(define list-of-numbers
+  (signatur (mixed empty-list cons-list)))
+
+; Die leere Liste
+(define-singleton empty-list
+  empty
+  empty?)
