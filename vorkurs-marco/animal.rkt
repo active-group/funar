@@ -86,12 +86,14 @@
 
 ; Aufgabe: Aus Minuten nach Mitternacht die Uhrzeit berechnen.
 (: msm->time (natural -> time))
+
 (check-expect (msm->time 649)
               time1)
 (check-expect (msm->time 1435)
               time2)
 (check-expect (msm->time 0)
               (make-time 0 0))
+
 (define msm->time
   (lambda (minutes)
     (make-time (quotient minutes 60)
@@ -99,5 +101,40 @@
 
 
 
+
+
+
 ; Tiere auf dem texanischen Highway
+
+; Ein Gürteltier besteht aus
+; - lebendig oder tot? - UND -
+; - Gewicht
+; zusammengesetzen Daten
+
+(define-record dillo ; signatur
+  make-dillo ; konstruktor
+  (dillo-alive? boolean)
+  (dillo-weight number))
+
+(: make-dillo (boolean number -> dillo))
+
+; lebendiges dillo mit 33kg
+(define dillo1 (make-dillo #t 33))
+(define dillo2 (make-dillo #f 15))
+
+; Ein Gürteltier überfahren
+(: run-over-dillo (dillo -> dillo))
+
+(check-expect (run-over-dillo dillo1)
+              (make-dillo #f 33))
+(check-expect (run-over-dillo dillo2)
+              dillo2)
+
+(define run-over-dillo
+  (lambda (dillo)
+    (make-dillo #f
+                (dillo-weight dillo))))
+
+
+
 
