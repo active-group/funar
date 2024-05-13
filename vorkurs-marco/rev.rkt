@@ -11,4 +11,7 @@
   (lambda (list)
     (cond
       ((empty? list) empty) ; oder list
-      ((cons? list) ...))))
+      ((cons? list)
+       (append-element ; ich wünsche eine funktion die das macht (Wunschdenken :))
+        (rev (cons-rest list))
+        (cons-first list))))))
