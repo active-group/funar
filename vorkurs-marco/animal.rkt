@@ -247,6 +247,8 @@ Expression Problem:
   (lambda (element)
     (signature (mixed empty-list
                       (cons-list-of element)))))
+(define list-of-numbers
+  (list-of number))
 
 ; Die leere Liste
 (define-singleton empty-list ; signatur
