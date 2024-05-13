@@ -12,7 +12,7 @@
 (define-record creek
   make-creek
   creek?
-  (creen-origin string))
+  (creek-origin string))
 
 (define eschach (make-creek "Heimliswald"))
 (define prim (make-creek "Dreifaltigkeitsberg"))
@@ -55,5 +55,10 @@
     (cond
       ((creek? river)
        (string=? location (creek-origin river)))
-      ((confluence? river) ...))))
+      ((confluence? river)
+       ... (confluence-location river) ...
+       .. (confluence-hauptfluss river) ...
+       ... (confluence-nebenfluss river) ...
+       
+       ))))
     
