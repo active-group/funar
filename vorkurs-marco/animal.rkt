@@ -241,9 +241,23 @@ Expression Problem:
 ; daten mit selbstbezug
 ; gemischte daten
 (define list-of-numbers
-  (signatur (mixed empty-list cons-list)))
+  (signature (mixed empty-list cons-list)))
 
 ; Die leere Liste
-(define-singleton empty-list
-  empty
-  empty?)
+(define-singleton empty-list ; signatur
+  empty ; "das singleton"
+  empty?) ; prädikat
+
+; Eine Cons-Liste besteht aus:
+; - erstem Element
+; - Rest-Liste
+(define-record cons-list
+  cons
+  cons?
+  (first number)
+  (rest list-of-numbers))
+
+; [5]
+(define list1 (cons 5 empty))
+; [5 8]
+(define list2 (cons 5 (cons 8 empty)))
