@@ -46,11 +46,17 @@
   (lambda (list)
     (rev*-worker empty list)))
 
+(: rev*-worker ((list-of %a) (list-of %a) -> (list-of %a)))
+
+(check-expect (rev*-worker empty (list 1 2 3 4))
+              (list 4 3 2 1))
+(check-expect (rev*-worker empty empty) empty)
+
 (define rev*-worker
   (lambda (acc list) ; Akkumulator
     (cond
       ((empty? list) acc)
       ((cons? list)
-       (rev*-worker
+       (rev*-worker ; Endrekursion/tail recursion
         (cons (first list) acc)
         (rest list))))))
