@@ -85,8 +85,19 @@
        (time-minute time))))
 
 ; Aufgabe: Aus Minuten nach Mitternacht die Uhrzeit berechnen.
+(: msm->time (natural -> time))
+(check-expect (msm->time 649)
+              time1)
+(check-expect (msm->time 1435)
+              time2)
+(check-expect (msm->time 0)
+              (make-time 0 0))
+(define msm->time
+  (lambda (minutes)
+    (make-time (quotient minutes 60)
+               (remainder minutes 60))))
 
 
 
-
+; Tiere auf dem texanischen Highway
 
