@@ -68,7 +68,7 @@
 (define time2 (make-time 23 55))
 
 
-; Minuten seit Mitternach
+; Minuten seit Mitternacht
 (: since-midnight (time -> natural))
 
 (check-expect (since-midnight time1)
@@ -84,6 +84,7 @@
           60)
        (time-minute time))))
 
+; Aus Minuten nach Mitternacht die Uhrzeit berechnen.
 
 
 
