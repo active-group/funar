@@ -126,6 +126,7 @@
 (: make-dillo (boolean number -> dillo))
 ; dillos sind immer #t, alles andere ist #f
 (: dillo? (any -> boolean))
+; foo instanceOf Dillo
 
 ; lebendiges dillo mit 33kg
 (define dillo1 (make-dillo #t 33))
@@ -210,15 +211,22 @@
       ((dillo? animal) (run-over-dillo animal))
       ((parrot? animal) (run-over-parrot animal)))))
 
+(define feed-animal
+  (lambda (animal)
+    (cond
+      ((dillo? animal) (feed-dillo animal))
+      ((parrot? animal) (feed-parrot animal)))))
 #|
 
-interface Animal { Animal runOver(); }
+interface Animal { Animal runOver(); Animal feed(); }
 
 class Dillo implements Animal { @Override Animal runOver(); }
 class Parrot implements Animal { ... }
+class Snake implements Animal { ... }
 
+Expression Problem:
+
+- OOP: neue Fälle hinzufügen super easy, neue Funktion aufwändig
+- FP: neue Fälle schwierig, neue Funktion weniger aufwändig
 |#
-
-
-
 
