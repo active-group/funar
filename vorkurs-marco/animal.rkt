@@ -160,4 +160,7 @@
                    (+ amount (dillo-weight dillo))))
       (else dillo))
 
+; Papagei besteht aus
+; - ein Satz den er sprechen kann - UND -
+; - Gewicht
     
