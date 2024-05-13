@@ -308,16 +308,20 @@ Expression Problem:
 
 ; Eine Liste zusammenfalten
 (: list-fold
-   (list-of-numbers number (number number -> number)
-                    -> number))
+   (number
+    (number number -> number)
+    list-of-numbers
+    -> number))
+
+(check-expect (list-fold empty 
 
 (define list-fold
-  (lambda (list zero op)
+  (lambda (zero op list)
     (cond
       ((empty? list) zero)
       ((cons? list)
        (op (first list)
-           (list-fold (rest list)))))))
+           (list-fold zero op (rest list)))))))
 
 ; Aufgabe 2: Aus einer Liste alle geraden Zahlen extrahieren.
 ;(: extract-evens (list-of-numbers -> list-of-numbers))
