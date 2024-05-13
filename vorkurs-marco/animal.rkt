@@ -436,7 +436,7 @@ Expression Problem:
       ((empty? list) empty)  ; könnte auch list sein
       ((cons? list)
        (cons
-        (first list)
+        (f (first list))
         (list-map f (rest list)))))))
 
 
