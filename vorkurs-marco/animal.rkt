@@ -124,6 +124,7 @@
   (dillo-weight number))
 
 (: make-dillo (boolean number -> dillo))
+; dillos sind immer #t, alles andere ist #f
 (: dillo? (any -> boolean))
 
 ; lebendiges dillo mit 33kg
