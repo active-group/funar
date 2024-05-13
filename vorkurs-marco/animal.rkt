@@ -18,4 +18,5 @@
 ; 3. Test
 
 ; Ist ein Haustier niedlich?
-#;(define check...)
+(: cute? (pet -> boolean))
+
