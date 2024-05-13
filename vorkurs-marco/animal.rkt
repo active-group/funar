@@ -368,6 +368,29 @@ Expression Problem:
            (extract-evens (rest list)))))))
 
 
+; eine Liste mit einem Prädikat filtern
+(: list-extract ((number -> boolean)
+                 list-of-numbers
+                 -> list-of-numbers))
+(check-expect (list-extract odd?
+                            (cons 1 (cons 2 (cons 3 empty))))
+              (cons 1 (cons 3 empty)))
+(check-expect (list-extract even?
+                            (cons 1 (cons 2 (cons 3 empty))))
+              (cons 2 empty))
+(define list-extract ; filter
+  (lambda (predicate list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (if (predicate (first list))
+           (cons (first list)
+                 (list-extract predicate (rest list)))
+           (list-extract predicate (rest list)))))))
+
+(define extract-odds
+  (lambda (list)
+    (list-extract odd? list)))
 
 
 
