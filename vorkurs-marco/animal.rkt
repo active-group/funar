@@ -326,10 +326,7 @@ Expression Problem:
 
 ; Eine Liste zusammenfalten
 (: list-fold
-   ((%a %b -> %b)
-    %b  
-    (list-of %a)
-    -> %b))
+   ((%a %b -> %b) %b (list-of %a) -> %b))
 
 (check-expect (list-fold + 0 empty)
               0)
@@ -339,6 +336,8 @@ Expression Problem:
               1)
 (check-expect (list-fold * 1 list3)
               40)
+(check-expect (list-fold string-append "" (cons "Marco" (cons "Schneider" empty)))
+              "MarcoSchneider")
 
 (define list-fold ; auch bekannt als reduce, ...
   (lambda (op zero list)
@@ -395,9 +394,11 @@ Expression Problem:
     (list-extract odd? list)))
 
 ; eine Liste mit einem Prädikat filtern
-(: list-extract ((number -> boolean)
+#;(: list-extract ((number -> boolean)
                  list-of-numbers
                  -> list-of-numbers))
+(: list-extract ((%a -> boolean) (list-of %a) -> (list-of %a)))
+                 
 (check-expect (list-extract odd?
                             (cons 1 (cons 2 (cons 3 empty))))
               (cons 1 (cons 3 empty)))
