@@ -420,3 +420,28 @@ Expression Problem:
 
 ; wende eine funktion auf alle werte einer liste an
 (: list-map ((%a -> %b) (list-of %a) -> (list-of %b)))
+
+(define inc (lambda (n) (+ n 1)))
+
+(check-expect (list-map inc (cons 1 (cons 2 empty)))
+              (cons 2 (cons 3 empty)))
+(check-expect (list-map inc empty)
+              empty)
+(check-expect (list-map odd? (cons 1 (cons 2 (cons 3 empty))))
+              (cons #t (cons #f (cons #t empty))))
+
+(define list-map
+  (lambda (f list)
+    (cond
+      ((empty? list) empty)  ; könnte auch list sein
+      ((cons? list)
+       (cons
+        (first list)
+        (list-map f (rest list)))))))
+
+
+
+
+
+
+
