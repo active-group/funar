@@ -43,3 +43,10 @@
       (cond
         (fall1 konsequente1)
         (fall2 konsequente2))))
+
+
+
+
+
+
+
