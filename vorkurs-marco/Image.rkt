@@ -37,6 +37,11 @@
                (beside star1 square1)
                (beside square1 star1)))
 
+(check-expect (tile star1 32) (above
+               (beside star1 square1)
+               (beside square1 star1)))
+
+;public static Image tile(Image image1, Image image2) { }
 (define tile
   (lambda (image1 image2)
     (above
