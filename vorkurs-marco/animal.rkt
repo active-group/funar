@@ -240,8 +240,13 @@ Expression Problem:
 ;                                                   ^^^^^
 ; daten mit selbstbezug
 ; gemischte daten
-(define list-of-numbers
+#;(define list-of-numbers
   (signature (mixed empty-list cons-list)))
+
+(define list-of
+  (lambda (element)
+    (signature (mixed empty-list
+                      (cons-list-of element)))))
 
 ; Die leere Liste
 (define-singleton empty-list ; signatur
@@ -251,7 +256,7 @@ Expression Problem:
 ; Eine Cons-Liste besteht aus:
 ; - erstem Element
 ; - Rest-Liste
-(define-record cons-list
+#;(define-record cons-list
   cons
   cons?
   (first number)
