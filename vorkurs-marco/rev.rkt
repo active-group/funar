@@ -14,7 +14,7 @@
       ((cons? list)
        (append-element ; ich wünsche eine funktion die das macht (Wunschdenken :))
         (rev (rest list))
-        (cons-first list))))))
+        (first list))))))
 
 ; Hänge ein Elmenent _hinten_ an eine Liste an
 (: append-element ((list-of %a) %a -> (list-of %a)))
