@@ -21,6 +21,7 @@
 
 ; Ist ein Haustier niedlich?
 (: cute? (pet -> boolean))
+#;(: cute? ((enum "dog" "cat" "snake" "fruit fly") -> boolean))
 
 (check-expect (cute? "dog") #t)
 (check-expect (cute? "cat") #t)
@@ -29,4 +30,16 @@
 
 (define cute?
   (lambda (animal)
-    ...))
+    (cond
+      ((string=? "dog" animal) #t)
+      ((string=? "cat" animal) #t)
+      ((string=? "snake" animal) #t)
+      ((string=? "fruit fly" animal) #f))))
+
+; Schablone für gemischte Daten/Falluntescheidung
+
+#;(define XXX
+    (lambda (l)
+      (cond
+        (fall1 konsequente1)
+        (fall2 konsequente2))))
