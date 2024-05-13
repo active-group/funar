@@ -471,5 +471,16 @@ Expression Problem:
 
 (check-expect (reverse (cons 1 (cons 2 empty)))
               (cons 2 (cons 1 empty)))
+(check-expect (reverse empty) empty)
+
+(define reverse
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (append-element (reverse (rest list))
+                       (first list))))))
+
+
 
 
