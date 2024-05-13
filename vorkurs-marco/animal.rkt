@@ -57,3 +57,35 @@
   make-time ; <- Konstruktor
   (time-hour hour) ; <- Selektoren
   (time-minute minute))
+
+(: make-time (hour minute -> time))
+(: time-hour (time -> hour))
+(: time-minute (time -> minute))
+
+; 10:49
+(define time1 (make-time 10 49))
+; fünf vor 12
+(define time2 (make-time 23 55))
+
+
+; Minuten seit Mitternach
+(: since-midnight (time -> natural))
+
+(check-expect (since-midnight time1)
+              649)
+(check-expect (since-midnight time2)
+              1435)
+(check-expect (since-midnight (make-time 0 0))
+              0)
+
+(define since-midnight
+  (lambda (time)
+    (+ (* (time-hour time)
+          60)
+       (time-minute time))))
+
+
+
+
+
+
