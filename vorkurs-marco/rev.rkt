@@ -32,3 +32,25 @@
        (cons
         (first list)
         (append-element (rest list) element))))))
+
+
+; reverse aber besser
+(: rev* ((list-of %a) -> (list-of %a)))
+
+
+(check-expect (rev (list 1 2 3 4))
+              (list 4 3 2 1))
+(check-expect (rev empty) empty)
+
+(define rev*
+  (lambda (list)
+    (rev*-worker empty list)))
+
+(define rev*-worker
+  (lambda (acc list) ; Akkumulator
+    (cond
+      ((empty? list) acc)
+      ((cons? list)
+       (rev*-worker
+        (cons (first list) acc)
+        (rest list))))))
