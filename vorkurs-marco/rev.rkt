@@ -61,3 +61,9 @@
         ; proper tail recursion
         (cons (first list) acc)
         (rest list))))))
+
+#|
+Haskell:
+foldr :: (a -> b -> b) -> b -> [a] -> b
+foldl :: (b -> a -> b) -> b -> [a] -> b
+|#
