@@ -8,3 +8,4 @@
 ; - Katze - ODER -
 ; - Schlange
 ; Fallunterscheidung
+; speziell hier: Aufzählugn
