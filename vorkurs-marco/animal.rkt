@@ -261,6 +261,11 @@ Expression Problem:
   cons?
   (first number)
   (rest list-of-numbers))
+(define-record (cons-list-of element) ; macht für uns ein lambda
+  cons
+  cons?
+  (first element)
+  (rest (list-of element)))
 
 ; [5]
 (define list1 (cons 5 empty))
