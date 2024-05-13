@@ -357,7 +357,7 @@ Expression Problem:
               (cons 2 empty))
 (check-expect (extract-evens empty) empty)
 
-(define extract-evens
+#;(define extract-evens
   (lambda (list)
     (cond
       ((empty? list) empty)
@@ -366,14 +366,18 @@ Expression Problem:
            (cons (first list)
                  (extract-evens (rest list)))
            (extract-evens (rest list)))))))
+(define extract-evens
+  (lambda (list)
+    (list-extract even? list)))
 
+; Aus einer Liste alle ungeraden Zahlen extrahieren.
 (: extract-odds (list-of-numbers -> list-of-numbers))
 
 (check-expect (extract-odds (cons 1 (cons 2 (cons 3 empty))))
               (cons 1 (cons 3 empty)))
 (check-expect (extract-odds empty) empty)
 
-(define extract-odds
+#;(define extract-odds
   (lambda (list)
     (cond
       ((empty? list) empty)
@@ -385,8 +389,6 @@ Expression Problem:
 (define extract-odds
   (lambda (list)
     (list-extract odd? list)))
-
-
 
 ; eine Liste mit einem Prädikat filtern
 (: list-extract ((number -> boolean)
