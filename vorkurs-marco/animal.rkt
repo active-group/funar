@@ -418,4 +418,5 @@ Expression Problem:
                  (list-extract predicate (rest list)))
            (list-extract predicate (rest list)))))))
 
-
+; wende eine funktion auf alle werte einer liste an
+(: list-map ((%a -> %b) (list-of %a) -> (list-of %b)))
