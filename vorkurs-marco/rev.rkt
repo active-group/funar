@@ -13,7 +13,7 @@
       ((empty? list) empty) ; oder list
       ((cons? list)
        (append-element ; ich wünsche eine funktion die das macht (Wunschdenken :))
-        (rev (cons-rest list))
+        (rev (rest list))
         (cons-first list))))))
 
 ; Hänge ein Elmenent _hinten_ an eine Liste an
@@ -23,3 +23,9 @@
               (list 42))
 (check-expect (append-element (list 1 2 3) 4)
               (list 1 2 3 4))
+
+(define append-element
+  (lambda (list element)
+    (cond
+      ((empty? list) ...)
+      ((cons? list) ...))))
