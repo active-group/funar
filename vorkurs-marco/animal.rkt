@@ -344,6 +344,12 @@ Expression Problem:
        (op (first list)
            (list-fold op zero (rest list)))))))
 
+#;(define list-up-to
+  (lambda (n)
+    (if (= n 0)
+        empty
+        (cons n (list-up-to (- n 1))))))
+
 ; Aufgabe 2: Aus einer Liste alle geraden Zahlen extrahieren.
 (: extract-evens (list-of-numbers -> list-of-numbers))
 
