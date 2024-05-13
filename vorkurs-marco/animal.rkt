@@ -84,7 +84,7 @@
           60)
        (time-minute time))))
 
-; Aufgaben: Aus Minuten nach Mitternacht die Uhrzeit berechnen.
+; Aufgabe: Aus Minuten nach Mitternacht die Uhrzeit berechnen.
 
 
 
