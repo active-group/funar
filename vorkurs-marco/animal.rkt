@@ -45,8 +45,13 @@
         (fall2 konsequente2))))
 
 
+; Uhrzeiten
+(define hour (signature (integer-from-to 0 23)))
+(define minute (signature (integer-from-to 0 59)))
 
-
+; Eine Uhrzeite besteht aus
+; - Stunde - UND -
+; - Minuten
 
 
 
