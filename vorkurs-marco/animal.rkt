@@ -280,8 +280,8 @@ Expression Problem:
     (cond
       ((empty? list) 0)
       ((cons? list)
-       (+ (cons-first list)
-          (list-sum (cons-rest list)))))))
+       (+ (first list)
+          (list-sum (rest list)))))))
 
 
 
