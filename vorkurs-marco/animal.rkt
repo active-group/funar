@@ -211,7 +211,7 @@
       ((dillo? animal) (run-over-dillo animal))
       ((parrot? animal) (run-over-parrot animal)))))
 
-(define feed-animal
+#;(define feed-animal
   (lambda (animal)
     (cond
       ((dillo? animal) (feed-dillo animal))
