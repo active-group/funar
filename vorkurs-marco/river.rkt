@@ -3,6 +3,7 @@
 ; Ein Fluss ist eins der folgenden:
 ; - ein Bach
 ; - ein Zusammenfluss
+; gemischte Daten
 (define river
   (signature (mixed creek confluence)))
 
@@ -50,4 +51,9 @@
 
 (define flows-from?
   (lambda (location river)
+    ; abbruchbedingung?
+    (cond
+      ((creek? river)
+       (string=? location (creek-origin river)))
+      ((confluence? river) ...))))
     
