@@ -439,8 +439,21 @@ Expression Problem:
         (f (first list))
         (list-map f (rest list)))))))
 
+; Eine Liste von Tieren auf dem texanischen Highway überfahren
+(define highway (cons dillo1 (cons dillo2 (cons hallo (cons ciao empty)))))
 
+(: run-over-animals ((list-of animal) -> (list-of animal)))
 
+(check-expect (run-over-animals highway)
+              (cons (make-dillo #f 33)
+                    (cons dillo2
+                          (cons (make-parrot "" 3)
+                                (cons (make-parrot "" 2)
+                                      empty)))))
+
+(define run-over-animals
+  (lambda (animals)
+    (list-map run-over-animal animals)))
 
 
 
