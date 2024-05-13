@@ -319,21 +319,13 @@ Expression Problem:
     list-of-numbers
     -> number))
 
-(check-expect (list-fold +
-                         0
-                         empty)
+(check-expect (list-fold + 0 empty)
               0)
-(check-expect (list-fold +
-                         0
-                         list3)
+(check-expect (list-fold + 0 list3)
               14)
-(check-expect (list-fold *
-                         1
-                         empty)
+(check-expect (list-fold * 1 empty)
               1)
-(check-expect (list-fold *
-                         1
-                         list3)
+(check-expect (list-fold * 1 list3)
               40)
 
 (define list-fold ; auch bekannt als reduce, ...
