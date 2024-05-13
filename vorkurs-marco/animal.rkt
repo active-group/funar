@@ -400,6 +400,7 @@ Expression Problem:
 (check-expect (list-extract even?
                             (cons 1 (cons 2 (cons 3 empty))))
               (cons 2 empty))
+
 (define list-extract ; filter
   (lambda (predicate list)
     (cond
