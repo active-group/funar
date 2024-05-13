@@ -456,5 +456,20 @@ Expression Problem:
     (list-map run-over-animal animals)))
 
 
+; die summe aller geraden zahlen
+(: sum-evens (list-of-numbers -> number))
+
+(check-expect (sum-evens empty) 0)
+(check-expect (sum-evens (cons 1 (cons 2 (cons 3 (cons 4 empty)))))
+              6)
+(define sum-evens
+  (lambda (list)
+    (list-fold + 0 (list-extract even? list))))
+
+; Aufgabe: Eine Liste umdrehen
+(: reverse ((list-of %a) -> (list-of %a)))
+
+(check-expect (reverse (cons 1 (cons 2 empty)))
+              (cons 2 (cons 1 empty)))
 
 
