@@ -287,7 +287,7 @@ Expression Problem:
 (: list-product (list-of-numbers -> number))
 
 ; Aufgabe 2: Aus einer Liste alle geraden Zahlen extrahieren.
-(: extract-evens (list-of-numbers -> list-of-numbers))
+;(: extract-evens (list-of-numbers -> list-of-numbers))
 
 
 
