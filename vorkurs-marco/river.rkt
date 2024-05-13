@@ -49,6 +49,9 @@
 (check-expect (flows-from? "Tübingen" neckar2)
               #f)
 
+; schablone für gemische daten
+; schablone für zusammengesetzte daten
+; schablone für daten mit selbstbezug
 (define flows-from?
   (lambda (location river)
     ; abbruchbedingung?
@@ -56,9 +59,9 @@
       ((creek? river)
        (string=? location (creek-origin river)))
       ((confluence? river)
-       ... (confluence-location river) ...
-       .. (confluence-hauptfluss river) ...
-       ... (confluence-nebenfluss river) ...
-       
-       ))))
-    
+       ; entweder die location ist schon 'hier'
+       ; oder sie ist im hauptfluss
+       ; oder sie ist im nebenfluss
+       (or (string=? location (confluence-location river))
+           (flows-from? location (confluence-hauptfluss river))
+           (flows-from? location (confluence-nebenfluss river)))))))
