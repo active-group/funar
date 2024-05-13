@@ -15,3 +15,11 @@
        (append-element ; ich wünsche eine funktion die das macht (Wunschdenken :))
         (rev (cons-rest list))
         (cons-first list))))))
+
+; Hänge ein Elmenent _hinten_ an eine Liste an
+(: append-element ((list-of %a) %a -> (list-of %a)))
+
+(check-expect (append-element empty 42)
+              (list 42))
+(check-expect (append-element (list 1 2 3) 4)
+              (list 1 2 3 4))
