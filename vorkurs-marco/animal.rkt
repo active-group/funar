@@ -109,6 +109,9 @@
 ; - ein Papagei
 ; gemischte Daten
 
+(define animal
+  (signature (mixed dillo parrot)))
+
 ; Ein Gürteltier besteht aus
 ; - lebendig oder tot? - UND -
 ; - Gewicht
@@ -116,6 +119,7 @@
 
 (define-record dillo ; signatur
   make-dillo ; konstruktor
+  dillo? ; prädikat
   (dillo-alive? boolean)
   (dillo-weight number))
 
@@ -188,3 +192,16 @@
   (lambda (parrot)
     (make-parrot "" (parrot-weight parrot))))
 
+; Ein Tier auf dem texanischen Highway überfahren
+(: run-over-animal (animal -> animal))
+
+(check-expect (run-over-animal dillo1)
+              (make-dillo #f 33))
+(check-expect (run-over-animal hallo)
+              (make-parrot ""
+                           3))
+
+(define run-over-animal
+  (lambda (animal)
+    (cond
+      )))
