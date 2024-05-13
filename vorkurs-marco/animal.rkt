@@ -401,7 +401,7 @@ Expression Problem:
                             (cons 1 (cons 2 (cons 3 empty))))
               (cons 2 empty))
 
-(define list-extract ; filter
+(define list-extract ; auch bekannt als filter, ...
   (lambda (predicate list)
     (cond
       ((empty? list) empty)
