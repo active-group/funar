@@ -273,7 +273,7 @@ Expression Problem:
 (check-expect (list-sum list3)
               14)
 
-(define list-sum
+#;(define list-sum
   ; gemischte daten
   ; -> zusammengesetzte daten mit selbstbezug
   (lambda (list)
@@ -282,6 +282,9 @@ Expression Problem:
       ((cons? list)
        (+ (first list)
           (list-sum (rest list)))))))
+(define list-sum
+  (lambda (list)
+    (list-fold + 0 list)))
 
 ; Aufgabe 1: Produkt der Listenelemente.
 (: list-product (list-of-numbers -> number))
@@ -293,13 +296,16 @@ Expression Problem:
 (check-expect (list-product list3)
               40)
 
-(define list-product
+#;(define list-product
   (lambda (list)
     (cond
       ((empty? list) 1)
       ((cons? list)
        (* (first list)
           (list-product (rest list)))))))
+(define list-product
+  (lambda (list)
+    (list-fold * 1 list)))
 
 ; Abstraktion:
 ; 1. letztes Mal kopieren
@@ -339,7 +345,21 @@ Expression Problem:
            (list-fold op zero (rest list)))))))
 
 ; Aufgabe 2: Aus einer Liste alle geraden Zahlen extrahieren.
-;(: extract-evens (list-of-numbers -> list-of-numbers))
+(: extract-evens (list-of-numbers -> list-of-numbers))
+
+(check-expect (extract-evens (cons 1 (cons 2 (cons 3 empty))))
+              (cons 2 empty))
+(check-expect (extract-evens empty) empty)
+
+(define extract-evens
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (if (even? (first list))
+           (cons (first list)
+                 (extract-evens (rest list)))
+           (extract-evens (rest list)))))))
 
 
 
