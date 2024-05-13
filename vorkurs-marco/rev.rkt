@@ -58,5 +58,6 @@
       ((empty? list) acc)
       ((cons? list)
        (rev*-worker ; Endrekursion/tail recursion
+        ; proper tail recursion
         (cons (first list) acc)
         (rest list))))))
