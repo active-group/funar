@@ -124,6 +124,7 @@
   (dillo-weight number))
 
 (: make-dillo (boolean number -> dillo))
+(: dillo? (any -> boolean))
 
 ; lebendiges dillo mit 33kg
 (define dillo1 (make-dillo #t 33))
@@ -173,6 +174,7 @@
 ; zusammengesetzte Daten
 (define-record parrot
   make-parrot
+  parrot? ; prädikat
   (parrot-sentence string)
   (parrot-weight number))
 
