@@ -283,6 +283,13 @@ Expression Problem:
        (+ (first list)
           (list-sum (rest list)))))))
 
+; Aufgabe 1: Produkt der Listenelemente.
+(: list-product (list-of-numbers -> number))
+
+; Aufgabe 2: Aus einer Liste alle geraden Zahlen extrahieren.
+(: extract-evens (list-of-numbers -> list-of-numbers))
+
+
 
 
 
