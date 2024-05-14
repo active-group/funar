@@ -285,5 +285,9 @@ listMap f (x:xs) = (f x) : (listMap f xs)
 
 -- nicht-strikte Auswertung
 -- (fast) alle anderen Sprachen: strikt
+-- strikt: alle Argumente eines Funktionsaufrufs werden ausgewertet,
+-- bevor die Funktion aufgerufen wird
+-- Haskell: Ausdrücke werden nur ausgewertet, wenn ihr Ergebnis benötigt wird
 integersFrom :: Integer -> [Integer]
-integersFrom n = n : (integersFrom (n+1)) 
+integersFrom n = n : (integersFrom (n+1))
+
