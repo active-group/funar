@@ -8,7 +8,6 @@ dist-newstyle/
 .bsp/
 .idea/
 .metals/
-.vscode/
 target/
 
 *.aux
