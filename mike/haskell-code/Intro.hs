@@ -149,14 +149,20 @@ feedAnimal :: Animal -> (Weight -> Animal) -- nur 1stellige Funktionen in Haskel
 feedAnimal (MkDillo Alive weight) amount = MkDillo Alive (weight + amount)
 feedAnimal dillo@(MkDillo Dead weight) amount = dillo
 feedAnimal (MkParrot sentence weight) amount =
-    MkParrot "" (weight + amount)
+    MkParrot sentence (weight + amount)
 
 feedAnimal' :: Weight -> Animal -> Animal
 feedAnimal' amount (MkDillo Alive weight) = MkDillo Alive (weight + amount)
 feedAnimal' amount dillo@(MkDillo Dead weight) = dillo
 feedAnimal' amount (MkParrot sentence weight) =
-  MkParrot "" (weight + amount)
+  MkParrot sentence (weight + amount)
 
+feedAnimal'' :: Weight -> Animal -> Animal
+feedAnimal'' amount animal = feedAnimal animal amount
+
+swap :: (Animal -> Weight -> Animal) -> (Weight -> Animal -> Animal)
+swap f =
+    \ weight -> \ animal -> f animal weight
 
 -- >>> feedAnimal dillo1 5
 -- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
