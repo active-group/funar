@@ -183,3 +183,9 @@ feedAnimal'''(amount, (MkParrot sentence weight)) =
 
 tuplify :: (a -> b -> c) -> ((a, b) -> c)
 tuplify f = \ (a, b) -> f a b
+
+-- Haskell Curry -> to curry
+-- Moses Schönfinkel -> schönfinkeln
+ 
+-- >>> tuplify feedAnimal (dillo1, 5)
+-- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
