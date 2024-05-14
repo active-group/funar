@@ -151,6 +151,9 @@ feedAnimal dillo@(MkDillo Dead weight) amount = dillo
 feedAnimal (MkParrot sentence weight) amount =
     MkParrot sentence (weight + amount)
 
+-- >>> (feedAnimal dillo1) 5
+-- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
+
 feedAnimal' :: Weight -> Animal -> Animal
 feedAnimal' amount (MkDillo Alive weight) = MkDillo Alive (weight + amount)
 feedAnimal' amount dillo@(MkDillo Dead weight) = dillo
@@ -160,9 +163,10 @@ feedAnimal' amount (MkParrot sentence weight) =
 feedAnimal'' :: Weight -> Animal -> Animal
 feedAnimal'' amount animal = feedAnimal animal amount
 
-swap :: (Animal -> Weight -> Animal) -> (Weight -> Animal -> Animal)
-swap f =
-    \ weight -> \ animal -> f animal weight
+-- swap :: (Animal -> Weight -> Animal) -> (Weight -> Animal -> Animal)
+swap :: (a -> b -> c) -> (b -> a -> c)
+swap f = \ b -> \ a -> f a b
 
--- >>> feedAnimal dillo1 5
+-- >>> swap feedAnimal 5 dillo1
 -- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
+
