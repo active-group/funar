@@ -94,6 +94,7 @@ runOverDillo :: Dillo -> Dillo
 runOverDillo (MkDillo _ weight) = MkDillo Dead weight -- _: "don't care"
 -}
 
+{-
 data Dillo = MkDillo
   { -- Konstruktor
     dilloLiveness :: Liveness, -- Selektor
@@ -102,11 +103,11 @@ data Dillo = MkDillo
   deriving Show
 
 data Animal =
-    Dillo
+    Dillo -- 
 
 dillo1 = MkDillo {dilloLiveness = Alive, dilloWeight = 10}
+-}
 
-{-
 -- algebraischer Datentyp
 data Animal =
     MkDillo {
@@ -115,4 +116,3 @@ data Animal =
     }
   | MkParrot String Weight 
   deriving Show
--}
