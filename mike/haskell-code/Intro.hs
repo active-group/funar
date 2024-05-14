@@ -182,7 +182,16 @@ feedAnimal'''(amount, (MkParrot sentence weight)) =
 -- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
 
 tuplify :: (a -> b -> c) -> ((a, b) -> c)
-tuplify f = \ (a, b) -> f a b
+-- tuplify f = \ (a, b) -> f a b
+tuplify f (a, b) = f a b
+
+tuplify' f tuple = f (fst tuple) (snd tuple)
+
+untuplify :: ((a, b) -> c) -> (a -> b -> c)
+-- untuplify f a b = f (a, b)
+untuplify f =
+  \a -> \b -> f (a, b)  
+
 
 -- Haskell Curry -> to curry
 -- Moses Schönfinkel -> schönfinkeln
