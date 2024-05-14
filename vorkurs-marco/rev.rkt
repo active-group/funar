@@ -124,4 +124,5 @@ foldl :: (b -> a -> b) -> b -> [a] -> b
                           (first list)
                           acc))))))
     
-  
+
+; list-map in endrekursiv
