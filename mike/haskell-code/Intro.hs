@@ -145,6 +145,7 @@ feedAnimal dillo@(MkDillo liveness weight) amount = -- Alias-Pattern
 -}
 
 -- Optimierung
+feedAnimal :: Animal -> (Weight -> Animal) -- nur 1stellige Funktionen in Haskell
 feedAnimal (MkDillo Alive weight) amount = MkDillo Alive (weight + amount)
 feedAnimal dillo@(MkDillo Dead weight) amount = dillo
 feedAnimal (MkParrot sentence weight) amount =
