@@ -167,6 +167,7 @@ feedAnimal'' amount animal = feedAnimal animal amount
 swap :: (a -> b -> c) -> (b -> a -> c) -- Typvariablen (Kleinbuchstaben)
 -- swap f = \ b -> \ a -> f a b
 
+-- eingebaut als "flip"
 swap f b a = f a b
 
 -- >>> swap feedAnimal 5 dillo1
@@ -181,20 +182,31 @@ feedAnimal'''(amount, (MkParrot sentence weight)) =
 -- >>> feedAnimal'''(5, dillo1)
 -- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
 
+-- "entschönfinkeln", eingebaut als uncurry
 tuplify :: (a -> b -> c) -> ((a, b) -> c)
 -- tuplify f = \ (a, b) -> f a b
 tuplify f (a, b) = f a b
 
 tuplify' f tuple = f (fst tuple) (snd tuple)
 
+-- "schönfinkeln", eingebaut als curry
 untuplify :: ((a, b) -> c) -> (a -> b -> c)
 -- untuplify f a b = f (a, b)
 untuplify f =
   \a -> \b -> f (a, b)  
-
 
 -- Haskell Curry -> to curry
 -- Moses Schönfinkel -> schönfinkeln
  
 -- >>> tuplify feedAnimal (dillo1, 5)
 -- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
+
+-- (2dimensionale Ebene)
+-- Eine (geometrische) Figur ("Shape") ist eins der folgenden:
+-- - Kreis
+-- - Quadrat
+-- - eine Überlagerung zweier geometrischer Figuren
+
+-- Entwerfe eine Datenrepräsentation für geometrische Figuren
+-- und schreibe eine Funktion, die feststellt, ob ein Punkt
+-- innerhalb oder außerhalb einer gegebenen Figur liegt.
