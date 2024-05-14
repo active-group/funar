@@ -288,6 +288,7 @@ listMap f (x:xs) = (f x) : (listMap f xs)
 -- strikt: alle Argumente eines Funktionsaufrufs werden ausgewertet,
 -- bevor die Funktion aufgerufen wird
 -- Haskell: Ausdrücke werden nur ausgewertet, wenn ihr Ergebnis benötigt wird
+-- lazy evaluation
 integersFrom :: Integer -> [Integer]
 integersFrom n = n : (integersFrom (n+1))
 
