@@ -269,3 +269,9 @@ listSum (x:xs) = x + listSum xs
 -- >>> listSum [5,12,15]
 -- 32
 
+listFilter :: (a -> Bool) -> [a] -> [a]
+listFilter p [] = []
+listFilter p (x:xs) = 
+  if p x 
+  then x : listFilter p xs 
+  else listFilter p xs
