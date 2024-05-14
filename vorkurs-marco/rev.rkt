@@ -67,3 +67,31 @@ Haskell:
 foldr :: (a -> b -> b) -> b -> [a] -> b
 foldl :: (b -> a -> b) -> b -> [a] -> b
 |#
+
+(: list-sum ((list-of number) -> number))
+
+(check-expect (list-sum (list 1 2 3 4)) 10)
+
+(define list-sum
+  (lambda (list)
+    (cond
+      ((empty? list) 0)
+      ((cons? list)
+       (+ (first list)
+          (list-sum (rest list)))))))
+
+
+; Schablone:
+#;(define list-sum*-worker
+  (lambda (list acc)
+    (cond
+      ((empty? list) acc)
+      ((cons?`list)
+       (list-sum*-worker (rest list)
+                         (...
+                          (first list)
+                          ...
+                          acc
+                          ...))))))
+    
+  
