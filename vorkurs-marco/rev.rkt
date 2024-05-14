@@ -80,6 +80,21 @@ foldl :: (b -> a -> b) -> b -> [a] -> b
        (+ (first list)
           (list-sum (rest list)))))))
 
+; Kontext von list-sum
+; (+ (first list)
+;    [])
+; Repräsentation des Kontext als Funktion:
+; (lambda (x) (+ (first list) x))
+
+(define list-sum*
+  (lambda (list k) ; <-- Kontext des Funktionsaufrufs als Funktion
+    ; k: Continuation, diese Art zu programmieren: CPS - Continuation-Passing Style
+    (cond
+      ((empty? list) (k 0))
+      ((cons? list)
+       (list-sum* (rest list)
+                  (lambda (x) (k (+ (first list) x))))))))
+           
 
 ; Schablone:
 #;(define list-sum*-worker
