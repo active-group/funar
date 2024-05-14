@@ -316,7 +316,13 @@ primes :: [Integer]
 primes = sieve (integersFrom 2)
 
 data Optional a = Null | Result a
-  deriving (Show, Eq)
+  deriving Show
+
+instance Eq a => Eq (Optional a) where
+  (==) Null Null = True
+  (==) Null (Result _) = False
+  (==) (Result _) Null = False
+  (==) (Result a1) (Result a2) = a1 == a2
 
 -- data Maybe a = Nothing | Just a
 
