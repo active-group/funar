@@ -296,3 +296,11 @@ strikeMultiples :: Integer -> [Integer] -> [Integer]
 strikeMultiples n list =
   listFilter (\ n' -> mod n' n /= 0) list
 
+-- >>> strikeMultiples 2 [1,2,3,4,5,6,7,8,9,10]
+-- [1,3,5,7,9]
+
+sieve :: [Integer] -> [Integer]
+sieve [] = []
+-- Unterstellung: x ist eine Primzahl
+sieve (x:xs) = x : sieve (strikeMultiples x xs)
+
