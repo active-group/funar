@@ -33,6 +33,14 @@ data Pet =
   | Fruitfly
   deriving Show
 
+instance Eq Pet where
+  (==) :: Pet -> Pet -> Bool
+  (==) Dog Dog = True
+  (==) Cat Cat = True
+  (==) Snake Snake = True
+  (==) Fruitfly Fruitfly = True
+  (==) _ _ = False
+
 isCute :: Pet -> Bool
 -- Schablone: eine Gleichung pro Fall
 -- isCute Dog = undefined
@@ -327,16 +335,15 @@ listIndex element (x:xs) =
 
 -- >>> listIndex "Mike" ["Felix", "Daniel", "Mike", "Thomas"]
 -- Result 2
+
 --- >>> listIndex Dog [Cat, Cat, Fruitfly, Snake, Dog]
--- No instance for (Eq Pet) arising from a use of `listIndex'
--- In the expression: listIndex Dog [Cat, Cat, Fruitfly, Snake, Dog]
--- In an equation for `it_a6ZS2':
---     it_a6ZS2 = listIndex Dog [Cat, Cat, Fruitfly, Snake, Dog]
 
 -- >>> :type (==)
 -- (==) :: Eq a => a -> a -> Bool
 
 -- Eq ist eine Typklasse, denke "Interface"
+-- instance: Implementierung einer Typklasse 
+
 -- >>> :info Eq
 -- type Eq :: * -> Constraint
 -- class Eq a where
