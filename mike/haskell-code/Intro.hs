@@ -349,5 +349,8 @@ listIndex element (x:xs) =
 -- class Eq a where
 --   (==) :: a -> a -> Bool
 --   (/=) :: a -> a -> Bool
---   {-# MINIMAL (==) | (/=) #-}
---   	-- Defined in ‘GHC.Classes’
+
+-- >>> :info Show
+-- type Show :: * -> Constraint
+-- class Show a where
+--   show :: a -> String
