@@ -283,5 +283,7 @@ listMap :: (a -> b) -> [a] -> [b]
 listMap f [] = []
 listMap f (x:xs) = (f x) : (listMap f xs)
 
+-- nicht-strikte Auswertung
+-- (fast) alle anderen Sprachen: strikt
 integersFrom :: Integer -> [Integer]
 integersFrom n = n : (integersFrom (n+1)) 
