@@ -292,3 +292,7 @@ listMap f (x:xs) = (f x) : (listMap f xs)
 integersFrom :: Integer -> [Integer]
 integersFrom n = n : (integersFrom (n+1))
 
+strikeMultiples :: Integer -> [Integer] -> [Integer]
+strikeMultiples n list =
+  listFilter (\ n' -> mod n' n /= 0) list
+
