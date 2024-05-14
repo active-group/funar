@@ -151,6 +151,11 @@ feedAnimal dillo@(MkDillo Dead weight) amount = dillo
 feedAnimal (MkParrot sentence weight) amount =
     MkParrot "" (weight + amount)
 
+feedAnimal' :: Weight -> Animal -> Animal
+feedAnimal' amount (MkDillo Alive weight) = MkDillo Alive (weight + amount)
+feedAnimal' amount dillo@(MkDillo Dead weight) = dillo
+feedAnimal' amount (MkParrot sentence weight) =
+  MkParrot "" (weight + amount)
 
 
 -- >>> feedAnimal dillo1 5
