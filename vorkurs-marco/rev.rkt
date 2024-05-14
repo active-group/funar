@@ -86,12 +86,22 @@ foldl :: (b -> a -> b) -> b -> [a] -> b
   (lambda (list acc)
     (cond
       ((empty? list) acc)
-      ((cons?`list)
+      ((cons? list)
        (list-sum*-worker (rest list)
                          (...
                           (first list)
                           ...
                           acc
                           ...))))))
+
+(define list-sum*-worker
+  (lambda (list acc)
+    (cond
+      ((empty? list) acc)
+      ((cons? list)
+       (list-sum*-worker (rest list)
+                         (+
+                          (first list)
+                          acc))))))
     
   
