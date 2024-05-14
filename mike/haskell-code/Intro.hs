@@ -304,3 +304,4 @@ sieve [] = []
 -- Unterstellung: x ist eine Primzahl
 sieve (x:xs) = x : sieve (strikeMultiples x xs)
 
+primes = sieve (integersFrom 2)
