@@ -113,6 +113,8 @@ foldl :: (b -> a -> b) -> b -> [a] -> b
               10)
 
 (define list-sum*-worker
+  ; Schleifeninvariante:
+  ; acc ist die Summe aller bisher gesehenen Elemente
   (lambda (list acc)
     (cond
       ((empty? list) acc)
