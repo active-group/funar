@@ -312,8 +312,10 @@ data Optional a = Null | Result a
 
 -- data Maybe a = Nothing | Just a
 
+-- Eq a: Constraint
+
 -- Index eines Elements innerhalb einer Liste
-listIndex :: a -> [a] -> Optional Integer
+listIndex :: Eq a => a -> [a] -> Optional Integer
 listIndex element [] = Null
 listIndex element (x:xs) =
   if x == element
