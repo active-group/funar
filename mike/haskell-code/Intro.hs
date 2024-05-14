@@ -270,8 +270,15 @@ listSum (x:xs) = x + listSum xs
 -- 32
 
 listFilter :: (a -> Bool) -> [a] -> [a]
-listFilter p [] = []
+listFilter _ [] = []
 listFilter p (x:xs) = 
   if p x 
   then x : listFilter p xs 
   else listFilter p xs
+
+-- >>> listFilter (\x -> x >= 0) [1,-5, 3]
+-- [1,3]
+
+listMap :: (a -> b) -> [a] -> [b]
+listMap f [] = []
+listMap f (x:xs) = (f x) : (listMap f xs)
