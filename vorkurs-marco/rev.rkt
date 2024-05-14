@@ -94,6 +94,9 @@ foldl :: (b -> a -> b) -> b -> [a] -> b
                           acc
                           ...))))))
 
+(check-expect (list-sum*-worker (list 1 2 3 4) 0)
+              10)
+
 (define list-sum*-worker
   (lambda (list acc)
     (cond
