@@ -165,8 +165,18 @@ feedAnimal'' amount animal = feedAnimal animal amount
 
 -- swap :: (Animal -> Weight -> Animal) -> (Weight -> Animal -> Animal)
 swap :: (a -> b -> c) -> (b -> a -> c)
-swap f = \ b -> \ a -> f a b
+-- swap f = \ b -> \ a -> f a b
+
+swap f b a = f a b
 
 -- >>> swap feedAnimal 5 dillo1
 -- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
 
+feedAnimal''' :: (Weight, Animal) -> Animal
+feedAnimal'''(amount, (MkDillo Alive weight)) = MkDillo Alive (weight + amount)
+feedAnimal'''(amount, dillo@(MkDillo Dead weight)) = dillo
+feedAnimal'''(amount, (MkParrot sentence weight)) =
+  MkParrot sentence (weight + amount)
+  
+-- >>> feedAnimal'''(5, dillo1)
+-- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
