@@ -316,7 +316,7 @@ primes :: [Integer]
 primes = sieve (integersFrom 2)
 
 data Optional a = Null | Result a
-  deriving Show
+  deriving (Show, Eq)
 
 -- data Maybe a = Nothing | Just a
 
