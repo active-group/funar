@@ -304,4 +304,21 @@ sieve [] = []
 -- Unterstellung: x ist eine Primzahl
 sieve (x:xs) = x : sieve (strikeMultiples x xs)
 
+primes :: [Integer]
 primes = sieve (integersFrom 2)
+
+data Optional a = Null | Result a
+  deriving Show
+
+-- data Maybe a = Nothing | Just a
+
+-- Index eines Elements innerhalb einer Liste
+listIndex :: a -> [a] -> Optional Integer
+listIndex element [] = Null
+listIndex element (x:xs) =
+  if x == element
+  then Result 0
+  else
+    case listIndex element xs of
+      Null -> Null
+      Result index -> Result (index + 1)
