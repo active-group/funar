@@ -206,6 +206,14 @@ untuplify f =
 -- Haskell Curry -> to curry
 -- Moses Schönfinkel -> schönfinkeln
  
+-- Funktionskomposition
+o :: (b -> c) -> (a -> b) -> (a -> c)
+o f g = \ a -> f (g a)
+-- eingebaut als . (Infix)
+
+-- "Pfeile" + Komposition + Assoziativgesetz: Kategorie
+-- f . (g . h) = (f . g) . h
+
 -- >>> tuplify feedAnimal (dillo1, 5)
 -- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
 
