@@ -84,3 +84,10 @@ p1'' = do put "Mike" 10
           put "Mike" (x * 2)
           y <- get "Mike"
           return (show (x+y))
+
+runDB :: DB a -> Map Key Value -> (a, Map Key Value)
+runDB (Get key callback) mp =
+    runDB (callback (mp ! key)) mp
+runDB (Put key value callback) mp =
+    runDB (callback ()) (Map.insert key value mp)
+runDB (Return result) mp = (result, mp)
