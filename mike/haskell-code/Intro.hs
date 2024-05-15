@@ -571,3 +571,8 @@ fmap2 function fa fb =
 -- Just 3
 -- >>> fmap2 (+) Nothing (Just 2)
 -- Nothing
+
+-- Aufgabe:
+
+instance Applicative (Validation error) where
+  --
