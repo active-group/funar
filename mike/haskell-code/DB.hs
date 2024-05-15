@@ -72,9 +72,10 @@ instance Functor DB where
 instance Applicative DB where
 
 instance Monad DB where
-    (>>=) = splice
+    (>>=) = splice -- "bind"
     return = Return
 
+p1'' :: DB String
 p1'' = do put "Mike" 10
           x <- get "Mike"
           put "Mike" (x * 2)
