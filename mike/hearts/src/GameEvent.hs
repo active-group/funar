@@ -12,6 +12,7 @@ import Data.Map (Map)
 -- Redundanz OK
 -- fachlich getrieben
 
+{-
 data GameEvent =
     CardsShuffled [Card]
   | CardsDealt Hand Hand Hand Hand
@@ -22,7 +23,7 @@ data GameEvent =
 -- Command: Wunsch, daß etwas passieren soll
 data GameCommand =
     PlayCard Card Player
-
+-}
 
 -- Antipattern: Events und Commands sind das gleiche
 -- Antipattern:
@@ -33,5 +34,21 @@ data GameCommand =
 
 -- ->
 
--- data fInputCommand { input1 :: Input1, input2 :: Input2, input3 :: Input3}
+-- data MkfInputCommand { input1 :: Input1, input2 :: Input2, input3 :: Input3}
 -- f command = ... input1 command ... input2 command ... input3 command
+
+-- f (MkfInputCommand input1 input2 input3)
+
+data GameEvent
+  = HandDealt Player Hand
+  | PlayerTurnChanged Player
+  | LegalCardPlayed Player Card
+  | TrickTaken Player Trick
+  | IllegalCardAttempted Player Card
+  | GameEnded Player
+  deriving (Show, Eq)
+
+data GameCommand
+  = DealHands (Map Player Hand)
+  | PlayCard Player Card
+  deriving (Show, Eq)
