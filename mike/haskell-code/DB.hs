@@ -50,6 +50,13 @@ put key value = Put key value Return
 
 --        DB a -> (a -> DB b) -> DB b
 
+-- eleganter: a -> DB b  "Kleisli arrows"
+compose :: (b -> DB c) -> (a -> DB b) -> (a -> DB c)
+compose bc ab a =
+    do b <- ab a
+       c <- bc b
+       return c
+
 splice :: DB a -> (a -> DB b) -> DB b
 splice (Get key callback) next =
     Get key (\value -> splice (callback value) next)
@@ -91,3 +98,6 @@ runDB (Get key callback) mp =
 runDB (Put key value callback) mp =
     runDB (callback ()) (Map.insert key value mp)
 runDB (Return result) mp = (result, mp)
+
+-- >>> runDB p1'' Map.empty
+-- ("30",fromList [("Mike",20)])
