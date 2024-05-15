@@ -592,3 +592,5 @@ data DomainObject validationState = MkDomainObject {
   domainObjectFoo :: Integer
   -- 
 }
+
+-- validateDraft :: DomainObject Draft -> Validation String (DomainObject Intermediate)
