@@ -410,7 +410,74 @@ instance Semigroup [b] where
   --combine list1 list2 = list1 ++ list2
   combine = (++)
 
+-- >>> combine [1,2,3] [4,5,6]
+-- [1,2,3,4,5,6]
+
+newtype AdditiveIntegers = MkAdditive Integer
+newtype MultiplicativeIntegers = MkMultiplicative Integer
+
+instance Semigroup AdditiveIntegers where
+  combine :: AdditiveIntegers -> AdditiveIntegers -> AdditiveIntegers
+  combine (MkAdditive n1) (MkAdditive n2) = MkAdditive (n1+n2)
+
+instance Semigroup MultiplicativeIntegers where
+  combine :: MultiplicativeIntegers -> MultiplicativeIntegers -> MultiplicativeIntegers
+  combine (MkMultiplicative n1) (MkMultiplicative n2) = MkMultiplicative (n1+n2)
+
+instance (Semigroup b, Semigroup c) => Semigroup (b, c) where
+  combine :: (b, c) -> (b, c) -> (b, c)
+  combine (b1, c1) (b2, c2) =
+    (combine b1 b2, combine c1 c2 )
+
+instance Semigroup Double where
+  combine :: Double -> Double -> Double
+  combine n1 n2 = n1 + n2
+
+-- Monoid
+-- Halbgruppe a mit zusätzlich:
+-- neutral :: a
+-- combine neutral x == combine x neutral == x
+
+-- Pfeil andersrum als bei instance!
+class Semigroup a => Monoid a where
+  -- combine neutral x == combine x neutral == x
+  neutral :: a
+
+instance Monoid [b] where
+  neutral :: [b]
+  neutral = []
+
+instance Monoid AdditiveIntegers where
+  neutral = MkAdditive 0
+
+instance Monoid MultiplicativeIntegers where
+  neutral = MkMultiplicative 1
+
+
+
+
+-- >>> combine (1.0, 2.0) (3.0, 4.0)
+-- (4.0,6.0)
+
 -- Notiz: Funktionskomposition
 
 
 -- neutrales Element
+
+-- >>> :info Num
+-- type Num :: * -> Constraint
+-- class Num a where
+--   (+) :: a -> a -> a
+--   (-) :: a -> a -> a
+--   (*) :: a -> a -> a
+--   negate :: a -> a
+--   abs :: a -> a
+--   signum :: a -> a
+--   fromInteger :: Integer -> a
+--   {-# MINIMAL (+), (*), abs, signum, fromInteger, (negate | (-)) #-}
+--   	-- Defined in ‘GHC.Num’
+-- instance Num Double -- Defined in ‘GHC.Float’
+-- instance Num Float -- Defined in ‘GHC.Float’
+-- instance Num Int -- Defined in ‘GHC.Num’
+-- instance Num Integer -- Defined in ‘GHC.Num’
+-- instance Num Word -- Defined in ‘GHC.Num’
