@@ -52,6 +52,7 @@ splice (Put key value callback) next =
     Put key value (\() -> splice (callback ()) next)
 splice (Return result) next = next result
 
+p1' :: DB String
 p1' = splice (put "Mike" 10) (\() ->
       splice (get "Mike") (\x ->
       splice (put "Mike" (x*2)) (\() ->
