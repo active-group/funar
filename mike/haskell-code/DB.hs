@@ -45,6 +45,8 @@ get key = Get key Return
 put :: Key -> Value -> DB ()
 put key value = Put key value Return
 
+--        DB a -> (a -> DB b) -> DB b
+
 splice :: DB a -> (a -> DB b) -> DB b
 splice (Get key callback) next =
     Get key (\value -> splice (callback value) next)
@@ -58,3 +60,23 @@ p1' = splice (put "Mike" 10) (\() ->
       splice (put "Mike" (x*2)) (\() ->
       splice (get "Mike") (\y ->
       Return (show (x+y))))))
+
+-- >>> :info Monad
+-- type Monad :: (* -> *) -> Constraint
+-- class Applicative m => Monad m where
+--   (>>=) :: m a -> (a -> m b) -> m b
+--   return :: a -> m a
+
+instance Functor DB where
+
+instance Applicative DB where
+
+instance Monad DB where
+    (>>=) = splice
+    return = Return
+
+p1'' = do put "Mike" 10
+          x <- get "Mike"
+          put "Mike" (x * 2)
+          y <- get "Mike"
+          return (show (x+y))
