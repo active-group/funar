@@ -335,6 +335,12 @@ optionalMap _ Null = Null
 optionalMap f (Result a) = Result (f a)
 
 -- >>> :info Functor
+-- type Functor :: (* -> *) -> Constraint
+-- class Functor f where
+--   fmap :: (a -> b) -> f a -> f b
+
+instance Functor Optional where
+  fmap = optionalMap
 
 -- Index eines Elements innerhalb einer Liste
 listIndex :: Eq a => a -> [a] -> Optional Integer
@@ -344,7 +350,7 @@ listIndex element (x:xs) =
   then Result 0
   else
     -- optionalMap (\index -> index + 1) (listIndex element xs)
-    optionalMap (+1) (listIndex element xs)
+    fmap (+1) (listIndex element xs)
     {-
     case listIndex element xs of
       Null -> Null
