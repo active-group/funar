@@ -1,5 +1,8 @@
 module DB where
 
+import Data.Map.Strict as Map
+import Data.Map.Strict (Map, (!))
+
 {-
 put "Mike" 10
 x = get "Mike"
