@@ -133,4 +133,6 @@ execDB db =
        result <- runSQLite db connection
        close connection
        return result
-       
+
+-- >>> execDB p1''
+-- "30"
