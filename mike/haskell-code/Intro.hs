@@ -576,3 +576,19 @@ fmap2 function fa fb =
 
 -- instance Applicative (Validation error) where
   --
+
+-- "interne Validierung"
+-- a -> Validation error b
+
+data Draft = Draft
+data Done = Done
+data Intermediate = Intermediate
+
+-- f :: DomainObject Done -> ...
+-- f' :: DomainObject a -> ...
+
+-- Phantomparameter
+data DomainObject validationState = MkDomainObject { 
+  domainObjectFoo :: Integer
+  -- 
+}
