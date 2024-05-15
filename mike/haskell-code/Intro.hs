@@ -492,3 +492,6 @@ foldMonoid list = foldr combine neutral list
 -- instance Num Int -- Defined in ‘GHC.Num’
 -- instance Num Integer -- Defined in ‘GHC.Num’
 -- instance Num Word -- Defined in ‘GHC.Num’
+
+-- Übungsaufgabe:
+-- sinnvolle Instanzen von Semigroup und Monoid für Optional a
