@@ -574,5 +574,5 @@ fmap2 function fa fb =
 
 -- Aufgabe:
 
-instance Applicative (Validation error) where
+-- instance Applicative (Validation error) where
   --
