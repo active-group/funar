@@ -372,3 +372,4 @@ listIndex element (x:xs) =
 --   max :: a -> a -> a
 --   min :: a -> a -> a
 
+-- sinnvolle Typklassen sind für universelle Konzepte
