@@ -271,7 +271,7 @@ list3 :: [Integer]
 list3 = [2, 5, 8]
 
 listSum :: [Integer] -> Integer
-listSum [] = 0
+listSum [] = 0 -- neutrale Element
 listSum (x:xs) = x + listSum xs
 
 -- >>> listSum [5,12,15]
@@ -372,4 +372,8 @@ listIndex element (x:xs) =
 --   max :: a -> a -> a
 --   min :: a -> a -> a
 
--- sinnvolle Typklassen sind für universelle Konzepte
+-- sinnvolle Typklassen sind für universelle Konzepte / Mathematik
+
+-- besonders nützlich:
+-- Halbgruppe, Monoid
+-- Funktor, applikative Funktoren, Monaden
