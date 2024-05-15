@@ -377,3 +377,40 @@ listIndex element (x:xs) =
 -- besonders nützlich:
 -- Halbgruppe, Monoid
 -- Funktor, applikative Funktoren, Monaden
+
+-- Algebraische Struktur:
+
+-- 1. eine Menge (Typ)
+-- 2. Operation(en)
+-- 3. Gleichungen
+
+-- "0 ist das neutrale Element bezüglich +"
+-- "1 ist das neutrale Element bezüglich *"
+
+-- Halbgruppe
+-- Typ a
+-- combine :: a -> a -> a
+-- Assoziativgesetz:
+-- op (op x y) z = op x (op y z)
+
+-- Beispiele:
+-- (x + y) + z == x + (y + z)
+-- (x * y) * z == x * (y * z)
+-- (x ++ y) ++ z == x ++ (y ++ z)
+-- (x && y) && z == x && (y && z)
+-- (x || y) || z == x || (y || z)
+-- overlay (overlay x y) z == overlay x (overlay y z)
+
+class Semigroup a where
+  -- combine (combine x y) z == combine x (combine y z)
+  combine :: a -> a -> a
+
+instance Semigroup [b] where
+  combine :: [b] -> [b] -> [b]
+  --combine list1 list2 = list1 ++ list2
+  combine = (++)
+
+-- Notiz: Funktionskomposition
+
+
+-- neutrales Element
