@@ -461,11 +461,11 @@ instance (Monoid b, Monoid c) => Monoid (b, c) where
 instance Monoid Double where
   neutral = 0.0
 
+foldMonoid :: Monoid b => [b] -> b
+foldMonoid list = foldr combine neutral list
+
 -- >>> neutral :: (Double, Double)
--- No instance for (Monoid Double) arising from a use of `neutral'
--- In the expression: neutral :: (Double, Double)
--- In an equation for `it_aapGP':
---     it_aapGP = neutral :: (Double, Double)
+-- (0.0,0.0)
 
 -- >>> combine (1.0, 2.0) (3.0, 4.0)
 -- (4.0,6.0)
