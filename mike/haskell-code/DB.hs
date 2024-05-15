@@ -51,3 +51,9 @@ splice (Get key callback) next =
 splice (Put key value callback) next =
     Put key value (\() -> splice (callback ()) next)
 splice (Return result) next = next result
+
+p1' = splice (put "Mike" 10) (\() ->
+      splice (get "Mike") (\x ->
+      splice (put "Mike" (x*2)) (\() ->
+      splice (get "Mike") (\y ->
+      Return (show (x+y))))))
