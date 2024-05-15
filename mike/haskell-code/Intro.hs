@@ -453,8 +453,19 @@ instance Monoid AdditiveIntegers where
 instance Monoid MultiplicativeIntegers where
   neutral = MkMultiplicative 1
 
+instance (Monoid b, Monoid c) => Monoid (b, c) where
+  neutral = -- neutrales Element von (b, c)
+     (neutral, -- neutrales Element von b
+      neutral) -- neutrales Element von c
 
+instance Monoid Double where
+  neutral = 0.0
 
+-- >>> neutral :: (Double, Double)
+-- No instance for (Monoid Double) arising from a use of `neutral'
+-- In the expression: neutral :: (Double, Double)
+-- In an equation for `it_aapGP':
+--     it_aapGP = neutral :: (Double, Double)
 
 -- >>> combine (1.0, 2.0) (3.0, 4.0)
 -- (4.0,6.0)
