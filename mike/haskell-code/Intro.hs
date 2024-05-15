@@ -533,8 +533,41 @@ instance Semigroup a => Monoid (Optional a) where
 
 -- Optional: Ergebnis oder nicht
 
-data Validation error a = Success a | Failure [error]
+data Validation error a = 
+    Success a
+  | Failure [error] -- Liste von Fehlerbeschreibungen
 
 -- Yaron Minsky: "Make illegal states unrepresentable."
 
 data Foo = MkFoo { fooInteger :: Integer, fooString :: String }
+
+{-
+decodeFoo =
+  let integer = decodeInteger ...
+      string = decodeString ...
+  in MkFoo integer string 
+-}
+
+-- applikativer Funktor
+-- type Applicative :: (* -> *) -> Constraint
+-- class (Functor f) => Applicative f where
+--   pure :: a -> f a
+--   (<*>) :: f (a -> b) -> f a -> f b
+
+--      fmap :: (a -> b) -> f a -> f b
+
+fmap2 :: Applicative f => (a -> b -> c) -> f a -> f b -> f c 
+fmap2 function fa fb =
+{-
+  ((pure function) -- :: f (a -> (b -> c))
+    <*> fa) -- f (b -> c)
+      <*> fb
+-}
+  -- pure function <*> fa <*> fb
+  -- fmap function fa <*> fb 
+  function <$> fa <*> fb
+
+-- >>> fmap2 (+) (Just 1) (Just 2)
+-- Just 3
+-- >>> fmap2 (+) Nothing (Just 2)
+-- Nothing
