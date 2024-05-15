@@ -530,3 +530,7 @@ instance Semigroup a => Semigroup (Optional a) where
 
 instance Semigroup a => Monoid (Optional a) where
   neutral = Null
+
+-- Optional: Ergebnis oder nicht
+
+data Validation error a = Success a | Failure [error]
