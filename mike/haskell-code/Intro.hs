@@ -534,3 +534,7 @@ instance Semigroup a => Monoid (Optional a) where
 -- Optional: Ergebnis oder nicht
 
 data Validation error a = Success a | Failure [error]
+
+-- Yaron Minsky: "Make illegal states unrepresentable."
+
+data Foo = MkFoo { fooInteger :: Integer, fooString :: String }
