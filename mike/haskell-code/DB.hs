@@ -1,7 +1,12 @@
+{-# LANGUAGE OverloadedStrings #-}
 module DB where
 
 import Data.Map.Strict as Map
 import Data.Map.Strict (Map, (!))
+
+import Control.Applicative
+import Database.SQLite.Simple
+import Database.SQLite.Simple.FromRow
 
 {-
 put "Mike" 10
@@ -101,3 +106,31 @@ runDB (Return result) mp = (result, mp)
 
 -- >>> runDB p1'' Map.empty
 -- ("30",fromList [("Mike",20)])
+
+data Entry = MkEntry Key Value
+
+instance FromRow Entry where
+    -- fromRow :: RowParser
+    fromRow = MkEntry <$> field <*> field
+
+instance ToRow Entry where
+    toRow (MkEntry key value) = toRow (key, value)
+
+runSQLite :: DB a -> Connection -> IO a
+runSQLite (Get key callback) connection = 
+    do [MkEntry _ value] <- queryNamed connection "SELECT key, value FROM entries WHERE key = :key" [":key" := key]
+       runSQLite (callback value) connection
+runSQLite (Put key value callback) connection =
+    do execute connection "REPLACE INTO entries (key, value) VALUES (?,?)" (MkEntry key value)
+       runSQLite (callback ()) connection
+runSQLite (Return result) connection = return result
+
+-- CREATE TABLE IF NOT EXISTS entries (key TEXT PRIMARY KEY, value INTEGER) 
+execDB :: DB a -> IO a
+execDB db =
+    do connection <- open "test.db"
+       execute_ connection "CREATE TABLE IF NOT EXISTS entries (key TEXT PRIMARY KEY, value INTEGER)"
+       result <- runSQLite db connection
+       close connection
+       return result
+       
