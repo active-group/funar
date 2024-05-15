@@ -287,7 +287,9 @@ listFilter p (x:xs) =
 -- >>> listFilter (\x -> x >= 0) [1,-5, 3]
 -- [1,3]
 
-listMap :: (a -> b) -> [a] -> [b]
+type List a = [a]
+
+listMap :: (a -> b) -> List a -> List b
 listMap f [] = []
 listMap f (x:xs) = (f x) : (listMap f xs)
 
@@ -328,6 +330,12 @@ instance Eq a => Eq (Optional a) where
 
 -- Eq a: Constraint
 
+optionalMap :: (a -> b) -> Optional a -> Optional b
+optionalMap _ Null = Null
+optionalMap f (Result a) = Result (f a)
+
+-- >>> :info Functor
+
 -- Index eines Elements innerhalb einer Liste
 listIndex :: Eq a => a -> [a] -> Optional Integer
 listIndex element [] = Null
@@ -335,9 +343,13 @@ listIndex element (x:xs) =
   if x == element
   then Result 0
   else
+    -- optionalMap (\index -> index + 1) (listIndex element xs)
+    optionalMap (+1) (listIndex element xs)
+    {-
     case listIndex element xs of
       Null -> Null
       Result index -> Result (index + 1)
+-}
 
 -- >>> listIndex "Mike" ["Felix", "Daniel", "Mike", "Thomas"]
 -- Result 2
@@ -495,3 +507,12 @@ foldMonoid list = foldr combine neutral list
 
 -- Übungsaufgabe:
 -- sinnvolle Instanzen von Semigroup und Monoid für Optional a
+
+instance Semigroup a => Semigroup (Optional a) where
+  combine Null Null = Null
+  combine Null (Result x) = Result x
+  combine (Result x) Null = Result x
+  combine (Result x) (Result y) = Result (combine x y)
+
+instance Semigroup a => Monoid (Optional a) where
+  neutral = Null
