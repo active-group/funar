@@ -6,10 +6,10 @@ maintainer:          michael.sperber@active-group.de
 
 library
   exposed-modules:     Cards
---                     , GameEvent
---                     , HeartsJson
---                     , Json.Decode
---                     , Table
+                     , GameEvent
+                     , HeartsJson
+                     , Json.Decode
+                     , Table
 --                     , TableIO
 --                     , Sync
 --                     , Free
@@ -61,9 +61,10 @@ executable server
 test-suite hearts-spec
   type:                exitcode-stdio-1.0
   main-is:             Spec.hs
-  other-modules:       TableSpec
-                     , HeartsJsonSpec
-                     , Json.DecodeSpec
+  other-modules:       Json.DecodeSpec
+--                     , TableSpec
+--                     , HeartsJsonSpec
+                     
   hs-source-dirs:      test
   build-depends:       base
                      , QuickCheck
