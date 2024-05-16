@@ -93,6 +93,8 @@ instance Monad Game where
         PlayerAfter player (\player -> callback player >>= next)
     GameOver callback >>= next =
         GameOver (\maybeWinner -> callback maybeWinner >>= next)
+    GetCommand callback >>= next =
+        GetCommand (\command -> callback command >>= next)
     Done result >>= next                    = next result
     return = Done
     
