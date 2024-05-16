@@ -57,6 +57,7 @@ data GameCommand
 
 data Game a =
     RecordEvent GameEvent (() -> Game a) 
+  | PlayValid Card Player (Bool -> Game a)
   | Done a -- "return"
 
 recordEventM :: GameEvent -> Game ()
@@ -75,4 +76,5 @@ tableProcessCommand (DealHands hands) =
         eventsList = map (uncurry HandDealt) handsList
     in do mapM_ recordEventM eventsList -- mapM :: (a -> Game b) -> [a] -> Game ()
           return Nothing -- Spiel noch nicht zu Ende
-tableProcessCommand (PlayCard player card) = undefined
+tableProcessCommand (PlayCard player card) =
+    do 
