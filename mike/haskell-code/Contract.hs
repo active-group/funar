@@ -41,9 +41,15 @@ data Contract =
    | WithAmount Amount Contract
    | Later Date Contract
    | Give Contract  -- Zahlungsströme umdrehen
-   | And Contract Contract
+   | And Contract Contract  -- von der Bedeutung assoziativ => Halbgruppe
+   | Zero
    deriving Show
 
+instance Semigroup Contract where
+    (<>) = And
+
+instance Monoid Contract where
+    mempty = Zero
 
 -- Ich bekomme jetzt 1 EUR
 c1 = One EUR
