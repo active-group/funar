@@ -82,6 +82,12 @@ p1' = splice (put "Mike" 10) (\() ->
 --   (>>=) :: m a -> (a -> m b) -> m b
 --   return :: a -> m a
 
+-- fmap  ::      (a ->   b) -> f a -> f b
+-- (<*>) ::    f (a ->   b) -> f a -> f b
+-- flip (>>=) :: (a -> f b) -> f a -> f b
+
+-- (>>=) :: f a -> (a -> f b) -> f b
+
 instance Functor DB where
 
 instance Applicative DB where
@@ -136,3 +142,6 @@ execDB db =
 
 -- >>> execDB p1''
 -- "30"
+
+main :: IO ()
+main = putStrLn "hello world"
