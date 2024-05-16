@@ -79,7 +79,36 @@ data Direction = Long | Short
   deriving Show
 
 data Payment = MkPayment Date Direction Amount Currency
+  deriving Show
+
+scalePayment :: Amount -> Payment -> Payment
+scalePayment factor (MkPayment direction date amount currency) =
+  MkPayment direction date (factor * amount) currency
+
+invertPayment :: Payment -> Payment
+invertPayment (MkPayment date Long amount currency) = MkPayment date Short amount currency
+invertPayment (MkPayment date Short amount currency) = MkPayment date Long amount currency
 
 -- alle Zahlungen bis jetzt + Restvertrag
 semantics :: Contract -> Date -> ([Payment], Contract)
+semantics (One currency) now = ([MkPayment now Long 1 currency], Zero)
+semantics (WithAmount amount contract) now =
+  let (payments, residualContract) = semantics contract now
+   in (map (scalePayment amount) payments, WithAmount amount residualContract)
+semantics c@(Later date contract) now =
+  if now >= date
+    then semantics contract now
+    else ([], c)
+semantics (Give contract) now =
+  let (payments, residualContract) = semantics contract now
+   in (map invertPayment payments, Give residualContract)
+semantics (And contract1 contract2) now =
+  let (payments1, residualContract1) = semantics contract1 now
+      (payments2, residualContract2) = semantics contract2 now
+   in (payments1 ++ payments2, And residualContract1 residualContract2)
+semantics Zero now = ([], Zero)
 
+cc = And (One EUR) (WithAmount 100 (Later (MkDate "2024-12-24") (One EUR)))
+
+-- >>> semantics cc (MkDate "2024-05-16")
+-- ([MkPayment (MkDate "2024-05-16") Long 1.0 EUR],And Zero (WithAmount 100.0 (Later (MkDate "2024-12-24") (One EUR))))
