@@ -87,6 +87,7 @@ tableProcessCommand (PlayCard player card) =
     do valid <- playValidM card player
        if valid
        then do recordEventM (LegalCardPlayed player card)
+               --- Übungsaufabe
                return undefined
        else do recordEventM (IllegalCardAttempted player card)
                return Nothing
