@@ -71,3 +71,15 @@ zcb2 = Give (zeroCouponBond (MkDate "2024-12-12") 100 CHF)
 
 fx1 :: Contract
 fx1 = And zcb1 zcb2
+
+-- >>> fx1
+-- And (Later (MkDate "2024-12-24") (WithAmount 100.0 (One EUR))) (Give (Later (MkDate "2024-12-12") (WithAmount 100.0 (One CHF))))
+
+data Direction = Long | Short 
+  deriving Show
+
+data Payment = MkPayment Date Direction Amount Currency
+
+-- alle Zahlungen bis jetzt + Restvertrag
+semantics :: Contract -> Date -> ([Payment], Contract)
+
