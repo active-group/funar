@@ -61,13 +61,20 @@ data Game a =
   | Done a -- "return"
 
 recordEventM :: GameEvent -> Game ()
-recordEventM event = RecordEvent event Done -- flip (>>=) :: (a -> f b) -> f a -> f b
+recordEventM event = RecordEvent event Done
 
+playValidM :: Card -> Player -> Game Bool
+playValidM card player = PlayValid card player Done
 
 instance Functor Game where
 instance Applicative Game where
 
 instance Monad Game where
+    RecordEvent event callback >>= next     =
+        RecordEvent event (\() -> callback () >>= next)
+    PlayValid card player callback >>= next =
+        PlayValid card player (\valid -> callback valid >>= next)
+    Done result >>= next                    = next result
     return = Done
     
 tableProcessCommand :: GameCommand -> Game (Maybe Player) -- ggf kommt hier Gewinner:in raus
@@ -77,4 +84,8 @@ tableProcessCommand (DealHands hands) =
     in do mapM_ recordEventM eventsList -- mapM :: (a -> Game b) -> [a] -> Game ()
           return Nothing -- Spiel noch nicht zu Ende
 tableProcessCommand (PlayCard player card) =
-    do 
+    do valid <- playValidM card player
+       if valid
+       then undefined
+       else do recordEventM (IllegalCardAttempted player card)
+               return Nothing
