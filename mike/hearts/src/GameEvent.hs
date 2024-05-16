@@ -52,3 +52,27 @@ data GameCommand
   = DealHands (Map Player Hand)
   | PlayCard Player Card
   deriving (Show, Eq)
+
+-- "Das Spiel" macht aus Commands Abläufe, die Events generieren
+
+data Game a =
+    RecordEvent GameEvent (() -> Game a) 
+  | Done a -- "return"
+
+recordEventM :: GameEvent -> Game ()
+recordEventM event = RecordEvent event Done -- flip (>>=) :: (a -> f b) -> f a -> f b
+
+
+instance Functor Game where
+instance Applicative Game where
+
+instance Monad Game where
+    return = Done
+    
+tableProcessCommand :: GameCommand -> Game (Maybe Player) -- ggf kommt hier Gewinner:in raus
+tableProcessCommand (DealHands hands) =
+    let handsList = Map.toList hands
+        eventsList = map (uncurry HandDealt) handsList
+    in do mapM_ recordEventM eventsList -- mapM :: (a -> Game b) -> [a] -> Game ()
+          return Nothing -- Spiel noch nicht zu Ende
+tableProcessCommand (PlayCard player card) = undefined
