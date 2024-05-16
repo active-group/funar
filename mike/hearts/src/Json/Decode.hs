@@ -16,6 +16,9 @@ data DecodeError
   | Failure String Json.Value
   deriving (Show, Eq)
 
+-- data Either b a = Left b | Right a
+-- Konvention: Ergebnis ist das a
+
 newtype Decoder a = Decoder {runDecoder :: Json.Value -> Either DecodeError a}
 
 instance Functor Decoder where
