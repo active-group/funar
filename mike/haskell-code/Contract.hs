@@ -68,3 +68,6 @@ zcb1' = zeroCouponBond (MkDate "2024-12-24") 100 EUR
 
 -- Ich gebe Weihnachten 100CHF.
 zcb2 = Give (zeroCouponBond (MkDate "2024-12-12") 100 CHF)
+
+fx1 :: Contract
+fx1 = And zcb1 zcb2
