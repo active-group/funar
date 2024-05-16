@@ -221,4 +221,27 @@ tableProcessEvent (IllegalCardAttempted player card) state = state
 tableProcessEvent (GameEnded player) state = state
 
 -- | Spielablauf ausführen
-runTable = undefined
+-- runTable :: Game a -> (TableState, [GameEvent]) -> t
+runTable :: Game b -> (TableState, [GameEvent]) -> (Either (GameCommand -> Game b) b, TableState, [GameEvent])
+runTable (RecordEvent event callback) (tableState, events) =
+  runTable (callback ())
+           (tableProcessEvent event tableState,
+            event:events)
+runTable (PlayValid card player callback) (tableState, events) =
+  runTable (callback (playValid tableState player card))
+           (tableState, events)
+runTable (TurnOverTrick callback) (tableState, events) =
+  runTable (callback (turnOverTrick tableState))
+           (tableState, events)
+runTable (PlayerAfter player callback) (tableState, events) =
+  runTable (callback (playerAfter tableState player))
+           (tableState, events)
+runTable (GameOver callback) (tableState, events) =
+  runTable (callback (gameOver tableState))
+           (tableState, events)
+runTable (GetCommand callback) (tableState, events) =
+  (Left callback, tableState, reverse events)
+runTable (Done result) (tableState, events) = 
+  (Right result, tableState, reverse events)
+
+-- data Either a b = Left a | Right b

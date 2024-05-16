@@ -10,11 +10,11 @@ library
                      , HeartsJson
                      , Json.Decode
                      , Table
---                     , TableIO
---                     , Sync
---                     , Free
---                     , Player
---                     , Shuffle
+                     , TableIO
+                     , Sync
+                     , Free
+                     , Player
+                     , Shuffle
   other-modules:       MVar
                      , Teletype
   build-depends:       base
