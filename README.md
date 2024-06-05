@@ -93,7 +93,7 @@ gefunden werden soll, dann bitte "Manually via PATH" auswählen!
 
 # Bei Problemen
 
-... bitte Mike Sperber oder Johannes Maier kontaktieren.
+... bitte Mike Sperber kontaktieren.
 
 ## Elm
 
