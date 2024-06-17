@@ -30,6 +30,12 @@
 ; - Unterschiede durch (abstrakte) Namen ersetzen
 ; - lambda
 
+; Konstruktionsanleitungen / design recipes
+
+; Kurzbeschreibung:
+; quadratisches Kachelmuster aus zwei Bildern herstellen
+(: tile (image image -> image)) ; Signatur
+
 (define tile
   (lambda (image1 image2)
     (above
