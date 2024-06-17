@@ -36,6 +36,12 @@
 ; quadratisches Kachelmuster aus zwei Bildern herstellen
 (: tile (image image -> image)) ; Signatur
 
+; Beispiele/Testfälle
+
+(check-expect (tile square1 circle1)
+              (above (beside square1 circle1)
+                     (beside circle1 square1)))
+
 (define tile
   (lambda (image1 image2)
     (above
