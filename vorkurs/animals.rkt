@@ -274,7 +274,6 @@
 (check-expect (extract-evens list4)
               (cons 8 (cons 2 empty)))
 
-
 (define extract-evens
   (lambda (list)
     (cond
@@ -283,3 +282,19 @@
        (if (even? (first list))
            (cons (first list) (extract-evens (rest list)))
            (extract-evens (rest list)))))))
+
+; aus einer Liste der ungeraden Zahlen extrahieren
+(: extract-odds (list-of-numbers -> list-of-numbers))
+
+(check-expect (extract-odds list4)
+              (cons 3 (cons 5 empty)))
+
+(define extract-odds
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (if (odd? (first list))
+           (cons (first list)
+                 (extract-odds (rest list)))
+           (extract-odds (rest list)))))))
