@@ -300,10 +300,16 @@
                  (extract-odds (rest list)))
            (extract-odds (rest list)))))))
 
+(: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
+
+(check-expect (extract even? list4)
+              (cons 8 (cons 2 empty)))
+(check-expect (extract odd? list4)
+              (cons 3 (cons 5 empty)))
 ; Abstraktion:
 ; - kopieren
 ; - Definition: umbenennen (auch rekursive Aufrufe!)
-; - Unterschiede durch abstrake Namen ersetzen
+; - Unterschiede durch abstrakte Namen ersetzen
 ; - lambda / Parameter: auch in rekursive Aufruf
 (define extract
   (lambda (p? list)
