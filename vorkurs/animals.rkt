@@ -44,6 +44,13 @@
 
 ; Tiere auf dem texanischen Highway
 
-; Gürteltier:
-; - lebendig oder tot?
+; Gürteltier hat folgende Eigenschaften:
+; - lebendig oder tot? -UND-
 ; - Gewicht
+; zusammengesetzte Daten
+(define-record dillo ; Signatur
+  make-dillo
+  dillo?
+  (dillo-alive? boolean)
+  (dillo-weight number))
+    
