@@ -1,4 +1,4 @@
-#lang deinprogramm/sdp
+#lang deinprogramm/sdp/beginner
 
 ; Datenanalyse
 
