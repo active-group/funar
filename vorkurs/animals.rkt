@@ -50,7 +50,6 @@
 ; zusammengesetzte Daten
 (define-record dillo ; Signatur
   make-dillo ; Konstruktor
-  dillo?
   (dillo-alive? boolean)
   (dillo-weight number))
 
