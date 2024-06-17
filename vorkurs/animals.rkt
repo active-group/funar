@@ -2,6 +2,8 @@
 
 ; Datenanalyse
 
+; F#: type pet = dog | cat | snake
+
 ; Haustier ist eins der folgenden:
 ; - Hund -ODER-
 ; - Katze -ODER-
