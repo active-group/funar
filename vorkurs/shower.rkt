@@ -1,5 +1,8 @@
 #lang deinprogramm/sdp
 
+(define shower-product
+  (signature (mixed soap shampoo showergel)))
+
 ; - Seife hat folgende Eigenschaft: pH-Wert
 (define-record soap
   make-soap
@@ -15,9 +18,9 @@
   shampoo?
   (shampoo-hairtype hairtype))
 
-; - Duschgel - bestehend aus 50% Seife, 50% Shampoo
+; - Duschgel - bestehen aus zwei Duschprodukten
 (define-record showergel
   make-showergel
   showergel?
-  (showergel-soap soap)
-  (showergel-shampoo shampoo))
+  (showergel-product1 shower-product)
+  (showergel-product2 shower-product))
