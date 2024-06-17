@@ -65,4 +65,28 @@
 (define dillo2 (make-dillo #f 8))
 
 ; Gürteltier überfahren
+
 (: run-over-dillo (dillo -> dillo))
+
+(check-expect (run-over-dillo dillo1)
+              (make-dillo #f 10))
+(check-expect (run-over-dillo dillo2)
+              (make-dillo #f 8))
+
+; Schablone - zusammengesetzte Daten als Eingabe
+
+#;(define run-over-dillo
+  (lambda (dillo)
+    ... (dillo-alive? dillo) ...
+    ... (dillo-weight dillo) ...))
+
+; Schablone - zusammengesetzte Daten als Ausgabe
+
+#;(define run-over-dillo
+  (lambda (dillo)
+    (make-dillo ... ...)))
+
+(define run-over-dillo
+  (lambda (dillo)
+    (make-dillo #f
+                (dillo-weight dillo))))
