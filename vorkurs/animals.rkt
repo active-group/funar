@@ -268,3 +268,5 @@
           (list-product (rest list)))))))
 
 
+; aus einer Liste die geraden Zahlen extrahieren
+
