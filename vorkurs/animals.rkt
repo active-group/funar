@@ -73,6 +73,7 @@
 (check-expect (run-over-dillo dillo2)
               dillo2)
 
+  
 ; Schablone - zusammengesetzte Daten als Eingabe
 
 #;(define run-over-dillo
@@ -91,4 +92,67 @@
     (make-dillo #f
                 (dillo-weight dillo))))
 
+(define dillo3 (run-over-dillo dillo1))
+
 ; Gürteltier füttern - wählbare Futtermenge
+
+(: feed-dillo (dillo number -> dillo))
+
+(check-expect (feed-dillo dillo1 5)
+              (make-dillo #t 15))
+(check-expect (feed-dillo dillo2 5)
+              dillo2)
+
+#;(define feed-dillo
+  (lambda (dillo amount)
+    (make-dillo (dillo-alive? dillo)
+                (cond
+                  ((equal? (dillo-alive? dillo) #t)
+                   (+ (dillo-weight dillo) amount))
+                  ((equal? (dillo-alive? dillo) #f)
+                   (dillo-weight dillo))))))
+
+#;(define feed-dillo
+  (lambda (dillo amount)
+    (make-dillo (dillo-alive? dillo)
+                (if (dillo-alive? dillo)
+                    (+ (dillo-weight dillo) amount)
+                    (dillo-weight dillo))
+                #;(cond ; binäre Verzweigung
+                  ((dillo-alive? dillo)
+                   (+ (dillo-weight dillo) amount))
+                  (else
+                   (dillo-weight dillo))))))
+
+(define feed-dillo
+  (lambda (dillo amount)
+    (if (dillo-alive? dillo)
+        (make-dillo #t (+ (dillo-weight dillo) amount))
+        dillo
+        #;(make-dillo (dillo-alive? dillo) (dillo-weight dillo)))))
+
+; Papagei hat folgende Eigenschaften:
+; - Satz -UND-
+; - Gewicht
+(define-record parrot
+  make-parrot
+  (parrot-sentence string)
+  (parrot-weight number))
+
+; Begrüßungspapagei
+(define parrot1 (make-parrot "Hello!" 1))
+(define parrot2 (make-parrot "Goodbye!" 2))
+
+; Papagei überfahren
+(: run-over-parrot (parrot -> parrot))
+
+(check-expect (run-over-parrot parrot1)
+              (make-parrot "" 1))
+
+(define run-over-parrot
+  (lambda (parrot)
+    (make-parrot ""
+                 (parrot-weight parrot))))
+
+
+    
