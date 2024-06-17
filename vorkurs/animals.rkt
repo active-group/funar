@@ -345,3 +345,23 @@
       ((cons? list)       
        (cons (+ 1 (first list))
              (inc-list (rest list)))))))
+
+(: run-over-animals ((list-of animal) -> (list-of animal)))
+
+(define highway
+  (cons dillo1 (cons dillo2 (cons parrot1 (cons parrot2 empty)))))
+
+(check-expect (run-over-animals highway)
+              (cons (run-over-animal dillo1)
+                    (cons (run-over-animal dillo2)
+                          (cons (run-over-animal parrot1)
+                                (cons (run-over-animal parrot2)
+                                      empty)))))
+
+(define run-over-animals
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cons (run-over-animal (first list))
+             (run-over-animals (rest list)))))))
