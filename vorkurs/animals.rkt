@@ -213,3 +213,16 @@
 
 (define list-of-numbers
   (signature (mixed empty-list cons-list)))
+
+
+
+; 1elementige Liste: 2
+(define list1 (cons 2 empty))
+
+; 2elementige Liste: 2 5
+(define list2         (cons 2 (cons 5 empty)))
+
+; 3elementige Liste: 8 2 5
+;(define list3 (cons 8 (cons 2 (cons 5 empty))))
+(define list3 (cons 8 list2))
+
