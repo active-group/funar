@@ -154,5 +154,8 @@
     (make-parrot ""
                  (parrot-weight parrot))))
 
-
+; Ein Tier ist eins der folgenden:
+; - Gürteltier -ODER-
+; - Papagei
+; Fallunterscheidung
     
