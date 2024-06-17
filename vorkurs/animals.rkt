@@ -7,10 +7,11 @@
 ; Haustier ist eins der folgenden:
 ; - Hund -ODER-
 ; - Katze -ODER-
-; - Schlange
+; - Schlange -ODER-
+; - Schwein
 ; Fallunterscheidung, hier speziell: Aufzählung
 (define pet
-  (signature (enum "dog" "cat" "snake")))
+  (signature (enum "dog" "cat" "snake" "pig")))
 
 ; Ist ein Haustier niedlich?
 (: cute? (pet -> boolean))
@@ -18,6 +19,7 @@
 (check-expect (cute? "dog") #t)
 (check-expect (cute? "cat") #t)
 (check-expect (cute? "snake") #f)
+(check-expect (cute? "pig") #t)
 
 ; Gerüst
 #;(define cute?
@@ -37,4 +39,5 @@
     (cond ; Verzweigung, 1 Zweig pro Fall
       ((equal? pet "dog") #t) ; (<Bedingung> <Ergebnis>)
       ((equal? pet "cat") #t)
-      ((equal? pet "snake") #f))))
+      ((equal? pet "snake") #f)
+      ((equal? pet "pig") #t))))
