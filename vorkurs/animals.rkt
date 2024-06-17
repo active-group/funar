@@ -41,3 +41,9 @@
       ((equal? pet "cat") #t)
       ((equal? pet "snake") #f)
       ((equal? pet "pig") #t))))
+
+; Tiere auf dem texanischen Highway
+
+; Gürteltier:
+; - lebendig oder tot?
+; - Gewicht
