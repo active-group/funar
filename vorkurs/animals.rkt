@@ -267,3 +267,4 @@
        (* (first list)
           (list-product (rest list)))))))
 
+
