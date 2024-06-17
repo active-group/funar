@@ -188,3 +188,7 @@
        (define dillo animal)
        (run-over-dillo dillo))
       ((parrot? animal) (run-over-parrot animal)))))
+
+; Eine Liste ist eins der folgenden:
+; - die leere Liste -ODER-
+; - eine Cons-Liste bestehend aus erstem Element und Rest-Liste
