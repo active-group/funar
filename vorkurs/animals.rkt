@@ -379,9 +379,9 @@
              (list-map f (rest list)))))))
 
 (define list-fold
-  (lambda (n f list)
+  (lambda (f n list)
     (cond
       ((empty? list) n)
       ((cons? list)
        (f (first list)
-          (list-fold n f (rest list)))))))
+          (list-fold f n (rest list)))))))
