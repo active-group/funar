@@ -343,8 +343,10 @@
     (cond
       ((empty? list) empty)
       ((cons? list)       
-       (cons (+ 1 (first list))
+       (cons (inc (first list))
              (inc-list (rest list)))))))
+
+(define inc (lambda (x) (+ 1 x)))
 
 (: run-over-animals ((list-of animal) -> (list-of animal)))
 
