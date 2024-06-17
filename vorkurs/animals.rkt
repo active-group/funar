@@ -180,3 +180,8 @@
        (define dillo animal)
        (run-over-dillo dillo))
       ((parrot? animal) (run-over-parrot animal)))))
+
+; - Seife
+; - Shampoo
+; - Duschgel - bestehend 50% Seife, 50% Shampoo
+
