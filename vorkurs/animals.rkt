@@ -300,6 +300,7 @@
                  (extract-odds (rest list)))
            (extract-odds (rest list)))))))
 
+; Funktion höherer Ordnung
 (: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
 
 (check-expect (extract even? list4)
