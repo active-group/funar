@@ -35,6 +35,8 @@
   (showergel-product1 shower-product) ; Selbstbezug
   (showergel-product2 shower-product))
 
+; closure of operations
+
 (: make-showergel (shower-product shower-product -> shower-product))
 
 (define gel1 (make-showergel soap1 shampoo1))
