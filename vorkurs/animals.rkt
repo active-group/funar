@@ -306,7 +306,7 @@
 
 ; Funktion höherer Ordnung
 ; %element: Signaturvariable
-(: extract ((number -> boolean) (list-of %element) -> list-of-numbers))
+(: extract ((%element -> boolean) (list-of %element) -> (list-of %element)))
 
 (check-expect (extract even? list4)
               (cons 8 (cons 2 empty)))
