@@ -158,4 +158,8 @@
 ; - Gürteltier -ODER-
 ; - Papagei
 ; Fallunterscheidung
+; hier: gemischte Daten
+(define animal (signature (mixed dillo parrot)))
+
+
     
