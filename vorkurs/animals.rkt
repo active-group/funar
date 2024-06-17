@@ -280,7 +280,8 @@
       ((empty? list) empty)
       ((cons? list)
        (if (even? (first list))
-           (cons (first list) (extract-evens (rest list)))
+           (cons (first list)
+                 (extract-evens (rest list)))
            (extract-evens (rest list)))))))
 
 ; aus einer Liste der ungeraden Zahlen extrahieren
