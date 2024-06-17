@@ -329,4 +329,5 @@
 
 (define dillos (cons dillo1 (cons dillo2 empty)))
 
-; (check-expect (extract dillo-alive? 
+(check-expect (extract dillo-alive? dillos)
+              (cons dillo1 empty))
