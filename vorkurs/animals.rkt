@@ -24,9 +24,17 @@
   (lambda (pet)
     ...))
 
-(define cute?
+; Schablone, ausschließlich aus der Signatur
+#;(define cute?
   (lambda (pet)
     (cond ; Verzweigung, 1 Zweig pro Fall
       ((equal? pet "dog") ...) ; (<Bedingung> <Ergebnis>)
       ((equal? pet "cat") ...)
       ((equal? pet "snake") ...))))
+
+(define cute?
+  (lambda (pet)
+    (cond ; Verzweigung, 1 Zweig pro Fall
+      ((equal? pet "dog") #t) ; (<Bedingung> <Ergebnis>)
+      ((equal? pet "cat") #t)
+      ((equal? pet "snake") #f))))
