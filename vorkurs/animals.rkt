@@ -44,6 +44,8 @@
 
 ; Tiere auf dem texanischen Highway
 
+; Repräsentation des Zustands des Gürteltiers zu einem bestimmten Zeitpunkt
+
 ; Gürteltier hat folgende Eigenschaften:
 ; - lebendig oder tot? -UND-
 ; - Gewicht
@@ -61,3 +63,6 @@
 (define dillo1 (make-dillo #t 10))
 ; totes Gürteltier, 8kg
 (define dillo2 (make-dillo #f 8))
+
+; Gürteltier überfahren
+(: run-over-dillo (dillo -> dillo))
