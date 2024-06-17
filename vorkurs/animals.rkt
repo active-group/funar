@@ -331,3 +331,17 @@
 
 (check-expect (extract dillo-alive? dillos)
               (cons dillo1 empty))
+
+; Alle Zahlen einer Liste inkrementieren
+(: inc-list ((list-of number) -> (list-of number)))
+
+(check-expect (inc-list list4)
+              (cons 4 (cons 9 (cons 3 (cons 6 empty)))))
+
+(define inc-list
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)       
+       (cons (+ 1 (first list))
+             (inc-list (rest list)))))))
