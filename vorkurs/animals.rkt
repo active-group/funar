@@ -75,6 +75,14 @@
 (check-expect (run-over-dillo dillo2)
               dillo2)
 
+(check-expect (not (dillo-alive? (run-over-dillo dillo1)))
+              #t)
+
+; QuickCheck
+(check-property
+ (for-all ((d dillo))
+   (not (dillo-alive? (run-over-dillo d)))))
+
   
 ; Schablone - zusammengesetzte Daten als Eingabe
 
@@ -91,7 +99,7 @@
 
 (define run-over-dillo
   (lambda (dillo)
-    (make-dillo #f
+    (make-dillo (and (dillo-alive? dillo) (>= (dillo-weight dillo) 20))
                 (dillo-weight dillo))))
 
 (define dillo3 (run-over-dillo dillo1))
