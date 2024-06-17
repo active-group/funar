@@ -24,3 +24,5 @@
   showergel?
   (showergel-product1 shower-product)
   (showergel-product2 shower-product))
+
+(: make-showergel (shower-product shower-product -> shower-product))
