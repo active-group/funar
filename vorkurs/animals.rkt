@@ -205,14 +205,16 @@
 ; Eine Cons-Liste besteht aus:
 ; - erstes Element -UND-
 ; - Rest-Liste
-(define-record cons-list
+(define-record (cons-list-of element) ; macht intern lambda
   cons
   cons?
-  (first number)
-  (rest list-of-numbers))
+  (first element)
+  (rest (list-of element)))
 
-(define list-of-numbers
-  (signature (mixed empty-list cons-list)))
+(define list-of
+  (lambda (element)
+    (signature (mixed empty-list
+                      (cons-list-of element)))))
 
 ; 1elementige Liste: 2
 (define list1 (cons 2 empty))
@@ -226,6 +228,8 @@
 
 ; 4elementige Liste: 3 8 2 5
 (define list4 (cons 3 list3))
+
+(define list-of-numbers (signature (list-of number)))
 
 ; Liste aufsummieren
 (: list-sum (list-of-numbers -> number))
@@ -301,7 +305,8 @@
            (extract-odds (rest list)))))))
 
 ; Funktion höherer Ordnung
-(: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
+; %element: Signaturvariable
+(: extract ((number -> boolean) (list-of %element) -> list-of-numbers))
 
 (check-expect (extract even? list4)
               (cons 8 (cons 2 empty)))
@@ -321,3 +326,7 @@
            (cons (first list)
                  (extract p? (rest list)))
            (extract p? (rest list)))))))
+
+(define dillos (cons dillo1 (cons dillo2 empty)))
+
+; (check-expect (extract dillo-alive? 
