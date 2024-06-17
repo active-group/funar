@@ -214,8 +214,6 @@
 (define list-of-numbers
   (signature (mixed empty-list cons-list)))
 
-
-
 ; 1elementige Liste: 2
 (define list1 (cons 2 empty))
 
@@ -226,6 +224,22 @@
 ;(define list3 (cons 8 (cons 2 (cons 5 empty))))
 (define list3 (cons 8 list2))
 
+; 4elementige Liste: 3 8 2 5
 (define list4 (cons 3 list3))
+
+; Liste aufsummieren
+(: list-sum (list-of-numbers -> number))
+
+(check-expect (list-sum list4)
+              18)
+
+(define list-sum
+  (lambda (list)
+    (cond
+      ((empty? list) 0)
+      ((cons? list)
+       (+ (first list)
+          (list-sum (rest list)))))))
+
 
 
