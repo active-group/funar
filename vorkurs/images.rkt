@@ -1,4 +1,6 @@
 #lang deinprogramm/sdp
+(require deinprogramm/sdp/image)
+  
 (define x
   (+ 12
-     (* 3 8)))
+     (* 4 8)))
