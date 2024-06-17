@@ -91,4 +91,4 @@
     (make-dillo #f
                 (dillo-weight dillo))))
 
-; Gürteltier füttern - wählbarer Futtermenge
+; Gürteltier füttern - wählbare Futtermenge
