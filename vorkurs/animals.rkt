@@ -176,5 +176,7 @@
 (define run-over-animal
   (lambda (animal)
     (cond
-      ((dillo? animal) (run-over-dillo animal))
+      ((dillo? animal)
+       (define dillo animal)
+       (run-over-dillo dillo))
       ((parrot? animal) (run-over-parrot animal)))))
