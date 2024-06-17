@@ -99,7 +99,7 @@
 
 (define run-over-dillo
   (lambda (dillo)
-    (make-dillo (and (dillo-alive? dillo) (>= (dillo-weight dillo) 20))
+    (make-dillo #f ; (and (dillo-alive? dillo) (>= (dillo-weight dillo) 20))
                 (dillo-weight dillo))))
 
 (define dillo3 (run-over-dillo dillo1))
