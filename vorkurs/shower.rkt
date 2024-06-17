@@ -58,4 +58,6 @@
       ((soap? shower-product) 1)
       ((shampoo? shower-product) 0)
       ((showergel? shower-product)
-       ))))
+       (/ (+ (soap-proportion (showergel-product1 shower-product))
+             (soap-proportion (showergel-product2 shower-product)))
+          2)))))
