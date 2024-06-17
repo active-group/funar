@@ -226,3 +226,6 @@
 ;(define list3 (cons 8 (cons 2 (cons 5 empty))))
 (define list3 (cons 8 list2))
 
+(define list4 (cons 3 list3))
+
+
