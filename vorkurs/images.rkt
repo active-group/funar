@@ -35,3 +35,19 @@
     (above
      (beside image1 image2)
      (beside image2 image1))))
+
+; (tile circle1 star1)
+
+#|
+class C {
+   static int m(int x) {
+     ... x ...
+     x = x+1;
+     ... x ...
+   }
+}
+
+... C.m(42) ... ->
+{ ... }
+
+|#
