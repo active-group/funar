@@ -71,7 +71,7 @@
 (check-expect (run-over-dillo dillo1)
               (make-dillo #f 10))
 (check-expect (run-over-dillo dillo2)
-              (make-dillo #f 8))
+              dillo2)
 
 ; Schablone - zusammengesetzte Daten als Eingabe
 
@@ -90,3 +90,5 @@
   (lambda (dillo)
     (make-dillo #f
                 (dillo-weight dillo))))
+
+; Gürteltier füttern
