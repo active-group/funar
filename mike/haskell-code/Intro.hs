@@ -458,3 +458,5 @@ instance (Semigroup a, Semigroup b) => Semigroup (a, b) where
 
 instance (Monoid a, Monoid b) => Monoid (a, b) where
   neutral = (neutral, neutral)
+
+-- Aufgabe: Monoid für Optional a
