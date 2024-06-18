@@ -266,9 +266,15 @@ listFilter p (x:xs) =
   then x : (listFilter p xs)
   else listFilter p xs
 
-listMap :: (a -> b) -> [a] -> [b]
+type List a = [a]
+
+listMap :: (a -> b) ->    List a      -> List b
 listMap f [] = []
 listMap f (x:xs) = f x : (listMap f xs)
+
+optionalMap :: (a -> b) -> Optional a -> Optional b
+optionalMap f Null = Null
+optionalMap f (Result a) = Result (f a)
 
 -- Liste aller Karten des französischen Blatts
 
@@ -375,9 +381,6 @@ listIndex a (first:rest) =
          Null -> Null
          Result index -> Result (index+1)
       -}
-optionalMap :: (a -> b) -> Optional a -> Optional b
-optionalMap f Null = Null
-optionalMap f (Result a) = Result (f a)
 
 -- class ... Typklasse ... "Interface"
 -- instance ... Instanz ... "Implementierung"
@@ -475,3 +478,15 @@ instance Semigroup a => Semigroup (Optional a) where
 
 instance Semigroup a => Monoid (Optional a) where
   neutral = Null
+
+-- >>> :info Functor
+-- type Functor :: (* -> *) -> Constraint
+-- class Functor f where
+--   fmap :: (a -> b) -> f a -> f b
+
+instance Functor Optional where
+  fmap :: (a -> b) -> Optional a -> Optional b
+  fmap = optionalMap
+
+-- instance Functor [] where
+--   fmap = listMap
