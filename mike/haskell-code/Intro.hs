@@ -452,3 +452,7 @@ monoidConcat (x:xs) =
 
 -- >>> monoidConcat [[1,2,3], [4,5,6]]
 -- [1,2,3,4,5,6]
+
+instance (Semigroup a, Semigroup b) => Semigroup (a, b) where
+  op (a1, b1) (a2, b2) = (op a1 a2, op b1 b2)
+
