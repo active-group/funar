@@ -314,7 +314,17 @@ data Card = Card {suit :: Suit, rank :: Rank}
   deriving Show
 
 -- allCards = concat (listMap allCardsWithSuit allSuits)
-allCards = concat (listMap (\suit -> listMap (\rank -> Card suit rank) allRanks) allSuits)
+allCards :: [Card]
+-- allCards = concat (listMap (\suit -> listMap (\rank -> (Card suit) rank) allRanks) allSuits)
+allCards = concat (listMap (\suit -> listMap (Card suit) allRanks) allSuits)
+
+
+all :: (a -> b -> c) -> [a] -> [b] -> [c]
+all constructor list1 list2 = concat (listMap (\x2 -> listMap (\x1 -> constructor x2 x1) list2) list1)
+
+cartesianProduct :: [a] -> [b] -> [(a, b)]
+cartesianProduct list1 list2 = concat (listMap (\x2 -> listMap (\x1 -> (x1, x2)) list1) list2)
+
 
 -- >>> length allCards
 -- 52
