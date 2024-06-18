@@ -342,7 +342,13 @@ feedAndThenRunOver' = flip feedAnimal 1 |> runOverAnimal
 -- Index eines Elements in einer Liste bestimmen
 
 -- >>> listIndex 5 [1, 3, 7, 5, 12]
--- 3
+-- Result 3
+
+-- >>> listIndex Cat [Dog, Snake, Cat, Snake]
+-- No instance for (Eq Pet) arising from a use of `listIndex'
+-- In the expression: listIndex Cat [Dog, Snake, Cat, Snake]
+-- In an equation for `it_adiWb':
+--     it_adiWb = listIndex Cat [Dog, Snake, Cat, Snake]
 
 data Optional a =
   Null | Result a
