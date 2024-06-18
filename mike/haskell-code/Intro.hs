@@ -294,7 +294,7 @@ data Rank
   | Queen
   | King
   | Ace
-  deriving Show
+  deriving (Show, Eq, Ord, Enum)
 
 -- | Liste aller Werte
 -- >>> length allRanks
@@ -402,4 +402,3 @@ listIndex a (first:rest) =
 --   max :: a -> a -> a
 --   min :: a -> a -> a
 --   {-# MINIMAL compare | (<=) #-}
---   	-- Defined in ‘GHC.Classes’
