@@ -313,11 +313,11 @@ allRanks =
 data Card = Card {suit :: Suit, rank :: Rank}
   deriving Show
 
-allCards :: [Card]
-allCards = concat (map allCardsWithSuit allSuits)
+-- allCards = concat (listMap allCardsWithSuit allSuits)
+allCards = concat (listMap (\suit -> listMap (\rank -> Card suit rank) allRanks) allSuits)
 
 -- >>> length allCards
 -- 52
 
 allCardsWithSuit :: Suit -> [Card]
-allCardsWithSuit suit = map (\rank -> Card suit rank) allRanks
+allCardsWithSuit suit = listMap (\rank -> Card suit rank) allRanks
