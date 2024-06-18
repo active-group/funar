@@ -456,3 +456,5 @@ monoidConcat (x:xs) =
 instance (Semigroup a, Semigroup b) => Semigroup (a, b) where
   op (a1, b1) (a2, b2) = (op a1 a2, op b1 b2)
 
+instance (Monoid a, Monoid b) => Monoid (a, b) where
+  neutral = (neutral, neutral)
