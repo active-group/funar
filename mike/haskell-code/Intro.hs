@@ -432,4 +432,8 @@ instance Semigroup Shape where
   op :: Shape -> Shape -> Shape
   op = MkOverlap
   
--- neutrales Element
+-- Halbgruppe,
+-- darin neutrales Element neutral
+-- op neutral x == op x neutral == x
+
+-- Halbgruppe mit neutralem Element: Monoid
