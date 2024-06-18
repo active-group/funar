@@ -19,8 +19,9 @@ double x = x * 2
 -- 14
 
 foo x y =
- let z = x + y 
-    in z * 4
+ let z = x + y
+     a = z * 2 
+    in z * 4 + a
 
 -- Ein Haustier ist eins der folgenden:
 -- - Hund -ODER-
@@ -32,7 +33,7 @@ data Pet =
     Dog 
   | Cat
   | Snake
-  deriving Show
+  -- deriving Show
 
 -- Ist Haustier niedlich?
 isCute :: Pet -> Bool
