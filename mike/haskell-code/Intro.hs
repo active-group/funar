@@ -257,4 +257,10 @@ listFilter p (x:xs) =
   then x : (listFilter p xs)
   else listFilter p xs
 
+listMap :: (a -> b) -> [a] -> [b]
+listMap f [] = []
+listMap f (x:xs) = 
+  f x : (listMap f xs)
+
+
   
