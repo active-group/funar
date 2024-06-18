@@ -460,3 +460,12 @@ instance (Monoid a, Monoid b) => Monoid (a, b) where
   neutral = (neutral, neutral)
 
 -- Aufgabe: Monoid für Optional a
+
+instance Semigroup a => Semigroup (Optional a) where
+  op Null Null = Null
+  op (Result a1) Null = Result a1
+  op Null (Result a2) = Result a2
+  op (Result a1) (Result a2) = Result (op a1 a2)
+
+instance Semigroup a => Monoid (Optional a) where
+  neutral = Null
