@@ -264,4 +264,5 @@ listMap f (x:xs) = f x : (listMap f xs)
 -- Liste aller Karten des franzöischen Blatts
 
 
+
   
