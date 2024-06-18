@@ -234,5 +234,22 @@ data ListOf a =
 -- [] leere Liste
 -- first:rest  : = Cons
 
-listSum [] = undefined
+list1 :: [Integer]
+list1 = 5 : []
+
+list2 :: [Integer]
+list2 = 2 : (5 : [])
+
+list3 :: [Integer]
+list3 = [2, 5, 4]
+
+list4 :: [Integer]
+list4 = 3 : list3
+
+listSum :: [Integer] -> Integer
+listSum [] = 0
 listSum (first:rest) = first + (listSum rest)
+
+listFilter :: (a -> Bool) -> [a] -> [a]
+listFilter p [] = undefined
+listFilter p (x:xs) = undefined
