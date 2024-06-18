@@ -1,7 +1,7 @@
 {-# LANGUAGE InstanceSigs #-}
 module Intro where
 
-import Prelude hiding (Semigroup)
+import Prelude hiding (Semigroup, Monoid)
 
 x :: Integer
 x = 5
