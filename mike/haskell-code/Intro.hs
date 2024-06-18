@@ -325,10 +325,38 @@ all constructor list1 list2 = concat (listMap (\x2 -> listMap (\x1 -> constructo
 cartesianProduct :: [a] -> [b] -> [(a, b)]
 cartesianProduct list1 list2 = concat (listMap (\x2 -> listMap (\x1 -> (x1, x2)) list1) list2)
 
--- allCards' = listMap Card (cartesianProduct allSuits allRanks)
+allCards' = listMap (uncurry Card) (cartesianProduct allSuits allRanks)
 
 -- >>> length allCards
 -- 52
 
 allCardsWithSuit :: Suit -> [Card]
 allCardsWithSuit suit = listMap (\rank -> Card suit rank) allRanks
+
+-- F#: |>
+
+(|>) = flip (.)
+
+feedAndThenRunOver' = flip feedAnimal 1 |> runOverAnimal
+
+-- Index eines Elements in einer Liste bestimmen
+
+-- >>> listIndex 5 [1, 3, 7, 5, 12]
+-- 3
+
+data Optional a =
+  Null | Result a
+  deriving Show
+
+-- eingebaut:
+-- data Maybe a = Nothing | Just a
+
+listIndex :: Eq a => a -> [a] -> Optional Integer
+listIndex a [] = Null
+listIndex a (first:rest) =
+  if a == first   
+  then Result 0
+  else case listIndex a rest of 
+         Null -> Null
+         Result index -> Result (index+1)
+      
