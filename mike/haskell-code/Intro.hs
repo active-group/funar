@@ -259,8 +259,7 @@ listFilter p (x:xs) =
 
 listMap :: (a -> b) -> [a] -> [b]
 listMap f [] = []
-listMap f (x:xs) = 
-  f x : (listMap f xs)
+listMap f (x:xs) = f x : (listMap f xs)
 
 
   
