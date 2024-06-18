@@ -59,6 +59,7 @@ type Weight = Integer
 data Liveness = Alive | Dead 
   deriving Show
 
+{-
 -- Record
 data Dillo =
     MkDillo { dilloLiveness :: Liveness,
@@ -93,3 +94,18 @@ runOverDillo dillo = dillo { dilloLiveness = Dead } -- Kopie von dillo, bis auf 
 
 -- >>> runOverDillo dillo1
 -- MkDillo {dilloLiveness = Dead, dilloWeight = 10}
+-}
+
+-- Ein Tier (auf dem texanischen Highway) ist eins der folgenden:
+-- - Gürteltier -ODER-
+-- - Papagei
+-- Fallunterscheidung
+
+-- Ein Papagei hat folgende Eigenschaften:
+-- - Satz
+-- - Gewicht
+data Animal =
+     MkDillo { dilloLiveness :: Liveness,
+               dilloWeight :: Weight }
+   | MkParrot String Weight  
+   deriving Show
