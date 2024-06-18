@@ -36,6 +36,7 @@ data Pet =
   deriving Show
 
 instance Eq Pet where
+  (==) :: Pet -> Pet -> Bool
   (==) Dog Dog = True
   (==) Cat Cat = True
   (==) Snake Snake = True
@@ -351,10 +352,7 @@ feedAndThenRunOver' = flip feedAnimal 1 |> runOverAnimal
 -- Result 3
 
 -- >>> listIndex Cat [Dog, Snake, Cat, Snake]
--- No instance for (Eq Pet) arising from a use of `listIndex'
--- In the expression: listIndex Cat [Dog, Snake, Cat, Snake]
--- In an equation for `it_adiWb':
---     it_adiWb = listIndex Cat [Dog, Snake, Cat, Snake]
+-- Result 2
 
 data Optional a =
   Null | Result a
