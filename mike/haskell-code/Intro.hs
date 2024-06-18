@@ -33,7 +33,7 @@ data Pet =
     Dog 
   | Cat
   | Snake
-  -- deriving Show
+  deriving Show
 
 -- Ist Haustier niedlich?
 isCute :: Pet -> Bool
