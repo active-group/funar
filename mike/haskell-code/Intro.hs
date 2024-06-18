@@ -317,6 +317,7 @@ allCards :: [Card]
 allCards = concat (map allCardsWithSuit allSuits)
 
 -- >>> length allCards
+-- 52
 
 allCardsWithSuit :: Suit -> [Card]
-allCardsWithSuit suit = map (\rank -> Card suit rank)  alllRanks
+allCardsWithSuit suit = map (\rank -> Card suit rank) allRanks
