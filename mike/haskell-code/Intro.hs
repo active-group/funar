@@ -142,6 +142,7 @@ feedAnimal dillo@(MkDillo liveness weight) amount = -- alias pattern
 feedAnimal (MkParrot sentence weight) amount = 
   MkParrot sentence (weight + amount)
 
+-- eingebaut als "flip"
 -- swap :: (Animal -> Weight -> Animal) -> (Weight -> Animal -> Animal)
 swap :: (a -> b -> c) -> (b -> a -> c) -- Typvariablen
 -- swap f = \ b -> \ a -> f a b
@@ -158,6 +159,29 @@ feedAnimal'(dillo@(MkDillo liveness weight), amount) =
     Dead -> dillo -- MkDillo liveness weight
 feedAnimal'(MkParrot sentence weight, amount) =
   MkParrot sentence (weight + amount)
+
+-- Haskell Curry
+-- Moses Schönfinkel
+
+-- "entschönfinkeln"
+-- eingebaut als "uncurry"
+tuplify :: (a -> b -> c) -> ((a, b) -> c)
+-- tuplify f = \ (a, b) -> f a b
+tuplify f (a, b) = f a b
+
+-- "schönfinkeln"
+-- eingebaut als "curry"
+untuplify :: ((a, b) -> c) -> (a -> b -> c)
+-- untuplify f = \a -> \b -> f (a, b)
+untuplify f a b = f (a, b)
+
+-- Funktionskomposition
+-- eingebaut als . (Infix)
+o :: (b -> c) -> (a -> b) -> (a -> c)
+o f g = \ a -> f (g a)
+
+feedAndThenRunOver :: Animal -> Animal
+feedAndThenRunOver = runOverAnimal . flip feedAnimal 1
 
 -- Eine (geometrische) Figur ist eins der folgenden:
 -- - Kreis -ODER-
