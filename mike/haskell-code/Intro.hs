@@ -49,9 +49,17 @@ isCute Snake = False
 -- False
 
 -- Gürteltier hat folgende Eigenschaften:
--- - lebendig oder tot -UND-
+-- - lebendig -ODER- tot -UND-
 -- - Gewicht
 -- zusammengesetzte Daten
 
 -- Typsynonym
 type Weight = Integer
+
+data Liveness = Alive | Dead 
+  deriving Show
+
+-- Record
+data Dillo =
+    MkDillo { liveness :: Liveness,
+              weight :: Weight }
