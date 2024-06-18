@@ -449,3 +449,6 @@ monoidConcat :: Monoid a => [a] -> a
 monoidConcat [] = neutral
 monoidConcat (x:xs) = 
   op x (monoidConcat xs)
+
+-- >>> monoidConcat [[1,2,3], [4,5,6]]
+-- [1,2,3,4,5,6]
