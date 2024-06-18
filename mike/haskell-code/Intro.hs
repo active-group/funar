@@ -366,3 +366,14 @@ listIndex a (first:rest) =
          Null -> Null
          Result index -> Result (index+1)
       
+
+-- class ... Typklasse ... "Interface"
+-- instance ... Instanz ... "Implementierung"
+
+-- >>> :info Eq
+-- type Eq :: * -> Constraint
+-- class Eq a where
+--   (==) :: a -> a -> Bool
+--   (/=) :: a -> a -> Bool
+--   {-# MINIMAL (==) | (/=) #-}
+--   	-- Defined in ‘GHC.Classes’
