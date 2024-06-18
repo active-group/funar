@@ -130,6 +130,10 @@ runOverAnimal (MkParrot _sentence weight) =
 
 -- Yaron Minsky: "Make illegal states unrepresentable."
 
+bar :: Double -> Double -> Double
+-- bar x y = (x + y)/2
+bar = \ x -> \ y -> (x + y)/2
+
 feedAnimal :: Animal -> (Weight -> Animal)
 feedAnimal dillo@(MkDillo liveness weight) amount = -- alias pattern
   case liveness of
