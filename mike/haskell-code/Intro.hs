@@ -52,3 +52,6 @@ isCute Snake = False
 -- - lebendig oder tot -UND-
 -- - Gewicht
 -- zusammengesetzte Daten
+
+-- Typsynonym
+type Weight = Integer
