@@ -312,3 +312,11 @@ allRanks =
 -- | Spielkarte
 data Card = Card {suit :: Suit, rank :: Rank}
   deriving Show
+
+allCards :: [Card]
+allCards = concat (map allCardsWithSuit allSuits)
+
+-- >>> length allCards
+
+allCardsWithSuit :: Suit -> [Card]
+allCardsWithSuit suit = map (\rank -> Card suit rank)  alllRanks
