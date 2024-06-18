@@ -420,7 +420,16 @@ listIndex a (first:rest) =
 -- 2. op :: T -> T -> T
 -- 3. op (op a b) c = op a (op b c)
 
+class Semigroup t where
+  -- op (op a b) c == op a (op b c)
+  op :: t -> t -> t
 
+instance Semigroup [a] where
+  op :: [a] -> [a] -> [a]
+  op = (++)
 
-
+instance Semigroup Shape where
+  op :: Shape -> Shape -> Shape
+  op = MkOverlap
+  
 -- neutrales Element
