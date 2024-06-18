@@ -47,3 +47,8 @@ isCute Snake = False
 
 -- >>> isCute Snake
 -- False
+
+-- Gürteltier hat folgende Eigenschaften:
+-- - lebendig oder tot -UND-
+-- - Gewicht
+-- zusammengesetzte Daten
