@@ -437,3 +437,15 @@ instance Semigroup Shape where
 -- op neutral x == op x neutral == x
 
 -- Halbgruppe mit neutralem Element: Monoid
+
+class Semigroup t => Monoid t where
+  neutral :: t
+
+instance Monoid [a] where
+  neutral :: [a]
+  neutral = []
+
+monoidConcat :: Monoid a => [a] -> a
+monoidConcat [] = neutral
+monoidConcat (x:xs) = 
+  op x (monoidConcat xs)
