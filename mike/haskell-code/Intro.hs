@@ -128,4 +128,4 @@ runOverAnimal (MkParrot _sentence weight) =
 
 -- Datenmodell für die Karten des französischen Blatts
 
--- Yaron Minsky: Make illegal states unrepresentable.
+-- Yaron Minsky: "Make illegal states unrepresentable."
