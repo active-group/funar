@@ -220,3 +220,19 @@ within (MkSquare (MkPoint squareX squareY) sideLength) (MkPoint x y) =
         && ((y >= squareY) && (y <= rightTopY))
 within (MkOverlap shape1 shape2) point =
   within shape1 point || within shape2 point
+
+
+-- Eine Liste ist eins der folgenden:
+-- - die leere Liste
+-- - eine Cons-Liste aus erstem Element und Rest-Liste
+
+data ListOf a =
+    EmptyList
+  | Cons a (ListOf a)
+
+-- eingebaut:
+-- [] leere Liste
+-- first:rest  : = Cons
+
+listSum [] = undefined
+listSum (first:rest) = first + (listSum rest)
