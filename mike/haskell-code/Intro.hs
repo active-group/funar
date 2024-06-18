@@ -251,5 +251,10 @@ listSum [] = 0
 listSum (first:rest) = first + (listSum rest)
 
 listFilter :: (a -> Bool) -> [a] -> [a]
-listFilter p [] = undefined
-listFilter p (x:xs) = undefined
+listFilter p [] = []
+listFilter p (x:xs) =
+  if p x 
+  then x : (listFilter p xs)
+  else listFilter p xs
+
+  
