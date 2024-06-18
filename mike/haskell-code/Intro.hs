@@ -1,6 +1,8 @@
 {-# LANGUAGE InstanceSigs #-}
 module Intro where
 
+import Prelude hiding (Semigroup)
+
 x :: Integer
 x = 5
 
@@ -402,3 +404,23 @@ listIndex a (first:rest) =
 --   max :: a -> a -> a
 --   min :: a -> a -> a
 --   {-# MINIMAL compare | (<=) #-}
+
+-- Algebra
+
+-- 1. Menge(n) / Typ: T
+-- 2. Operation(en)
+-- 3. Gesetze / Gleichungen
+
+-- 1. Integer
+-- 2. + :: Integer -> Integer -> Integer
+-- 3. (a + b) + c = a + (b + c)         Assoziativgesetz
+
+-- Halbgruppe
+-- 1. T
+-- 2. op :: T -> T -> T
+-- 3. op (op a b) c = op a (op b c)
+
+
+
+
+-- neutrales Element
