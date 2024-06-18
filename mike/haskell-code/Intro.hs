@@ -118,3 +118,10 @@ parrot1 :: Animal
 parrot1 = MkParrot "Hello!" 1
 parrot2 :: Animal
 parrot2 = MkParrot "Goodbye!" 2
+
+-- Tier überfahren
+runOverAnimal :: Animal -> Animal
+runOverAnimal (MkDillo _liveness weight) =
+  MkDillo Dead weight
+runOverAnimal (MkParrot _sentence weight) =
+  MkParrot "" weight
