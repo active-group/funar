@@ -63,3 +63,4 @@ data Liveness = Alive | Dead
 data Dillo =
     MkDillo { dilloLiveness :: Liveness,
               dilloWeight :: Weight }
+    deriving Show
