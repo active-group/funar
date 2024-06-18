@@ -368,10 +368,13 @@ listIndex a [] = Null
 listIndex a (first:rest) =
   if a == first   
   then Result 0
-  else case listIndex a rest of 
+  else optionalMap (+1) -- (\index -> index + 1)
+                   (listIndex a rest)
+    
+    {- case listIndex a rest of 
          Null -> Null
          Result index -> Result (index+1)
-      
+      -}
 optionalMap :: (a -> b) -> Optional a -> Optional b
 optionalMap f Null = Null
 optionalMap f (Result a) = Result (f a)
