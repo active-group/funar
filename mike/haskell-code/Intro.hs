@@ -261,8 +261,54 @@ listMap :: (a -> b) -> [a] -> [b]
 listMap f [] = []
 listMap f (x:xs) = f x : (listMap f xs)
 
--- Liste aller Karten des franzöischen Blatts
+-- Liste aller Karten des französischen Blatts
 
+data Suit = Diamonds | Clubs | Spades | Hearts
+  deriving Show
 
+-- | Liste aller Farben
+-- >>> length allSuits
+-- 4
 
-  
+allSuits :: [Suit]
+allSuits = [Spades, Hearts, Diamonds, Clubs]
+
+data Rank
+  = Two
+  | Three
+  | Four
+  | Five
+  | Six
+  | Seven
+  | Eight
+  | Nine
+  | Ten
+  | Jack
+  | Queen
+  | King
+  | Ace
+  deriving Show
+
+-- | Liste aller Werte
+-- >>> length allRanks
+-- 13
+allRanks :: [Rank]
+allRanks =
+  [ Two,
+    Three,
+    Four,
+    Five,
+    Six,
+    Seven,
+    Eight,
+    Nine,
+    Ten,
+    Jack,
+    Queen,
+    King,
+    Ace
+  ]
+
+-- | Spielkarte
+data Card = Card {suit :: Suit, rank :: Rank}
+  deriving Show
