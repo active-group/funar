@@ -64,3 +64,10 @@ data Dillo =
     MkDillo { dilloLiveness :: Liveness,
               dilloWeight :: Weight }
     deriving Show
+
+-- lebendiges Gürteltier, 10kg
+dillo1 :: Dillo
+dillo1 = MkDillo { dilloLiveness = Alive, dilloWeight = 10 }
+
+dillo2 :: Dillo
+dillo2 = MkDillo { dilloLiveness = Dead, dilloWeight = 8 }
