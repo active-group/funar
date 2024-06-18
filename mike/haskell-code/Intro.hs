@@ -381,3 +381,25 @@ listIndex a (first:rest) =
 --   (/=) :: a -> a -> Bool
 --   {-# MINIMAL (==) | (/=) #-}
 --   	-- Defined in ‘GHC.Classes’
+
+-- >>> :info Show
+-- type Show :: * -> Constraint
+-- class Show a where
+--   showsPrec :: Int -> a -> ShowS
+--   show :: a -> String
+--   showList :: [a] -> ShowS
+--   {-# MINIMAL showsPrec | show #-}
+--   	-- Defined in ‘GHC.Show’
+
+-- >>> :info Ord
+-- type Ord :: * -> Constraint
+-- class Eq a => Ord a where
+--   compare :: a -> a -> Ordering
+--   (<) :: a -> a -> Bool
+--   (<=) :: a -> a -> Bool
+--   (>) :: a -> a -> Bool
+--   (>=) :: a -> a -> Bool
+--   max :: a -> a -> a
+--   min :: a -> a -> a
+--   {-# MINIMAL compare | (<=) #-}
+--   	-- Defined in ‘GHC.Classes’
