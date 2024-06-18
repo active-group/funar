@@ -141,3 +141,6 @@ feedAnimal dillo@(MkDillo liveness weight) amount = -- alias pattern
     Dead -> dillo -- MkDillo liveness weight
 feedAnimal (MkParrot sentence weight) amount = 
   MkParrot sentence (weight + amount)
+
+swap :: (Animal -> Weight -> Animal) -> (Weight -> Animal -> Animal)
+swap f = \ weight -> \ animal -> f animal weight
