@@ -271,7 +271,7 @@ listMap f (x:xs) = f x : (listMap f xs)
 -- Liste aller Karten des französischen Blatts
 
 data Suit = Diamonds | Clubs | Spades | Hearts
-  deriving Show
+  deriving (Show, Eq, Enum)
 
 -- | Liste aller Farben
 -- >>> length allSuits
