@@ -61,5 +61,5 @@ data Liveness = Alive | Dead
 
 -- Record
 data Dillo =
-    MkDillo { liveness :: Liveness,
-              weight :: Weight }
+    MkDillo { dilloLiveness :: Liveness,
+              dilloWeight :: Weight }
