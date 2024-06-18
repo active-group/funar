@@ -158,3 +158,12 @@ feedAnimal'(dillo@(MkDillo liveness weight), amount) =
     Dead -> dillo -- MkDillo liveness weight
 feedAnimal'(MkParrot sentence weight, amount) =
   MkParrot sentence (weight + amount)
+
+-- Eine (geometrische) Figur ist eins der folgenden:
+-- - Kreis -ODER-
+-- - Quadrat -ODER-
+-- - Überlagerung zweiter geometrischer Figuren
+
+-- 1. Datentype(en)
+-- 2. Funktion, die bei einem Punkt feststellt, 
+--    ob er innerhalb oder außerhalb einer geomtrischen Figur liegt
