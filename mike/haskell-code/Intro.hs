@@ -325,6 +325,7 @@ all constructor list1 list2 = concat (listMap (\x2 -> listMap (\x1 -> constructo
 cartesianProduct :: [a] -> [b] -> [(a, b)]
 cartesianProduct list1 list2 = concat (listMap (\x2 -> listMap (\x1 -> (x1, x2)) list1) list2)
 
+-- allCards' = listMap Card (cartesianProduct allSuits allRanks)
 
 -- >>> length allCards
 -- 52
