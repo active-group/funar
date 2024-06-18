@@ -129,3 +129,10 @@ runOverAnimal (MkParrot _sentence weight) =
 -- Datenmodell für die Karten des französischen Blatts
 
 -- Yaron Minsky: "Make illegal states unrepresentable."
+
+feedAnimal dillo@(MkDillo liveness weight) amount = -- alias pattern
+  case liveness of
+    Alive -> MkDillo liveness (weight + amount)
+    Dead -> dillo -- MkDillo liveness weight
+feedAnimal (MkParrot sentence weight) amount = 
+  MkParrot sentence (weight + amount)
