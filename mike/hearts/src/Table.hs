@@ -219,3 +219,5 @@ tableProcessEvent (TrickTaken player trick) state =
   }
 tableProcessEvent (IllegalCardAttempted player card) state = state
 tableProcessEvent (GameEnded player) state = state
+
+runTable = undefined
