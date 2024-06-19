@@ -394,8 +394,17 @@ newtype UserAge = MkUserAge Integer
 data User = MkUser { userName:: UserName, userAge :: UserAge }
 
 -- fmap :: (a -> b) -> f a -> f b
-fmap2 :: (a -> b -> c) -> f a -> f b -> f c
-fmap2 = undefined
+fmap2 :: Applicative f => (a -> b -> c) -> f a -> f b -> f c
+fmap2 f fa fb = 
+   -- (pure f) <*> fa <*> fb
+   -- fmap f fa <*> fb
+   f <$> fa <*> fb
+
+-- :type <$> 
+
+fmap3 :: Applicative f => (a -> b -> c -> d) -> f a -> f b -> f c -> f d
+fmap3 f fa fb fc =
+  (pure f) <*> fa <*> fb <*> fc
 
 validateUserName letters =
   if length letters > 50
