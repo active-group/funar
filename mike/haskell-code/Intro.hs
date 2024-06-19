@@ -366,6 +366,65 @@ data Optional a =
   Null | Result a
   deriving Show
 
+-- >>> :info Applicative
+-- type Applicative :: (* -> *) -> Constraint
+-- class Functor f => Applicative f where
+--   pure :: a -> f a
+--   (<*>) :: f (a -> b) -> f a -> f b
+
+--   fmap  ::   (a -> b) -> f a -> f b
+instance Applicative Optional where
+  pure :: a -> Optional a
+  pure = Result
+  (<*>) :: Optional (a -> b) -> Optional a -> Optional b
+  (<*>) Null Null = Null
+  (<*>) Null (Result a) = Null
+  (<*>) (Result fa) Null = Null
+  (<*>) (Result fa) (Result a) = Result (fa a)
+
+instance Monad Optional where
+  return = Result
+  (>>=) :: Optional a -> (a -> Optional b) -> Optional b
+  (>>=) Null next = Null
+  (>>=) (Result a) next = next a
+
+newtype UserName = MkUserName String
+newtype UserAge = MkUserAge Integer
+
+data User = MkUser { userName:: UserName, userAge :: UserAge }
+
+-- fmap :: (a -> b) -> f a -> f b
+fmap2 :: (a -> b -> c) -> f a -> f b -> f c
+fmap2 = undefined
+
+validateUserName letters =
+  if length letters > 50
+  then Null
+  else Result (MkUserName letters)
+
+validateUserAge years =
+  if years < 0
+  then Null
+  else Result (MkUserAge years)
+
+makeUserFromForm :: String -> Integer -> Optional User
+makeUserFromForm letters years = 
+  fmap2 MkUser (validateUserName letters) (validateUserAge years)
+{-  do name <- validateUserName letters
+     age <- validateUserAge years
+     return (MkUser name age)
+     -}
+  {-
+  case validateUserName letters of
+    Result name ->
+      case validateUserAge years of
+        Result age -> Result (MkUser name age)
+        Null -> Null
+    Null -> Null
+  -}
+
+
+
 -- eingebaut:
 -- data Maybe a = Nothing | Just a
 
