@@ -1,3 +1,4 @@
+{-# LANGUAGE InstanceSigs #-}
 module DB where
 
 {-
@@ -63,3 +64,26 @@ splice (Get key cont) next =
 splice (Put key value cont) next =
     Put key value (\() -> splice (cont ()) next)
 splice (Return result) next = next result
+
+p1' :: DB String
+p1' = splice (put "Mike" 100) (\() ->
+      splice (get "Mike") (\x -> 
+      splice (put "Mike" (x+1)) (\() ->
+      splice (get "Mike") (\y ->
+      Return (show (x+y))))))
+
+-- >>> :info Monad
+-- type Monad :: (* -> *) -> Constraint
+-- class Applicative m => Monad m where
+--   (>>=) :: m a -> (a -> m b) -> m b
+--   return :: a -> m a
+
+instance Functor DB where
+
+instance Applicative DB where
+
+instance Monad DB where
+    (>>=) :: DB a -> (a -> DB b) -> DB b
+    (>>=) = splice
+    return :: a -> DB a
+    return = Return
