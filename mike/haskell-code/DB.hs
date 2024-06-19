@@ -98,6 +98,10 @@ p1'' = do put "Mike" 100
           return (show (x+y))
 
 runDB :: DB a -> Map Key Value -> (a, Map Key Value)
-runDB (Get key cont) mp = undefined
-runDB (Put key value cont) mp = undefined
-runDB (Return result) mp = undefined
+runDB (Get key cont) mp =
+    let value = mp ! key 
+    in runDB (cont value) mp
+runDB (Put key value cont) mp =
+    let mp' = Map.insert key value mp
+    in runDB (cont ()) mp'
+runDB (Return result) mp = (result, mp)
