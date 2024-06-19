@@ -45,3 +45,8 @@ p1 = Put "Mike" 100 (\() ->
 
 -- - Notation schicker
 -- - laufen lassen
+
+-- 1. Idee: Programm zerlegen
+
+get :: Key -> DB Value
+get key = Get key (\value -> Return value)
