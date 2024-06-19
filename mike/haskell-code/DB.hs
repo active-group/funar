@@ -1,6 +1,8 @@
 {-# LANGUAGE InstanceSigs #-}
 module DB where
 
+import qualified Data.Map.Strict as Map
+import Data.Map.Strict (Map, (!))
 {-
 put "Mike" 100
 x = get "Mike"
@@ -87,3 +89,12 @@ instance Monad DB where
     (>>=) = splice
     return :: a -> DB a
     return = Return
+
+p1'' :: DB String
+p1'' = do put "Mike" 100
+          x <- get "Mike"
+          put "Mike" (x+1)
+          y <- get "Mike"
+          return (show (x+y))
+
+runDB :: DB a -> Map Key Value -> a
