@@ -97,4 +97,7 @@ p1'' = do put "Mike" 100
           y <- get "Mike"
           return (show (x+y))
 
-runDB :: DB a -> Map Key Value -> a
+runDB :: DB a -> Map Key Value -> (a, Map Key Value)
+runDB (Get key cont) mp = undefined
+runDB (Put key value cont) mp = undefined
+runDB (Return result) mp = undefined
