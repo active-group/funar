@@ -1,5 +1,10 @@
 {-# LANGUAGE InstanceSigs #-}
+{-# LANGUAGE OverloadedStrings #-}
 module DB where
+
+import Control.Applicative
+import Database.SQLite.Simple
+import Database.SQLite.Simple.FromRow
 
 import qualified Data.Map.Strict as Map
 import Data.Map.Strict (Map, (!))
@@ -38,6 +43,7 @@ p1 = [
 data DB a =
     Get Key       (Value -> DB a) -- callback / continuation
   | Put Key Value (()    -> DB a)
+---  | Transaction (DB a) (a -> DB a)
   | Return a
 
 p1 = Put "Mike" 100 (\() ->
@@ -110,3 +116,40 @@ runDB (Put key value cont) mp =
 runDB (Return result) mp = (result, mp)
 
 -- IO: IO-Monade
+-- main :: IO ()
+-- benötigen Datentyp, der den Datenbank-Zeilen entspricht
+data Entry = MkEntry Key Value
+
+instance FromRow Entry where
+  fromRow = MkEntry <$> field <*> field
+
+instance ToRow Entry where
+  -- toRow :: Entry -> [SQLData]
+  toRow (MkEntry key value) = toRow (key, value)
+
+runDBSQLite :: Connection -> DB a -> IO a
+runDBSQLite conn (Get key callback) =
+  do
+    [entry] <-
+      -- OverloadedStrings macht aus SQL-Text ein Query-Objekt
+      queryNamed conn "SELECT key, value FROM entries WHERE key = :key" [":key" := key]
+    let (MkEntry _ value) = entry
+    runDBSQLite conn (callback value)
+runDBSQLite conn (Put key value callback) =
+  do
+    execute conn "REPLACE INTO entries (key, value) VALUES (?,?)" (MkEntry key value)
+    runDBSQLite conn (callback ())
+runDBSQLite conn (Return result) = return result
+
+-- >>> execDB p1
+-- "103"
+execDB :: DB a -> IO a
+execDB db =
+  do
+    conn <- open "test.db"
+    execute_
+      conn
+      "CREATE TABLE IF NOT EXISTS entries (key TEXT PRIMARY KEY, value INTEGER)"
+    result <- runDBSQLite conn db
+    close conn
+    return result
