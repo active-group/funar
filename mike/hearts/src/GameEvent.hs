@@ -74,6 +74,7 @@ data Game a =
   | TurnOverTrick (Maybe (Trick, Player) -> Game a)
   | PlayerAfter Player (Player -> Game a)
   | GameOver (Maybe Player -> Game a)
+  | GetCommand (GameCommand -> Game a)
 
 recordEventM :: GameEvent -> Game ()
 recordEventM event = RecordEvent event Return
