@@ -28,6 +28,10 @@ p1 = [
     Get "Mike",
     Put "Mike" ???
 ]
-
 -}
 
+-- Namen vergeben: let, =, \
+
+data DB a =
+    Get Key (Value -> DB a) -- callback / continuation
+  | Put Key Value (() -> DB a)
