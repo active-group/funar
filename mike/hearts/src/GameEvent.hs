@@ -1,3 +1,4 @@
+{-# LANGUAGE InstanceSigs #-}
 module GameEvent where
 
 import Cards
@@ -65,3 +66,37 @@ eventsWinner (first : rest) =
   case first of
     GameEnded winner -> Just winner
     _ -> eventsWinner rest
+
+data Game a =
+    Return a
+  | RecordEvent GameEvent (() -> Game a)
+  | IsCardOk Player Card (Bool -> Game a)
+
+recordEventM :: GameEvent -> Game ()
+recordEventM event = RecordEvent event Return
+
+isCardOK :: Player -> Card -> Game Bool
+isCardOK player card = IsCardOk player card Return
+
+instance Functor Game where
+
+instance Applicative Game where
+
+instance Monad Game where
+    return :: a -> Game a
+    return = Return
+    (>>=) :: Game a -> (a -> Game b) -> Game b
+    (>>=) (Return result) next = next result
+    (>>=) (RecordEvent event cont) next =
+        RecordEvent event (\() -> cont () >>= next)
+
+-- data Maybe a = Just a | Nothing
+
+-- Spielregeln: GameCommand rein, GameEvents raus
+tableProcessCommandM :: GameCommand -> Game (Maybe Player)
+tableProcessCommandM (DealHands hands) =
+    let gameMs = fmap (recordEventM . uncurry HandDealt) (Map.toList hands)
+    in do sequence_ gameMs
+          return Nothing
+tableProcessCommandM (PlayCard player card) =
+    undefined
