@@ -110,6 +110,8 @@ instance Monad Game where
         PlayerAfter player( \player -> cont player >>= next)
     (>>=) (GameOver cont) next =
         GameOver ( \won -> cont won >>= next)
+    (>>=) (GetCommand cont) next =
+        GetCommand (\command -> cont command >>= next)
 
 -- data Maybe a = Just a | Nothing
 
