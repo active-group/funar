@@ -75,8 +75,8 @@ data Game a =
 recordEventM :: GameEvent -> Game ()
 recordEventM event = RecordEvent event Return
 
-isCardOK :: Player -> Card -> Game Bool
-isCardOK player card = IsCardOk player card Return
+isCardOkM :: Player -> Card -> Game Bool
+isCardOkM player card = IsCardOk player card Return
 
 instance Functor Game where
 
@@ -89,6 +89,8 @@ instance Monad Game where
     (>>=) (Return result) next = next result
     (>>=) (RecordEvent event cont) next =
         RecordEvent event (\() -> cont () >>= next)
+    (>>=) (IsCardOk player card cont) next =
+        IsCardOk player card (\ok -> cont ok >>= next)
 
 -- data Maybe a = Just a | Nothing
 
@@ -99,4 +101,8 @@ tableProcessCommandM (DealHands hands) =
     in do sequence_ gameMs
           return Nothing
 tableProcessCommandM (PlayCard player card) =
-    undefined
+    do ok <- isCardOkM player card
+       if ok
+       then undefined
+       else do recordEventM (IllegalCardAttempted player card)
+               return Nothing
