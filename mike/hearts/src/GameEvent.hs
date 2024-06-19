@@ -71,12 +71,24 @@ data Game a =
     Return a
   | RecordEvent GameEvent (() -> Game a)
   | IsCardOk Player Card (Bool -> Game a)
+  | TurnOverTrick (Maybe (Trick, Player) -> Game a)
+  | PlayerAfter Player (Player -> Game a)
+  | GameOver (Maybe Player -> Game a)
 
 recordEventM :: GameEvent -> Game ()
 recordEventM event = RecordEvent event Return
 
 isCardOkM :: Player -> Card -> Game Bool
 isCardOkM player card = IsCardOk player card Return
+
+turnOverTrickM :: Game (Maybe (Trick, Player))
+turnOverTrickM = TurnOverTrick Return
+
+playerAfterM :: Player -> Game Player
+playerAfterM player = PlayerAfter player Return
+
+gameOverM :: Game (Maybe Player)
+gameOverM = GameOver Return
 
 instance Functor Game where
 
@@ -91,6 +103,12 @@ instance Monad Game where
         RecordEvent event (\() -> cont () >>= next)
     (>>=) (IsCardOk player card cont) next =
         IsCardOk player card (\ok -> cont ok >>= next)
+    (>>=) (TurnOverTrick cont) next =
+        TurnOverTrick ( \over -> cont over >>= next)
+    (>>=) (PlayerAfter player cont) next =
+        PlayerAfter player( \player -> cont player >>= next)
+    (>>=) (GameOver cont) next =
+        GameOver ( \won -> cont won >>= next)
 
 -- data Maybe a = Just a | Nothing
 
@@ -104,6 +122,21 @@ tableProcessCommandM (PlayCard player card) =
     do ok <- isCardOkM player card
        if ok
        then do recordEventM (LegalCardPlayed player card)
-               return undefined
+               turnOverTrick <- turnOverTrickM
+               case turnOverTrick of
+                 Just (trick, trickTaker) ->
+                   do recordEventM (TrickTaken trickTaker trick)
+                      over <- gameOverM
+                      case over of
+                          Just winner ->
+                            do recordEventM (GameEnded winner)
+                               return (Just winner)
+                          Nothing ->
+                            do recordEventM (PlayerTurnChanged trickTaker)
+                               return Nothing
+                 Nothing ->
+                    do nextPlayer <- playerAfterM player
+                       recordEventM (PlayerTurnChanged nextPlayer)
+                       return Nothing
        else do recordEventM (IllegalCardAttempted player card)
                return Nothing
