@@ -103,6 +103,7 @@ tableProcessCommandM (DealHands hands) =
 tableProcessCommandM (PlayCard player card) =
     do ok <- isCardOkM player card
        if ok
-       then undefined
+       then do recordEventM (LegalCardPlayed player card)
+               return undefined
        else do recordEventM (IllegalCardAttempted player card)
                return Nothing
