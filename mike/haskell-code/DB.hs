@@ -43,7 +43,7 @@ p1 = [
 data DB a =
     Get Key       (Value -> DB a) -- callback / continuation
   | Put Key Value (()    -> DB a)
---  | Transaction (DB a) (a -> DB a)
+-- | Transaction (DB (DB a))
   | Return a
 
 p1 = Put "Mike" 100 (\() ->
