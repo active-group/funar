@@ -48,5 +48,16 @@ p1 = Put "Mike" 100 (\() ->
 
 -- 1. Idee: Programm zerlegen
 
+-- DB a: (Beschreibung eines) Programms, das mit der Datenbank redet
+--       und ein Ergebnis vom Typ a liefert
+
 get :: Key -> DB Value
-get key = Get key (\value -> Return value)
+get key = Get key Return -- (\value -> Return value)
+
+put :: Key -> Value -> DB ()
+put key value = Put key value Return -- (\() -> Return ())
+
+splice :: DB a -> (a -> DB b) -> DB b
+splice (Get key cont) next = undefined
+splice (Put key value cont) next = undefined
+splice (Return result) next = undefined
