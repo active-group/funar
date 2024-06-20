@@ -116,7 +116,8 @@ semantics (FlipDirection contract) now =
 -- let (payments, residualContract) = semantics ...
 -- in ...
 
--- >>> semantics c6 (MkDate "2024-07-01")
-
 c6 :: Contract
 c6 = Value 100 (Combine (One EUR) (Later (MkDate "2024-12-24") (One EUR)))
+
+-- >>> semantics c6 (MkDate "2024-07-01")
+-- ([MkPayment (MkDate "2024-07-01") Long 100.0 EUR],Combine Zero (Later (MkDate "2024-12-24") (One EUR)))
