@@ -362,6 +362,8 @@ feedAndThenRunOver' = flip feedAnimal 1 |> runOverAnimal
 -- >>> listIndex Cat [Dog, Snake, Cat, Snake]
 -- Result 2
 
+-- Funktor: Typ*konstruktor*, Typ mit Typparameter
+
 data Optional a =
   Null | Result a
   deriving Show
