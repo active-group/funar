@@ -1,3 +1,4 @@
+{-# LANGUAGE InstanceSigs #-}
 module Contract where
 
 {-
@@ -49,6 +50,13 @@ data Contract =
   | Combine Contract Contract
   | FlipDirection Contract
 
+instance Semigroup Contract where
+    (<>) :: Contract -> Contract -> Contract
+    (<>) = Combine
+
+instance Monoid Contract where
+    mempty :: Contract
+    mempty = Zero
 
 -- Ich bekomme 1€ jetzt.
 c1 = One EUR
