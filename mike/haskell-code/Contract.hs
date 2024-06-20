@@ -59,6 +59,11 @@ instance Monoid Contract where
     mempty :: Contract
     mempty = Zero
 
+combine :: Contract -> Contract -> Contract
+combine c1 Zero = c1
+combine Zero c2 = c2
+combine c1 c2 = Combine c1 c2
+
 -- Ich bekomme 1€ jetzt.
 c1 = One EUR
 
@@ -108,7 +113,7 @@ semantics c@(Later date contract) now =
 semantics (Combine contract1 contract2) now =
     let (payments1, residualContract1) = semantics contract1 now
         (payments2, residualContract2) = semantics contract2 now
-    in (payments1 ++ payments2, Combine residualContract1 residualContract2)
+    in (payments1 ++ payments2, combine residualContract1 residualContract2)
 semantics (FlipDirection contract) now =
     let (payments, residualContract) = semantics contract now
     in (map flipPayment payments, FlipDirection residualContract)
@@ -120,4 +125,4 @@ c6 :: Contract
 c6 = Value 100 (Combine (One EUR) (Later (MkDate "2024-12-24") (One EUR)))
 
 -- >>> semantics c6 (MkDate "2024-07-01")
--- ([MkPayment (MkDate "2024-07-01") Long 100.0 EUR],Combine Zero (Later (MkDate "2024-12-24") (One EUR)))
+-- ([MkPayment (MkDate "2024-07-01") Long 100.0 EUR],Value 100.0 (Combine Zero (Later (MkDate "2024-12-24") (One EUR))))
