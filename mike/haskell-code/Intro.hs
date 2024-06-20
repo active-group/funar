@@ -371,9 +371,20 @@ data Optional a =
 -- type Applicative :: (* -> *) -> Constraint
 -- class Functor f => Applicative f where
 --   pure :: a -> f a
---   (<*>) :: f (a -> b) -> f a -> f b
+--   (<*>) ::  f (a ->   b) -> f a -> f b
 
---   fmap  ::   (a -> b) -> f a -> f b
+--   fmap  ::    (a ->   b) -> f a -> f b
+-- flip (>>=) :: (a -> f b) -> f a -> f b
+
+--   (>>=) :: f a -> (a -> f b) -> f b
+
+fmap' f x = (pure f) <*> x
+
+data Validation a =
+    Valid a
+  | Invalid [String] -- Liste von Fehlermeldungen
+      
+
 instance Applicative Optional where
   pure :: a -> Optional a
   pure = Result
