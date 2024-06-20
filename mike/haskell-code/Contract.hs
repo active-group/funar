@@ -33,9 +33,13 @@ data Contract =
 data Contract =
     One Currency
   | Value Amount Contract
+  | Later Date Contract
 
 -- Ich bekomme 1€ jetzt.
 c1 = One EUR
 
 -- Ich bekomme 100€ jetzt.
 c2 = Value 100 (One EUR)
+
+-- Ich bekomme am 24.12.2024 100€.
+c3 = Later (MkDate "2024-12-24") c2
