@@ -384,7 +384,7 @@ data Validation a =
     Valid a
   | Invalid [String] -- Liste von Fehlermeldungen
 
--- Übung: Funktor, Applicative
+-- Übung: Functor, Applicative für Validation
       
 
 instance Applicative Optional where
