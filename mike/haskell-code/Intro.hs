@@ -392,7 +392,7 @@ instance Functor Validation where
 
 instance Applicative Validation where
   pure = Valid
-  (<*>) (Valid fa) (Valid a) = Valid (f a)
+  (<*>) (Valid fa) (Valid a) = Valid (fa a)
   (<*>) (Valid _) (Invalid errors) = Invalid errors
   (<*>) (Invalid errors) (Valid _) = Invalid errors
   (<*>) (Invalid errors1) (Invalid errors2) = Invalid (errors1 + errors2)
