@@ -105,11 +105,8 @@ https://guide.elm-lang.org/install/
 Falls Sie `nix` verwenden, dann ist `elm` bereits in der Entwicklungsumgebung
 (`nix develop`) vorhanden.
 
-# Archive
+# Literatur
 
-Zurückliegende Schulungen werden in GitHub als Branches archiviert und sollten
-am Datum erkennbar sein.
-
-<!-- Local Variables: -->
-<!-- fill-column: 80 -->
-<!-- End: -->
+- Michael Sperber, Herbert Klaeren: [Schreibe Dein Programm!](https://www.deinprogramm.de/sdp/)
+- Sandy Maguire: [Algebra-Driven Design](https://leanpub.com/algebra-driven-design)
+- Michael Pilquist, Rúnar Bjarnason, and Paul Chiusano [Functional Programming in Scala](https://www.manning.com/books/functional-programming-in-scala-second-edition)
