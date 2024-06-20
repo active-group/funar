@@ -7,6 +7,10 @@ module Contract where
 
 - Beispiel in "atomare Bestandteile" / "Ideen" aufteilen
   häufig: entlang der Attribute
+
+  - Währung: "Ich bekomme jetzt 1€."
+  - Betrag: "Ich bekomme jetzt 100€."
+  - Später: "Ich bekomme am 24.12.2024 ..."
 -}
 
 data Date = MkDate String
@@ -17,9 +21,21 @@ type Amount = Double
 data Currency = EUR | CHF | USD
   deriving Show
 
+{-
 data Contract =
     ZeroCouponBond Date Amount Currency
   | Call 
   | Put
   | Everest
   | Himalaya
+-}
+
+data Contract =
+    One Currency
+  | Value Amount Contract
+
+-- Ich bekomme 1€ jetzt.
+c1 = One EUR
+
+-- Ich bekomme 100€ jetzt.
+c2 = Value 100 (One EUR)
