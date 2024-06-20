@@ -4,6 +4,9 @@ module Contract where
 - einfaches Beispiel
   Zero-Bond / zero-coupon bond
   "Ich bekomme am 24.12.2024 100€."
+
+- Beispiel in "atomare Bestandteile" / "Ideen" aufteilen
+  häufig: entlang der Attribute
 -}
 
 data Date = MkDate String
