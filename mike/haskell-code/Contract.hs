@@ -84,5 +84,5 @@ fxSwap1 =
 data Payment = MkPayment Date Direction Amount Currency
   deriving Show
 
--- Semantik ... Zahlungen bis zu Datum
-semantics :: Contract -> Date -> [Payment]
+-- Semantik ... Zahlungen bis zu Datum -> Residualvertrag
+semantics :: Contract -> Date -> ([Payment], Contract)
