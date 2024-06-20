@@ -82,6 +82,7 @@ fxSwap1 =
        (FlipDirection (zeroCouponBond (MkDate "2024-12-24") 100 CHF))
 
 data Payment = MkPayment Date Direction Amount Currency
+  deriving Show
 
--- Semantik
-semantics :: Contract -> [Payment]
+-- Semantik ... Zahlungen bis zu Datum
+semantics :: Contract -> Date -> [Payment]
