@@ -362,7 +362,6 @@ feedAndThenRunOver' = flip feedAnimal 1 |> runOverAnimal
 -- >>> listIndex Cat [Dog, Snake, Cat, Snake]
 -- Result 2
 
--- Funktor: Typ*konstruktor*, Typ mit Typparameter
 
 data Optional a =
   Null | Result a
@@ -548,6 +547,16 @@ instance Semigroup a => Semigroup (Optional a) where
 
 instance Semigroup a => Monoid (Optional a) where
   neutral = Null
+
+-- Funktor: Typ*konstruktor*, Typ mit Typparameter
+-- bzw. "Funktion auf Typebene"
+-- C#: List<A>
+{-
+interface Functor<F> {
+  F<B> Map(func<A, B> f, F<A> thing);
+}
+
+-}
 
 -- >>> :info Functor
 -- type Functor :: (* -> *) -> Constraint
