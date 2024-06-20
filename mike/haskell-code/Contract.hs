@@ -49,6 +49,7 @@ data Contract =
   | Later Date Contract
   | Combine Contract Contract
   | FlipDirection Contract
+  deriving Show
 
 instance Semigroup Contract where
     (<>) :: Contract -> Contract -> Contract
@@ -75,3 +76,12 @@ c5 = FlipDirection c4
 zeroCouponBond :: Date -> Amount -> Currency -> Contract
 zeroCouponBond date amount currency =
     Later date (Value amount (One currency))
+
+fxSwap1 =
+    Combine c3
+       (FlipDirection (zeroCouponBond (MkDate "2024-12-24") 100 CHF))
+
+data Payment = MkPayment Date Direction Amount Currency
+
+-- Semantik
+semantics :: Contract -> [Payment]
