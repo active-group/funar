@@ -443,8 +443,8 @@ listIndex a [] = Null
 listIndex a (first:rest) =
   if a == first   
   then Result 0
-  else optionalMap (+1) -- (\index -> index + 1)
-                   (listIndex a rest)
+  else fmap (+1) -- (\index -> index + 1)
+            (listIndex a rest)
     
     {- case listIndex a rest of 
          Null -> Null
