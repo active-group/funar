@@ -59,6 +59,7 @@ instance Monoid Contract where
     mempty :: Contract
     mempty = Zero
 
+-- smart constructor
 combine :: Contract -> Contract -> Contract
 combine c1 Zero = c1
 combine Zero c2 = c2
@@ -125,4 +126,4 @@ c6 :: Contract
 c6 = Value 100 (Combine (One EUR) (Later (MkDate "2024-12-24") (One EUR)))
 
 -- >>> semantics c6 (MkDate "2024-07-01")
--- ([MkPayment (MkDate "2024-07-01") Long 100.0 EUR],Value 100.0 (Combine Zero (Later (MkDate "2024-12-24") (One EUR))))
+-- ([MkPayment (MkDate "2024-07-01") Long 100.0 EUR],Value 100.0 (Later (MkDate "2024-12-24") (One EUR)))
