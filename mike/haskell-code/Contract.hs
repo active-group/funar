@@ -16,3 +16,7 @@ data Currency = EUR | CHF | USD
 
 data Contract =
     ZeroCouponBond Date Amount Currency
+  | Call 
+  | Put
+  | Everest
+  | Himalaya
