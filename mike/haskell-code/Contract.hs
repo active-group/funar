@@ -86,3 +86,6 @@ data Payment = MkPayment Date Direction Amount Currency
 
 -- Semantik ... Zahlungen bis zu Datum -> Residualvertrag
 semantics :: Contract -> Date -> ([Payment], Contract)
+
+-- let (payments, residualContract) = semantics ...
+-- in ...
