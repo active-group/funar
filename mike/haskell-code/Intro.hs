@@ -383,6 +383,8 @@ fmap' f x = (pure f) <*> x
 data Validation a =
     Valid a
   | Invalid [String] -- Liste von Fehlermeldungen
+
+-- Übung: Funktor, Applicative
       
 
 instance Applicative Optional where
