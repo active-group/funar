@@ -11,6 +11,10 @@ module Contract where
   - Währung: "Ich bekomme jetzt 1€."
   - Betrag: "Ich bekomme jetzt 100€."
   - Später: "Ich bekomme am 24.12.2024 ..."
+
+  ... dabei nach Selbstbezügen suchen
+
+- wiederholen
 -}
 
 data Date = MkDate String
@@ -43,3 +47,7 @@ c2 = Value 100 (One EUR)
 
 -- Ich bekomme am 24.12.2024 100€.
 c3 = Later (MkDate "2024-12-24") c2
+
+zeroCouponBond :: Date -> Amount -> Currency -> Contract
+zeroCouponBond date amount currency =
+    Later date (Value amount (One currency))
