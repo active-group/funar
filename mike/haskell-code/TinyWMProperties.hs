@@ -100,7 +100,7 @@ prop_view_I   stackIndex (stackSet :: T) = invariant (view stackIndex stackSet)
 prop_rotate_I stackIndex (stackSet :: T) = invariant (rotate stackIndex stackSet)
 prop_push_I   stackIndex (stackSet :: T) = invariant (push stackIndex stackSet)
 prop_delete_I stackIndex (stackSet :: T) = invariant (delete stackIndex stackSet)
-prop_shift_I  stackIndex (stackSet :: T) = stackIndex >= 0 && stackIndex < size stackSet
+prop_shift_I  stackIndex (stackSet :: T) = stackIndex >= 0 && stackIndex < size stackSet-
                                  ==> invariant (shift stackIndex stackSet)
 prop_insert_I stackIndex window (stackSet :: T) = window >= 0 && window < size stackSet
                                  ==> invariant (insert stackIndex window stackSet)
