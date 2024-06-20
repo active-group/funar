@@ -3,7 +3,7 @@
 module Player where
 
 import Cards
-import Data.Foldable (minimumBy)
+import Data.Foldable (minimumBy, maximumBy)
 import Data.IORef (IORef)
 import qualified Data.IORef as IORef
 import Data.Map.Strict (Map, (!))
