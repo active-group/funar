@@ -395,7 +395,7 @@ instance Applicative Validation where
   (<*>) (Valid fa) (Valid a) = Valid (fa a)
   (<*>) (Valid _) (Invalid errors) = Invalid errors
   (<*>) (Invalid errors) (Valid _) = Invalid errors
-  (<*>) (Invalid errors1) (Invalid errors2) = Invalid (errors1 + errors2)
+  (<*>) (Invalid errors1) (Invalid errors2) = Invalid (errors1 ++ errors2)
 
       
 
