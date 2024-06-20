@@ -15,6 +15,10 @@ module Contract where
   ... dabei nach Selbstbezügen suchen
 
 - wiederholen
+
+  Currency Swap:
+  Ich bekomme am 24.12.2024 100€. -UND-
+  Ich bezahle am 24.12.2024 100CHF.
 -}
 
 data Date = MkDate String
@@ -34,10 +38,17 @@ data Contract =
   | Himalaya
 -}
 
+data Direction = Long | Short
+  deriving Show
+
 data Contract =
-    One Currency
+    Zero
+  | One Currency
   | Value Amount Contract
   | Later Date Contract
+  | Combine Contract Contract
+  | FlipDirection Contract
+
 
 -- Ich bekomme 1€ jetzt.
 c1 = One EUR
@@ -47,6 +58,11 @@ c2 = Value 100 (One EUR)
 
 -- Ich bekomme am 24.12.2024 100€.
 c3 = Later (MkDate "2024-12-24") c2
+
+-- Ich bezahle jetzt 1€.
+c4 = FlipDirection c1
+
+c5 = FlipDirection c4
 
 zeroCouponBond :: Date -> Amount -> Currency -> Contract
 zeroCouponBond date amount currency =
