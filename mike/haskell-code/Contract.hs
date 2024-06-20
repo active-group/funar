@@ -84,8 +84,39 @@ fxSwap1 =
 data Payment = MkPayment Date Direction Amount Currency
   deriving Show
 
+scalePayment :: Amount -> Payment -> Payment
+scalePayment factor (MkPayment date direction amount currency) =
+    MkPayment date direction (factor * amount) currency
+
+flipPayment (MkPayment date Long amount currency) =
+    MkPayment date Short amount currency
+flipPayment (MkPayment date Short amount currency) =
+  MkPayment date Long amount currency
+
 -- Semantik ... Zahlungen bis zu Datum -> Residualvertrag
 semantics :: Contract -> Date -> ([Payment], Contract)
+semantics Zero now = ([], Zero)
+semantics (One currency) now = 
+    ([MkPayment now Long 1 currency], Zero)
+semantics (Value factor contract) now =
+    let (payments, residualContract) = semantics contract now
+    in (map (scalePayment factor) payments, Value factor residualContract)
+semantics c@(Later date contract) now =
+    if now >= date
+    then semantics contract now
+    else ([], c)
+semantics (Combine contract1 contract2) now =
+    let (payments1, residualContract1) = semantics contract1 now
+        (payments2, residualContract2) = semantics contract2 now
+    in (payments1 ++ payments2, Combine residualContract1 residualContract2)
+semantics (FlipDirection contract) now =
+    let (payments, residualContract) = semantics contract now
+    in (map flipPayment payments, FlipDirection residualContract)
 
 -- let (payments, residualContract) = semantics ...
 -- in ...
+
+-- >>> semantics c6 (MkDate "2024-07-01")
+
+c6 :: Contract
+c6 = Value 100 (Combine (One EUR) (Later (MkDate "2024-12-24") (One EUR)))
