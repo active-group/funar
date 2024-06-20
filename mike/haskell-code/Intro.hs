@@ -385,6 +385,18 @@ data Validation a =
   | Invalid [String] -- Liste von Fehlermeldungen
 
 -- Übung: Functor, Applicative für Validation
+
+instance Functor Validation where
+  fmap f (Valid a) = Valid (f a)
+  fmap f (Invalid errors) = Invalid errors
+
+instance Applicative Validation where
+  pure = Valid
+  (<*>) (Valid fa) (Valid a) = Valid (f a)
+  (<*>) (Valid _) (Invalid errors) = Invalid errors
+  (<*>) (Invalid errors) (Valid _) = Invalid errors
+  (<*>) (Invalid errors1) (Invalid errors2) = Invalid (errors1 + errors2)
+
       
 
 instance Applicative Optional where
