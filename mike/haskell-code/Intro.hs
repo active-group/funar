@@ -600,4 +600,4 @@ newtype Additive = MkAdditive Integer
   deriving Show
 
 instance Semigroup Additive where
-  (<>) (MkAdditive i1) (MkAdditive i2) = MkAdditive (i1+i2)
+  op (MkAdditive i1) (MkAdditive i2) = MkAdditive (i1+i2)
