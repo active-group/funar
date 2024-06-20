@@ -22,6 +22,9 @@ class Functor f where
 {-
 fmap id = id
 fmap (h . g) = fmap h . fmap g
+
+fmap (\x -> h (g x)) c = fmap h (fmap g c)
+
 -}
 
 class Functor f => Applicative f where
@@ -35,8 +38,10 @@ u <*> pure y = pure ($ y) <*> u
 pure (.) <*> u <*> v <*> w = u <*> (v <*> w)
 -}
 
+-- f $ a = f a
+
 class Applicative m => Monad m where
-    (>>=)       :: forall a b. m a -> (a -> m b) -> m b
+    (>>=)       :: m a -> (a -> m b) -> m b
 
     return      :: a -> m a
     return      = pure
@@ -44,5 +49,5 @@ class Applicative m => Monad m where
 {-
 return a >>= k  =  k a
 m >>= return =  m
-m >>= (\\x -> k x >>= h)  =  (m >>= k) >>= h
+m >>= (\x -> k x >>= h)  =  (m >>= k) >>= h
 -}
