@@ -1,0 +1,6 @@
+# Let git choose what to do by default
+* text=auto
+
+# Nix expressions and shell scripts must not get CRLF line endings!
+*.nix text eol=lf
+*.sh text eol=lf
