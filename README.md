@@ -93,7 +93,7 @@ gefunden werden soll, dann bitte "Manually via PATH" auswählen!
 
 # Bei Problemen
 
-... bitte Mike Sperber oder Johannes Maier kontaktieren.
+... bitte Mike Sperber kontaktieren.
 
 ## Elm
 
@@ -105,10 +105,12 @@ https://guide.elm-lang.org/install/
 Falls Sie `nix` verwenden, dann ist `elm` bereits in der Entwicklungsumgebung
 (`nix develop`) vorhanden.
 
-# Archive
+# Literatur
 
-Zurückliegende Schulungen werden in GitHub als Branches archiviert und sollten
-am Datum erkennbar sein.
+- Michael Sperber, Herbert Klaeren: [Schreibe Dein Programm!](https://www.deinprogramm.de/sdp/)
+- Sandy Maguire: [Algebra-Driven Design](https://leanpub.com/algebra-driven-design)
+- Michael Pilquist, Rúnar Bjarnason, and Paul Chiusano [Functional Programming in Scala](https://www.manning.com/books/functional-programming-in-scala-second-edition)
+- Scott Wlaschin: [Domain Modeling Made Functional](https://pragprog.com/titles/swdddf/domain-modeling-made-functional/)
 
 <!-- Local Variables: -->
 <!-- fill-column: 80 -->
