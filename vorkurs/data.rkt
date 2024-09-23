@@ -8,8 +8,8 @@
 ; zusammengesetzte Daten / compound data
 (define-record time ; Signatur
   make-time ; Konstruktor
-  (time-hour   natural) ; Selektoren / Getter-Funktion
-  (time-minute natural))
+  (time-hour   (integer-from-to 0 23)) ; Selektoren / Getter-Funktion
+  (time-minute (integer-from-to 0 59)))
 
 (: make-time (natural natural -> time))
 (: time-hour (time -> natural))
@@ -54,6 +54,12 @@
    (expect
     (minutes-since-midnight (msm->time minutes))
     minutes)))
+
+(check-property
+ (for-all ((t time))
+   (expect
+    (msm->time (minutes-since-midnight t))
+    t)))
 
 (define msm->time
   (lambda (minutes)
