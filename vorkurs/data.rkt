@@ -72,6 +72,13 @@
 
 ; Tiere auf dem texanischen Highway
 
+; Tier ist eins der folgenden:
+; - Gürteltier -ODER-
+; - Schlange
+; Fallunterscheidung, hier: gemischte Daten
+(define animal
+  (signature (mixed dillo snake)))
+
 ; Gürteltier hat folgende Eigenschaften:
 ; - (lebendig -ODER- tot)   -UND-
 ; - Gewicht
@@ -161,3 +168,30 @@ class Dillo {
       ("alive" (make-dillo "alive"
                            (+ (dillo-weight dillo) amount)))
       ("dead" dillo))))
+
+; Eine Schlange hat folgende Eigenschaften:
+; - Länge -UND-
+; - Dicke
+(define-record snake
+  make-snake
+  (snake-length number)
+  (snake-thickness number))
+
+; Schlange 2m lang, 5cm dick
+(define snake1 (make-snake 200 5))
+; Baby-Anaconda, 5m lang, 20cm dick
+(define snake2 (make-snake 500 20))
+
+; Schlange überfahren
+(: run-over-snake (snake -> snake))
+
+(check-expect (run-over-snake snake1)
+              (make-snake 200 0))
+(check-expect (run-over-snake snake2)
+              (make-snake 500 0))
+
+(define run-over-snake
+  (lambda (snake)
+    (make-snake (snake-length snake) 0)))
+
+; Tier überfahren
