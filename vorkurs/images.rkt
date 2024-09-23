@@ -29,9 +29,18 @@
 ; Signatur:
 (: tile (image image -> image))
 
-(check-expect (tile star1 circle1)
-              (above (beside star1 circle1)
-                     (beside circle1 star1)))
+(check-expect (tile circle1 circle1)
+              (beside (above circle1 circle1)
+                      (above circle1 circle1)))
+
+(check-property
+ (for-all ((image1 image)
+           (image2 image))
+   (expect
+    (above (beside image1 image2)
+           (beside image2 image1))
+    (beside (above image1 image2)
+            (above image2 image1)))))
 
 (define tile
   (lambda (image1 image2)
