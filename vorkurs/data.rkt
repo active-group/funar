@@ -303,16 +303,43 @@ class Dillo {
 (: extract-odds (list-of-numbers -> list-of-numbers))
 
 (check-expect (extract-odds list4)
-              (cons 2 (cons 8 empty)))
+              (cons 3 (cons 5 empty)))
 
 (define extract-odds
   (lambda (list)
     (cond
       ((empty? list) empty)
       ((cons? list)
-       (cond
+       ; binäre Verzweigung
+       (if (odd? (first list)) ; Bedingung
+           (cons (first list) ; Konsequente
+                 (extract-odds (rest list)))
+           (extract-odds (rest list))) ; Alternative
+       #;(cond
          ((odd? (first list))
           (cons (first list)
                 (extract-odds (rest list))))
-         ((even? (first list))
+         (else
           (extract-odds (rest list))))))))
+
+; abstrahieren:
+; - kopieren
+; - umbenennen - an die rekursiven Aufrufe denken
+; - Unterschiede durch abstrakte Namen ersetzen
+; - abstraken Namen in lambda aufnehmen
+;   - an rekursive Aufrufe denken
+
+(: extract
+   ((number -> boolean) list-of-numbers -> list-of-numbers))
+
+(define extract
+  (lambda (p? list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       ; binäre Verzweigung
+       (if (p? (first list)) ; Bedingung
+           (cons (first list) ; Konsequente
+                 (extract p? (rest list)))
+           (extract p? (rest list))) ; Alternative
+       ))))
