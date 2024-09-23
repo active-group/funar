@@ -122,3 +122,11 @@ class Dillo {
   }
 }
 |#
+
+; Gürteltier füttern
+(: feed-dillo (dillo weight -> dillo))
+
+(check-expect (feed-dillo dillo1 2)
+              (make-dillo "alive" 12))
+(check-expect (feed-dillo dillo2 2)
+              dillo2)
