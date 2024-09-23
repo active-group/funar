@@ -338,8 +338,9 @@ class Dillo {
 
 ; >1 Pfeil in Signatur: Funktion höherer Ordnung
 
+; Signaturvariable: %...
 (: extract
-   ((number -> boolean) list-of-numbers -> list-of-numbers))
+   ((%element -> boolean) (list-of %element) -> (list-of %element)))
 
 (define extract
   (lambda (p? list)
