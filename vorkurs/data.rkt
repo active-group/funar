@@ -133,18 +133,20 @@ class Dillo {
 
 (define feed-dillo
   (lambda (dillo amount)
+    (define liveness (dillo-liveness dillo))
+    (define weight (dillo-weight dillo))
     (make-dillo
-     (dillo-liveness dillo)
-     ...
+     liveness ; (dillo-liveness dillo)
      ; Fallunterscheidung in den Daten
      ; -> Verzweigung
-     (cond
+     ; Pattern-Matching
+     (match liveness
        ; ein Zweig pro Fall
-       ((equal? (dillo-liveness dillo) "alive")  ; (<Bedingung> <Ergebnis>)
-        ...)
-       ((equal? (dillo-liveness dillo) "dead")
-        ...)
-     )
-    (dillo-liveness dillo)
-    (dillo-weight dillo)
-    ))
+       ("alive" (+ weight amount))
+       ("dead" weight))
+     #;(cond
+       ; ein Zweig pro Fall
+       ((equal? liveness "alive")  ; (<Bedingung> <Ergebnis>)
+        (+ weight amount))
+       ((equal? liveness "dead")
+        weight)))))
