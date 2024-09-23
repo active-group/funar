@@ -213,4 +213,14 @@ class Dillo {
       ((dillo? animal) (run-over-dillo animal))
       ((snake? animal) (run-over-snake animal)))))
 
+; zusammengesetzte Daten:
+; "besteht aus", "haben folgende Eigenschaften", "UND"
+
+; Fallunterscheidungen
+; "ist eins der folgenden", "ODER"
+
+; häufig:
+; gemischte Daten, jeder Fall zusammengesetzte Daten
+; -> algebraische Datentypen
+
 ; Note: Sums and products
