@@ -7,6 +7,6 @@
 ; - Minute
 ; zusammengesetzte Daten
 (define-record time
-  make-time
+  make-time ; Konstruktor
   (time-hour natural)
   (time-minute natural))
