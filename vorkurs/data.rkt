@@ -92,3 +92,30 @@
   make-dillo
   (dillo-liveness liveness)
   (dillo-weight weight))
+
+; lebendiges Gürteltier, 10kg
+(define dillo1 (make-dillo "alive" 10))
+; totes Gürteltier, 8kg
+(define dillo2 (make-dillo "dead" 8))
+
+; Gürteltier überfahren
+(: run-over-dillo (dillo -> dillo))
+
+(check-expect (run-over-dillo dillo1)
+              (make-dillo "dead" 10))
+(check-expect (run-over-dillo dillo2)
+              dillo2 ; (make-dillo "dead" 8)
+              )
+
+
+                              
+#|
+class Dillo {
+  Liveness liveness;
+  Weight weight;
+
+  void runOver() {
+    this.liveness = Liveness.DEAD;
+  }
+}
+|#
