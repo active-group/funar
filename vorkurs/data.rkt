@@ -152,7 +152,7 @@ class Dillo {
         weight)))))
 
 (define feed-dillo
-  (lambda (dillo weight)
+  (lambda (dillo amount)
     (match (dillo-liveness dillo)
       ("alive" (make-dillo "alive"
                            (+ (dillo-weight dillo) amount)))
