@@ -31,3 +31,16 @@
      (beside image2 image1))))
 
 (tile star1 circle1)
+
+#|
+"Referenz"
+
+int m(int x) { // x steht für Referenz/Speicherzelle, in der Zahl steht
+  x
+  ...
+  x = x + 1;
+  x
+}
+
+m(42) -> { 42 ... 42 }
+|#
