@@ -6,10 +6,12 @@
 ; - Stunde -UND-
 ; - Minute
 ; zusammengesetzte Daten
-(define-record time
+(define-record time ; Signatur
   make-time ; Konstruktor
-  (time-hour natural)
+  (time-hour   natural) ; Selektoren / Getter-Funktion
   (time-minute natural))
+
+(: make-time (natural natural -> time))
 
 ; 12 Uhr 24
 (define time1 (make-time 12 24))
