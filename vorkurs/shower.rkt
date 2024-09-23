@@ -57,3 +57,12 @@
 (define sh2 (make-shampoo "dry"))
 (define sp1 (make-soap 8))
 (define sp2 (make-soap 7))
+
+(define gel1 (make-shower-gel sp1 sh1))
+(define gel2 (make-shower-gel sp2 sh2))
+
+(define mix1 (make-mixture sp1 sh1))
+(define mix2 (make-mixture sp2 sh2))
+
+(define mix3 (make-mixture mix1 sp2))
+(define mix4 (make-mixture mix2 sh2))
