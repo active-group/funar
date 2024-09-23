@@ -298,3 +298,5 @@ class Dillo {
 ; (op x (op y z)) = (op (op x y) z)
 
 ; Monoid = Halbgruppe mit neutralem Element
+
+; Alle geraden Zahlen aus einer Liste extrahieren
