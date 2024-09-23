@@ -212,3 +212,5 @@ class Dillo {
     (cond
       ((dillo? animal) (run-over-dillo animal))
       ((snake? animal) (run-over-snake animal)))))
+
+; Note: Sums and products
