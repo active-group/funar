@@ -131,7 +131,9 @@ class Dillo {
 (check-expect (feed-dillo dillo2 2)
               dillo2)
 
-; lexikalische Bindung
+; lexikalische/statische Bindung
+; vom Vorkommen von innen nach außen nach Bindung suchen
+; Bindung: lambda, define, oder eingebaut
 
 (define feed-dillo
   (lambda (dillo amount)
