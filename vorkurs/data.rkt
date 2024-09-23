@@ -381,3 +381,11 @@ class Dillo {
       ((cons? list)
        (cons (f (first list))
              (list-map f (rest list)))))))
+
+(define list-fold
+  (lambda (e op list)
+    (cond
+      ((empty? list) e)
+      ((cons? list)
+       (op (first list)
+           (list-fold e op (rest list)))))))
