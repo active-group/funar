@@ -68,3 +68,23 @@
 
 (define mix3 (make-mixture mix1 sp2))
 (define mix4 (make-mixture mix2 sh2))
+
+; pH-Wert eines Duschprodukts ermitteln
+(: shower-product-ph (shower-product -> real))
+
+(check-expect (shower-product-ph soap1) 8)
+(check-expect (shower-product-ph shampoo1) 7)
+(check-expect (shower-product-ph mix1)
+              7.5)
+
+(define shower-product-ph
+  (lambda (product)
+    (match product
+      ((make-soap ph)
+       ph)
+      ((make-shampoo type)
+       7)
+      ((make-mixture product1 product2)
+       (/ (+ (shower-product-ph product1)
+             (shower-product-ph product2))
+          2)))))
