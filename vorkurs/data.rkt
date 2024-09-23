@@ -6,14 +6,17 @@
 ; - Stunde -UND-
 ; - Minute
 ; zusammengesetzte Daten / compound data
+(define hour (signature (integer-from-to 0 23)))
+(define minute (signature (integer-from-to 0 59)))
+
 (define-record time ; Signatur
   make-time ; Konstruktor
-  (time-hour   (integer-from-to 0 23)) ; Selektoren / Getter-Funktion
-  (time-minute (integer-from-to 0 59)))
+  (time-hour   hour) ; Selektoren / Getter-Funktion
+  (time-minute minute))
 
-(: make-time (natural natural -> time))
-(: time-hour (time -> natural))
-(: time-minute (time -> natural))
+(: make-time (hour minute -> time))
+(: time-hour (time -> hour))
+(: time-minute (time -> minute))
 
 ; 12 Uhr 24
 (define time1 (make-time 12 24))
