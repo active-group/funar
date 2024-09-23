@@ -75,6 +75,7 @@
 ; Gürteltier hat folgende Eigenschaften:
 ; - (lebendig -ODER- tot)   -UND-
 ; - Gewicht
+; zusammengesetzte Daten
 
 ; Eine Liveness ist eins der folgenden:
 ; - lebendig -ODER-
@@ -87,3 +88,7 @@
 
 (define weight (signature number))
 
+(define-record dillo
+  make-dillo
+  (dillo-liveness liveness)
+  (dillo-weight weight))
