@@ -345,3 +345,15 @@ class Dillo {
                  (extract p? (rest list)))
            (extract p? (rest list))) ; Alternative
        ))))
+
+(define dillos (cons dillo1 (cons dillo2 empty)))
+
+; Lebt das Gürteltier?
+(: dillo-alive? (dillo -> boolean))
+
+(check-expect (dillo-alive? dillo1) #t)
+(check-expect (dillo-alive? dillo2) #f)
+
+(define dillo-alive?
+  (lambda (dillo)
+    (equal? "alive" (dillo-liveness dillo))))
