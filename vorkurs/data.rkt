@@ -231,3 +231,29 @@ class Dillo {
 ; T3: 3elementig
 ; Produkt aus T2 und T3: 6
 ; Summe aus T2 und T3: 5
+
+; Eine Liste ist eins der folgenden:
+; - die leere Liste -ODER-
+; - eine Cons-Liste, bestehend aus erstem Element und Rest-Liste
+;                                                          ^^^^^
+(define list-of-numbers
+  (signature (mixed empty-list cons-list)))
+
+(define-singleton empty-list ; Signatur
+  empty ; Wert
+  empty?) ; Prädikat
+
+(define-record cons-list
+  cons
+  cons?
+  (first number)
+  (rest list-of-numbers))
+
+; 1elementige Liste: 5
+(define list1 (cons 5 empty))
+; 2elementige Liste: 5 8
+(define list2 (cons 5 (cons 8 empty)))
+; 3elementige Liste: 2 5 8
+(define list3 (cons 2 list2 #;(cons 5 (cons 8 empty))))
+; 4elementige Liste: 3 2 5 8
+(define list4 (cons 3 list3))
