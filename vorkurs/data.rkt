@@ -69,3 +69,18 @@
     (make-time
      (quotient minutes 60)
      (remainder minutes 60))))
+
+; Tiere auf dem texanischen Highway
+
+; Gürteltier hat folgende Eigenschaften:
+; - (lebendig -ODER- tot)   -UND-
+; - Gewicht
+
+; Eine Liveness ist eins der folgenden:
+; - lebendig -ODER-
+; - tot
+; Fallunterscheidung, hier: Aufzählung
+(define liveness
+  (signature
+   (enum "alive"
+         "dead")))
