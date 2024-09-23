@@ -1,6 +1,7 @@
 #lang deinprogramm/sdp/beginner
 ; Datenanalyse
 
+; Datendefinition:
 ; Uhrzeit besteht aus:
 ; - Stunde -UND-
 ; - Minute
