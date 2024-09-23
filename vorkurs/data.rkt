@@ -299,4 +299,20 @@ class Dillo {
 
 ; Monoid = Halbgruppe mit neutralem Element
 
-; Alle geraden Zahlen aus einer Liste extrahieren
+; Alle ungeraden Zahlen aus einer Liste extrahieren
+(: extract-odds (list-of-numbers -> list-of-numbers))
+
+(check-expect (extract-odds list4)
+              (cons 2 (cons 8 empty)))
+
+(define extract-odds
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cond
+         ((odd? (first list))
+          (cons (first list)
+                (extract-odds (rest list))))
+         ((even? (first list))
+          (extract-odds (rest list))))))))
