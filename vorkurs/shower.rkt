@@ -1,6 +1,8 @@
 #lang deinprogramm/sdp/beginner
 ; Duschprodukte
 
+; Kombinator: Funktion mit gleichem Input wie Output
+
 ; Duschprodukt ist eins der folgenden:
 ; - Seife ... pH-Wert -ODER-
 ; - Shampoo ... Haartyp -ODER-
