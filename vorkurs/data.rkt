@@ -226,3 +226,8 @@ class Dillo {
 ; Sums and products
 ; Summen (Fallunterscheidungen) und
 ; Produkte (zusammengesetzte Daten)
+
+; T2: 2elementig
+; T3: 3elementig
+; Produkt aus T2 und T3: 6
+; Summe aus T2 und T3: 5
