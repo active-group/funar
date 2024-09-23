@@ -98,8 +98,11 @@
 
 (define-record dillo
   make-dillo
+  dillo? ; Prädikat
   (dillo-liveness liveness)
   (dillo-weight weight))
+
+(: dillo? (any -> boolean))
 
 ; lebendiges Gürteltier, 10kg
 (define dillo1 (make-dillo "alive" 10))
@@ -175,6 +178,7 @@ class Dillo {
 ; - Dicke
 (define-record snake
   make-snake
+  snake?
   (snake-length number)
   (snake-thickness number))
 
