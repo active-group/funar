@@ -16,7 +16,7 @@
        )))))
 
 ; Gauß'sche Summenformel
-; 1 + 2 + 3 + ... + (n-1) + n = (n+1)*n/2
+; 1 + 2 + 3 + ... + (n-1) + n = (n+1)*n/2 = O(n^2)
 
 ; Element hinten an eine Liste anhängen
 (: snoc ((list-of %a) %a -> (list-of %a)))
