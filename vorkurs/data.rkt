@@ -365,3 +365,19 @@ class Dillo {
 (define dillo-alive?
   (lambda (dillo)
     (equal? "alive" (dillo-liveness dillo))))
+
+; Funktion auf alle Elemente einer Liste anwenden
+(: list-map ((%a -> %b) (list-of %a) -> (list-of %b)))
+
+(check-expect (list-map run-over-dillo dillos)
+              (cons (make-dillo "dead" 10)
+                    (cons (make-dillo "dead" 8)
+                          empty)))
+
+(define list-map
+  (lambda (f list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cons (f (first list))
+             (list-map f (rest list)))))))
