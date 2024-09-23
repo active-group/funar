@@ -10,7 +10,7 @@
   (signature (mixed soap
                     shampoo
                     mixture
-                    shower-gel)))
+                    #;shower-gel)))
 
 ; Eine Mixtur besteht aus:
 ; - Duschprodukt
