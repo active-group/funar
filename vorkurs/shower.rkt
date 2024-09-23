@@ -4,7 +4,9 @@
 ; Duschprodukt ist eins der folgenden:
 ; - Seife ... pH-Wert -ODER-
 ; - Shampoo ... Haartyp -ODER-
-; - Duschgel, bestehend aus gleichen Teilen Seife und Shampoo
+; - Mixtur aus zwei Duschprodukten
+;                   ^^^^^^^^^^^^ Selbstbezug
+; x Duschgel, bestehend aus gleichen Teilen Seife und Shampoo
 ; Fallunterscheidung
 (define shower-product
   (signature (mixed soap
