@@ -5,7 +5,9 @@
 ; - Seife ... pH-Wert -ODER-
 ; - Shampoo ... Haartyp -ODER-
 ; - Duschgel, bestehend aus gleichen Teilen Seife und Shampoo
-; Fallunterscheidung 
+; Fallunterscheidung
+(define shower-product
+  (signature (mixed soap shampoo shower-gel)))
 
 ; Duschgel besteht aus:
 ; - Seife -UND-
