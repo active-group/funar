@@ -198,7 +198,7 @@ class Dillo {
 (define run-over-snake
   (lambda (snake)
     (make-snake (snake-length snake) 0)))
-#|
+
 ; Tier überfahren
 (: run-over-animal (animal -> animal))
 
@@ -210,6 +210,5 @@ class Dillo {
 (define run-over-animal
   (lambda (animal)
     (cond
-      (... ...)
-      (... ...))))
-|#
+      ((dillo? animal) (run-over-dillo animal))
+      ((snake? animal) (run-over-snake animal)))))
