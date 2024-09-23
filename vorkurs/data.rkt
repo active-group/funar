@@ -19,3 +19,12 @@
 (define time1 (make-time 12 24))
 ; 13:15
 (define time2 (make-time 13 15))
+
+; Minuten seit Mitternacht
+(: minutes-since-midnight (time -> natural))
+
+(check-expect (minutes-since-midnight time1)
+              744)
+(check-expect (minutes-since-midnight time2)
+              795)
+
