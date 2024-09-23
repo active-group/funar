@@ -223,4 +223,6 @@ class Dillo {
 ; gemischte Daten, jeder Fall zusammengesetzte Daten
 ; -> algebraische Datentypen
 
-; Note: Sums and products
+; Sums and products
+; Summen (Fallunterscheidungen) und
+; Produkte (zusammengesetzte Daten)
