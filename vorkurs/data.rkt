@@ -258,4 +258,31 @@ class Dillo {
 ; 4elementige Liste: 3 2 5 8
 (define list4 (cons 3 list3))
 
-; Elemente einer Liste summieren
+; Elemente einer Liste multiplizieren
+(: list-product (list-of-numbers -> number))
+
+(check-expect (list-product list4)
+              240)
+
+#;(define list-product
+  (lambda (list)
+    (cond
+      ((empty? list) ...)
+      ((cons? list)
+       (first list)
+       (list-product (rest list))
+       ...))))
+
+(define list-product
+  (lambda (list)
+    (cond
+      ((empty? list) 1) ; das NEUTRALE ELEMENT von *
+      ((cons? list)
+       (* (first list)
+          (list-product (rest list)))))))
+
+; neutrales Element:
+; 1 * x = x * 1 = x ... von *
+; 0 + x = x + 0 = x ... von +
+
+; Monoid
