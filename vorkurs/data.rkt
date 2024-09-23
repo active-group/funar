@@ -84,3 +84,6 @@
   (signature
    (enum "alive"
          "dead")))
+
+(define weight (signature number))
+
