@@ -34,6 +34,7 @@
               (above (beside circle1 square1)
                      (beside square1 circle1)))
 
+; gilt nicht!
 #;(check-property
  (for-all ((image1 image)
            (image2 image))
