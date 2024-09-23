@@ -285,4 +285,16 @@ class Dillo {
 ; 1 * x = x * 1 = x ... von *
 ; 0 + x = x + 0 = x ... von +
 
-; Monoid
+; Algebra:
+; - Menge
+; - Operationen
+; - Gleichungen
+
+; Halbgruppe / Semigroup
+; - Menge M
+; (: op (M M -> M))
+; op : M x M -> M
+; Assoziativität:
+; (op x (op y z)) = (op (op x y) z)
+
+; Monoid = Halbgruppe mit neutralem Element
