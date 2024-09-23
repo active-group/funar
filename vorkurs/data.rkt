@@ -28,3 +28,17 @@
 (check-expect (minutes-since-midnight time2)
               795)
 
+; Gerüst
+#;(define minutes-since-midnight
+  (lambda (time)
+    ...))
+
+; Schablone
+#;(define minutes-since-midnight
+  (lambda (time)
+    ... (time-hour time) (time-minute time) ...))
+
+(define minutes-since-midnight
+  (lambda (time)
+    (+ (* 60 (time-hour time))
+       (time-minute time))))
