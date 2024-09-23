@@ -24,6 +24,11 @@
 ; - Unterschiede durch (abstrakte) Namen
 ; - Namen in Lambda-Ausdruck aufgenommen
 
+; Quadratisches Kachelmuster aus 2 Bildern zusammensetzen
+
+; Signatur:
+(: tile (image image -> image))
+
 (define tile
   (lambda (image1 image2)
     (above
