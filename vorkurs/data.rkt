@@ -130,3 +130,21 @@ class Dillo {
               (make-dillo "alive" 12))
 (check-expect (feed-dillo dillo2 2)
               dillo2)
+
+(define feed-dillo
+  (lambda (dillo amount)
+    (make-dillo
+     (dillo-liveness dillo)
+     ...
+     ; Fallunterscheidung in den Daten
+     ; -> Verzweigung
+     (cond
+       ; ein Zweig pro Fall
+       ((equal? (dillo-liveness dillo) "alive")  ; (<Bedingung> <Ergebnis>)
+        ...)
+       ((equal? (dillo-liveness dillo) "dead")
+        ...)
+     )
+    (dillo-liveness dillo)
+    (dillo-weight dillo)
+    ))
