@@ -72,8 +72,8 @@
 ; pH-Wert eines Duschprodukts ermitteln
 (: shower-product-ph (shower-product -> real))
 
-(check-expect (shower-product-ph soap1) 8)
-(check-expect (shower-product-ph shampoo1) 7)
+(check-expect (shower-product-ph sp1) 8)
+(check-expect (shower-product-ph sh1) 7)
 (check-expect (shower-product-ph mix1)
               7.5)
 
