@@ -5,7 +5,7 @@
 ; Uhrzeit besteht aus:
 ; - Stunde -UND-
 ; - Minute
-; zusammengesetzte Daten
+; zusammengesetzte Daten / compound data
 (define-record time ; Signatur
   make-time ; Konstruktor
   (time-hour   natural) ; Selektoren / Getter-Funktion
