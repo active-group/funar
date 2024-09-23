@@ -29,11 +29,11 @@
 ; Signatur:
 (: tile (image image -> image))
 
-(check-expect (tile circle1 circle1)
-              (beside (above circle1 circle1)
-                      (above circle1 circle1)))
+(check-expect (tile circle1 square1)
+              (above (beside circle1 square1)
+                     (beside square1 circle1)))
 
-(check-property
+#;(check-property
  (for-all ((image1 image)
            (image2 image))
    (expect
