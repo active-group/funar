@@ -107,7 +107,10 @@
               dillo2 ; (make-dillo "dead" 8)
               )
 
-
+(define run-over-dillo
+  (lambda (dillo)
+    (make-dillo "dead"
+                (dillo-weight dillo))))
                               
 #|
 class Dillo {
