@@ -10,7 +10,7 @@
     (cond
       ((empty? list) empty)
       ((cons? list)
-       (snoc
+       (snoc ; Kontext von rev
         (rev (rest list)) ; 4 3 2
         (first list) ; 1
        )))))
