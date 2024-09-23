@@ -329,6 +329,8 @@ class Dillo {
 ; - abstraken Namen in lambda aufnehmen
 ;   - an rekursive Aufrufe denken
 
+; >1 Pfeil in Signatur: Funktion höherer Ordnung
+
 (: extract
    ((number -> boolean) list-of-numbers -> list-of-numbers))
 
