@@ -382,6 +382,8 @@ class Dillo {
        (cons (f (first list))
              (list-map f (rest list)))))))
 
+(: list-fold (%b (%a %b -> %b) (list-of %a) -> %b))
+              
 (define list-fold
   (lambda (e op list)
     (cond
