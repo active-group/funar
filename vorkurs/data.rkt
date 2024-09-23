@@ -258,3 +258,4 @@ class Dillo {
 ; 4elementige Liste: 3 2 5 8
 (define list4 (cons 3 list3))
 
+; Elemente einer Liste summieren
