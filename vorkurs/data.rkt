@@ -77,7 +77,8 @@
 ; - Schlange
 ; Fallunterscheidung, hier: gemischte Daten
 (define animal
-  (signature (mixed dillo snake)))
+  (signature (mixed dillo
+                    snake)))
 
 ; Gürteltier hat folgende Eigenschaften:
 ; - (lebendig -ODER- tot)   -UND-
@@ -193,5 +194,18 @@ class Dillo {
 (define run-over-snake
   (lambda (snake)
     (make-snake (snake-length snake) 0)))
-
+#|
 ; Tier überfahren
+(: run-over-animal (animal -> animal))
+
+(check-expect (run-over-animal dillo1)
+              (make-dillo "dead" 10))
+(check-expect (run-over-animal snake1)
+              (make-snake 200 0))
+
+(define run-over-animal
+  (lambda (animal)
+    (cond
+      (... ...)
+      (... ...))))
+#|
