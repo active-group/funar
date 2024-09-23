@@ -131,7 +131,7 @@ class Dillo {
 (check-expect (feed-dillo dillo2 2)
               dillo2)
 
-(define feed-dillo
+#;(define feed-dillo
   (lambda (dillo amount)
     (define liveness (dillo-liveness dillo))
     (define weight (dillo-weight dillo))
@@ -150,3 +150,10 @@ class Dillo {
         (+ weight amount))
        ((equal? liveness "dead")
         weight)))))
+
+(define feed-dillo
+  (lambda (dillo weight)
+    (match (dillo-liveness dillo)
+      ("alive" (make-dillo "alive"
+                           (+ (dillo-weight dillo) amount)))
+      ("dead" dillo))))
