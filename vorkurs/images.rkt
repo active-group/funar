@@ -29,6 +29,7 @@
 ; Signatur:
 (: tile (image image -> image))
 
+; Testfall:
 (check-expect (tile circle1 square1)
               (above (beside circle1 square1)
                      (beside square1 circle1)))
