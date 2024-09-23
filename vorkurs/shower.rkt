@@ -7,7 +7,19 @@
 ; - Duschgel, bestehend aus gleichen Teilen Seife und Shampoo
 ; Fallunterscheidung
 (define shower-product
-  (signature (mixed soap shampoo shower-gel)))
+  (signature (mixed soap
+                    shampoo
+                    mixture
+                    shower-gel)))
+
+; Eine Mixtur besteht aus:
+; - Duschprodukt
+; - nochn Duschprodukt
+(define-record mixture
+  make-mixture
+  mixture?
+  (mixture-product1 shower-product)
+  (mixture-product2 shower-product))
 
 ; Duschgel besteht aus:
 ; - Seife -UND-
@@ -40,3 +52,8 @@
 ; - Fettig
 (define hair-type
   (signature (enum "dandruff" "dry" "oily")))
+
+(define sh1 (make-shampoo "dandruff"))
+(define sh2 (make-shampoo "dry"))
+(define sp1 (make-soap 8))
+(define sp2 (make-soap 7))
