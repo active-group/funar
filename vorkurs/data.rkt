@@ -368,7 +368,7 @@ class Dillo {
 
 ; Funktion auf alle Elemente einer Liste anwenden
 (: list-map ((%a -> %b) (list-of %a) -> (list-of %b)))
-
+; (: list-map ((number -> number) (list-of number) -> (list-of number))
 (check-expect (list-map run-over-dillo dillos)
               (cons (make-dillo "dead" 10)
                     (cons (make-dillo "dead" 8)
