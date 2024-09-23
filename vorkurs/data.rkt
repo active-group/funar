@@ -42,3 +42,21 @@
   (lambda (time)
     (+ (* 60 (time-hour time))
        (time-minute time))))
+
+; Minuten seit Mitternacht in time-Wert umwandeln
+(: msm->time (natural -> time))
+
+(check-expect (msm->time 744)
+              time1)
+
+(check-property
+ (for-all ((minutes natural))
+   (expect
+    (minutes-since-midnight (msm->time minutes))
+    minutes)))
+
+(define msm->time
+  (lambda (minutes)
+    (make-time
+     (quotient minutes 60)
+     (remainder minutes 60))))
