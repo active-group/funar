@@ -13,3 +13,7 @@
 (above
  (beside star1 circle1)
  (beside circle1 star1))
+
+(above
+ (beside circle1 square1)
+ (beside square1 circle1))
