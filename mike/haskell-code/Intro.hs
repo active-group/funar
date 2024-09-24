@@ -120,15 +120,21 @@ feedAnimal'(dillo@(MkDillo liveness weight), amount) =
 feedAnimal'(MkSnake length thickness, amount) =
   MkSnake length (thickness + amount)
 
-tuplify :: (a -> b -> c) -> ((a, b) -> c)
+-- eingebaut als uncurry
+entschönfinkeln :: (a -> b -> c) -> ((a, b) -> c)
 --tuplify f = \ (a, b) -> f a b
-tuplify f (a, b) = f a b
+entschönfinkeln f (a, b) = f a b
 
 -- Haskell Curry
 -- Moses Schönfinkel
 
-untuplify :: ((a, b) -> c) -> (a -> b -> c)
-untuplify f a b =  f (a, b)
+-- eingebaut als curry
+schönfinkeln :: ((a, b) -> c) -> (a -> b -> c)
+schönfinkeln f a b =  f (a, b)
+
+-- Funktionskomposition
+o :: (b -> c) -> (a -> b) -> (a -> c)
+o f g = \ a -> f (g a)
 
 -- Eine geometrische Figur ("Shape") ist eins der folgenden:
 -- - ein Kreis
