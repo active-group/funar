@@ -232,7 +232,21 @@ sieve (x:xs) = x:(sieve (strikeMultiples x xs))
 primes :: [Integer]
 primes = sieve (natsFrom 2)
 
+data Optional a =
+    Null 
+  | Result a
+  deriving Show
+
+-- >>> listIndex 5 [1,5,7,9]
+-- Result 1
+
 -- Index eines Elements in einer Liste finden
-listIndex :: a -> [a] -> Integer
-listIndex x [] = undefined
-listIndex x (y:ys) = undefined
+listIndex :: Eq a => a -> [a] -> Optional Integer
+listIndex x [] = Null
+listIndex x (y:ys) =
+    if x == y
+    then Result 0
+    else
+        case listIndex x ys of
+            Null -> Null
+            Result index -> Result (index+1)
