@@ -50,5 +50,3 @@ runOverDillo :: Dillo -> Dillo
 --    MkDillo { dilloLiveness = Dead, dilloWeight = dilloWeight dillo }
 runOverDillo (MkDillo { dilloLiveness = l, dilloWeight = w}) =
     MkDillo { dilloLiveness = Dead, dilloWeight = w }
-
-z = 12
