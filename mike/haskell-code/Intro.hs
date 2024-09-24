@@ -205,7 +205,9 @@ listSum [] = 0
 listSum (x:xs) =
     x + listSum xs
 
--- >>> extract (\ x -> x % 2 == 0) list4
+xx = 5
+-- >>> extract (\ x -> x `mod` 2 == 0) list4
+-- [4,2]
 
 extract :: (a -> Bool) -> [a] -> [a]
 extract p [] = []
