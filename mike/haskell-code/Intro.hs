@@ -252,3 +252,11 @@ listIndex x (y:ys) =
         case listIndex x ys of
             Null -> Null
             Result index -> Result (index+1)
+
+-- >>> :info Eq
+-- type Eq :: * -> Constraint
+-- class Eq a where
+--   (==) :: a -> a -> Bool
+--   (/=) :: a -> a -> Bool
+
+-- Typklasse ... Interface
