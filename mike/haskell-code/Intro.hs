@@ -65,7 +65,7 @@ runOverDillo (MkDillo _liveness weight) =
 
 -- algebraischer Datentyp
 data Animal =
-    MkDillo Dillo
+    MkDillo Liveness Weight
   | MkSnake { snakeLength :: Integer, snakeThickness :: Integer }
   deriving Show
 
@@ -92,6 +92,12 @@ runOverAnimal (MkSnake length _thickness) =
 
 
 feedAnimal :: Animal -> (Weight -> Animal)
+{-
+feedAnimal (MkDillo Alive weight) amount =
+  MkDillo Alive (weight+amount)
+feedAnimal dillo@(MkDillo Dead _) amount =
+      dillo -- MkDillo liveness weight
+-}
 feedAnimal dillo@(MkDillo liveness weight) amount = -- Alias-Pattern
     case liveness of
       Alive -> MkDillo Alive (weight+amount)
@@ -99,3 +105,11 @@ feedAnimal dillo@(MkDillo liveness weight) amount = -- Alias-Pattern
 feedAnimal (MkSnake length thickness) amount =
     MkSnake length (thickness+amount)
 
+feedAnimal' :: (Animal, Weight) -> Animal
+feedAnimal'(dillo@(MkDillo liveness weight), amount) =
+  -- Alias-Pattern
+  case liveness of
+    Alive -> MkDillo Alive (weight + amount)
+    Dead -> dillo -- MkDillo liveness weight
+feedAnimal'(MkSnake length thickness, amount) =
+  MkSnake length (thickness + amount)
