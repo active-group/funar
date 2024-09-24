@@ -240,6 +240,13 @@ data Optional a =
 -- >>> listIndex 5 [1,5,7,9]
 -- Result 1
 
+-- >>> listIndex dillo1 [snake1, snake2, dillo1, dillo2]
+-- No instance for (Eq Animal) arising from a use of `listIndex'
+-- In the expression:
+--   listIndex dillo1 [snake1, snake2, dillo1, dillo2]
+-- In an equation for `it_a8tcI':
+--     it_a8tcI = listIndex dillo1 [snake1, snake2, dillo1, dillo2]
+
 -- Eq a: Constraint => Gleichheit existiert für a
 
 -- Index eines Elements in einer Liste finden
@@ -252,6 +259,7 @@ listIndex x (y:ys) =
         case listIndex x ys of
             Null -> Null
             Result index -> Result (index+1)
+
 
 -- >>> :info Eq
 -- type Eq :: * -> Constraint
