@@ -105,8 +105,8 @@ feedAnimal dillo@(MkDillo liveness weight) amount = -- Alias-Pattern
 feedAnimal (MkSnake length thickness) amount =
     MkSnake length (thickness+amount)
 
-flip :: (Animal -> Weight -> Animal) -> (Weight -> Animal -> Animal)
-flip f = \ weight -> \ animal -> f animal weight
+swap :: (Animal -> Weight -> Animal) -> (Weight -> Animal -> Animal)
+swap f = \ weight -> \ animal -> f animal weight
 
 feedAnimal' :: (Animal, Weight) -> Animal
 feedAnimal'(dillo@(MkDillo liveness weight), amount) =
