@@ -44,6 +44,9 @@
               (list 4 3 2 1))
 
 (define rev-2
+  ; Schleifeninvariante:
+  ; acc enthält alle bisher gesehenen Elemente
+  ; in umgekehrter Reihenfolge
   (lambda (list acc)
     (cond
       ((empty? list) acc) ; Zwischenergebnis wird zum Endergebnis
