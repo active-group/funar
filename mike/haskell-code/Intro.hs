@@ -240,6 +240,8 @@ data Optional a =
 -- >>> listIndex 5 [1,5,7,9]
 -- Result 1
 
+-- Eq a: Constraint => Gleichheit existiert für a
+
 -- Index eines Elements in einer Liste finden
 listIndex :: Eq a => a -> [a] -> Optional Integer
 listIndex x [] = Null
