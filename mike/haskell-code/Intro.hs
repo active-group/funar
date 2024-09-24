@@ -218,3 +218,15 @@ extract p (x:xs) =
 
 natsFrom :: Integer -> [Integer]
 natsFrom n = n : natsFrom (n+1)
+
+-- alle Vielfachen einer Zahl entfernen
+strikeMultiples :: Integer -> [Integer] -> [Integer]
+strikeMultiples n list =
+    filter (\ x -> mod x n /= 0) list
+
+-- die erste Zahl ist eine Primzahl
+sieve :: [Integer] -> [Integer]
+sieve [] = []
+sieve (x:xs) = x:(sieve (strikeMultiples x xs))
+
+primes = sieve (natsFrom 2)
