@@ -216,3 +216,5 @@ extract p (x:xs) =
     then x : extract p xs
     else extract p xs
 
+natsFrom :: Integer -> [Integer]
+natsFrom n = n : natsFrom (n+1)
