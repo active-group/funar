@@ -314,3 +314,8 @@ listIndex x (y:ys) =
 --   abs :: a -> a
 --   signum :: a -> a
 --   fromInteger :: Integer -> a
+
+-- Halbgruppe:
+-- - Typ t
+-- - Operation op :: t -> t -> t
+-- - Assoziativität: op x (op y z) == op (op x y) z
