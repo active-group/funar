@@ -33,6 +33,12 @@ foo = \ x -> \ y ->
 data Liveness = Alive | Dead
   deriving Show
 
+instance Eq Liveness where
+    (==) :: Liveness -> Liveness -> Bool
+    (==) Alive Alive = True
+    (==) Dead Dead = True
+    (==) _ _ = False
+    
 -- Typalias
 type Weight = Integer
 
@@ -68,6 +74,15 @@ data Animal =
     MkDillo Liveness Weight
   | MkSnake { snakeLength :: Integer, snakeThickness :: Integer }
   deriving Show
+
+instance Eq Animal where
+  (==) :: Animal -> Animal -> Bool
+  (==) (MkDillo liveness1 weight1) (MkDillo liveness2 weight2) =
+    (liveness1 == liveness2) && (weight1 == weight2)
+  (==) (MkSnake length1 thickness1) (MkSnake length2 thickness2) =
+    (length1 == length2) && (thickness1 == thickness2)
+  (==) (MkDillo _ _) (MkSnake _ _) = False
+  (==) (MkSnake _ _) (MkDillo _ _) = False
 
 dillo1 = MkDillo Alive 10
 dillo2 = MkDillo Dead 8
