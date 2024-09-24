@@ -215,3 +215,4 @@ extract p (x:xs) =
     if p x
     then x : extract p xs
     else extract p xs
+
