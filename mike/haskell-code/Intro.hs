@@ -132,7 +132,7 @@ entschönfinkeln f (a, b) = f a b
 schönfinkeln :: ((a, b) -> c) -> (a -> b -> c)
 schönfinkeln f a b =  f (a, b)
 
--- Funktionskomposition
+-- Funktionskomposition, eingebaut als .
 o :: (b -> c) -> (a -> b) -> (a -> c)
 o f g = \ a -> f (g a)
 
