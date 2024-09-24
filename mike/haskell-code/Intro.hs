@@ -193,3 +193,21 @@ list2 = 2 : 5 : []
 
 list3 :: [Integer]
 list3 = 7 : list2
+
+list4 :: [Integer]
+list4 = [4, 7, 2, 5]
+
+-- >>> listSum list4
+-- 18
+
+listSum :: [Integer] -> Integer
+listSum [] = 0
+listSum (x:xs) =
+    x + listSum xs
+
+extract :: (a -> Bool) -> [a] -> [a]
+extract p [] = []
+extract p (x:xs) =
+    if p x
+    then x : extract p xs
+    else extract p xs
