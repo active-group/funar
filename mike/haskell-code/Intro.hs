@@ -120,6 +120,13 @@ feedAnimal'(dillo@(MkDillo liveness weight), amount) =
 feedAnimal'(MkSnake length thickness, amount) =
   MkSnake length (thickness + amount)
 
+tuplify :: (a -> b -> c) -> ((a, b) -> c)
+--tuplify f = \ (a, b) -> f a b
+tuplify f (a, b) = f a b
+
+untuplify :: ((a, b) -> c) -> (a -> b -> c)
+untuplify f a b =  f (a, b)
+
 -- Eine geometrische Figur ("Shape") ist eins der folgenden:
 -- - ein Kreis
 -- - Quadrat
