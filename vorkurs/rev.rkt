@@ -48,5 +48,7 @@
     (cond
       ((empty? list) acc) ; Zwischenergebnis wird zum Endergebnis
       ((cons? list)
-       (rev-2 (rest list)
+       (rev-2 (rest list) ; kein Kontext! tail call / endrekursiv
               (cons (first list) acc))))))
+
+; JVM: auch tail calls verbrauchen Platz!
