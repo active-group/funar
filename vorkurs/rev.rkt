@@ -36,3 +36,17 @@
       ((cons? list)
        (cons (first list)
              (snoc (rest list) element))))))
+
+; Liste umdrehen, 2. Versuch
+(: rev-2 ((list-of %a) (list-of %a) -> (list-of %a)))
+
+(check-expect (rev-2 (list 1 2 3 4) empty)
+              (list 4 3 2 1))
+
+(define rev-2
+  (lambda (list acc)
+    (cond
+      ((empty? list) acc) ; Zwischenergebnis wird zum Endergebnis
+      ((cons? list)
+       (rev-2 (rest list)
+              (cons (first list) acc))))))
