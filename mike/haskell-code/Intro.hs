@@ -32,6 +32,7 @@ data Liveness = Alive | Dead
 -- Typalias
 type Weight = Integer
 
+{-
 data Dillo = MkDillo { dilloLiveness :: Liveness, 
                        dilloWeight :: Weight }
   deriving Show
@@ -54,3 +55,9 @@ runOverDillo (MkDillo _liveness weight) =
     MkDillo Dead weight
 -- runOverDillo dillo = dillo { dilloLiveness = Dead } -- functional update
 
+-}
+
+data Animal =
+    MkDillo { dilloLiveness :: Liveness, dilloWeight :: Weight}
+  | MkSnake { snakeLength :: Int, snakeThickness :: Int }
+  deriving Show
