@@ -229,4 +229,10 @@ sieve :: [Integer] -> [Integer]
 sieve [] = []
 sieve (x:xs) = x:(sieve (strikeMultiples x xs))
 
+primes :: [Integer]
 primes = sieve (natsFrom 2)
+
+-- Index eines Elements in einer Liste finden
+listIndex :: a -> [a] -> Integer
+listIndex x [] = undefined
+listIndex x (y:ys) = undefined
