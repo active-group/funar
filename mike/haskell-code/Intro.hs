@@ -319,3 +319,19 @@ listIndex x (y:ys) =
 -- - Typ t
 -- - Operation op :: t -> t -> t
 -- - Assoziativität: op x (op y z) == op (op x y) z
+
+class Semigroup t where -- "t bildet eine Halbgruppe"
+  op :: t -> t -> t
+
+instance Semigroup [a] where
+    op :: [a] -> [a] -> [a]
+    op = (++)
+
+-- Monoid: Halbgruppe mit neutralem Element
+-- op x neutral == op neutral x == x
+
+class Semigroup t => Monoid t where
+    neutral :: t
+
+instance Monoid [a] where
+    neutral = []
