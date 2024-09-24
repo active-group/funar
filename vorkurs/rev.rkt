@@ -52,3 +52,5 @@
               (cons (first list) acc))))))
 
 ; JVM: auch tail calls verbrauchen Platz!
+; Scala, Kotlin: aufpassen, "tailrec"-Annotation
+; Clojure: loop
