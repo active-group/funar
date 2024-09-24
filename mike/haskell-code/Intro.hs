@@ -345,3 +345,9 @@ instance (Semigroup x, Semigroup y) => Semigroup (x, y) where
     op :: (x, y) -> (x, y) -> (x, y)
     op (x1, y1) (x2, y2) =
         (op x1 x2, op y1 y2)
+
+-- Übung
+
+instance Semigroup (Optional a) where
+
+instance Monoid (Optional a) where
