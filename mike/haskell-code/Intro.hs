@@ -48,5 +48,7 @@ dillo2 = MkDillo Dead 8
 runOverDillo :: Dillo -> Dillo
 -- runOverDillo dillo =
 --    MkDillo { dilloLiveness = Dead, dilloWeight = dilloWeight dillo }
-runOverDillo (MkDillo { dilloLiveness = l, dilloWeight = w}) =
-    MkDillo { dilloLiveness = Dead, dilloWeight = w }
+-- runOverDillo (MkDillo { dilloWeight = w}) =
+--    MkDillo { dilloLiveness = Dead, dilloWeight = w }
+runOverDillo (MkDillo _ w) =
+    MkDillo Dead w
