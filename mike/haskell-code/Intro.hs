@@ -58,6 +58,6 @@ runOverDillo (MkDillo _liveness weight) =
 -}
 
 data Animal =
-    MkDillo { dilloLiveness :: Liveness, dilloWeight :: Weight}
+    MkDillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
   | MkSnake { snakeLength :: Integer, snakeThickness :: Integer }
   deriving Show
