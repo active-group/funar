@@ -285,7 +285,7 @@ class Dillo {
     (cond
       ((empty? list) 1) ; das NEUTRALE ELEMENT von *
       ((cons? list)
-       (* (first list)
+       (* (first list) ; Kontext: *
           (list-product (rest list)))))))
 
 ; neutrales Element:
