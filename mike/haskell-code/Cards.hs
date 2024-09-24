@@ -10,4 +10,4 @@ module Cards where
 -- Input: alle Farben, alle Wertigkeiten
 
 -- 3. Funktion, die bei zwei Karten ermittelt, welche höherwertig ist
--- ("höherwertig" nur definiert bei gleicher Farbe)
+-- ("höherwertig" nur definiert bei gleicher Farbe)y
