@@ -113,3 +113,13 @@ feedAnimal'(dillo@(MkDillo liveness weight), amount) =
     Dead -> dillo -- MkDillo liveness weight
 feedAnimal'(MkSnake length thickness, amount) =
   MkSnake length (thickness + amount)
+
+-- Eine geometrische Figur ("Shape") ist eins der folgenden:
+-- - ein Kreis
+-- - Quadrat
+-- - eine Überlagerung zweiter geometrischer Figuren
+
+-- 1. Datentyp dafür
+-- 2. Funktion, die für einen Punkt feststellt, ob dieser
+--    innerhalb oder außerhalb einer geometrischen Figur
+--    liegt
