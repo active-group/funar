@@ -334,4 +334,9 @@ class Semigroup t => Monoid t where
     neutral :: t
 
 instance Monoid [a] where
+    neutral :: [a]
     neutral = []
+
+listOp :: Monoid a => [a] -> a
+listOp [] = neutral
+listOp (x:xs) = op x (listOp xs)
