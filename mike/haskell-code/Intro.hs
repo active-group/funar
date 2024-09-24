@@ -61,9 +61,11 @@ runOverDillo (MkDillo _liveness weight) =
 
 -}
 
+-- data Dillo = MkDillo Liveness Weight
+
 -- algebraischer Datentyp
 data Animal =
-    MkDillo Liveness Weight
+    MkDillo Dillo
   | MkSnake { snakeLength :: Integer, snakeThickness :: Integer }
   deriving Show
 
