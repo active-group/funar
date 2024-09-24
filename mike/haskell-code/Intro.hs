@@ -348,6 +348,10 @@ instance (Semigroup x, Semigroup y) => Semigroup (x, y) where
 
 -- Übung
 
-instance Semigroup (Optional a) where
+instance Semigroup a => Semigroup (Optional a) where
+    op Null x = x
+    op x Null = x
+    op (Result a) (Result a') = Result (op a a')
 
-instance Monoid (Optional a) where
+instance Semigroup a => Monoid (Optional a) where
+    neutral = Null
