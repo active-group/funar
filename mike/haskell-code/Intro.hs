@@ -57,7 +57,29 @@ runOverDillo (MkDillo _liveness weight) =
 
 -}
 
+-- algebraischer Datentyp
 data Animal =
     MkDillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
   | MkSnake { snakeLength :: Integer, snakeThickness :: Integer }
   deriving Show
+
+dillo1 = MkDillo Alive 10
+dillo2 = MkDillo Dead 8
+snake1 = MkSnake 200 5
+snake2 = MkSnake 500 20
+
+-- >>> runOverAnimal dillo1 
+-- MkDillo {dilloLiveness = Dead, dilloWeight = 10}
+-- >>> runOverAnimal snake1
+-- MkSnake {snakeLength = 200, snakeThickness = 0}
+
+runOverAnimal :: Animal -> Animal
+-- 1 Gleichung pro Fall
+-- Schablone:
+-- runOverAnimal (MkDillo liveness weight) = undefined
+-- runOverAnimal (MkSnake length thickness) = undefined
+
+runOverAnimal (MkDillo _liveness weight) =
+    MkDillo Dead weight
+runOverAnimal (MkSnake length _thickness) =
+    MkSnake length 0
