@@ -31,14 +31,16 @@ foo = \ x -> \ y ->
 -- - Tot
 
 data Liveness = Alive | Dead
-  deriving Show
+  deriving (Show, Eq)
 
+{-
 instance Eq Liveness where
     (==) :: Liveness -> Liveness -> Bool
     (==) Alive Alive = True
     (==) Dead Dead = True
     (==) _ _ = False
-    
+-}
+
 -- Typalias
 type Weight = Integer
 
@@ -283,3 +285,32 @@ listIndex x (y:ys) =
 --   (/=) :: a -> a -> Bool
 
 -- Typklasse ... Interface
+
+-- >>> :info Show
+-- type Show :: * -> Constraint
+-- class Show a where
+--   showsPrec :: Int -> a -> ShowS
+--   show :: a -> String
+--   showList :: [a] -> ShowS
+
+-- >>> :info Ord
+-- type Ord :: * -> Constraint
+-- class Eq a => Ord a where
+--   compare :: a -> a -> Ordering
+--   (<) :: a -> a -> Bool
+--   (<=) :: a -> a -> Bool
+--   (>) :: a -> a -> Bool
+--   (>=) :: a -> a -> Bool
+--   max :: a -> a -> a
+--   min :: a -> a -> a
+
+-- >>> :info Num
+-- type Num :: * -> Constraint
+-- class Num a where
+--   (+) :: a -> a -> a
+--   (-) :: a -> a -> a
+--   (*) :: a -> a -> a
+--   negate :: a -> a
+--   abs :: a -> a
+--   signum :: a -> a
+--   fromInteger :: Integer -> a
