@@ -15,6 +15,11 @@
         (first list) ; 1
        )))))
 
+; viele Runtimes benutzen für die Kette von Kontexten
+; einen "Stack", linearer Bereich im Speicher,
+; - feste Größe
+; - klein (ca. 1000-10000 Einträge)
+
 ; Gauß'sche Summenformel
 ; 1 + 2 + 3 + ... + (n-1) + n = (n+1)*n/2 = O(n^2)
 
