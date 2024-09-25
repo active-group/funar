@@ -222,6 +222,10 @@ listSum [] = 0
 listSum (x:xs) =
     x + listSum xs
 
+listMap :: (a -> b) -> [a] -> [b]
+listMap f [] = []
+listMap f (x:xs) = (f x) : (listMap f xs)
+
 xx = 5
 -- >>> extract (\ x -> x `mod` 2 == 0) list4
 -- [4,2]
@@ -273,10 +277,29 @@ listIndex x (y:ys) =
     if x == y
     then Result 0
     else
+        optionalMap (+1) -- (\ index -> index + 1) 
+                    (listIndex x ys)
+        {-
         case listIndex x ys of
             Null -> Null
             Result index -> Result (index+1)
+        -}
 
+-- listMap  :: (a -> b) -> List     a -> List     b
+optionalMap :: (a -> b) -> Optional a -> Optional b
+optionalMap f Null = Null
+optionalMap f (Result a) = Result (f a)
+
+-- >>> :info Functor
+-- type Functor :: (* -> *) -> Constraint
+-- class Functor f where
+--   fmap :: (a -> b) -> f a -> f b
+
+instance Functor Optional where
+    fmap = optionalMap
+
+-- fmap id == id
+-- fmap f . fmap g == fmap (f . g)
 
 -- >>> :info Eq
 -- type Eq :: * -> Constraint
