@@ -220,6 +220,6 @@ tableProcessEvent (TrickTaken trickTaker trick) state =
 tableProcessEvent (GameEnded winner) state = state
 
 -- | Spielablauf ausführen
-runTable :: Game a -> (TableState, [GameEvent]) -> 
-             (Either (GameCommand -> Game a) a, TableState, [GameEvent])
-runTable = undefined
+-- runTable :: Game a -> (TableState, [GameEvent]) -> ... a, TableState ...
+runTable :: Game a -> (TableState, [GameEvent]) -> (a, TableState, [GameEvent])
+--                                 ^^^^^^^^^^^ umgekehrte Reihenfolge   ^^^^ richtige Reihenfolge
