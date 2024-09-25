@@ -198,7 +198,26 @@ dealHand player hand hands = Map.insert player hand hands
 -- | Ereignis in den Zustand einarbeiten
 tableProcessEvent :: GameEvent -> TableState -> TableState
 -- tableProcessEvent event state | trace ("tableProfessEvent " ++ show state ++ " " ++ show event) False = undefined
-tableProcessEvent = undefined
+tableProcessEvent (HandDealt player hand) state =
+  state {
+    tableStateHands= dealHand player hand (tableStateHands state)
+  }
+tableProcessEvent (PlayerTurnChanged player) state =
+  state {
+    tableStatePlayers = rotateTo player (tableStatePlayers state)
+  }
+tableProcessEvent (LegalCardPlayed player card) state =
+  state {
+    tableStateHands = playCard (tableStateHands state) player card,
+    tableStateTrick = addToTrick player card (tableStateTrick state)
+  }
+tableProcessEvent (IllegalCardAttempted player card) state = state
+tableProcessEvent (TrickTaken trickTaker trick) state =
+  state {
+    tableStatePiles = addTrickToPile (tableStatePiles state) trickTaker trick,
+    tableStateTrick = emptyTrick
+  }
+tableProcessEvent (GameEnded winner) state = state
 
 -- | Spielablauf ausführen
 runTable :: Game a -> (TableState, [GameEvent]) -> 
