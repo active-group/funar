@@ -298,6 +298,54 @@ optionalMap f (Result a) = Result (f a)
 instance Functor Optional where
     fmap = optionalMap
 
+-- >>> :info Applicative
+-- type Applicative :: (* -> *) -> Constraint
+-- class Functor f => Applicative f where
+--   pure :: a -> f a
+--   (<*>) :: f (a -> b) -> f a -> f b
+
+instance Applicative Optional where
+    pure :: a -> Optional a
+    pure = Result
+    (<*>) :: Optional (a -> b) -> Optional a -> Optional b
+    (<*>) Null Null = Null
+    (<*>) (Result f) Null = Null
+    (<*>) Null (Result a) = Null
+    (<*>) (Result f) (Result a) = Result (f a)
+
+-- (<$>) = fmap
+
+-- optionalMap2 :: (a -> b -> c) -> Optional a -> Optional b -> Optional c
+optionalMap2 :: Applicative f => (a -> b -> c) -> (f a -> f b -> f c)
+-- optionalMap2 f2 oa ob = fmap f2 oa <*> ob
+optionalMap2 f2 oa ob = f2 <$> oa <*> ob
+
+fmap3 f3 aa ab ac = f3 <$> aa <*> ab <*> ac
+
+-- fmap  ::      (a ->   b) -> f a -> f b
+-- (<*>) ::    f (a ->   b) -> f a -> f b
+-- flip (>>=) :: (a -> f b) -> f a -> f b
+-- (>>=) ::    f a -> (a -> f b) -> f b
+
+instance Monad Optional where
+    return = Result
+    (>>=) :: Optional a -> (a -> Optional b) -> Optional b
+    (>>=) Null _next = Null
+    (>>=) (Result a) next = next a
+
+incOptional :: Optional Integer -> Optional Integer
+incOptional = fmap (+1)
+
+
+plusOptional :: Optional Integer -> Optional Integer -> Optional Integer
+plusOptional = optionalMap2 (+)
+{-
+plusOptional o1 o2 =
+    do n1 <- o1
+       n2 <- o2
+       return (n1+n2)
+-}
+
 -- fmap id == id
 -- fmap f . fmap g == fmap (f . g)
 
