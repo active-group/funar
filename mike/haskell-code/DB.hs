@@ -104,3 +104,51 @@ runDB (Put key value callback) mp =
     in runDB (callback ()) mp'
 runDB (Return result) mp =
     (result, mp)
+
+-- >>> runState (runDB' p1) Map.empty
+-- ("201",fromList [("Mike",101)])
+
+runDB' :: DB a -> State (Map Key Value) a
+runDB' (Get key callback) = 
+    do mp <- currentState
+       let value = mp ! key
+       runDB' (callback value)
+runDB' (Put key value callback) =
+    do mp <- currentState
+       let mp' = Map.insert key value mp
+       putState mp'
+       runDB' (callback ())
+runDB' (Return result) = return result
+
+newtype State state a = 
+    MkState (state -> (a, state))
+
+runState :: State state a -> state -> (a, state)
+runState (MkState f) state = f state
+
+currentState :: State state state
+currentState =
+    MkState (\state -> (state, state))
+
+putState :: state -> State state ()
+putState newState =
+    MkState (\_state -> ((), newState))
+
+modifyState :: (state -> state) -> State state ()
+modifyState transform =
+    MkState (\state -> ((), transform state))
+
+instance Functor (State state) where
+
+instance Applicative (State state) where
+
+instance Monad (State state) where
+    (>>=) :: State state a -> (a -> State state b) -> State state b
+    (>>=) (MkState f) next =
+        MkState (\state -> 
+            let (a, state') = f state
+                MkState fb = next a
+            in fb state')
+    return :: a -> State state a
+    return result =
+        MkState (\state -> (result, state)) 
