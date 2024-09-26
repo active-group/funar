@@ -111,7 +111,7 @@ Falls Sie `nix` verwenden, dann ist `elm` bereits in der Entwicklungsumgebung
 - Sandy Maguire: [Algebra-Driven Design](https://leanpub.com/algebra-driven-design)
 - Michael Pilquist, Rúnar Bjarnason, and Paul Chiusano [Functional Programming in Scala](https://www.manning.com/books/functional-programming-in-scala-second-edition)
 - Scott Wlaschin: [Domain Modeling Made Functional](https://pragprog.com/titles/swdddf/domain-modeling-made-functional/)
-
+- Alexis King: [Parse, Don't Validate](https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/)
 <!-- Local Variables: -->
 <!-- fill-column: 80 -->
 <!-- End: -->
