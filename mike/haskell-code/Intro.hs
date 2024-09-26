@@ -353,6 +353,7 @@ plusOptional o1 o2 =
 data Validation a =
     Valid a
   | Invalid [String] -- Fehlermeldungen
+  deriving Show
 
 -- >>> :info Eq
 -- type Eq :: * -> Constraint
