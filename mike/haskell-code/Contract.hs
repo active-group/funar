@@ -44,6 +44,12 @@ data Contract =
   | Mix Contract Contract
   deriving Show
 
+-- "smart constructor"
+mix :: Contract -> Contract -> Contract
+mix Zero c = c
+mix c Zero = c
+mix c1 c2 = Mix c1 c2
+
 c1 :: Contract
 -- "Ich bekomme jetzt einen Euro."
 c1 = One EUR
@@ -79,5 +85,37 @@ fxSwap date amount1 currency1 amount2 currency2 =
 data Payment = MkPayment Direction Date Amount Currency
   deriving Show
 
+scalePayment :: Amount -> Payment -> Payment
+scalePayment factor (MkPayment direction date amount currency) =
+  MkPayment direction date (factor * amount) currency
+
+invertPayment :: Payment -> Payment
+invertPayment (MkPayment Long date amount currency) = MkPayment Short date amount currency
+invertPayment (MkPayment Short date amount currency) = MkPayment Long date amount currency
+
 -- "alle Zahlungen bis heute" + Residualvertrag
 semantics :: Contract -> Date -> ([Payment], Contract)
+semantics (One currency) now = ([MkPayment Long now 1 currency], Zero)
+semantics (Amount amount contract) now =
+  let (payments, residualContract) = semantics contract now
+   in (map (scalePayment amount) payments, Amount amount residualContract)
+semantics c@(At date contract) now =
+  if now >= date
+    then semantics contract now
+    else ([], c)
+semantics (Reverse contract) now =
+  let (payments, residualContract) = semantics contract now
+   in (map invertPayment payments, Reverse residualContract)
+semantics (Mix contract1 contract2) now =
+  let (payments1, residualContract1) = semantics contract1 now
+      (payments2, residualContract2) = semantics contract2 now
+   in (payments1 ++ payments2, mix residualContract1 residualContract2)
+semantics Zero now = ([], Zero)
+
+foo = 1
+
+-- >>> semantics c (Date "2024-09-26")
+-- ([MkPayment Long (Date "2024-09-26") 100.0 EUR],Amount 100.0 (At (Date "2024-12-24") (One EUR)))
+
+c :: Contract
+c = Amount 100 (Mix (One EUR) (At (Date "2024-12-24") (One EUR)))
