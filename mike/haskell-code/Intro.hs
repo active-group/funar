@@ -367,6 +367,33 @@ instance Applicative Validation where
   (<*>) (Invalid errors) (Valid _) = Invalid errors
   (<*>) (Invalid errors1) (Invalid errors2) = Invalid (errors1 ++ errors2)
 
+data User = MkUser Name Age
+  deriving Show
+
+makeUser :: String -> Integer -> Validation User
+makeUser name n =
+    MkUser <$> (makeName name) <*> (makeAge n) 
+
+newtype Name = MkName String
+    deriving Show
+
+makeName :: String -> Validation Name
+makeName name =
+    if length name < 100
+    then Valid (MkName name)
+    else Invalid ["name too long"]
+
+newtype Age = MkAge Integer
+    deriving Show
+
+makeAge :: Integer -> Validation Age
+makeAge n =
+    if (n >= 18) && (n <= 120)
+    then Valid (MkAge n)
+    else Invalid ["not an appropriate age"]
+
+
+
 
 -- >>> :info Eq
 -- type Eq :: * -> Constraint
