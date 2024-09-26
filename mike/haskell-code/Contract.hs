@@ -93,9 +93,15 @@ invertPayment :: Payment -> Payment
 invertPayment (MkPayment Long date amount currency) = MkPayment Short date amount currency
 invertPayment (MkPayment Short date amount currency) = MkPayment Long date amount currency
 
+instance Semigroup Contract where
+    (<>) = mix
+
+instance Monoid Contract where
+    mempty = Zero
+
 -- "alle Zahlungen bis heute" + Residualvertrag
 semantics :: Contract -> Date -> ([Payment], Contract)
-semantics (One currency) now = ([MkPayment Long now 1 currency], Zero)
+semantics (One currency) now = ([MkPayment Long now 1 currency], mempty)
 semantics (Amount amount contract) now =
   let (payments, residualContract) = semantics contract now
    in (map (scalePayment amount) payments, Amount amount residualContract)
@@ -109,10 +115,10 @@ semantics (Reverse contract) now =
 semantics (Mix contract1 contract2) now =
   let (payments1, residualContract1) = semantics contract1 now
       (payments2, residualContract2) = semantics contract2 now
-   in (payments1 ++ payments2, mix residualContract1 residualContract2)
-semantics Zero now = ([], Zero)
+   in (payments1 <> payments2, residualContract1 <> residualContract2)
+semantics Zero now = (mempty, mempty)
 
-foo = 1
+-- Monoiden-Homomorphismus
 
 -- >>> semantics c (Date "2024-09-26")
 -- ([MkPayment Long (Date "2024-09-26") 100.0 EUR],Amount 100.0 (At (Date "2024-12-24") (One EUR)))
