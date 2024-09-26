@@ -2,6 +2,7 @@
 module Intro where
 
 import Prelude hiding (Semigroup, Monoid)
+import Text.Read (readMaybe)
 
 x :: Integer
 x = 23
@@ -354,6 +355,18 @@ data Validation a =
     Valid a
   | Invalid [String] -- Fehlermeldungen
   deriving Show
+
+instance Functor Validation where
+  fmap f (Valid a) = Valid (f a)
+  fmap f (Invalid errors) = Invalid errors
+
+instance Applicative Validation where
+  pure = Valid
+  (<*>) (Valid fa) (Valid a) = Valid (fa a)
+  (<*>) (Valid _) (Invalid errors) = Invalid errors
+  (<*>) (Invalid errors) (Valid _) = Invalid errors
+  (<*>) (Invalid errors1) (Invalid errors2) = Invalid (errors1 ++ errors2)
+
 
 -- >>> :info Eq
 -- type Eq :: * -> Constraint
