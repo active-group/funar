@@ -313,6 +313,7 @@ instance Applicative Optional where
     (<*>) Null (Result a) = Null
     (<*>) (Result f) (Result a) = Result (f a)
 
+
 -- (<$>) = fmap
 
 -- optionalMap2 :: (a -> b -> c) -> Optional a -> Optional b -> Optional c
@@ -348,6 +349,10 @@ plusOptional o1 o2 =
 
 -- fmap id == id
 -- fmap f . fmap g == fmap (f . g)
+
+data Validation a =
+    Valid a
+  | Invalid [String] -- Fehlermeldungen
 
 -- >>> :info Eq
 -- type Eq :: * -> Constraint
