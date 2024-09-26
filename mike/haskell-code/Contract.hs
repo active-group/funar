@@ -37,6 +37,7 @@ data Direction = Long | Short
 data Contract =
     -- Ich bekomme einen Euro. Jetzt.
     One Currency
+  | Zero
   | Amount Amount Contract
   | At Date Contract
   | Reverse Contract
@@ -73,3 +74,10 @@ fxSwap date amount1 currency1 amount2 currency2 =
 --        (Reverse (zeroCouponBond date amount2 currency2))
   At date (Mix (Amount amount1 (One currency1))
                (Reverse (Amount amount2 (One currency2))))
+
+
+data Payment = MkPayment Direction Date Amount Currency
+  deriving Show
+
+-- "alle Zahlungen bis heute" + Residualvertrag
+semantics :: Contract -> Date -> ([Payment], Contract)
