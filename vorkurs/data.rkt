@@ -390,3 +390,11 @@
        (cons
         (f (first list))
         (map-list f (rest list)))))))
+
+(define list-fold
+  (lambda (neutral-element operation list)
+    (cond
+      ((empty? list) neutral-element)
+      ((cons? list)
+       (operation (first list)
+          (list-fold neutral-element operation (rest list)))))))
