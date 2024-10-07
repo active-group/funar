@@ -26,3 +26,12 @@
 ; - fettig
 (define hairtype
   (signature (enum "dandruff" "dry" "oily")))
+
+; Duschgel besteht aus:
+; - Seife
+; - Shampoo
+(define-record showergel
+  make-showergel
+  showergel?
+  (showergel-soap soap)
+  (showergel-shampoo shampoo))
