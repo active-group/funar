@@ -218,5 +218,55 @@
 
 ; hier:
 ; gemischte Daten
-; jeder Fall ist zusammengesetzte Daten 
+; jeder Fall ist zusammengesetzte Daten
 
+; Liste ist eins der folgenden:
+; - die leere Liste -ODER-
+; - eine Cons-Liste bestehend aus erstem Element und Rest-Liste
+;                                                         ^^^^^ Selbstbezug
+
+(define list-of-numbers
+  (signature (mixed empty-list
+                    cons-list)))
+
+; Die leere Liste hat folgende Eigenschaften:
+; ... ein Singleton
+(define-record empty-list
+  make-empty-list
+  empty?)
+
+; Convenience
+(define empty (make-empty-list))
+
+; Eine Cons-Liste besteht aus:
+; - erstes Element -UND-
+; - Rest-List
+(define-record cons-list
+  cons
+  cons?
+  (first number)
+  (rest list-of-numbers))
+
+; 1elementige Liste: 5
+(define list1 (cons 5 empty))
+; 2elementige Liste: 2 5
+(define list2 (cons 2 (cons 5 empty)))
+; 3elementige Liste: 7 2 5
+(define list3 (cons 7 (cons 2 (cons 5 empty))))
+; 4elementige Liste 8 7 2 5
+(define list4 (cons 8 list3))
+
+; Elemente einer Liste addieren
+(: list-sum (list-of-numbers -> number))
+
+(check-expect (list-sum list4)
+              22)
+
+(define list-sum
+  (lambda (list)
+    (cond
+      ((empty? list) ...)
+      ((cons? list)
+       (first list)
+       (rest list)
+       ...))))
