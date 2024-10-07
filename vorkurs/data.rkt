@@ -345,3 +345,48 @@
 (define dillos (cons dillo1 (cons dillo2 empty)))
 
 ; (extract dillo-alive? dillos)
+
+; Alle Gürteltiere überfahren
+(: run-over-dillos ((list-of dillo) -> (list-of dillo)))
+
+(check-expect (run-over-dillos dillos)
+              (cons (run-over-dillo dillo1)
+                    (cons (run-over-dillo dillo2)
+                          empty)))
+
+(define run-over-dillos
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cons
+        (run-over-dillo (first list))
+        (run-over-dillos (rest list)))))))
+
+; Liste von Zahlen inkrementieren
+(: inc-list ((list-of number) -> (list-of number)))
+
+(check-expect (inc-list list4)
+              (cons 9 (cons 8 (cons 3 (cons 6 empty)))))
+
+(define inc-list
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cons
+        (inc (first list))
+        (inc-list (rest list)))))))
+
+(define inc (lambda (n) (+ 1 n)))
+
+(: map-list ((%a -> %b) (list-of %a)  -> (list-of %b)))
+
+(define map-list
+  (lambda (f list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cons
+        (f (first list))
+        (map-list f (rest list)))))))
