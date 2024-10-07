@@ -391,10 +391,12 @@
         (f (first list))
         (map-list f (rest list)))))))
 
+(: list-fold (%r (%a %r -> %r) (list-of %a) -> %r))
+
 (define list-fold
   (lambda (neutral-element operation list)
     (cond
       ((empty? list) neutral-element)
       ((cons? list)
        (operation (first list)
-          (list-fold neutral-element operation (rest list)))))))
+                  (list-fold neutral-element operation (rest list)))))))
