@@ -16,3 +16,17 @@
 (above
  (beside circle1 star1)
  (beside star1 circle1))
+
+
+(above
+ (beside square1 circle1)
+ (beside circle1 square1))
+
+; Abstraktion
+; Voraussetzung: 2 ähnliche Code-Stellen
+; - kopieren (ein letztes Mal)
+; - Unterschiede durch abstrakte Namen
+
+(above
+ (beside image1 image2)
+ (beside image2 image1))
