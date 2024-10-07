@@ -294,3 +294,6 @@
       ((cons? list)
        (* (first list)
           (list-product (rest list)))))))
+
+; für alle x: x * 1 = 1 * x = x
+;             x + 0 = 0 + x = x
