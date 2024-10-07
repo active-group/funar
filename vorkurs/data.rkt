@@ -104,7 +104,9 @@
       ((equal? pet "cat") #t)
       ((equal? pet "snake") #f))))
 
-; Tiere auf dem texanischen Highway
+; Tier auf dem texanischen Highway:
+; - Gürteltier -ODER-
+; - Papagei
 
 ; Gürteltier hat folgende Eigenschaften:
 ; - lebendig? -UND-
