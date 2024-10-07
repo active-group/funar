@@ -122,6 +122,10 @@
 (check-expect (run-over-dillo dillo2)
               dillo2)
 
+(check-property
+ (for-all ((d dillo))
+   (not (dillo-alive? (run-over-dillo d)))))
+
 (define run-over-dillo
   (lambda (dillo)
     (make-dillo #f (dillo-weight dillo))))
