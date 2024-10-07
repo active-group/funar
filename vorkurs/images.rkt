@@ -28,10 +28,26 @@
 ; - Unterschiede durch abstrakte Namen
 ; - lambda mit den Namen als Parameter
 
+; Konstruktionsanleitung
+; - Kurzbeschreibung
+
+
 (define tile
   (lambda (image1 image2)
     (above
      (beside image1 image2)
      (beside image2 image1))))
 
-(tile star1 circle1)
+;(tile star1 circle1)
+
+#|
+class C {
+   static int m(int x) {
+     // x steht für eine Speicherzelle, in der eine Zahl steht
+     ... x ...
+     x = x + 1;
+     ... x ...
+   }
+   ... C.m(42) -> { ... 42 ... }
+}
+|#
