@@ -137,6 +137,23 @@
     (make-dillo #f (dillo-weight dillo))))
   
 ; Gürteltier füttern (mit einer spezifizierbaren Menge Futter)
+(: feed-dillo (dillo number -> dillo))
 
+(check-expect (feed-dillo dillo1 5)
+              (make-dillo #t 15))
+(check-expect (feed-dillo dillo2 5)
+              dillo2)
+
+(define feed-dillo
+  (lambda (dillo amount)
+    (define alive? (dillo-alive? dillo))
+    (define weight (dillo-weight dillo))
+    (make-dillo alive?
+                (cond
+                  (alive?
+                   (+ weight amount))
+                  (#t
+                   #;(not (dillo-alive? dillo))
+                   weight)))))
 
 
