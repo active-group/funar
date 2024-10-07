@@ -107,6 +107,11 @@
 ; Tier auf dem texanischen Highway:
 ; - Gürteltier -ODER-
 ; - Papagei
+; Fallunterscheidung, jeder Fall eigene Datendefinition
+; -> gemischte Daten
+(define animal
+  (signature (mixed dillo
+                    parrot)))
 
 ; Gürteltier hat folgende Eigenschaften:
 ; - lebendig? -UND-
