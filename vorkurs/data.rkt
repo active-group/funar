@@ -225,9 +225,10 @@
 ; - eine Cons-Liste bestehend aus erstem Element und Rest-Liste
 ;                                                         ^^^^^ Selbstbezug
 
-(define list-of-numbers
-  (signature (mixed empty-list
-                    cons-list)))
+(define list-of
+  (lambda (element)
+    (signature (mixed empty-list
+                      (cons-list-of element)))))
 
 ; Die leere Liste hat folgende Eigenschaften:
 ; ... ein Singleton
@@ -241,11 +242,11 @@
 ; Eine Cons-Liste besteht aus:
 ; - erstes Element -UND-
 ; - Rest-List
-(define-record cons-list
+(define-record (cons-list-of element) ; macht Hintergrund ein lambda
   cons
   cons?
-  (first number)
-  (rest list-of-numbers))
+  (first element)
+  (rest (list-of element)))
 
 ; 1elementige Liste: 5
 (define list1 (cons 5 empty))
@@ -257,7 +258,7 @@
 (define list4 (cons 8 list3))
 
 ; Elemente einer Liste addieren
-(: list-sum (list-of-numbers -> number))
+(: list-sum ((list-of number) -> number))
 
 (check-expect (list-sum list4)
               22)
@@ -280,6 +281,8 @@
       ((cons? list)
        (+ (first list)
           (list-sum (rest list)))))))
+
+(define list-of-numbers (signature (list-of number)))
 
 ; Produkt der Elemente einer Liste berechnen
 (: list-product (list-of-numbers -> number))
@@ -321,7 +324,9 @@
 
 ; oft eingebaut als filter
 
-(: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
+
+; %: Signaturvariable
+(: extract ((%element -> boolean) (list-of %element) -> (list-of %element)))
 
 (check-expect (extract even? list4)
               (cons 8 (cons 2 empty)))
@@ -335,3 +340,7 @@
        (if (p? (first list))
            (cons (first list) (extract p? (rest list)))
            (extract p? (rest list)))))))
+
+(define dillos (cons dillo1 (cons dillo2 empty)))
+
+(extract dillo-alive? dillos)
