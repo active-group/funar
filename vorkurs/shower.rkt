@@ -4,6 +4,8 @@
 ; - Seife -ODER-
 ; - Shampoo -ODER-
 ; - Mixtur: besteht aus gleichen Teilen aus zwei Duschprodukten
+;                                                ^^^^^^^^^^^^ Selbstbezug
+;      -> Kombinator
 ; gemischte Daten
 (define shower-product
   (signature (mixed soap
@@ -75,3 +77,26 @@
 
 (define mix1 (make-mixture gel1 soap2))
 (define mix2 (make-mixture gel1 gel2))
+
+; Seifenanteil von Duschprodukt berechnen
+(: shower-product-soap-proportion (shower-product -> number))
+
+(check-expect (shower-product-soap-proportion soap1)
+              1)
+(check-expect (shower-product-soap-proportion shampoo1)
+              0)
+(check-expect (shower-product-soap-proportion mix1)
+              0.75)
+
+(define shower-product-soap-proportion
+  (lambda (product)
+    (cond
+      ((soap? product) 1)
+      ((shampoo? product) 0)
+      ((mixture? product)
+       (/
+        (+
+         (shower-product-soap-proportion (mixture-product1 product))
+         (shower-product-soap-proportion (mixture-product2 product)))
+        2)))))
+                
