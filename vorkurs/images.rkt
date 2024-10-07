@@ -46,9 +46,9 @@
 ; - Kurzbeschreibung
 ; - Signaturdeklaration
 ; - Beispiel/Tests
+; - Funktionsdefinition
 
 ; quadratisches Kachelmuster aus 2 Kacheln zusammensetzen
-
 (: tile (image image -> image))
 
 (check-expect (tile star1 circle1)
