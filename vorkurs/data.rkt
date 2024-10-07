@@ -136,7 +136,7 @@
   (lambda (dillo)
     (make-dillo #f (dillo-weight dillo))))
   
-
+; Gürteltier füttern (mit einer spezifizierbaren Menge Futter)
 
 
 
