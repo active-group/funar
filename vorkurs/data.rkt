@@ -325,7 +325,7 @@
 ; oft eingebaut als filter
 
 
-; %: Signaturvariable
+; %: Signaturvariable, "magisch", bei jedem Aufruf kann das was anderes sein
 (: extract ((%element -> boolean) (list-of %element) -> (list-of %element)))
 
 (check-expect (extract even? list4)
