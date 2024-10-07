@@ -262,11 +262,21 @@
 (check-expect (list-sum list4)
               22)
 
-(define list-sum
+; Schablone:
+#;(define list-sum
   (lambda (list)
     (cond
       ((empty? list) ...)
       ((cons? list)
+       ...
        (first list)
-       (rest list)
+       (list-sum (rest list))
        ...))))
+
+(define list-sum
+  (lambda (list)
+    (cond
+      ((empty? list) 0)
+      ((cons? list)
+       (+ (first list)
+          (list-sum (rest list)))))))
