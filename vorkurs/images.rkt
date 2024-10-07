@@ -6,10 +6,19 @@
   (+ 23
      (* 42 2)))
 (define z (+ x y))
+;(define z 17)
+
+; lexikalische Bindung
+; vom Vorkommen aus von innen nach außen suchen
+; die erste Bindung (lambda, define) isses
 
 (define f
   (lambda (z)
     (+ z 1)))
+
+(define g
+  (lambda (+)
+    (* + 2)))
 
 ; Kommentar
 
@@ -35,8 +44,16 @@
 
 ; Konstruktionsanleitung
 ; - Kurzbeschreibung
+; - Signaturdeklaration
+; - Beispiel/Tests
 
 ; quadratisches Kachelmuster aus 2 Kacheln zusammensetzen
+
+(: tile (image image -> image))
+
+(check-expect (tile star1 circle1)
+              (above (beside star1 circle1)
+                     (beside circle1 star1)))
 
 (define tile
   (lambda (image1 image2)
@@ -44,7 +61,6 @@
      (beside image1 image2)
      (beside image2 image1))))
 
-;(tile star1 circle1)
 
 #|
 class C {
