@@ -46,3 +46,54 @@
        (time-minute time))))
 
 ; aus Minuten-seit-Mitternacht die Uhrzeit berechnen
+(: msm->time (natural -> time))
+
+(check-expect (msm->time 654)
+              (make-time 10 54))
+
+(define msm->time
+  (lambda (minutes)
+    (define hour (quotient minutes 60))
+    (define minute (remainder minutes 60))
+    (make-time hour minute)))
+
+; Haustier ist eins der folgenden:
+; - Hund -ODER-
+; - Katze -ODER-
+; - Schlange
+; Fallunterscheidung
+; hier: Aufzählung
+(define pet
+  (signature (enum "dog"
+                   "cat"
+                   "snake")))
+
+; Ist Haustier niedlich?
+(: cute? (pet -> boolean))
+
+(check-expect (cute? "dog") #t)
+(check-expect (cute? "cat") #t)
+(check-expect (cute? "snake") #f)
+
+; Schablone
+#;(define cute?
+  (lambda (pet)
+    ; Fallunterschiedung -> Verzweigung
+    ; für jeden Fall einen Zweig
+    ; werden sequentiell abgearbeitet
+    (cond
+      ; Zweig: (<Bedingung> <Ergebnis>)
+      ((equal? pet "dog") ...)
+      ((equal? pet "cat") ...)
+      ((equal? pet "snake") ...))))
+
+(define cute?
+  (lambda (pet)
+    ; Fallunterschiedung -> Verzweigung
+    ; für jeden Fall einen Zweig
+    ; werden sequentiell abgearbeitet
+    (cond
+      ; Zweig: (<Bedingung> <Ergebnis>)
+      ((equal? pet "dog") #t)
+      ((equal? pet "cat") #t)
+      ((equal? pet "snake") #f))))
