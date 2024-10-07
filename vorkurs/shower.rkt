@@ -5,6 +5,10 @@
 ; - Shampoo -ODER-
 ; - Duschgel: besteht aus gleichen Teilen aus Seife und Shampoo
 ; gemischte Daten
+(define shower-product
+  (signature (mixed soap
+                    shampoo
+                    showergel)))
 
 ; Seife hat folgende Eigenschaften:
 ; - pH-Wert
@@ -13,12 +17,8 @@
   soap?
   (soap-ph number))
 
-; Shampoo hat folgende Eigenschaften:
-; - Haartyp
-(define-record shampoo
-  make-shampoo
-  shampoo?
-  (shampoo-hairtype hairtype))
+(define soap1 (make-soap 7.0))
+(define soap2 (make-soap 8.0))
 
 ; Haartyp:
 ; - Schuppen -ODER-
@@ -26,6 +26,16 @@
 ; - fettig
 (define hairtype
   (signature (enum "dandruff" "dry" "oily")))
+
+; Shampoo hat folgende Eigenschaften:
+; - Haartyp
+(define-record shampoo
+  make-shampoo
+  shampoo?
+  (shampoo-hairtype hairtype))
+
+(define shampoo1 (make-shampoo "dandruff"))
+(define shampoo2 (make-shampoo "dry"))
 
 ; Duschgel besteht aus:
 ; - Seife
@@ -35,3 +45,6 @@
   showergel?
   (showergel-soap soap)
   (showergel-shampoo shampoo))
+
+(define gel1 (make-showergel soap1 shampoo1))
+(define gel2 (make-showergel soap2 shampoo2))
