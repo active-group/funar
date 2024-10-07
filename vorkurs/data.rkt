@@ -194,7 +194,7 @@
   (lambda (parrot)
     (make-parrot "" (parrot-weight parrot))))
 
-#|
+
 ; Tier überfahren
 (: run-over-animal (animal -> animal))
 
@@ -203,10 +203,16 @@
 (check-expect (run-over-parrot parrot1)
               (run-over-parrot parrot1))
 
+; Schablone:
+#;(define run-over-animal
+  (lambda (animal)
+    (cond
+      ((dillo? animal) ...)
+      ((parrot? animal) ...))))
+
 (define run-over-animal
   (lambda (animal)
     (cond
-      (... ...)
-      (... ...))))
+      ((dillo? animal) (run-over-dillo animal))
+      ((parrot? animal) (run-over-parrot animal)))))
 
-|#
