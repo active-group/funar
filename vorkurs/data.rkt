@@ -218,5 +218,5 @@
 
 ; hier:
 ; gemischte Daten
-; jeder Fall ist zusammengesetzte Daten
+; jeder Fall ist zusammengesetzte Daten 
 
