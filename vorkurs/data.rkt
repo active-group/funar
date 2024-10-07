@@ -163,3 +163,25 @@
                    weight)))))
 
 
+; Papagei hat folgende Eigenschaften:
+; - Satz -UND-
+; - Gewicht
+(define-record parrot
+  make-parrot
+  (parrot-sentence string)
+  (parrot-weight number))
+
+; 1kg-Papagei, sagt "hello!"
+(define parrot1 (make-parrot "hello!" 1))
+(define parrot2 (make-parrot "goodbye!" 2))
+
+; Papagei überfahren
+(: run-over-parrot (parrot -> parrot))
+
+(check-expect (run-over-parrot parrot1)
+              (make-parrot "" 1))
+              
+(define run-over-parrot
+  (lambda (parrot)
+    (make-parrot "" (parrot-weight parrot))))
+    
