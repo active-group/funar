@@ -325,6 +325,7 @@
 ; oft eingebaut als filter
 
 
+; parametrische Polymorphie
 ; %: Signaturvariable, "magisch", bei jedem Aufruf kann das was anderes sein
 (: extract ((%element -> boolean) (list-of %element) -> (list-of %element)))
 
@@ -343,4 +344,4 @@
 
 (define dillos (cons dillo1 (cons dillo2 empty)))
 
-(extract dillo-alive? dillos)
+; (extract dillo-alive? dillos)
