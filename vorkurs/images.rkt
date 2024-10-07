@@ -5,6 +5,11 @@
 (define y
   (+ 23
      (* 42 2)))
+(define z (+ x y))
+
+(define f
+  (lambda (z)
+    (+ z 1)))
 
 ; Kommentar
 
@@ -31,6 +36,7 @@
 ; Konstruktionsanleitung
 ; - Kurzbeschreibung
 
+; quadratisches Kachelmuster aus 2 Kacheln zusammensetzen
 
 (define tile
   (lambda (image1 image2)
