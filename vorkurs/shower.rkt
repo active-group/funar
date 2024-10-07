@@ -3,12 +3,13 @@
 ; Duschprodukt ist eins der folgenden:
 ; - Seife -ODER-
 ; - Shampoo -ODER-
-; - Duschgel: besteht aus gleichen Teilen aus Seife und Shampoo
+; - Mixtur: besteht aus gleichen Teilen aus zwei Duschprodukten
 ; gemischte Daten
 (define shower-product
   (signature (mixed soap
                     shampoo
-                    showergel)))
+                    ;showergel
+                    mixture)))
 
 ; Seife hat folgende Eigenschaften:
 ; - pH-Wert
@@ -46,8 +47,6 @@
   (showergel-soap soap)
   (showergel-shampoo shampoo))
 
-(define gel1 (make-showergel soap1 shampoo1))
-(define gel2 (make-showergel soap2 shampoo2))
 
 ; Mixtur aus Duschgel und Seife
 (define-record mixture-a
@@ -70,6 +69,9 @@
   mixture?
   (mixture-product1 shower-product)
   (mixture-product2 shower-product))
+
+(define gel1 (make-mixture soap1 shampoo1))
+(define gel2 (make-mixture soap2 shampoo2))
 
 (define mix1 (make-mixture gel1 soap2))
 (define mix2 (make-mixture gel1 gel2))
