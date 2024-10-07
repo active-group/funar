@@ -149,10 +149,14 @@
     (define alive? (dillo-alive? dillo))
     (define weight (dillo-weight dillo))
     (make-dillo alive?
-                (cond
+                ; binäre Verzweigung
+                (if alive?
+                    (+ weight amount)
+                    weight)
+                #;(cond
                   (alive?
                    (+ weight amount))
-                  (#t
+                  (else
                    #;(not (dillo-alive? dillo))
                    weight)))))
 
