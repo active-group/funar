@@ -400,3 +400,12 @@
       ((cons? list)
        (operation (first list)
                   (list-fold neutral-element operation (rest list)))))))
+
+(define map-list2
+  (lambda (f list)
+    (list-fold empty
+               (lambda (first-list rec-result)
+                 (cons
+                  (f first-list)
+                  rec-result))
+               list)))
