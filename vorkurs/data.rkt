@@ -8,8 +8,8 @@
 ; zusammengesetzte Daten
 (define-record time ; Signatur
   make-time ; Konstruktor
-  (time-hour   natural) ; Selektor ("Getter-Funktion")
-  (time-minute natural))
+  (time-hour   (integer-from-to 0 23)) ; Selektor ("Getter-Funktion")
+  (time-minute (integer-from-to 0 59)))
 
 (: make-time (natural natural -> time))
 (: time-hour (time -> natural))
@@ -56,6 +56,12 @@
     (define hour (quotient minutes 60))
     (define minute (remainder minutes 60))
     (make-time hour minute)))
+
+(check-property
+ (for-all ((t time))
+   (equal? t
+           (msm->time (minutes-since-midnight t)))))
+
 
 ; Haustier ist eins der folgenden:
 ; - Hund -ODER-
