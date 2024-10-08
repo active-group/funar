@@ -198,3 +198,14 @@ within (MkSquare (MkPoint squareX squareY) sideLength) (MkPoint x y) =
         && ((y >= squareY) && (y <= rightTopY))
 within (MkOverlap shape1 shape2) point =
   within shape1 point || within shape2 point
+
+-- Eine Liste ist eins der folgenden:
+-- - die leere Liste
+-- - eine Cons-Liste aus erstem Element und Rest
+data ListOf a = -- Typvariable
+    Empty 
+  | Cons a (ListOf a)
+
+-- 2elementige Liste
+loi2 :: ListOf Integer
+loi2 = Cons 5 (Cons 7 Empty)
