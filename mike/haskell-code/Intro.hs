@@ -34,7 +34,7 @@ data Pet =
     Dog 
   | Cat
   | Snake
---  deriving Show
+  deriving Show
 
 -- Ist Haustier niedlich?
 isCute :: Pet -> Bool
@@ -142,6 +142,7 @@ feedAnimal (MkParrot sentence weight) amount = MkParrot sentence (weight + amoun
 -- MkDillo {dilloLiveness = Dead, dilloWeight = 8}
 
 
+-- Tupel
 feedAnimal' :: (Animal, Weight) -> Animal
 feedAnimal'(dillo@(MkDillo liveness weight), amount) =
   -- Alias-Pattern
