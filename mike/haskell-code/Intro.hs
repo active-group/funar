@@ -33,7 +33,7 @@ data Pet =
     Dog 
   | Cat
   | Snake
-  deriving Show
+--  deriving Show
 
 -- Ist Haustier niedlich?
 isCute :: Pet -> Bool
@@ -50,3 +50,4 @@ isCute Snake = False
 
 -- >>> isCute Snake
 -- False
+
