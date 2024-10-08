@@ -125,6 +125,7 @@ runOverAnimal (MkParrot sentence weight) = MkParrot "" weight
 -- MkParrot "" 1
 
 -- Tier füttern
+feedAnimal :: Animal -> (Weight -> Animal)
 feedAnimal dillo@(MkDillo liveness weight) amount = -- Alias-Pattern
     case liveness of
         Alive -> MkDillo Alive (weight + amount)
