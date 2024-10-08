@@ -393,6 +393,18 @@
 
 (: list-fold (%r (%a %r -> %r) (list-of %a) -> %r))
 
+(check-expect (list-fold 15 ; %r = number
+                         ; %a = string
+                         (lambda (a r) ; (: a %a)  (: %r number)
+                           (+ (string-length a) r))
+                         (cons "Mike"
+                               (cons "Markus"
+                                     (cons "Yves"
+                                           (cons "Alex"
+                                                 empty)))))
+              33)
+              
+
 (define list-fold
   (lambda (neutral-element operation list)
     (cond
@@ -409,3 +421,15 @@
                   (f first-list)
                   rec-result))
                list)))
+
+; Datendefinition für Listen -> Schablone -> list-xxx
+
+(define list-xxx
+  (lambda (for-empty for-cons list)
+    (cond
+      ((empty? list) for-empty)
+      ((cons? list)
+       (for-cons
+        (first list)
+        (list-xxx for-empty for-cons (rest list)))))))
+
