@@ -236,5 +236,12 @@ listSum (first : rest) =  first + listSum rest
 
 listFold :: r -> (a -> r -> r) -> [a] -> r
 listFold forEmpty forCons [] = forEmpty
-listFold forEmpty forCons (x:xs) =
-  forCons x (listFold forEmpty forCons xs)
+listFold forEmpty forCons (x  :                                   xs) =
+                           x `forCons` (listFold forEmpty forCons xs)
+--  forCons x (listFold forEmpty forCons xs)
+
+-- >>> listFold 0 (+) list4
+-- 22
+
+-- >>> listFold 0 (\ x y -> x + y) list4
+-- 22
