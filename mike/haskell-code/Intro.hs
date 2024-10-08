@@ -9,8 +9,7 @@ x = 42
 
 double :: Integer -> Integer
 -- double x = x * 2
-double =
- \ x -> x * 2 -- \ lambda
+double = \ x -> x * 2 -- \ lambda
 
 -- >>> double 42
 -- 84
@@ -136,8 +135,12 @@ feedAnimal (MkParrot sentence weight) amount = MkParrot sentence (weight + amoun
 
 -- swap :: (Animal -> Weight -> Animal) -> (Weight -> Animal -> Animal)
 swap :: (a -> b -> c) -> (b -> a -> c)
-swap f = \ b -> \ a -> f a b
-    
+-- swap f = \ b -> \ a -> f a b
+swap f b a = f a b
+
+tuplify :: (a -> b -> c) -> ((a, b) -> c)
+tuplify f = \ (a, b) -> f a b
+
 feedAnimalR :: Weight -> Animal -> Animal
 feedAnimalR = swap feedAnimal
 
