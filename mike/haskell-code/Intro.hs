@@ -77,5 +77,5 @@ dillo1 = MkDillo { dilloLiveness = Alive, dilloWeight = 10}
 dillo2 :: Dillo
 dillo2 = MkDillo Dead 8
 
--- runOverDillo :: Dillo -> Dillo
--- runOverDillo dillo = MkDillo { dilloLiveness = Dead, dilloWeight}
+runOverDillo :: Dillo -> Dillo
+runOverDillo dillo = MkDillo { dilloLiveness = Dead, dilloWeight = dilloWeight dillo }
