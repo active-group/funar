@@ -133,13 +133,43 @@ feedAnimal (MkParrot sentence weight) amount = MkParrot sentence (weight + amoun
 
 -- Besser wäre vielleicht feedAnimal :: Weight -> (Animal -> Animal)
 
+-- eingebaut als flip
 -- swap :: (Animal -> Weight -> Animal) -> (Weight -> Animal -> Animal)
 swap :: (a -> b -> c) -> (b -> a -> c)
 -- swap f = \ b -> \ a -> f a b
 swap f b a = f a b
 
+-- Haskell Curry
+-- Moses Schönfinkel
+
+-- eingebaut als uncurry
 tuplify :: (a -> b -> c) -> ((a, b) -> c)
-tuplify f = \ (a, b) -> f a b
+-- tuplify f = \ (a, b) -> f a b
+tuplify f (a, b) = f a b
+
+-- >>> (tuplify feedAnimal) (dillo1, 5)
+-- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
+
+-- eingebaut als curry
+untuplify :: ((a, b) -> c) -> (a -> b -> c)
+-- untuplify f = \ a -> \ b -> f (a, b)
+untuplify f a b = f (a, b)
+
+-- Funktionskomposition, eingebaut als .
+o :: (b -> c) -> (a -> b) -> (a -> c)
+o f g = \ a -> f (g a)
+
+-- >>> (runOverAnimal . flip feedAnimal 1) dillo1
+-- MkDillo {dilloLiveness = Dead, dilloWeight = 11}
+
+-- >>> untuplify feedAnimal' dillo1 5
+-- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
+
+(|>) :: a -> (a -> b) -> b
+(|>) a f = f a
+
+-- >>> dillo1 |> flip feedAnimal 1 |> runOverAnimal
+-- MkDillo {dilloLiveness = Dead, dilloWeight = 11}
 
 feedAnimalR :: Weight -> Animal -> Animal
 feedAnimalR = swap feedAnimal
