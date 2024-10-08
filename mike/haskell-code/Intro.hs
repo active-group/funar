@@ -94,8 +94,32 @@ runOverDillo dillo = dillo { dilloLiveness = Dead } -- Kopie von dillo, bis auf 
 -- - Gürteltier -ODER-
 -- - Papagei
 -- gemischte Daten, in Haskell alle in einen Datentyp
+
+-- algebraischer Datentyp
+
 data Animal =
     MkDillo { dilloLiveness :: Liveness,
               dilloWeight :: Weight}
   | MkParrot String Weight
   deriving Show
+
+dillo1 :: Animal
+dillo1 = MkDillo { dilloLiveness = Alive, dilloWeight = 10 }
+dillo2 :: Animal
+dillo2 = MkDillo Dead 8
+
+parrot1 :: Animal
+parrot1 = MkParrot "hello!" 1
+parrot2 :: Animal
+parrot2 = MkParrot "goodbye!" 2
+
+-- Tier überfahren
+runOverAnimal :: Animal -> Animal
+runOverAnimal (MkDillo liveness weight) = MkDillo Dead weight
+runOverAnimal (MkParrot sentence weight) = MkParrot "" weight
+
+-- >>> runOverAnimal dillo1
+-- MkDillo {dilloLiveness = Dead, dilloWeight = 10}
+
+-- >>> runOverAnimal parrot1
+-- MkParrot "" 1
