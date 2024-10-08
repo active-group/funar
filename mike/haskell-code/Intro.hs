@@ -34,3 +34,19 @@ data Pet =
   | Cat
   | Snake
   deriving Show
+
+-- Ist Haustier niedlich?
+isCute :: Pet -> Bool
+-- eine Gleichung pro Fall ... Pattern-Matching
+isCute Dog = True
+isCute Cat = True
+isCute Snake = False
+
+-- >>> isCute Dog
+-- True
+
+-- >>> isCute Cat
+-- True
+
+-- >>> isCute Snake
+-- False
