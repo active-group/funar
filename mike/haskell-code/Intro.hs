@@ -209,3 +209,19 @@ data ListOf a = -- Typvariable
 -- 2elementige Liste
 loi2 :: ListOf Integer
 loi2 = Cons 5 (Cons 7 Empty)
+
+-- die leere Liste: []
+-- Cons:            :   (Sonderzeichen sind Infix-Funktionen)
+
+list1 :: [Integer] -- eine Liste aus Integers
+list1 = 5 : []
+
+list2 :: [Integer]
+list2 = 2 : (5 : [])
+
+list3 :: [Integer]
+list3 = [7,2,5]
+
+list4 :: [Integer]
+list4 = 8:list3
+
