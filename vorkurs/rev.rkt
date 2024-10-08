@@ -3,7 +3,7 @@
 ; Liste umdrehen
 (: rev ((list-of %a) -> (list-of %a)))
 
-#;(check-expect (rev (list 1 2 3 4))
+(check-expect (rev (list 1 2 3 4))
               (list 4 3 2 1))
 
 (define rev
@@ -20,7 +20,7 @@
 ; Element an eine Liste anhängen
 (: append-element ((list-of %a) %a -> (list-of %a)))
 
-#;(check-expect (append-element (list 1 2 3) 4)
+(check-expect (append-element (list 1 2 3) 4)
               (list 1 2 3 4))
 
 (define append-element
@@ -28,10 +28,11 @@
     (cond
       ((empty? list) (cons element empty))
       ((cons? list)
-       (cons
+       (cons ; Kontext vom Aufruf von append-element
         (first list)
         (append-element (rest list) element))))))
 
+; JVM: Stack begrenzt, klein
 
 ; Laufzeit: 1 + 2 + 3 + ... + (n-1) + n = (n+1)*n/2 = n^2 + ... = O(n^2)
 
@@ -45,4 +46,9 @@
     (cond
       ((empty? list) acc)
       ((cons? list)
+       ; kein Kontext, tail call
+       ; endrekursiver Aufruf
        (rev-2 (rest list) (cons (first list) acc))))))
+
+
+; JVM-Problem: auch tail calls generieren Stack-Frames
