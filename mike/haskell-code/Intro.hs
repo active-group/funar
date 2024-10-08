@@ -4,7 +4,7 @@ module Intro where
 import Prelude hiding (Semigroup, Monoid)
 
 x :: Integer
-x = 43
+x = 42
 
 double :: Integer -> Integer
 double x = x * 2
