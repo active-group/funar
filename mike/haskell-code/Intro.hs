@@ -3,6 +3,7 @@ module Intro where
 
 import Prelude hiding (Semigroup, Monoid)
 
+
 x :: Integer
 x = 42
 
@@ -51,3 +52,27 @@ isCute Snake = False
 -- >>> isCute Snake
 -- False
 
+-- Gürteltier hat folgende Eigenschaften:
+-- - lebendig -ODER- tot
+-- - Gewicht
+
+data Liveness =
+    Alive 
+  | Dead
+  deriving Show
+
+-- Typalias
+type Weight = Integer
+
+data Dillo =
+    MkDillo { dilloLiveness :: Liveness,
+              dilloWeight :: Weight }
+    deriving Show
+
+-- lebendiges Gürteltier, 10kg
+dillo1 :: Dillo
+dillo1 = MkDillo { dilloLiveness = Alive, dilloWeight = 10}
+
+-- totes Gürteltier, 8kg
+dillo2 :: Dillo
+dillo2 = MkDillo Alive 8
