@@ -225,3 +225,6 @@ list3 = [7,2,5]
 list4 :: [Integer]
 list4 = 8:list3
 
+listSum :: [Integer] -> Integer
+listSum [] = 0
+listSum (first:rest) =  first + listSum rest
