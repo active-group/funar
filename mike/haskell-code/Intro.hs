@@ -33,7 +33,7 @@ data Pet =
     Dog 
   | Cat
   | Snake
-  deriving Show
+  deriving (Show, Ord)
 
 -- Ist Haustier niedlich?
 isCute :: Pet -> Bool
@@ -58,7 +58,7 @@ isCute Snake = False
 data Liveness =
     Alive 
   | Dead
-  deriving Show
+  deriving Eq  -- der Compiler soll eine Instanz von Eq herleiten
 
 -- Typalias
 type Weight = Integer
@@ -285,7 +285,6 @@ data Optional a =
   deriving Show
 
 -- Eq a: Constraint, "die Werte von a sind vergleichbar"
-
 listIndex :: Eq a => a -> [a] -> Optional Integer
 listIndex x [] = Null
 listIndex x (y:ys) =
@@ -296,5 +295,43 @@ listIndex x (y:ys) =
       Null -> Null
       Result index -> Result (index + 1)
 
+-- Eq ist eine Typklasse
+-- Typklasse == Interface
+-- Instanz == Implementierung
+
+-- >>> :info Eq
+-- type Eq :: * -> Constraint
+-- class Eq a where
+--   (==) :: a -> a -> Bool
+-- instance Eq Integer -- Defined in ‘GHC.Num.Integer’
+
 -- >>> listIndex 5 [1, 3, 5, 7]
--- 2
+-- Result 2
+
+z = 1
+
+--- >>> listIndex Snake [Dog, Cat, Cat, Dog, Snake, Dog, Cat]
+-- Result 4
+
+instance Eq Pet where
+  (==) :: Pet -> Pet -> Bool
+  (==) Dog Dog = True
+  (==) Cat Cat = True
+  (==) Snake Snake = True
+  (==) _ _ = False
+
+-- >>> :info Show
+-- type Show :: * -> Constraint
+-- class Show a where
+--   show :: a -> String
+
+-- >>> :info Ord
+-- type Ord :: * -> Constraint
+-- class Eq a => Ord a where
+--   compare :: a -> a -> Ordering
+--   (<) :: a -> a -> Bool
+--   (<=) :: a -> a -> Bool
+--   (>) :: a -> a -> Bool
+--   (>=) :: a -> a -> Bool
+--   max :: a -> a -> a
+--   min :: a -> a -> a
