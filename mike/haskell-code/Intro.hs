@@ -150,7 +150,6 @@ feedAnimalR = swap feedAnimal
 -- >>> feedAnimal dillo2 5
 -- MkDillo {dilloLiveness = Dead, dilloWeight = 8}
 
-
 -- Tupel
 feedAnimal' :: (Animal, Weight) -> Animal
 feedAnimal' (dillo@(MkDillo liveness weight), amount) =
@@ -159,3 +158,12 @@ feedAnimal' (dillo@(MkDillo liveness weight), amount) =
     Alive -> MkDillo Alive (weight + amount)
     Dead -> dillo -- MkDillo liveness weight
 feedAnimal' (MkParrot sentence weight, amount) = MkParrot sentence (weight + amount)
+
+-- Eine geometrische Figur ("Shape") ist eins der folgenden:
+-- - ein Kreis
+-- - ein Quadrat
+-- - eine Überlagerung zweier geometrischer Figuren
+
+-- Aufgabe:
+-- 1. Datentyp
+-- 2. Funktion, die ermittelt, ob ein Punkt innerhalb oder außerhalb einer geometrischen Figur liegt
