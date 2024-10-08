@@ -58,7 +58,7 @@ isCute Snake = False
 data Liveness =
     Alive 
   | Dead
-  deriving Eq  -- der Compiler soll eine Instanz von Eq herleiten
+  deriving (Show, Eq)  -- der Compiler soll eine Instanz von Eq herleiten
 
 -- Typalias
 type Weight = Integer
