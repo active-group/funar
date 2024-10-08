@@ -140,3 +140,12 @@ feedAnimal (MkParrot sentence weight) amount = MkParrot sentence (weight + amoun
 
 -- >>> feedAnimal dillo2 5
 -- MkDillo {dilloLiveness = Dead, dilloWeight = 8}
+
+
+feedAnimal' :: (Animal, Weight) -> Animal
+feedAnimal'(dillo@(MkDillo liveness weight), amount) =
+  -- Alias-Pattern
+  case liveness of
+    Alive -> MkDillo Alive (weight + amount)
+    Dead -> dillo -- MkDillo liveness weight
+feedAnimal' (MkParrot sentence weight, amount) = MkParrot sentence (weight + amount)
