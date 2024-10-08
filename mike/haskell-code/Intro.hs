@@ -134,9 +134,9 @@ feedAnimal (MkParrot sentence weight) amount = MkParrot sentence (weight + amoun
 
 -- Besser wäre vielleicht feedAnimal :: Weight -> (Animal -> Animal)
 
-swap :: (Animal -> Weight -> Animal) -> (Weight -> Animal -> Animal)
-swap f = 
-    \ weight -> \ animal -> f animal weight
+-- swap :: (Animal -> Weight -> Animal) -> (Weight -> Animal -> Animal)
+swap :: (a -> b -> c) -> (b -> a -> c)
+swap f = \ b -> \ a -> f a b
     
 feedAnimalR :: Weight -> Animal -> Animal
 feedAnimalR = swap feedAnimal
