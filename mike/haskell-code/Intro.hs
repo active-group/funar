@@ -278,3 +278,23 @@ listFold forEmpty forCons (x  :                                   xs) =
 
 -- >>> listFold 0 (\ x y -> x + y) list4
 -- 22
+
+data Optional a =
+    Result a
+  | Null
+  deriving Show
+
+-- Eq a: Constraint, "die Werte von a sind vergleichbar"
+
+listIndex :: Eq a => a -> [a] -> Optional Integer
+listIndex x [] = Null
+listIndex x (y:ys) =
+  if x == y
+  then Result 0 
+  else 
+    case listIndex x ys of
+      Null -> Null
+      Result index -> Result (index + 1)
+
+-- >>> listIndex 5 [1, 3, 5, 7]
+-- 2
