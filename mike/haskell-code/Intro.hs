@@ -123,3 +123,19 @@ runOverAnimal (MkParrot sentence weight) = MkParrot "" weight
 
 -- >>> runOverAnimal parrot1
 -- MkParrot "" 1
+
+-- Tier füttern
+feedAnimal (MkDillo liveness weight) amount =
+    case liveness of
+        Alive -> MkDillo Alive (weight + amount)
+        Dead -> MkDillo liveness weight
+feedAnimal (MkParrot sentence weight) amount = MkParrot sentence (weight + amount)
+
+-- >>> feedAnimal dillo1 5
+-- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
+
+-- >>> feedAnimal parrot1 5
+-- MkParrot "hello!" 6
+
+-- >>> feedAnimal dillo2 5
+-- MkDillo {dilloLiveness = Dead, dilloWeight = 8}
