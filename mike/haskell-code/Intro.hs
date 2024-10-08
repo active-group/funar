@@ -64,6 +64,7 @@ data Liveness =
 -- Typalias
 type Weight = Integer
 
+{-
 data Dillo =
     MkDillo { dilloLiveness :: Liveness,
               dilloWeight :: Weight }
@@ -78,7 +79,23 @@ dillo2 :: Dillo
 dillo2 = MkDillo Dead 8
 
 runOverDillo :: Dillo -> Dillo
-runOverDillo dillo = MkDillo { dilloLiveness = Dead, dilloWeight = dilloWeight dillo }
+-- runOverDillo dillo = MkDillo { dilloLiveness = Dead, dilloWeight = dilloWeight dillo }
+-- runOverDillo (MkDillo { dilloLiveness = l, dilloWeight = w}) = MkDillo { dilloLiveness = Dead, dilloWeight = w}
+-- runOverDillo (MkDillo { dilloWeight = w }) = MkDillo Dead w
+-- runOverDillo (MkDillo _ w) = MkDillo Dead w
+-- "functional update":
+runOverDillo dillo = dillo { dilloLiveness = Dead } -- Kopie von dillo, bis auf ...
 
 -- >>> runOverDillo dillo1
 -- MkDillo {dilloLiveness = Dead, dilloWeight = 10}
+-}
+
+-- Tier (auf dem texanischen Highway) ist eins der folgenden:
+-- - Gürteltier -ODER-
+-- - Papagei
+-- gemischte Daten, in Haskell alle in einen Datentyp
+data Animal =
+    MkDillo { dilloLiveness :: Liveness,
+              dilloWeight :: Weight}
+  | MkParrot String Weight
+  deriving Show
