@@ -227,4 +227,14 @@ list4 = 8:list3
 
 listSum :: [Integer] -> Integer
 listSum [] = 0
-listSum (first:rest) =  first + listSum rest
+listSum (first : rest) =  first + listSum rest
+
+-- >>> listSum list4
+-- 22
+
+-- (: list-fold (%r (%a %r -> %r) (list-of %a) -> %r))
+
+listFold :: r -> (a -> r -> r) -> [a] -> r
+listFold forEmpty forCons [] = forEmpty
+listFold forEmpty forCons (x:xs) =
+  forCons x (listFold forEmpty forCons xs)
