@@ -334,3 +334,56 @@ instance Eq Pet where
 --   max :: a -> a -> a
 --   min :: a -> a -> a
 
+-- >>> :info Num
+-- type Num :: * -> Constraint
+-- class Num a where
+--   (+) :: a -> a -> a
+--   (-) :: a -> a -> a
+--   (*) :: a -> a -> a
+--   negate :: a -> a
+--   abs :: a -> a
+--   signum :: a -> a
+--   fromInteger :: Integer -> a
+--   {-# MINIMAL (+), (*), abs, signum, fromInteger, (negate | (-)) #-}
+--   	-- Defined in ‘GHC.Num’
+-- instance Num Double -- Defined in ‘GHC.Float’
+-- instance Num Float -- Defined in ‘GHC.Float’
+-- instance Num Int -- Defined in ‘GHC.Num’
+-- instance Num Integer -- Defined in ‘GHC.Num’
+-- instance Num Word -- Defined in ‘GHC.Num’
+
+-- Typklassen: idealerweise für universelle Konzepte, d.h. aus der Mathematik
+
+-- hier: 5 Konzepte aus der Algebra
+
+-- - Halbgruppe
+-- - Monoid
+
+-- - Funktor
+-- - applikativer Funktor
+-- - Monad
+
+-- "neutrales Element"
+
+-- Algebraische Struktur:
+-- - Menge(n)/Typ
+-- - Operationen (auf dem Typ)
+-- - Gleichungen
+
+-- Assoziativität 
+-- (a + b) + c = a + (b + c)
+-- der Operation + auf der Menge R
+-- + :: R -> R -> R
+
+-- Integer
+-- (*) :: Integer -> Integer -> Integer
+-- (a * b) * c = a * (b * c)
+
+-- Halbgruppe
+-- Typ t
+-- op :: t -> t -> t
+-- op (op a b) c == op a (op b c)
+
+-- Typ [a]
+-- (++) :: [a] -> [a] -> [a]
+-- (a ++ b) ++ c == a ++ (b ++ c)
