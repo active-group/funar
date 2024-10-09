@@ -108,7 +108,8 @@ runDB (Return result) mp = (result, mp)
 -- >>> runDB p1 Map.empty
 -- ("201",fromList [("Mike",101)])
 
+io1 :: IO String
 io1 = do putStrLn "Mike"
          x <- getLine
-         putStrLn ("you typed" ++ x)
+         putStrLn ("you typed: " ++ x)
          return x
