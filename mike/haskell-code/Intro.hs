@@ -412,3 +412,17 @@ instance Eq Pet where
 class Semigroup t where
   -- op (op a b) c == op a (op b c)
   op :: t -> t -> t
+
+instance Semigroup [a] where
+  op :: [a] -> [a] -> [a]
+  op = (++)
+
+-- neutrales Element:
+-- Voraussetzung Halbgruppe
+-- Semigroup t
+-- neutral :: t
+-- op neutral x == op x neutral == x
+-- Monoid: Halbgruppe mit neutralem Element
+
+class Semigroup t => Monoid t where
+  neutral :: t
