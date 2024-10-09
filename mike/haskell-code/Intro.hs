@@ -297,9 +297,36 @@ listIndex x (y:ys) =
   if x == y
   then Result 0 
   else 
+    fmap (+1) (listIndex x ys)
+    -- optionalMap (\index -> index + 1) (listIndex x ys)
+    {-
     case listIndex x ys of
       Null -> Null
       Result index -> Result (index + 1)
+-}
+
+listMap ::     (a -> b) ->         [a] ->        [b]
+listMap f [] = []
+listMap f (x:xs) = f x : listMap f xs
+
+optionalMap :: (a -> b) -> Optional a -> Optional b
+optionalMap f Null = Null
+optionalMap f (Result a) = Result (f a)
+
+-- >>> :info Functor
+-- type Functor :: (* -> *) -> Constraint
+-- class Functor f where
+--   fmap :: (a -> b) -> f a -> f b
+
+instance Functor Optional where
+  fmap :: (a -> b) -> Optional a -> Optional b
+  fmap = optionalMap
+
+-- Zutaten:
+-- Typkonstruktor/Typ mit Typparameter f
+-- fmap :: (a -> b) -> f a -> f b
+-- fmap id = id
+-- fmap f . fmap g = fmap (f . g) 
 
 -- Eq ist eine Typklasse
 -- Typklasse == Interface
