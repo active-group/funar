@@ -224,7 +224,7 @@ square1 = MkSquare (MkPoint 3 3) 4.0
 
 -- Denotation
 
-within :: Shape -> Point -> Bool
+within :: Shape -> (Point -> Bool)
 within (MkCircle (MkPoint centerX centerY) radius) (MkPoint x y) =
   let distanceX = (x - centerX) ^ 2
       distanceY = (y - centerY) ^ 2
