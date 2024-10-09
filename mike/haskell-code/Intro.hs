@@ -440,3 +440,6 @@ instance (Monoid a, Monoid b) => Monoid (a, b) where
   neutral =  --    :: (a, b)
      (neutral,  -- :: a 
       neutral)  -- :: b
+
+-- Übung:
+-- instance ... Monoid (Optional a) where ...
