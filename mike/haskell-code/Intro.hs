@@ -406,3 +406,9 @@ instance Eq Pet where
 -- image
 -- (: overlay (image image -> image)
 -- (overlay i1 (overlay i2 i3)) == (overlay (overlay i1 i2) i3)
+
+-- nicht: Duschprodukte
+
+class Semigroup t where
+  -- op (op a b) c == op a (op b c)
+  op :: t -> t -> t
