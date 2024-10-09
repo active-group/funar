@@ -142,6 +142,14 @@ runDBSQLite (Put key value callback) connection =
        runDBSQLite (callback ()) connection
 runDBSQLite (Return result) connection = return result -- return :: a -> IO a
 
--- CREATE TABLE IF NOT EXISTS entries (key TEXT PRIMARY KEY, value INTEGER)
 
 execDB :: DB a -> IO a
+execDB db =
+    do connection <- open "test.db"
+       execute_ connection "CREATE TABLE IF NOT EXISTS entries (key TEXT PRIMARY KEY, value INTEGER)"
+       result <- runDBSQLite db connection 
+       close connection
+       return result
+
+-- >>> execDB p1''
+-- "201"
