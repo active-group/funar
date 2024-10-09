@@ -216,6 +216,8 @@ data Shape
 
 circle1 = MkCircle (MkPoint 2 2) 2.0
 
+circle2 = MkCircle (MkPoint 4 4) 4.0
+
 square1 = MkSquare (MkPoint 3 3) 4.0
 
 within :: Shape -> Point -> Bool
@@ -387,3 +389,12 @@ instance Eq Pet where
 -- Typ [a]
 -- (++) :: [a] -> [a] -> [a]
 -- (a ++ b) ++ c == a ++ (b ++ c)
+
+-- Typ string
+-- (: string-append (string string -> string)
+-- (string-append (string-append a b) c) = (string-append a (string-append b c))
+
+-- Shapes:
+-- Shape
+-- MkOverlay :: Shape -> Shape -> Shape
+-- 
