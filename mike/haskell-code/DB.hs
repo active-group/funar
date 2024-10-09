@@ -1,7 +1,12 @@
+{-# LANGUAGE OverloadedStrings #-}
 module DB where
 
 import qualified Data.Map.Strict as Map
 import Data.Map.Strict (Map, (!))
+
+import Control.Applicative
+import Database.SQLite.Simple
+import Database.SQLite.Simple.FromRow
 
 {-
 put "Mike" 100
@@ -113,3 +118,28 @@ io1 = do putStrLn "Mike"
          x <- getLine
          putStrLn ("you typed: " ++ x)
          return x
+
+-- Beispiel - "DTO"
+-- data TestField = TestField Int String deriving (Show)
+
+data DBRow = MkRow Key Value deriving Show
+
+instance FromRow DBRow where
+    fromRow = MkRow <$> field <*> field
+
+instance ToRow DBRow where
+    toRow (MkRow key value) = toRow (key, value)
+
+runDBSQLite :: DB a -> Connection -> IO a
+runDBSQLite (Get key callback) connection =
+    -- queryNamed liefert Liste von Zeilen
+    do [MkRow _ value] <- queryNamed connection 
+                                     "SELECT key, value FROM entries WHERE key = :key" 
+                                     [":key" := key]
+       runDBSQLite (callback value) connection
+runDBSQLite (Put key value callback) connection = 
+    do execute connection "REPLACE INTO entries (key, value) VALUES (?, ?)" (MkRow key value)
+       runDBSQLite (callback ()) connection
+runDBSQLite (Return result) connection = return result -- return :: a -> IO a
+
+-- CREATE TABLE IF NOT EXISTS entries (key TEXT PRIMARY KEY, value INTEGER)
