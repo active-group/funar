@@ -400,5 +400,6 @@ instance Eq Pet where
 
 -- Shapes:
 -- Shape
--- MkOverlay :: Shape -> Shape -> Shape
--- 
+-- MkOverlap :: Shape -> Shape -> Shape
+-- isIn (MkOverlap s1 (MkOverlap s2 s3)) == isIn (MkOverlap (MkOverlap s1 s2) s3)
+
