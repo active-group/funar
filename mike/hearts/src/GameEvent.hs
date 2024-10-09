@@ -57,3 +57,6 @@ playCard :: PlayCardCommand -> ... -> ...
 playCard p c ... -> playCard (MkPlayerCommand p c) ...
 
 -}
+
+-- als nächstes: Ablauf des Spiels / Anordnung der Events
+-- sequentielle Abläufe: Monade
