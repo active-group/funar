@@ -424,5 +424,14 @@ instance Semigroup [a] where
 -- op neutral x == op x neutral == x
 -- Monoid: Halbgruppe mit neutralem Element
 
+-- Pfeil falschrum!
 class Semigroup t => Monoid t where
   neutral :: t
+
+instance Monoid [a] where
+  neutral :: [a]
+  neutral = []
+
+instance (Semigroup a, Semigroup b) => Semigroup (a, b) where
+  op :: (a, b) -> (a, b) -> (a, b)
+  op (a1, b1) (a2, b2) = (op a1 a2, op b1 b2)
