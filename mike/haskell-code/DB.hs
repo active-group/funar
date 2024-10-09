@@ -36,6 +36,8 @@ data DB a =
   | Put Key Value (()    -> DB a)
   | Return a
 
+-- Callback-Hell
+-- Klammern des Grauens
 p1 :: DB String
 p1 = Put "Mike" 100 (\() ->
      Get "Mike" (\x -> 
