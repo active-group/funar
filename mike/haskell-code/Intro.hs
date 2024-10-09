@@ -202,6 +202,7 @@ feedAnimal' (MkParrot sentence weight, amount) = MkParrot sentence (weight + amo
 -- 2. Funktion, die ermittelt, ob ein Punkt innerhalb oder außerhalb einer geometrischen Figur liegt
 
 data Point = MkPoint Double Double
+  deriving (Eq, Show)
 
 point1 = MkPoint 1 1
 
@@ -213,6 +214,7 @@ data Shape
   = MkCircle {center :: Point, radius :: Double}
   | MkSquare {leftBottom :: Point, sideLength :: Double}
   | MkOverlap {shape1 :: Shape, shape2 :: Shape}
+  deriving (Eq, Show)
 
 circle1 = MkCircle (MkPoint 2 2) 2.0
 
