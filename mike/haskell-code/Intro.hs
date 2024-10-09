@@ -443,3 +443,13 @@ instance (Monoid a, Monoid b) => Monoid (a, b) where
 
 -- Übung:
 -- instance ... Monoid (Optional a) where ...
+
+instance (Semigroup a) => Semigroup (Optional a) where
+  op :: Semigroup a => Optional a -> Optional a -> Optional a
+  op Null x = x
+  op x Null = x
+  op (Result a) (Result a') = Result (op a a')
+
+instance (Semigroup a) => Monoid (Optional a) where
+  neutral :: Semigroup a => Optional a
+  neutral = Null
