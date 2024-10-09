@@ -308,8 +308,6 @@ listIndex x (y:ys) =
 -- >>> listIndex 5 [1, 3, 5, 7]
 -- Result 2
 
-z = 1
-
 --- >>> listIndex Snake [Dog, Cat, Cat, Dog, Snake, Dog, Cat]
 -- Result 4
 
@@ -335,3 +333,4 @@ instance Eq Pet where
 --   (>=) :: a -> a -> Bool
 --   max :: a -> a -> a
 --   min :: a -> a -> a
+
