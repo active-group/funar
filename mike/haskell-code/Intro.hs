@@ -453,3 +453,54 @@ instance (Semigroup a) => Semigroup (Optional a) where
 instance (Semigroup a) => Monoid (Optional a) where
   neutral :: Semigroup a => Optional a
   neutral = Null
+
+newtype Additive a = MkAdditive a 
+
+instance Num a => Num (Additive a) where
+  (+) (MkAdditive a) (MkAdditive a') = MkAdditive (a + a')
+
+instance Num a => Semigroup (Additive a) where
+  op = (+)
+
+-- data Maybe a = Nothing | Just a
+
+opList :: Monoid r => [r] -> r
+opList list = listFold neutral op list
+
+-- >>> op "Mike" "Sperber" -- Strings sind Listen
+-- "MikeSperber"
+
+-- >>> opList ["Mike", "Sperber", "Hendrik"]
+-- "MikeSperberHendrik"
+
+-- >>> opList ([] :: [String])
+-- ""
+
+{-
+// Java:
+interface Semigroup<T> {
+   T op(T other);
+}
+
+interface Monoid<T> extends Semigroup<T> {
+   T neutral();
+}
+
+class MyList implements Semigroup<MyList> { ... }
+
+// eher:
+// "Halbgruppe von T"
+interface Semigroup<T> {
+   T op(T t1, T t2);
+   T neutral();
+}
+
+class MyListSemigroup implements Semigroup<MyList> {
+  ...
+}
+
+... Semigroup<MyList> myListSemigroup = new MyListSemigroup();
+myListSemigroup.op(..., ...)
+  
+
+-}
