@@ -573,3 +573,6 @@ data Validation a =
   | Invalid [String]
   deriving Show
 
+-- Aufgabe:
+-- 1. Applicative-Instanz für Validation
+-- 2. Kleines Beispiel: Person mit Alter und Name, >18, Name < 100 Buchstaben
