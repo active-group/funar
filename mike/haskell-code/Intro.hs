@@ -2,6 +2,7 @@
 module Intro where
 
 import Prelude hiding (Semigroup, Monoid)
+import Data.Text.Internal.Encoding.Utf32 (validate)
 
 
 x :: Integer
@@ -576,3 +577,40 @@ data Validation a =
 -- Aufgabe:
 -- 1. Applicative-Instanz für Validation
 -- 2. Kleines Beispiel: Person mit Alter und Name, >18, Name < 100 Buchstaben
+instance Functor Validation where
+  fmap :: (a -> b) -> Validation a -> Validation b
+  fmap f (Valid a) = Valid (f a)
+  fmap f (Invalid errors) = Invalid errors
+
+instance Applicative Validation where
+  pure :: a -> Validation a
+  pure = Valid
+  (<*>) :: Validation (a -> b) -> Validation a -> Validation b
+  (<*>) (Valid fa) (Valid a) = Valid (fa a)
+  (<*>) (Valid _) (Invalid errors) = Invalid errors
+  (<*>) (Invalid errors) (Valid _) = Invalid errors
+  (<*>) (Invalid errors1) (Invalid errors2) = Invalid (errors1 ++ errors2)
+
+
+-- class Stream<T>:
+-- <R> Stream<R> flatMap(Function<T, Stream<R>> mapper)
+-- ... bind
+
+data AdultAge = AdultAge Integer
+  deriving Show
+
+data Person = MkPerson String AdultAge
+  deriving Show
+
+
+validateAge :: Integer -> Validation AdultAge
+validateAge age = if age >= 18 then Valid (AdultAge age) else Invalid ["too young"]
+
+validateName :: String -> Validation String
+validateName name = if length name > 10 then Invalid ["name too long"] else Valid name
+
+validatePerson :: String -> Integer -> Validation Person
+validatePerson name age = MkPerson <$> (validateName name) <*> (validateAge age)
+
+-- >>> validatePerson "Mikeeeeeeeeeee" 15
+-- Invalid ["name too long","too young"]
