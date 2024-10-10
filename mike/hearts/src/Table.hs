@@ -237,6 +237,7 @@ runTable (RecordEvent event callback) (state, revents) =
   runTable (callback ()) (tableProcessEvent event state, event:revents)
 
 runTable (GetCommand callback) (state, revents) =
+  -- geht nicht: runTable (callback undefined) (state, revents)
   (Left callback, state, reverse revents)
 
 runTable (IsPlayCardAllowed player card callback) (state, revents) =
