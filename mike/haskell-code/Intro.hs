@@ -531,3 +531,45 @@ myListSemigroup.op(..., ...)
   
 
 -}
+
+incOptional :: Optional Integer -> Optional Integer
+incOptional = fmap (+1)
+
+plusOptional :: Optional Integer -> Optional Integer -> Optional Integer
+plusOptional o1 o2 = fmap2 (+) o1 o2
+
+fmap2 :: Applicative f => (a -> (x -> y)) -> f a -> f x -> f y -- b = x -> y
+-- fmap2 fn fa fx = pure fn <*> fa <*> fx
+-- fmap2 fn fa fx = fmap fn fa <*> fx
+-- (<$>) = fmap
+fmap2 fn fa fx = fn <$> fa <*> fx
+
+fmap3 :: Applicative f => (a1 -> a2 -> a3 -> b) -> f a1 -> f a2 -> f a3 -> f b
+fmap3 fn fa fx fy = pure fn <*> fa <*> fx <*> fy
+
+-- >>> :info Applicative
+-- type Applicative :: (* -> *) -> Constraint
+-- class Functor f => Applicative f where
+--   pure :: a -> f a
+--   (<*>) :: f (a -> b) -> f a -> f b
+
+instance Applicative Optional where
+  pure = Result
+  (<*>) :: Optional (a -> b) -> Optional a -> Optional b
+  (<*>) Null Null = Null
+  (<*>) Null (Result a) = Null
+  (<*>) (Result f) Null = Null
+  (<*>) (Result f) (Result a) = Result (f a)
+
+-- fmap  ::   (a -> b) -> f a -> f b
+-- (<*>) :: f (a -> b) -> f a -> f b
+
+-- Validierung:
+-- "Make illegal states unrepresentable." -> nur valide Domänenbjekte bauen
+-- "invalide" bzw. "ungecheckte" Objekte bekommen einen anderen Typ
+
+data Validation a = 
+    Valid a
+  | Invalid [String]
+  deriving Show
+
