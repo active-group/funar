@@ -1,0 +1,9 @@
+* Running interactive Hearts in console
+
+If no console input is accepted:
+
+https://github.com/sbt/sbt/issues/4021
+
+#+begin_src shell
+sbt "-Djline.terminal=none"
+#+end_src
