@@ -251,3 +251,13 @@ runTable (GameOver callback) (state, revents) =
 
 runTable (Return result) (state, revents) =
   (Right result, state, reverse revents)
+
+
+-- ab hier bleiben 6 Dinge, die man braucht, um die Spielregeln zu benutzen:
+
+-- - GameEvent
+-- - GameCommand
+-- - TableState (aber nicht dessen Implementierung)
+-- - emptyTableState
+-- - runTable
+-- - tableLoopM
