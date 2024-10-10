@@ -56,7 +56,7 @@ data Contract =
 
 instance Semigroup Contract where
     (<>) :: Contract -> Contract -> Contract
-    (<>) = And
+    (<>) = and'
 
 instance Monoid Contract where
     mempty = Zero
@@ -89,7 +89,54 @@ data Direction = Long | Short
 data Payment = MkPayment Direction Date Amount Currency
   deriving Show
 
+scalePayment :: Amount -> Payment -> Payment
+scalePayment factor (MkPayment direction date amount currency) =
+  MkPayment direction date (factor * amount) currency
+
+invertPayment :: Payment -> Payment
+invertPayment (MkPayment Long date amount currency) = MkPayment Short date amount currency
+invertPayment (MkPayment Short date amount currency) = MkPayment Long date amount currency
+
+
 -- Denotation
 -- Datum: "heute"/"jetzt", Zahlungen bis heute
 -- Output: "Residualvertrag"
 denotation :: Contract -> Date -> ([Payment], Contract)
+denotation (One currency) now = ([MkPayment Long now 1 currency], mempty)
+denotation (Times amount contract) now =
+  let (payments, residualContract) = denotation contract now
+   in (map (scalePayment amount) payments, Times amount residualContract)
+denotation c@(AtDueDate date contract) now =
+  if now >= date
+    then denotation contract now
+    else ([], c)
+denotation (Negate contract) now =
+  let (payments, residualContract) = denotation contract now
+   in (map invertPayment payments, Negate residualContract)
+denotation (And contract1 contract2) now =
+    {-
+  let (payments1, residualContract1) = denotation contract1 now
+      (payments2, residualContract2) = denotation contract2 now
+   in (payments1, residualContract1) <> (payments2, residualContract2)
+   -}
+   denotation contract1 now <> denotation contract2 now
+
+denotation Zero now = mempty
+
+-- smart constructor
+and' :: Contract -> Contract -> Contract
+and' Zero c = c
+and' c Zero = c
+and' c1 c2 = And c1 c2
+
+negate :: Contract -> Contract
+negate Zero = Zero
+negate c = Negate c
+
+cc = Times 100 (And (One EUR) (AtDueDate (MkDate "2024-12-24") (One EUR)))
+
+-- >>> denotation cc (MkDate "2024-10-10")
+-- ([MkPayment Long (MkDate "2024-10-10") 100.0 EUR],Times 100.0 (AtDueDate (MkDate "2024-12-24") (One EUR)))
+
+-- >>> and' Zero Zero
+-- Zero
