@@ -107,11 +107,15 @@ Falls Sie `nix` verwenden, dann ist `elm` bereits in der Entwicklungsumgebung
 
 # Literatur
 
+- [Blog Funktionale Programmierung](https://funktionale-programmierung.de/)
 - Michael Sperber, Herbert Klaeren: [Schreibe Dein Programm!](https://www.deinprogramm.de/sdp/)
 - Sandy Maguire: [Algebra-Driven Design](https://leanpub.com/algebra-driven-design)
 - Michael Pilquist, Rúnar Bjarnason, and Paul Chiusano [Functional Programming in Scala](https://www.manning.com/books/functional-programming-in-scala-second-edition)
 - Scott Wlaschin: [Domain Modeling Made Functional](https://pragprog.com/titles/swdddf/domain-modeling-made-functional/)
 - Alexis King: [Parse, Don't Validate](https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/)
+- Markus Schlegel: [Denotational Design](https://funktionale-programmierung.de/2024/02/27/denotational-design-01.html)
+- Scott Wlaschin: [Moving IO to the edges of your app: Functional Core, Imperative Shell](https://www.youtube.com/watch?v=P1vES9AgfC4)
+- [Copilot](https://copilot-language.github.io/) (DSL für Hard-Real-Time-Code, mit C-Code-Generierung)
 <!-- Local Variables: -->
 <!-- fill-column: 80 -->
 <!-- End: -->
