@@ -224,8 +224,15 @@ tableProcessEvent (GameEnded player) state = state
 -- Konvention: Wenn was fertig ist, nimm Right
 -- data Either a b = Left a | Right b
 
+{-
+sealed interface Either<A, B> { ...}
+record Left<A>(A leftValue) implements Either<A, ?> {}
+record Right<B>(B rightValue) implements Either<?, B> {}
+-}
+
 -- zusätzlich zum Zustand: Akkumulator für die Events, in umgekehrter Reihenfolge
--- runTable :: Game a -> (TableState, [GameEvent]) -> (a, TableState, [GameEvent])
+runTable :: Game x -> (TableState, [GameEvent]) -> 
+         (Either (GameCommand -> Game x) x, TableState, [GameEvent])
 runTable (RecordEvent event callback) (state, revents) =
   runTable (callback ()) (tableProcessEvent event state, event:revents)
 
