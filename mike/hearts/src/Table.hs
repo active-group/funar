@@ -221,12 +221,16 @@ tableProcessEvent (TrickTaken player trick) state =
 tableProcessEvent (IllegalCardAttempted player card) state = state
 tableProcessEvent (GameEnded player) state = state
 
+-- Konvention: Wenn was fertig ist, nimm Right
+-- data Either a b = Left a | Right b
+
 -- zusätzlich zum Zustand: Akkumulator für die Events, in umgekehrter Reihenfolge
-runTable :: Game a -> (TableState, [GameEvent]) -> (a, TableState, [GameEvent])
+-- runTable :: Game a -> (TableState, [GameEvent]) -> (a, TableState, [GameEvent])
 runTable (RecordEvent event callback) (state, revents) =
   runTable (callback ()) (tableProcessEvent event state, event:revents)
 
-runTable (GetCommand callback) (state, revents) = undefined
+runTable (GetCommand callback) (state, revents) =
+  (Left callback, state, reverse revents)
 
 runTable (IsPlayCardAllowed player card callback) (state, revents) =
   runTable (callback (playValid state player card)) (state, revents)
@@ -238,4 +242,4 @@ runTable (GameOver callback) (state, revents) =
   runTable (callback (gameOver state)) (state, revents)
 
 runTable (Return result) (state, revents) =
-  (result, state, reverse revents)
+  (Right result, state, reverse revents)
