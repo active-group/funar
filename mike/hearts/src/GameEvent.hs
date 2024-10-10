@@ -58,6 +58,9 @@ playCard p c ... -> playCard (MkPlayerCommand p c) ...
 
 -}
 
+-- ----------------------------------------------------------------------------
+-- Abhängigkeiten ^^^^^^^^^^
+
 -- als nächstes: Ablauf des Spiels / Anordnung der Events
 -- sequentielle Abläufe: Monade
 
@@ -65,6 +68,7 @@ playCard p c ... -> playCard (MkPlayerCommand p c) ...
 
 data Game a =
     RecordEvent GameEvent (() -> Game a)
+  | GetCommand (GameCommand -> Game a)
   | IsPlayCardAllowed Player Card (Bool -> Game a)
   | TurnOverTrick (Maybe (Trick, Player) -> Game a)
   | PlayerAfter Player (Player -> Game a)
@@ -112,7 +116,8 @@ instance Monad Game where
     ( \won ->
         cont won >>= next
     )
-
+  (>>=) (GetCommand cont) next =
+    GetCommand (\command -> cont command >>= next)
   (>>=) (Return result) next = next result
   return = Return
 
@@ -154,3 +159,11 @@ tableProcessCommandM (PlayCard player card) =
                     return Nothing
      else do recordEventM (IllegalCardAttempted player card)
              return Nothing
+
+-- Gesamtes Spiel spielen
+tableLoopM :: GameCommand -> Game Player
+tableLoopM command =
+  do maybeWinner <- tableProcessCommandM command
+     case maybeWinner of
+      Nothing -> GetCommand tableLoopM -- hätte gern einen Callback vom Typ (GameCommand -> Game a)
+      Just winner -> return winner
