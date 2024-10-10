@@ -194,3 +194,48 @@ addTrickToPile playerPiles player trick =
 
 dealHand :: Player -> Hand -> PlayerHands -> PlayerHands
 dealHand player hand hands = Map.insert player hand hands
+
+-- ----------------------------------------------------------
+
+-- | Ereignis in den Zustand einarbeiten
+tableProcessEvent :: GameEvent -> TableState -> TableState
+tableProcessEvent (HandDealt player hand) state =
+  state
+    { tableStateHands = dealHand player hand (tableStateHands state)
+    }
+tableProcessEvent (PlayerTurnChanged player) state =
+  state
+    { tableStatePlayers = rotateTo player (tableStatePlayers state)
+    }
+tableProcessEvent (LegalCardPlayed player card) state =
+  state
+    { tableStateHands = playCard (tableStateHands state) player card,
+      tableStateTrick = addToTrick player card (tableStateTrick state)
+    }
+tableProcessEvent (TrickTaken player trick) state =
+  state
+    { tableStatePiles =
+        addTrickToPile (tableStatePiles state) player trick,
+      tableStateTrick = emptyTrick
+    }
+tableProcessEvent (IllegalCardAttempted player card) state = state
+tableProcessEvent (GameEnded player) state = state
+
+-- zusätzlich zum Zustand: Akkumulator für die Events, in umgekehrter Reihenfolge
+runTable :: Game a -> (TableState, [GameEvent]) -> (a, TableState, [GameEvent])
+runTable (RecordEvent event callback) (state, revents) =
+  runTable (callback ()) (tableProcessEvent event state, event:revents)
+
+runTable (GetCommand callback) (state, revents) = undefined
+
+runTable (IsPlayCardAllowed player card callback) (state, revents) =
+  runTable (callback (playValid state player card)) (state, revents)
+runTable (TurnOverTrick callback) (state, revents) =
+  runTable (callback (turnOverTrick state)) (state, revents)
+runTable (PlayerAfter player callback) (state, revents) = 
+  runTable (callback (playerAfter state player)) (state, revents)
+runTable (GameOver callback) (state, revents) =
+  runTable (callback (gameOver state)) (state, revents)
+
+runTable (Return result) (state, revents) =
+  (result, state, reverse revents)
