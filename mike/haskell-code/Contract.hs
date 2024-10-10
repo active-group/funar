@@ -1,3 +1,4 @@
+{-# LANGUAGE InstanceSigs #-}
 module Contract where
 
 {-
@@ -50,7 +51,16 @@ data Contract =
   | AtDueDate Date Contract
   | And Contract Contract
   | Negate Contract -- dreht alle Zahlungsrichtungen um
+  | Zero
   deriving Show
+
+instance Semigroup Contract where
+    (<>) :: Contract -> Contract -> Contract
+    (<>) = And
+
+instance Monoid Contract where
+    mempty = Zero
+
 
 -- Ich bekomme 1€ jetzt
 c1 = One EUR
