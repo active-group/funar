@@ -614,3 +614,11 @@ validatePerson name age = MkPerson <$> (validateName name) <*> (validateAge age)
 
 -- >>> validatePerson "Mikeeeeeeeeeee" 15
 -- Invalid ["name too long","too young"]
+
+
+-- fmap  ::        (a ->   b) -> f a -> f b
+-- (<*>)      :: f (a ->   b) -> f a -> f b
+-- flip (>>=) ::   (a -> f b) -> f a -> f b
+-- (>>=) :: f a -> (a -> f b) -> f b
+
+-- Arrows: auch zwischen Funktoren und Monaden
