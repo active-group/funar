@@ -116,6 +116,13 @@ Falls Sie `nix` verwenden, dann ist `elm` bereits in der Entwicklungsumgebung
 - Markus Schlegel: [Denotational Design](https://funktionale-programmierung.de/2024/02/27/denotational-design-01.html)
 - Scott Wlaschin: [Moving IO to the edges of your app: Functional Core, Imperative Shell](https://www.youtube.com/watch?v=P1vES9AgfC4)
 - [Copilot](https://copilot-language.github.io/) (DSL für Hard-Real-Time-Code, mit C-Code-Generierung)
+- [Arrows](https://www.haskell.org/arrows/)
+- [Monaden in Kotlin](https://funktionale-programmierung.de/2023/05/22/kotlin-monads.html}, [Vortrag](https://www.youtube.com/watch?v=yaxQACdn8qI)
+- [Vavr](https://vavr.io/) (funktionale Programmierung in Java/Kotlin):
+- [Wie Effekte strukturieren](https://www.youtube.com/watch?v=Yx8z9M7XHu0)
+- [Financial Contracts](https://www.microsoft.com/en-us/research/publication/composing-contracts-an-adventure-in-financial-engineering/)
+
+
 <!-- Local Variables: -->
 <!-- fill-column: 80 -->
 <!-- End: -->
