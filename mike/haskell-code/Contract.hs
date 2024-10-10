@@ -71,12 +71,10 @@ c5 = Times 5 (One EUR)
 zcb1 = AtDueDate (MkDate "2024-12-24") (Times 100 (One EUR))
 
 -- "Ich bezahle am 24.12.2024 100€."
-zcb1r = Pay zcb1
+zcb1r = Negate zcb1
 
 
-zcb1rr = Pay zcb1r
-
-cx = Receive zcb1
+zcb1rr = Negate zcb1r
 
 c2 = AtDueDate (MkDate "2024-02-01") (AtDueDate (MkDate "2024-02-02") (Times 5 (One EUR)))
 
@@ -84,3 +82,14 @@ zeroCouponBond :: Amount -> Currency -> Date -> Contract
 zeroCouponBond amount currency date = AtDueDate date (Times amount (One currency))
 
 zcb1' = zeroCouponBond 100 EUR (MkDate "2024-12-24")
+
+data Direction = Long | Short
+  deriving Show
+
+data Payment = MkPayment Direction Date Amount Currency
+  deriving Show
+
+-- Denotation
+-- Datum: "heute"/"jetzt", Zahlungen bis heute
+-- Output: "Residualvertrag"
+denotation :: Contract -> Date -> ([Payment], Contract)
