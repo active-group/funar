@@ -94,6 +94,8 @@
 (check-expect (msm->time 698)
               time1)
 
+; property-based testing
+; QuickCheck
 (check-property
  (for-all ((t time))
    (equal? (msm->time (msm t))
