@@ -282,5 +282,41 @@ class Dillo {
 ; 4elementige Liste: 7 2 5 8
 (define list4 (cons 7 list3))
 
+; Liste aufsummieren
+(: list-sum (list-of-numbers -> number))
+
+(check-expect (list-sum list4)
+              22)
+
+; Schablone
+#;(define list-sum
+  (lambda (list)
+    (cond
+      ((empty? list) ...)
+      ((cons? list)
+       ...
+       (first list)
+       (list-sum (rest list))
+       ...))))
+
+; neutrales Element:
+; 0 + x = x + 0 = x
+
+(define list-sum
+  (lambda (list)
+    (cond
+      ((empty? list) 0) ; Jan: das neutrale Element der Addition
+      ((cons? list)
+       (+ (first list)
+          (list-sum (rest list)))))))
 
 
+
+
+
+
+
+
+
+
+      
