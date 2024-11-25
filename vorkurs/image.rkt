@@ -19,4 +19,13 @@
 (above
  (beside square1 circle1)
  (beside circle1 square1))
-  
+
+; Abstraktion
+; - kopieren (ein letztes Mal)
+; - Unterschiede ersetzen durch abstrakte Namen
+; - Namen in lambda aufnehmen
+(define tile
+  (lambda (image1 image2)
+    (above
+     (beside image1 image2)
+     (beside image2 image1))))
