@@ -310,6 +310,20 @@ class Dillo {
        (+ (first list)
           (list-sum (rest list)))))))
 
+; Liste aufmultiplizieren
+(: list-product (list-of-numbers -> number))
+
+(check-expect (list-product list4)
+              560)
+
+(define list-product
+  (lambda (list)
+    (cond
+      ((empty? list) 1) ; Alex: das neutrale Element der Multiplikation
+      ((cons? list)
+       (* (first list)
+          (list-product (rest list)))))))
+
 
 
 
