@@ -260,7 +260,7 @@ class Dillo {
 
 (define-singleton empty-list ; Signatur
   empty ; Singleton-Wert
-  empty?)
+  empty?) ; Prädikat
   
 
 
