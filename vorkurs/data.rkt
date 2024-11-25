@@ -121,7 +121,7 @@
 ; - Gewicht
 (define-record dillo
   make-dillo
-  dillo? ; Prädikat
+  dillo? ; Prädikat (steht nach dem Konstruktor)
   (dillo-alive? boolean)
   (dillo-weight number))
 
@@ -208,6 +208,7 @@ class Dillo {
 ; - Gewicht
 (define-record parrot
   make-parrot
+  parrot?
   (parrot-sentence string)
   (parrot-weight number))
 
@@ -237,7 +238,6 @@ class Dillo {
 (define animal
   (signature (mixed dillo parrot)))
 
-#|
 ; Tier überfahren
 (: roadkill-animal (animal -> animal))
 
@@ -249,10 +249,8 @@ class Dillo {
 (define roadkill-animal
   (lambda (animal)
     (cond
-      (... ...)
-      (... ...))))
-
-|#
+      ((dillo? animal) (roadkill-dillo animal))
+      ((parrot? animal) (roadkill-parrot animal)))))
 
 
 
