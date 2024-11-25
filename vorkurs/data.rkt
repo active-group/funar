@@ -346,7 +346,10 @@ class Dillo {
 ; - Unterschiede durch abstrakte Namen ersetzen
 ; - Namen in lambda aufnehmen (an rekursiven Aufrufe denken)
 
- (: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
+; Higher-Order-Funktion: mehr als ein Pfeil
+; Funktion höherer Ordnung
+; eingebaut als filter
+(: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
 
 (define extract
   (lambda (p? list)
