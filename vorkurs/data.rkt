@@ -324,7 +324,7 @@ class Dillo {
        (* (first list)
           (list-product (rest list)))))))
 
-
+; Aus einer Liste die geraden Elemente extrahieren
 
 
 
