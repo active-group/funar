@@ -225,10 +225,31 @@ class Dillo {
     (make-parrot ""
                  (parrot-weight parrot))))
 
+; Tier ist eins der folgenden:
+; - Gürteltier -ODER-
+; - Papagei
+; Fallunterscheidung
+; jeder Fall hat eigene Datendefinition
+; gemischte Daten
+(define animal
+  (signature (mixed dillo parrot)))
 
+#|
+; Tier überfahren
+(: roadkill-animal (animal -> animal))
 
+(check-expect (roadkill-animal dillo1)
+              (roadkill-dillo dillo1))
+(check-expect (roadkill-animal parrot1)
+              (roadkill-parrot parrot1))
 
+(define roadkill-animal
+  (lambda (animal)
+    (cond
+      (... ...)
+      (... ...))))
 
+|#
 
 
 
