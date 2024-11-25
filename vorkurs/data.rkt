@@ -87,6 +87,8 @@
        (time-minute time))))
 
 
+; Aus den Minuten seit Mitternacht die Uhrzeit berechnen
+; msm->time
 
 
 
