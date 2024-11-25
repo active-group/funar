@@ -75,6 +75,9 @@
 (check-expect (msm time2)
               852)
 
+; Schablone
 (define msm
   (lambda (time)
-    ...))
+    ... (time-hour time) ...
+    ... (time-minute time) ...))
+    
