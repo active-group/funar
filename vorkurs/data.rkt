@@ -21,3 +21,17 @@
 (check-expect (cute? "cat") #t)
 (check-expect (cute? "snake") #f)
 
+; Gerüst
+#;(define cute?
+  (lambda (pet)
+    ...))
+
+(define cute?
+  (lambda (pet)
+    ; Verzweigung
+    ; einen Zweig pro Fall
+    ; jeder Fall hat die Form (<Bedingung> <Ergebnis>)
+    (cond
+      ((equal? pet "dog") ...)
+      ((equal? pet "cat") ...)
+      ((equal? pet "snake") ...))))
