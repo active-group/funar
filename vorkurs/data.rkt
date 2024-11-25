@@ -203,7 +203,7 @@ class Dillo {
 ; Papagei hat folgende Eigenschaften:
 ; - Satz -UND-
 ; - Gewicht
-(define parrot
+(define-record parrot
   make-parrot
   (parrot-sentence string)
   (parrot-weight number))
