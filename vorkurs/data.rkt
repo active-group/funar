@@ -254,14 +254,25 @@ class Dillo {
 
 
 ; Eine Liste ist eins der folgenden:
-; - die leere Liste
+; - die leere Liste -ODER-
 ; - eine Cons-Liste
-;   bestehend aus erstem Element und Rest-Liste
+;   bestehend aus erstem Element UND Rest-Liste
+;                                         ^^^^^ Selbstbezug
+
+(define list-of-numbers
+  (signature (mixed empty-list
+                    cons-list)))
 
 (define-singleton empty-list ; Signatur
   empty ; Singleton-Wert
   empty?) ; Prädikat
-  
+
+(define-record cons-list
+  cons
+  cons?
+  (first number) ; vorläufig
+  (rest list-of-numbers))
+
 
 
 
