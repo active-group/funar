@@ -147,7 +147,23 @@
                 (dillo-weight dillo))))
 
 ; Gürteltier füttern - tote Tiere fressen nix
-                
+(: feed-dillo (dillo number -> dillo))
+
+(check-expect (feed-dillo dillo1 2)
+              (make-dillo #t 12))
+(check-expect (feed-dillo dillo2 2)
+              dillo2)
+
+(define feed-dillo
+  (lambda (dillo)
+    (make-dillo
+     (dillo-alive? dillo)
+     (cond
+       ((equal? (dillo-alive? dillo) #t)
+        (+ (dillo-weight dillo) amount))
+       ((equal? (dillo-alive? dillo) #f)
+        (dillo-weight dillo))))))
+
    
 
 #|
