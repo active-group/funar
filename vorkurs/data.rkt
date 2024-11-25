@@ -155,7 +155,7 @@
               dillo2)
 
 (define feed-dillo
-  (lambda (dillo)
+  (lambda (dillo amount)
     (make-dillo
      (dillo-alive? dillo)
      (cond
