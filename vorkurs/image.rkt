@@ -24,10 +24,36 @@
 ; - kopieren (ein letztes Mal)
 ; - Unterschiede ersetzen durch abstrakte Namen
 ; - Namen in lambda aufnehmen
+
+; Konstruktionsanleitungen
+
+; Kurzbeschreibung
+; quadratisches Badezimmermuster aus zwei Bildern
+
+; Signatur(deklaration)
+(: tile (image image -> image))
+
+
 (define tile
   (lambda (image1 image2)
     (above
      (beside image1 image2)
      (beside image2 image1))))
 
-(tile star1 circle1)
+;(tile star1 circle1)
+
+#|
+class C {
+  static int m(int x) {
+    ... x ...
+    x = x + 1;
+    ... x ....
+  }
+}
+
+... C.m(42) ...
+->
+{
+    ... 42 ...
+}
+|#
