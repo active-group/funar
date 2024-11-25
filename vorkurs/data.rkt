@@ -154,17 +154,42 @@
 (check-expect (feed-dillo dillo2 2)
               dillo2)
 
-(define feed-dillo
+#;(define feed-dillo
+  (lambda (dillo amount)
+    (cond
+      ((equal? (dillo-alive? dillo) #t)
+       (make-dillo #t
+                   (+ (dillo-weight dillo) amount)))
+      ((equal? (dillo-alive? dillo) #f)
+       dillo))))
+
+#;(define feed-dillo
   (lambda (dillo amount)
     (make-dillo
      (dillo-alive? dillo)
      (cond
-       ((equal? (dillo-alive? dillo) #t)
+       ((dillo-alive? dillo)
         (+ (dillo-weight dillo) amount))
-       ((equal? (dillo-alive? dillo) #f)
+       ((not (dillo-alive? dillo))
         (dillo-weight dillo))))))
 
-   
+#;(define feed-dillo
+  (lambda (dillo amount)
+    (make-dillo
+     (dillo-alive? dillo)
+     (cond
+       ((dillo-alive? dillo)
+        (+ (dillo-weight dillo) amount))
+       (else
+        (dillo-weight dillo))))))
+
+(define feed-dillo
+  (lambda (dillo amount)
+    (make-dillo
+     (dillo-alive? dillo)
+     (if (dillo-alive? dillo)
+         (+ (dillo-weight dillo) amount)
+         (dillo-weight dillo)))))
 
 #|
 class Dillo {
