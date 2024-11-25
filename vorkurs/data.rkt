@@ -259,6 +259,9 @@ class Dillo {
 ;   bestehend aus erstem Element UND Rest-Liste
 ;                                         ^^^^^ Selbstbezug
 
+( : list-of (signature -> signature))
+
+; parametrische Polymorphie
 (define list-of
   (lambda (element) ; Signatur der Elemente
     (signature (mixed empty-list
@@ -274,6 +277,8 @@ class Dillo {
   (first element) ; vorläufig
   (rest (list-of element)))
 
+(define list-of-numbers (signature (list-of number)))
+
 ; 1elementige Liste: 5
 (define list1 (cons 5 empty))
 ; 2elementige Liste: 2 5
@@ -284,7 +289,7 @@ class Dillo {
 (define list4 (cons 7 list3))
 
 ; Liste aufsummieren
-(: list-sum (list-of-numbers -> number))
+(: list-sum ((list-of number) -> number))
 
 (check-expect (list-sum list4)
               22)
