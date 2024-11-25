@@ -259,19 +259,20 @@ class Dillo {
 ;   bestehend aus erstem Element UND Rest-Liste
 ;                                         ^^^^^ Selbstbezug
 
-(define list-of-numbers
-  (signature (mixed empty-list
-                    cons-list)))
+(define list-of
+  (lambda (element)
+    (signature (mixed empty-list
+                      (cons-list-of element)))))
 
 (define-singleton empty-list ; Signatur
   empty ; Singleton-Wert
   empty?) ; Prädikat
 
-(define-record cons-list
+(define-record (cons-list-of element) ; implizites lambda
   cons
   cons?
-  (first number) ; vorläufig
-  (rest list-of-numbers))
+  (first element) ; vorläufig
+  (rest (list-of element)))
 
 ; 1elementige Liste: 5
 (define list1 (cons 5 empty))
