@@ -33,6 +33,7 @@
 ; Signatur(deklaration)
 (: tile (image image -> image))
 
+; Test(s)
 (check-expect
  (tile star1 square1)
  (above (beside star1 square1)
