@@ -128,6 +128,34 @@
 (: dillo-alive? (dillo -> boolean))
 (: dillo-weight (dillo -> number))
 
+; lebendiges Gürteltier, 10kg
+(define dillo1 (make-dillo #t 10))
+; totes Gürteltier, 8kg
+(define dillo2 (make-dillo #f 8))
+
+; Gürteltier überfahren
+(: roadkill-dillo (dillo -> dillo))
+
+(check-expect (roadkill-dillo dillo1)
+              (make-dillo #f 10))
+(check-expect (roadkill-dillo dillo2)
+              dillo2)
+
+(define roadkill-dillo
+  (lambda (dillo)
+    (make-dillo #f
+                (dillo-weight dillo))))
+
+; Gürteltier füttern - tote Tiere fressen nix
+                
+   
+
+#|
+class Dillo {
+   void roadkill() { ... }
+}
+|#
+
 
 
 
