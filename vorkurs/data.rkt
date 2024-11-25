@@ -76,8 +76,13 @@
               852)
 
 ; Schablone
-(define msm
+#;(define msm
   (lambda (time)
     ... (time-hour time) ...
     ... (time-minute time) ...))
+
+(define msm
+  (lambda (time)
+    (+ (* 60 (time-hour time))
+       (time-minute time))))
     
