@@ -114,6 +114,31 @@
                (modulo minutes 60))))
 
 
+; Tiere auf dem texanischem Highway
+
+; Gürteltier hat folgende Eigenschaften:
+; - lebendig? -UND-
+; - Gewicht
+(define-record dillo
+  make-dillo
+  (dillo-alive? boolean)
+  (dillo-weight number))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
