@@ -355,7 +355,15 @@ class Dillo {
 ; Higher-Order-Funktion: mehr als ein Pfeil
 ; Funktion höherer Ordnung
 ; eingebaut als filter
-(: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
+; Signaturvariablen: mit %
+
+;(: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
+(: extract ((%a -> boolean) (list-of %a) -> (list-of %a)))
+
+(check-expect (extract even? list4)
+              (cons 2 (cons 8 empty)))
+(check-expect (extract odd? list4)
+              (cons 7 (cons 5 empty)))
 
 (define extract
   (lambda (p? list)
