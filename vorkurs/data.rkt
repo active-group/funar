@@ -260,7 +260,7 @@ class Dillo {
 ;                                         ^^^^^ Selbstbezug
 
 (define list-of
-  (lambda (element)
+  (lambda (element) ; Signatur der Elemente
     (signature (mixed empty-list
                       (cons-list-of element)))))
 
