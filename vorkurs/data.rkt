@@ -253,7 +253,15 @@ class Dillo {
       ((parrot? animal) (roadkill-parrot animal)))))
 
 
+; Eine Liste ist eins der folgenden:
+; - die leere Liste
+; - eine Cons-Liste
+;   bestehend aus erstem Element und Rest-Liste
 
+(define-singleton empty-list ; Signatur
+  empty ; Singleton-Wert
+  empty?)
+  
 
 
 
