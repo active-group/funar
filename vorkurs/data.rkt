@@ -217,7 +217,7 @@ class Dillo {
 ; Papagei überfahren
 (: roadkill-parrot (parrot -> parrot))
 
-(check-expect parrot1
+(check-expect (roadkill-parrot parrot1)
               (make-parrot "" 1))
 
 (define roadkill-parrot
