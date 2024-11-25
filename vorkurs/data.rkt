@@ -193,12 +193,37 @@
          (+ weight amount)
          weight))))
 
+
 #|
 class Dillo {
    void roadkill() { ... }
 }
 |#
 
+; Papagei hat folgende Eigenschaften:
+; - Satz -UND-
+; - Gewicht
+(define parrot
+  make-parrot
+  (parrot-sentence string)
+  (parrot-weight number))
+
+; Begrüßungspapagei
+(define parrot1 (make-parrot "hello!" 1))
+
+; dicker Verabschiedungspapagei
+(define parrot2 (make-parrot "goodbye!" 2))
+
+; Papagei überfahren
+(: roadkill-parrot (parrot -> parrot))
+
+(check-expect parrot1
+              (make-parrot "" 1))
+
+(define roadkill-parrot
+  (lambda (parrot)
+    (make-parrot ""
+                 (parrot-weight parrot))))
 
 
 
