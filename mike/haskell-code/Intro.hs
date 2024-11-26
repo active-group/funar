@@ -272,8 +272,7 @@ data Optional a =
 -- Result 2
 
 -- >>> listIndex Snake [Cat, Dog, Dog, Snake, Cat]
--- No instance for (Eq Pet) arising from a use of `listIndex'
--- In the expression: listIndex Snake [Cat, Dog, Dog, Snake, Cat]
+-- Result 3
 
 -- >>> :info Eq
 -- type Eq :: * -> Constraint
