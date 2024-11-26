@@ -162,30 +162,30 @@ feedAnimal (MkParrot sentence weight) amount = MkParrot sentence (weight + amoun
 type Point = (Double, Double)
 
 point1 :: Point
-point1 = MkPoint 1 1
+point1 = (1, 1)
 
 point2 :: Point
-point2 = MkPoint 3 3
+point2 = (3, 3)
 
 point3 :: Point
-point3 = MkPoint 10 4
+point3 = (10, 4)
 
 data Shape
   = MkCircle {center :: Point, radius :: Double}
   | MkSquare {leftBottom :: Point, sideLength :: Double}
   | MkOverlap {shape1 :: Shape, shape2 :: Shape}
 
-circle1 = MkCircle (MkPoint 2 2) 2.0
+circle1 = MkCircle (2, 2) 2.0
 
-square1 = MkSquare (MkPoint 3 3) 4.0
+square1 = MkSquare (3, 3) 4.0
 
 within :: Shape -> Point -> Bool
-within (MkCircle (MkPoint centerX centerY) radius) (MkPoint x y) =
+within (MkCircle (centerX, centerY) radius) (x, y) =
   let distanceX = (x - centerX) ^ 2
       distanceY = (y - centerY) ^ 2
       difference = sqrt (distanceX + distanceY)
    in difference <= radius
-within (MkSquare (MkPoint squareX squareY) sideLength) (MkPoint x y) =
+within (MkSquare (squareX, squareY) sideLength) (x, y) =
   let rightTopX = squareX + sideLength
       rightTopY = squareY + sideLength
    in ((x >= squareX) && (x <= rightTopX))
