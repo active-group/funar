@@ -141,6 +141,9 @@ feedAnimal (MkDillo liveness weight) amount =
         Dead -> MkDillo liveness weight
 feedAnimal (MkParrot sentence weight) amount = MkParrot sentence (weight + amount)
 
+tuplify :: (Animal -> Weight -> Animal) -> ((Animal, Weight) -> Animal)
+tuplify f = \ (animal, weight) -> f animal weight
+
 -- Eine geometrische Figur ("Shape") ist eins der folgenden:
 -- - Kreis -ODER-
 -- - Quadrat -ODER-
