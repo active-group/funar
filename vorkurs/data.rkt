@@ -375,11 +375,57 @@ class Dillo {
                  (extract p? (rest list)))
            (extract p? (rest list)))))))
 
-(define dillos (cons dillo1 (cons dillo2 empty)))
+; (define dillos (cons dillo1 (cons dillo2 empty)))
 
-(extract dillo-alive? dillos)
+; (extract dillo-alive? dillos)
+
+(: list-fold (%a (%b %a -> %a) (list-of %b) -> %a))
+
+(check-expect (list-fold 0 + list4)
+              22)
+(check-expect (list-fold 1 * list4)
+              560)
+
+
+(define list-fold
+  (lambda (terminator operation list)
+    (cond
+      ((empty? list) terminator)
+      ((cons? list)
+       (operation (first list)
+                  (list-fold terminator operation (rest list)))))))
+
+(check-expect (extract2 odd? list4)
+              (cons 7 (cons 5 empty)))
+
+(define extract2
+  (lambda (p? list)
+    (list-fold empty
+               (lambda (first-list rec-result)
+                 (if (p? first-list)
+                     (cons first-list
+                           rec-result)
+                     rec-result))
+               list)))
+
+
+#;(check-expect (string-join (cons "Mike" (cons "Alex" (cons "Andreas" empty))))
+              "Mike;Alex;Andreas")
+
+(define string-append-with-semicolon
+  (lambda (string1 string2)
+    (string-append string1 ";" string2)))
+
+(define string-join
+  (lambda (strings)
+    (list-fold (first strings)
+               (lambda (string1 string2)
+                 (string-append string1 ";" string2))
+               (rest strings))))
 
 
 
 
-      
+
+
+
