@@ -92,3 +92,28 @@ data Animal =
   | MkParrot String Weight
   deriving Show
 
+dillo1 :: Animal
+dillo1 = MkDillo { dilloLiveness = Alive, dilloWeight = 10 }
+
+dillo2 :: Animal
+dillo2 = MkDillo Dead 8
+
+parrot1 :: Animal
+parrot1 = MkParrot "hello" 1
+
+-- >>> roadKillAnimal dillo1
+-- MkDillo {dilloLiveness = Dead, dilloWeight = 10}
+
+-- >>> roadKillAnimal parrot1
+-- MkParrot "" 1
+
+roadKillAnimal :: Animal -> Animal
+roadKillAnimal (MkDillo _liveness weight) = MkDillo Dead weight
+roadKillAnimal (MkParrot _sentence weight) = MkParrot "" weight
+
+-- Tier füttern
+feedAnimal (MkDillo liveness weight) amount = 
+    case liveness of
+        Alive -> MkDillo liveness (weight + amount)
+        Dead -> MkDillo liveness weight
+feedAnimal (MkParrot sentence weight) amount = MkParrot sentence (weight + amount)
