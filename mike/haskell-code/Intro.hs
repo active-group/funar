@@ -254,3 +254,12 @@ listMap :: (a -> b) -> [a] -> [b]
 listMap f [] = []
 listMap f (first:rest) = (f first)  :  (listMap f rest)
 
+data Optional a =
+    Result a
+  | Null
+  deriving Show
+
+-- Index eines Elements in einer Liste finden
+listIndex :: a -> [a] -> Optional Integer
+listIndex element [] = Null
+listIndex element (first:rest) = undefined
