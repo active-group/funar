@@ -41,7 +41,7 @@
     (cond
       ((empty? list) acc)
       ((cons? list)
-       (rev2 (rest list)
+       (rev2 (rest list) ; kein Kontext: tail call
              (cons (first list) acc))))))
     
     
