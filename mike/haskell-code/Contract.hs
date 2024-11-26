@@ -41,6 +41,7 @@ data Contract =
     One Currency
   | Value Amount Contract
   | Later Date Contract
+  | Flow Direction Contract 
   deriving Show
 
 
@@ -64,3 +65,7 @@ zeroCouponBond date amount currency = Later date (Value amount (One currency))
 
 zcb1' :: Contract
 zcb1' = zeroCouponBond christmas 100 EUR
+
+-- "Ich zahle 100GBP jetzt."
+c4 = Flow Short (Value 100 (One GBP))
+
