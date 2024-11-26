@@ -63,7 +63,7 @@ isCute Snake = False
 -- - Gewicht
 
 data Liveness = Alive | Dead 
- deriving Show
+ deriving (Show, Eq)
 
 type Weight = Integer -- Typ-Synonym
 
