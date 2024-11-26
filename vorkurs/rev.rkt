@@ -19,3 +19,11 @@
 (check-expect (adjoin (list 1 2 3) 4)
               (list 1 2 3 4))
 
+(define adjoin
+  (lambda (list element)
+    (cond
+      ((empty? list) (cons element empty))
+      ((cons? list)
+       (cons
+        (first list)
+        (adjoin (rest list) element))))))
