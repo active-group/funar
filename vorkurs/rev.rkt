@@ -47,3 +47,4 @@
     
 ; JVM-Bug: Auch tail calls verbrauchen Platz
 ; deutsch: endrekursiver Aufruf
+; Scala, Clojure, Kotlin: Spezialkonstrukte
