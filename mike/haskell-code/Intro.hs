@@ -259,7 +259,30 @@ data Optional a =
   | Null
   deriving Show
 
+-- Eq a : Constraint, "a vergleichbar"
+
+-- >>> listIndex 7 [1, 4, 7, 3, 8]
+-- Result 2
+
+-- >>> listIndex Snake [Cat, Dog, Dog, Snake, Cat]
+-- No instance for (Eq Pet) arising from a use of `listIndex'
+-- In the expression: listIndex Snake [Cat, Dog, Dog, Snake, Cat]
+
+-- >>> :info Eq
+-- type Eq :: * -> Constraint
+-- Typklasse ... Interface
+-- class Eq a where
+--   (==) :: a -> a -> Bool  -- Methode
+
+
+
 -- Index eines Elements in einer Liste finden
-listIndex :: a -> [a] -> Optional Integer
+listIndex :: Eq a => a -> [a] -> Optional Integer
 listIndex element [] = Null
-listIndex element (first:rest) = undefined
+listIndex element (first:rest) = 
+    if element == first
+    then Result 0
+    else 
+        case listIndex element rest of
+            Null -> Null
+            Result index -> Result (index + 1)
