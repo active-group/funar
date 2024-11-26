@@ -41,7 +41,8 @@ data Contract =
     One Currency
   | Value Amount Contract
   | Later Date Contract
-  | IsShort Contract
+  | Reverse Contract
+  | And Contract Contract 
   deriving Show
 
 
@@ -67,10 +68,10 @@ zcb1' :: Contract
 zcb1' = zeroCouponBond christmas 100 EUR
 
 -- "Ich zahle 100GBP jetzt."
-c4 = Flow Short (Value 100 (One GBP))
+c4 = Reverse (Value 100 (One GBP))
 
 -- "Ich bekomme 100GBP jetzt."
-c5 = Flow Long (Value 100 (One GBP))
+-- c5 = Flow Long (Value 100 (One GBP))
 
 -- "Ich bekomme 100GBP."
-c6 = Flow Short c4
+c6 = Reverse c4
