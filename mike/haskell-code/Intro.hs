@@ -143,7 +143,7 @@ feedAnimal (MkParrot sentence weight) amount = MkParrot sentence (weight + amoun
 
 -- tuplify :: (Animal -> Weight -> Animal) -> ((Animal, Weight) -> Animal)
 -- Typvariablen: Kleinbuchstaben
--- eingebraut als uncurry
+-- eingebaut als uncurry
 tuplify :: (a -> b -> c) -> ((a, b) -> c)
 -- tuplify f = \ (a, b) -> f a b
 tuplify f (a, b) = f a b
