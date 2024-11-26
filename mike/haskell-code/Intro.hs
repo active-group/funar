@@ -158,12 +158,16 @@ feedAnimal (MkParrot sentence weight) amount = MkParrot sentence (weight + amoun
 -- 2. Funktion, die bei einem Punkt feststellt,
 --    ob er innerhalb oder außerhalb einer geomtrischen Figur liegt
 
-data Point = MkPoint Double Double
+-- data Point = MkPoint Double Double
+type Point = (Double, Double)
 
+point1 :: Point
 point1 = MkPoint 1 1
 
+point2 :: Point
 point2 = MkPoint 3 3
 
+point3 :: Point
 point3 = MkPoint 10 4
 
 data Shape
