@@ -152,6 +152,9 @@ tuplify f (a, b) = f a b
 untuplify :: ((a, b) -> c) -> (a -> b -> c)
 untuplify f a b = f (a, b)
 
+-- >>> :type flip
+-- flip :: (a -> b -> c) -> (b -> a -> c)
+
 
 -- Eine geometrische Figur ("Shape") ist eins der folgenden:
 -- - Kreis -ODER-
