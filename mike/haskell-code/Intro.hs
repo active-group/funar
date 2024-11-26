@@ -16,6 +16,18 @@ double x = x * 2
 -- >>> double 7
 -- 14
 
+quadruple :: Integer -> Integer
+quadruple x =
+    let dbl = double x
+    in double dbl
+
+
+octuple :: Integer -> Integer
+octuple x =
+    let dbl = double x
+        quad = double dbl
+    in double quad
+
 -- Haustier ist eins der folgenden:
 -- - Hund -ODER-
 -- - Katze -ODER-
