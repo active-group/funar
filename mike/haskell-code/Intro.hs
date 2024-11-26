@@ -65,3 +65,21 @@ dillo2 = MkDillo Dead 8
 -- Alive
 -- >>> dilloWeight dillo2
 -- 8
+
+-- Gürteltier überfahren
+roadkillDillo :: Dillo -> Dillo
+
+-- >>> roadkillDillo dillo1
+-- MkDillo {dilloLiveness = Dead, dilloWeight = 10}
+
+-- roadkillDillo dillo = MkDillo { dilloLiveness = Dead, dilloWeight = dilloWeight dillo }
+-- roadkillDillo dillo = MkDillo Dead (dilloWeight dillo)
+-- roadkillDillo d = d { dilloLiveness = Dead } -- "functional update", Kopie bis auf ...
+-- roadkillDillo (MkDillo { dilloLiveness = l, dilloWeight = w}) = MkDillo Dead w
+-- roadkillDillo (MkDillo {dilloWeight = w}) = MkDillo Dead w
+roadkillDillo (MkDillo _ weight) = MkDillo Dead weight
+
+
+-- Ein Tier ... ist eins der folgenden:
+-- - Gürteltier -ODER-
+-- - Papagei
