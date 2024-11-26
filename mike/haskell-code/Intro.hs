@@ -158,6 +158,11 @@ untuplify f a b = f (a, b)
 -- >>> flip feedAnimal 2 dillo1
 -- MkDillo {dilloLiveness = Alive, dilloWeight = 12}
 
+-- >>> :type (.)
+-- (.) :: (b -> c) -> (a -> b) -> (a -> c)
+
+f :: Animal -> Animal
+f = roadKillAnimal . flip feedAnimal 3
 
 -- Eine geometrische Figur ("Shape") ist eins der folgenden:
 -- - Kreis -ODER-
