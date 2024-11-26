@@ -252,5 +252,5 @@ listMap :: (a -> b) -> [a] -> [b]
 -- [MkDillo {dilloLiveness = Dead, dilloWeight = 10},MkDillo {dilloLiveness = Dead, dilloWeight = 8},MkParrot "" 1]
 
 listMap f [] = []
-listMap f (first:rest) = f first  :  listMap f rest
+listMap f (first:rest) = (f first)  :  (listMap f rest)
 
