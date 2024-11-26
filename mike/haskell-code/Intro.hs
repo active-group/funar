@@ -274,7 +274,7 @@ data Optional a =
 -- class Eq a where
 --   (==) :: a -> a -> Bool  -- Methode
 
-
+-- Instanz: Implementierung einer Typklasse
 
 -- Index eines Elements in einer Liste finden
 listIndex :: Eq a => a -> [a] -> Optional Integer
