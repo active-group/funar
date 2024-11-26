@@ -38,3 +38,30 @@ isCute :: Pet -> Bool
 isCute Dog = True
 isCute Cat = True
 isCute Snake = False
+
+-- Gürteltier hat folgende Eigenschaften:
+-- - lebendig -ODER- tot
+-- - Gewicht
+
+data Liveness = Alive | Dead 
+ deriving Show
+
+type Weight = Integer -- Typ-Synonym
+
+-- Record
+data Dillo = MkDillo { dilloLiveness :: Liveness,
+                       dilloWeight :: Weight }
+  deriving Show
+
+-- lebendiges Gürteltier, 10kg
+dillo1 :: Dillo
+dillo1 = MkDillo { dilloLiveness = Alive, dilloWeight = 10 }
+
+-- totes Gürteltier, 8kg
+dillo2 :: Dillo
+dillo2 = MkDillo Dead 8
+
+-- >>> dilloLiveness dillo1
+-- Alive
+-- >>> dilloWeight dillo2
+-- 8
