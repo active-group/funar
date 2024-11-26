@@ -245,6 +245,12 @@ listSum :: [Integer] -> Integer
 listSum [] = 0
 listSum (x:xs) = x + listSum xs
 
+-- Funktion auf jedes Element einer Liste anwenden
 listMap :: (a -> b) -> [a] -> [b]
+
+-- >>> listMap roadKillAnimal [dillo1, dillo2, parrot1]
+-- [MkDillo {dilloLiveness = Dead, dilloWeight = 10},MkDillo {dilloLiveness = Dead, dilloWeight = 8},MkParrot "" 1]
+
 listMap f [] = []
-listMap f (x:xs) = (f x) : (listMap f xs)
+listMap f (x:xs) = f x  :  listMap f xs
+
