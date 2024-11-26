@@ -141,8 +141,15 @@ feedAnimal (MkDillo liveness weight) amount =
         Dead -> MkDillo liveness weight
 feedAnimal (MkParrot sentence weight) amount = MkParrot sentence (weight + amount)
 
-tuplify :: (Animal -> Weight -> Animal) -> ((Animal, Weight) -> Animal)
-tuplify f = \ (animal, weight) -> f animal weight
+-- tuplify :: (Animal -> Weight -> Animal) -> ((Animal, Weight) -> Animal)
+-- Typvariablen: Kleinbuchstaben
+tuplify :: (a -> b -> c) -> ((a, b) -> c)
+-- tuplify f = \ (a, b) -> f a b
+tuplify f (a, b) = f a b
+
+untuplify :: ((a, b) -> c) -> (a -> b -> c)
+untuplify f a b = f (a, b)
+
 
 -- Eine geometrische Figur ("Shape") ist eins der folgenden:
 -- - Kreis -ODER-
