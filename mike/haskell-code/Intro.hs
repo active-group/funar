@@ -112,6 +112,16 @@ roadKillAnimal (MkDillo _liveness weight) = MkDillo Dead weight
 roadKillAnimal (MkParrot _sentence weight) = MkParrot "" weight
 
 -- Tier füttern
+
+-- >>> feedAnimal dillo1 2
+-- MkDillo {dilloLiveness = Alive, dilloWeight = 12}
+
+-- >>> feedAnimal dillo2 2
+-- MkDillo {dilloLiveness = Dead, dilloWeight = 8}
+
+
+-- gibt nur 1stellige Funktionen
+feedAnimal :: Animal -> (Weight -> Animal)
 feedAnimal (MkDillo liveness weight) amount = 
     case liveness of
         Alive -> MkDillo liveness (weight + amount)
