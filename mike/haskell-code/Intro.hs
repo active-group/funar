@@ -99,6 +99,7 @@ roadkillDillo (MkDillo _ weight) = MkDillo Dead weight
 -- - Gürteltier -ODER-
 -- - Papagei
 
+-- algebraischer Datentyp
 data Animal =
     MkDillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
   | MkParrot String Weight
