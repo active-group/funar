@@ -48,6 +48,8 @@ data Liveness = Alive | Dead
 
 type Weight = Integer -- Typ-Synonym
 
+{-
+
 -- Record
 data Dillo = MkDillo { dilloLiveness :: Liveness,
                        dilloWeight :: Weight }
@@ -79,7 +81,14 @@ roadkillDillo :: Dillo -> Dillo
 -- roadkillDillo (MkDillo {dilloWeight = w}) = MkDillo Dead w
 roadkillDillo (MkDillo _ weight) = MkDillo Dead weight
 
+-}
 
 -- Ein Tier ... ist eins der folgenden:
 -- - Gürteltier -ODER-
 -- - Papagei
+
+data Animal =
+    MkDillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
+  | MkParrot String Weight
+  deriving Show
+
