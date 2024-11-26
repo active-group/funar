@@ -45,4 +45,5 @@
              (cons (first list) acc))))))
     
     
-    
+; JVM-Bug: Auch tail calls verbrauchen Platz
+; deutsch: endrekursiver Aufruf
