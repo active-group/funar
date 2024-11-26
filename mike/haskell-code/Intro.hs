@@ -292,3 +292,8 @@ listIndex element (first:rest) =
         case listIndex element rest of
             Null -> Null
             Result index -> Result (index + 1)
+
+-- >>> :info Show
+-- type Show :: * -> Constraint
+-- class Show a where
+--   show :: a -> String
