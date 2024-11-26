@@ -110,7 +110,7 @@ roadkillDillo (MkDillo _ weight) = MkDillo Dead weight
 data Animal =
     MkDillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
   | MkParrot String Weight
-  deriving Show
+--  deriving Show
 
 dillo1 :: Animal
 dillo1 = MkDillo { dilloLiveness = Alive, dilloWeight = 10 }
