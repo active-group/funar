@@ -1,5 +1,7 @@
 module Contract where
 
+import Prelude hiding (and, reverse)
+
 {-
 - einfaches Beispiel
   Zero-Bond / zero-coupon bond
@@ -46,6 +48,18 @@ data Contract =
   | Zero
   deriving Show
 
+value :: Amount -> Contract -> Contract
+value _ Zero = Zero
+value amount contract = Value amount contract
+
+and :: Contract -> Contract -> Contract
+and c1 Zero = c1
+and Zero c2 = c2
+and c1 c2 = And c1 c2
+
+reverse :: Contract -> Contract
+reverse Zero = Zero
+reverse c = Reverse c
 
 -- "Ich bekomme 1€ jetzt."
 c1 :: Contract
@@ -104,18 +118,18 @@ denotation :: Contract -> Date -> ([Payment], Contract)
 denotation (One currency) now = ([MkPayment Long now 1 currency], Zero)
 denotation (Value amount contract) now =
   let (payments, residualContract) = denotation contract now
-   in (map (scalePayment amount) payments, residualContract)
+   in (map (scalePayment amount) payments, value amount residualContract)
 denotation c@(Later date contract) now =
   if now >= date
     then denotation contract now
     else ([], c)
 denotation (Reverse contract) now =
   let (payments, residualContract) = denotation contract now
-   in (map invertPayment payments, residualContract)
+   in (map invertPayment payments, reverse residualContract)
 denotation (And contract1 contract2) now =
   let (payments1, residualContract1) = denotation contract1 now
       (payments2, residualContract2) = denotation contract2 now
-   in (payments1 ++ payments2, And residualContract1 residualContract2)
+   in (payments1 ++ payments2, and residualContract1 residualContract2)
 denotation Zero now = ([], Zero)
 
 c8 :: Contract
