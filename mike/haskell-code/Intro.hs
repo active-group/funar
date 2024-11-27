@@ -290,7 +290,7 @@ listIndex element (first:rest) =
     then Result 0
     else
         -- optionalMap (\ index -> index + 1) (listIndex element rest) 
-        optionalMap (+1) (listIndex element rest)
+        fmap (+1) (listIndex element rest)
 
 {-        case listIndex element rest of
             Null -> Null
@@ -307,10 +307,14 @@ optionalMap f (Result a) = Result (f a)
 -- >>> :info Functor
 -- type Functor :: (* -> *) -> Constraint
 -- class Functor f where
---   fmap :: (a -> b) -> f a -> f b
+--   fmap :: (a -> b) -> (f a -> f b)
 
 instance Functor Optional where
+    fmap :: (a -> b) -> Optional a -> Optional b
     fmap = optionalMap
+
+
+
 
 -- >>> :info Show
 -- type Show :: * -> Constraint
