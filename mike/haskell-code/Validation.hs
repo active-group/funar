@@ -3,7 +3,8 @@ module Validation where
 
 -- "Make illegal states unrepresentable." -- Yaron Minsky
 
-type UserName = String
+data UserName = MkUserName String
+  deriving Show
 type UserAge = Integer
 
 data User = MkUser UserName UserAge
@@ -48,11 +49,15 @@ instance Applicative Validation where
     (<*>) (Valid fab) (Invalid errors) = Invalid errors
     (<*>) (Valid fab) (Valid a) = Valid (fab a)
 
-validateName :: String -> Validation String
+-- Java-/Spring-Praxis:
+-- validateXXX :: XXXDto -> Validation XXX
+
+-- "parse, don't validate"
+validateName :: String -> Validation UserName
 validateName userName =
     if userName == ""
     then Invalid ["username empty"]
-    else Valid userName
+    else Valid (MkUserName userName)
 
 validateAge :: Integer -> Validation Integer
 validateAge userAge =
