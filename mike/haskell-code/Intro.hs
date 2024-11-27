@@ -288,14 +288,29 @@ listIndex element [] = Null
 listIndex element (first:rest) = 
     if element == first
     then Result 0
-    else 
-        case listIndex element rest of
+    else
+        -- optionalMap (\ index -> index + 1) (listIndex element rest) 
+        optionalMap (+1) (listIndex element rest)
+
+{-        case listIndex element rest of
             Null -> Null
             Result index -> Result (index + 1)
+-}
 
+type List a = [a]
+
+-- listMap  :: (a -> b) -> List a     -> List b
 optionalMap :: (a -> b) -> Optional a -> Optional b
 optionalMap f Null = Null
-optionalMap f (Result a) = Result (f a )
+optionalMap f (Result a) = Result (f a)
+
+-- >>> :info Functor
+-- type Functor :: (* -> *) -> Constraint
+-- class Functor f where
+--   fmap :: (a -> b) -> f a -> f b
+
+instance Functor Optional where
+    fmap = optionalMap
 
 -- >>> :info Show
 -- type Show :: * -> Constraint
