@@ -125,7 +125,7 @@ denotation (One currency) now = ([MkPayment Long now 1 currency], Zero)
 denotation (Value amount contract) now =
   let (payments, residualContract) = denotation contract now
    in (map (scalePayment amount) payments, value amount residualContract)
-denotation c@(Later date contract) now =
+denotation c@(Later date contract) now = -- Alias-Pattern
   if now >= date
     then denotation contract now
     else ([], c)
