@@ -392,3 +392,17 @@ instance (Monoid a, Monoid b) => Monoid (a, b) where
 
 -- >>> (,,) 1 2 3
 -- (1,2,3)
+
+instance (Semigroup a) => Semigroup (Optional a) where
+  combine Null Null = Null
+  combine (Result a1) Null = Result a1
+  combine Null (Result a2) = Result a2
+  combine (Result a1) (Result a2) = Result (combine a1 a2)
+
+instance (Semigroup a) => Monoid (Optional a) where
+  neutral = Null
+
+-- >>> combine (Result [1,2,3]) (Result [4,5,6])
+-- Result [1,2,3,4,5,6]
+
+-- data Maybe a = Nothing | Just a
