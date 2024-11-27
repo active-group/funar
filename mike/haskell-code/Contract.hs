@@ -61,6 +61,12 @@ reverse :: Contract -> Contract
 reverse Zero = Zero
 reverse c = Reverse c
 
+instance Semigroup Contract where
+    (<>) = and
+
+instance Monoid Contract where
+    mempty = Zero
+
 -- "Ich bekomme 1€ jetzt."
 c1 :: Contract
 c1 = One EUR
@@ -127,10 +133,10 @@ denotation (Reverse contract) now =
   let (payments, residualContract) = denotation contract now
    in (map invertPayment payments, reverse residualContract)
 denotation (And contract1 contract2) now =
-  let (payments1, residualContract1) = denotation contract1 now
-      (payments2, residualContract2) = denotation contract2 now
-   in (payments1 ++ payments2, and residualContract1 residualContract2)
-denotation Zero now = ([], Zero)
+  denotation contract1 now <> denotation contract2 now
+denotation Zero now = mempty
+
+-- denotation ist ein Monoiden-Homomorphismus
 
 c8 :: Contract
 c8 = Value 100 (Later christmas (One EUR))
