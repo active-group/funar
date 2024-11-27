@@ -123,6 +123,11 @@ runDBSQlite (Put key value callback) conn =
        runDBSQlite (callback ()) conn
 runDBSQlite (Return result) conn = return result
 
+f = 5
+
+-- >>> execDB p1''
+-- "201"
+
 execDB :: DB a -> IO a
 execDB db =
     do conn <- open "test.db"
