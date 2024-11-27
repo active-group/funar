@@ -40,6 +40,9 @@ instance Functor Validation where
 --   pure :: a -> f a
 --   (<*>) :: f (a -> b) -> f a -> f b
 
+-- fmap ::   (a -> b) -> f a -> f b
+-- (<*>):: f (a -> b) -> f a -> f b
+
 instance Applicative Validation where
     pure :: a -> Validation a
     pure a = Valid a
