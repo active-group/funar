@@ -1,7 +1,12 @@
+{-# LANGUAGE OverloadedStrings #-}
 module DB where
 
 import qualified Data.Map.Strict as Map
 import Data.Map.Strict (Map, (!))
+
+import Control.Applicative
+import Database.SQLite.Simple
+import Database.SQLite.Simple.FromRow
 
 {-
 put "Mike" 100
@@ -99,3 +104,29 @@ runDB (Put key value callback) mp =
     let mp' = Map.insert key value mp 
     in runDB (callback ()) mp'
 runDB (Return result) mp = (result, mp)
+
+data EntryDto = MkEntry Key Value
+  deriving Show
+
+instance FromRow EntryDto where
+    fromRow = MkEntry <$> field <*> field
+
+instance ToRow EntryDto where
+    toRow (MkEntry key value) = toRow (key, value)
+
+runDBSQlite :: DB a -> Connection -> IO a
+runDBSQlite (Get key callback) conn = 
+    do [MkEntry _ value] <- queryNamed conn "SELECT key, value FROM entries WHERE key = :key" [":key" := key]
+       runDBSQlite (callback value) conn
+runDBSQlite (Put key value callback) conn = 
+    do execute conn "REPLACE INTO entries (key, value) VALUES (?,?)"  (MkEntry key value)
+       runDBSQlite (callback ()) conn
+runDBSQlite (Return result) conn = return result
+
+execDB :: DB a -> IO a
+execDB db =
+    do conn <- open "test.db"
+       execute_ conn "CREATE TABLE IF NOT EXISTS entries (key TEXT PRIMARY KEY, value INTEGER)" 
+       result <- runDBSQlite db conn
+       close conn
+       return result
