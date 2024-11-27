@@ -43,6 +43,7 @@ data Contract =
   | Later Date Contract
   | Reverse Contract
   | And Contract Contract 
+  | Zero
   deriving Show
 
 
@@ -90,5 +91,35 @@ data Payment = MkPayment Direction Date Amount Currency
 
 -- Bedeutung / Denotation
 
+scalePayment :: Amount -> Payment -> Payment
+scalePayment factor (MkPayment direction date amount currency) =
+  MkPayment direction date (factor * amount) currency
+
+invertPayment :: Payment -> Payment
+invertPayment (MkPayment Long date amount currency) = MkPayment Short date amount currency
+invertPayment (MkPayment Short date amount currency) = MkPayment Long date amount currency
+
 -- Zahlungen bis Datum + Residualvertrag
 denotation :: Contract -> Date -> ([Payment], Contract)
+denotation (One currency) now = ([MkPayment Long now 1 currency], Zero)
+denotation (Value amount contract) now =
+  let (payments, residualContract) = denotation contract now
+   in (map (scalePayment amount) payments, residualContract)
+denotation c@(Later date contract) now =
+  if now >= date
+    then denotation contract now
+    else ([], c)
+denotation (Reverse contract) now =
+  let (payments, residualContract) = denotation contract now
+   in (map invertPayment payments, residualContract)
+denotation (And contract1 contract2) now =
+  let (payments1, residualContract1) = denotation contract1 now
+      (payments2, residualContract2) = denotation contract2 now
+   in (payments1 ++ payments2, And residualContract1 residualContract2)
+denotation Zero now = ([], Zero)
+
+c8 :: Contract
+c8 = Value 100 (Later christmas (One EUR))
+
+-- >>> denotation c8 (MkDate "2024-11-27")
+-- ([],Later (MkDate "2024-12-24") (One EUR))
