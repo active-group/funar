@@ -326,3 +326,69 @@ listIndex element (first:rest) =
 --   (/) :: a -> a -> a
 --   recip :: a -> a
 --   fromRational :: Rational -> a
+
+
+-- x + 0 = 0 + x = x 
+-- (+) :: Integer -> Integer -> Integer
+
+-- Menge/Typ a
+-- Operationen
+-- Gleichungen
+
+-- Halbgruppe / Semigroup
+-- Typ a
+-- combine :: a -> a -> a
+-- Assoziativität
+-- combine a (combine b c) == combine (combine a b) c
+
+-- Monoid
+-- Halbgruppe mit neutralem Element:
+-- neutral :: a
+-- combine neutral x == combine x neutral == x
+
+
+-- Typklasse ... Interface
+class Semigroup a where
+    -- combine a (combine b c) == combine (combine a b) c
+    combine :: a -> a -> a
+
+-- Implementierung
+instance Semigroup [b] where
+    combine :: [b] -> [b] -> [b]
+    combine = (++) 
+
+instance Semigroup Shape where
+    combine :: Shape -> Shape -> Shape
+    combine = MkOverlap
+
+class Semigroup a => Monoid a where
+    -- combine x neutral == combine neutral x == x
+    neutral :: a
+
+instance Monoid [b] where
+    neutral :: [b]
+    neutral = []
+
+listFold :: a -> (b -> a -> a) -> [b] -> a
+listFold terminator operation [] = terminator
+listFold terminator operation (first:rest) =
+    operation first (listFold terminator operation rest)
+
+
+monoidFold :: Monoid a => [a] -> a
+monoidFold list = listFold neutral combine list
+
+-- >>> monoidFold [[1,2,3], [4,5,6], [7,8,9]]
+-- [1,2,3,4,5,6,7,8,9]
+
+instance (Semigroup a, Semigroup b) => Semigroup (a, b) where
+    combine (a1, b1) (a2, b2) = (combine a1 a2, combine b1 b2)
+
+instance (Monoid a, Monoid b) => Monoid (a, b) where
+    neutral = (neutral, neutral)
+
+-- >>> (,) 1 2
+-- (1,2)
+
+-- >>> (,,) 1 2 3
+-- (1,2,3)
