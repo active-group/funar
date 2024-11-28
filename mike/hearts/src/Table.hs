@@ -234,4 +234,7 @@ runTable (TurnOverTrick callback) (state, revents) =
   runTable (callback (turnOverTrick state)) (state, revents)
 runTable (PlayerAfter player callback) (state, revents) =
   runTable (callback (playerAfter state player)) (state, revents)
+runTable (GameOver callback) (state, revents) =
+  runTable (callback (gameOver state)) (state, revents)
+
 
