@@ -229,8 +229,8 @@ tableProcessEvent (GameEnded player) state = state
 -- Konvention: Erfolg = Right
 
 ---runTable :: Game a -> (TableState, [GameEvent]) -> a
-runTable :: Game b -> (TableState, [GameEvent]) -> 
-             (Either (GameCommand -> Game b) b, 
+runTable :: Game a -> (TableState, [GameEvent]) -> 
+             (Either (GameCommand -> Game a) a, 
               TableState,
               [GameEvent])
 runTable (IsValidCard player card callback) (state, revents) =
@@ -247,4 +247,4 @@ runTable (Return result) (state, revents) = (Right result, state, reverse revent
 runTable (RecordEvent event callback) (state, revents) =
   runTable (callback ()) (tableProcessEvent event state, event : revents)
 runTable (GetCommand callback) (state, revents) =
-  (Left callback, state, revents)
+  (Left callback, state, reverse revents)
