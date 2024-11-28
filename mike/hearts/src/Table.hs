@@ -225,8 +225,14 @@ tableProcessEvent (GameEnded player) state = state
 -- - Zustand
 -- - Ergebnis
 
+-- date Either a b = Left a | Right b
+-- Konvention: Erfolg = Right
 
 ---runTable :: Game a -> (TableState, [GameEvent]) -> a
+runTable :: Game b -> (TableState, [GameEvent]) -> 
+             (Either (GameCommand -> Game b) b, 
+              TableState,
+              [GameEvent])
 runTable (IsValidCard player card callback) (state, revents) =
   let valid = playValid state player card
   in runTable (callback valid) (state, revents)
@@ -237,4 +243,8 @@ runTable (PlayerAfter player callback) (state, revents) =
 runTable (GameOver callback) (state, revents) =
   runTable (callback (gameOver state)) (state, revents)
 
-
+runTable (Return result) (state, revents) = (Right result, state, reverse revents)
+runTable (RecordEvent event callback) (state, revents) =
+  runTable (callback ()) (tableProcessEvent event state, event : revents)
+runTable (GetCommand callback) (state, revents) =
+  (Left callback, state, revents)
