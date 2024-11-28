@@ -77,6 +77,9 @@ instance Monad Game where
     (>>=) :: Game a -> (a -> Game b) -> Game b
     (>>=) (RecordEvent event callback) next =
         RecordEvent event (\() -> callback () >>= next)
+    (>>=) (IsValidCard player card callback) next =
+        IsValidCard player card
+          (\valid -> callback valid >>= next)
     (>>=) (Return result) next = next result
 
 -- *ein* Command, Ergebnis: Gewinner, falls Spiel zu Ende
@@ -89,4 +92,9 @@ tableProcessCommandM (DealHands hand) =
        mapM_ recordEventM events
        return Nothing -- Spiel noch nicht zu Ende
 tableProcessCommandM (PlayCard player card) =
-    do undefined
+    do valid <- isValidCardM player card
+       if valid
+       then do recordEventM (LegalCardPlayed player card)
+               undefined
+       else do recordEventM (IllegalCardAttempted player card)
+               return Nothing
