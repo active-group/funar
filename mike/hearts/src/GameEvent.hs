@@ -59,6 +59,10 @@ executeDealHandsCommand (DealHands map)
 data Game a =
     RecordEvent GameEvent (() -> Game a)
   | IsValidCard Player Card (Bool -> Game a)
+  | TurnOverTrick (Maybe (Trick, Player) -> Game a)
+  | PlayerAfter Player (Player -> Game a)
+  | GameOver (Maybe Player -> Game a)
+  | GetCommand (GameCommand -> Game a)
   | Return a
 
 recordEventM :: GameEvent -> Game ()
@@ -66,6 +70,15 @@ recordEventM event = RecordEvent event Return
 
 isValidCardM :: Player -> Card -> Game Bool
 isValidCardM player card = IsValidCard player card Return
+
+turnOverTrickM :: Game (Maybe (Trick, Player))
+turnOverTrickM = TurnOverTrick Return
+
+playerAfterM :: Player -> Game Player
+playerAfterM player = PlayerAfter player Return
+
+gameOverM :: Game (Maybe Player)
+gameOverM = GameOver Return
 
 instance Functor Game where
 
@@ -80,6 +93,14 @@ instance Monad Game where
     (>>=) (IsValidCard player card callback) next =
         IsValidCard player card
           (\valid -> callback valid >>= next)
+    (>>=) (TurnOverTrick callback) next =
+        TurnOverTrick (\m -> callback m >>= next)
+    (>>=) (PlayerAfter player callback) next =
+        PlayerAfter player (\player -> callback player >>= next)
+    (>>=) (GameOver callback) next =
+        GameOver (\m -> callback m >>= next)
+    (>>=) (GetCommand callback) next =
+        GetCommand (\command -> callback command >>= next)
     (>>=) (Return result) next = next result
 
 -- *ein* Command, Ergebnis: Gewinner, falls Spiel zu Ende
@@ -95,6 +116,30 @@ tableProcessCommandM (PlayCard player card) =
     do valid <- isValidCardM player card
        if valid
        then do recordEventM (LegalCardPlayed player card)
-               undefined
+               turnOverTrick <- turnOverTrickM
+               case turnOverTrick of
+                Just (trick, trickTaker) ->
+                   do recordEventM (TrickTaken trickTaker trick)
+                      over <- gameOverM
+                      case over of
+                        Just winner ->
+                          do recordEventM (GameEnded winner)
+                             return (Just winner)
+                        Nothing ->
+                          do recordEventM (PlayerTurnChanged trickTaker)
+                             return Nothing
+                Nothing ->
+                  do nextPlayer <- playerAfterM player
+                     recordEventM (PlayerTurnChanged nextPlayer)
+                     return Nothing
+
        else do recordEventM (IllegalCardAttempted player card)
                return Nothing
+
+tableLoopM :: GameCommand -> Game Player
+tableLoopM command =
+    do maybeWinner <- tableProcessCommandM command
+       case maybeWinner of
+        Just winner -> return winner
+        Nothing ->
+            GetCommand tableLoopM
