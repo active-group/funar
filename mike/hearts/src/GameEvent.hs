@@ -58,10 +58,14 @@ executeDealHandsCommand (DealHands map)
 
 data Game a =
     RecordEvent GameEvent (() -> Game a)
+  | IsValidCard Player Card (Bool -> Game a)
   | Return a
 
 recordEventM :: GameEvent -> Game ()
 recordEventM event = RecordEvent event Return
+
+isValidCardM :: Player -> Card -> Game Bool
+isValidCardM player card = IsValidCard player card Return
 
 instance Functor Game where
 
@@ -84,4 +88,5 @@ tableProcessCommandM (DealHands hand) =
        -- M für Monade, _ für "kein Ergebnis"
        mapM_ recordEventM events
        return Nothing -- Spiel noch nicht zu Ende
-tableProcessCommandM (PlayCard player card) = undefined
+tableProcessCommandM (PlayCard player card) =
+    do undefined
