@@ -219,3 +219,13 @@ tableProcessEvent (TrickTaken player trick) state =
     }
 tableProcessEvent (IllegalCardAttempted player card) state = state
 tableProcessEvent (GameEnded player) state = state
+
+-- was interessiert uns?
+-- - Events   ---> Akkumulator
+-- - Zustand
+-- - Ergebnis
+
+
+---runTable :: Game a -> (TableState, [GameEvent]) -> a
+runTable ( player card callback) (state, revents) =
+  playValid state player card
