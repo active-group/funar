@@ -227,5 +227,11 @@ tableProcessEvent (GameEnded player) state = state
 
 
 ---runTable :: Game a -> (TableState, [GameEvent]) -> a
-runTable ( player card callback) (state, revents) =
-  playValid state player card
+runTable (IsValidCard player card callback) (state, revents) =
+  let valid = playValid state player card
+  in runTable (callback valid) (state, revents)
+runTable (TurnOverTrick callback) (state, revents) =
+  runTable (callback (turnOverTrick state)) (state, revents)
+runTable (PlayerAfter player callback) (state, revents) =
+  runTable (callback (playerAfter state player)) (state, revents)
+
