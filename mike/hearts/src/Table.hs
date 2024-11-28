@@ -1,5 +1,5 @@
 module Table(TableState, emptyTableState,
-            -- runTable
+            runTable
             )
 where
 
