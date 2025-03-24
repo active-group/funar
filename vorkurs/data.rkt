@@ -7,7 +7,7 @@
 ; - Hund -ODER-
 ; - Katze -ODER-
 ; - Schlange
-; Fallunterscheidung
+; Fallunterscheidung: Summe
 ; hier: Aufzählung
 ; -> Code
 (define pet
@@ -40,7 +40,14 @@
       ((equal? pet "cat") #t)
       ((equal? pet "snake") #f))))
 
-
+; Uhrzeit besteht aus / hat folgende Eigenschaften:
+; - Stunde -UND-
+; - Minute
+; zusammengesetzte Daten: Produkt
+(define-record time ; Signatur
+  make-time ; Konstruktor
+  (time-hour natural)
+  (time-minute natural))
 
 
 
