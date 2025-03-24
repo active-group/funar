@@ -291,6 +291,44 @@
 ; 0 + x = x + 0 = x
 ; 1 * x = x * 1 = x
 
-; Alle geraden Zahlen aus einer Liste extrahieren
+; Alle ungeraden Zahlen aus einer Liste extrahieren
+
+(: extract-odds (list-of-numbers -> list-of-numbers))
+
+(check-expect (extract-odds list4)
+              (cons 3 (cons 7 (cons 5 empty))))
+
+(define extract-odds
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (if (odd? (first list))
+           (cons (first list)
+                 (extract-odds (rest list)))
+           (extract-odds (rest list)))))))
+
+; Abstraktion über 2 Definitionen:
+; - letztes Mal kopieren
+; - umbenennen (rekursive Aufrufe nicht vergessen)
+; - Unterschiede durch abstrakte Namen ersetzen
+; - Namen in lambda aufnehmen (rekursive Aufrufe ...)
+
+; >1 Pfeil: Funktion höherer Ordnung
+(: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
+            
+(define extract
+  (lambda (p? list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (if (p? (first list))
+           (cons (first list)
+                 (extract p? (rest list)))
+           (extract p? (rest list)))))))
 
 
+
+
+
+ 
