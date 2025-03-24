@@ -176,7 +176,7 @@
 ; zusammengesetzte Daten/Produkt
 (define-record snake
   make-snake
-  is-snake
+  snake?
   (snake-length number)
   (snake-thickness number))
 
