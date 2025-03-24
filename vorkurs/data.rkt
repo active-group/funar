@@ -282,14 +282,15 @@
 (define list-product
   (lambda (list)
     (cond
-      ((empty? list) 1)
+      ((empty? list) 1) ; neutrale Element von *
       ((cons? list)
        (*
         (first list)
         (list-product (rest list)))))))
 
+; 0 + x = x + 0 = x
+; 1 * x = x * 1 = x
 
-
-
+; Alle geraden Zahlen aus einer Liste extrahieren
 
 
