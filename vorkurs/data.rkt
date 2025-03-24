@@ -378,7 +378,31 @@
        (cons
         (run-over-animal (first list))
         (run-over-animals (rest list)))))))
-       
+
+(: list-map
+   ((%element -> %new) (list-of %element) -> (list-of %new)))
+             
+(check-expect (list-map (lambda (n) (+ 1 n)) list4)
+              (cons 4 (cons 5 (cons 8 (cons 6 empty)))))
+
+(define list-map
+  (lambda (f list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cons
+        (f (first list))
+        (list-map f (rest list)))))))
+
+
+
+
+
+
+
+
+
+
 
 
  
