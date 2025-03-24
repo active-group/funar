@@ -397,6 +397,16 @@
         (list-map f (rest list)))))))
 
 
+(: list-fold (%b (%a %b -> %b) (list-of %a)  -> %b))
+
+(define list-fold
+  (lambda (e c list)
+    (cond
+      ((empty? list) e)
+      ((cons? list)
+       (c (first list)
+          (list-fold e c (rest list)))))))
+        
 
 
 
