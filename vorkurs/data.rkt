@@ -84,7 +84,10 @@
 ; zusammengesetzte Daten als Ausgabe:
 ; Konstruktor
 
-; Tiere auf dem texanischen Highway
+; Tier (auf dem texanischen Highway):
+; - Gürteltier -ODER-
+; - Klapperschlange
+; Fallunterscheidung / Summe
 
 ; Gürteltier hat folgende Eigenschaften:
 ; - (lebendig -ODER tot) -UND-
@@ -160,6 +163,39 @@
 ; - define
 ; Der erste Fund ist die Bindung.
 ; ... oder importiert.
+
+; Klapperschlange hat folgende Eigenschaften:
+; - Länge -UND-
+; - Dicke
+; zusammengesetzte Daten/Produkt
+(define-record snake
+  make-snake
+  (snake-length number)
+  (snake-thickness number))
+
+; Klapperschlange, 3m lang, 10cm dick
+(define snake1 (make-snake 300 10))
+
+; Klapperschlange überfahren
+(define run-over-snake
+  (lambda (snake)
+    (make-snake (snake-length snake)  0)))
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
