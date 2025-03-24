@@ -193,7 +193,6 @@
   (lambda (snake)
     (make-snake (snake-length snake) 0)))
 
-#|
 ; Tier überfahren
 (: run-over-animal (animal -> animal))
 
@@ -202,13 +201,20 @@
 (check-expect (run-over-animal snake1)
               (run-over-snake snake1))
 
+; Schablone
+#;(define run-over-animal
+  (lambda (animal)
+    (cond
+      ((dillo? animal) ...)
+      ((snake? animal) ...))))
+
 (define run-over-animal
   (lambda (animal)
     (cond
-      (... ...)
-      (... ...))))
-
-|#
+      ((dillo? animal)
+       (run-over-dillo animal))
+      ((snake? animal)
+       (run-over-snake animal)))))
 
 
 
