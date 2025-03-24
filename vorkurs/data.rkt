@@ -135,11 +135,13 @@
 
 (define feed-dillo
   (lambda (dillo amount)
-    (make-dillo (dillo-alive? dillo)
+    (define alive? (dillo-alive? dillo))
+    (define weight (dillo-weight dillo))
+    (make-dillo alive?
                 (cond                  
-                  ((dillo-alive? dillo)
-                   (+ (dillo-weight dillo) amount))
-                  (else (dillo-weight dillo))))))
+                  (alive?
+                   (+ weight amount))
+                  (else weight)))))
 
 ; lexikalische Bindung:
 ; vom Vorkommen des Namens von innen nach außen suchen
