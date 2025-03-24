@@ -318,7 +318,12 @@
 ; - Namen in lambda aufnehmen (rekursive Aufrufe ...)
 
 ; >1 Pfeil: Funktion höherer Ordnung
-(: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
+; Signaturvariable %
+; (: extract ((number -> boolean) (list-of number)
+;                               -> (list-of number)))
+
+(: extract ((%element -> boolean) (list-of %element)
+                                -> (list-of %element)))
             
 (define extract
   (lambda (p? list)
@@ -332,7 +337,7 @@
 
 (define dillos (cons dillo1 (cons dillo2 empty)))
 
-;(extract dillo-alive? dillos)
+(extract dillo-alive? dillos)
 
 
 
