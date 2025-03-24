@@ -88,6 +88,9 @@
 ; - Gürteltier -ODER-
 ; - Klapperschlange
 ; Fallunterscheidung / Summe
+; gemischte Daten
+(define animal
+  (signature (mixed dillo snake)))
 
 ; Gürteltier hat folgende Eigenschaften:
 ; - (lebendig -ODER tot) -UND-
@@ -184,7 +187,7 @@
 
 (define run-over-snake
   (lambda (snake)
-    (make-snake (snake-length snake)  0)))
+    (make-snake (snake-length snake) 0)))
     
 
 
