@@ -31,7 +31,8 @@ type PlayerPiles = Map Player Pile
 
 data TableState =
   TableState
-  { tableStatePlayers :: [Player], -- wer dran ist, steht vorn
+  { tableStatePlayers :: [Player],
+    tableStateNext :: [Player], -- unendliche Liste
     tableStateHands   :: PlayerHands,
     tableStatePiles  :: PlayerPiles,
     tableStateTrick   :: Trick
@@ -43,6 +44,7 @@ emptyTableState :: [Player] -> TableState
 emptyTableState players =
   TableState {
     tableStatePlayers = players,
+    tableStateNext = cycle players,
     tableStateHands = Map.fromList (map (\ player -> (player, emptyHand)) players),
     tableStatePiles = Map.fromList (map (\ player -> (player, emptyPile)) players),
     tableStateTrick = emptyTrick
@@ -69,30 +71,24 @@ gameAtBeginning tableState =
 -- Player {playerName = "Nicole"}
 playerAfter :: TableState -> Player -> Player
 playerAfter state player =
-   head (rotate (rotateTo player (tableStatePlayers state)))
-
--- | Liste rotieren
--- >>> rotate [1,2,3]
--- [2,3,1]
-rotate :: [a] -> [a]
-rotate (x : xs) = xs ++ [x]
-rotate [] = undefined
+  case skipTo player (tableStateNext state) of
+    _player : after : _rest -> after
+    _ -> error "this can't happen"
 
 -- | Liste zu einem bestimmten Element rotieren
--- >>> rotateTo 3 [1,2,3,4,5]
--- [3,4,5,1,2]
-rotateTo :: Eq a => a -> [a] -> [a]
-rotateTo y xs@(x : xs') | x == y = xs
-                        | otherwise = rotateTo y (xs' ++ [x])
-rotateTo y [] = undefined
-
+-- >>> skipTo 3 [1,2,3,4,5]
+-- [3,4,5]
+skipTo :: Eq a => a -> [a] -> [a]
+skipTo x list = dropWhile (/= x) list
 
 -- | wer ist gerade dran?
 -- >>> currentPlayer state0
 -- Player {playerName = "Mike"}
 currentPlayer :: TableState -> Player
 currentPlayer state =
-  head (tableStatePlayers state)
+  case tableStateNext state of
+    current : _test -> current
+    _ -> error "this can't happen"
 
 -- | ist es zulässig, diese Karte auszuspielen?
 -- >>> playValid state0 mike (Card Clubs Two)

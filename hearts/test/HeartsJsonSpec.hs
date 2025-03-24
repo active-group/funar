@@ -31,7 +31,7 @@ instance Arbitrary Hand where
   arbitrary = makeHand <$> arbitrary
 
 instance Arbitrary Trick where
-  arbitrary = Trick <$> arbitrary
+  arbitrary = listToTrick <$> arbitrary
 
 instance Arbitrary GameEvent where
   arbitrary =

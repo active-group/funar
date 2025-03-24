@@ -26,36 +26,35 @@ data PlayerState = PlayerState
 makeEmptyPlayerStateFor = PlayerState emptyHand emptyTrick emptyPile
 
 -- Spielevent "sehen"
-playerProcessEvent :: Player -> GameEvent -> PlayerState -> PlayerState
-playerProcessEvent player (HandDealt player' hand) state =
-  if player == player'
+playerProcessEvent :: GameEvent -> PlayerState -> PlayerState
+playerProcessEvent (HandDealt player' hand) state =
+  if playerStatePlayer state == player'
     then
-      PlayerState
+      state
         { playerStateHand = hand,
           playerStateTrick = emptyTrick,
-          playerStatePile = emptyPile,
-          playerStatePlayer = player
+          playerStatePile = emptyPile
         }
     else state
-playerProcessEvent player (PlayerTurnChanged player') state = state
-playerProcessEvent player (LegalCardPlayed player' card) state =
-  if player' == player
+playerProcessEvent (PlayerTurnChanged player') state = state
+playerProcessEvent (LegalCardPlayed player' card) state =
+  if playerStatePlayer state == player'
     then
       state
         { playerStateHand = removeCard card (playerStateHand state),
           playerStateTrick = addToTrick player' card (playerStateTrick state)
         }
     else state {playerStateTrick = addToTrick player' card (playerStateTrick state)}
-playerProcessEvent player (TrickTaken player' trick) state =
-  if player' == player
+playerProcessEvent (TrickTaken player' trick) state =
+  if playerStatePlayer state == player'
     then
       state
         { playerStateTrick = emptyTrick,
           playerStatePile = pileAddTrick (playerStatePile state) trick
         }
     else state {playerStateTrick = emptyTrick}
-playerProcessEvent player (IllegalCardAttempted player' card) state = state
-playerProcessEvent player (GameEnded winner) state = state
+playerProcessEvent (IllegalCardAttempted player' card) state = state
+playerProcessEvent (GameEnded winner) state = state
 
 data StatePlayer' r
   = GetEvent (GameEvent -> r)
@@ -86,25 +85,24 @@ instance StatePlayerMonad (Free StatePlayer') where
   getPlayerStateM = Impure (GetPlayerState Pure)
 
 runStatePlayer ::
-  Player ->
   StatePlayer a ->
   PlayerState ->
   [GameCommand] ->
   ([GameCommand], Either (GameEvent -> (PlayerState, StatePlayer a)) a)
-runStatePlayer player (Pure result) state commands =
+runStatePlayer (Pure result) state commands =
   (reverse commands, Right result)
-runStatePlayer player (Impure (GetEvent cont)) state commands =
-  (reverse commands, Left (\event -> (playerProcessEvent player event state, cont event)))
-runStatePlayer player (Impure (RecordCommand command cont)) state commands =
-  runStatePlayer player (cont ()) state (command : commands)
-runStatePlayer player (Impure (GetPlayerState cont)) state commands =
-  runStatePlayer player (cont state) state commands
+runStatePlayer (Impure (GetEvent cont)) state commands =
+  (reverse commands, Left (\event -> (playerProcessEvent event state, cont event)))
+runStatePlayer (Impure (RecordCommand command cont)) state commands =
+  runStatePlayer (cont ()) state (command : commands)
+runStatePlayer (Impure (GetPlayerState cont)) state commands =
+  runStatePlayer (cont state) state commands
 
 statePlayerIO :: Player -> StatePlayer a -> IO (GameEvent -> IO [GameCommand])
 statePlayerIO player playerM =
   do
     let emptyPlayerState = makeEmptyPlayerStateFor player
-        (commands0, step0) = runStatePlayer player playerM emptyPlayerState []
+        (commands0, step0) = runStatePlayer playerM emptyPlayerState []
     ref <- IORef.newIORef (emptyPlayerState, commands0, step0)
     let processEvent event =
           do
@@ -113,7 +111,7 @@ statePlayerIO player playerM =
               Left cont ->
                 do
                   let (state', playerM') = cont event
-                  let (commands', step') = runStatePlayer player playerM' state' []
+                  let (commands', step') = runStatePlayer playerM' state' []
                   IORef.writeIORef ref (state', [], step')
                   return (commands ++ commands')
               Right _result -> return commands
@@ -272,7 +270,7 @@ runStateTtyPlayer ::
 runStateTtyPlayer player (Pure result) state commands lines =
   (reverse commands, reverse lines, StepDone result)
 runStateTtyPlayer player (Impure (GetEventT cont)) state commands lines =
-  (reverse commands, reverse lines, WaitingForEvent (\event -> (playerProcessEvent player event state, cont event)))
+  (reverse commands, reverse lines, WaitingForEvent (\event -> (playerProcessEvent event state, cont event)))
 runStateTtyPlayer player (Impure (RecordCommandT command cont)) state commands lines =
   runStateTtyPlayer player (cont ()) state (command : commands) lines
 runStateTtyPlayer player (Impure (GetPlayerStateT cont)) state commands lines =
