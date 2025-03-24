@@ -273,7 +273,20 @@
         (first list)
         (list-sum (rest list)))))))
 
-; Liste 
+; Liste aufmultiplizieren
+(: list-product (list-of-numbers -> number))
+
+(check-expect (list-product list4)
+              420)
+
+(define list-product
+  (lambda (list)
+    (cond
+      ((empty? list) 1)
+      ((cons? list)
+       (*
+        (first list)
+        (list-product (rest list)))))))
 
 
 
