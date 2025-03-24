@@ -143,6 +143,17 @@
                    (+ weight amount))
                   (else weight)))))
 
+#;(define feed-dillo
+  (lambda (dillo amount)
+    ((lambda (alive? weight)
+       (make-dillo alive?
+                   (cond                  
+                     (alive?
+                      (+ weight amount))
+                     (else weight))))
+     (dillo-alive? dillo)
+     (dillo-weight dillo))))
+
 ; lexikalische Bindung:
 ; vom Vorkommen des Namens von innen nach außen suchen
 ; - lambda oder
