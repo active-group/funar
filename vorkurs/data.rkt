@@ -49,8 +49,16 @@
   (time-hour natural) ; Selektoren / "Getter-Funktionen"
   (time-minute natural))
 
+(: make-time (natural natural -> time))
+(: time-hour (time -> natural))
+(: time-minute (time -> natural))
+
 ; 11 Uhr 13 Minuten
 (define time1 (make-time 11 13))
+; 14:10
+(define time2 (make-time 14 10))
+
+
 
 
 
