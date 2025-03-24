@@ -25,6 +25,8 @@
 ; Abstraktion:
 ; - letztes Mal kopieren
 ; - Unterschiede durch abstrakte Namen ersetzen
+; - Namen in lambda-Ausdruck aufnehmen
+
 (define tile
   (lambda (image1 image2)
     (above
