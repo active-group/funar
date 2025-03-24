@@ -216,14 +216,53 @@
       ((snake? animal)
        (run-over-snake animal)))))
 
+; Eine Liste ist eins der folgenden:
+; - die leere Liste -ODER-
+; - eine Cons-Liste, bestehend aus
+;    erstem Element -UND- Rest-Liste
+;                              ^^^^^
+;                           Selbstbezug
+(define-record empty-list
+  make-empty-list
+  empty?)
+
+(define empty (make-empty-list))
+
+(define-record cons-list
+  cons
+  cons?
+  (first number)
+  (rest list-of-numbers))
+
+(define list-of-numbers
+  (signature (mixed empty-list
+                    cons-list)))
+
+; Liste 1 Element: 7
+(define list1 (cons 7 empty))
+; Liste 2 Element: 4 7
+(define list2 (cons 4 (cons 7 empty)))
+; Liste 3 Elemente: 4 7 5
+(define list3 (cons 4 (cons 7 (cons 5 empty))))
+; Liste 4 Elemente: 3 4 7 5
+(define list4 (cons 3 list3))
+
+; Liste aufsummieren
+(: list-sum (list-of-numbers -> number))
+
+(check-expect (list-sum list4)
+              19)
+
+(define list-sum
+  (lambda (list)
+    (cond
+      ((empty? list) ...)
+      ((cons? list) ...))))
+    
 
 
 
-
-
-
-
-
+  
 
 
 
