@@ -379,8 +379,10 @@
         (run-over-animal (first list))
         (run-over-animals (rest list)))))))
 
-(: list-map
+#;(: list-map
    ((%element -> %new) (list-of %element) -> (list-of %new)))
+(: list-map
+   ((%a -> %b) (list-of %a) -> (list-of %b)))
              
 (check-expect (list-map (lambda (n) (+ 1 n)) list4)
               (cons 4 (cons 5 (cons 8 (cons 6 empty)))))
