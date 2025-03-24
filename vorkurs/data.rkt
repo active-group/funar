@@ -141,7 +141,12 @@
                    (+ (dillo-weight dillo) amount))
                   (else (dillo-weight dillo))))))
 
-
+; lexikalische Bindung:
+; vom Vorkommen des Namens von innen nach außen suchen
+; - lambda oder
+; - define
+; Der erste Fund ist die Bindung.
+; ... oder importiert.
 
 
 
