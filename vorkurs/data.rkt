@@ -253,16 +253,27 @@
 (check-expect (list-sum list4)
               19)
 
-(define list-sum
+; Schablone:
+#;(define list-sum
   (lambda (list)
     (cond
       ((empty? list) ...)
-      ((cons? list) ...))))
+      ((cons? list)
+       ...
+       (first list)
+       (list-sum (rest list))
+       ...))))
     
+(define list-sum
+  (lambda (list)
+    (cond
+      ((empty? list) 0) ; neutrales Element von +
+      ((cons? list)
+       (+
+        (first list)
+        (list-sum (rest list)))))))
 
-
-
-  
+; Liste 
 
 
 
