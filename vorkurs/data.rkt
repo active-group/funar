@@ -357,8 +357,27 @@
       ((empty? list) empty)
       ((cons? list)
        (cons
-        (+ 1 (first list))
+        (inc (first list))
         (inc-list (rest list)))))))
+
+(define inc (lambda (n) (+ 1 n)))
+
+(: run-over-animals ((list-of animal) -> (list-of animal)))
+
+(check-expect (run-over-animals
+               (cons dillo1 (cons snake1 empty)))
+              (cons (run-over-animal dillo1)
+                    (cons (run-over-animal snake1)
+                          empty)))
+
+(define run-over-animals
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cons
+        (run-over-animal (first list))
+        (run-over-animals (rest list)))))))
        
 
 
