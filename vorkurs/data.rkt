@@ -406,9 +406,47 @@
       ((cons? list)
        (c (first list)
           (list-fold e c (rest list)))))))
-        
 
 
+(: extract-odds2 (list-of-numbers -> list-of-numbers))
+
+(check-expect (extract-odds2 list4)
+              (cons 3 (cons 7 (cons 5 empty))))
+
+
+(define extract-odds2
+  (lambda (list)
+    (list-fold empty
+               (lambda (first-list rec-result)
+                 (if (odd? first-list)
+                     (cons first-list
+                           rec-result)
+                     rec-result))
+               list)))
+
+
+; neutrales Element ...
+
+; Algebra:
+; - Menge(n)
+; - Operationen
+; - Gleichungen
+
+; Menge/Signatur a
+; (: op (a a -> a))
+
+; Assoziativität
+; (op x (op y z)) = (op (op x y) z)
+
+; ^^^ Halbgruppe
+
+
+; neutrales Element:
+; (: neutral a)
+; (op neutral x) = (op x neutral) = x
+
+
+; Halbgruppe + neutrales Element: Monoid
 
 
 
