@@ -75,8 +75,8 @@
 
 (define msm
   (lambda (time)
-    ... (time-hour time) ...
-    ... (time-minute time) ...))
+    (+ (* 60 (time-hour time))
+       (time-minute time))))
 
 
 
