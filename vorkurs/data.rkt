@@ -177,6 +177,11 @@
 (define snake1 (make-snake 300 10))
 
 ; Klapperschlange überfahren
+(: run-over-snake (snake -> snake))
+
+(check-expect (run-over-snake snake1)
+              (make-snake 300 0))
+
 (define run-over-snake
   (lambda (snake)
     (make-snake (snake-length snake)  0)))
