@@ -234,10 +234,12 @@
   (first element)
   (rest (list-of element)))
 
+(: list-of (signature -> signature))
+
 (define list-of
-  (lambda (element)
+  (lambda (element-signature)
     (signature (mixed empty-list
-                      (cons-list-of element)))))
+                      (cons-list-of element-signature)))))
 
 (define list-of-numbers (signature (list-of number)))
 
@@ -339,8 +341,25 @@
 
 (extract dillo-alive? dillos)
 
+; (mixed empty-list (cons-list-of dillo) (cons-list-of snake))
+; Teilmenge von:
+; (list-of (mixed dillo snake))
 
+; alle Zahlen in einer Liste inkrementieren
+(: inc-list ((list-of number) -> (list-of number)))
 
+(check-expect (inc-list list4)
+              (cons 4 (cons 5 (cons 8 (cons 6 empty)))))
+
+(define inc-list
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cons
+        (+ 1 (first list))
+        (inc-list (rest list)))))))
+       
 
 
  
