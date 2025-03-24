@@ -79,6 +79,51 @@
        (time-minute time))))
 
 
+; msm->time
+
+; zusammengesetzte Daten als Ausgabe:
+; Konstruktor
+
+; Tiere auf dem texanischen Highway
+
+; Gürteltier hat folgende Eigenschaften:
+; - (lebendig -ODER tot) -UND-
+; - Gewicht
+(define-record dillo
+  make-dillo
+  (dillo-alive? boolean)
+  (dillo-weight number))
+
+; "(Beschreibung von) Zustand des Gürteltiers zu
+;  einem bestimmten Zeitpunkt"
+
+(: make-dillo (boolean number -> dillo))
+
+; lebendiges Gürteltier, 10kg
+(define dillo1 (make-dillo #t 10))
+
+; totes Gürteltier, 8kg
+(define dillo2 (make-dillo #f 8))
+
+; Gürteltier überfahren
+(: run-over-dillo (dillo -> dillo))
+
+(check-expect (run-over-dillo dillo1)
+              (make-dillo #f 10))
+(check-expect (run-over-dillo dillo2)
+              dillo2)
+
+; Schablone
+#;(define run-over-dillo
+  (lambda (dillo)
+    (make-dillo ... ...)
+    ... (dillo-alive? dillo) ...
+    ... (dillo-weight dillo) ...))
+   
+(define run-over-dillo
+  (lambda (dillo)
+    (make-dillo #f (dillo-weight dillo))))
+
 
 
 
