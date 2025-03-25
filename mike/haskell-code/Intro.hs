@@ -60,6 +60,7 @@ data Liveness = Alive | Dead
 -- Typalias
 type Weight = Integer
 
+{-
 data Dillo = MkDillo { dilloLiveness :: Liveness,
                        dilloWeight :: Weight }
   deriving Show
@@ -95,14 +96,13 @@ runOverDillo dillo = dillo { dilloLiveness = Dead } -- "functional update"
 
 -- >>> runOverDillo dillo2
 -- MkDillo {dilloLiveness = Dead, dilloWeight = 8}
-
+-}
 
 
 -- Tier auf dem texanischen Highway:
 -- - Gürteltier ODER
 -- - Klapperschlange
 
-{-
 type Thickness = Integer
 type Length = Integer
 
@@ -111,4 +111,20 @@ data Animal
     = MkDillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
     | MkSnake Length Thickness
     deriving Show
--}
+
+dillo1 :: Animal
+dillo1 = MkDillo { dilloLiveness = Alive, dilloWeight = 10 }
+dillo2 :: Animal
+dillo2 = MkDillo Dead 8
+snake1 :: Animal
+snake1 = MkSnake 300 10
+
+-- Tier überfahren
+runOverAnimal :: Animal -> Animal
+runOverAnimal (MkDillo _ weight) = MkDillo Dead weight
+runOverAnimal (MkSnake length _) = MkSnake length 0
+
+-- >>> runOverAnimal dillo1
+-- MkDillo {dilloLiveness = Dead, dilloWeight = 10}
+-- >>> runOverAnimal snake1
+-- MkSnake 300 0
