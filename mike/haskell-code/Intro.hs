@@ -138,8 +138,10 @@ feedAnimal dillo@(MkDillo liveness weight) amount = -- Alias-Pattern
 feedAnimal (MkSnake length thickness) amount =
     MkSnake length (thickness + amount)
 
-swap :: (Animal -> Weight -> Animal) -> (Weight -> (Animal -> Animal))
-swap f = \ weight -> \ animal -> f animal weight
+-- swap :: (Animal -> Weight -> Animal) -> (Weight -> (Animal -> Animal))
+swap :: (a -> b -> c) -> (b -> a -> c) -- Typvariablen
+-- swap f = \ b -> \ a -> f a b
+swap f b a = f a b
 
 -- >>> (swap feedAnimal) 5 dillo1
 -- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
