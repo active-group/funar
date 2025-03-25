@@ -142,3 +142,15 @@ feedAnimal (MkSnake length thickness) amount =
 -- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
 -- >>> feedAnimal snake1 7
 -- MkSnake 300 17
+
+doubleSum :: Integer -> Integer -> Integer
+doubleSum x y = (x+y) * 2
+
+-- Eine geometrische Figur ("Shape") ist eins der folgenden:
+-- - Kreis -ODER-
+-- - Quadrat -ODER-
+-- - Überlagerung zweier geometrischer Figuren
+
+-- 1. Datendefinition in Code übersetzen
+-- 2. Funktion schreiben, die für einen Punkt ermittelt, ob dieser
+--    innerhalb oder außerhalb einer geometrischen Figur liegt
