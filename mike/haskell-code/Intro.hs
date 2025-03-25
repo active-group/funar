@@ -443,3 +443,21 @@ instance Monoid [a] where
 
 instance (Monoid a, Monoid b) => Monoid (a, b) where
     neutral = (neutral, neutral)
+
+instance (Semigroup a) => Semigroup (Optional a) where
+  mörtsch Null Null = Null
+  mörtsch (Result a1) Null = Result a1
+  mörtsch Null (Result a2) = Result a2
+  mörtsch (Result a1) (Result a2) = Result (mörtsch a1 a2)
+
+-- >>> mörtsch (Result 5) (Result 12)
+-- Result 17
+
+-- >>> mörtsch (Result Dog) (Result Cat)
+-- No instance for `Semigroup Pet' arising from a use of `mörtsch'
+-- In the expression: mörtsch (Result Dog) (Result Cat)
+-- In an equation for `it_ahugC':
+--     it_ahugC = mörtsch (Result Dog) (Result Cat)
+
+instance Semigroup a => Monoid (Optional a) where
+    neutral = Null
