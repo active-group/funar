@@ -143,6 +143,15 @@ swap :: (a -> b -> c) -> (b -> a -> c) -- Typvariablen
 -- swap f = \ b -> \ a -> f a b
 swap f b a = f a b
 
+feedAnimal' :: (Animal, Weight) -> Animal
+feedAnimal'(dillo@(MkDillo liveness weight), amount) =
+  -- Alias-Pattern
+  case liveness of
+    Alive -> MkDillo liveness (weight + amount)
+    Dead -> dillo -- MkDillo liveness weight
+feedAnimal'(MkSnake length thickness, amount) =
+  MkSnake length (thickness + amount)
+
 -- >>> (swap feedAnimal) 5 dillo1
 -- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
 
