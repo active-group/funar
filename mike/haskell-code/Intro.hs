@@ -63,7 +63,7 @@ isCute Snake = False
 -- -- Gewicht
 
 data Liveness = Alive | Dead
-  deriving Show
+  deriving (Show, Eq)
 
 -- Typalias
 type Weight = Integer
@@ -367,3 +367,32 @@ listIndex (x:xs) a =
 --   -- Defined in ‘GHC.Classes’
 -- instance Eq () -- Defined in ‘GHC.Classes’
 -- instance Eq Word -- Defined in ‘GHC.Classes’
+
+-- >>> :info Show
+-- type Show :: * -> Constraint
+-- class Show a where
+--   show :: a -> String
+
+-- >>> :info Ord
+-- type Ord :: * -> Constraint
+-- class Eq a => Ord a where
+--   compare :: a -> a -> Ordering
+--   (<) :: a -> a -> Bool
+--   (<=) :: a -> a -> Bool
+--   (>) :: a -> a -> Bool
+--   (>=) :: a -> a -> Bool
+--   max :: a -> a -> a
+--   min :: a -> a -> a
+--   {-# MINIMAL compare | (<=) #-}
+--   	-- Defined in ‘GHC.Classes’
+
+-- >>> :info Num
+-- type Num :: * -> Constraint
+-- class Num a where
+--   (+) :: a -> a -> a
+--   (-) :: a -> a -> a
+--   (*) :: a -> a -> a
+--   negate :: a -> a
+--   abs :: a -> a
+--   signum :: a -> a
+--   fromInteger :: Integer -> a
