@@ -1,0 +1,5 @@
+{
+    "haskell.manageHLS": "PATH",
+    "extensions.ignoreRecommendations": true,
+    "haskell.plugin.hlint.diagnosticsOn": false
+}
