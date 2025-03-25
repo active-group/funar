@@ -267,3 +267,24 @@ listSum [] = 0
 listSum (x:xs) =
     x + (listSum xs)
 
+data Optional a 
+  = Null
+  | Result a
+  deriving Show
+
+-- einbaut als:
+-- data Maybe a = Nothing | Just a
+
+-- Index eines Elements in einer Liste
+listIndex :: Eq a => [a] -> a -> Optional Integer
+listIndex [] a = Null
+listIndex (x:xs) a =
+    if x == a
+    then Result 0 
+    else 
+        case listIndex xs a of
+            Null -> Null
+            Result index -> Result (index + 1)
+
+-- >>> listIndex [1, 0, 2, 4, 7] 4
+-- Result 3
