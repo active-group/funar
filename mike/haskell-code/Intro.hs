@@ -399,3 +399,16 @@ listIndex (x:xs) a =
 --   signum :: a -> a
 --   fromInteger :: Integer -> a
 
+-- algebraische Struktur:
+-- - Menge/Typ
+-- - Operation(en)
+-- - Gleichungen
+
+-- Halbgruppe:
+-- Typ a
+-- Operation
+-- mörtsch :: a -> a -> a
+class Semigroup a where
+    -- mörtsch a (mörtsch b c) == mörtsch (mörtsch a b) c
+    mörtsch :: a -> a -> a
+ 
