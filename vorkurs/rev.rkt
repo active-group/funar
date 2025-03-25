@@ -11,7 +11,7 @@
     (cond
       ((empty? list) empty)
       ((cons? list)
-       (add-element
+       (add-element ; Kontext vom rev-Aufruf
         (rev (rest list))
         (first list))))))
 
@@ -31,7 +31,7 @@
     (cond
       ((empty? list) (cons element empty))
       ((cons? list)
-       (cons
+       (cons ; Kontext
         (first list)
         (add-element (rest list) element))))))
 
@@ -47,7 +47,7 @@
     (cond
       ((empty? list) acc)
       ((cons? list)
-       (rev-2 (rest list)
+       (rev-2 (rest list) ; tail call
               (cons (first list) acc))))))
 
 
