@@ -299,10 +299,7 @@ listIndex (x:xs) a =
 -- Result 3
 
 -- >>> listIndex [Cat, Cat, Snake, Snake, Dog, Cat] Dog
--- No instance for `Eq Pet' arising from a use of `listIndex'
--- In the expression: listIndex [Cat, Cat, Snake, Snake, Dog, Cat] Dog
--- In an equation for `it_ab0pa':
---     it_ab0pa = listIndex [Cat, Cat, Snake, Snake, Dog, Cat] Dog
+-- Result 4
 
 -- Typklasse:
 
