@@ -122,6 +122,12 @@
 (check-expect (run-over-dillo dillo2)
               dillo2)
 
+; QuickCheck: property-based testing
+(check-property
+ (for-all ((d dillo))
+   (equal? #f
+           (dillo-alive? (run-over-dillo d)))))
+
 ; Schablone
 #;(define run-over-dillo
   (lambda (dillo)
@@ -131,7 +137,9 @@
    
 (define run-over-dillo
   (lambda (dillo)
-    (make-dillo #f (dillo-weight dillo))))
+    (if (> (dillo-weight dillo) 20)
+        dillo
+        (make-dillo #f (dillo-weight dillo)))))
 
 ; Gürteltier füttern - Menge variabel
 (: feed-dillo (dillo number -> dillo))
