@@ -282,13 +282,21 @@ data Optional a
   | Result a
   deriving Show
 
-listMap :: (a -> b) -> [a] -> [b]
+listMap ::     (a -> b) ->        [a] ->         [b]
 listMap f [] = []
 listMap f (x:xs) = f x  : (listMap f xs)
 
 optionalMap :: (a -> b) -> Optional a -> Optional b
 optionalMap f Null = Null
 optionalMap f (Result a) = Result (f a)
+
+-- >>> :info Functor
+-- type Functor :: (* -> *) -> Constraint
+-- class Functor f where
+--   fmap :: (a -> b) -> f a -> f b
+
+instance Functor Optional where
+    fmap = optionalMap
 
 -- einbaut als:
 -- data Maybe a = Nothing | Just a
@@ -301,9 +309,12 @@ listIndex (x:xs) a =
     if x == a
     then Result 0 
     else 
-        case listIndex xs a of
+        -- optionalMap (\ x -> x + 1) (listIndex xs a)
+        fmap (1+) (listIndex xs a)
+{-        case listIndex xs a of
             Null -> Null
             Result index -> Result (index + 1)
+-}
 
 -- >>> listIndex [1, 0, 2, 4, 7] 4
 -- Result 3
