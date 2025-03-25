@@ -15,6 +15,9 @@
         (rev (rest list))
         (first list))))))
 
+; Continuation
+; (lambda (x) (add-element x (first list)))
+
 ; Liste Länge n
 ; 1 + 2 + 3 + ... + (n - 1) + n = n * (n + 1) / 2
 ; = O(n^2)
@@ -45,6 +48,9 @@
 (check-expect (rev-2 (list 1 2 3 4) empty)
               (list 4 3 2 1))
 
+; Schleifeninvariante:
+; acc enthält alle bisher gesehenen Elemente,
+; nur umgedreht
 (define rev-2
   (lambda (list acc)
     (cond
