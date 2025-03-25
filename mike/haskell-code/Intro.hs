@@ -282,6 +282,14 @@ data Optional a
   | Result a
   deriving Show
 
+listMap :: (a -> b) -> [a] -> [b]
+listMap f [] = []
+listMap f (x:xs) = f x  : (listMap f xs)
+
+optionalMap :: (a -> b) -> Optional a -> Optional b
+optionalMap f Null = Null
+optionalMap f (Result a) = Result (f a)
+
 -- einbaut als:
 -- data Maybe a = Nothing | Just a
 
