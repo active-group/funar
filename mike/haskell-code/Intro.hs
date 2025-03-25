@@ -188,6 +188,10 @@ feed1 = swap feedAnimal 1
 -- >>> feedAnimal snake1 7
 -- MkSnake 300 17
 
+-- Funktionskomposition
+o :: (b -> c) -> (a -> b) -> (a -> c)
+o f g = \ a -> f (g a)
+
 doubleSum :: Integer -> Integer -> Integer
 doubleSum x y = (x+y) * 2
 
