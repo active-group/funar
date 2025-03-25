@@ -130,13 +130,16 @@ runOverAnimal (MkSnake length _) = MkSnake length 0
 -- MkSnake 300 0
 
 -- Tier füttern
-feedAnimal :: Animal -> (Weight -> Animal)
+feedAnimal :: Animal -> Weight -> Animal
 feedAnimal dillo@(MkDillo liveness weight) amount = -- Alias-Pattern
     case liveness of
         Alive -> MkDillo liveness (weight + amount)
         Dead -> dillo -- MkDillo liveness weight
 feedAnimal (MkSnake length thickness) amount =
     MkSnake length (thickness + amount)
+
+swap :: (Animal -> Weight -> Animal) -> (Weight -> (Animal -> Animal))
+swap f = \ weight -> \ animal -> f animal weight
 
 -- >>> feedAnimal dillo1 5
 -- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
