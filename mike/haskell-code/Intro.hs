@@ -128,3 +128,16 @@ runOverAnimal (MkSnake length _) = MkSnake length 0
 -- MkDillo {dilloLiveness = Dead, dilloWeight = 10}
 -- >>> runOverAnimal snake1
 -- MkSnake 300 0
+
+-- Tier füttern
+feedAnimal (MkDillo liveness weight) amount =
+    case liveness of
+        Alive -> MkDillo liveness (weight + amount)
+        Dead -> MkDillo liveness weight
+feedAnimal (MkSnake length thickness) amount =
+    MkSnake length (thickness + amount)
+
+-- >>> feedAnimal dillo1 5
+-- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
+-- >>> feedAnimal snake1 7
+-- MkSnake 300 17
