@@ -24,10 +24,15 @@
 (define add-element
   (lambda (list element)
     (cond
-      ((empty? list) ...)
+      ((empty? list) (cons element empty))
       ((cons? list)
-       ...
-       (first list)
-       (add-element (rest list) element)
-       ...))))
+       (cons
+        (first list)
+        (add-element (rest list) element))))))
+
+
+
+
+
+
        
