@@ -160,6 +160,13 @@ tuplify f (a, b) = f a b
 -- >>> tuplify (swap feedAnimal) (5, dillo1)
 -- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
 
+untuplify :: ((a, b) -> c) -> (a -> b -> c)
+-- untuplify f = \ a -> \b -> f (a, b)
+untuplify f a b = f (a, b)
+
+-- >>> swap (untuplify feedAnimal') 5 dillo1
+-- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
+
 -- >>> feedAnimal'(dillo1, 5)
 -- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
 
