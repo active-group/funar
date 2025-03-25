@@ -153,6 +153,7 @@ feedAnimal'(dillo@(MkDillo liveness weight), amount) =
 feedAnimal'(MkSnake length thickness, amount) =
   MkSnake length (thickness + amount)
 
+-- eingebaut als uncurry
 tuplify :: (a -> b -> c) -> ((a, b) -> c)
 -- tuplify f = \ (a, b) -> f a b
 tuplify f (a, b) = f a b
@@ -160,6 +161,7 @@ tuplify f (a, b) = f a b
 -- >>> tuplify (swap feedAnimal) (5, dillo1)
 -- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
 
+-- eingebaut als curry
 untuplify :: ((a, b) -> c) -> (a -> b -> c)
 -- untuplify f = \ a -> \b -> f (a, b)
 untuplify f a b = f (a, b)
