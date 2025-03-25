@@ -42,6 +42,7 @@
 ; - feste Größe
 ; - klein (~10.000 Kontexte)
 ; - auch tail calls verbrauchen Platz
+;   ... aber: Kotlin tailrec, Scala @tailrec, Clojure loop
 
 ; mit Zwischenergebnis/Akkumulator
 (: rev-2 ((list-of %a) (list-of %a) -> (list-of %a)))
@@ -61,13 +62,22 @@
               (cons (first list) acc))))))
 
 
+; Liste aufsummieren
 
+(check-expect (list-sum (list 7 3 4 5) (lambda (x) x))
+              19)
 
+; Continuation-Passing Style
 
-
-
-
-
+(define list-sum
+  (lambda (list k) ; k: Continuation
+    (cond
+      ((empty? list) (k 0)) ; neutrales Element von +
+      ((cons? list)
+       ; Kontext: (+ (first list) [Loch])
+       (list-sum (rest list)
+                 (lambda (result)
+                   (k (+ (first list) result))))))))
 
 
 
