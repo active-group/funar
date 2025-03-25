@@ -27,6 +27,14 @@ data Pet
   | Snake
   deriving Show
 
+instance Eq Pet where
+    (==) :: Pet -> Pet -> Bool
+    (==) Dog Dog = True
+    (==) Cat Cat = True
+    (==) Snake Snake = True
+    (==) _ _ = False
+
+
 -- Ist Haustier niedlich?
 isCute :: Pet -> Bool
 -- eine Gleichung pro Fall
