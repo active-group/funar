@@ -247,3 +247,23 @@ within (MkSquare (squareX, squareY) sideLength) (x, y) =
         && ((y >= squareY) && (y <= rightTopY))
 within (MkOverlap shape1 shape2) point =
   within shape1 point || within shape2 point
+
+data ListOf a
+  = EmptyList
+  | Cons a (ListOf a)
+
+-- leere Liste: []
+-- Cons:        :
+
+list1 :: [Integer]
+list1 = 5 : []
+list2 = 5 : 2 : []
+list3 = [4, 5, 2]
+
+listSum :: [Integer] -> Integer
+listSum [] = 0
+-- listSum (first:rest) = 
+--     first + (listSum rest)
+listSum (x:xs) =
+    x + (listSum xs)
+
