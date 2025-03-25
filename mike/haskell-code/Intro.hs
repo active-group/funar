@@ -141,6 +141,17 @@ feedAnimal (MkSnake length thickness) amount =
 swap :: (Animal -> Weight -> Animal) -> (Weight -> (Animal -> Animal))
 swap f = \ weight -> \ animal -> f animal weight
 
+-- >>> (swap feedAnimal) 5 dillo1
+-- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
+
+feed1 :: Animal -> Animal
+feed1 = swap feedAnimal 1
+
+-- >>> feed1 dillo1
+-- MkDillo {dilloLiveness = Alive, dilloWeight = 11}
+-- >>> feed1 snake1
+-- MkSnake 300 11
+
 -- >>> feedAnimal dillo1 5
 -- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
 -- >>> feedAnimal snake1 7
