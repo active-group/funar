@@ -276,6 +276,7 @@ data Optional a
 -- data Maybe a = Nothing | Just a
 
 -- Index eines Elements in einer Liste
+-- Eq a: Constraint, "Werte des Typs a sind vergleichbar"
 listIndex :: Eq a => [a] -> a -> Optional Integer
 listIndex [] a = Null
 listIndex (x:xs) a =
@@ -288,3 +289,76 @@ listIndex (x:xs) a =
 
 -- >>> listIndex [1, 0, 2, 4, 7] 4
 -- Result 3
+
+-- >>> listIndex [Cat, Cat, Snake, Snake, Dog, Cat] Dog
+-- No instance for `Eq Pet' arising from a use of `listIndex'
+-- In the expression: listIndex [Cat, Cat, Snake, Snake, Dog, Cat] Dog
+-- In an equation for `it_ab0pa':
+--     it_ab0pa = listIndex [Cat, Cat, Snake, Snake, Dog, Cat] Dog
+
+-- Typklasse:
+
+-- >>> :info Eq
+-- type Eq :: * -> Constraint
+-- class Eq a where
+--   (==) :: a -> a -> Bool
+--   (/=) :: a -> a -> Bool
+--   {-# MINIMAL (==) | (/=) #-}
+--   	-- Defined in ‘GHC.Classes’
+-- instance (Eq a, Eq b) => Eq (Either a b)
+--   -- Defined in ‘Data.Either’
+-- instance Eq a => Eq (Maybe a) -- Defined in ‘GHC.Maybe’
+-- instance Eq Integer -- Defined in ‘GHC.Num.Integer’
+-- instance Eq Bool -- Defined in ‘GHC.Classes’
+-- instance Eq Char -- Defined in ‘GHC.Classes’
+-- instance Eq Double -- Defined in ‘GHC.Classes’
+-- instance Eq Float -- Defined in ‘GHC.Classes’
+-- instance Eq Int -- Defined in ‘GHC.Classes’
+-- instance Eq a => Eq [a] -- Defined in ‘GHC.Classes’
+-- instance Eq Ordering -- Defined in ‘GHC.Classes’
+-- instance Eq a => Eq (Solo a) -- Defined in ‘GHC.Classes’
+-- instance (Eq a, Eq b, Eq c, Eq d, Eq e, Eq f, Eq g, Eq h, Eq i,
+--           Eq j) =>
+--          Eq (a, b, c, d, e, f, g, h, i, j)
+--   -- Defined in ‘GHC.Classes’
+-- instance (Eq a, Eq b, Eq c, Eq d, Eq e, Eq f, Eq g, Eq h, Eq i,
+--           Eq j, Eq k) =>
+--          Eq (a, b, c, d, e, f, g, h, i, j, k)
+--   -- Defined in ‘GHC.Classes’
+-- instance (Eq a, Eq b, Eq c, Eq d, Eq e, Eq f, Eq g, Eq h, Eq i,
+--           Eq j, Eq k, Eq l) =>
+--          Eq (a, b, c, d, e, f, g, h, i, j, k, l)
+--   -- Defined in ‘GHC.Classes’
+-- instance (Eq a, Eq b, Eq c, Eq d, Eq e, Eq f, Eq g, Eq h, Eq i,
+--           Eq j, Eq k, Eq l, Eq m) =>
+--          Eq (a, b, c, d, e, f, g, h, i, j, k, l, m)
+--   -- Defined in ‘GHC.Classes’
+-- instance (Eq a, Eq b, Eq c, Eq d, Eq e, Eq f, Eq g, Eq h, Eq i,
+--           Eq j, Eq k, Eq l, Eq m, Eq n) =>
+--          Eq (a, b, c, d, e, f, g, h, i, j, k, l, m, n)
+--   -- Defined in ‘GHC.Classes’
+-- instance (Eq a, Eq b, Eq c, Eq d, Eq e, Eq f, Eq g, Eq h, Eq i,
+--           Eq j, Eq k, Eq l, Eq m, Eq n, Eq o) =>
+--          Eq (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o)
+--   -- Defined in ‘GHC.Classes’
+-- instance (Eq a, Eq b) => Eq (a, b) -- Defined in ‘GHC.Classes’
+-- instance (Eq a, Eq b, Eq c) => Eq (a, b, c)
+--   -- Defined in ‘GHC.Classes’
+-- instance (Eq a, Eq b, Eq c, Eq d) => Eq (a, b, c, d)
+--   -- Defined in ‘GHC.Classes’
+-- instance (Eq a, Eq b, Eq c, Eq d, Eq e) => Eq (a, b, c, d, e)
+--   -- Defined in ‘GHC.Classes’
+-- instance (Eq a, Eq b, Eq c, Eq d, Eq e, Eq f) =>
+--          Eq (a, b, c, d, e, f)
+--   -- Defined in ‘GHC.Classes’
+-- instance (Eq a, Eq b, Eq c, Eq d, Eq e, Eq f, Eq g) =>
+--          Eq (a, b, c, d, e, f, g)
+--   -- Defined in ‘GHC.Classes’
+-- instance (Eq a, Eq b, Eq c, Eq d, Eq e, Eq f, Eq g, Eq h) =>
+--          Eq (a, b, c, d, e, f, g, h)
+--   -- Defined in ‘GHC.Classes’
+-- instance (Eq a, Eq b, Eq c, Eq d, Eq e, Eq f, Eq g, Eq h, Eq i) =>
+--          Eq (a, b, c, d, e, f, g, h, i)
+--   -- Defined in ‘GHC.Classes’
+-- instance Eq () -- Defined in ‘GHC.Classes’
+-- instance Eq Word -- Defined in ‘GHC.Classes’
