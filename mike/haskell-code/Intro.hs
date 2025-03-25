@@ -418,4 +418,13 @@ instance Semigroup Integer where
 
 instance Semigroup [a] where
     mörtsch :: [a] -> [a] -> [a]
-    mörtsch = (++) 
+    mörtsch = (++)
+
+-- >>> mörtsch [1, 2, 3] [4, 5, 6] 
+-- [1,2,3,4,5,6]
+
+instance (Semigroup a, Semigroup b) => Semigroup (a, b) where
+    mörtsch (a1, b1) (a2, b2) = (mörtsch a1 a2, mörtsch b1 b2)
+
+-- >>> mörtsch ([1,2,3], 5 :: Integer) ([4,5,6], 7)
+-- ([1,2,3,4,5,6],12)
