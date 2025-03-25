@@ -1,6 +1,8 @@
 {-# LANGUAGE InstanceSigs #-}
 module Intro where
 
+import Prelude hiding (Semigroup, Monoid)
+
 x :: Integer
 x = 12 + 23 * 2
 
@@ -396,3 +398,4 @@ listIndex (x:xs) a =
 --   abs :: a -> a
 --   signum :: a -> a
 --   fromInteger :: Integer -> a
+
