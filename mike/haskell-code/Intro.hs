@@ -433,3 +433,13 @@ class Semigroup a => Monoid a where
     -- mörtsch neutral x == mörtsch x neutral == x
     neutral :: a
 
+instance Monoid Integer where
+    neutral :: Integer
+    neutral = 0
+
+instance Monoid [a] where
+    neutral :: [a]
+    neutral = []
+
+instance (Monoid a, Monoid b) => Monoid (a, b) where
+    neutral = (neutral, neutral)
