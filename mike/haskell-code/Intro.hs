@@ -130,6 +130,7 @@ runOverAnimal (MkSnake length _) = MkSnake length 0
 -- MkSnake 300 0
 
 -- Tier füttern
+feedAnimal :: Animal -> (Weight -> Animal)
 feedAnimal (MkDillo liveness weight) amount =
     case liveness of
         Alive -> MkDillo liveness (weight + amount)
