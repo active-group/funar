@@ -430,4 +430,6 @@ instance (Semigroup a, Semigroup b) => Semigroup (a, b) where
 -- ([1,2,3,4,5,6],12)
 
 class Semigroup a => Monoid a where
+    -- mörtsch neutral x == mörtsch x neutral == x
     neutral :: a
+
