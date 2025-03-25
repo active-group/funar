@@ -428,3 +428,6 @@ instance (Semigroup a, Semigroup b) => Semigroup (a, b) where
 
 -- >>> mörtsch ([1,2,3], 5 :: Integer) ([4,5,6], 7)
 -- ([1,2,3,4,5,6],12)
+
+class Semigroup a => Monoid a where
+    neutral :: a
