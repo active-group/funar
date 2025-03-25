@@ -461,3 +461,6 @@ instance (Semigroup a) => Semigroup (Optional a) where
 
 instance Semigroup a => Monoid (Optional a) where
     neutral = Null
+
+instance Semigroup b => Semigroup (a -> b) where
+    mörtsch f g = \ a -> mörtsch (f a) (g a)
