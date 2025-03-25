@@ -142,6 +142,7 @@ feedAnimal (MkSnake length thickness) amount =
 swap :: (a -> b -> c) -> (b -> a -> c) -- Typvariablen
 -- swap f = \ b -> \ a -> f a b
 swap f b a = f a b
+-- eingebaut flip
 
 feedAnimal' :: (Animal, Weight) -> Animal
 feedAnimal'(dillo@(MkDillo liveness weight), amount) =
@@ -151,6 +152,13 @@ feedAnimal'(dillo@(MkDillo liveness weight), amount) =
     Dead -> dillo -- MkDillo liveness weight
 feedAnimal'(MkSnake length thickness, amount) =
   MkSnake length (thickness + amount)
+
+tuplify :: (a -> b -> c) -> ((a, b) -> c)
+-- tuplify f = \ (a, b) -> f a b
+tuplify f (a, b) = f a b
+
+-- >>> tuplify (swap feedAnimal) (5, dillo1)
+-- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
 
 -- >>> feedAnimal'(dillo1, 5)
 -- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
