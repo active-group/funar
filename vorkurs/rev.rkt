@@ -35,6 +35,9 @@
         (first list)
         (add-element (rest list) element))))))
 
+; JVM: Kontext werden auf Stack verwaltet
+; - feste Größe
+; - klein (~10.000 Kontexte)
 
 ; mit Zwischenergebnis/Akkumulator
 (: rev-2 ((list-of %a) (list-of %a) -> (list-of %a)))
