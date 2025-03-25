@@ -78,13 +78,37 @@ dillo2 = MkDillo Dead 8
 
 -- Gürteltier überfahren
 runOverDillo :: Dillo -> Dillo
-runOverDillo dillo =
+-- runOverDillo dillo =
 -- Schablone:
 --     MkDillo { dilloLiveness = undefined, dilloWeight = undefined }
-   MkDillo {dilloLiveness = Dead, dilloWeight = dilloWeight dillo }
+--   MkDillo {dilloLiveness = Dead, dilloWeight = dilloWeight dillo }
+-- runOverDillo (MkDillo { dilloLiveness = l, dilloWeight = w}) = -- Pattern
+--    MkDillo { dilloLiveness = Dead, dilloWeight = w }
+-- runOverDillo (MkDillo { dilloWeight = w}) =
+--  MkDillo { dilloLiveness = Dead, dilloWeight = w }
+-- runOverDillo (MkDillo _liveness weight) = MkDillo Dead weight
+runOverDillo dillo = dillo { dilloLiveness = Dead } -- "functional update"
+
 
 -- >>> runOverDillo dillo1
 -- MkDillo {dilloLiveness = Dead, dilloWeight = 10}
 
 -- >>> runOverDillo dillo2
 -- MkDillo {dilloLiveness = Dead, dilloWeight = 8}
+
+
+
+-- Tier auf dem texanischen Highway:
+-- - Gürteltier ODER
+-- - Klapperschlange
+
+{-
+type Thickness = Integer
+type Length = Integer
+
+-- algebraischer Datentyp
+data Animal
+    = MkDillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
+    | MkSnake Length Thickness
+    deriving Show
+-}
