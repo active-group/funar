@@ -41,6 +41,7 @@
 ; JVM: Kontext werden auf Stack verwaltet
 ; - feste Größe
 ; - klein (~10.000 Kontexte)
+; - auch tail calls verbrauchen Platz
 
 ; mit Zwischenergebnis/Akkumulator
 (: rev-2 ((list-of %a) (list-of %a) -> (list-of %a)))
