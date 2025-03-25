@@ -411,4 +411,11 @@ listIndex (x:xs) a =
 class Semigroup a where
     -- mörtsch a (mörtsch b c) == mörtsch (mörtsch a b) c
     mörtsch :: a -> a -> a
- 
+
+instance Semigroup Integer where
+    mörtsch :: Integer -> Integer -> Integer
+    mörtsch = (+)
+
+instance Semigroup [a] where
+    mörtsch :: [a] -> [a] -> [a]
+    mörtsch = (++) 
