@@ -152,6 +152,9 @@ feedAnimal'(dillo@(MkDillo liveness weight), amount) =
 feedAnimal'(MkSnake length thickness, amount) =
   MkSnake length (thickness + amount)
 
+-- >>> feedAnimal'(dillo1, 5)
+-- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
+
 -- >>> (swap feedAnimal) 5 dillo1
 -- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
 
