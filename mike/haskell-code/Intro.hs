@@ -464,3 +464,6 @@ instance Semigroup a => Monoid (Optional a) where
 
 instance Semigroup b => Semigroup (a -> b) where
     mörtsch f g = \ a -> mörtsch (f a) (g a)
+
+-- >>> (mörtsch double quadruple) 5
+-- 110
