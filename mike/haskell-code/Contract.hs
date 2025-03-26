@@ -125,7 +125,7 @@ meaning c@(Later date contract) today =
     else ([], c)
 meaning (Inverse contract) today =
     let (payments, residual) = meaning contract today
-    in undefined
+    in (map invertPayment payments, Inverse residual)
 meaning (Combine contract1 contract2) today =
     let (payments1, residual1) = meaning contract1 today
         (payments2, residual2) = meaning contract2 today
