@@ -15,7 +15,7 @@ import Data.Map.Strict (Map, (!))
 -- 2. Validierung
 
 data Suit = Diamonds | Clubs | Spades | Hearts
-    deriving (Show, Eq)
+    deriving (Show, Eq, Ord)
 
 allSuits :: [Suit]
 allSuits = [Diamonds, Clubs, Spades, Hearts]
@@ -43,7 +43,7 @@ allRanks =
   ]
 
 data Card = Card { suit :: Suit, rank :: Rank }
-  deriving Show
+  deriving (Show, Eq, Ord)
 
 cartesianProduct :: [a] -> [b] -> [(a, b)]
 cartesianProduct as bs =
@@ -60,3 +60,29 @@ cardOrder card1 card2 =
     if suit card1 == suit card2
     then Just (compare (rank card1) (rank card2))
     else Nothing
+
+-- | Karten, die jemand auf der Hand hält
+newtype Hand = Hand {unHand :: Set Card}
+  deriving (Eq, Show)
+
+makeHand :: [Card] -> Hand
+makeHand cards = Hand (Set.fromList cards)
+
+handCards :: Hand -> [Card]
+handCards (Hand set) = Set.toList set
+
+-- | Ist die Hand leer?
+isHandEmpty :: Hand -> Bool
+isHandEmpty hand = Set.null (unHand hand)
+
+-- | Enthält die Hand eine spezifische Karte?
+containsCard :: Card -> Hand -> Bool
+containsCard card hand = Set.member card (unHand hand)
+
+-- | Karte aus der Hand entfernen
+removeCard :: Card -> Hand -> Hand
+removeCard card hand = Hand (Set.delete card (unHand hand))
+
+-- | Leere Hand
+emptyHand :: Hand
+emptyHand = Hand Set.empty
