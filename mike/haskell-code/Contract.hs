@@ -136,6 +136,10 @@ combine Zero c = c
 combine c Zero = c
 combine c1 c2 = Combine c1 c2
 
+inverse :: Contract -> Contract
+inverse Zero = Zero
+inverse c = Inverse c
+
 today = MkDate "2025-03-26"
 
 -- >>> meaning c2 today
@@ -149,4 +153,4 @@ today = MkDate "2025-03-26"
 -- ([MkPayment Long (MkDate "2025-03-26") 1.0 EUR],Combine Zero (Later (MkDate "2025-12-24") (One EUR)))
 
 -- >>> meaning (Combine (One EUR) (Later christmas (One EUR))) christmas
--- ([MkPayment Long (MkDate "2025-12-24") 1.0 EUR,MkPayment Long (MkDate "2025-12-24") 1.0 EUR],Combine Zero Zero)
+-- ([MkPayment Long (MkDate "2025-12-24") 1.0 EUR,MkPayment Long (MkDate "2025-12-24") 1.0 EUR],Zero)
