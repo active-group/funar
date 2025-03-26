@@ -23,7 +23,7 @@ p1 = [Put "Mike" 50,
       Get "Mike"] -- ups
 -}
 data DB a =
-    Get Key (Value -> DB a)
+    Get Key (Value -> DB a) -- Callback / Continuation
   | Put Key Value (() -> DB a)
   | Return a
 
@@ -37,3 +37,17 @@ p1 = Put "Mike" 50 (\() ->
 -- fehlt noch:
 -- 1. laufenlassen
 -- 2. schick aussehen (ohne viele Klammern)
+
+get :: Key -> DB Value
+get key = Get key Return
+
+put :: Key -> Value -> DB ()
+put key value = Put key value Return
+
+p1' = put "Mike" 50 -- ...
+
+
+splice :: DB a -> (a -> DB b) -> DB b
+splice (Get key cont) next = undefined
+splice (Put key value cont) next = undefined
+splice (Return result) next = undefined
