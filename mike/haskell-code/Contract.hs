@@ -104,19 +104,31 @@ scalePayment factor (MkPayment direction date amount currency) =
   MkPayment direction date (factor * amount) currency
 
 invertPayment :: Payment -> Payment
-invertPayment (MkPayment Long date amount currency) = MkPayment Short date amount currency
-invertPayment (MkPayment Short date amount currency) = MkPayment Long date amount currency
+invertPayment (MkPayment Long date amount currency) =
+    MkPayment Short date amount currency
+invertPayment (MkPayment Short date amount currency) =
+    MkPayment Long date amount currency
 
 -- Zahlungen aus dem Vertrag bis heute
 -- ----> "Residualvertrag"
 meaning :: Contract -> Date -> ([Payment], Contract)
+meaning Zero today = ([], Zero)
+meaning (One currency) today =
+    ([MkPayment Long today 1 currency], Zero)
 meaning (Many amount contract) today =
+    let (payments, residual) = meaning contract today
+    in (map (scalePayment amount) payments, residual)
+meaning c@(Later date contract) today =
+    if today >= date
+    then meaning contract today
+    else ([], c)
+meaning (Inverse contract) today =
     let (payments, residual) = meaning contract today
     in undefined
 meaning (Combine contract1 contract2) today =
     let (payments1, residual1) = meaning contract1 today
         (payments2, residual2) = meaning contract2 today
-    in undefined
+    in (payments1 ++ payments2, Combine residual1 residual2)
 
 today = MkDate "2025-03-26"
 
