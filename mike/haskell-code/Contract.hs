@@ -73,6 +73,8 @@ c3 = Many 10 c2 -- "Ich bekomme 120€ jetzt."
 
 c4 = Inverse (Inverse c3)
 
+c5 = mconcat [c1,c2,c3,c4]
+
 -- "Ich bekomme am 24.12.2025 100€."
 zcb1' = Later christmas (Many 100 (One EUR))
 
