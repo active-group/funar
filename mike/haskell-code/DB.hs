@@ -68,6 +68,10 @@ p1'' = splice (put "Mike" 50) (\() ->
        splice (get "Mike") (\ y ->
        Return (show (x+y))))))
 
+instance Functor DB where
+
+instance Applicative DB where
+
 instance Monad DB where
     (>>=) :: DB a -> (a -> DB b) -> DB b
     (>>=) = splice
