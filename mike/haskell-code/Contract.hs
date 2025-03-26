@@ -139,3 +139,9 @@ today = MkDate "2025-03-26"
 -- >>> meaning (One EUR) today
 -- ([MkPayment Long (MkDate "2025-03-26") 1 EUR], Zero)
 -- >>> c2
+
+-- >>> meaning (Combine (One EUR) (Later christmas (One EUR))) today
+-- ([MkPayment Long (MkDate "2025-03-26") 1.0 EUR],Combine Zero (Later (MkDate "2025-12-24") (One EUR)))
+
+-- >>> meaning (Combine (One EUR) (Later christmas (One EUR))) christmas
+-- ([MkPayment Long (MkDate "2025-12-24") 1.0 EUR,MkPayment Long (MkDate "2025-12-24") 1.0 EUR],Combine Zero Zero)
