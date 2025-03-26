@@ -49,7 +49,8 @@ data Direction = Long | Short
   deriving Show
 
 data Contract
-    = One Currency
+    = Zero
+    | One Currency
     | Many Amount Contract
     | Later Date Contract
     | Inverse Contract
@@ -59,6 +60,9 @@ data Contract
 instance Semigroup Contract where
     (<>) :: Contract -> Contract -> Contract
     (<>) = Combine
+
+instance Monoid Contract where
+    mempty = Zero
 
 c1 = One EUR -- "Ich bekomme 1€ jetzt."
 
