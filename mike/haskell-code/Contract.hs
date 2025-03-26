@@ -93,8 +93,9 @@ fxSwap date longCurrency longAmount shortCurrency shortAmount =
     Combine (zeroCouponBond date longCurrency longAmount)
             (Inverse (zeroCouponBond date shortCurrency shortAmount))
 
-c6 = Many 50 (Combine (One EUR)
-                      (Later christmas (One EUR)))
+c6 = Many 50 (Later christmas (One EUR))
+
+-- >>> meaning c6 (MkDate "2025-03-26")
 
 -- Semantik
 data Payment = MkPayment Direction Date Amount Currency
@@ -103,3 +104,14 @@ data Payment = MkPayment Direction Date Amount Currency
 -- Zahlungen aus dem Vertrag bis heute
 -- ----> "Residualvertrag"
 meaning :: Contract -> Date -> ([Payment], Contract)
+meaning (Combine contract1 contract2) today =
+    let (payments1, residual1) = meaning contract1 today
+        (payments2, residual2) = meaning contract2 today
+    in undefined
+
+today = MkDate "2025-03-26"
+
+-- meaning c2 today
+-- ([MkPayment Long (MkDate "2025-03-26") 12 EUR)], Zero)
+
+
