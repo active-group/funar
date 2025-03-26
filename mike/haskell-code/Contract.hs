@@ -59,7 +59,7 @@ data Contract
 
 instance Semigroup Contract where
     (<>) :: Contract -> Contract -> Contract
-    (<>) = Combine
+    (<>) = combine
 
 instance Monoid Contract where
     mempty = Zero
@@ -129,7 +129,12 @@ meaning (Inverse contract) today =
 meaning (Combine contract1 contract2) today =
     let (payments1, residual1) = meaning contract1 today
         (payments2, residual2) = meaning contract2 today
-    in (payments1 ++ payments2, Combine residual1 residual2)
+    in (payments1 ++ payments2, combine residual1 residual2)
+
+combine :: Contract -> Contract -> Contract
+combine Zero c = c
+combine c Zero = c
+combine c1 c2 = Combine c1 c2
 
 today = MkDate "2025-03-26"
 
