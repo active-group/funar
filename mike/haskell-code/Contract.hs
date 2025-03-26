@@ -10,7 +10,7 @@ zero-coupon bond / Zero-Bond
 2. Beispiel zerlegen in "atomare Bestandteile" / "Ideen"
    z.B. entlang der Attribute
    - Währung - "Ich bekomme jetzt 1EUR."
-   - Betrag
+   - Betrag - "Ich bekomme 12€ jetzt."
    - "Später"
 
 -}
@@ -36,6 +36,16 @@ zcb1 = ZeroCouponBond christmas 100 EUR
 
 data Contract
     = One Currency
+    | Many Amount Contract
+    | Later Date Contract
     deriving Show
 
 c1 = One EUR -- "Ich bekomme 1€ jetzt."
+
+
+c2 = Many 12 (One EUR) -- "Ich bekomme 12€ jetzt."
+
+c3 = Many 10 c2 -- "Ich bekomme 120€ jetzt."
+
+-- "Ich bekomme am 24.12.2025 100€."
+zcb1 = Later christmas (Many 100 (One EUR))
