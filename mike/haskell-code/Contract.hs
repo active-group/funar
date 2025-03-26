@@ -94,6 +94,7 @@ fxSwap date longCurrency longAmount shortCurrency shortAmount =
             (Inverse (zeroCouponBond date shortCurrency shortAmount))
 
 -- >>> meaning (Many 50 (Later christmas (One EUR))) (MkDate "2025-03-26")
+-- ([],Later (MkDate "2025-12-24") (One EUR))
 
 -- Semantik
 data Payment = MkPayment Direction Date Amount Currency
@@ -117,7 +118,7 @@ meaning (One currency) today =
     ([MkPayment Long today 1 currency], Zero)
 meaning (Many amount contract) today =
     let (payments, residual) = meaning contract today
-    in (map (scalePayment amount) payments, residual)
+    in (map (scalePayment amount) payments, Many amount residual)
 meaning c@(Later date contract) today =
     if today >= date
     then meaning contract today
