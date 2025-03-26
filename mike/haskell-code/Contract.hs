@@ -93,6 +93,9 @@ fxSwap date longCurrency longAmount shortCurrency shortAmount =
     Combine (zeroCouponBond date longCurrency longAmount)
             (Inverse (zeroCouponBond date shortCurrency shortAmount))
 
+c6 = Many 50 (Combine (One EUR)
+                      (Later christmas (One EUR)))
+
 -- Semantik
 data Payment = MkPayment Direction Date Amount Currency
   deriving Show
