@@ -113,7 +113,8 @@ invertPayment (MkPayment Short date amount currency) =
 -- Zahlungen aus dem Vertrag bis heute
 -- ----> "Residualvertrag"
 meaning :: Contract -> Date -> ([Payment], Contract)
-meaning Zero today = ([], Zero)
+-- Monoid-Homomorphismus
+meaning Zero today = mempty
 meaning (One currency) today =
     ([MkPayment Long today 1 currency], Zero)
 meaning (Many amount contract) today =
@@ -126,11 +127,16 @@ meaning c@(Later date contract) today =
 meaning (Inverse contract) today =
     let (payments, residual) = meaning contract today
     in (map invertPayment payments, Inverse residual)
-meaning (Combine contract1 contract2) today =
+meaning (Combine contract1 contract2) today = {-
     let (payments1, residual1) = meaning contract1 today
         (payments2, residual2) = meaning contract2 today
-    in (payments1 ++ payments2, combine residual1 residual2)
+--    in (payments1 ++ payments2, combine residual1 residual2)
+    in  (payments1 <> payments2, residual1 <> residual2)
+-}
+    -- Halbgruppen-Homomorphismus
+    meaning contract1 today <> meaning contract2 today
 
+-- "Smart Constructor"
 combine :: Contract -> Contract -> Contract
 combine Zero c = c
 combine c Zero = c
