@@ -93,15 +93,19 @@ fxSwap date longCurrency longAmount shortCurrency shortAmount =
     Combine (zeroCouponBond date longCurrency longAmount)
             (Inverse (zeroCouponBond date shortCurrency shortAmount))
 
--- >>> meaning (Many 50 (Later christmas (One EUR)) (MkDate "2025-03-26")
+-- >>> meaning (Many 50 (Later christmas (One EUR))) (MkDate "2025-03-26")
 
 -- Semantik
 data Payment = MkPayment Direction Date Amount Currency
   deriving Show
 
-multiplyAmount :: Amount -> Payment -> Payment
-multiplyAmount factor (MkPayment direction date amount currency) =
-    undefined
+scalePayment :: Amount -> Payment -> Payment
+scalePayment factor (MkPayment direction date amount currency) =
+  MkPayment direction date (factor * amount) currency
+
+invertPayment :: Payment -> Payment
+invertPayment (MkPayment Long date amount currency) = MkPayment Short date amount currency
+invertPayment (MkPayment Short date amount currency) = MkPayment Long date amount currency
 
 -- Zahlungen aus dem Vertrag bis heute
 -- ----> "Residualvertrag"
