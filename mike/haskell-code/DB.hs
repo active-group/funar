@@ -77,3 +77,10 @@ instance Monad DB where
     (>>=) = splice
     return :: a -> DB a
     return = Return
+
+p1''' :: DB String
+p1''' = do put "Mike" 50
+           x <- get "Mike"
+           put "Mike" (x+1)
+           y <- get "Mike"
+           return (show (x+y))
