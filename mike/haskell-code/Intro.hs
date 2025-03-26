@@ -298,7 +298,7 @@ optionalMap f (Result a) = Result (f a)
 instance Functor Optional where
     fmap = optionalMap
 
--- einbaut als:
+-- eingebaut als:
 -- data Maybe a = Nothing | Just a
 
 -- Index eines Elements in einer Liste
