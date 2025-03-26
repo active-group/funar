@@ -1,6 +1,9 @@
 {-# LANGUAGE InstanceSigs #-}
 module DB where
 
+import qualified Data.Map.Strict as Map
+import Data.Map.Strict (Map, (!))
+
 {-
 put "Mike" 50
 x = get "Mike"
@@ -74,7 +77,7 @@ instance Applicative DB where
 
 instance Monad DB where
     (>>=) :: DB a -> (a -> DB b) -> DB b
-    (>>=) = splice
+    (>>=) = splice -- "bind"
     return :: a -> DB a
     return = Return
 
@@ -84,3 +87,8 @@ p1''' = do put "Mike" 50
            put "Mike" (x+1)
            y <- get "Mike"
            return (show (x+y))
+
+runDB :: DB a -> Map Key Value -> (a, Map Key Value)
+runDB (Get key cont) mp = undefined
+runDB (Put key value cont) mp = undefined
+runDB (Return result) mp = undefined
