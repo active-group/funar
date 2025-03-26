@@ -1,5 +1,34 @@
 -- Das französische Blatt
-module Cards where
+module Cards
+  ( Suit (..),
+    Rank (..),
+    Card (..),
+    deck,
+    cardOrder,
+    Player (..),
+    Hand,
+    makeHand,
+    emptyHand,
+    isHandEmpty,
+    containsCard,
+    removeCard,
+    handCards,
+    Trick,
+    emptyTrick,
+    trickEmpty,
+    addToTrick,
+    trickToList,
+    listToTrick,
+    leadingCardOfTrick,
+    Pile,
+    emptyPile,
+    pileEmpty,
+    pileAddTrick,
+    pileCards,
+    allSuits,
+    allRanks,
+  )
+where
 
 import qualified Data.Set as Set
 import Data.Set (Set)
