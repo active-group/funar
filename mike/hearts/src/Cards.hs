@@ -89,3 +89,55 @@ removeCard card hand = Hand (Set.delete card (unHand hand))
 -- | Leere Hand
 emptyHand :: Hand
 emptyHand = Hand Set.empty
+
+-- Spieler
+
+data Player = Player {playerName :: String}
+  deriving (Show, Eq, Ord)
+
+-- * Stich
+
+-- | Zuletzt gespielte Karte zuerst
+newtype Trick = Trick {trickToList :: [(Player, Card)]}
+  deriving (Show, Eq)
+
+listToTrick :: [(Player, Card)] -> Trick
+listToTrick = Trick
+
+-- | leeren Stich herstellen
+emptyTrick :: Trick
+emptyTrick = Trick []
+
+-- | ist Stich leer
+trickEmpty :: Trick -> Bool
+trickEmpty (Trick list) = null list
+
+-- | alle Karten des Stich
+cardsOfTrick :: Trick -> [Card]
+cardsOfTrick (Trick list) = map snd list
+
+-- | Karte auf den Stich legen
+addToTrick :: Player -> Card -> Trick -> Trick
+addToTrick player card (Trick list) = Trick ((player, card) : list)
+
+-- | die Karte des Stich, die bedient werden muß
+leadingCardOfTrick :: Trick -> Card
+leadingCardOfTrick (Trick list) = snd (last list)
+
+-- | Haufen aufgenommener Karten
+newtype Pile = Pile {unPile :: Set Card}
+  deriving (Show)
+
+emptyPile :: Pile
+emptyPile = Pile Set.empty
+
+pileEmpty :: Pile -> Bool
+pileEmpty pile = Set.null (unPile pile)
+
+-- Stich auf den Haufen legen
+pileAddTrick :: Pile -> Trick -> Pile
+pileAddTrick pile trick =
+  Pile (Set.union (unPile pile) (Set.fromList (cardsOfTrick trick)))
+
+pileCards :: Pile -> [Card]
+pileCards pile = Set.toList (unPile pile)
