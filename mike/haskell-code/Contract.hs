@@ -101,9 +101,16 @@ c6 = Many 50 (Later christmas (One EUR))
 data Payment = MkPayment Direction Date Amount Currency
   deriving Show
 
+multiplyAmount :: Amount -> Payment -> Payment
+multiplyAmount factor (MkPayment direction date amount currency) =
+    undefined
+
 -- Zahlungen aus dem Vertrag bis heute
 -- ----> "Residualvertrag"
 meaning :: Contract -> Date -> ([Payment], Contract)
+meaning (Many amount contract) today =
+    let (payments, residual) = meaning contract today
+    in undefined
 meaning (Combine contract1 contract2) today =
     let (payments1, residual1) = meaning contract1 today
         (payments2, residual2) = meaning contract2 today
@@ -111,7 +118,9 @@ meaning (Combine contract1 contract2) today =
 
 today = MkDate "2025-03-26"
 
--- meaning c2 today
--- ([MkPayment Long (MkDate "2025-03-26") 12 EUR)], Zero)
+-- >>> meaning c2 today
+-- ([MkPayment Long (MkDate "2025-03-26") 12 EUR], Zero)
 
+-- >>> meaning (One EUR) today
+-- ([MkPayment Long (MkDate "2025-03-26") 1 EUR], Zero)
 -- >>> c2
