@@ -114,4 +114,4 @@ today = MkDate "2025-03-26"
 -- meaning c2 today
 -- ([MkPayment Long (MkDate "2025-03-26") 12 EUR)], Zero)
 
-
+-- >>> c2
