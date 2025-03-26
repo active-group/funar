@@ -17,6 +17,9 @@ import Data.Map.Strict (Map, (!))
 data Suit = Diamonds | Clubs | Spades | Hearts
     deriving (Show, Eq, Ord)
 
+-- >>> Diamonds < Clubs
+-- True
+
 allSuits :: [Suit]
 allSuits = [Diamonds, Clubs, Spades, Hearts]
 
