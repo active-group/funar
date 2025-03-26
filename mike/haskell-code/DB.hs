@@ -88,6 +88,12 @@ p1''' = do put "Mike" 50
            y <- get "Mike"
            return (show (x+y))
 
+-- >>> runDB p1 Map.empty
+-- ("101",fromList [("Mike",51)])
+
+-- >>> runDB p1''' Map.empty
+-- ("101",fromList [("Mike",51)])
+
 runDB :: DB a -> Map Key Value -> (a, Map Key Value)
 runDB (Get key cont) mp = 
     let value = mp ! key
