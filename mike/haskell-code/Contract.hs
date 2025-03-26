@@ -78,3 +78,6 @@ fxSwap1 :: Contract
 fxSwap1 = Later christmas (Combine (Many 100 (One EUR))
                                    (Inverse (Many 100 (One GBP))))
 
+fxSwap date longCurrency longAmount shortCurrency shortAmount =
+    Combine (zeroCouponBond date longCurrency longAmount)
+            (Inverse (zeroCouponBond date shortCurrency shortAmount))
