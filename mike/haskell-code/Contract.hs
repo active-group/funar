@@ -92,3 +92,11 @@ fxSwap1 = Later christmas (Combine (Many 100 (One EUR))
 fxSwap date longCurrency longAmount shortCurrency shortAmount =
     Combine (zeroCouponBond date longCurrency longAmount)
             (Inverse (zeroCouponBond date shortCurrency shortAmount))
+
+-- Semantik
+data Payment = MkPayment Direction Date Amount Currency
+  deriving Show
+
+-- Zahlungen aus dem Vertrag bis heute
+-- ----> "Residualvertrag"
+meaning :: Contract -> Date -> ([Payment], Contract)
