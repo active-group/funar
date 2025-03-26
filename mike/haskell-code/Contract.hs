@@ -13,6 +13,12 @@ zero-coupon bond / Zero-Bond
    - Betrag - "Ich bekomme 12€ jetzt."
    - "Später"
 
+3. Selbstbezüge suchen/konstruieren
+
+... und von vorne.
+
+
+
 -}
 
 newtype Date = MkDate String -- wie data
