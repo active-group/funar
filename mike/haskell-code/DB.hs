@@ -48,6 +48,7 @@ p1' = put "Mike" 50 -- ...
 
 
 splice :: DB a -> (a -> DB b) -> DB b
-splice (Get key cont) next = undefined
+splice (Get key cont) next =
+    Get key (\value -> splice (cont value) next)
 splice (Put key value cont) next = undefined
 splice (Return result) next = undefined
