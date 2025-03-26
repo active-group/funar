@@ -1,3 +1,4 @@
+{-# LANGUAGE InstanceSigs #-}
 module Contract where
 
 {-
@@ -54,6 +55,10 @@ data Contract
     | Inverse Contract
     | Combine Contract Contract
     deriving Show
+
+instance Semigroup Contract where
+    (<>) :: Contract -> Contract -> Contract
+    (<>) = Combine
 
 c1 = One EUR -- "Ich bekomme 1€ jetzt."
 
