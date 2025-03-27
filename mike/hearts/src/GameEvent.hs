@@ -46,12 +46,21 @@ data Game a =
     Return a
   | RecordEvent GameEvent (() -> Game a)
   | IsValid Player Card (Bool -> Game a)
+  | TurnOverTrick (Maybe (Trick, Player) -> Game a)
+  | PlayerAfter Player (Player -> Game a)
+
 
 recordEventM :: GameEvent -> Game ()
 recordEventM event = RecordEvent event Return
 
 isValidM :: Player -> Card -> Game Bool
 isValidM player card = IsValid player card Return
+
+turnOverTrickM :: Game (Maybe (Trick, Player))
+turnOverTrickM = TurnOverTrick Return
+
+playerAfterM :: Player -> Game Player
+playerAfterM player = PlayerAfter player Return
 
 instance Functor Game where
     -- later maybe
@@ -69,6 +78,10 @@ instance Monad Game where
         RecordEvent event (\() -> cont () >>= next)
     (>>=) (IsValid player card cont) next =
         IsValid player card (\valid -> cont valid >>= next)
+    (>>=) (TurnOverTrick cont) next =
+        TurnOverTrick (\m -> cont m >>= next)
+    (>>=) (PlayerAfter player cont) next =
+        PlayerAfter player (\player -> cont player >>= next)
 
 -- Maybe Player: Ist das Spiel und wer hat gewonnen?
 tableProcessCommandM :: GameCommand -> Game (Maybe Player)
@@ -80,7 +93,19 @@ tableProcessCommandM (DealHands hands) =
 tableProcessCommandM (PlayCard player card) =
     do valid <- isValidM player card
        if valid
-       then undefined
+       then do recordEventM (LegalCardPlayed player card)
+               turnOverTrick <- turnOverTrickM               
+               case turnOverTrick of
+                 Just (trick, trickTaker) ->
+                   do recordEventM (TrickTaken trickTaker trick)
+                      undefined
+                 Nothing ->
+                  do nextPlayer <- playerAfterM player
+                     recordEventM (PlayerTurnChanged nextPlayer)
+                     return Nothing
        else do recordEventM (IllegalCardAttempted player card)
                return Nothing
+               
+
+
             
