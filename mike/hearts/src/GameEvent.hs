@@ -45,6 +45,7 @@ data GameCommand
 data Game a =
     Return a
   | RecordEvent GameEvent (() -> Game a)
+  | IsValid Player Card (Bool -> Game a)
 
 recordEventM :: GameEvent -> Game ()
 recordEventM event = RecordEvent event Return
@@ -61,8 +62,15 @@ instance Monad Game where
     return = pure
     (>>=) :: Game a -> (a -> Game b) -> Game b
     (>>=) (Return result) next = next result
+    (>>=) (RecordEvent event cont) next =
+        RecordEvent event (\() -> cont () >>= next)
 
 -- Maybe Player: Ist das Spiel und wer hat gewonnen?
 tableProcessCommandM :: GameCommand -> Game (Maybe Player)
-tableProcessCommandM (DealHands hands) = undefined
-tableProcessCommandM (PlayCard player card) = undefined
+tableProcessCommandM (DealHands hands) =
+    let pairs = Map.toList hands
+        events = map (uncurry HandDealt) pairs
+    in do mapM_ recordEventM events
+          return Nothing
+tableProcessCommandM (PlayCard player card) =
+    do undefined
