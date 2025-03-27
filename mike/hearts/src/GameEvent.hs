@@ -49,6 +49,7 @@ data Game a =
   | TurnOverTrick (Maybe (Trick, Player) -> Game a)
   | PlayerAfter Player (Player -> Game a)
   | GameOver (Maybe Player -> Game a)
+  | GetCommand (GameCommand -> Game a)
 
 recordEventM :: GameEvent -> Game ()
 recordEventM event = RecordEvent event Return
@@ -119,10 +120,11 @@ tableProcessCommandM (PlayCard player card) =
        else do recordEventM (IllegalCardAttempted player card)
                return Nothing
 
+-- Spiel von Anfang bis zum Ende spielen
 tableLoopM :: GameCommand -> Game Player
 tableLoopM command =
     do maybeWinner <- tableProcessCommandM command
        case maybeWinner of
-        Nothing -> undefined
+        Nothing -> tableLoopM 
         Just winner ->
             return winner
