@@ -500,6 +500,7 @@ data User = MkUser EMail Age
 data Validated a = 
     Valid a
   | Invalid [String] --  Fehlermeldungen
+  deriving Show
 
 validateEMail :: String -> Validated EMail
 validateEMail email =
@@ -529,6 +530,10 @@ fmap2 f oa ob =
     -- fmap f oa <*> ob
     f <$> oa <*> ob
 
+instance Functor Validated where
+    fmap f (Valid a) = Valid (f a)
+    fmap f (Invalid errors) = Invalid errors
+
 instance Applicative Validated where
     pure = Valid
     (<*>) (Invalid errors1) (Invalid errors2) = Invalid (errors1 ++ errors2)
@@ -536,7 +541,10 @@ instance Applicative Validated where
     (<*>) (Valid f) (Invalid errors) = Invalid errors
     (<*>) (Valid f) (Valid a) = Valid (f a)
 
-makeUser :: String -> Integer -> Optional User
+makeUser :: String -> Integer -> Validated User
 makeUser s n =
     -- fmap2 MkUser (validateEMail s) (validateAge n)
     MkUser <$> validateEMail s <*> validateAge n
+
+-- >>> makeUser "mike" 150
+-- Invalid ["no at sign","too young or too old"]
