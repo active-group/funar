@@ -527,4 +527,5 @@ fmap2 f oa ob =
 
 makeUser :: String -> Integer -> Optional User
 makeUser s n =
-    fmap2 MkUser (validateEMail s) (validateAge n)
+    -- fmap2 MkUser (validateEMail s) (validateAge n)
+    MkUser <$> validateEMail s <*> validateAge n
