@@ -1,5 +1,5 @@
 module Table(TableState, emptyTableState,
-      )
+             runTable)
 where
 
 import qualified Data.Foldable as Foldable
