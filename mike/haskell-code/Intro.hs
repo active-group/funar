@@ -486,3 +486,19 @@ instance Semigroup b => Semigroup (a -> b) where
 
 -- >>> (mörtsch double quadruple) 5
 -- 110
+
+-- E-Mail-Adresse, Alter
+data User = MkUser String Integer
+  deriving Show
+
+validateEMail :: String -> Optional String
+validateEMail email =
+    case listIndex email '@' of 
+        Result _ -> Result email
+        Null -> Null
+
+validateAge :: Integer -> Optional Integer
+validateAge n =
+    if n >= 0 && n <= 120
+    then Result n
+    else Null
