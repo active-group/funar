@@ -1,3 +1,4 @@
+{-# LANGUAGE InstanceSigs #-}
 module GameEvent where
 
 import Cards
@@ -43,8 +44,25 @@ data GameCommand
 
 data Game a =
     Return a
+  | RecordEvent GameEvent (() -> Game a)
 
+recordEventM :: GameEvent -> Game ()
+recordEventM event = RecordEvent event Return
+
+instance Functor Game where
+    -- later maybe
+instance Applicative Game where
+    -- later maybe
+    pure :: a -> Game a
+    pure = Return
+
+instance Monad Game where
+    return :: a -> Game a
+    return = pure
+    (>>=) :: Game a -> (a -> Game b) -> Game b
+    (>>=) (Return result) next = next result
 
 -- Maybe Player: Ist das Spiel und wer hat gewonnen?
 tableProcessCommandM :: GameCommand -> Game (Maybe Player)
-tableProcessCommandM = undefined
+tableProcessCommandM (DealHands hands) = undefined
+tableProcessCommandM (PlayCard player card) = undefined
