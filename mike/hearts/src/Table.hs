@@ -212,3 +212,26 @@ tableProcessEvent (TrickTaken player trick) state =
     }
 tableProcessEvent (IllegalCardAttempted player card) state = state
 tableProcessEvent (GameEnded player) state = state
+
+swap :: (b, a) -> (a, b)
+swap (a, b) = (b, a)
+turnOverTrick' :: TableState -> Maybe (Player, Trick)
+turnOverTrick' state = fmap swap (turnOverTrick state)
+
+-- Konvention: Right, wenn man fertig ist / es geklappt
+-- data Either a b = Left a | Right b
+
+-- [GameEvent]: Akkumulator für Events - im Input in umgekehrter Reihenfolge
+runTable :: Game a -> (TableState, [GameEvent]) -> (a, TableState, [GameEvent])
+runTable (IsValid player card cont) s@(state, _) =
+  runTable (cont (playValid state player card)) s
+runTable (TurnOverTrick cont) s@(state, _) =
+  runTable (cont (fmap swap (turnOverTrick' state))) s
+runTable (RecordEvent event cont) (state, revents) =
+  runTable (cont ()) (tableProcessEvent event state, event : revents)
+
+runTable (Return result) (state, revents) =
+  (result, state, reverse revents)
+runTable (GetCommand cont) (state, revents) =
+  -- müssen anhalten
+  (cont, state, reverse revents)
