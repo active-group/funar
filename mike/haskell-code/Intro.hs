@@ -487,8 +487,14 @@ instance Semigroup b => Semigroup (a -> b) where
 -- >>> (mörtsch double quadruple) 5
 -- 110
 
+newtype EMail = MkEMail String
+  deriving Show
+
+newtype Age = MkAge Integer
+  deriving Show
+
 -- E-Mail-Adresse, Alter
-data User = MkUser String Integer
+data User = MkUser EMail Age
   deriving Show
 
 validateEMail :: String -> Optional String
