@@ -1,5 +1,5 @@
 module Table(TableState, emptyTableState,
-             runTable)
+      )
 where
 
 import qualified Data.Foldable as Foldable
@@ -197,7 +197,7 @@ tableProcessEvent (HandDealt player hand) state =
     }
 tableProcessEvent (PlayerTurnChanged player) state =
   state
-    { tableStatePlayers = rotateTo player (tableStatePlayers state)
+    { tableStatePlayers = skipTo player (tableStatePlayers state)
     }
 tableProcessEvent (LegalCardPlayed player card) state =
   state
