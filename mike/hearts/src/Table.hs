@@ -222,7 +222,8 @@ turnOverTrick' state = fmap swap (turnOverTrick state)
 -- data Either a b = Left a | Right b
 
 -- [GameEvent]: Akkumulator für Events - im Input in umgekehrter Reihenfolge
-runTable :: Game a -> (TableState, [GameEvent]) -> (a, TableState, [GameEvent])
+runTable :: Game a -> (TableState, [GameEvent]) -> 
+               (Either (GameCommand -> Game a) a, TableState, [GameEvent])
 runTable (IsValid player card cont) s@(state, _) =
   runTable (cont (playValid state player card)) s
 runTable (TurnOverTrick cont) s@(state, _) =
@@ -231,7 +232,7 @@ runTable (RecordEvent event cont) (state, revents) =
   runTable (cont ()) (tableProcessEvent event state, event : revents)
 
 runTable (Return result) (state, revents) =
-  (result, state, reverse revents)
+  (Right result, state, reverse revents)
 runTable (GetCommand cont) (state, revents) =
   -- müssen anhalten
-  (cont, state, reverse revents)
+  (Left cont, state, reverse revents)
