@@ -40,3 +40,11 @@ data GameCommand
   = DealHands (Map Player Hand)
   | PlayCard Player Card
   deriving (Show, Eq)
+
+data Game a =
+    Return a
+
+
+-- Maybe Player: Ist das Spiel und wer hat gewonnen?
+tableProcessCommandM :: GameCommand -> Game (Maybe Player)
+tableProcessCommandM = undefined
