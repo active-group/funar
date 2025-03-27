@@ -89,6 +89,8 @@ instance Monad Game where
         PlayerAfter player (\player -> cont player >>= next)
     (>>=) (GameOver cont) next =
         GameOver (\winner -> cont winner >>= next)
+    (>>=) (GetCommand cont) next =
+        GetCommand (\command -> cont command >>= next)
 
 -- Maybe Player: Ist das Spiel vorbei und wer hat gewonnen?
 tableProcessCommandM :: GameCommand -> Game (Maybe Player)
