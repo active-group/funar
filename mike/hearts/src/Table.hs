@@ -197,7 +197,7 @@ tableProcessEvent (HandDealt player hand) state =
     }
 tableProcessEvent (PlayerTurnChanged player) state =
   state
-    { tableStatePlayers = skipTo player (tableStatePlayers state)
+    { tableStateNext = skipTo player (tableStateNext state)
     }
 tableProcessEvent (LegalCardPlayed player card) state =
   state
