@@ -508,3 +508,23 @@ validateAge n =
     if n >= 0 && n <= 120
     then Result (MkAge n)
     else Null
+
+instance Applicative Optional where
+    pure :: a -> Optional a
+    pure = Result
+
+    (<*>) :: Optional (a -> b) -> Optional a -> Optional b
+    (<*>) Null Null = Null
+    (<*>) (Result f) (Result a) = Result (f a)
+    (<*>) Null (Result a) = Null
+    (<*>) (Result f) Null = Null
+
+fmap2 :: (a -> b -> c) -> Optional a -> Optional b -> Optional c
+fmap2 f oa ob =
+    -- pure f <*> oa <*> ob
+    -- fmap f oa <*> ob
+    f <$> oa <*> ob
+
+makeUser :: String -> Integer -> Optional User
+makeUser s n =
+    fmap2 MkUser (validateEMail s) (validateAge n)
