@@ -71,9 +71,25 @@ p1'' = splice (put "Mike" 50) (\() ->
        splice (get "Mike") (\ y ->
        Return (show (x+y))))))
 
+-- fmap ::       (a ->    b) -> DB a -> DB b
+-- (<*>) ::   DB (a ->    b) -> DB a -> DB b
+-- flip (>>=) :: (a -> DB b) -> DB a -> DB b
+
+
+
 instance Functor DB where
+    fmap :: (a -> b) -> DB a -> DB b
+    fmap f (Get key cont) =
+        Get key (\value -> fmap f (cont value))
+    fmap f (Put key value cont) =
+        Put key value (\() -> fmap f (cont ()))
+    fmap f (Return result) = Return (f result)
 
 instance Applicative DB where
+    pure :: a -> DB a
+    pure = Return
+    (<*>) :: DB (a -> b) -> DB a -> DB b
+    (<*>) = undefined
 
 instance Monad DB where
     (>>=) :: DB a -> (a -> DB b) -> DB b
