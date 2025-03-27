@@ -531,11 +531,14 @@ fmap2 f oa ob =
     f <$> oa <*> ob
 
 instance Functor Validated where
+    fmap :: (a -> b) -> Validated a -> Validated b
     fmap f (Valid a) = Valid (f a)
     fmap f (Invalid errors) = Invalid errors
 
 instance Applicative Validated where
+    pure :: a -> Validated a
     pure = Valid
+    (<*>) :: Validated (a -> b) -> Validated a -> Validated b
     (<*>) (Invalid errors1) (Invalid errors2) = Invalid (errors1 ++ errors2)
     (<*>) (Invalid errors) (Valid a) = Invalid errors
     (<*>) (Valid f) (Invalid errors) = Invalid errors
@@ -548,3 +551,6 @@ makeUser s n =
 
 -- >>> makeUser "mike" 150
 -- Invalid ["no at sign","too young or too old"]
+
+-- >>> makeUser "sperber@deinprogramm.de" 20
+-- Valid (MkUser (MkEMail "sperber@deinprogramm.de") (MkAge 20))
