@@ -497,17 +497,21 @@ newtype Age = MkAge Integer
 data User = MkUser EMail Age
   deriving Show
 
-validateEMail :: String -> Optional EMail
+data Validated a = 
+    Valid a
+  | Invalid [String] --  Fehlermeldungen
+
+validateEMail :: String -> Validated EMail
 validateEMail email =
     case listIndex email '@' of 
-        Result _ -> Result (MkEMail email)
-        Null -> Null
+        Result _ -> Valid (MkEMail email)
+        Null -> Invalid ["no at sign"]
 
-validateAge :: Integer -> Optional Age
+validateAge :: Integer -> Validated Age
 validateAge n =
     if n >= 0 && n <= 120
-    then Result (MkAge n)
-    else Null
+    then Valid (MkAge n)
+    else Invalid ["too young or too old"]
 
 instance Applicative Optional where
     pure :: a -> Optional a
@@ -524,6 +528,13 @@ fmap2 f oa ob =
     -- pure f <*> oa <*> ob
     -- fmap f oa <*> ob
     f <$> oa <*> ob
+
+instance Applicative Validated where
+    pure = Valid
+    (<*>) (Invalid errors1) (Invalid errors2) = Invalid (errors1 ++ errors2)
+    (<*>) (Invalid errors) (Valid a) = Invalid errors
+    (<*>) (Valid f) (Invalid errors) = Invalid errors
+    (<*>) (Valid f) (Valid a) = Valid (f a)
 
 makeUser :: String -> Integer -> Optional User
 makeUser s n =
