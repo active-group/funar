@@ -497,14 +497,14 @@ newtype Age = MkAge Integer
 data User = MkUser EMail Age
   deriving Show
 
-validateEMail :: String -> Optional String
+validateEMail :: String -> Optional EMail
 validateEMail email =
     case listIndex email '@' of 
-        Result _ -> Result email
+        Result _ -> Result (MkEMail email)
         Null -> Null
 
-validateAge :: Integer -> Optional Integer
+validateAge :: Integer -> Optional Age
 validateAge n =
     if n >= 0 && n <= 120
-    then Result n
+    then Result (MkAge n)
     else Null
