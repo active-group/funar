@@ -48,7 +48,7 @@ data Game a =
   | IsValid Player Card (Bool -> Game a)
   | TurnOverTrick (Maybe (Trick, Player) -> Game a)
   | PlayerAfter Player (Player -> Game a)
-
+  | GameOver (Maybe Player -> Game a)
 
 recordEventM :: GameEvent -> Game ()
 recordEventM event = RecordEvent event Return
@@ -61,6 +61,10 @@ turnOverTrickM = TurnOverTrick Return
 
 playerAfterM :: Player -> Game Player
 playerAfterM player = PlayerAfter player Return
+
+gameOverM :: Game (Maybe Player)
+gameOverM = GameOver Return
+
 
 instance Functor Game where
     -- later maybe
@@ -82,8 +86,10 @@ instance Monad Game where
         TurnOverTrick (\m -> cont m >>= next)
     (>>=) (PlayerAfter player cont) next =
         PlayerAfter player (\player -> cont player >>= next)
+    (>>=) (GameOver cont) next =
+        GameOver (\winner -> cont winner >>= next)
 
--- Maybe Player: Ist das Spiel und wer hat gewonnen?
+-- Maybe Player: Ist das Spiel vorbei und wer hat gewonnen?
 tableProcessCommandM :: GameCommand -> Game (Maybe Player)
 tableProcessCommandM (DealHands hands) =
     let pairs = Map.toList hands
@@ -98,14 +104,17 @@ tableProcessCommandM (PlayCard player card) =
                case turnOverTrick of
                  Just (trick, trickTaker) ->
                    do recordEventM (TrickTaken trickTaker trick)
-                      undefined
+                      over <- gameOverM
+                      case over of
+                        Just winner ->
+                            do recordEventM (GameEnded winner)
+                               return (Just winner)
+                        Nothing ->
+                            do recordEventM (PlayerTurnChanged trickTaker)
+                               return Nothing
                  Nothing ->
                   do nextPlayer <- playerAfterM player
                      recordEventM (PlayerTurnChanged nextPlayer)
                      return Nothing
        else do recordEventM (IllegalCardAttempted player card)
                return Nothing
-               
-
-
-            
