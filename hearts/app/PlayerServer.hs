@@ -16,7 +16,7 @@ import Network.Wai.Middleware.Cors
 import Network.Wai.Middleware.Servant.Options
 import Servant
 
-import Player
+import StatePlayer
 
 type PlayerAPI = "event" :> ReqBody '[JSON] GameEvent :> Post '[JSON] [GameCommand]
 

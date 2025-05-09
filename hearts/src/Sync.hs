@@ -14,7 +14,8 @@ import Data.Foldable as Foldable
 
 import Cards
 import GameEvent
-import Player
+import StatePlayer ( statePlayerIO, alongStrategy )
+import StateTtyPlayer ( interactiveStrategy, stateTtyPlayerIO )
 import Shuffle
 import TableIO
 
