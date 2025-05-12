@@ -213,6 +213,19 @@
     (make-snake (snake-length snake) 0)))
 
 ; Tier überfahren
+(: run-over-animal (animal -> animal))
+
+(check-expect (run-over-animal dillo1)
+              (run-over-dillo dillo1))
+
+(check-expect (run-over-animal snake1)
+              (run-over-snake snake1))
+
+(define run-over-animal
+  (lambda (animal)
+    (cond
+      (... ...)
+      (... ...))))
 
 
 #|
