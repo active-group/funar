@@ -86,4 +86,4 @@
     (+ (* 60 (time-hour time))
        (time-minute time))))
 
-
+; aus Minuten-seit-Mitternacht die Uhrzeit berechnen
