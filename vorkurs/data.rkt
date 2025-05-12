@@ -108,6 +108,10 @@
 ; Tier auf dem texanischen Highway
 ; - Gürteltier -ODER-
 ; - Schlange
+; Fallunterscheidung
+; gemischte Daten
+(define animal
+  (signature (mixed dillo snake)))
 
 ; Gürteltier hat folgende Eigenschaften:
 ; - lebendig? -UND-
@@ -207,6 +211,8 @@
 (define run-over-snake
   (lambda (snake)
     (make-snake (snake-length snake) 0)))
+
+; Tier überfahren
 
 
 #|
