@@ -266,7 +266,7 @@
 (define-record cons-list
   cons
   cons?
-  (first number)
+  (first element)
   (rest list-of-numbers))
 
 ; 1elementige Liste: 5
@@ -338,8 +338,32 @@
            (cons (first list)
                  (filter-odds (rest list)))
            (filter-odds (rest list)))))))
-       
 
+
+(: filter ((number -> boolean) list-of-numbers -> list-of-numbers))
+
+(check-expect (filter odd? list4)
+              (cons 3 (cons 5 empty)))
+(check-expect (filter even? list4)
+              (cons 2 (cons 8 empty)))
+
+(define filter
+  (lambda (p? list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (if (p? (first list))
+           (cons (first list)
+                 (filter p? (rest list)))
+           (filter p? (rest list)))))))
+
+(define dillos (cons dillo1 (cons dillo2 empty)))
+
+; Abstraktion:
+; - kopieren (letztes Mal)
+; - ggf. umbenennen - rekursive Aufrufe nicht vergessen
+; - Unterschiede in (abstrakte) Namen umwandeln
+; - Namen in lambda aufnehmen - rekursive Aufrufe nicht vergessen
 
 
 #|
