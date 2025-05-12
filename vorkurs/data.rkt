@@ -104,3 +104,39 @@
     (make-time
      (quotient minutes 60)
      (remainder minutes 60))))
+
+; Tiere auf dem texanischen Highway
+
+; Gürteltier hat folgende Eigenschaften:
+; - lebendig? -UND-
+; - Gewicht
+(define-record dillo
+  make-dillo
+  (dillo-alive? boolean)
+  (dillo-weight number))
+
+; Beschreibung des Zustands des Gürteltiers zu einem bestimmten Zeitpunkt
+
+(: make-dillo (boolean number -> dillo))
+(: dillo-alive? (dillo -> boolean))
+(: dillo-weight (dillo -> number))
+
+; lebendiges Gürteltier, 10kg
+(define dillo1 (make-dillo #t 10))
+
+; totes Gürteltier, 8kg
+(define dillo2 (make-dillo #f 8))
+
+; Gürteltier überfahren
+
+
+#|
+class Dillo {
+  bool isAlive;
+  double weight;
+
+  void runOver() {
+    this.isAlive = false;
+  }
+}
+|#
