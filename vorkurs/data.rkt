@@ -87,3 +87,20 @@
        (time-minute time))))
 
 ; aus Minuten-seit-Mitternacht die Uhrzeit berechnen
+(: msm->time (natural -> time))
+
+(check-expect (msm->time 744)
+              time1)
+
+; Schablone
+#;(define msm->time
+  (lambda (minutes)
+    (make-time
+     ...
+     ...)))
+
+(define msm->time
+  (lambda (minutes)
+    (make-time
+     (quotient minutes 60)
+     (remainder minutes 60))))
