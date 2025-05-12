@@ -198,7 +198,7 @@
 ; - Dicke
 (define-record snake
   make-snake
-  snake?
+  snake? ; Prädikat
   (snake-length number)
   (snake-thickness number))
 
