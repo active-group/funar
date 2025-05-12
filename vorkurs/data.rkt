@@ -412,6 +412,18 @@
         (f (first list))
         (map f (rest list)))))))
 
+(: fold (%b (%a %b -> %b) (list-of %a) -> %b))
+
+(define fold
+  (lambda (for-empty for-cons list)
+    (cond
+      ((empty? list) for-empty)
+      ((cons? list)
+       (for-cons
+        (first list)
+        (fold for-empty for-cons (rest list)))))))
+              
+           
 #|
 class Dillo {
   bool isAlive;
