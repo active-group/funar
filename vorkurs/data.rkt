@@ -255,7 +255,7 @@
 (define list-of
   (lambda (element)
     (signature (mixed empty-list
-                      cons-list))))
+                      (cons-list-of element)))))
 
 (define-singleton empty-list ; Signatur
   empty ; "Instanz"
@@ -283,7 +283,7 @@
 (define list4 (cons 3 list3))
 
 ; Liste aufsummieren
-(: list-sum (list-of-numbers -> number))
+(: list-sum ((list-of number) -> number))
 
 (check-expect (list-sum list4)
               18)
@@ -299,6 +299,7 @@
        (list-sum (rest list))
        ...))))
     
+(define list-of-numbers (signature (list-of number)))
 
 (define list-sum
   (lambda (list)
