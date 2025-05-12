@@ -70,4 +70,18 @@
 ; Minuten seit Mitternacht
 (: minutes-since-midnight (time -> natural))
 
+(check-expect (minutes-since-midnight time1)
+              744)
+(check-expect (minutes-since-midnight time2)
+              903)
 
+; Schablone
+#;(define minutes-since-midnight
+  (lambda (time)
+    ... (time-hour time) ...
+    ... (time-minute time) ...))
+
+(define minutes-since-midnight
+  (lambda (time)
+    (+ (* 60 (time-hour time))
+       (time-minute time))))
