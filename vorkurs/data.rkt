@@ -166,7 +166,7 @@
       ((not (dillo-alive? dillo))
        dillo))))
 
-(define feed-dillo
+#;(define feed-dillo
   (lambda (dillo number)
     (cond
       ((dillo-alive? dillo)
