@@ -388,11 +388,12 @@
         (run-over-animals (rest list)))))))
 
 ; alle Elemente einer Liste inkrementieren
+(: inc-list ((list-of number) -> (list-of number)))
 
 (define inc-list
   (lambda (list)
     (cond
-      ((empty? list) ...)
+      ((empty? list) empty)
       ((cons? list)
        (cons
         (inc (first list))
@@ -400,6 +401,16 @@
 
 (define inc (lambda (x) (+ 1 x)))
 
+(: map ((%a -> %b) (list-of %a) -> (list-of %b)))
+   
+(define map
+  (lambda (f list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cons
+        (f (first list))
+        (map f (rest list)))))))
 
 #|
 class Dillo {
