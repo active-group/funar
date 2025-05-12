@@ -246,6 +246,24 @@
 
 ; häufig: Summe aus Produkten
 
+; Liste ist eins der folgenden:
+; - die leere Liste -ODER-
+; - eine Cons-Liste, bestehend aus erstem Element und Rest-Liste
+;                                                          ^^^^^ Selbstbezug
+
+; anfangs: Listen aus Zahlen
+#;(define list-of-numbers
+  (signature (mixed empty-list
+                    cons-list)))
+
+(define-singleton empty-list ; Signatur
+  empty ; "Instanz"
+  empty?) ; Prädikat
+
+
+
+
+
 #|
 class Dillo {
   bool isAlive;
