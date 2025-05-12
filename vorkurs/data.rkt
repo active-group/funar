@@ -323,9 +323,22 @@
         (first list)
         (list-product (rest list)))))))
 
-; alle geraden Elemente aus einer Liste extrahieren
+; alle ungeraden Elemente aus einer Liste extrahieren
+(: filter-odds (list-of-numbers -> list-of-numbers))
 
+(check-expect (filter-odds list4)
+              (cons 3 (cons 5 empty)))
 
+(define filter-odds
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (if (odd? (first list))
+           (cons (first list)
+                 (filter-odds (rest list)))
+           (filter-odds (rest list)))))))
+       
 
 
 
