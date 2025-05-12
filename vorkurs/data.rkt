@@ -342,7 +342,10 @@
            (filter-odds (rest list)))))))
 
 
-(: filter ((number -> boolean) list-of-numbers -> list-of-numbers))
+; %element: Signaturvariable, "jedesmal was anderes einsetzen"
+; (: filter ((number -> boolean) (list-of number) -> (list-of number)
+; Wissen nichts über %elements
+(: filter ((%element -> boolean) (list-of %element) -> (list-of %element)))
 
 (check-expect (filter odd? list4)
               (cons 3 (cons 5 empty)))
@@ -366,6 +369,24 @@
 ; - ggf. umbenennen - rekursive Aufrufe nicht vergessen
 ; - Unterschiede in (abstrakte) Namen umwandeln
 ; - Namen in lambda aufnehmen - rekursive Aufrufe nicht vergessen
+
+; alle Tiere überfahren
+(: run-over-animals ((list-of animal) -> (list-of animal)))
+
+(check-expect (run-over-animals list4)
+              (cons (run-over-animal dillo1)
+                    (cons (run-over-animal dillo2)
+                          empty)))
+
+(define run-over-animals
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cons
+        (run-over-animal (first list))
+        (run-over-animals (rest list)))))))
+
 
 
 #|
