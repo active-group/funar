@@ -252,13 +252,25 @@
 ;                                                          ^^^^^ Selbstbezug
 
 ; anfangs: Listen aus Zahlen
-#;(define list-of-numbers
+(define list-of-numbers
   (signature (mixed empty-list
                     cons-list)))
 
 (define-singleton empty-list ; Signatur
   empty ; "Instanz"
   empty?) ; Prädikat
+
+; Eine Cons-Liste besteht aus:
+; - erstes Element -UND-
+; - Rest-Liste
+(define-record cons-list
+  cons
+  cons?
+  (first number)
+  (rest list-of-numbers))
+
+
+
 
 
 
