@@ -269,7 +269,44 @@
   (first number)
   (rest list-of-numbers))
 
+; 1elementige Liste: 5
+(define list1 (cons 5 empty))
 
+; 2elementige Liste: 5 8
+(define list2 (cons 5 (cons 8 empty)))
+
+; 3elementige Liste: 2 5 8
+(define list3         (cons 2 (cons 5 (cons 8 empty))))
+
+; 4elementige Liste: 3 2 5 8
+(define list4 (cons 3 list3))
+
+; Liste aufsummieren
+(: list-sum (list-of-numbers -> number))
+
+(check-expect (list-sum list4)
+              18)
+
+; Schablone:
+#;(define list-sum
+  (lambda (list)
+    (cond
+      ((empty? list) ...)
+      ((cons? list)
+       ...
+       (first list)
+       (list-sum (rest list))
+       ...))))
+    
+
+(define list-sum
+  (lambda (list)
+    (cond
+      ((empty? list) 0)
+      ((cons? list)
+       (+
+        (first list)
+        (list-sum (rest list)))))))
 
 
 
