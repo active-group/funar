@@ -105,7 +105,9 @@
      (quotient minutes 60)
      (remainder minutes 60))))
 
-; Tiere auf dem texanischen Highway
+; Tier auf dem texanischen Highway
+; - Gürteltier -ODER-
+; - Schlange
 
 ; Gürteltier hat folgende Eigenschaften:
 ; - lebendig? -UND-
@@ -184,6 +186,27 @@
          (dillo-alive? dillo)
          (+ (dillo-weight dillo) number))
         dillo)))
+
+; Eine Schlange hat folgende Eigenschaften:
+; - Länge -UND-
+; - Dicke
+(define-record snake
+  make-snake
+  (snake-length number)
+  (snake-thickness number))
+
+; Schlange 3m lang, 10cm dick
+(define snake1 (make-snake 300 10))
+
+; Schlange überfahren
+(: run-over-snake (snake -> snake))
+
+(check-expect (run-over-snake snake1)
+              (make-snake 300 0))
+
+(define run-over-snake
+  (lambda (snake)
+    (make-snake (snake-length snake) 0)))
 
 
 #|
