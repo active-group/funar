@@ -67,4 +67,7 @@
 ; 15:03 Uhr
 (define time2 (make-time 15 03))
   
-  
+; Minuten seit Mitternacht
+(: minutes-since-midnight (time -> natural))
+
+
