@@ -237,6 +237,15 @@
       ((dillo? animal) (run-over-dillo animal))
       ((snake? animal) (run-over-snake animal)))))
 
+; neue Fälle:      FP :-(  OOP :-)
+; neue Funktionen: FP :-)  OOP :-(
+; ===> Kombinatormodelle
+
+; zusammengesetzte Daten - Produkt
+; gemischte Daten        - Summe
+
+; häufig: Summe aus Produkten
+
 #|
 class Dillo {
   bool isAlive;
