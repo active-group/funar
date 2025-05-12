@@ -17,3 +17,15 @@
 (above
  (beside star1 square1)
  (beside square1 star1))
+
+; Abstraktion
+; 2 ähnliche Code-Stücke
+; - (ein letztes Mal) kopieren
+; - die Unterschiede ersetzen durch (abstrakte) Namen
+; - Namen in ein lambda aufnehmen
+
+(define tile
+  (lambda (image1 image2)
+    (above
+     (beside image1 image2)
+     (beside image2 image1))))
