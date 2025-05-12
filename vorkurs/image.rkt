@@ -24,10 +24,37 @@
 ; - die Unterschiede ersetzen durch (abstrakte) Namen
 ; - Namen in ein lambda aufnehmen
 
+; Konstruktionsanleitung
+; - Kurzbeschreibung
+; - Signatur(deklaration)
+
+; quadratisches Kachelmuster erzeugen
+(: tile (image image -> image))
+
 (define tile
   (lambda (image1 image2)
     (above
      (beside image1 image2)
      (beside image2 image1))))
 
-(tile star1 square1)
+;(tile star1 square1)
+
+#|
+
+class C {
+   static int f(int x) {
+      ... x ...
+      x = x + 1;
+      ... x ...
+   }
+}
+
+... C.f(42) ... ->
+{
+  ... 42 ...
+
+  ... 43 ...
+}
+
+
+|#
