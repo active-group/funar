@@ -423,7 +423,15 @@
         (first list)
         (fold for-empty for-cons (rest list)))))))
               
-           
+
+(fold empty (lambda (first-list rec-result) (cons (run-over-animal first-list) rec-result)) dillos)
+
+(fold 0
+      (lambda (dillo sum-rest)
+        (+ (dillo-weight dillo)
+           sum-rest))
+      dillos)
+
 #|
 class Dillo {
   bool isAlive;
