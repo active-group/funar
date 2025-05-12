@@ -149,6 +149,42 @@
     (make-dillo #f (dillo-weight dillo))))
 
 ; Gürteltier füttern ... variable Menge
+(check-expect
+ (feed-dillo dillo1 10)
+ (make-dillo #t 20))
+(check-expect
+ (feed-dillo dillo2 5)
+ dillo2)
+
+#;(define feed-dillo
+  (lambda (dillo number)
+    (cond
+      ((dillo-alive? dillo)
+       (make-dillo
+        (dillo-alive? dillo)
+        (+ (dillo-weight dillo) number)))
+      ((not (dillo-alive? dillo))
+       dillo))))
+
+(define feed-dillo
+  (lambda (dillo number)
+    (cond
+      ((dillo-alive? dillo)
+       (make-dillo
+        (dillo-alive? dillo)
+        (+ (dillo-weight dillo) number)))
+      (else ; syntaktischer Zucker
+       dillo))))
+
+; binäre Verzweigung
+(define feed-dillo
+  (lambda (dillo number)
+    (if (dillo-alive? dillo)
+        (make-dillo
+         (dillo-alive? dillo)
+         (+ (dillo-weight dillo) number))
+        dillo)))
+
 
 #|
 class Dillo {
