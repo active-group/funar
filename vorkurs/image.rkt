@@ -1,2 +1,2 @@
 #lang deinprogramm/sdp/beginner
-(+ 23 (* 42 2))
+(define x (+ 23 (* 42 2)))
