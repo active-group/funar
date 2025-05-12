@@ -10,11 +10,11 @@
 (define star1 (star 50 "solid" "gold"))
 (define overlay1 (overlay star1 circle1))
 
-(above
+#;(above
  (beside circle1 star1)
  (beside star1 circle1))
 
-(above
+#;(above
  (beside star1 square1)
  (beside square1 star1))
 
