@@ -373,7 +373,7 @@
 ; alle Tiere überfahren
 (: run-over-animals ((list-of animal) -> (list-of animal)))
 
-(check-expect (run-over-animals list4)
+(check-expect (run-over-animals dillos)
               (cons (run-over-animal dillo1)
                     (cons (run-over-animal dillo2)
                           empty)))
@@ -387,6 +387,18 @@
         (run-over-animal (first list))
         (run-over-animals (rest list)))))))
 
+; alle Elemente einer Liste inkrementieren
+
+(define inc-list
+  (lambda (list)
+    (cond
+      ((empty? list) ...)
+      ((cons? list)
+       (cons
+        (inc (first list))
+        (inc-list (rest list)))))))
+
+(define inc (lambda (x) (+ 1 x)))
 
 
 #|
