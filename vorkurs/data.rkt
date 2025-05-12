@@ -302,12 +302,28 @@
 (define list-sum
   (lambda (list)
     (cond
-      ((empty? list) 0)
+      ((empty? list) 0) ; neutrale Element von +
       ((cons? list)
        (+
         (first list)
         (list-sum (rest list)))))))
 
+; List multiplizieren
+(: list-product (list-of-numbers -> number))
+
+(check-expect (list-product list4)
+              240)
+
+(define list-product
+  (lambda (list)
+    (cond
+      ((empty? list) 1) ; neutrale Element von *
+      ((cons? list)
+       (*
+        (first list)
+        (list-product (rest list)))))))
+
+; alle geraden Elemente aus einer Liste extrahieren
 
 
 
