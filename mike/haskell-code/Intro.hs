@@ -62,6 +62,11 @@ data Liveness = Alive | Dead deriving Show
 
 type Weight = Integer -- Typsynonym
 
+-- Tier auf dem texanischen Highway:
+-- - Gürteltier -ODER-
+-- - Schlange
+
+{-
 data Dillo = 
     MkDillo { dilloLiveness :: Liveness, -- MkDillo: Konstruktor, dilloLiveness ... Selektoren
               dilloWeight :: Weight }
@@ -147,3 +152,34 @@ entschönfinkeln f (a, b) = f a b
 
 schönfinkeln :: ((a, b) -> c) -> a -> b -> c
 schönfinkeln f a b = f (a, b)
+-}
+
+type Length = Integer
+type Thickness = Integer
+
+
+data Animal =
+    MkDillo { dilloLiveness :: Liveness, dilloWeight :: Weight}
+  | MkSnake Length Thickness -- nur verwendbar mit Pattern-Matching, abgekürzten Notation
+  deriving Show
+
+dillo1 :: Animal
+dillo1 = MkDillo { dilloLiveness = Alive, dilloWeight = 10 }
+
+dillo2 :: Animal
+dillo2 = MkDillo Dead 8
+
+snake1 :: Animal
+snake1 = MkSnake 300 10
+
+runOverAnimal :: Animal -> Animal
+
+-- >>> runOverAnimal dillo1
+-- MkDillo {dilloLiveness = Dead, dilloWeight = 10}
+
+-- >>> runOverAnimal snake1
+-- MkSnake 300 0
+
+-- jede Gleichung muß Konstruktor erwähnen
+runOverAnimal (MkDillo _ weight) = MkDillo Dead weight
+runOverAnimal (MkSnake length _) = MkSnake length 0
