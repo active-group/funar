@@ -48,6 +48,7 @@ zcb1 = ZeroCouponBond (MkDate "2025-12-24") 100 EUR
 data Contract =
     One Currency
   | WithMoney Amount Contract -- statt Currency
+  | WithDate Date Contract
   deriving Show
 
 -- "Ich bekomme 1€ jetzt."
@@ -55,3 +56,16 @@ c1 :: Contract
 c1 = One EUR
 
 -- "Ich bekomme 100€ jetzt."
+c2 = WithMoney 100 (One EUR)
+
+-- "Ich bekomme jetzt 50000€."
+c3 = WithMoney 500 (WithMoney 100 (One EUR))
+
+zcb1 :: Contract
+zcb1 = WithDate (MkDate "2025-12-24") (WithMoney 100 (One EUR))
+
+zeroCouponBond :: Date -> Amount -> Currency -> Contract
+zeroCouponBond date amount currency =
+    WithDate date (WithMoney amount (One currency))
+
+zcb1' = zeroCouponBond (MkDate "2025-12-24") 100 EUR
