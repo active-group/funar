@@ -323,5 +323,34 @@ listIndex (x:xs) element =
 -- - Operationen
 -- - Gesetze/Gleichungen
 
--- Gruppe<
+
+
+-- Gruppe
 -- "neutrales Element"
+
+-- 1 + 1 == 2
+
+-- Halbgruppe
+-- Typ a
+-- op :: a -> a -> a
+-- Assoziativität (Eigenschaft von op)
+-- op x (op y z) == op (op x y) z
+-- x + (y + z) == (x + y) + z
+
+class Semigroup a where
+  -- op x (op y z) == op (op x y) z
+  op :: a -> a -> a
+
+instance Semigroup [a] where
+    op :: [a] -> [a] -> [a]
+    op x y = x ++ y
+
+-- Typ a
+-- neutral :: a
+-- op :: a -> a -> a
+
+-- Für alle x:
+-- op neutral x == op x neutral == x
+
+-- 0 + x == x + 0 == x -- neutrales Element von +
+-- 1 * x == x * 1 == x -- neutrales Element von *
