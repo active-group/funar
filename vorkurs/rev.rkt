@@ -38,7 +38,7 @@
         (add-element (rest list) element))))))
 
 
-; Liste umdrehen, 2. Versuch
+; Liste umdrehen, 2. Versuch, linear
 (: rev-2 ((list-of %a) (list-of %a) -> (list-of %a)))
 ;                      ^^^^^ Zwischenergebnis
 
