@@ -71,7 +71,8 @@ isCute Snake = False
 -- - lebendig ODER tot
 -- - Gewicht
 
-data Liveness = Alive | Dead deriving Show
+data Liveness = Alive | Dead 
+  deriving (Show, Eq)
 
 type Weight = Integer -- Typsynonym
 
@@ -174,7 +175,7 @@ type Thickness = Integer
 data Animal =
     MkDillo { dilloLiveness :: Liveness, dilloWeight :: Weight}
   | MkSnake Length Thickness -- nur verwendbar mit Pattern-Matching, abgekürzten Notation
-  deriving Show
+  deriving (Show, Eq)
 
 dillo1 :: Animal
 dillo1 = MkDillo { dilloLiveness = Alive, dilloWeight = 10 }
@@ -299,10 +300,7 @@ listIndex :: Eq a => [a] -> a -> Optional Integer
 -- Result 2
 
 -- >>> listIndex [Dog, Snake, Cat, Snake, Dog] Cat
--- No instance for `Eq Pet' arising from a use of `listIndex'
--- In the expression: listIndex [Dog, Snake, Cat, Snake, Dog] Cat
--- In an equation for `it_a8UXb':
---     it_a8UXb = listIndex [Dog, Snake, Cat, Snake, Dog] Cat
+-- Result 2
 
 listIndex [] element = Null
 listIndex (x:xs) element =
@@ -312,3 +310,8 @@ listIndex (x:xs) element =
         case listIndex xs element of
             Null -> Null
             Result index -> Result (index + 1)
+
+-- >>> :info Show
+-- type Show :: * -> Constraint
+-- class Show a where
+--   show :: a -> String
