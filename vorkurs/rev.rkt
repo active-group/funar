@@ -11,10 +11,17 @@
     (cond
       ((empty? list) empty)
       ((cons? list)
-       (add-element
+       (add-element ; Kontext des Aufrufs von rev
         (rev (rest list)) ; 3 2
         (first list) ; 1
        )))))
+
+; Kontext oft zur Laufzeit auf Stack verwaltet
+
+; Problem: Stack ist auf vielen Laufzeitumgebungen a) begrenzt b) klein
+
+; Laufzeit für Liste der Länge n
+; 1 + 2 + ... + (n-1) + n = (n+1)*n/2 = O(n^2)
 
 (: add-element ((list-of %a) %a -> (list-of %a)))
 
@@ -29,4 +36,22 @@
        (cons
         (first list)
         (add-element (rest list) element))))))
-  
+
+
+; Liste umdrehen, 2. Versuch
+(: rev-2 ((list-of %a) (list-of %a) -> (list-of %a)))
+;                      ^^^^^ Zwischenergebnis
+
+(check-expect (rev-2 (list 1 2 3)
+                     empty)
+              (list 3 2 1))
+
+(define rev-2
+  (lambda (list acc)
+    (cond
+      ((empty? list) ...)
+      ((cons? list)
+       ...
+       (first list)
+       (rev-2 (rest list) ...)
+       ...))))
