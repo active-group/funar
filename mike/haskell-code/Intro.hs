@@ -120,6 +120,12 @@ swap :: (a -> b -> c) -> (b -> a -> c)
 swap f b a = f a b
 -- eingebaut flip
 
+-- Tupel: Ad-hoc zusammengesetzte Daten
+
+-- >>> feedDillo''(dillo1, 5)
+-- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
+
+feedDillo'' :: (Dillo, Weight) -> Dillo
 feedDillo''(dillo, amount) =
   case dilloLiveness dillo of
     Alive -> dillo {dilloWeight = dilloWeight dillo + amount}
