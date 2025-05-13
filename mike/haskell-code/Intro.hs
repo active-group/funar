@@ -345,6 +345,11 @@ instance Semigroup [a] where
     op :: [a] -> [a] -> [a]
     op x y = x ++ y
 
+instance Semigroup Shape where
+    op :: Shape -> Shape -> Shape
+    op = MkOverlap
+
+
 -- >>> op [1,2,3] [4,5,6]
 -- [1,2,3,4,5,6]
 
