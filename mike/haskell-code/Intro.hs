@@ -365,7 +365,32 @@ instance (Monoid a, Monoid b) => Monoid (a, b) where
     neutral :: (a, b)
     neutral = (neutral, neutral)
 
+-- Übung:
+instance Semigroup a => Semigroup (Optional a) where
+    op :: Optional a -> Optional a -> Optional a
+    op Null o = o
+    op o Null = o
+    op (Result a1) (Result a2) = Result (op a1 a2)
 
+instance Semigroup a => Monoid (Optional a) where
+    neutral :: Optional a
+    neutral = Null
+
+
+data AndBool = AndBool Bool
+  deriving Show
+
+instance Semigroup AndBool where
+  op :: AndBool -> AndBool -> AndBool
+  op (AndBool b1) (AndBool b2) = AndBool (b1 && b2)
+
+-- >>> op (Result (AndBool True)) (Result (AndBool False))
+-- Result (AndBool False)
+
+-- >>> op (Result [1,2,3]) Null
+-- Result [1,2,3]
+-- >>> op (Result [1,2,3]) (Result [4,5,6])
+-- Result [1,2,3,4,5,6]
 
 -- >>> op [1,2,3] [4,5,6]
 -- [1,2,3,4,5,6]
