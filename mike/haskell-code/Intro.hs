@@ -315,3 +315,13 @@ listIndex (x:xs) element =
 -- type Show :: * -> Constraint
 -- class Show a where
 --   show :: a -> String
+
+-- Algebra
+
+-- algebraische Struktur:
+-- - Menge / Typ
+-- - Operationen
+-- - Gesetze/Gleichungen
+
+-- Gruppe<
+-- "neutrales Element"
