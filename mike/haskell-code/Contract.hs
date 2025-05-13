@@ -9,7 +9,16 @@ module Contract where
 --   Zero-Bond / zero-coupon bond
 --   "Ich bekomme Weihnachten 100€."
 
--- - Beispiel in "atomare Bestandteile" / "Bauteile"
+-- - Beispiel in "atomare Bestandteile" / "Bauteile" zerlegt
+
+-- - dabei Kombinatoren konstruiert
+
+-- wiederholen
+
+-- Currency Swap:
+-- Am 24.12.2025:
+--    Ich bekomme 100€ und
+--    ich zahle $100.
 
 -- 3 Ideen:
 ---  1. Währung
@@ -49,6 +58,8 @@ data Contract =
     One Currency
   | WithMoney Amount Contract -- statt Currency
   | WithDate Date Contract
+  | WithContract Contract Contract
+  | Negate Contract
   deriving Show
 
 -- "Ich bekomme 1€ jetzt."
@@ -69,3 +80,9 @@ zeroCouponBond date amount currency =
     WithDate date (WithMoney amount (One currency))
 
 zcb1' = zeroCouponBond (MkDate "2025-12-24") 100 EUR
+
+xmas = MkDate "2025-12-24"
+
+fxSwap1 :: Contract
+fxSwap1 = WithDate xmas (WithContract (WithMoney 100 (One EUR))
+                                      (WithMoney 100 (One USD)))
