@@ -62,5 +62,5 @@
       ((empty? list) acc)
       ((cons? list)
        (rev-2 (rest list)
-              ... (first list) acc ...) ; neues Zwischenergebnis
-       ))))
+              (cons (first list) acc) ; neues Zwischenergebnis
+       )))))
