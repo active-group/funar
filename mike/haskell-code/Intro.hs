@@ -31,6 +31,19 @@ data Pet = -- data: neuer Datentyp
   | Snake
   deriving Show -- Zauberspruch
 
+instance Eq Pet where
+    (==) :: Pet -> Pet -> Bool
+    (==) Cat Cat = True
+    (==) Dog Dog = True
+    (==) Snake Snake = True
+    (==) _ _ = False
+--    (==) Cat Dog = False
+--    (==) Dog Cat = False
+--    (==) Cat Snake = False
+--    (==) Snake Cat = False
+--    (==) Snake Dog = False
+--    (==) Dog Snake = False
+
 -- Ist Haustier niedlich?
 isCute :: Pet -> Bool
 -- 1 Gleichung pro Fall
