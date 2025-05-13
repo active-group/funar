@@ -46,12 +46,21 @@
                      empty)
               (list 3 2 1))
 
+; Schablone
+#;(define rev-2
+  (lambda (list acc)
+    (cond
+      ((empty? list) acc)
+      ((cons? list)
+       (rev-2 (rest list)
+              ... (first list) acc ...) ; neues Zwischenergebnis
+       ))))
+
 (define rev-2
   (lambda (list acc)
     (cond
-      ((empty? list) ...)
+      ((empty? list) acc)
       ((cons? list)
-       ...
-       (first list)
-       (rev-2 (rest list) ...)
-       ...))))
+       (rev-2 (rest list)
+              ... (first list) acc ...) ; neues Zwischenergebnis
+       ))))
