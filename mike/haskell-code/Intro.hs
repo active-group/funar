@@ -268,8 +268,17 @@ listMap f (x:xs) = f x : listMap f xs
 data Optional a =
     Null 
   | Result a
+  deriving Show
+
+-- Eq a: Constraint "a ist vergleichbar bzw. unterstützt die ==-Operation"
 
 -- Index eines Elements in einer Liste finden
-listIndex :: [a] -> a -> Optional Integer
+listIndex :: Eq a => [a] -> a -> Optional Integer
 listIndex [] element = Null
-listIndex (x:xs) element = undefined
+listIndex (x:xs) element =
+    if element == x
+    then Result 0
+    else
+        case listIndex xs element of
+            Null -> Null
+            Result index -> Result (index + 1)
