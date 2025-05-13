@@ -65,7 +65,7 @@ type Weight = Integer -- Typsynonym
 data Dillo = 
     MkDillo { dilloLiveness :: Liveness, -- MkDillo: Konstruktor, dilloLiveness ... Selektoren
               dilloWeight :: Weight }
---    deriving Show
+    deriving Show
 
 -- lebendiges Gürteltier 10kg
 dillo1 :: Dillo
