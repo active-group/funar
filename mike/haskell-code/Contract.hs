@@ -85,4 +85,8 @@ xmas = MkDate "2025-12-24"
 
 fxSwap1 :: Contract
 fxSwap1 = WithDate xmas (WithContract (WithMoney 100 (One EUR))
-                                      (WithMoney 100 (One USD)))
+                                      (Negate (WithMoney 100 (One USD))))
+
+fxSwap1' = WithContract (zeroCouponBond xmas 100 EUR)
+                        (Negate (zeroCouponBond xmas 100 USD))
+        
