@@ -61,6 +61,9 @@
     (cond
       ((empty? list) acc)
       ((cons? list)
-       (rev-2 (rest list)
+       (rev-2 (rest list) ; kein Kontext => "tail call", endrekursiv
               (cons (first list) acc) ; neues Zwischenergebnis
        )))))
+
+; Bug in JVM: Auch tail calls verbrauchen Stack-Platz
+; => spezielle Konstrukte in Clojure, Scala, Kotlin
