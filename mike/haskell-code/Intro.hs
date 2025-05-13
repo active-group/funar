@@ -272,8 +272,25 @@ data Optional a =
 
 -- Eq a: Constraint "a ist vergleichbar bzw. unterstützt die ==-Operation"
 
+-- Eq: Typklasse ~ Interface, Instanz ~ Klasse/Implementierung einer Typklasse
+
+-- >>> :info Eq
+-- type Eq :: * -> Constraint
+-- class Eq a where
+--   (==) :: a -> a -> Bool  -- Methode
+
 -- Index eines Elements in einer Liste finden
 listIndex :: Eq a => [a] -> a -> Optional Integer
+
+-- >>> listIndex [1, 5, 7, 2] 7
+-- Result 2
+
+-- >>> listIndex [Dog, Snake, Cat, Snake, Dog] Cat
+-- No instance for `Eq Pet' arising from a use of `listIndex'
+-- In the expression: listIndex [Dog, Snake, Cat, Snake, Dog] Cat
+-- In an equation for `it_a8UXb':
+--     it_a8UXb = listIndex [Dog, Snake, Cat, Snake, Dog] Cat
+
 listIndex [] element = Null
 listIndex (x:xs) element =
     if element == x
