@@ -260,3 +260,16 @@ listSum :: [Integer] -> Integer
 
 listSum [] = 0
 listSum (first:rest) = first + (listSum rest)
+
+listMap :: (a -> b) -> [a] -> [b]
+listMap f [] = []
+listMap f (x:xs) = f x : listMap f xs
+
+data Optional a =
+    Null 
+  | Result a
+
+-- Index eines Elements in einer Liste finden
+listIndex :: [a] -> a -> Optional Integer
+listIndex [] element = Null
+listIndex (x:xs) element = undefined
