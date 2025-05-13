@@ -101,3 +101,9 @@ feedDillo dillo amount =
     case dilloLiveness dillo of
         Alive -> dillo { dilloWeight = dilloWeight dillo + amount }
         Dead -> dillo
+
+feedDillo' :: Weight -> Dillo -> Dillo
+feedDillo' amount dillo =
+    case dilloLiveness dillo of
+      Alive -> dillo {dilloWeight = dilloWeight dillo + amount}
+      Dead -> dillo
