@@ -187,7 +187,7 @@ runOverAnimal (MkSnake length _) = MkSnake length 0
 -- Geometrische Figur ("shape") ist eins der folgenden:
 -- -- Kreis -ODER-
 -- -- Quadrat -ODER-
--- -- Überlagerung zweiter geometrischer Figuren
+-- -- Überlagerung zweier geometrischer Figuren
 
 -- Aufgabe:
 -- 1. Datenanalyse, Repräsentation
@@ -204,10 +204,11 @@ point2 = (3, 3)
 point3 :: Point
 point3 = (10, 4)
 
+-- algebraischer Datentyp
 data Shape
   = MkCircle {center :: Point, radius :: Double}
   | MkSquare {leftBottom :: Point, sideLength :: Double}
-  | MkOverlap {shape1 :: Shape, shape2 :: Shape}
+  | MkOverlap {shape1 :: Shape, shape2 :: Shape} -- Kombinator
 
 circle1 = MkCircle (2, 2) 2.0
 
@@ -226,3 +227,36 @@ within (MkSquare (squareX, squareY) sideLength) (x, y) =
         && ((y >= squareY) && (y <= rightTopY))
 within (MkOverlap shape1 shape2) point =
   within shape1 point || within shape2 point
+
+-- Liste ist eins der folgenden:
+-- - die leere Liste                                 []
+-- - Cons-Liste aus erstem Element und Rest-Liste    first : rest
+--                                                         ^ "cons", Infix
+
+-- data ListOfIntegers =
+--    EmptyList
+--  | Cons Integer ListOfIntegers
+
+data ListOf a =
+    EmptyList
+  | Cons a (ListOf a)
+
+list1 :: [Integer]
+list1 = 5 : []
+
+list2 :: [Integer]
+list2 = 2 : 5 : []
+
+list3 :: [Integer]
+list3 = [7, 2, 5] -- syntaktischer Zucker
+
+list4 :: [Integer]
+list4 = 8 : list3
+
+listSum :: [Integer] -> Integer
+
+-- >>> listSum list4
+-- 22
+
+listSum [] = 0
+listSum (first:rest) = first + (listSum rest)
