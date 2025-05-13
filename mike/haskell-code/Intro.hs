@@ -353,9 +353,27 @@ instance Semigroup Shape where
 class Semigroup a => Monoid a where -- jeder Monoid muß auch eine Halbgruppe
     neutral :: a
 
+instance Monoid [a] where
+    neutral :: [a]
+    neutral = []
+
+instance (Semigroup a, Semigroup b) => Semigroup (a, b) where
+    op :: (a, b) -> (a, b) -> (a, b)
+    op (a1, b1) (a2, b2) = (op a1 a2, op b1 b2)
+
+instance (Monoid a, Monoid b) => Monoid (a, b) where
+    neutral :: (a, b)
+    neutral = (neutral, neutral)
+
 
 -- >>> op [1,2,3] [4,5,6]
 -- [1,2,3,4,5,6]
+
+-- >>> op [1,2,3] neutral
+-- [1,2,3]
+
+-- >>> op ([1,2,3], [4,5,6]) ([4,5,6], [1,2,3])
+-- ([1,2,3,4,5,6],[4,5,6,1,2,3])
 
 -- Typ a
 -- neutral :: a
