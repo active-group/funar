@@ -183,3 +183,8 @@ runOverAnimal :: Animal -> Animal
 -- jede Gleichung muß Konstruktor erwähnen
 runOverAnimal (MkDillo _ weight) = MkDillo Dead weight
 runOverAnimal (MkSnake length _) = MkSnake length 0
+
+-- Geometrische Figur ("shape") ist eins der folgenden:
+-- -- Kreis -ODER-
+-- -- Quadrat -ODER-
+-- -- Überlagerung zweiter geometrischer Figuren
