@@ -63,6 +63,14 @@ data Liveness = Alive | Dead deriving Show
 type Weight = Integer -- Typsynonym
 
 data Dillo = 
-    MkDillo { dilloLiveness :: Liveness,
-              dillWeight :: Weight }
+    MkDillo { dilloLiveness :: Liveness, -- MkDillo: Konstruktor, dilloLiveness ... Selektoren
+              dilloWeight :: Weight }
     deriving Show
+
+-- lebendiges Gürteltier 10kg
+dillo1 :: Dillo
+dillo1 = MkDillo { dilloLiveness = Alive, dilloWeight = 10}
+
+-- totes Gürteltier, 8kg
+dillo2 :: Dillo
+dillo2 = MkDillo Dead 8
