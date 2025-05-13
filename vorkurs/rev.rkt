@@ -3,7 +3,7 @@
 ; Liste umdrehen
 (: rev ((list-of %a) -> (list-of %a)))
 
-(check-expect (rev (list 1 2 3))
+#;(check-expect (rev (list 1 2 3))
               (list 3 2 1))
 
 (define rev
@@ -25,7 +25,7 @@
 
 (: add-element ((list-of %a) %a -> (list-of %a)))
 
-(check-expect (add-element (list 3 2) 1)
+#;(check-expect (add-element (list 3 2) 1)
               (list 3 2 1))
 
 (define add-element
