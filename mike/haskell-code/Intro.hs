@@ -130,3 +130,20 @@ feedDillo''(dillo, amount) =
   case dilloLiveness dillo of
     Alive -> dillo {dilloWeight = dilloWeight dillo + amount}
     Dead -> dillo
+
+-- Haskell Curry -> curry, curryfizieren
+-- Moses Schönfinkel -> schönfinkeln
+
+-- eingebaut: curry, uncurry
+
+-- a, b, c: Typvariablen (kleingeschrieben)
+entschönfinkeln :: (a -> b -> c) -> ((a, b) -> c)
+
+-- >>> (tuplify feedDillo) (dillo1, 5)
+-- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
+
+-- tuplify f = \ (a, b) -> f a b
+entschönfinkeln f (a, b) = f a b
+
+schönfinkeln :: ((a, b) -> c) -> a -> b -> c
+schönfinkeln f a b = f (a, b)
