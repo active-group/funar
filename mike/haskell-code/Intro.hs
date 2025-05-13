@@ -96,7 +96,7 @@ runOverDillo :: Dillo -> Dillo
 runOverDillo dillo = dillo { dilloLiveness = Dead } -- "functional update", Kopie bis auf ...
 
 -- nur 1stellige Funktionen in Haskell
-feedDillo :: Dillo -> (Weight -> Dillo)
+feedDillo :: Dillo -> Weight -> Dillo
 feedDillo dillo amount =
     case dilloLiveness dillo of
         Alive -> dillo { dilloWeight = dilloWeight dillo + amount }
@@ -107,3 +107,20 @@ feedDillo' amount dillo =
     case dilloLiveness dillo of
       Alive -> dillo {dilloWeight = dilloWeight dillo + amount}
       Dead -> dillo
+
+-- Eingaben vertauschen
+-- swap :: (Dillo -> Weight -> Dillo) -> (Weight -> Dillo -> Dillo)
+
+-- >>> (swap feedDillo) 5 dillo1
+-- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
+
+swap :: (a -> b -> c) -> (b -> a -> c)
+-- swap f = \ weight -> \ dillo -> f dillo weight
+-- swap f = \b -> \a -> f a b
+swap f b a = f a b
+-- eingebaut flip
+
+feedDillo''(dillo, amount) =
+  case dilloLiveness dillo of
+    Alive -> dillo {dilloWeight = dilloWeight dillo + amount}
+    Dead -> dillo
