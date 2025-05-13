@@ -94,3 +94,10 @@ runOverDillo :: Dillo -> Dillo
 --    MkDillo { dilloLiveness = Dead, dilloWeight = w }
 -- runOverDillo (MkDillo _liveness weight) = MkDillo Dead weight -- _: "don't care"
 runOverDillo dillo = dillo { dilloLiveness = Dead } -- "functional update", Kopie bis auf ...
+
+-- nur 1stellige Funktionen in Haskell
+feedDillo :: Dillo -> (Weight -> Dillo)
+feedDillo dillo amount =
+    case dilloLiveness dillo of
+        Alive -> dillo { dilloWeight = dilloWeight dillo + amount }
+        Dead -> dillo
