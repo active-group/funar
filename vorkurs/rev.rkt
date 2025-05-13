@@ -18,5 +18,15 @@
 
 (: add-element ((list-of %a) %a -> (list-of %a)))
 
+(check-expect (add-element (list 3 2) 1)
+              (list 3 2 1))
 
+(define add-element
+  (lambda (list element)
+    (cond
+      ((empty? list) (cons element empty))
+      ((cons? list)
+       (cons
+        (first list)
+        (add-element (rest list) element))))))
   
