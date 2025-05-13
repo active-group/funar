@@ -74,3 +74,23 @@ dillo1 = MkDillo { dilloLiveness = Alive, dilloWeight = 10}
 -- totes Gürteltier, 8kg
 dillo2 :: Dillo
 dillo2 = MkDillo Dead 8
+
+-- >>> dilloLiveness dillo1
+-- Alive
+
+-- >>> dilloWeight dillo2
+-- 8
+
+-- Gürteltier überfahren
+runOverDillo :: Dillo -> Dillo
+
+-- >>> runOverDillo dillo1
+-- MkDillo {dilloLiveness = Dead, dilloWeight = 10}
+
+-- runOverDillo dillo =
+--    MkDillo {dilloLiveness = Dead, dilloWeight = dilloWeight dillo }
+-- runOverDillo dillo = MkDillo Dead (dilloWeight dillo)
+-- runOverDillo (MkDillo { dilloLiveness = l, dilloWeight = w }) = -- Pattern
+--    MkDillo { dilloLiveness = Dead, dilloWeight = w }
+-- runOverDillo (MkDillo _liveness weight) = MkDillo Dead weight -- _: "don't care"
+runOverDillo dillo = dillo { dilloLiveness = Dead } -- "functional update", Kopie bis auf ...
