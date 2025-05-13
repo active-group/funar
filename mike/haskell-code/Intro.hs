@@ -188,3 +188,7 @@ runOverAnimal (MkSnake length _) = MkSnake length 0
 -- -- Kreis -ODER-
 -- -- Quadrat -ODER-
 -- -- Überlagerung zweiter geometrischer Figuren
+
+-- Aufgabe:
+-- 1. Datenanalyse, Repräsentation
+-- 2. Funktion, die für einen Punkt feststellt, ob er innerhalb einer geometrischen Figur liegt
