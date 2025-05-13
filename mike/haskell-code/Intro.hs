@@ -192,3 +192,37 @@ runOverAnimal (MkSnake length _) = MkSnake length 0
 -- Aufgabe:
 -- 1. Datenanalyse, Repräsentation
 -- 2. Funktion, die für einen Punkt feststellt, ob er innerhalb einer geometrischen Figur liegt
+
+type Point = (Double, Double)
+
+point1 :: Point
+point1 = (1, 1)
+
+point2 :: Point
+point2 = (3, 3)
+
+point3 :: Point
+point3 = (10, 4)
+
+data Shape
+  = MkCircle {center :: Point, radius :: Double}
+  | MkSquare {leftBottom :: Point, sideLength :: Double}
+  | MkOverlap {shape1 :: Shape, shape2 :: Shape}
+
+circle1 = MkCircle (2, 2) 2.0
+
+square1 = MkSquare (3, 3) 4.0
+
+within :: Shape -> Point -> Bool
+within (MkCircle (centerX, centerY) radius) (x, y) =
+  let distanceX = (x - centerX) ^ 2
+      distanceY = (y - centerY) ^ 2
+      difference = sqrt (distanceX + distanceY)
+   in difference <= radius
+within (MkSquare (squareX, squareY) sideLength) (x, y) =
+  let rightTopX = squareX + sideLength
+      rightTopY = squareY + sideLength
+   in ((x >= squareX) && (x <= rightTopX))
+        && ((y >= squareY) && (y <= rightTopY))
+within (MkOverlap shape1 shape2) point =
+  within shape1 point || within shape2 point
