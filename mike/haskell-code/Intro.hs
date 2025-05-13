@@ -366,6 +366,7 @@ instance (Monoid a, Monoid b) => Monoid (a, b) where
     neutral = (neutral, neutral)
 
 
+
 -- >>> op [1,2,3] [4,5,6]
 -- [1,2,3,4,5,6]
 
@@ -384,3 +385,7 @@ instance (Monoid a, Monoid b) => Monoid (a, b) where
 
 -- 0 + x == x + 0 == x -- neutrales Element von +
 -- 1 * x == x * 1 == x -- neutrales Element von *
+
+-- wichtige algebraische Strukturen:
+-- Halbgruppe -> Monoid
+-- Funktor -> applikativer Funktor -> Monade
