@@ -42,6 +42,21 @@ p1 = Put "Mike" 100 (\() ->
      Get "Mike" (\y ->
      Return (show(x+y))))))
 
+put :: Key -> Value -> DB ()
+put key value = Put key value Return -- (\ value -> Return value)
+
+get :: Key -> DB Value
+get key = Get key Return
+
+splice :: DB a -> (a -> DB b) -> DB b
+splice (Get key callback) next = 
+    Get key (\value ->
+        splice (callback value) next)
+splice (Put key value callback) next = 
+    Put key value (\() -> 
+        splice (callback ())    next)
+splice (Return result) next = next result
+
 runDB :: DB a -> Map Key Value -> (a, Map Key Value)
 runDB (Get key callback) mp = 
     let value = mp ! key
