@@ -1,5 +1,8 @@
 module DB where
 
+import qualified Data.Map as Map
+import Data.Map (Map, (!))
+
 {-
 put "Mike" 100
 x = get "Mike"
@@ -38,3 +41,8 @@ p1 = Put "Mike" 100 (\() ->
      Put "Mike" (x+1) (\() ->
      Get "Mike" (\y ->
      Return (show(x+y))))))
+
+runDB :: DB a -> Map Key Value -> (a, Map Key Value)
+runDB (Get key callback) mp = undefined
+runDB (Put key value callback) mp = undefined
+runDB (Return result) mp = (result, mp)
