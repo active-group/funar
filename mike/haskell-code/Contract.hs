@@ -153,10 +153,12 @@ meaning (WithDate date contract) today =
     then meaning contract today
     else ([], WithDate date contract)
 meaning (WithContract contract1 contract2) today =
-    let (payments1, residualContract1) = meaning contract1 today
-        (payments2, residualContract2) = meaning contract2 today
-    in (payments1 ++ payments2, WithContract residualContract1 residualContract2)
-
+    -- let (payments1, residualContract1) = meaning contract1 today
+    --    (payments2, residualContract2) = meaning contract2 today
+    --in -- (payments1 <> payments2, residualContract1 <> residualContract2)
+       --(payments1, residualContract1) <> (payments2, residualContract2)
+       -- Monoidhomomorphismus
+       meaning contract1 today <> meaning contract2 today
 -- >>> meaning (WithMoney 100 (One EUR)) xmas
 -- ([MkPayment (MkDate "2025-12-24") Long 100.0 EUR],Zero)
 
