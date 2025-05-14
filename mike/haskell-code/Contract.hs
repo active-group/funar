@@ -55,7 +55,8 @@ zcb1 = ZeroCouponBond (MkDate "2025-12-24") 100 EUR
 -}
 
 data Contract =
-    One Currency
+    Zero
+  | One Currency
   | WithMoney Amount Contract -- statt Currency
   | WithDate Date Contract
   | WithContract Contract Contract
@@ -93,6 +94,8 @@ fxSwap1' = WithContract (zeroCouponBond xmas 100 EUR)
 oneMonthLater :: Date -> Date
 oneMonthLater date = date -- FIXME
 
-monthly :: Date -> Contract -> Contract
-monthly startDate contract =
-    WithContract (WithDate startDate contract) (monthly (oneMonthLater startDate) contract)
+monthly :: Date -> Date -> Contract -> Contract
+monthly startDate endDate contract =
+    if startDate > endDate
+    then Zero
+    else WithContract (WithDate startDate contract) (monthly (oneMonthLater startDate) endDate contract)
