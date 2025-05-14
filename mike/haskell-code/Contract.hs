@@ -72,6 +72,7 @@ instance Monoid Contract where
     mempty :: Contract
     mempty = Zero
 
+
 -- "Ich bekomme 1€ jetzt."
 c1 :: Contract
 c1 = One EUR
@@ -81,6 +82,9 @@ c2 = WithMoney 100 (One EUR)
 
 -- "Ich bekomme jetzt 50000€."
 c3 = WithMoney 500 (WithMoney 100 (One EUR))
+
+-- >>> mconcat [c1,c2,c3]
+-- WithContract (One EUR) (WithContract (WithMoney 100.0 (One EUR)) (WithContract (WithMoney 500.0 (WithMoney 100.0 (One EUR))) Zero))
 
 zcb1 :: Contract
 zcb1 = WithDate (MkDate "2025-12-24") (WithMoney 100 (One EUR))
