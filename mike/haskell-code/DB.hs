@@ -43,6 +43,13 @@ p1 = Put "Mike" 100 (\() ->
      Return (show(x+y))))))
 
 runDB :: DB a -> Map Key Value -> (a, Map Key Value)
-runDB (Get key callback) mp = undefined
-runDB (Put key value callback) mp = undefined
+runDB (Get key callback) mp = 
+    let value = mp ! key
+    in runDB (callback value) mp -- tail call
+runDB (Put key value callback) mp =
+    let mp' = Map.insert key value mp
+    in runDB (callback ()) mp'
 runDB (Return result) mp = (result, mp)
+
+-- >>> runDB p1 Map.empty
+-- ("201",fromList [("Mike",101)])
