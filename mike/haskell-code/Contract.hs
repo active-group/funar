@@ -66,7 +66,7 @@ data Contract =
 
 instance Semigroup Contract where
     (<>) :: Contract -> Contract -> Contract
-    (<>) = WithContract
+    (<>) = withContract
 
 instance Monoid Contract where
     mempty :: Contract
@@ -118,6 +118,12 @@ combineContracts :: [Contract] -> Contract
 -- combineContracts list =
 --    foldr WithContract Zero list
 combineContracts = mconcat
+
+withContract :: Contract -> Contract -> Contract
+withContract Zero contract2 = contract2
+withContract contract1 Zero = contract1
+withContract contract1 contract2 = WithContract contract1 contract2
+
 
 -- Semantik
 
@@ -184,3 +190,6 @@ cfix = WithMoney 100 (WithContract (One EUR) (WithDate xmas (One EUR)))
 
 -- >>> meaning cfix (MkDate "2025-05-14")
 -- ([MkPayment (MkDate "2025-05-14") Long 100.0 EUR],WithMoney 100.0 (WithContract Zero (WithDate (MkDate "2025-12-24") (One EUR))))
+
+-- >>> meaning cfix xmas
+-- ([MkPayment (MkDate "2025-12-24") Long 100.0 EUR,MkPayment (MkDate "2025-12-24") Long 100.0 EUR],WithMoney 100.0 (WithContract Zero Zero))
