@@ -321,10 +321,11 @@ listIndex (x:xs) element =
             Result index -> Result (index + 1)
 -}
 
-a = 3
-
--- :info Functor
-
+-- >>> :info Functor
+-- type Functor :: (* -> *) -> Constraint
+-- class Functor f where
+--   fmap :: (a -> b) -> f a -> f b
+-- => braucht Typ mit Typparameter
 
 -- >>> :info Show
 -- type Show :: * -> Constraint
