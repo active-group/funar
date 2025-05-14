@@ -140,7 +140,7 @@ invertPayment (MkPayment date Short amount currency) =
 -- Zahlungen bis zu Zeitpunkt, "heute"
 -- ---> "Residualvertrag", was vom Vertrag übrigbleibt, nachdem die Zahlungen geleistet sind
 meaning :: Contract -> Date -> ([Payment], Contract)
-meaning Zero today = ([], Zero)
+meaning Zero today = mempty
 meaning (One currency) today = ([MkPayment today Long 1 currency], Zero)
 meaning (WithMoney amount contract) today = 
     let (payments, residualContract) = meaning contract today
@@ -181,4 +181,4 @@ meaning (WithContract contract1 contract2) today =
 cfix = WithMoney 100 (WithContract (One EUR) (WithDate xmas (One EUR)))
 
 -- >>> meaning cfix (MkDate "2025-05-14")
--- ([MkPayment (MkDate "2025-05-14") Long 100.0 EUR],WithContract Zero (WithDate (MkDate "2025-12-24") (One EUR)))
+-- ([MkPayment (MkDate "2025-05-14") Long 100.0 EUR],WithMoney 100.0 (WithContract Zero (WithDate (MkDate "2025-12-24") (One EUR))))
