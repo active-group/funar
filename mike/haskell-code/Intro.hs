@@ -275,7 +275,9 @@ listSum :: [Integer] -> Integer
 listSum [] = 0
 listSum (first:rest) = first + (listSum rest)
 
-listMap :: (a -> b) -> [a] -> [b]
+type List a = [a]
+
+listMap :: (a -> b) -> List a -> List b
 listMap f [] = []
 listMap f (x:xs) = f x : listMap f xs
 
@@ -283,6 +285,10 @@ data Optional a =
     Null 
   | Result a
   deriving Show
+
+optionalMap :: (a -> b) -> Optional a -> Optional b
+optionalMap f Null = Null
+optionalMap f (Result a) = Result (f a)
 
 -- Eq a: Constraint "a ist vergleichbar bzw. unterstützt die ==-Operation"
 
