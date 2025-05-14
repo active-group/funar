@@ -1,8 +1,13 @@
 {-# LANGUAGE InstanceSigs #-}
+{-# LANGUAGE OverloadedStrings #-}
 module DB where
 
 import qualified Data.Map as Map
 import Data.Map (Map, (!))
+
+import Control.Applicative
+import Database.SQLite.Simple
+import Database.SQLite.Simple.FromRow
 
 {-
 put "Mike" 100
@@ -106,3 +111,40 @@ runDB (Return result) mp = (result, mp)
 
 -- >>> runDB p1 Map.empty
 -- ("201",fromList [("Mike",101)])
+
+-- SQLite
+-- CREATE TABLE IF NOT EXISTS entries (key TEXT PRIMARY KEY, value INTEGER)
+
+execDB :: DB a -> IO a
+execDB db =
+    do connection <- open "test.sqlite"
+       execute_ connection
+         "CREATE TABLE IF NOT EXISTS entries (key TEXT PRIMARY KEY, value INTEGER)"
+       result <- runDBSQLite db connection
+       close connection
+       return result
+
+-- Datentyp für Zeile in der Tabelle
+data Entry = MkEntry Key Value
+  deriving Show
+
+instance FromRow Entry where
+    fromRow :: RowParser Entry
+    fromRow = MkEntry <$> field <*> field
+
+instance ToRow Entry where
+    toRow :: Entry -> [SQLData]
+    toRow (MkEntry key value) = toRow (key, value)
+
+runDBSQLite :: DB a -> Connection -> IO a
+runDBSQLite (Get key callback) connection =
+    do [MkEntry foundKey value] <- 
+          queryNamed connection "SELECT key, value FROM entries where key = :key" [":key" := key]
+       runDBSQLite (callback value) connection
+runDBSQLite (Put key value callback) connection = 
+    do execute connection 
+         "REPLACE INTO entries (key, value) VALUES (?,?)"
+         (MkEntry key value)
+       runDBSQLite (callback ()) connection
+runDBSQLite (Return result) connection = return result
+
