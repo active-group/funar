@@ -127,6 +127,58 @@ data Payment = MkPayment Date Direction Amount Currency
 data Direction = Long | Short
   deriving Show
 
+scalePayment :: Amount -> Payment -> Payment
+scalePayment factor (MkPayment direction date amount currency) =
+  MkPayment direction date (factor * amount) currency
+
+invertPayment :: Payment -> Payment
+invertPayment (MkPayment date Long amount currency) =
+  MkPayment date Short amount currency
+invertPayment (MkPayment date Short amount currency) =
+  MkPayment date Long amount currency
+
 -- Zahlungen bis zu Zeitpunkt, "heute"
 -- ---> "Residualvertrag", was vom Vertrag übrigbleibt, nachdem die Zahlungen geleistet sind
 meaning :: Contract -> Date -> ([Payment], Contract)
+meaning Zero today = ([], Zero)
+meaning (One currency) today = ([MkPayment today Long 1 currency], Zero)
+meaning (WithMoney amount contract) today = 
+    let (payments, residualContract) = meaning contract today
+    in (map (scalePayment amount) payments, residualContract)
+meaning (Negate contract) today =
+    let (payments, residualContract) = meaning contract today
+    in (map invertPayment payments, undefined)
+meaning (WithDate date contract) today =
+    if today >= date 
+    then meaning contract today
+    else ([], WithDate date contract)
+meaning (WithContract contract1 contract2) today =
+    let (payments1, residualContract1) = meaning contract1 today
+        (payments2, residualContract2) = meaning contract2 today
+    in (payments1 ++ payments2, WithContract residualContract1 residualContract2)
+
+-- >>> meaning (WithMoney 100 (One EUR)) xmas
+-- ([MkPayment (MkDate "2025-12-24") Long 100.0 EUR],Zero)
+
+{- Schablone:
+meaning Zero today = (undefined, undefined)
+meaning (One currency) today = (undefined, undefined)
+meaning (WithMoney amount contract) today =
+  let (payments, residualContract) = meaning contract today
+   in (undefined, undefined)
+meaning (Negate contract) today =
+  let (payments, residualContract) = meaning contract today
+   in (undefined, undefined)
+meaning (WithDate date contract) today =
+  let (payments, residualContract) = meaning contract today
+   in (undefined, undefined)
+meaning (WithContract contract1 contract2) today =
+  let (payments1, residualContract1) = meaning contract1 today
+      (payments2, residualContract2) = meaning contract2 today
+   in (undefined, undefined)
+-}
+
+cfix = WithMoney 100 (WithContract (One EUR) (WithDate xmas (One EUR)))
+
+-- >>> meaning cfix (MkDate "2025-05-14")
+-- ([MkPayment (MkDate "2025-05-14") Long 100.0 EUR],WithMoney 100.0 (WithContract Zero (WithDate (MkDate "2025-12-24") (One EUR))))
