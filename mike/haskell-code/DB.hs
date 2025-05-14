@@ -84,6 +84,7 @@ instance Monad DB where
     return :: a -> DB a
     return = Return
 
+-- wichtig: alle Zeilen müssen genau untereinander anfangen
 p1'' :: DB String
 p1'' = do put "Mike" 100
           x <- get "Mike"
