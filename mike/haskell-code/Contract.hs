@@ -1,3 +1,4 @@
+{-# LANGUAGE InstanceSigs #-}
 module Contract where
 
 -- Finanzderivat:
@@ -63,6 +64,14 @@ data Contract =
   | Negate Contract
   deriving Show
 
+instance Semigroup Contract where
+    (<>) :: Contract -> Contract -> Contract
+    (<>) = WithContract
+
+instance Monoid Contract where
+    mempty :: Contract
+    mempty = Zero
+
 -- "Ich bekomme 1€ jetzt."
 c1 :: Contract
 c1 = One EUR
@@ -99,3 +108,7 @@ monthly startDate endDate contract =
     if startDate > endDate
     then Zero
     else WithContract (WithDate startDate contract) (monthly (oneMonthLater startDate) endDate contract)
+
+combineContracts :: [Contract] -> Contract
+combineContracts list =
+    foldr WithContract Zero list
