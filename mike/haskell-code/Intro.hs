@@ -71,7 +71,7 @@ isCute Snake = False
 -- - lebendig ODER tot
 -- - Gewicht
 
-data Liveness = Alive | Dead 
+data Liveness = Alive | Dead
   deriving (Show, Eq)
 
 type Weight = Integer -- Typsynonym
@@ -282,7 +282,7 @@ listMap f [] = []
 listMap f (x:xs) = f x : listMap f xs
 
 data Optional a =
-    Null 
+    Null
   | Result a
   deriving Show
 
@@ -313,9 +313,18 @@ listIndex (x:xs) element =
     if element == x
     then Result 0
     else
+      optionalMap (+ 1) -- das gleiche (\ index -> index + 1)
+                  (listIndex xs element)
+      {-
         case listIndex xs element of
             Null -> Null
             Result index -> Result (index + 1)
+-}
+
+a = 3
+
+-- :info Functor
+
 
 -- >>> :info Show
 -- type Show :: * -> Constraint
