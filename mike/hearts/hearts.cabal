@@ -15,8 +15,6 @@ library
                      , Free
                      , Player
                      , Shuffle
-  other-modules:       MVar
-                     , Teletype
   build-depends:       base
                      , aeson
                      , cond
