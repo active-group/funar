@@ -91,7 +91,7 @@ fxSwap1' = WithContract (zeroCouponBond xmas 100 EUR)
                         (Negate (zeroCouponBond xmas 100 USD))
         
 oneMonthLater :: Date -> Date
-oneMonthLater date = undefined
+oneMonthLater date = date
 
 monthly :: Date -> Contract -> Contract
 monthly startDate contract =
