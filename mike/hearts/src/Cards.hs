@@ -23,6 +23,9 @@ data Suit = Diamonds | Clubs | Spades | Hearts
 allSuits :: [Suit]
 allSuits = [Spades, Hearts, Diamonds, Clubs]
 
+-- Yaron Minsky:
+-- "Make illegal states unrepresentable."
+
 data Rank = Two | Three | Four | Five | Six | Seven | Eight | Nine | Ten
          | Jack | Queen | King | Ace
   deriving (Show, Eq, Ord)
@@ -37,6 +40,8 @@ allRanks = [Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten,
 -- | Spielkarte
 data Card = Card { suit :: Suit, rank :: Rank }
   deriving (Show, Eq, Ord)
+
+-- data Maybe a = Nothing | Just a
 
 -- | Eine Karte kann nur eine andere Karte gleicher Farbe nach Wert schlagen
 cardOrder :: Card -> Card -> Maybe Ordering
