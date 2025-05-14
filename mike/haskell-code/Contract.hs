@@ -119,11 +119,15 @@ combineContracts :: [Contract] -> Contract
 --    foldr WithContract Zero list
 combineContracts = mconcat
 
+-- smart constructor
 withContract :: Contract -> Contract -> Contract
 withContract Zero contract2 = contract2
 withContract contract1 Zero = contract1
 withContract contract1 contract2 = WithContract contract1 contract2
 
+withMoney :: Amount -> Contract -> Contract
+withMoney _ Zero = Zero
+withMoney amount contract = WithMoney amount contract
 
 -- Semantik
 
@@ -189,7 +193,7 @@ meaning (WithContract contract1 contract2) today =
 cfix = WithMoney 100 (WithContract (One EUR) (WithDate xmas (One EUR)))
 
 -- >>> meaning cfix (MkDate "2025-05-14")
--- ([MkPayment (MkDate "2025-05-14") Long 100.0 EUR],WithMoney 100.0 (WithContract Zero (WithDate (MkDate "2025-12-24") (One EUR))))
+-- ([MkPayment (MkDate "2025-05-14") Long 100.0 EUR],WithMoney 100.0 (WithDate (MkDate "2025-12-24") (One EUR)))
 
 -- >>> meaning cfix xmas
--- ([MkPayment (MkDate "2025-12-24") Long 100.0 EUR,MkPayment (MkDate "2025-12-24") Long 100.0 EUR],WithMoney 100.0 (WithContract Zero Zero))
+-- ([MkPayment (MkDate "2025-12-24") Long 100.0 EUR,MkPayment (MkDate "2025-12-24") Long 100.0 EUR],WithMoney 100.0 Zero)
