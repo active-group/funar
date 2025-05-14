@@ -154,7 +154,7 @@ meaning Zero today = mempty
 meaning (One currency) today = ([MkPayment today Long 1 currency], Zero)
 meaning (WithMoney amount contract) today = 
     let (payments, residualContract) = meaning contract today
-    in (map (scalePayment amount) payments, WithMoney amount residualContract)
+    in (map (scalePayment amount) payments, withMoney amount residualContract)
 meaning (Negate contract) today =
     let (payments, residualContract) = meaning contract today
     in (map invertPayment payments, Negate residualContract)
