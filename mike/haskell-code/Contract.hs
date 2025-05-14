@@ -90,3 +90,9 @@ fxSwap1 = WithDate xmas (WithContract (WithMoney 100 (One EUR))
 fxSwap1' = WithContract (zeroCouponBond xmas 100 EUR)
                         (Negate (zeroCouponBond xmas 100 USD))
         
+oneMonthLater :: Date -> Date
+oneMonthLater date = undefined
+
+monthly :: Date -> Contract -> Contract
+monthly startDate contract =
+    WithContract (WithDate startDate contract) (monthly (oneMonthLater startDate) contract)
