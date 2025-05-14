@@ -196,4 +196,4 @@ cfix = WithMoney 100 (WithContract (One EUR) (WithDate xmas (One EUR)))
 -- ([MkPayment (MkDate "2025-05-14") Long 100.0 EUR],WithMoney 100.0 (WithDate (MkDate "2025-12-24") (One EUR)))
 
 -- >>> meaning cfix xmas
--- ([MkPayment (MkDate "2025-12-24") Long 100.0 EUR,MkPayment (MkDate "2025-12-24") Long 100.0 EUR],WithMoney 100.0 Zero)
+-- ([MkPayment (MkDate "2025-12-24") Long 100.0 EUR,MkPayment (MkDate "2025-12-24") Long 100.0 EUR],Zero)
