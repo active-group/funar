@@ -144,10 +144,10 @@ meaning Zero today = ([], Zero)
 meaning (One currency) today = ([MkPayment today Long 1 currency], Zero)
 meaning (WithMoney amount contract) today = 
     let (payments, residualContract) = meaning contract today
-    in (map (scalePayment amount) payments, residualContract)
+    in (map (scalePayment amount) payments, WithMoney amount residualContract)
 meaning (Negate contract) today =
     let (payments, residualContract) = meaning contract today
-    in (map invertPayment payments, undefined)
+    in (map invertPayment payments, Negate residualContract)
 meaning (WithDate date contract) today =
     if today >= date 
     then meaning contract today
@@ -181,4 +181,4 @@ meaning (WithContract contract1 contract2) today =
 cfix = WithMoney 100 (WithContract (One EUR) (WithDate xmas (One EUR)))
 
 -- >>> meaning cfix (MkDate "2025-05-14")
--- ([MkPayment (MkDate "2025-05-14") Long 100.0 EUR],WithMoney 100.0 (WithContract Zero (WithDate (MkDate "2025-12-24") (One EUR))))
+-- ([MkPayment (MkDate "2025-05-14") Long 100.0 EUR],WithContract Zero (WithDate (MkDate "2025-12-24") (One EUR)))
