@@ -124,6 +124,9 @@ execDB db =
        close connection
        return result
 
+-- >>> execDB p1
+-- "201"
+
 -- Datentyp für Zeile in der Tabelle
 data Entry = MkEntry Key Value
   deriving Show
