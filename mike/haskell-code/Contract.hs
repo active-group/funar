@@ -115,5 +115,18 @@ monthly startDate endDate contract =
                       (monthly (oneMonthLater startDate) endDate contract)
 
 combineContracts :: [Contract] -> Contract
-combineContracts list =
-    foldr WithContract Zero list
+-- combineContracts list =
+--    foldr WithContract Zero list
+combineContracts = mconcat
+
+-- Semantik
+
+data Payment = MkPayment Date Direction Amount Currency
+  deriving Show
+
+data Direction = Long | Short
+  deriving Show
+
+-- Zahlungen bis zu Zeitpunkt, "heute"
+-- ---> "Residualvertrag", was vom Vertrag übrigbleibt, nachdem die Zahlungen geleistet sind
+meaning :: Contract -> Date -> ([Payment], Contract)
