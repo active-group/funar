@@ -327,6 +327,10 @@ listIndex (x:xs) element =
 --   fmap :: (a -> b) -> f a -> f b
 -- => braucht Typ mit Typparameter
 
+instance Functor Optional where
+  fmap :: (a -> b) -> Optional a -> Optional b
+  fmap = optionalMap
+
 -- >>> :info Show
 -- type Show :: * -> Constraint
 -- class Show a where
