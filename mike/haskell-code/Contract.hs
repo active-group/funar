@@ -111,7 +111,8 @@ monthly :: Date -> Date -> Contract -> Contract
 monthly startDate endDate contract =
     if startDate > endDate
     then Zero
-    else WithContract (WithDate startDate contract) (monthly (oneMonthLater startDate) endDate contract)
+    else WithContract (WithDate startDate contract) 
+                      (monthly (oneMonthLater startDate) endDate contract)
 
 combineContracts :: [Contract] -> Contract
 combineContracts list =
