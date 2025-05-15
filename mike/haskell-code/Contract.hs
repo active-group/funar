@@ -158,10 +158,10 @@ meaning (WithMoney amount contract) today =
 meaning (Negate contract) today =
     let (payments, residualContract) = meaning contract today
     in (map invertPayment payments, Negate residualContract)
-meaning (WithDate date contract) today =
+meaning c@(WithDate date contract) today =
     if today >= date 
     then meaning contract today
-    else ([], WithDate date contract)
+    else ([], c) -- WithDate date contract
 meaning (WithContract contract1 contract2) today =
     -- let (payments1, residualContract1) = meaning contract1 today
     --    (payments2, residualContract2) = meaning contract2 today
