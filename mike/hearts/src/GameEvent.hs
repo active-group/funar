@@ -141,6 +141,15 @@ tableProcessCommandM (PlayCard player card) =
         recordEventM (IllegalCardAttempted player card)
         return Nothing
 
+-- ganzes Spiel
+tableLoopM :: GameCommand -> Game Player
+tableLoopM command =
+    do maybeWinner <- tableProcessCommandM command
+       case maybeWinner of
+        Nothing -> tableLoopM undefined -- nächster Command
+        Just winner -> return winner
+
+
 -- $setup
 -- >>> let mike = Player "Mike"
 -- >>> let nicole = Player "Nicole"
@@ -149,6 +158,4 @@ tableProcessCommandM (PlayCard player card) =
 -- >>> let hands = Map.fromList [(mike, makeHand []), (nicole, makeHand []), (peter, makeHand []), (annette, makeHand [])]
 
 -- >>> tableProcessCommandM (DealHands hands)
--- No instance for `Show (Game (Maybe Player))'
---   arising from a use of `evalPrint'
--- In a stmt of an interactive GHCi command: evalPrint it_adxEn
+-- RecordEvent HandDealt (Player {playerName = "Annette"}) (Hand {unHand = fromList []})
