@@ -442,6 +442,7 @@ instance Semigroup AndBool where
 data Validation a = -- wie Optional
     Valid a
   | Invalid [String] -- Fehlermeldungen
+  deriving Show
 
 instance Functor Validation where
 
