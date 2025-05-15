@@ -123,10 +123,10 @@ turnOver state =
 -- >>> replaceIfHigher (1, Card Clubs Two) (2, Card Diamonds Three)
 -- (1,...
 replaceIfHigher :: (a, Card) -> (a, Card) -> (a, Card)
-replaceIfHigher p1@(marker1, c1) p2@(marker2, c2) =
+replaceIfHigher p1@(marker1, c1) p2@(marker2, c2) = -- Alias-Pattern
   case cardOrder c1 c2 of
     Just LT -> p2
-    _ -> p1
+    _ -> p1 -- (marker1, c1)
 
 -- | wer muß den Stich einziehen?
 -- >>> whoTakesTrick emptyTrick
