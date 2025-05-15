@@ -55,18 +55,19 @@ playerProcessEvent (TrickTaken player' trick) state =
 playerProcessEvent (IllegalCardAttempted player' card) state = state
 playerProcessEvent (GameEnded winner) state = state
 
-data StatePlayerOps m =
+data StatePlayerOps m =  --- m: Monade
   StatePlayerOps {
      getEventOp :: m GameEvent,
      recordCommandOp :: GameCommand -> m (),
      getPlayerStateOp :: m PlayerState
   }
 
+-- Strategie, die eine Karte auswählt, wenn Spieler:in dran ist
 chooserStrategy ::
   Monad m =>
   StatePlayerOps m ->
   Player ->
-  m Card ->
+  m Card ->  -- Auswahlstrategie
   m ()
 chooserStrategy ops player choose =
   do
