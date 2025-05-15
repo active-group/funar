@@ -439,6 +439,14 @@ instance Semigroup AndBool where
 -- => Wenn ich ein Objekt vom Typ T habe, dann ist es auch korrekt.
 -- => "Parse don't validate."
 
+data Validation a = -- wie Optional
+    Valid a
+  | Invalid [String] -- Fehlermeldungen
+
+instance Functor Validation where
+
+instance Applicative Validation where
+
 newtype EMail = MkEMail String
   deriving Show
 
