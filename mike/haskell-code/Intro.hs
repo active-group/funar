@@ -463,3 +463,12 @@ validateEMail s =
   case listIndex s '@' of
     Null -> Null
     Result _ -> Result (MkEMail s)
+
+makeUser :: String -> Integer -> Optional User
+makeUser s n =
+  case validateEMail s of
+    Null -> Null
+    Result email ->
+      case validateAge n of
+        Null -> Null
+        Result age -> Result (MkUser email age)
