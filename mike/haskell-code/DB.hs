@@ -54,6 +54,8 @@ put key value = Put key value Return -- (\ value -> Return value)
 get :: Key -> DB Value
 get key = Get key Return
 
+type Kleisli m a b = a -> m b
+
 splice :: DB a -> (a -> DB b) -> DB b
 splice (Get key callback) next = 
     Get key (\value ->
