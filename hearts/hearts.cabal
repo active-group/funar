@@ -14,6 +14,8 @@ library
                      , Sync
                      , Free
                      , Player
+                     , StatePlayer
+                     , StateTtyPlayer
                      , Shuffle
   build-depends:       base
                      , aeson
