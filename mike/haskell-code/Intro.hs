@@ -466,13 +466,16 @@ validateEMail s =
 
 makeUser :: String -> Integer -> Optional User
 makeUser s n =
+  -- fmap2 MkUser (validateEMail s) (validateAge n)
+  MkUser <$> validateEMail s <*> validateAge n
+  {-
   case validateEMail s of
     Null -> Null
     Result email ->
       case validateAge n of
         Null -> Null
         Result age -> Result (MkUser email age)
-
+-}
 -- >>> :info Applicative
 -- type Applicative :: (* -> *) -> Constraint
 -- class Functor f => Applicative f where
@@ -490,3 +493,8 @@ instance Applicative Optional where
   (<*>) (Result oab) (Result oa) = Result (oab oa)
 
 -- optionalMap2 :: (a -> b -> c) -> Optional a -> Optional b -> Optional c
+fmap2 :: Applicative f => (a -> b -> c) -> f a -> f b -> f c
+fmap2 fabc oa ob =
+  -- (pure fabc) <*> oa <*> ob
+  fabc <$> oa <*> ob
+  --   ^^^ Synonym für fmap
