@@ -507,3 +507,17 @@ fmap2 fabc oa ob =
   -- (pure fabc) <*> oa <*> ob
   fabc <$> oa <*> ob
   --   ^^^ Synonym für fmap
+
+instance Functor Validation where
+  fmap :: (a -> b) -> Validation a -> Validation b
+  fmap f (Valid a) = Valid (f a)
+  fmap f (Invalid errors) = Invalid errors
+
+instance Applicative Validation where
+  pure :: a -> Validation a
+  pure = Valid
+  (<*>) :: Validation (a -> b) -> Validation a -> Validation b
+  (<*>) (Invalid errors1) (Invalid errors2) = Invalid (errors1 ++ errors2)
+  (<*>) (Invalid errors) (Valid a) = Invalid errors
+  (<*>) (Valid f) (Invalid errors) = Invalid errors
+  (<*>) (Valid f) (Valid a) = Valid (f a)
