@@ -472,3 +472,21 @@ makeUser s n =
       case validateAge n of
         Null -> Null
         Result age -> Result (MkUser email age)
+
+-- >>> :info Applicative
+-- type Applicative :: (* -> *) -> Constraint
+-- class Functor f => Applicative f where
+--   pure :: a -> f a
+--   (<*>) :: f (a -> b) -> f a -> f b
+
+instance Applicative Optional where
+  pure :: a -> Optional a
+  pure = Result
+
+  (<*>) :: Optional (a -> b) -> Optional a -> Optional b
+  (<*>) Null Null = Null
+  (<*>) (Result oab) Null = Null
+  (<*>) Null (Result oa) = Null
+  (<*>) (Result oab) (Result oa) = Result (oab oa)
+
+-- optionalMap2 :: (a -> b -> c) -> Optional a -> Optional b -> Optional c
