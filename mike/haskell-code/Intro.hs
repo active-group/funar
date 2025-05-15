@@ -434,3 +434,16 @@ instance Semigroup AndBool where
 -- wichtige algebraische Strukturen:
 -- Halbgruppe -> Monoid
 -- Funktor -> applikativer Funktor -> Monade
+
+-- "Make illegal states unrepresentable."
+-- => Wenn ich ein Objekt vom Typ T habe, dann ist es auch korrekt.
+-- => "Parse don't validate."
+
+type EMail = String
+
+type Age = Integer
+
+data User = MkUser String Integer
+  deriving Show
+
+mike = MkUser "michael.sperber@active-group.de" 54
