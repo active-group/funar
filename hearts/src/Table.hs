@@ -189,3 +189,28 @@ addTrickToPile playerPiles player trick =
 
 dealHand :: Player -> Hand -> PlayerHands -> PlayerHands
 dealHand player hand hands = Map.insert player hand hands
+
+-- | Ereignis in den Zustand einarbeiten
+tableProcessEvent :: GameEvent -> TableState -> TableState
+-- tableProcessEvent event state | trace ("tableProfessEvent " ++ show state ++ " " ++ show event) False = undefined
+tableProcessEvent (HandDealt player hand) state =
+  state {
+    tableStateHands = dealHand player hand (tableStateHands state)
+  }
+tableProcessEvent (PlayerTurnChanged player) state =
+  state {
+    tableStateNext  = skipTo player (tableStateNext state)
+  }
+tableProcessEvent (LegalCardPlayed player card) state =
+  state {
+    tableStateHands = playCard (tableStateHands state) player card,
+    tableStateTrick = addToTrick player card (tableStateTrick state)
+  }
+tableProcessEvent (TrickTaken player trick) state =
+  state {
+    tableStatePiles =
+      addTrickToPile (tableStatePiles state) player trick,
+    tableStateTrick = emptyTrick
+  }
+tableProcessEvent (IllegalCardAttempted player card) state = state
+tableProcessEvent (GameEnded player) state = state
