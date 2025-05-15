@@ -521,3 +521,7 @@ instance Applicative Validation where
   (<*>) (Invalid errors) (Valid a) = Invalid errors
   (<*>) (Valid f) (Invalid errors) = Invalid errors
   (<*>) (Valid f) (Valid a) = Valid (f a)
+
+-- fmap ::        (a ->   b) -> f a -> f b
+-- (<*>) ::     f (a ->   b) -> f a -> f b
+-- flip (>>=) ::  (a -> f b) -> f a -> f b
