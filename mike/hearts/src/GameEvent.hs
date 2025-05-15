@@ -57,6 +57,7 @@ data Game a =
   | TurnOverTrick (Maybe (Trick, Player) -> Game a)
   | PlayerAfter Player (Player -> Game a)
   | GameOver (Maybe Player -> Game a)
+  | GetCommand (GameCommand -> Game a)
   | Return a
 
 instance Show (Game a) where
@@ -146,7 +147,7 @@ tableLoopM :: GameCommand -> Game Player
 tableLoopM command =
     do maybeWinner <- tableProcessCommandM command
        case maybeWinner of
-        Nothing -> tableLoopM undefined -- nächster Command
+        Nothing -> GetCommand tableLoopM
         Just winner -> return winner
 
 
