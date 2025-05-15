@@ -439,12 +439,27 @@ instance Semigroup AndBool where
 -- => Wenn ich ein Objekt vom Typ T habe, dann ist es auch korrekt.
 -- => "Parse don't validate."
 
-type EMail = String
-
-type Age = Integer
-
-data User = MkUser String Integer
+newtype EMail = MkEMail String
   deriving Show
 
-mike :: User
-mike = MkUser "§%$()%$§%/)§$%()$" (-100)
+newtype Age = MkAge Integer
+  deriving Show
+
+data User = MkUser EMail Age
+  deriving Show
+
+---mike = MkUser "§%$()%$§%/)§$%()$" (-100)
+
+validateAge :: Integer -> Optional Age
+validateAge n =
+  if n < 0
+  then Null
+  else if n > 120
+  then Null
+  else Result (MkAge n)
+
+validateEMail :: String -> Optional EMail
+validateEMail s =
+  case listIndex s '@' of
+    Null -> Null
+    Result _ -> Result (MkEMail s)
