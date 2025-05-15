@@ -446,4 +446,5 @@ type Age = Integer
 data User = MkUser String Integer
   deriving Show
 
-mike = MkUser "michael.sperber@active-group.de" 54
+mike :: User
+mike = MkUser "§%$()%$§%/)§$%()$" (-100)
