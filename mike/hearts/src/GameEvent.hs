@@ -59,6 +59,10 @@ data Game a =
   | GameOver (Maybe Player -> Game a)
   | Return a
 
+instance Show (Game a) where
+    show :: Game a -> String
+    show (RecordEvent event _) = "RecordEvent " ++ show event
+
 recordEventM :: GameEvent -> Game ()
 recordEventM event = RecordEvent event Return
 
@@ -136,3 +140,15 @@ tableProcessCommandM (PlayCard player card) =
        else do
         recordEventM (IllegalCardAttempted player card)
         return Nothing
+
+-- $setup
+-- >>> let mike = Player "Mike"
+-- >>> let nicole = Player "Nicole"
+-- >>> let peter = Player "Peter"
+-- >>> let annette = Player "Annette"
+-- >>> let hands = Map.fromList [(mike, makeHand []), (nicole, makeHand []), (peter, makeHand []), (annette, makeHand [])]
+
+-- >>> tableProcessCommandM (DealHands hands)
+-- No instance for `Show (Game (Maybe Player))'
+--   arising from a use of `evalPrint'
+-- In a stmt of an interactive GHCi command: evalPrint it_adxEn
