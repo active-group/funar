@@ -75,6 +75,10 @@
     (+ (* 60 (time-hour time))
        (time-minute time))))
 
+
+; lexikalische Bindung: vom Vorkommen einer Variable innen -> außen nach Bindung suchen
+; Bindung: lambda oder define
+
 ; Aus Minuten seit Mitternacht die Uhrzeit berechnen
 (: msm->time (natural -> time))
 
@@ -117,6 +121,3 @@
 (define run-over-dillo
   (lambda (dillo)
     (make-dillo #f (dillo-weight dillo))))
-
-; lexikalische Bindung: vom Vorkommen einer Variable innen -> außen nach Bindung suchen
-; Bindung: lambda oder define
