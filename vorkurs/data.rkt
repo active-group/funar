@@ -298,3 +298,25 @@
        (if (odd? (first list))
            (cons (first list) (list-odds (rest list)))
            (list-odds (rest list)))))))
+
+; Abstraktion
+; - kopieren (ein letztes Mal)
+; - Definition umbenennen - rekursive Aufrufe nicht vergessen
+; - Unterschiede durch abstrakte Namen ersetzen
+; - abstrakte Namen in lambda aufnehmen - rekursive Aufrufe nicht vergessen
+(: list-filter ((number -> boolean) list-of-numbers -> list-of-numbers)) 
+
+(define dillos (cons dillo1 (cons dillo2 empty)))
+
+(check-expect (list-filter dillo-alive? dillos)
+              (cons dillo1 empty))
+
+
+(define list-filter
+  (lambda (p? list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (if (p? (first list))
+           (cons (first list) (list-filter p? (rest list)))
+           (list-filter p? (rest list)))))))
