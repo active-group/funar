@@ -58,3 +58,19 @@
 (: make-time (natural natural -> time))
 (: time-hour (time -> natural))
 (: time-minute (time -> natural))
+
+; Minuten seit Mitternacht
+(: msm (time -> natural))
+
+(check-expect (msm time1) 662)
+(check-expect (msm time2) 853)
+
+; Schablone
+#;(define msm
+  (lambda (time)
+    ... (time-hour time) ... (time-minute time) ...))
+
+(define msm
+  (lambda (time)
+    (+ (* 60 (time-hour time))
+       (time-minute time))))
