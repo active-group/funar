@@ -283,3 +283,18 @@
           (list-product (rest list)))))))
 
 ; Aus einer Liste die geraden Elemente extrahieren
+
+; Aus einer Liste die ungeraden Elemente extrahieren
+(: list-odds (list-of-numbers -> list-of-numbers))
+
+(check-expect (list-odds list4)
+              (cons 3 (cons 5 empty)))
+
+(define list-odds
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (if (odd? (first list))
+           (cons (first list) (list-odds (rest list)))
+           (list-odds (rest list)))))))
