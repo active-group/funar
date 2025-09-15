@@ -121,3 +121,31 @@
 (define run-over-dillo
   (lambda (dillo)
     (make-dillo #f (dillo-weight dillo))))
+
+; Gürteltier füttern
+(: feed-dillo (dillo number -> dillo))
+
+(check-expect (feed-dillo dillo1 5)
+              (make-dillo #t 15))
+(check-expect (feed-dillo dillo2 5)
+              dillo2)
+
+#;(define feed-dillo
+  (lambda (dillo amount)
+    (make-dillo (dillo-alive? dillo)
+                (cond
+                  ((equal? (dillo-alive? dillo) #t) (+ (dillo-weight dillo) amount))
+                  ((equal? (dillo-alive? dillo) #f) (dillo-weight dillo))))))
+
+(define feed-dillo
+  (lambda (dillo amount)
+    (define alive? (dillo-alive? dillo))
+    (define weight (dillo-weight dillo))
+    (make-dillo alive?
+                ; binäre Verzweigung
+                (if alive?
+                    (+ weight amount)
+                    weight)
+                #;(cond
+                  (alive? (+ weight amount))
+                  (else weight)))))
