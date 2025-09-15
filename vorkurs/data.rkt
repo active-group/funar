@@ -360,6 +360,8 @@
         (run-over-animal (first list))
         (run-over-animals (rest list)))))))
 
+(: list-map ((%a -> %b) (list-of %a) -> (list-of %b)))
+   
 (define list-map
   (lambda (f list)
     (cond
