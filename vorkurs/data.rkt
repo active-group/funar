@@ -75,5 +75,17 @@
     (+ (* 60 (time-hour time))
        (time-minute time))))
 
+; Aus Minuten seit Mitternacht die Uhrzeit berechnen
+(: msm->time (natural -> time))
+
+(check-expect (msm->time 662) time1)
+
+(define msm->time
+  (lambda (minutes)
+    (make-time (quotient minutes 60)
+               (remainder minutes 60))))
+
+
+
 ; lexikalische Bindung: vom Vorkommen einer Variable innen -> außen nach Bindung suchen
 ; Bindung: lambda oder define
