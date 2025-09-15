@@ -92,6 +92,10 @@
 
 ; Tiere auf dem texanischen Highway
 
+; Tier ist eins der folgenden:
+; - Gürteltier ODER
+; - Papagei
+
 ; Gürteltier hat folgende Eigenschaften:
 ; - lebendig? UND
 ; - Gewicht
@@ -118,9 +122,15 @@
 (check-expect (run-over-dillo dillo2)
               dillo2)
 
+(check-property
+ (for-all ((d dillo))
+   (not (dillo-alive? (run-over-dillo d)))))
+
 (define run-over-dillo
   (lambda (dillo)
-    (make-dillo #f (dillo-weight dillo))))
+    (if (>= (dillo-weight dillo) 10)
+        (make-dillo #f (dillo-weight dillo))
+        dillo)))
 
 ; Gürteltier füttern
 (: feed-dillo (dillo number -> dillo))
