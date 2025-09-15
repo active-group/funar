@@ -74,3 +74,6 @@
   (lambda (time)
     (+ (* 60 (time-hour time))
        (time-minute time))))
+
+; lexikalische Bindung: vom Vorkommen einer Variable innen -> außen nach Bindung suchen
+; Bindung: lambda oder define
