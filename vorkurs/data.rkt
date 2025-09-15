@@ -22,7 +22,8 @@
   (lambda (pet)
     ...))
 
-(define cute?
+; Schablone
+#;(define cute?
   (lambda (pet)
     ; Verzweigung
     ; 1 Zweig pro Fall
@@ -31,3 +32,13 @@
       ((equal? pet "dog") ...)
       ((equal? pet "cat") ...)
       ((equal? pet "snake") ...))))
+
+(define cute?
+  (lambda (pet)
+    ; Verzweigung
+    ; 1 Zweig pro Fall
+    (cond
+      ; (<Bedingung>  <Ergebnis>)
+      ((equal? pet "dog") #t)
+      ((equal? pet "cat") #t)
+      ((equal? pet "snake") #f))))
