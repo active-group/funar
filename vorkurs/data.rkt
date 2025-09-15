@@ -86,6 +86,18 @@
     (make-time (quotient minutes-on-day 60)
                (remainder minutes-on-day 60))))
 
+; Tiere auf dem texanischen Highway
+
+; Gürteltier hat folgende Eigenschaften:
+; - lebendig? UND
+; - Gewicht
+(define-record dillo
+  make-dillo
+  (dillo-alive? boolean)
+  (dillo-weight number))
+
+
+  
 
 
 ; lexikalische Bindung: vom Vorkommen einer Variable innen -> außen nach Bindung suchen
