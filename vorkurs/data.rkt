@@ -137,7 +137,7 @@
                   ((equal? (dillo-alive? dillo) #t) (+ (dillo-weight dillo) amount))
                   ((equal? (dillo-alive? dillo) #f) (dillo-weight dillo))))))
 
-(define feed-dillo
+#;(define feed-dillo
   (lambda (dillo amount)
     (define alive? (dillo-alive? dillo))
     (define weight (dillo-weight dillo))
@@ -149,3 +149,9 @@
                 #;(cond
                   (alive? (+ weight amount))
                   (else weight)))))
+
+(define feed-dillo
+  (lambda (dillo amount)
+    (if (dillo-alive? dillo)
+        (make-dillo #t (+ (dillo-weight dillo) amount))
+        dillo #;(make-dillo (dillo-alive? dillo) (dillo-weight dillo)))))
