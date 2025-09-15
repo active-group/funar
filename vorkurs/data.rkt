@@ -307,7 +307,11 @@
 ; - Definition umbenennen - rekursive Aufrufe nicht vergessen
 ; - Unterschiede durch abstrakte Namen ersetzen
 ; - abstrakte Namen in lambda aufnehmen - rekursive Aufrufe nicht vergessen
-(: list-filter ((number -> boolean) list-of-numbers -> list-of-numbers)) 
+
+;(: list-filter ((number -> boolean) list-of-numbers -> list-of-numbers)) 
+
+; %element: Signaturvariable, (implizit) jedesmal anders
+(: list-filter ((%element -> boolean) (list-of %element) -> (list-of %element)))
 
 (define dillos (cons dillo1 (cons dillo2 empty)))
 
