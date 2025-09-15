@@ -344,4 +344,10 @@
                     (cons parrot2
                           empty)))))
 
-(check-expect (run-over-animals 
+(check-expect (run-over-animals all-animals)
+              (cons (run-over-animal dillo1)
+                    (cons (run-over-animal dillo2)
+                          (cons (run-over-animal parrot1)
+                                (cons (run-over-animal parrot2)
+                                      empty)))))
+
