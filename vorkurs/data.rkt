@@ -82,8 +82,9 @@
 
 (define msm->time
   (lambda (minutes)
-    (make-time (quotient minutes 60)
-               (remainder minutes 60))))
+    (define minutes-on-day (remainder minutes (* 24 60)))
+    (make-time (quotient minutes-on-day 60)
+               (remainder minutes-on-day 60))))
 
 
 
