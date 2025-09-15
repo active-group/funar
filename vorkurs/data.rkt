@@ -96,8 +96,13 @@
   (dillo-alive? boolean)
   (dillo-weight number))
 
+(: make-dillo (boolean number -> dillo))
 
-  
+; lebendiges Gürteltier, 10kg
+(define dillo1 (make-dillo #t 10))
+
+; totes Gürteltier, 8kg
+(define dillo2 (make-dillo #f 8))
 
 
 ; lexikalische Bindung: vom Vorkommen einer Variable innen -> außen nach Bindung suchen
