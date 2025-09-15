@@ -308,7 +308,13 @@
 ; - Unterschiede durch abstrakte Namen ersetzen
 ; - abstrakte Namen in lambda aufnehmen - rekursive Aufrufe nicht vergessen
 
-;(: list-filter ((number -> boolean) list-of-numbers -> list-of-numbers)) 
+;(: list-filter ((number -> boolean) list-of-numbers -> list-of-numbers))
+
+#;(define list-filter
+  (lambda (p? list)
+    (if (p? 5)
+        (cons 17 empty)
+        (cons 12 empty))))
 
 ; %element: Signaturvariable, (implizit) jedesmal anders
 (: list-filter ((%element -> boolean) (list-of %element) -> (list-of %element)))
@@ -327,3 +333,15 @@
        (if (p? (first list))
            (cons (first list) (list-filter p? (rest list)))
            (list-filter p? (rest list)))))))
+
+; Tiere überfahren
+(: run-over-animals ((list-of animal) -> (list-of animal)))
+
+(define all-animals
+  (cons dillo1
+        (cons dillo2
+              (cons parrot1
+                    (cons parrot2
+                          empty)))))
+
+(check-expect (run-over-animals 
