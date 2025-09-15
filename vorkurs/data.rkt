@@ -51,3 +51,6 @@
   make-time ; Konstruktor
   (time-hour natural)
   (time-minute natural))
+
+(define time1 (make-time 11 02))
+(define time2 (make-time 14 13))
