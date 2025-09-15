@@ -285,6 +285,16 @@
        (* (first list)
           (list-product (rest list)))))))
 
+(: list-fold (%a (%b %a -> %a) (list-of %b) -> %a))
+
+(define list-fold
+  (lambda (n o list)
+    (cond
+      ((empty? list) n)
+      ((cons? list)
+       (o (first list)
+          (list-fold n o (rest list)))))))
+
 ; Aus einer Liste die geraden Elemente extrahieren
 
 ; Aus einer Liste die ungeraden Elemente extrahieren
