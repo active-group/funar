@@ -351,3 +351,20 @@
                                 (cons (run-over-animal parrot2)
                                       empty)))))
 
+(define run-over-animals
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cons
+        (run-over-animal (first list))
+        (run-over-animals (rest list)))))))
+
+(define list-map
+  (lambda (f list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cons
+        (f (first list))
+        (list-map f (rest list)))))))
