@@ -264,7 +264,7 @@
 (define list-sum
   (lambda (list)
     (cond
-      ((empty? list) 0)
+      ((empty? list) 0) ; neutrales Element von +
       ((cons? list)
        (+ (first list)
           (list-sum (rest list)))))))
@@ -277,7 +277,7 @@
 (define list-product
   (lambda (list)
     (cond
-      ((empty? list) 1)
+      ((empty? list) 1) ; neutrales Element von *
       ((cons? list)
        (* (first list)
           (list-product (rest list)))))))
