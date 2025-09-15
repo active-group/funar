@@ -23,7 +23,23 @@
 ; Zwei ähnliche Stellen Code
 ; - noch einmal kopieren
 ; - Unterschiede durch abstrakte Namen ersetzen
-(above
- (beside image1 image2)
- (beside image2 image1))
+; - lambda drum mit diesen Namen
+
+; Kurzbeschreibung:
+; Quadratisches Kachelmuster zusammensetzen
+; Signatur(deklaration)
+(: tile (image image -> image))
+
+; Beispiele/Tests
+(check-expect (tile square1 star1)
+              (above
+               (beside square1 star1)
+               (beside star1 square1)))
+
+; Funktionsdefinition
+(define tile
+  (lambda (image1 image2)
+    (above
+     (beside image1 image2)
+     (beside image2 image1))))
 
