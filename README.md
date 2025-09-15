@@ -31,9 +31,15 @@ ghcup install ghc 9.8.4
 ghcup set ghc 9.8.4
 ```
 
-Um die Installation zu testen, bitte VSCode starten, die Extension
-`haskell.haskell` starten und in der Datei `haskell-code/Intro.hs` das `module`
-verunstalten (z. B. einen Buchstaben entfernen)
+Um die Installation zu testen:
+
+- Mit `code .` VSCode in diesem Ordner öffnen
+- Die Extension `haskell.haskell` installieren
+- In der Datei `haskell-code/Intro.hs` das `module` verunstalten (z. B. einen
+  Buchstaben beim `where` entfernen)
+- Nach etwas Wartezeit (in der unteren Leiste sollte "Processing" oder ähnlich
+  zu sehen sein) sollte etwas rot unterschlängelt werden
+, bitte VSCode starten, die Extension
 
 ### Via Nix-Installation (Linux, macOS, vmtl. WSL2)
 
