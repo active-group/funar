@@ -1,2 +1,7 @@
 #lang deinprogramm/sdp/beginner
-(define x (+ 42 (* 2 23)))
+(require deinprogramm/sdp/image)
+
+(define x
+  (+ 42
+     (* 2 23)))
+(define y (* x 2))
