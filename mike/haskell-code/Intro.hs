@@ -12,8 +12,9 @@ double :: Integer -> Integer
 double x = x * 2
 
 plus :: Integer -> Integer -> Integer
--- plus x y = x + y
-plus = \ x -> \ y -> x + y
+plus x y = x + y
+-- plus = \ x -> \ y -> x + y
+-- plus x = \ y -> x + y
 
 -- >>> (plus 23) 42
 -- 65
@@ -153,12 +154,19 @@ feedAnimal dillo@(MkDillo liveness weight) amount = -- Alias-Pattern
 feedAnimal (MkParrot sentence weight) amount = MkParrot sentence (weight+amount)
 
 -- Argumente einer Funktion vertauschen
-swap :: (Animal -> Weight -> Animal) -> (Weight -> Animal -> Animal)
+-- swap :: (Animal -> Weight -> Animal) -> (Weight -> Animal -> Animal)
 -- (lambda (weight) (lambda (animal) (f animal weight)))
-swap f =                              \ weight -> \animal -> f animal weight
+swap :: (a -> b -> c) -> (b -> a -> c) -- Typvariablen
+-- swap f =                              \ b -> \ a -> f a b
+swap f b a = f a b
+-- eingebaut als flip
+
 
 feedAnimal' :: Weight -> Animal -> Animal
 feedAnimal' = swap feedAnimal
+
+-- >>> swap feedAnimal 5 dillo1
+-- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
 
 -- >>> feedAnimal' 5 dillo1
 -- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
