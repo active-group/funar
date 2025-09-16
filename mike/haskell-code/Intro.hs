@@ -67,3 +67,4 @@ data Liveness = Dead | Alive
 
 -- Typsynonym
 data Weight = Integer
+
