@@ -212,7 +212,7 @@ untuplify f = \a -> \b -> f (a, b)
 -- Moses Schönfinkel
 schönfinkeln = untuplify
 
-swapTuplified :: ((a, b) -> c) -> ((b. a) -> c)
+swapTuplified :: ((a, b) -> c) -> ((b, a) -> c)
 swapTuplified =  tuplify . swap . untuplify
 -- >>> (swap (untuplify feedAnimal'')) 5 dillo1
 -- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
