@@ -190,7 +190,7 @@ feedDillo1 :: Weight -> Animal
 feedDillo1 = feedAnimal dillo1
 
 
-feedAnimal'' :: (Animal, Weight) -> Animal
+feedAnimal'' :: (Animal, Weight) -> Animal -- Tupel
 feedAnimal''(dillo@(MkDillo liveness weight), amount) =
   -- Alias-Pattern
   case liveness of
