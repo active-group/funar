@@ -9,9 +9,18 @@
 (define rev
   (lambda (list)
     (cond
-      ((empty? list) ...)
+      ((empty? list) empty)
       ((cons? list)
-       ...
-       (first list)
-       (rev (rest list))
-       ...))))
+       (append-element
+        (rev (rest list)) ; 4 3 2
+        (first list) ; 1
+       )))))
+
+; Element an Liste anhängen
+(: append-element ((list-of %a) %a -> (list-of %a)))
+
+(check-expect (append-element (list 4 3 2) 1)
+              (list 4 3 2 1))
+
+
+                              
