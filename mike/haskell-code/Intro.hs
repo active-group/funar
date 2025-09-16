@@ -198,7 +198,14 @@ feedAnimal''(dillo@(MkDillo liveness weight), amount) =
     Dead -> dillo -- MkDillo liveness weight
 feedAnimal''(MkParrot sentence weight, amount) = MkParrot sentence (weight + amount)
 
+tuplify :: (a -> b -> c) -> ((a, b) -> c)
+tuplify f = \ (a, b) -> f a b
 
+-- >>> (tuplify feedAnimal) (dillo1, 5)
+-- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
+
+untuplify :: ((a, b) -> c) -> (a -> b -> c)
+untuplify f = \a -> \b -> f (a, b)
 
 -- Eine geometrische Figuren ("Shape") ist eins der folgenden:
 -- - Kreis
@@ -208,6 +215,7 @@ feedAnimal''(MkParrot sentence weight, amount) = MkParrot sentence (weight + amo
 -- 1. Datentyp für geometrische Figuren
 -- 2. Funktion, die feststellt, ob ein Punkt innerhalb einer Figur (oder außerhalb) ist
 
+-- type Point = (Double, Double)
 data Point = MkPoint Double Double
 
 point1 :: Point
