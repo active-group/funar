@@ -108,10 +108,10 @@ playValid tableState player card =
   else currentPlayer tableState == player
 
 -- | ist diese Runde vorbei?
--- >>> turnOver state0
+-- >>> roundOver state0
 -- False
-turnOver :: TableState -> Bool
-turnOver state =
+roundOver :: TableState -> Bool
+roundOver state =
   length (tableStatePlayers state) == length (trickToList (tableStateTrick state))
 
 -- | Eine Karte kann nur eine andere Karte gleicher Farbe nach Wert schlagen
@@ -146,9 +146,9 @@ whoTakesTrick trick =
       in Just player
 
 -- | Falls Runde vorbei, Stich und Aufnehmer:in liefern
-turnOverTrick :: TableState -> Maybe (Trick, Player)
-turnOverTrick state =
-  if turnOver state
+roundOverTrick :: TableState -> Maybe (Trick, Player)
+roundOverTrick state =
+  if roundOver state
   then
     let trick = tableStateTrick state
     in fmap (\player -> (trick, player)) (whoTakesTrick trick)
