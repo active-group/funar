@@ -151,3 +151,11 @@ feedAnimal dillo@(MkDillo liveness weight) amount = -- Alias-Pattern
     Alive -> MkDillo liveness (weight+amount)
     Dead -> dillo -- MkDillo liveness weight
 feedAnimal (MkParrot sentence weight) amount = MkParrot sentence (weight+amount)
+
+-- Eine geometrische Figuren ("Shape") ist eins der folgenden:
+-- - Kreis
+-- - Quadrat
+-- - Überlagerung zweiter geometrischer Figuren
+
+-- 1. Datentyp für geometrische Figuren
+-- 2. Funktion, die feststellt, ob ein Punkt innerhalb einer Figur (oder außerhalb) ist
