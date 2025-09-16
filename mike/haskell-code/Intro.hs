@@ -66,5 +66,8 @@ data Liveness = Dead | Alive
   deriving Show
 
 -- Typsynonym
-data Weight = Integer
+type Weight = Integer
 
+data Dillo = MkDillo { dilloLiveness :: Liveness,
+                       dilloWeight :: Weight }
+  deriving Show
