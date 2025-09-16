@@ -72,3 +72,13 @@ zcb1 = WithDate xmas (WithAmount 100 (One EUR))
 
 zeroCouponBond :: Date -> Amount -> Currency -> Contract
 zeroCouponBond date amount currency = WithDate date (WithAmount amount (One currency))
+
+data Payment = MkPayment Date Direction Amount Currency
+  deriving Show
+
+-- operationelle Semantik
+-- Zahlungen bis zu einem bestimmten Zeitpunkt + Residualvertrag
+meaning :: Contract -> Date -> ([Payment], Contract)
+
+
+c5 = WithAmount 100 (Two (One EUR) ()
