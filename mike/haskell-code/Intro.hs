@@ -154,7 +154,16 @@ feedAnimal (MkParrot sentence weight) amount = MkParrot sentence (weight+amount)
 
 -- Argumente einer Funktion vertauschen
 swap :: (Animal -> Weight -> Animal) -> (Weight -> Animal -> Animal)
-swap f = \ weight -> \ animal -> f animal weight
+swap f =                              \ weight -> \animal -> f animal weight
+
+feedAnimal' :: Weight -> Animal -> Animal
+feedAnimal' = swap feedAnimal
+
+-- >>> feedAnimal' 5 dillo1
+-- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
+
+feed1 :: Animal -> Animal
+feed1 = feedAnimal' 1
 
 feedDillo1 :: Weight -> Animal
 feedDillo1 = feedAnimal dillo1
