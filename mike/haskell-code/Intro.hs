@@ -306,8 +306,17 @@ data Optional a =
   | Result a
   deriving Show
 
--- Index eines Elements in einer Liste finden
+-- ersten Index eines Elements in einer Liste finden
 listIndex :: Eq a => a -> [a] -> Optional Integer -- Constraint
+
+-- >>> listIndex 5 [1,2,7,5,8,5]
+-- Result 3
+-- >>> listIndex Snake [Dog, Cat, Snake, Cat]
+-- No instance for `Eq Pet' arising from a use of `listIndex'
+-- In the expression: listIndex Snake [Dog, Cat, Snake, Cat]
+-- In an equation for `it_acJjw':
+--     it_acJjw = listIndex Snake [Dog, Cat, Snake, Cat]
+
 listIndex element [] = Null
 listIndex element (x:xs) = 
   if x == element
