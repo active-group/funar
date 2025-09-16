@@ -8,8 +8,21 @@ y :: Integer
 y = x + 2
 
 double :: Integer -> Integer
--- double = \x -> x * 2
+-- double = \x -> x * 2 -- "Lambda"
 double x = x * 2
+
+plus :: Integer -> Integer -> Integer
+-- plus x y = x + y
+plus = \ x -> \ y -> x + y
+
+-- >>> (plus 23) 42
+-- 65
+
+plus23 :: Integer -> Integer
+
+-- >>> plus23 42
+-- 65
+plus23 = plus 23
 
 -- >>> double 21
 -- 42
