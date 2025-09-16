@@ -39,6 +39,15 @@ data Pet =
 
 isCute :: Pet -> Bool
 -- Schablone: eine Gleichung pro Fall
-isCute Dog = undefined
-isCute Cat = undefined
-isCute Snake = undefined
+-- isCute Dog = undefined
+-- isCute Cat = undefined
+-- isCute Snake = undefined
+
+-- >>> isCute Dog
+-- True
+-- >>> isCute Snake
+-- False
+
+isCute Dog = True
+isCute Cat = True
+isCute Snake = False
