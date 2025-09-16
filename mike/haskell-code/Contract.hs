@@ -81,4 +81,3 @@ data Payment = MkPayment Date Direction Amount Currency
 meaning :: Contract -> Date -> ([Payment], Contract)
 
 
-c5 = WithAmount 100 (Two (One EUR) ()
