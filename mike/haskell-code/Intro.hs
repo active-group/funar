@@ -37,6 +37,7 @@ data Pet =
 
 -- Abseitsregel: Folgezeilen eines mehrzeilgen Konstrukts müssen eingerückt werden
 
+-- Ist ein Haustier niedlich?
 isCute :: Pet -> Bool
 -- Schablone: eine Gleichung pro Fall
 -- isCute Dog = undefined
