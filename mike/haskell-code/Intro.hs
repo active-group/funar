@@ -99,3 +99,8 @@ runOverDillo dillo = dillo { dilloLiveness = Dead }
 -} 
 
 -- algebraische Datentypen (ML, OCaml, F#, Haskell, Scala, Swift, ...)
+
+data Animal =
+    MkDillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
+  | MkParrot String Weight
+  deriving Show
