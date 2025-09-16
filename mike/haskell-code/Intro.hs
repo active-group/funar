@@ -281,5 +281,9 @@ list3 = [3, 5, 8]
 list4 :: [Integer]
 list4 = 6 : list3
 
+listSum :: [Integer] -> Integer
+listSum [] = 0
+listSum (first : rest) = first + listSum rest
+
 -- Index eines Elements in einer Liste finden
 -- listIndex :: 
