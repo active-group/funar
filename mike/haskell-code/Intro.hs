@@ -128,6 +128,11 @@ runOverAnimal (MkParrot _sentence weight) = MkParrot "" weight
 
 -- Tiere füttern
 
+feedAnimal :: Animal -> (Weight -> Animal)
+
+-- >>> feedAnimal dillo1 5
+-- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
+
 feedAnimal dillo@(MkDillo liveness weight) amount = -- Alias-Pattern
   case liveness of
     Alive -> MkDillo liveness (weight+amount)
