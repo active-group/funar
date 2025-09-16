@@ -261,3 +261,20 @@ within (MkSquare (MkPoint squareX squareY) sideLength) (MkPoint x y) =
         && ((y >= squareY) && (y <= rightTopY))
 within (MkOverlap shape1 shape2) point =
   within shape1 point || within shape2 point
+
+-- Listen
+data ListOf a =
+    Empty
+  | Cons a (ListOf a)
+
+-- leere Liste: []
+-- Cons       :  :
+
+list1 = 5 : []
+list2 = 8 : (5 : [])
+list2' = [5, 8]
+list3 = [3, 5, 8]
+list4 = 6 : list3
+
+-- Index eines Elements in einer Liste finden
+-- listIndex :: 
