@@ -48,4 +48,6 @@
        (rev2 (rest list) ; tail call, endrekursiver Aufruf
              ; neues Zwischenergebnis, aus dem alten Zwischenergebnis
              (cons (first list) acc))))))
+
+; JVM legt auch für endrekursive Aufrufe Stack-Platz an
                               
