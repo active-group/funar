@@ -35,4 +35,5 @@ data Contract =
     deriving Show
 
 -- "Ich bekomme 1€ jetzt."
+c1 :: Contract
 c1 = One EUR
