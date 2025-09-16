@@ -44,6 +44,7 @@ data Contract =
   | WithDate Date Contract 
   | WithChangedDirection Contract -- Zahlungsrichtungen umdrehen
   | Two Contract Contract
+  | Zero
   deriving Show
 
 -- "Ich bekomme 1€ jetzt."
