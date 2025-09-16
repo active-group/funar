@@ -161,6 +161,15 @@ swap :: (a -> b -> c) -> (b -> a -> c) -- Typvariablen
 swap f b a = f a b
 -- eingebaut als flip
 
+-- Funktionskomposition
+o :: (b -> c) -> (a -> b) -> (a -> c)
+o f g = \ a -> f (g a)
+-- eingebaut unter .
+
+-- >>> z
+-- MkDillo {dilloLiveness = Dead, dilloWeight = 15}
+z = o runOverAnimal (feedAnimal' 5) dillo1
+
 
 feedAnimal' :: Weight -> Animal -> Animal
 feedAnimal' = swap feedAnimal
