@@ -198,14 +198,21 @@ feedAnimal''(dillo@(MkDillo liveness weight), amount) =
     Dead -> dillo -- MkDillo liveness weight
 feedAnimal''(MkParrot sentence weight, amount) = MkParrot sentence (weight + amount)
 
+-- eingebaut als uncurry
 tuplify :: (a -> b -> c) -> ((a, b) -> c)
 tuplify f = \ (a, b) -> f a b
 
--- >>> (tuplify feedAnimal) (dillo1, 5)
+-- >>> (tuplify feedAnimal) (dillo1, 5) -- a = Animal, b = Weight, c = Animal
 -- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
 
+-- eingebaut als curry
 untuplify :: ((a, b) -> c) -> (a -> b -> c)
 untuplify f = \a -> \b -> f (a, b)
+
+swapTuplified :: ((a, b) -> c) -> ((b. a) -> c)
+swapTuplified =  tuplify . swap . untuplify
+-- >>> (swap (untuplify feedAnimal'')) 5 dillo1
+-- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
 
 -- Eine geometrische Figuren ("Shape") ist eins der folgenden:
 -- - Kreis
