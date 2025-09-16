@@ -115,3 +115,13 @@ parrot1 :: Animal
 parrot1 = MkParrot "Hello!" 1
 parrot2 :: Animal
 parrot2 = MkParrot "Tschüss!" 2
+
+-- Tier überfahren
+runOverAnimal :: Animal -> Animal
+
+-- >>> runOverAnimal dillo1
+-- MkDillo {dilloLiveness = Dead, dilloWeight = 10}
+-- >>> runOverAnimal parrot1
+-- MkParrot "" 1
+runOverAnimal (MkDillo _liveness weight) = MkDillo Dead weight
+runOverAnimal (MkParrot _sentence weight) = MkParrot "" weight
