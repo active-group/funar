@@ -37,3 +37,4 @@ data Pet =
 
 -- Abseitsregel: Folgezeilen eines mehrzeilgen Konstrukts müssen eingerückt werden
 
+isCute :: Pet -> Bool
