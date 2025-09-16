@@ -22,3 +22,14 @@ quadruple x =
 -- >>> quadruple 21 
 -- 84
  
+ {- Blockkommentar
+ -}
+
+-- Haustier ist eins der folgenden:
+-- - Hund ODER
+-- - Katze ODER
+-- - Schlange
+data Pet =
+    Dog
+  | Cat
+  | Snake
