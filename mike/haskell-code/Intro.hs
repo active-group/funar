@@ -282,8 +282,17 @@ list4 :: [Integer]
 list4 = 6 : list3
 
 listSum :: [Integer] -> Integer
+
+-- >>> listSum list4
+-- 22
+
+-- Liste aufsummieren
 listSum [] = 0
-listSum (first : rest) = first + listSum rest
+listSum (x : xs) = x + listSum xs
+
+listMap :: (a -> b) -> [a] -> [b]
+listMap f [] = []
+listMap f (x:xs) = f x : listMap f xs
 
 -- Index eines Elements in einer Liste finden
 -- listIndex :: 
