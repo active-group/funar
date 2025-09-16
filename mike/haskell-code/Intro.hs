@@ -152,6 +152,9 @@ feedAnimal dillo@(MkDillo liveness weight) amount = -- Alias-Pattern
     Dead -> dillo -- MkDillo liveness weight
 feedAnimal (MkParrot sentence weight) amount = MkParrot sentence (weight+amount)
 
+feedDillo1 :: Weight -> Animal
+feedDillo1 = feedAnimal dillo1
+
 -- Eine geometrische Figuren ("Shape") ist eins der folgenden:
 -- - Kreis
 -- - Quadrat
