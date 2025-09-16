@@ -45,7 +45,7 @@
     (cond
       ((empty? list) acc)
       ((cons? list)
-       (rev2 (rest list)
+       (rev2 (rest list) ; tail call, endrekursiver Aufruf
              ; neues Zwischenergebnis, aus dem alten Zwischenergebnis
              (cons (first list) acc))))))
                               
