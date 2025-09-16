@@ -33,3 +33,5 @@ data Pet =
     Dog
   | Cat
   | Snake
+
+-- Abseitsregel: Folgezeilen müssen eingerückt werden
