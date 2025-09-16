@@ -205,9 +205,12 @@ tuplify f = \ (a, b) -> f a b
 -- >>> (tuplify feedAnimal) (dillo1, 5) -- a = Animal, b = Weight, c = Animal
 -- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
 
--- eingebaut als curry
+-- eingebaut als curry (Haskell Curry)
 untuplify :: ((a, b) -> c) -> (a -> b -> c)
 untuplify f = \a -> \b -> f (a, b)
+
+-- Moses Schönfinkel
+schönfinkeln = untuplify
 
 swapTuplified :: ((a, b) -> c) -> ((b. a) -> c)
 swapTuplified =  tuplify . swap . untuplify
