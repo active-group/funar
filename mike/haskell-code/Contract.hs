@@ -9,7 +9,7 @@ Zero-Bond / zero-coupon bond
 
 - zerlegen in "atomare Bestandteile" / "Ideen" ... z.B. entlang der Attribute
   - Währung: "Ich bekomme 1€ jetzt."
-  - Betrag
+  - Betrag: "Ich bekomme 100€ jetzt."
   - Später
 
 -}
@@ -32,7 +32,8 @@ data Contract =
 
 data Contract =
     One Currency
-    deriving Show
+  | WithAmount Amount Currency 
+  deriving Show
 
 -- "Ich bekomme 1€ jetzt."
 c1 :: Contract
