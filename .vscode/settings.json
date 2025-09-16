@@ -1,5 +1,6 @@
 {
     "haskell.manageHLS": "PATH",
     "extensions.ignoreRecommendations": true,
-    "haskell.plugin.hlint.diagnosticsOn": false
+    "haskell.plugin.hlint.diagnosticsOn": false,
+    "editor.inlayHints.enabled": "off"
 }
