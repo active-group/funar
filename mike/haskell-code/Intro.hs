@@ -299,6 +299,8 @@ listMap :: (a -> b) -> [a] -> [b]
 listMap f [] = []
 listMap f (x:xs) = f x : listMap f xs
 
+-- data Maybe a = Nothing | Just a
+
 data Optional a =
     Null
   | Result a
