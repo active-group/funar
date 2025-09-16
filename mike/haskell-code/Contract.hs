@@ -32,9 +32,21 @@ data Contract =
 
 data Contract =
     One Currency
-  | WithAmount Amount Currency 
+  | WithAmount Amount Contract
+  | WithDate Date Contract 
   deriving Show
 
 -- "Ich bekomme 1€ jetzt."
 c1 :: Contract
 c1 = One EUR
+
+-- "Ich bekomme 100€ jetzt."
+c2 :: Contract
+c2 = WithAmount 100 (One EUR)
+
+-- "Ich bekomme Weihnachten 100€."
+zcb1 :: Contract
+zcb1 = WithDate xmas (WithAmount 100 (One EUR))
+
+zeroCouponBond :: Date -> Amount -> Currency -> Contract
+zeroCouponBond date amount currency = WithDate date (WithAmount amount (One currency))
