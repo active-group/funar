@@ -66,4 +66,4 @@ data Liveness = Dead | Alive
   deriving Show
 
 -- Typsynonym
-type Weight = Integer
+data Weight = Integer
