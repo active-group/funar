@@ -305,7 +305,7 @@ data Optional a =
   deriving Show
 
 -- Index eines Elements in einer Liste finden
-listIndex :: Eq a => a -> [a] -> Optional Integer
+listIndex :: Eq a => a -> [a] -> Optional Integer -- Constraint
 listIndex element [] = Null
 listIndex element (x:xs) = 
   if x == element
