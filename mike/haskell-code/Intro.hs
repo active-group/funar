@@ -17,5 +17,8 @@ double x = x * 2
 quadruple :: Integer -> Integer
 quadruple x =
     let d = double x
-    in double d 
+    in double d
+
+-- >>> quadruple 21 
+-- 84
  
