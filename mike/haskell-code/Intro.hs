@@ -295,8 +295,24 @@ listMap :: (a -> b) -> [a] -> [b]
 -- >>> listMap runOverAnimal [dillo1, dillo2, parrot1, parrot2]
 -- [MkDillo {dilloLiveness = Dead, dilloWeight = 10},MkDillo {dilloLiveness = Dead, dilloWeight = 8},MkParrot "" 1,MkParrot "" 2]
 
+-- eingebaut als map
 listMap f [] = []
 listMap f (x:xs) = f x : listMap f xs
 
+data Optional a =
+    Null
+  | Result a
+  deriving Show
+
 -- Index eines Elements in einer Liste finden
--- listIndex :: 
+listIndex :: a -> [a] -> Optional Integer
+listIndex element [] = Null
+listIndex element (x:xs) = 
+  if x == element
+  then Result 0
+  else
+    case listIndex element xs of
+      Null -> Null
+      Result index -> Result (index + 1)
+
+
