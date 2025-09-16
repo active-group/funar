@@ -166,10 +166,13 @@ o :: (b -> c) -> (a -> b) -> (a -> c)
 o f g = \ a -> f (g a)
 -- eingebaut unter .
 
+-- Namen aus Sonderzeichen: immer Infix
+
 -- >>> z
 -- MkDillo {dilloLiveness = Dead, dilloWeight = 15}
-z = o runOverAnimal (feedAnimal' 5) dillo1
+z = (o runOverAnimal (feedAnimal' 5)) dillo1
 
+z' = (runOverAnimal . feedAnimal' 5) dillo1
 
 feedAnimal' :: Weight -> Animal -> Animal
 feedAnimal' = swap feedAnimal
