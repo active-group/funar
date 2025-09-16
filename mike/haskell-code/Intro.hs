@@ -68,6 +68,7 @@ data Liveness = Dead | Alive
 -- Typsynonym
 type Weight = Integer
 
+{-
 data Dillo = MkDillo { dilloLiveness :: Liveness,
                        dilloWeight :: Weight }
   deriving Show
@@ -95,5 +96,6 @@ runOverDillo :: Dillo -> Dillo
 -- runOverDillo (MkDillo _ w) = MkDillo Dead w 
 -- functional update: Kopie von dillo bis auf { ... }
 runOverDillo dillo = dillo { dilloLiveness = Dead }
+-} 
 
 -- algebraische Datentypen (ML, OCaml, F#, Haskell, Scala, Swift, ...)
