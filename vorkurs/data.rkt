@@ -318,7 +318,8 @@
                (lambda (first-list rec-call-result)
                  (if (odd? first-list)
                      (cons first-list rec-call-result)
-                     rec-call-result)))))
+                     rec-call-result))
+               list)))
 
 ; Abstraktion
 ; - kopieren (ein letztes Mal)
