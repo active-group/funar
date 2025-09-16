@@ -270,10 +270,15 @@ data ListOf a =
 -- leere Liste: []
 -- Cons       :  :
 
+list1 :: [Integer]
 list1 = 5 : []
+list2 :: [Integer]
 list2 = 8 : (5 : [])
+list2' :: [Integer]
 list2' = [5, 8]
+list3 :: [Integer]
 list3 = [3, 5, 8]
+list4 :: [Integer]
 list4 = 6 : list3
 
 -- Index eines Elements in einer Liste finden
