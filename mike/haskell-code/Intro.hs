@@ -33,5 +33,7 @@ data Pet =
     Dog
   | Cat
   | Snake
+  deriving Show -- hinter jedes data
 
--- Abseitsregel: Folgezeilen müssen eingerückt werden
+-- Abseitsregel: Folgezeilen eines mehrzeilgen Konstrukts müssen eingerückt werden
+
