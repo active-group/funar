@@ -291,6 +291,10 @@ listSum [] = 0
 listSum (x : xs) = x + listSum xs
 
 listMap :: (a -> b) -> [a] -> [b]
+
+-- >>> listMap runOverAnimal [dillo1, dillo2, parrot1, parrot2]
+-- [MkDillo {dilloLiveness = Dead, dilloWeight = 10},MkDillo {dilloLiveness = Dead, dilloWeight = 8},MkParrot "" 1,MkParrot "" 2]
+
 listMap f [] = []
 listMap f (x:xs) = f x : listMap f xs
 
