@@ -312,6 +312,14 @@
            (cons (first list) (list-odds (rest list)))
            (list-odds (rest list)))))))
 
+(define list-odds2
+  (lambda (list)
+    (list-fold empty
+               (lambda (first-list rec-call-result)
+                 (if (odd? first-list)
+                     (cons first-list rec-call-result)
+                     rec-call-result)))))
+
 ; Abstraktion
 ; - kopieren (ein letztes Mal)
 ; - Definition umbenennen - rekursive Aufrufe nicht vergessen
