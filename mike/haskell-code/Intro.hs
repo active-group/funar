@@ -52,3 +52,18 @@ isCute :: Pet -> Bool
 isCute Dog = True
 isCute Cat = True
 isCute Snake = False
+
+-- geht auch, aber !/&""%§&!"§"
+-- isCute Snake = False
+-- isCute otherPet = True
+-- isCute _ = True
+
+-- Gürteltier hat folgende Eigenschaften:
+-- - lebendig ODER tot  UHND
+-- - Gewicht
+
+data Liveness = Dead | Alive
+  deriving Show
+
+-- Typsynonym
+type Weight = Integer
