@@ -356,12 +356,13 @@ listIndex element (x:xs) =
   then Result 0
   else
     -- optionalMap (\index -> index + 1) (listIndex element xs)
-    fmap (+1) (listIndex element xs)
+    fmap (\x -> x + 1) (listIndex element xs)
+    -- fmap (+1) (listIndex element xs)
     {-
     case listIndex element xs of
       Null -> Null
       Result index -> Result (index + 1)
--}
+    -}
 -- Typklasse ~~ Interface
 -- Instanz: Implementierung einer Typklasse
 
