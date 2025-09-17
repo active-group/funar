@@ -86,4 +86,19 @@ p1''' = do put "Mike" 100
            y <- get "Mike"
            return (show (x+y))
 
-runDB :: DB a -> a
+runDB :: DB a -> Map Key Value -> (a, Map Key Value)
+runDB (Get key callback) mp =
+    let value = mp ! key
+    in runDB (callback value) mp
+runDB (Put key value callback) mp =
+    let mp' = Map.insert key value mp
+    in runDB (callback ()) mp'
+runDB (Return result) mp = (result, mp)
+
+
+-- >>> runDB p1 Map.empty
+-- ("201",fromList [("Mike",101)])
+-- >>> runDB p1' Map.empty
+-- ("201",fromList [("Mike",101)])
+-- >>> runDB p1''' Map.empty
+-- ("201",fromList [("Mike",101)])
