@@ -116,9 +116,10 @@ meaning c@(WithDate date contract) today =
     then meaning contract today
     else ([], c) -- WithDate date contract
 meaning (Two contract1 contract2) today =
-  let (payments1, residualContract1) = meaning contract1 today
-      (payments2, residualContract2) = meaning contract2 today
-  in (payments1 ++ payments2, two residualContract1 residualContract2)
+--  let (payments1, residualContract1) = meaning contract1 today
+--      (payments2, residualContract2) = meaning contract2 today
+--  in (payments1 ++ payments2, two residualContract1 residualContract2)
+  meaning contract1 today <> meaning contract2 today
 
 scalePayment :: Amount -> Payment -> Payment
 scalePayment factor (MkPayment direction date amount currency) =
