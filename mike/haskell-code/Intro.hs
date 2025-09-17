@@ -433,6 +433,7 @@ class Semigroup a => Monoid a where
   neutral :: a
 
 instance Monoid [a] where
+  neutral :: [a]
   neutral = []
 
 -- Kombi:
