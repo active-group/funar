@@ -49,6 +49,13 @@ data Pet =
   | Snake
   deriving Show -- hinter jedes data
 
+instance Eq Pet where
+  (==) :: Pet -> Pet -> Bool
+  (==) Dog Dog = True
+  (==) Cat Cat = True
+  (==) Snake Snake = True
+  (==) _ _ = False
+
 -- Abseitsregel: Folgezeilen eines mehrzeilgen Konstrukts müssen eingerückt werden
 
 -- Ist ein Haustier niedlich?
