@@ -49,7 +49,7 @@ data Contract =
   deriving Show
 
 instance Semigroup Contract where
-    (<>) = Two
+    (<>) = two
 
 instance Monoid Contract where
     mempty = Zero
@@ -102,7 +102,8 @@ withAmount amount contract = WithAmount amount contract
 -- operationelle Semantik
 -- Zahlungen bis zu einem bestimmten Zeitpunkt + Residualvertrag
 meaning :: Contract -> Date -> ([Payment], Contract)
-meaning Zero today = ([], Zero)
+-- meaning Zero today = ([], Zero)
+meaning Zero today = mempty
 meaning (One currency) today = ([MkPayment today Long 1 currency], Zero)
 meaning (WithAmount amount contract) today =
   let (payments, residualContract) = meaning contract today
