@@ -23,6 +23,8 @@ data Suit = Diamonds | Clubs | Spades | Hearts
 allSuits :: [Suit]
 allSuits = [Spades, Hearts, Diamonds, Clubs]
 
+-- "Make illegal states unrepresentable."
+
 data Rank = Two | Three | Four | Five | Six | Seven | Eight | Nine | Ten
          | Jack | Queen | King | Ace
   deriving (Show, Eq, Ord)
