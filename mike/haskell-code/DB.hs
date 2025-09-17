@@ -41,3 +41,15 @@ get key = Get key Return
 
 put :: Key -> Value -> DB ()
 put key value = Put key value Return
+
+p1' :: DB ()
+p1' = put "Mike" 100
+
+splice :: DB a -> (a -> DB b) -> DB b
+splice (Get key callback) next =
+    Get key
+      (\ value -> splice (callback value) next)
+splice (Put key value callback) next =
+    Put key value
+      ( \()    -> splice (callback ()) next)
+splice (Return result) next = next result
