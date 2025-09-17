@@ -438,6 +438,10 @@ instance Monoid [a] where
   neutral :: [a]
   neutral = []
 
+instance (Monoid a, Monoid b) => Monoid (a, b) where
+  neutral :: (a, b)
+  neutral = (neutral, neutral)
+
 -- Kombi:
 -- - Typ(en)
 -- - Operation(en)
