@@ -39,6 +39,7 @@ data Direction = Long | Short
   deriving Show
 
 data Contract =
+    -- | eine Einheit der Währung bekommen
     One Currency
   | WithAmount Amount Contract
   | WithDate Date Contract 
