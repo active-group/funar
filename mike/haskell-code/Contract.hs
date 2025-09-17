@@ -88,6 +88,10 @@ two Zero contract2 = contract2
 two contract1 Zero = contract1
 two contract1 contract2 = Two contract1 contract2
 
+withAmount :: Amount -> Contract -> Contract
+withAmount _ Zero = Zero
+withAmount amount contract = WithAmount amount contract
+
 -- operationelle Semantik
 -- Zahlungen bis zu einem bestimmten Zeitpunkt + Residualvertrag
 meaning :: Contract -> Date -> ([Payment], Contract)
