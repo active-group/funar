@@ -83,6 +83,7 @@ fxSwap date myAmount myCurrency theirAmount theirCurrency =
 data Payment = MkPayment Date Direction Amount Currency
   deriving Show
 
+-- "smart constructor"
 two :: Contract -> Contract -> Contract
 two Zero contract2 = contract2
 two contract1 Zero = contract1
@@ -123,7 +124,7 @@ invertPayment (MkPayment date Short amount currency) =
   MkPayment date Long amount currency
 
 -- >>> meaning c6 (MkDate "2025-10-01")
--- ([MkPayment (MkDate "2025-10-01") Long 100.0 EUR],WithAmount 100.0 (Two Zero (WithDate (MkDate "2025-12-24") (One EUR))))
+-- ([MkPayment (MkDate "2025-10-01") Long 100.0 EUR],WithAmount 100.0 (WithDate (MkDate "2025-12-24") (One EUR)))
 -- >>> meaning c6 xmas
--- ([MkPayment (MkDate "2025-12-24") Long 100.0 EUR,MkPayment (MkDate "2025-12-24") Long 100.0 EUR],WithAmount 100.0 Zero)
+-- ([MkPayment (MkDate "2025-12-24") Long 100.0 EUR,MkPayment (MkDate "2025-12-24") Long 100.0 EUR],Zero)
 c6 = WithAmount 100 (Two (One EUR) (WithDate xmas (One EUR)))
