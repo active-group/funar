@@ -447,8 +447,13 @@ instance (Monoid a, Monoid b) => Monoid (a, b) where
 -- - Operation(en)
 -- - Gleichungen
 
-instance Semigroup (Optional a) where
-  -- ...
+instance Semigroup a => Semigroup (Optional a) where
+  combine :: Optional a -> Optional a -> Optional a
+  combine Null Null = Null
+  combine Null (Result a) = Result a
+  combine (Result a) Null = Result a
+  combine (Result a) (Result a') = Result (combine a a')
 
-instance Monoid (Optional a) where
-  -- ...
+instance Semigroup a => Monoid (Optional a) where
+  neutral :: Optional a
+  neutral = Null
