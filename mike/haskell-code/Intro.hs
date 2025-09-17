@@ -399,3 +399,16 @@ listIndex element (x:xs) =
 -- instance (Eq a, Eq b) => Eq (Either a b)
 --   -- Defined in ‘Data.Either’
 -- instance Eq a => Eq (Maybe a) -- Defined in ‘GHC.Maybe’
+
+-- Kombinatoren, besonders "binäre Kombinatoren"
+
+-- Halbgruppe:
+-- Typ a
+-- combine :: a -> a -> a
+-- Assoziativität
+-- combine x (combine y z) == combine (combine x y) z
+
+-- Kombi:
+-- - Typ(en)
+-- - Operation(en)
+-- - Gleichungen
