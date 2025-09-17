@@ -47,7 +47,7 @@ data Pet =
     Dog
   | Cat
   | Snake
---  deriving Show -- hinter jedes data
+  deriving Show -- hinter jedes data
 
 -- >>> :info Show
 
@@ -86,7 +86,7 @@ isCute Snake = False
 -- - Gewicht
 
 data Liveness = Dead | Alive
-  deriving Show
+  deriving (Show, Eq)
 
 -- Typsynonym
 type Weight = Integer
@@ -126,7 +126,7 @@ runOverDillo dillo = dillo { dilloLiveness = Dead }
 data Animal =
     MkDillo { dilloLiveness :: Liveness, dilloWeight :: Weight }
   | MkParrot String Weight
-  deriving Show
+  deriving (Eq, Show)
 
 dillo1 :: Animal
 dillo1 = MkDillo { dilloLiveness = Alive, dilloWeight = 10 }
