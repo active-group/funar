@@ -421,6 +421,11 @@ instance Semigroup [a] where
   combine :: [a] -> [a] -> [a]
   combine = (++)
 
+-- Wenn a und b Halbruppen sind, ist auch (a, b) eine Halbgruppe
+instance (Semigroup a, Semigroup b) => Semigroup (a, b) where
+  combine :: (a, b) -> (a, b) -> (a, b)
+  combine (a1, b1) (a2, b2) = (combine a1 a2 , combine b1 b2)
+
 -- Monoid
 -- Halbgruppe a +
 -- neutrales Element
