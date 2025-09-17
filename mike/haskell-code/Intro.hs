@@ -321,6 +321,27 @@ optionalMap :: (a -> b) -> Optional a -> Optional b
 optionalMap f Null = Null
 optionalMap f (Result a) = Result (f a)
 
+instance Functor Optional where
+  fmap :: (a -> b) -> Optional a -> Optional b
+  fmap = optionalMap
+
+-- >>> :info Functor
+-- type Functor :: (* -> *) -> Constraint
+-- class Functor f where
+--   fmap :: (a -> b) -> f a -> f b
+-- instance Functor ((->) r) -- Defined in ‘GHC.Base’
+-- instance Functor IO -- Defined in ‘GHC.Base’
+-- instance Functor [] -- Defined in ‘GHC.Base’
+-- instance Functor Maybe -- Defined in ‘GHC.Base’
+-- instance Functor Solo -- Defined in ‘GHC.Base’
+-- instance Functor ((,) a) -- Defined in ‘GHC.Base’
+-- instance Functor ((,,) a b) -- Defined in ‘GHC.Base’
+-- instance Functor ((,,,) a b c) -- Defined in ‘GHC.Base’
+-- instance Functor ((,,,,) a b c d) -- Defined in ‘GHC.Base’
+-- instance Functor ((,,,,,) a b c d e) -- Defined in ‘GHC.Base’
+-- instance Functor ((,,,,,,) a b c d e f) -- Defined in ‘GHC.Base’
+-- instance Functor (Either a) -- Defined in ‘Data.Either’
+
 -- ersten Index eines Elements in einer Liste finden
 listIndex :: Eq a => a -> [a] -> Optional Integer -- Constraint
 
