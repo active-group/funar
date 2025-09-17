@@ -1,6 +1,9 @@
 {-# LANGUAGE InstanceSigs #-}
 module DB where
 
+import qualified Data.Map.Strict as Map
+import Data.Map.Strict (Map, (!))
+
 {-
 put "Mike" 100
 x = get "Mike"
