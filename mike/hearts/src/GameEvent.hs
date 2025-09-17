@@ -2,6 +2,9 @@ module GameEvent where
 
 import Cards
 
+import qualified Data.Map.Strict as Map
+import Data.Map.Strict (Map)
+
 -- Event:
 -- Repräsentation eines Ereignisses (als DATEN), das passiert ist.
 -- - in der Vergangenheit
@@ -13,6 +16,16 @@ import Cards
 -- - Redundanz OK
 -- - "lieber zu viel als zu wenig"
 
--- vs. Commands
+-- vs. Commands:
+-- Repräsentation eines Wunsches, dass etwas passieren möge
+-- => von den Events trennen
 
 data GameEvent =
+    CardPlayed Player Card
+  | CardDealt Player Card
+  | CardConsidered Player Card
+  | CardRejected Player Card
+  | TrickTaken Player [Card]
+  | RoundOver
+  | PlayerSelected Player  
+  | GameEnded (Map Player Integer)
