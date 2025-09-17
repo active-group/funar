@@ -23,9 +23,15 @@ import Data.Map.Strict (Map)
 data GameEvent =
     CardPlayed Player Card
   | CardDealt Player Card
+  -- ab hier ist alles andere unnötig:
   | CardConsidered Player Card
   | CardRejected Player Card
   | TrickTaken Player [Card]
   | RoundOver
   | PlayerSelected Player  
+  | GameStarted
   | GameEnded (Map Player Integer)
+
+data GameCommand =
+    StartGame [Player]
+  | PlayCard Player Card
