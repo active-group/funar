@@ -73,6 +73,12 @@ zcb1 = WithDate xmas (WithAmount 100 (One EUR))
 zeroCouponBond :: Date -> Amount -> Currency -> Contract
 zeroCouponBond date amount currency = WithDate date (WithAmount amount (One currency))
 
+-- Currency-Swap
+fxSwap :: Date -> Amount -> Currency -> Amount -> Currency -> Contract
+fxSwap date myAmount myCurrency theirAmount theirCurrency =
+    Two (zeroCouponBond date myAmount myCurrency)
+        (WithChangedDirection (zeroCouponBond date theirAmount theirCurrency))
+
 data Payment = MkPayment Date Direction Amount Currency
   deriving Show
 
