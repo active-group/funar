@@ -84,7 +84,8 @@ data Payment = MkPayment Date Direction Amount Currency
   deriving Show
 
 two :: Contract -> Contract -> Contract
-two Zero Zero = Zero
+two Zero contract2 = contract2
+two contract1 Zero = contract1
 two contract1 contract2 = Two contract1 contract2
 
 -- operationelle Semantik
@@ -105,7 +106,7 @@ meaning c@(WithDate date contract) today =
 meaning (Two contract1 contract2) today =
   let (payments1, residualContract1) = meaning contract1 today
       (payments2, residualContract2) = meaning contract2 today
-  in (payments1 ++ payments2, Two residualContract1 residualContract2)
+  in (payments1 ++ payments2, two residualContract1 residualContract2)
 
 scalePayment :: Amount -> Payment -> Payment
 scalePayment factor (MkPayment direction date amount currency) =
@@ -120,5 +121,5 @@ invertPayment (MkPayment date Short amount currency) =
 -- >>> meaning c6 (MkDate "2025-10-01")
 -- ([MkPayment (MkDate "2025-10-01") Long 100.0 EUR],WithAmount 100.0 (Two Zero (WithDate (MkDate "2025-12-24") (One EUR))))
 -- >>> meaning c6 xmas
--- ([MkPayment (MkDate "2025-12-24") Long 100.0 EUR,MkPayment (MkDate "2025-12-24") Long 100.0 EUR],WithAmount 100.0 (Two Zero Zero))
+-- ([MkPayment (MkDate "2025-12-24") Long 100.0 EUR,MkPayment (MkDate "2025-12-24") Long 100.0 EUR],WithAmount 100.0 Zero)
 c6 = WithAmount 100 (Two (One EUR) (WithDate xmas (One EUR)))
