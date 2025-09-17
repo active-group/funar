@@ -319,6 +319,11 @@ data Optional a =
   | Result a
   deriving Show
 
+
+optionalMap :: (a -> b) -> Optional a -> Optional b
+optionalMap f Null = Null
+optionalMap f (Result a) = Result (f a)
+
 -- ersten Index eines Elements in einer Liste finden
 listIndex :: Eq a => a -> [a] -> Optional Integer -- Constraint
 
