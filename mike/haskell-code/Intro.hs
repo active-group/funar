@@ -47,7 +47,7 @@ data Pet =
     Dog
   | Cat
   | Snake
-  deriving Show -- hinter jedes data
+--  deriving Show -- hinter jedes data
 
 -- >>> :info Show
 
