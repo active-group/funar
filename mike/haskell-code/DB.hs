@@ -82,3 +82,5 @@ p1''' = do put "Mike" 100
            put "Mike" (x+1)
            y <- get "Mike"
            return (show (x+y))
+
+runDB :: DB a -> a
