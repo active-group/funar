@@ -426,11 +426,8 @@ instance (Semigroup a, Semigroup b) => Semigroup (a, b) where
   combine :: (a, b) -> (a, b) -> (a, b)
   combine (a1, b1) (a2, b2) = (combine a1 a2 , combine b1 b2)
 
--- Monoid
--- Halbgruppe a +
--- neutrales Element
--- neutral :: a
--- combine x neutral == combine neutral x == x
+-- >>> combine ([1,2,3], [4,5,6]) ([10,11], [12,13])
+-- ([1,2,3,10,11],[4,5,6,12,13])
 
 -- "ein Monoid muß auch eine Halbgruppe sein"
 class Semigroup a => Monoid a where
