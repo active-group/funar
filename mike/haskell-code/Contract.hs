@@ -83,6 +83,10 @@ fxSwap date myAmount myCurrency theirAmount theirCurrency =
 data Payment = MkPayment Date Direction Amount Currency
   deriving Show
 
+two :: Contract -> Contract -> Contract
+two Zero Zero = Zero
+two contract1 contract2 = Two contract1 contract2
+
 -- operationelle Semantik
 -- Zahlungen bis zu einem bestimmten Zeitpunkt + Residualvertrag
 meaning :: Contract -> Date -> ([Payment], Contract)
@@ -114,4 +118,7 @@ invertPayment (MkPayment date Short amount currency) =
   MkPayment date Long amount currency
 
 -- >>> meaning c6 (MkDate "2025-10-01")
+-- ([MkPayment (MkDate "2025-10-01") Long 100.0 EUR],WithAmount 100.0 (Two Zero (WithDate (MkDate "2025-12-24") (One EUR))))
+-- >>> meaning c6 xmas
+-- ([MkPayment (MkDate "2025-12-24") Long 100.0 EUR,MkPayment (MkDate "2025-12-24") Long 100.0 EUR],WithAmount 100.0 (Two Zero Zero))
 c6 = WithAmount 100 (Two (One EUR) (WithDate xmas (One EUR)))
