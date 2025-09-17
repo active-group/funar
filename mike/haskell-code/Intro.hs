@@ -238,6 +238,7 @@ swapTuplified =  tuplify . swap . untuplify
 
 -- type Point = (Double, Double)
 data Point = MkPoint Double Double
+  deriving Show
 
 point1 :: Point
 point1 = MkPoint 1 1
@@ -252,6 +253,7 @@ data Shape
   = MkCircle {center :: Point, radius :: Double}
   | MkSquare {leftBottom :: Point, sideLength :: Double}
   | MkOverlap {shape1 :: Shape, shape2 :: Shape} -- Kombinator
+  deriving Show
 
 circle1 :: Shape
 circle1 = MkCircle (MkPoint 2 2) 2.0
@@ -457,3 +459,7 @@ instance Semigroup a => Semigroup (Optional a) where
 instance Semigroup a => Monoid (Optional a) where
   neutral :: Optional a
   neutral = Null
+
+-- >>> combine (Null :: Optional Shape) Null
+-- No instance for `Show Shape' arising from a use of `evalPrint'
+-- In a stmt of an interactive GHCi command: evalPrint it_asf9V
