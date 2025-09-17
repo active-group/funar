@@ -49,6 +49,8 @@ data Pet =
   | Snake
   deriving Show -- hinter jedes data
 
+-- >>> :info Show
+
 instance Eq Pet where
   (==) :: Pet -> Pet -> Bool
   (==) Dog Dog = True
