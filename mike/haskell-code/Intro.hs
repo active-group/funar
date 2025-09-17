@@ -429,7 +429,11 @@ instance Semigroup [a] where
 
 -- "ein Monoid muß auch eine Halbgruppe sein"
 class Semigroup a => Monoid a where
+  -- combine x neutral == combine neutral x == x
   neutral :: a
+
+instance Monoid [a] where
+  neutral = []
 
 -- Kombi:
 -- - Typ(en)
