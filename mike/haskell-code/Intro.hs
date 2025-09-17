@@ -409,6 +409,27 @@ listIndex element (x:xs) =
 -- combine :: a -> a -> a
 -- Assoziativität
 -- combine x (combine y z) == combine (combine x y) z
+class Semigroup a
+  -- combine x (combine y z) == combine (combine x y) z
+  combine :: a -> a -> a
+
+instance Semigroup Shape where
+  combine :: Shape -> Shape -> Shape
+  combine = MkOverlap
+
+instance Semigroup [a] where
+  combine :: [a] -> [a] -> [a]
+  combine = (++)
+
+-- Monoid
+-- Halbgruppe a +
+-- neutrales Element
+-- neutral :: a
+-- combine x neutral == combine neutral x == x
+
+-- "ein Monoid muß auch eine Halbgruppe sein"
+class Semigroup a => Monoid a where
+  neutral :: a
 
 -- Kombi:
 -- - Typ(en)
