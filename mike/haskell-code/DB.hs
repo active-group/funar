@@ -42,8 +42,12 @@ get key = Get key Return
 put :: Key -> Value -> DB ()
 put key value = Put key value Return
 
-p1' :: DB ()
-p1' = put "Mike" 100
+p1' :: DB String
+p1' = splice (put "Mike" 100) (\() ->
+      splice (get "Mike") (\x ->
+      splice (put "Mike" (x+1)) (\() ->
+      splice (get "Mike") (\y ->
+              Return (show (x+y))))))             
 
 splice :: DB a -> (a -> DB b) -> DB b
 splice (Get key callback) next =
@@ -53,3 +57,4 @@ splice (Put key value callback) next =
     Put key value
       ( \()    -> splice (callback ()) next)
 splice (Return result) next = next result
+
