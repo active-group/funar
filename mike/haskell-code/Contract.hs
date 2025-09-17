@@ -99,7 +99,7 @@ meaning Zero today = ([], Zero)
 meaning (One currency) today = ([MkPayment today Long 1 currency], Zero)
 meaning (WithAmount amount contract) today =
   let (payments, residualContract) = meaning contract today
-   in (map (scalePayment amount) payments, WithAmount amount residualContract)
+   in (map (scalePayment amount) payments, withAmount amount residualContract)
 meaning (WithChangedDirection contract) today =
   let (payments, residualContract) = meaning contract today
    in (map invertPayment payments, WithChangedDirection residualContract)
