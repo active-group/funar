@@ -461,5 +461,7 @@ instance Semigroup a => Monoid (Optional a) where
   neutral = Null
 
 -- >>> combine (Null :: Optional Shape) Null
--- No instance for `Show Shape' arising from a use of `evalPrint'
--- In a stmt of an interactive GHCi command: evalPrint it_asf9V
+-- Null
+
+-- >>> combine (Result [5]) Null
+-- Result [5]
