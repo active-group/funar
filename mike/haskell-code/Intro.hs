@@ -446,3 +446,9 @@ instance (Monoid a, Monoid b) => Monoid (a, b) where
 -- - Typ(en)
 -- - Operation(en)
 -- - Gleichungen
+
+instance Semigroup (Optional a) where
+  -- ...
+
+instance Monoid (Optional a) where
+  -- ...
