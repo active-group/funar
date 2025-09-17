@@ -48,6 +48,12 @@ data Contract =
   | Zero
   deriving Show
 
+instance Semigroup Contract where
+    (<>) = Two
+
+instance Monoid Contract where
+    mempty = Zero
+
 -- "Ich bekomme 1€ jetzt."
 c1 :: Contract
 c1 = One EUR
