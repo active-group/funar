@@ -217,10 +217,15 @@ tableProcessEvent (IllegalCardAttempted player card) state = state
 tableProcessEvent (GameEnded player) state = state
 
 runTable :: Game a -> TableState -> (a, TableState)
-runTable (RecordEvent event callback) state = undefined
-runTable (PlayAllowed player card callback) state = undefined
-runTable (RoundOverTrick callback) state = undefined
-runTable (GameOver callback) state = undefined
-runTable (PlayerAfter player callback) state = undefined
+runTable (RecordEvent event callback) state =
+  runTable (callback ()) (tableProcessEvent event state)
+runTable (PlayAllowed player card callback) state =
+  runTable (callback (playValid state player card)) state
+runTable (RoundOverTrick callback) state =
+  runTable (callback undefined) state
+runTable (GameOver callback) state =
+    runTable (callback undefined) state
+runTable (PlayerAfter player callback) state =
+    runTable (callback undefined) state
 runTable (GetCommand callback) state = undefined
 runTable (Return result) state = undefined
