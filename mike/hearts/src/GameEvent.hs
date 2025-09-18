@@ -134,6 +134,12 @@ tableProcessCommandM (PlayCard player card) =
        else do recordEventM (IllegalCardAttempted player card)
                return Nothing
 
+tableLoopM :: GameCommand -> Game Player
+tableLoopM command =
+  do maybeWinner <- tableProcessCommandM command
+     case maybeWinner of
+      Nothing -> undefined
+      Just winner -> return winner
 
 {-
 class ProcessManagement {
