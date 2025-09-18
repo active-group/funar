@@ -345,12 +345,24 @@ data Car = MkCar { licensePlate :: LicensePlate, seats :: Seats }
 
 makeCar :: String -> Integer -> Maybe Car
 makeCar licensePlate seats =
+  map2 MkCar (makeLicensePlate licensePlate) (makeSeats seats)
+  {-
   case makeLicensePlate licensePlate of
     Just licensePlate ->
       case makeSeats seats of
         Just seats -> Just (MkCar licensePlate seats)
         Nothing -> Nothing
     Nothing -> Nothing
+    -}
+
+map2 :: (a -> b -> c) -> Maybe a -> Maybe b -> Maybe c
+map2 f ma mb = undefined
+
+ap :: Maybe (a -> b) -> Maybe a -> Maybe b
+ap Nothing Nothing = Nothing
+ap Nothing (Just a) = Nothing
+ap (Just fab) Nothing = Nothing
+ap (Just fab) (Just a) = Just (fab a)
 
 {-
 makeCar :: String -> Integer -> Maybe Car
@@ -362,8 +374,6 @@ makeCar licensePlate seats =
   else Nothing
 -}
 
-map2 :: (a -> b -> c) -> Maybe a -> Maybe b -> Maybe c
-map2 f ma mb = undefined
 
 optionalMap :: (a -> b) -> Optional a -> Optional b
 optionalMap f Null = Null
