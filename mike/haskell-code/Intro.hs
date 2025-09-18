@@ -322,9 +322,22 @@ data Optional a =
 -- 1. Verteidigungslinie: Typsystem
 -- 2. Verteidigungslinie: Validierung
 
-data Car = MkCar { licensePlate :: String, seats :: Integer }
+data LicensePlate = MkLicensePlate String
   deriving Show
 
+makeLicensePlate :: String -> Maybe LicensePlate
+makeLicensePlate licensePlate =
+  if (length licensePlate >= 2) && (length licensePlate <= 14)
+  then Just (MkLicensePlate licensePlate)
+  else Nothing
+
+data Seats = MkSeats Integer
+  deriving Show
+
+data Car = MkCar { licensePlate :: LicensePlate, seats :: Seats }
+  deriving Show
+
+{-
 makeCar :: String -> Integer -> Maybe Car
 makeCar licensePlate seats =
   if (length licensePlate >= 2) && (length licensePlate <= 14)
@@ -332,6 +345,7 @@ makeCar licensePlate seats =
        then Just (MkCar licensePlate seats)
        else Nothing
   else Nothing
+-}
 
 optionalMap :: (a -> b) -> Optional a -> Optional b
 optionalMap f Null = Null
