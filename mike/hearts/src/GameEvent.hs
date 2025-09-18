@@ -75,6 +75,12 @@ instance Monad Game where
     return = Return
     (>>=) :: Game a -> (a -> Game b) -> Game b
     (>>=) (Return result) next = next result
+    (>>=) (RecordEvent event callback) next =
+        RecordEvent event
+          (\() -> callback () >>= next)
+    (>>=) (PlayAllowed player card callback) next =
+        PlayAllowed player card
+          (\allowed -> callback allowed >>= next)
 
 -- tableProcessCommand :: GameCommand -> TableState -> [GameEvent]
 -- ist das Spiel vorbei - und wer hat gewonnen?
