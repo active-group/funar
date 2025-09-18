@@ -75,6 +75,9 @@ roundOverTrickM = RoundOverTrick Return
 gameOverM :: Game (Maybe Player)
 gameOverM = GameOver Return
 
+playerAfterM :: Player -> Game Player
+playerAfterM player = PlayerAfter player Return
+
 instance Functor Game where
 
 instance Applicative Game where
