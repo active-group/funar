@@ -57,6 +57,7 @@ data GameCommand
 -- Monade für den Spielablauf
 data Game a =
       RecordEvent GameEvent (() -> Game a)
+    | GetCommand (GameCommand -> Game a)
     | PlayAllowed Player Card (Bool -> Game a)
     | RoundOverTrick (Maybe (Trick, Player) -> Game a)
     | PlayerAfter Player (Player -> Game a)
@@ -138,7 +139,7 @@ tableLoopM :: GameCommand -> Game Player
 tableLoopM command =
   do maybeWinner <- tableProcessCommandM command
      case maybeWinner of
-      Nothing -> undefined
+      Nothing -> undefined -- müssen tableLoopM
       Just winner -> return winner
 
 {-
