@@ -380,6 +380,10 @@ makeCar licensePlate seats =
 --  map2 MkCar (makeLicensePlate licensePlate) (makeSeats seats)
   MkCar <$> makeLicensePlate licensePlate <*> makeSeats seats
 
+validateCar :: String -> Integer -> Validated Car
+validateCar licensePlate seats =
+  MkCar <$> validateLicensePlate licensePlate <*> validateSeats seats
+
   {-
   case makeLicensePlate licensePlate of
     Just licensePlate ->
@@ -397,6 +401,12 @@ makeCar licensePlate seats =
 
 -- >>> makeCar "T" 5
 -- Nothing
+
+-- >>> validateCar "Tü-GV256E" 5
+-- Valid (MkCar {licensePlate = MkLicensePlate "T\252-GV256E", seats = MkSeats 5})
+
+-- >>> validateCar "T" 1
+-- Invalid ["invalid length of license plate","invalid # of seats"]
 
 -- map2 :: (a -> b -> c) -> Maybe a -> Maybe b -> Maybe c
 map2 :: (a -> b -> c) -> Maybe a -> Maybe b -> Maybe c
