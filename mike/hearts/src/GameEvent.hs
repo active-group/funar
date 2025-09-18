@@ -116,7 +116,14 @@ tableProcessCommandM (PlayCard player card) =
                case roundOver of
                 Just (trick, trickTaker) ->
                   do recordEventM (TrickTaken trickTaker trick)                     
-                     return undefined
+                     over <- gameOverM
+                     case over of
+                      Just winner ->
+                        do recordEventM (GameEnded winner)
+                           return (Just winner)
+                      Nothing ->
+                        do recordEventM (PlayerTurnChanged trickTaker)
+                           return Nothing
                 Nothing -> undefined
        else do recordEventM (IllegalCardAttempted player card)
                return Nothing
