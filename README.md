@@ -98,7 +98,7 @@ am Datum erkennbar sein.
 - Scott Wlaschin: [Domain Modeling Made Functional](https://pragprog.com/titles/swdddf/domain-modeling-made-functional/)
 - [Video: Graham Hutton - Applicative Functors](https://www.youtube.com/watch?v=8oVHISjS3wI)
 - [Blog-Post: Alexis King - Parse, Don't Validate](https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/)
-
+- [Copilot - Realtime Programming Language and Runtime Verification Framework](https://copilot-language.github.io/)
 <!-- Local Variables: -->
 <!-- fill-column: 80 -->
 <!-- End: -->
