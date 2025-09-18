@@ -56,7 +56,11 @@ data GameCommand
 
 -- Monade für den Spielablauf
 data Game a =
-    Return a
+      RecordEvent GameEvent (() -> Game a)
+    | Return a
+
+recordEventM :: GameEvent -> Game ()
+recordEventM event = RecordEvent event Return
 
 instance Functor Game where
 
@@ -65,11 +69,19 @@ instance Applicative Game where
 instance Monad Game where
     return :: a -> Game a
     return = Return
+    (>>=) :: Game a -> (a -> Game b) -> Game b
+    (>>=) (Return result) next = next result
 
 -- tableProcessCommand :: GameCommand -> TableState -> [GameEvent]
 -- ist das Spiel vorbei - und wer hat gewonnen?
 -- dabei sollen Events protokolliert werden
 tableProcessCommandM :: GameCommand -> Game (Maybe Player)
-tableProcessCommandM (DealHands hands) = undefined
+tableProcessCommandM (DealHands hands) =
+    let pairs = Map.toList hands
+        events = map (uncurry HandDealt) pairs
+        records = map recordEventM events
+    in do sequence_ records
+          return Nothing -- Spiel noch nicht vorbei
+
 tableProcessCommandM (PlayCard player card) = undefined
 
