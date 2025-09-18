@@ -58,6 +58,9 @@ data GameCommand
 data Game a =
       RecordEvent GameEvent (() -> Game a)
     | PlayAllowed Player Card (Bool -> Game a)
+    | RoundOverTrick (Maybe (Trick, Player) -> Game a)
+    | PlayerAfter Player (Player -> Game a)
+    | GameOver (Maybe Player -> Game a)
     | Return a
 
 recordEventM :: GameEvent -> Game ()
