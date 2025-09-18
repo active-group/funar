@@ -322,6 +322,26 @@ data Optional a =
 -- 1. Verteidigungslinie: Typsystem
 -- 2. Verteidigungslinie: Validierung
 
+data Validated a =
+     Valid a
+   | Invalid [String] -- Fehlermeldungen
+  deriving Show
+
+instance Functor Validated where
+  fmap :: (a -> b) -> Validated a -> Validated b
+  fmap f (Valid a) = Valid (f a)
+  fmap f (Invalid errors) = Invalid errors
+
+instance Applicative Validated where
+  pure :: a -> Validated a
+  pure = Valid
+
+  (<*>) :: Validated (a -> b) -> Validated a -> Validated b
+  (<*>) (Valid f) (Valid a) = Valid (f a)
+  (<*>) (Invalid ferrors) (Valid a) = Invalid ferrors
+  (<*>) (Valid f) (Invalid aerrors) = Invalid aerrors
+  (<*>) (Invalid ferrors) (Invalid aerrors) = Invalid (ferrors ++ aerrors)
+
 data LicensePlate = MkLicensePlate String
   deriving Show
 
