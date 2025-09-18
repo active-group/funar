@@ -69,6 +69,12 @@ recordEventM event = RecordEvent event Return
 playAllowedM :: Player -> Card -> Game Bool
 playAllowedM player card = PlayAllowed player card Return
 
+roundOverTrickM :: Game (Maybe (Trick, Player))
+roundOverTrickM = RoundOverTrick Return
+
+gameOverM :: Game (Maybe Player)
+gameOverM = GameOver Return
+
 instance Functor Game where
 
 instance Applicative Game where
@@ -84,6 +90,12 @@ instance Monad Game where
     (>>=) (PlayAllowed player card callback) next =
         PlayAllowed player card
           (\allowed -> callback allowed >>= next)
+    (>>=) (RoundOverTrick callback) next =
+      RoundOverTrick (\r -> callback r >>= next)
+    (>>=) (PlayerAfter player callback) next =
+      PlayerAfter player (\player -> callback player >>= next)
+    (>>=) (GameOver callback) next =
+      GameOver (\r -> callback r >>= next)
 
 -- tableProcessCommand :: GameCommand -> TableState -> [GameEvent]
 -- ist das Spiel vorbei - und wer hat gewonnen?
@@ -100,7 +112,12 @@ tableProcessCommandM (PlayCard player card) =
     do allowed <- playAllowedM player card
        if allowed
        then do recordEventM (LegalCardPlayed player card)
-               return undefined
+               roundOver <- roundOverTrickM
+               case roundOver of
+                Just (trick, trickTaker) ->
+                  do recordEventM (TrickTaken trickTaker trick)                     
+                     return undefined
+                Nothing -> undefined
        else do recordEventM (IllegalCardAttempted player card)
                return Nothing
 
