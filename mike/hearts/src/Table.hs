@@ -222,10 +222,11 @@ runTable (RecordEvent event callback) state =
 runTable (PlayAllowed player card callback) state =
   runTable (callback (playValid state player card)) state
 runTable (RoundOverTrick callback) state =
-  runTable (callback undefined) state
+  runTable (callback (roundOverTrick state)) state
 runTable (GameOver callback) state =
-    runTable (callback undefined) state
+    runTable (callback (gameOver state)) state
 runTable (PlayerAfter player callback) state =
-    runTable (callback undefined) state
+    runTable (callback (playerAfter state player)) state
+
 runTable (GetCommand callback) state = undefined
 runTable (Return result) state = undefined
