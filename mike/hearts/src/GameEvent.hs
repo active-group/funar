@@ -94,9 +94,12 @@ tableProcessCommandM (DealHands hands) =
           return Nothing -- Spiel noch nicht vorbei
 
 tableProcessCommandM (PlayCard player card) =
-    if playAllowed player card
-    then undefined
-    else undefined
+    do allowed <- playAllowedM player card
+       if allowed
+       then do recordEventM (LegalCardPlayed player card)
+               return undefined
+       else do recordEventM (IllegalCardAttempted player card)
+               return Nothing
 
 
 {-
