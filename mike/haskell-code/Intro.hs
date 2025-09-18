@@ -351,6 +351,12 @@ makeLicensePlate licensePlate =
   then Just (MkLicensePlate licensePlate)
   else Nothing
 
+validateLicensePlate :: String -> Validated LicensePlate
+validateLicensePlate licensePlate =
+  if (length licensePlate >= 2) && (length licensePlate <= 14)
+    then Valid (MkLicensePlate licensePlate)
+    else Invalid ["invalid length of license plate"]
+
 data Seats = MkSeats Integer
   deriving Show
 
@@ -359,6 +365,12 @@ makeSeats seats =
   if seats >= 2
   then Just (MkSeats seats)
   else Nothing
+
+validateSeats :: Integer -> Validated Seats
+validateSeats seats =
+  if seats >= 2
+    then Valid (MkSeats seats)
+    else Invalid ["invalid # of seats"]
 
 data Car = MkCar { licensePlate :: LicensePlate, seats :: Seats }
   deriving Show
