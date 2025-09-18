@@ -96,6 +96,8 @@ am Datum erkennbar sein.
 - Sandy Maguire: [Algebra-Driven Design](https://leanpub.com/algebra-driven-design)
 - Michael Pilquist, Rúnar Bjarnason, and Paul Chiusano [Functional Programming in Scala](https://www.manning.com/books/functional-programming-in-scala-second-edition)
 - Scott Wlaschin: [Domain Modeling Made Functional](https://pragprog.com/titles/swdddf/domain-modeling-made-functional/)
+- [Video: Graham Hutton - Applicative Functors](https://www.youtube.com/watch?v=8oVHISjS3wI)
+- [Blog-Post: Alexis King - Parse, Don't Validate](https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/)
 
 <!-- Local Variables: -->
 <!-- fill-column: 80 -->
