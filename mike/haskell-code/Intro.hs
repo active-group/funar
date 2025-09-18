@@ -317,6 +317,22 @@ data Optional a =
   | Result a
   deriving Show
 
+-- Yaron Minsky:
+-- "Make illegal states unrepresentable."
+-- 1. Verteidigungslinie: Typsystem
+-- 2. Verteidigungslinie: Validierung
+
+data Car = MkCar { licensePlate :: String, seats :: Integer }
+  deriving Show
+
+makeCar :: String -> Integer -> Maybe Car
+makeCar licensePlate seats =
+  if (length licensePlate >= 2) && (length licensePlate <= 14)
+  then if seats >= 2
+       then Just (MkCar licensePlate seats)
+       else Nothing
+  else Nothing
+
 optionalMap :: (a -> b) -> Optional a -> Optional b
 optionalMap f Null = Null
 optionalMap f (Result a) = Result (f a)
