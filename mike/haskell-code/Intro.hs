@@ -334,6 +334,12 @@ makeLicensePlate licensePlate =
 data Seats = MkSeats Integer
   deriving Show
 
+makeSeats :: Integer -> Maybe Seats
+makeSeats seats =
+  if seats >= 2
+  then Just (MkSeats seats)
+  else Nothing
+
 data Car = MkCar { licensePlate :: LicensePlate, seats :: Seats }
   deriving Show
 
