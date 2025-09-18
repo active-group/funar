@@ -362,6 +362,9 @@ makeCar licensePlate seats =
   else Nothing
 -}
 
+map2 :: (a -> b -> c) -> Maybe a -> Maybe b -> Maybe c
+map2 f ma mb = undefined
+
 optionalMap :: (a -> b) -> Optional a -> Optional b
 optionalMap f Null = Null
 optionalMap f (Result a) = Result (f a)
