@@ -238,7 +238,7 @@ runTable (PlayerAfter player callback) (state, revents) =
 
 runTable (GetCommand callback) (state, revents) =
   -- müssen anhalten
-  (callback, 
+  (Left callback, 
    state, reverse revents)
 
-runTable (Return result) (state, revents) = (result, state, reverse revents)
+runTable (Return result) (state, revents) = (Right result, state, reverse revents)
