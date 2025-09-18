@@ -216,17 +216,29 @@ tableProcessEvent (TrickTaken player trick) state =
 tableProcessEvent (IllegalCardAttempted player card) state = state
 tableProcessEvent (GameEnded player) state = state
 
-runTable :: Game a -> TableState -> (a, TableState)
-runTable (RecordEvent event callback) state =
-  runTable (callback ()) (tableProcessEvent event state)
-runTable (PlayAllowed player card callback) state =
-  runTable (callback (playValid state player card)) state
-runTable (RoundOverTrick callback) state =
-  runTable (callback (roundOverTrick state)) state
-runTable (GameOver callback) state =
-    runTable (callback (gameOver state)) state
-runTable (PlayerAfter player callback) state =
-    runTable (callback (playerAfter state player)) state
+-- Konvention: Right = "erfolgreich" / "fertig"
+-- data Either left right = Left left | Right right
 
-runTable (GetCommand callback) state = undefined
-runTable (Return result) state = undefined
+runTable :: Game a -> (TableState, [GameEvent]) -- Liste Akkumulator, umgekehrter Reihenfolge
+              -> (Either (GameCommand -> Game a) a, 
+                  TableState, [GameEvent])
+runTable (RecordEvent event callback) (state, revents) =
+  runTable (callback ())
+           (tableProcessEvent event state,
+            event : revents)
+
+runTable (PlayAllowed player card callback) (state, revents) =
+  runTable (callback (playValid state player card)) (state, revents)
+runTable (RoundOverTrick callback) (state, revents) =
+  runTable (callback (roundOverTrick state)) (state, revents)
+runTable (GameOver callback) (state, revents) =
+    runTable (callback (gameOver state)) (state, revents)
+runTable (PlayerAfter player callback) (state, revents) =
+    runTable (callback (playerAfter state player)) (state, revents)
+
+runTable (GetCommand callback) (state, revents) =
+  -- müssen anhalten
+  (callback, 
+   state, reverse revents)
+
+runTable (Return result) (state, revents) = (result, state, reverse revents)
