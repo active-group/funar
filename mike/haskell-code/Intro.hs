@@ -343,6 +343,15 @@ makeSeats seats =
 data Car = MkCar { licensePlate :: LicensePlate, seats :: Seats }
   deriving Show
 
+makeCar :: String -> Integer -> Maybe Car
+makeCar licensePlate seats =
+  case makeLicensePlate licensePlate of
+    Just licensePlate ->
+      case makeSeats seats of
+        Just seats -> Just (MkCar licensePlate seats)
+        Nothing -> Nothing
+    Nothing -> Nothing
+
 {-
 makeCar :: String -> Integer -> Maybe Car
 makeCar licensePlate seats =
