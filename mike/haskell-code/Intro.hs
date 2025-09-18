@@ -345,7 +345,9 @@ data Car = MkCar { licensePlate :: LicensePlate, seats :: Seats }
 
 makeCar :: String -> Integer -> Maybe Car
 makeCar licensePlate seats =
-  map2 MkCar (makeLicensePlate licensePlate) (makeSeats seats)
+--  map2 MkCar (makeLicensePlate licensePlate) (makeSeats seats)
+  MkCar <$> makeLicensePlate licensePlate <*> makeSeats seats
+
   {-
   case makeLicensePlate licensePlate of
     Just licensePlate ->
@@ -355,14 +357,46 @@ makeCar licensePlate seats =
     Nothing -> Nothing
     -}
 
+-- >>> makeCar "Tü-GV256E" 5
+-- Just (MkCar {licensePlate = MkLicensePlate "T\252-GV256E", seats = MkSeats 5})
+
+-- >>> makeCar "Tü" 1
+-- Nothing
+
+-- >>> makeCar "T" 5
+-- Nothing
+
+-- map2 :: (a -> b -> c) -> Maybe a -> Maybe b -> Maybe c
 map2 :: (a -> b -> c) -> Maybe a -> Maybe b -> Maybe c
-map2 f ma mb = undefined
+map2 f ma mb = ap (fmap f ma) mb
+
+fmap2 :: Applicative f => (a -> b -> c) -> f a -> f b -> f c
+-- fmap2 f ma mb = fmap f ma <*> mb
+fmap2 f ma mb = f <$> ma <*> mb
+
+map3 :: (a -> b -> c -> d) -> Maybe a -> Maybe b -> Maybe c -> Maybe d
+map3 f ma mb mc = ap (ap (ap (Just f) ma) mb) mc
+
+fmap3 f ma mb mc = fmap f ma <*> mb <*> mc
+
+-- (<$>) = fmap
 
 ap :: Maybe (a -> b) -> Maybe a -> Maybe b
 ap Nothing Nothing = Nothing
 ap Nothing (Just a) = Nothing
 ap (Just fab) Nothing = Nothing
 ap (Just fab) (Just a) = Just (fab a)
+
+-- >>> :info Applicative
+-- type Applicative :: (* -> *) -> Constraint
+-- class Functor f => Applicative f where
+--   pure :: a -> f a
+--   (<*>) :: f (a -> b) -> f a -> f b
+
+-- fmap ::          (a -> b)   -> f a -> f b
+-- (<*>) ::       f (a ->   b) -> f a -> f b
+-- (flip (>>=)) ::  (a -> f b) -> f a -> f b
+-- (>>=) :: f a -> (a -> f b) -> f b
 
 {-
 makeCar :: String -> Integer -> Maybe Car
