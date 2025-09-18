@@ -57,10 +57,14 @@ data GameCommand
 -- Monade für den Spielablauf
 data Game a =
       RecordEvent GameEvent (() -> Game a)
+    | PlayAllowed Player Card (Bool -> Game a)
     | Return a
 
 recordEventM :: GameEvent -> Game ()
 recordEventM event = RecordEvent event Return
+
+playAllowedM :: Player -> Card -> Game Bool
+playAllowedM player card = PlayAllowed player card Return
 
 instance Functor Game where
 
@@ -83,5 +87,20 @@ tableProcessCommandM (DealHands hands) =
     in do sequence_ records
           return Nothing -- Spiel noch nicht vorbei
 
-tableProcessCommandM (PlayCard player card) = undefined
+tableProcessCommandM (PlayCard player card) =
+    if playAllowed player card
+    then undefined
+    else undefined
 
+
+{-
+class ProcessManagement {
+    processCommand(GameCommand command, EventListener<GameEvent> listener) {
+        switch (command) {
+           DealHands ... -> eventListener.fire(new HandDealt(...);
+                             eventListener.fire(new HandDealt(...);
+        }
+    }
+}
+
+-}
