@@ -100,6 +100,8 @@ instance Monad Game where
       PlayerAfter player (\player -> callback player >>= next)
     (>>=) (GameOver callback) next =
       GameOver (\r -> callback r >>= next)
+    (>>=) (GetCommand callback) next =
+      GetCommand (\command -> callback command >>= next)
 
 -- tableProcessCommand :: GameCommand -> TableState -> [GameEvent]
 -- ist das Spiel vorbei - und wer hat gewonnen?
@@ -139,7 +141,8 @@ tableLoopM :: GameCommand -> Game Player
 tableLoopM command =
   do maybeWinner <- tableProcessCommandM command
      case maybeWinner of
-      Nothing -> undefined -- müssen tableLoopM
+      Nothing ->  -- müssen tableLoopM aufrufen
+        GetCommand tableLoopM
       Just winner -> return winner
 
 {-
