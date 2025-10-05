@@ -38,19 +38,34 @@ import qualified Json.Decode as Decode
 -- |
 -- >>> :seti -XOverloadedStrings
 
-tuple2Decoder :: Decoder a -> Decoder b -> Decoder (a, b)
-tuple2Decoder first second = do
-  a <- Decode.index 0 first
-  b <- Decode.index 1 second
-  pure (a, b)
+-- | Spieler:in codieren
+-- >>> encodePlayer (Cards.Player "Mike")
+-- String "Mike"
+encodePlayer :: Cards.Player -> Json.Value
+encodePlayer (Cards.Player playerName) =
+  jsonString playerName
 
-mapDecoder :: Ord key => Decoder key -> Decoder value -> Decoder (Map.Map key value)
-mapDecoder keyDecoder valueDecoder =
-  Map.fromList
-    <$> Decode.list (tuple2Decoder keyDecoder valueDecoder)
+jsonString :: String -> Json.Value
+jsonString = Json.toJSON . Text.pack
+
+constructor1Decoder :: Decoder a -> (a -> b) -> Decoder b
+constructor1Decoder = flip fmap
 
 playerDecoder :: Decoder Cards.Player
 playerDecoder = constructor1Decoder Decode.string Cards.Player
+
+-- | Farbe codieren
+-- >>> encodeSuit Cards.Diamonds
+-- String "Diamonds"
+encodeSuit :: Cards.Suit -> Json.Value
+encodeSuit suit =
+  jsonString
+    ( case suit of
+        Cards.Diamonds -> "Diamonds"
+        Cards.Clubs -> "Clubs"
+        Cards.Spades -> "Spades"
+        Cards.Hearts -> "Hearts"
+    )
 
 suitDecoder :: Decoder Cards.Suit
 suitDecoder = do
@@ -61,6 +76,28 @@ suitDecoder = do
     "Hearts" -> return Cards.Hearts
     "Clubs" -> return Cards.Clubs
     s -> Decode.faild ("Not a suit: " <> s)
+
+-- | Wertigkeit codieren
+-- >>> encodeRank Cards.Three
+-- String "Three"
+encodeRank :: Cards.Rank -> Json.Value
+encodeRank rank =
+  jsonString
+    ( case rank of
+        Cards.Two -> "Two"
+        Cards.Three -> "Three"
+        Cards.Four -> "Four"
+        Cards.Five -> "Five"
+        Cards.Six -> "Six"
+        Cards.Seven -> "Seven"
+        Cards.Eight -> "Eight"
+        Cards.Nine -> "Nine"
+        Cards.Ten -> "Ten"
+        Cards.Queen -> "Queen"
+        Cards.King -> "King"
+        Cards.Jack -> "Jack"
+        Cards.Ace -> "Ace"
+    )
 
 rankDecoder :: Decoder Cards.Rank
 rankDecoder = do
@@ -81,6 +118,16 @@ rankDecoder = do
     "Ace" -> return Cards.Ace
     s -> Decode.faild ("Not a rank: " <> s)
 
+-- | Karte codieren
+-- >>> encodeCard (Cards.Card Cards.Diamonds Cards.Queen)
+-- Object (fromList [("rank",String "Queen"),("suit",String "Diamonds")])
+encodeCard :: Cards.Card -> Json.Value
+encodeCard (Cards.Card suit rank) =
+  Json.object
+    [ "suit" .= encodeSuit suit,
+      "rank" .= encodeRank rank
+    ]
+
 -- | Decoder für eine Karte
 -- >>> runDecoder cardDecoder (fromJust ((Json.decode "{\"rank\":\"Ten\",\"suit\":\"Diamonds\"}") :: Maybe Json.Value))
 -- Right (Card {suit = Diamonds, rank = Ten})
@@ -94,21 +141,80 @@ cardDecoder =
     <$> Decode.field "suit" suitDecoder
     <*> Decode.field "rank" rankDecoder
 
+encodeHand :: Cards.Hand -> Json.Value
+encodeHand = jsonList encodeCard . Cards.handCards
+
+jsonList :: (a -> Json.Value) -> [a] -> Json.Value
+jsonList encode = Json.Array . Vector.fromList . fmap encode
+
 handDecoder :: Decoder Cards.Hand
 handDecoder = Cards.makeHand <$> Decode.list cardDecoder
+
+encodeTrick :: Cards.Trick -> Json.Value
+encodeTrick trick =
+  jsonList
+    (\(player, card) -> jsonList id [encodePlayer player, encodeCard card])
+    (Cards.trickToList trick)
+
+tuple2Decoder :: Decoder a -> Decoder b -> Decoder (a, b)
+tuple2Decoder first second = do
+  a <- Decode.index 0 first
+  b <- Decode.index 1 second
+  pure (a, b)
 
 trickDecoder :: Decoder Cards.Trick
 trickDecoder = Cards.listToTrick <$> (Decode.list (tuple2Decoder playerDecoder cardDecoder))
 
-playerHandsDecoder :: Decoder (Map Cards.Player Cards.Hand)
-playerHandsDecoder = mapDecoder playerDecoder handDecoder
+encodeConstructor1 :: String -> Json.Value -> Json.Value
+encodeConstructor1 constructorName x =
+  Json.object
+    [ ("tag", jsonString constructorName),
+      ("contents", x)
+    ]
 
-constructor1Decoder :: Decoder a -> (a -> b) -> Decoder b
-constructor1Decoder = flip fmap
+encodeConstructor2 :: String -> Json.Value -> Json.Value -> Json.Value
+encodeConstructor2 constructorName x y =
+  Json.object
+    [ "tag" .= jsonString constructorName,
+      "contents" .= jsonList id [x, y]
+    ]
+
+-- | Event codieren
+-- >>> let mike = Cards.Player "Mike"
+-- >>> encodeGameEvent (PlayerTurnChanged mike)
+-- Object (fromList [("contents",String "Mike"),("tag",String "PlayerTurnChanged")])
+-- >>> encodeGameEvent (GameEnded mike)
+-- Object (fromList [("contents",String "Mike"),("tag",String "GameEnded")])
+encodeGameEvent :: GameEvent -> Json.Value
+encodeGameEvent gameEvent =
+  case gameEvent of
+    PlayerTurnChanged player ->
+      encodeConstructor1 "PlayerTurnChanged" (encodePlayer player)
+    LegalCardPlayed player card ->
+      encodeConstructor2 "LegalCardPlayed" (encodePlayer player) (encodeCard card)
+    IllegalCardAttempted player card ->
+      encodeConstructor2 "IllegalCardAttempted" (encodePlayer player) (encodeCard card)
+    GameEnded player ->
+      encodeConstructor1 "GameEnded" (encodePlayer player)
+    HandDealt player hand ->
+      encodeConstructor2 "HandDealt" (encodePlayer player) (encodeHand hand)
+    TrickTaken player trick ->
+      encodeConstructor2 "TrickTaken" (encodePlayer player) (encodeTrick trick)
+
+encodeGameEvents :: [GameEvent] -> Json.Value
+encodeGameEvents = jsonList encodeGameEvent
 
 constructor2Decoder :: Decoder a -> Decoder b -> (a -> b -> c) -> Decoder c
 constructor2Decoder decodeA decodeB constructor =
   uncurry constructor <$> tuple2Decoder decodeA decodeB
+
+mapDecoder :: Ord key => Decoder key -> Decoder value -> Decoder (Map.Map key value)
+mapDecoder keyDecoder valueDecoder =
+  Map.fromList
+    <$> Decode.list (tuple2Decoder keyDecoder valueDecoder)
+
+playerHandsDecoder :: Decoder (Map Cards.Player Cards.Hand)
+playerHandsDecoder = mapDecoder playerDecoder handDecoder
 
 handDealtDecoder :: Decoder GameEvent
 handDealtDecoder = constructor2Decoder playerDecoder handDecoder HandDealt
@@ -127,12 +233,6 @@ illegalCardPlayedDecoder = constructor2Decoder playerDecoder cardDecoder Illegal
 
 gameEndedDecoder :: Decoder GameEvent
 gameEndedDecoder = constructor1Decoder playerDecoder GameEnded
-
-dealHandsDecoder :: Decoder GameCommand
-dealHandsDecoder = constructor1Decoder playerHandsDecoder DealHands
-
-playCardDecoder :: Decoder GameCommand
-playCardDecoder = constructor2Decoder playerDecoder cardDecoder PlayCard
 
 dataDecoder :: Map String (Decoder a) -> (String -> Decoder a) -> Decoder a
 dataDecoder constructorDecoders defaultDecoder = do
@@ -161,97 +261,6 @@ gameEventDecoder =
 gameEventsDecoder :: Decoder [GameEvent]
 gameEventsDecoder = Decode.list gameEventDecoder
 
-gameCommandDecoderTable :: Map String (Decoder GameCommand)
-gameCommandDecoderTable =
-  Map.fromList
-    [ ("PlayCard", playCardDecoder),
-      ("DealHands", dealHandsDecoder)
-    ]
-
-gameCommandDecoder :: Decoder GameCommand
-gameCommandDecoder =
-  dataDecoder
-    gameCommandDecoderTable
-    (\tag -> Decode.faild ("unknown GameCommand tag " ++ tag))
-
-gameCommandsDecoder :: Decoder [GameCommand]
-gameCommandsDecoder = Decode.list gameCommandDecoder
-
-jsonString :: String -> Json.Value
-jsonString = Json.toJSON . Text.pack
-
--- | Spieler:in codieren
--- >>> encodePlayer (Cards.Player "Mike")
--- String "Mike"
-encodePlayer :: Cards.Player -> Json.Value
-encodePlayer (Cards.Player playerName) =
-  jsonString playerName
-
--- | Farbe codieren
--- >>> encodeSuit Cards.Diamonds
--- String "Diamonds"
-encodeSuit :: Cards.Suit -> Json.Value
-encodeSuit suit =
-  jsonString
-    ( case suit of
-        Cards.Diamonds -> "Diamonds"
-        Cards.Clubs -> "Clubs"
-        Cards.Spades -> "Spades"
-        Cards.Hearts -> "Hearts"
-    )
-
--- | Wertigkeit codieren
--- >>> encodeRank Cards.Three
--- String "Three"
-encodeRank :: Cards.Rank -> Json.Value
-encodeRank rank =
-  jsonString
-    ( case rank of
-        Cards.Two -> "Two"
-        Cards.Three -> "Three"
-        Cards.Four -> "Four"
-        Cards.Five -> "Five"
-        Cards.Six -> "Six"
-        Cards.Seven -> "Seven"
-        Cards.Eight -> "Eight"
-        Cards.Nine -> "Nine"
-        Cards.Ten -> "Ten"
-        Cards.Queen -> "Queen"
-        Cards.King -> "King"
-        Cards.Jack -> "Jack"
-        Cards.Ace -> "Ace"
-    )
-
--- | Karte codieren
--- >>> encodeCard (Cards.Card Cards.Diamonds Cards.Queen)
--- Object (fromList [("rank",String "Queen"),("suit",String "Diamonds")])
-encodeCard :: Cards.Card -> Json.Value
-encodeCard (Cards.Card suit rank) =
-  Json.object
-    [ "suit" .= encodeSuit suit,
-      "rank" .= encodeRank rank
-    ]
-
-jsonList :: (a -> Json.Value) -> [a] -> Json.Value
-jsonList encode = Json.Array . Vector.fromList . fmap encode
-
-encodeHand :: Cards.Hand -> Json.Value
-encodeHand = jsonList encodeCard . Cards.handCards
-
-encodeConstructor2 :: String -> Json.Value -> Json.Value -> Json.Value
-encodeConstructor2 constructorName x y =
-  Json.object
-    [ "tag" .= jsonString constructorName,
-      "contents" .= jsonList id [x, y]
-    ]
-
-encodeConstructor1 :: String -> Json.Value -> Json.Value
-encodeConstructor1 constructorName x =
-  Json.object
-    [ ("tag", jsonString constructorName),
-      ("contents", x)
-    ]
-
 encodeGameCommand :: GameCommand -> Json.Value
 encodeGameCommand command =
   case command of
@@ -270,36 +279,27 @@ encodeGameCommand command =
             (Map.toList playerHands)
         )
 
-encodeTrick :: Cards.Trick -> Json.Value
-encodeTrick trick =
-  jsonList
-    (\(player, card) -> jsonList id [encodePlayer player, encodeCard card])
-    (Cards.trickToList trick)
+dealHandsDecoder :: Decoder GameCommand
+dealHandsDecoder = constructor1Decoder playerHandsDecoder DealHands
 
--- | Event codieren
--- >>> let mike = Cards.Player "Mike"
--- >>> encodeGameEvent (PlayerTurnChanged mike)
--- Object (fromList [("contents",String "Mike"),("tag",String "PlayerTurnChanged")])
--- >>> encodeGameEvent (GameEnded mike)
--- Object (fromList [("contents",String "Mike"),("tag",String "GameEnded")])
-encodeGameEvent :: GameEvent -> Json.Value
-encodeGameEvent gameEvent =
-  case gameEvent of
-    PlayerTurnChanged player ->
-      encodeConstructor1 "PlayerTurnChanged" (encodePlayer player)
-    LegalCardPlayed player card ->
-      encodeConstructor2 "LegalCardPlayed" (encodePlayer player) (encodeCard card)
-    IllegalCardAttempted player card ->
-      encodeConstructor2 "IllegalCardAttempted" (encodePlayer player) (encodeCard card)
-    GameEnded player ->
-      encodeConstructor1 "GameEnded" (encodePlayer player)
-    HandDealt player hand ->
-      encodeConstructor2 "HandDealt" (encodePlayer player) (encodeHand hand)
-    TrickTaken player trick ->
-      encodeConstructor2 "TrickTaken" (encodePlayer player) (encodeTrick trick)
+playCardDecoder :: Decoder GameCommand
+playCardDecoder = constructor2Decoder playerDecoder cardDecoder PlayCard
 
-encodeGameEvents :: [GameEvent] -> Json.Value
-encodeGameEvents = jsonList encodeGameEvent
+gameCommandDecoderTable :: Map String (Decoder GameCommand)
+gameCommandDecoderTable =
+  Map.fromList
+    [ ("PlayCard", playCardDecoder),
+      ("DealHands", dealHandsDecoder)
+    ]
+
+gameCommandDecoder :: Decoder GameCommand
+gameCommandDecoder =
+  dataDecoder
+    gameCommandDecoderTable
+    (\tag -> Decode.faild ("unknown GameCommand tag " ++ tag))
+
+gameCommandsDecoder :: Decoder [GameCommand]
+gameCommandsDecoder = Decode.list gameCommandDecoder
 
 instance Json.ToJSON GameCommand where
   toJSON = encodeGameCommand
