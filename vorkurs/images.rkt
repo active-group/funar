@@ -24,7 +24,7 @@
 ; Abstraktion - 2 ähnliche Code-Stellen
 ; - noch einmal kopieren
 ; - Unterschiede durch abstrakte Namen ersetzen
-; - Namen in lambda
+; - Namen in lambda aufnehmen -> Parameter
 
 (define tile
   (lambda (image1 image2)
