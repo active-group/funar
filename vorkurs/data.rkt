@@ -90,3 +90,5 @@
   (lambda (time)
     (+ (* 60 (time-hour time))
        (time-minute time))))
+
+; Aus Minuten seit Mitternacht das entsprechende time-Objekt konstruieren
