@@ -175,9 +175,12 @@
   (lambda (dillo amount)
     (make-dillo
      (dillo-alive? dillo)
-     (cond
-       ((equal? (dillo-alive? dillo) #t)
+     (if (dillo-alive? dillo)
+         (+ (dillo-weight dillo) amount)
+         (dillo-weight dillo))
+     #;(cond
+       ((dillo-alive? dillo)
         (+ (dillo-weight dillo) amount))
-       ((equal? (dillo-alive? dillo) #f)
+       (else   ; (not (dillo-alive? dillo))
         (dillo-weight dillo))))))
 
