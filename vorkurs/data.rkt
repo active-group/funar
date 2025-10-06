@@ -266,3 +266,9 @@
 
 ; 1elementige Liste: 5
 (define list1 (cons 5 empty))
+
+; 2elementige Liste: 2 5
+(define list2 (cons 2 (cons 5 empty)))
+
+; 3elementige Liste: 2 5 8
+(define list3 (cons 2 (cons 5 (cons 8 empty))))
