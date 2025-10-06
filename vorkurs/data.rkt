@@ -244,10 +244,12 @@
 ; - die leere Liste -ODER-
 ; - eine Cons-Liste, bestehend aus erstem Element und Rest-Liste
 ;                                                          ^^^^^ Selbstbezug
+(: list-of (signature -> signature))
 
-(define list-of-numbers
-  (signature (mixed empty-list
-                    cons-list)))
+(define list-of
+  (lambda (element)
+    (signature (mixed empty-list
+                      (cons-list-of element)))))
 
 ; die leere Liste ist ... ES GIBT NUR EINE
 (define-singleton empty-list ; Signatur
@@ -257,11 +259,11 @@
 ; Eine Cons-Liste besteht aus:
 ; - erstes Element  -UND-
 ; - Rest-Liste
-(define-record cons-list
+(define-record (cons-list-of element) ; macht intern ein lambda
   cons
   cons?
-  (first number) ; vorläufig
-  (rest list-of-numbers))
+  (first element) ; vorläufig
+  (rest (list-of element)))
 
 
 ; 1elementige Liste: 5
@@ -278,7 +280,7 @@
 (define list4 (cons 3 list3))
 
 ; Liste aufsummieren
-(: list-sum (list-of-numbers -> number))
+(: list-sum ((list-of number) -> number))
 
 (check-expect (list-sum list4)
               18)
@@ -299,6 +301,9 @@
       ((cons? list)
        (+ (first list)
           (list-sum (rest list)))))))
+
+#;(define list-of-numbers
+  (signature (list-of number)))
 
 ; Liste aufmultiplizieren
 (: list-product (list-of-numbers -> number))
@@ -355,3 +360,5 @@
            (cons (first list)
                  (extract p? (rest list)))           
            (extract p? (rest list)))))))
+
+(define dillos (cons dillo1 (cons dillo2 empty)))
