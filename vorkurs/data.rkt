@@ -55,5 +55,15 @@
 ; zusammengesetzte Daten
 (define-record time
   make-time ; Konstruktor
-  (time-hour natural)
+  ; Felder:
+  (time-hour   natural)
   (time-minute natural))
+
+(: make-time (natural natural -> time))
+
+; natural: natürliche Zahlen, 0,1,2,3,4,5,6,...
+
+; 11 Uhr 27 Minuten
+(define time1 (make-time 11 27))
+; 14:13
+(define time2 (make-time 14 13))
