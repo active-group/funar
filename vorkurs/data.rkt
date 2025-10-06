@@ -239,3 +239,12 @@
     (cond
       ((dillo? animal) (run-over-dillo animal))
       ((parrot? animal) (run-over-parrot animal)))))
+
+; Liste ist eins der folgenden:
+; - die leere Liste
+; - eine Cons-Liste, bestehend aus erstem Element und Rest-Liste
+
+; die leere Liste ist ... ES GIBT NUR EINE
+(define-singleton empty-list ; Signatur
+  empty ; Singleton-Wert
+  empty?) ; Prädikat
