@@ -338,6 +338,7 @@
 
 ; eingebaut, meistens als "filter"
 
+; Funktion höherer Ordnung / Higher-Order-Function
 (: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
 
 (check-expect (extract even? list4)
