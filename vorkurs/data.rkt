@@ -302,7 +302,7 @@
        (+ (first list)
           (list-sum (rest list)))))))
 
-#;(define list-of-numbers
+(define list-of-numbers
   (signature (list-of number)))
 
 ; Liste aufmultiplizieren
@@ -344,7 +344,11 @@
 ; eingebaut, meistens als "filter"
 
 ; Funktion höherer Ordnung / Higher-Order-Function
-(: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
+;(: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
+
+; %element: Signaturvariable
+; parametrische Polymorphie
+(: extract ((%element -> boolean) (list-of %element) -> (list-of %element)))
 
 (check-expect (extract even? list4)
               (cons 2 (cons 8 empty)))
@@ -361,4 +365,9 @@
                  (extract p? (rest list)))           
            (extract p? (rest list)))))))
 
+(: dillos (list-of dillo))
 (define dillos (cons dillo1 (cons dillo2 empty)))
+
+; 1. Funktion, die alle Tiere in einer Liste überfährt
+; 2. Funktion, die alle Zahlen in einer Liste um 1 erhöht
+; 3. Abstraktion über #1 und #2, mit passender Signatur
