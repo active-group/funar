@@ -124,6 +124,8 @@
 ; - Papagei
 ; Fallunterscheidung: Fälle haben selber Datendefinitionen
 ; -> gemischte Daten
+(define animal
+  (signature (mixed dillo parrot)))
 
 ; Gürteltier hat folgende Eigenschaften:
 ; - lebendig? -UND-
