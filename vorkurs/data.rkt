@@ -283,9 +283,33 @@
 (check-expect (list-sum list4)
               18)
 
-(define list-sum
+; Schablone
+#;(define list-sum
   (lambda (list)
     (cond
       ((empty? list) ...)
       ((cons? list)
-       ...))))
+       ... (first list) ...
+       ... (list-sum (rest list)) ...))))
+
+(define list-sum
+  (lambda (list)
+    (cond
+      ((empty? list) 0)
+      ((cons? list)
+       (+ (first list)
+          (list-sum (rest list)))))))
+
+; Liste aufmultiplizieren
+(: list-product (list-of-numbers -> number))
+
+(check-expect (list-product list4)
+              240)
+
+(define list-product
+  (lambda (list)
+    (cond
+      ((empty? list) 1)
+      ((cons? list)
+       (* (first list)
+          (list-product (rest list)))))))
