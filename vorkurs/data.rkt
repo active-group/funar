@@ -241,7 +241,7 @@
       ((parrot? animal) (run-over-parrot animal)))))
 
 ; Liste ist eins der folgenden:
-; - die leere Liste
+; - die leere Liste -ODER-
 ; - eine Cons-Liste, bestehend aus erstem Element und Rest-Liste
 ;                                                          ^^^^^ Selbstbezug
 
@@ -276,3 +276,16 @@
 ; 4elementige Liste: 3 2 5 8
 ;(define list4 (cons 3 (cons 2 (cons 5 (cons 8 empty)))))
 (define list4 (cons 3 list3))
+
+; Liste aufsummieren
+(: list-sum (list-of-numbers -> number))
+
+(check-expect (list-sum list4)
+              18)
+
+(define list-sum
+  (lambda (list)
+    (cond
+      ((empty? list) ...)
+      ((cons? list)
+       ...))))
