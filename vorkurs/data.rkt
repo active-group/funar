@@ -336,6 +336,11 @@
 ; - Unterschiede ersetzen durch abstrakte Namen
 ; - Namen in lambda aufnehmen (rekursive Aufrufe nicht vergessen)
 
+(check-expect (extract even? list4)
+              (cons 2 (cons 8 empty)))
+(check-expect (extract odd? list4)
+              (cons 3 (cons 5 empty)))
+
 (define extract
   (lambda (p? list)
     (cond
