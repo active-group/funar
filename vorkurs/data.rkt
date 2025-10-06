@@ -107,6 +107,7 @@
  (msm->time (msm time2))
  time2)
 
+; Property-based testing / QuickCheck
 (check-property
  (for-all ((t time))
    (equal?
