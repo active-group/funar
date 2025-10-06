@@ -336,6 +336,8 @@
 ; - Unterschiede ersetzen durch abstrakte Namen
 ; - Namen in lambda aufnehmen (rekursive Aufrufe nicht vergessen)
 
+; eingebaut, meistens als "filter"
+
 (: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
 
 (check-expect (extract even? list4)
