@@ -26,7 +26,8 @@
 ; - Unterschiede durch abstrakte Namen ersetzen
 ; - Namen in lambda
 
-(lambda (image1 image2)
-  (above
-   (beside image1 image2)
-   (beside image2 image1)))
+(define tile
+  (lambda (image1 image2)
+    (above
+     (beside image1 image2)
+     (beside image2 image1))))
