@@ -56,10 +56,12 @@
 (define-record time
   make-time ; Konstruktor
   ; Felder:
-  (time-hour   natural)
+  (time-hour   natural) ; Selektor, "Getter-Funktion"
   (time-minute natural))
 
 (: make-time (natural natural -> time))
+(: time-hour (time -> natural))
+(: time-minute (time -> natural))
 
 ; natural: natürliche Zahlen, 0,1,2,3,4,5,6,...
 
