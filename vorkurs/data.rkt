@@ -56,8 +56,8 @@
 (define-record time
   make-time ; Konstruktor
   ; Felder:
-  (time-hour   natural) ; Selektor, "Getter-Funktion"
-  (time-minute natural))
+  (time-hour   (integer-from-to 0 23)) ; Selektor, "Getter-Funktion"
+  (time-minute (integer-from-to 0 59)))
 
 (: make-time (natural natural -> time))
 (: time-hour (time -> natural))
@@ -92,3 +92,28 @@
        (time-minute time))))
 
 ; Aus Minuten seit Mitternacht das entsprechende time-Objekt konstruieren
+(: msm->time (natural -> time))
+
+; Schablone
+#;(define msm->time
+  (lambda (minutes)
+    (make-time ... ...)))
+
+(check-expect
+ (msm->time (msm time1))
+ time1)
+
+(check-expect
+ (msm->time (msm time2))
+ time2)
+
+(check-property
+ (for-all ((t time))
+   (equal?
+    (msm->time (msm t))
+    t)))
+
+(define msm->time
+  (lambda (minutes)
+    (make-time (quotient minutes 60)
+               (remainder minutes 60))))
