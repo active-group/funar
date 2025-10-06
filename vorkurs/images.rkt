@@ -26,8 +26,49 @@
 ; - Unterschiede durch abstrakte Namen ersetzen
 ; - Namen in lambda aufnehmen -> Parameter
 
+; Kurzbeschreibung:
+; quadratisches Kachelmuster aus 2 Bildern herstellen
+
+; Signatur(deklaration)
+(: tile (image image -> image))
+
+; Beispiele/Tests
+(check-expect (tile star1 circle1)
+              (above
+               (beside star1 circle1)
+               (beside circle1 star1)))
+              
+
 (define tile
   (lambda (image1 image2)
     (above
      (beside image1 image2)
      (beside image2 image1))))
+
+
+#|
+
+class C {
+
+  int y;
+  
+  int f(int x) {
+     ... x ...
+     x = x + 1;
+     ... x ...
+  }
+}
+
+C a = new C(...);
+C b = a;
+
+a.y = 12;
+
+
+
+x steht für eine Speicherzelle, in der eine Zahl steht
+
+... C.f(42) ...
+
+
+|#
