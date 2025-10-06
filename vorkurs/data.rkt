@@ -243,8 +243,26 @@
 ; Liste ist eins der folgenden:
 ; - die leere Liste
 ; - eine Cons-Liste, bestehend aus erstem Element und Rest-Liste
+;                                                          ^^^^^ Selbstbezug
+
+(define list-of-numbers
+  (signature (mixed empty-list
+                    cons-list)))
 
 ; die leere Liste ist ... ES GIBT NUR EINE
 (define-singleton empty-list ; Signatur
   empty ; Singleton-Wert
   empty?) ; Prädikat
+
+; Eine Cons-Liste besteht aus:
+; - erstes Element  -UND-
+; - Rest-Liste
+(define-record cons-list
+  cons
+  cons?
+  (first number) ; vorläufig
+  (rest list-of-numbers))
+
+
+; 1elementige Liste: 5
+(define list1 (cons 5 empty))
