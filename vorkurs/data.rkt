@@ -119,7 +119,11 @@
     (make-time (quotient minutes 60)
                (remainder minutes 60))))
 
-; Tiere auf dem texanischen Highway
+; Tier auf dem texanischen Highway ist eins der folgenden:
+; - Gürteltier -ODER-
+; - Papagei
+; Fallunterscheidung: Fälle haben selber Datendefinitionen
+; -> gemischte Daten
 
 ; Gürteltier hat folgende Eigenschaften:
 ; - lebendig? -UND-
