@@ -173,11 +173,13 @@
 
 (define feed-dillo
   (lambda (dillo amount)
+    (define alive? (dillo-alive? dillo))
+    (define weight (dillo-weight dillo))
     (make-dillo
-     (dillo-alive? dillo)
-     (if (dillo-alive? dillo)
-         (+ (dillo-weight dillo) amount)
-         (dillo-weight dillo))
+     alive?
+     (if alive? ; syntaktischer Zucker
+         (+ weight amount)
+         weight)
      #;(cond
        ((dillo-alive? dillo)
         (+ (dillo-weight dillo) amount))
