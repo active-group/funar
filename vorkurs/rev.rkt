@@ -46,5 +46,9 @@
     (cond
       ((empty? list) acc)
       ((cons? list)
-       (rev2 (rest list)
+       (rev2 (rest list) ; kein Kontext, tail call, endrekursiver Aufruf
              (cons (first list) acc))))))
+
+; für tail calls wird kein Platz auf dem Stack benötigt
+
+; leider: JVM, C# haben jeweils Bug
