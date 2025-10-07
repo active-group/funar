@@ -110,3 +110,13 @@ fxSwap :: Date -> Amount -> Currency -> Amount -> Currency -> Contract
 fxSwap date myAmount myCurrency yourAmount yourCurrency =
     Later date (Combine (Scale myAmount (One myCurrency))
                         (Reverse (Scale yourAmount (One yourCurrency))))
+
+
+data Payment =
+    MkPayment Date Direction Amount Currency
+    deriving Show
+
+-- Semantik
+-- Zahlungen bis zu Datum ("today")
+-- + "Residualvertrag"
+meaning :: Contract -> Date -> ([Payment], Contract)
