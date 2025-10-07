@@ -152,6 +152,17 @@ feedAnimal (MkDillo liveness weight) amount =
 feedAnimal (MkParrot sentence weight) amount =
     MkParrot sentence (weight + amount)
 
+feedAnimal' :: (Animal, Weight) -> Animal
+
+-- >>> feedAnimal'(dillo1, 2)
+-- MkDillo {dilloLiveness = Alive, dilloWeight = 12}
+feedAnimal'(MkDillo liveness weight, amount) =
+    case liveness of
+        Alive -> MkDillo liveness (weight + amount)
+        Dead -> MkDillo Dead weight
+feedAnimal'(MkParrot sentence weight, amount) =
+    MkParrot sentence (weight + amount)
+
 -- eingebaut als flip
 -- swap :: (Animal -> Weight -> Animal) -> (Weight -> Animal -> Animal)
 -- Typvariablen: klein geschrieben
