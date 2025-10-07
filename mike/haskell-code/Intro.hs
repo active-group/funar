@@ -115,4 +115,4 @@ data Animal =
     MkDillo { dilloLiveness :: Liveness,
               dilloWeight :: Weight }
   | MkParrot String Weight
-
+  deriving Show
