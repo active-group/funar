@@ -189,8 +189,14 @@ schönfinkeln :: ((a, b) -> c) -> (a -> b -> c)
 schönfinkeln f = \ a -> \ b -> f (a, b)
 
 -- Funktionskomposition
+-- eingebaut als .  (Infix)
 compose :: (b -> c) -> (a -> b) -> (a -> c)
 compose f g = \ a -> f (g a)
+
+-- >>> foo dillo1
+-- MkDillo {dilloLiveness = Dead, dilloWeight = 12}
+foo :: Animal -> Animal
+foo = runOverAnimal . swap (curry feedAnimal') 2
 
 feedAnimalR :: Weight -> Animal -> Animal
 feedAnimalR amount (MkDillo liveness weight) =
@@ -266,3 +272,28 @@ within (MkSquare (MkPoint squareX squareY) sideLength) (MkPoint x y) =
         && ((y >= squareY) && (y <= rightTopY))
 within (MkOverlap shape1 shape2) point =
   within shape1 point || within shape2 point
+
+-- Liste ist eins der folgenden:
+-- - leere Liste:  []
+-- - Cons-Liste bestehend aus erstem Element und Rest-Liste
+--   : ist cons (Infix)
+list1 :: [Integer] -- Liste von Integer
+list1 = 5 : [] -- (cons 5 empty)
+list2 :: [Integer]
+list2 = 2 : 5 : []
+list3 :: [Integer]
+list3 = [3, 2, 5] -- syntaktischer Zucker
+list4 :: [Integer]
+list4 = 8 : list3
+
+-- Liste aufsummieren
+listSum :: [Integer] -> Integer
+
+-- >>> listSum list4
+-- 18
+listSum [] = 0
+listSum (first : rest) = first + listSum rest
+
+listMap :: (a -> b) -> [a] -> [b]
+listMap f [] = []
+listMap f (x:xs) = (f x) : (listMap f xs)
