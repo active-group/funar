@@ -20,3 +20,73 @@ quadruple :: Integer -> Integer
 quadruple n =
     let d = double n
     in double d
+
+-- Haustier ist eins der folgenden:
+-- - Hund -ODER-
+-- - Katze -ODER-
+-- - Schlange
+data Pet =
+    Dog
+  | Cat
+  | Snake
+  deriving Show -- "Zauberspruch"
+
+-- Ist Haustier niedlich?
+isCute :: Pet -> Bool
+
+-- Schablone:
+{-
+isCute pet =
+    case pet of -- Verzweigung
+      Dog -> undefined
+      Cat -> undefined
+      Snake -> undefined
+-}
+
+-- >>> isCute Dog
+-- True
+-- >>> isCute Snake
+-- False
+
+{-
+isCute pet =
+  case pet of -- Verzweigung
+    Dog -> True
+    Cat -> True
+    Snake -> False
+-}
+-- eine Gleichung pro Fall
+isCute Dog = True
+isCute Cat = True
+isCute Snake = False
+
+-- Gürteltier hat folgende Eigenschaften:
+-- - lebendig -ODER- tot
+-- - Gewicht
+
+data Liveness = Alive | Dead
+  deriving Show
+
+type Weight = Integer -- Typ-Alias
+
+-- Record
+data Dillo = MkDillo { dilloLiveness :: Liveness,
+                       dilloWeight :: Weight }
+  deriving Show
+
+-- lebendiges Gürteltier 10kg
+dillo1 :: Dillo
+dillo1 = MkDillo { dilloLiveness = Alive,
+                   dilloWeight = 10 }
+
+-- >>> dilloLiveness dillo1
+-- Alive
+
+-- totes Gürteltier 8kg
+dillo2 :: Dillo
+dillo2 = MkDillo Dead 8 -- syntaktischer Zucker
+
+-- Gürteltier überfahren
+runOverDillo :: Dillo -> Dillo
+runOverDillo dillo = MkDillo { dilloLiveness = Dead,
+                               dilloWeight = dilloWeight dillo }
