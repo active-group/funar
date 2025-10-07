@@ -144,7 +144,7 @@ runOverAnimal (MkParrot sentence weight) = MkParrot "" weight
 -- MkDillo {dilloLiveness = Alive, dilloWeight = 12}
 
 -- alle Funktion 1 Input, 1 Output
-feedAnimal :: Animal -> (Weight -> Animal)
+feedAnimal :: Animal -> Weight -> Animal
 feedAnimal (MkDillo liveness weight) amount =
     case liveness of
         Alive -> MkDillo liveness (weight + amount)
@@ -152,8 +152,38 @@ feedAnimal (MkDillo liveness weight) amount =
 feedAnimal (MkParrot sentence weight) amount =
     MkParrot sentence (weight + amount)
 
+-- swap :: (Animal -> Weight -> Animal) -> (Weight -> Animal -> Animal)
+-- Typvariablen: klein geschrieben
+swap :: (a -> b -> c) -> (b -> a -> c)
+-- swap f = \ b -> \ a -> f a b
+
+
+feedAnimalR :: Weight -> Animal -> Animal
+feedAnimalR amount (MkDillo liveness weight) =
+  case liveness of
+    Alive -> MkDillo liveness (weight + amount)
+    Dead -> MkDillo Dead weight
+feedAnimalR amount (MkParrot sentence weight) =
+  MkParrot sentence (weight + amount)
+
+-- >>> feedDillo1 5
+-- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
+-- >>> feedDillo1 12
+-- MkDillo {dilloLiveness = Alive, dilloWeight = 22}
+feedDillo1 :: Weight -> Animal
+feedDillo1 = feedAnimal dillo1
+
+feed1 :: Animal -> Animal
+feed1 = feedAnimalR 1
+
+-- >>> feed1 dillo1
+-- MkDillo {dilloLiveness = Alive, dilloWeight = 11}
+-- >>> feed1 dillo2
+-- MkDillo {dilloLiveness = Dead, dilloWeight = 8}
+
 plusDouble :: Integer -> Integer -> Integer
-plusDouble = \ x -> \ y -> x + double y
+-- plusDouble = \ x -> \ y -> x + double y
+plusDouble x y = x + double y
 
 -- Eine geometrische Figur ("Shape") ist eins der folgenden:
 -- - ein Kreis - ODER-
