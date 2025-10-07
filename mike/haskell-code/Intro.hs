@@ -188,6 +188,10 @@ entschönfinkeln f = \ (a, b) -> f a b
 schönfinkeln :: ((a, b) -> c) -> (a -> b -> c)
 schönfinkeln f = \ a -> \ b -> f (a, b)
 
+-- Funktionskomposition
+compose :: (b -> c) -> (a -> b) -> (a -> c)
+compose f g = \ a -> f (g a)
+
 feedAnimalR :: Weight -> Animal -> Animal
 feedAnimalR amount (MkDillo liveness weight) =
   case liveness of
