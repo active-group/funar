@@ -97,3 +97,7 @@ c5 = Reverse (One EUR)
 c7 = Reverse (Reverse (One EUR))
 -- "Ich zahle 1€ jetzt."
 -- c8 = Direction Long  (Direction Short (One EUR))
+
+-- "Ich bekomme am 24.12.2025 100€ und zahle 80GBP."
+c8 = Later xmas2025 (Combine (Scale 100 (One EUR))
+                             (Reverse (Scale 80 (One GBP))))
