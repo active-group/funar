@@ -351,6 +351,16 @@
                  (extract-odds (rest list)))           
            (extract-odds (rest list)))))))
 
+(define extract-odds2
+  (lambda (list)
+    (list-fold empty
+               (lambda (first-list result-rec)
+                 (if (odd? first-list)
+                     (cons first-list
+                           result-rec)
+                     result-rec))
+               list)))
+   
 ; Abstraktion:
 ; - noch ein (letztes) Mal kopieren
 ; - umbenennen (rekursive Aufrufe nicht vergessen)
