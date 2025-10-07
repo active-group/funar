@@ -66,3 +66,9 @@ c3 = Scale 50 (Scale 50 (One EUR))
 
 -- "Ich bekomme 50€ am 24.12.2025."
 c4 = Later xmas2025 c2
+
+zcb1 = Later xmas2025 (Scale 100 (One EUR))
+
+zeroCouponBond :: Date -> Amount -> Currency -> Contract
+zeroCouponBond date amount currency =
+    Later date (Scale amount (One currency))
