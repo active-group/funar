@@ -152,6 +152,7 @@ feedAnimal (MkDillo liveness weight) amount =
 feedAnimal (MkParrot sentence weight) amount =
     MkParrot sentence (weight + amount)
 
+-- eingebaut als flip
 -- swap :: (Animal -> Weight -> Animal) -> (Weight -> Animal -> Animal)
 -- Typvariablen: klein geschrieben
 swap :: (a -> b -> c) -> (b -> a -> c)
