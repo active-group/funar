@@ -11,10 +11,12 @@
     (cond
       ((empty? list) empty)
       ((cons? list)
-       (append-element
+       (append-element ; Kontext
         (rev (rest list)) ; 4 3 2
         (first list) ; 1
        )))))
+
+; Stack für Kontext: nur kleine Anzahl von aktiven Kontexten möglich
 
 ; Länge n
 ; Laufzeit 1 + 2 + 3 ... (n-1) + n = (n+1)*n/2 = O(n^2)
