@@ -51,10 +51,15 @@ zcb1 :: Contract
 zcb1 = ZeroCouponBond xmas2025 100 EUR
 -}
 
+data Direction = Long | Short
+  deriving Show
+
 data Contract =
     One Currency
   | Scale Amount Contract
   | Later Date Contract -- "closure of operations"
+--  | Direction Direction Contract
+  | Reverse Contract
   deriving Show
 
 -- "Ich bekomme 1€ jetzt."
@@ -79,3 +84,15 @@ zeroCouponBond date amount currency =
 
 zcb1' :: Contract
 zcb1' = zeroCouponBond xmas2025 100 EUR
+
+-- "Ich zahle 1€ jetzt"
+c5 :: Contract
+c5 = Reverse (One EUR)
+
+-- "Ich bekomme 1€ jetzt."
+-- c6 = Direction Long (One EUR)
+
+-- "Ich bekomme 1€ jetzt."
+c7 = Reverse (Reverse (One EUR))
+-- "Ich zahle 1€ jetzt."
+-- c8 = Direction Long  (Direction Short (One EUR))
