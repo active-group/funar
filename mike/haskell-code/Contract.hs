@@ -11,6 +11,14 @@ Vorgehensweise:
 
 - Beispiel zerlegen in "atomare Bestandteile" / "Ideen"
   geht häufig entlang der Attribute
+  - Währung
+  - Betrag
+  - Datum
+
+  Einfachster Vertrag nur mit Währung:
+  "Ich bekomme 1€ jetzt."
+  ... jetzt auch mit Betrag:
+  "Ich bekomme 50€ jetzt."
 -}
 
 data Currency = EUR | USD | GBP | YEN
@@ -38,3 +46,23 @@ data Contract =
 zcb1 :: Contract
 zcb1 = ZeroCouponBond xmas2025 100 EUR
 -}
+
+data Contract =
+    One Currency
+  | Scale Amount Contract
+  | Later Date Contract
+  deriving Show
+
+-- "Ich bekomme 1€ jetzt."
+c1 :: Contract
+c1 = One EUR
+
+
+-- "Ich bekomme 50€ jetzt."
+c2 = Scale 50 (One EUR)
+
+-- "Ich bekomme 2500€ jetzt."
+c3 = Scale 50 (Scale 50 (One EUR))
+
+-- "Ich bekomme 50€ am 24.12.2025."
+c4 = Later xmas2025 c2
