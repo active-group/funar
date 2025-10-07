@@ -319,6 +319,22 @@
        (* (first list)
           (list-product (rest list)))))))
 
+(: list-fold (%b (%a %b -> %b) (list-of %a) -> %b))
+
+(check-expect (list-fold 0 + list4)
+              18)
+(check-expect (list-fold 1 * list4)
+              240)
+
+(define list-fold
+  (lambda (n o list)
+    (cond
+      ((empty? list) n)
+      ((cons? list)
+       (o (first list)
+          (list-fold n o (rest list)))))))
+
+
 ; alle ungeraden Zahlen aus einer Liste extrahieren
 (: extract-odds (list-of-numbers -> list-of-numbers))
 
