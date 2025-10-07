@@ -152,4 +152,14 @@ feedAnimal (MkDillo liveness weight) amount =
 feedAnimal (MkParrot sentence weight) amount =
     MkParrot sentence (weight + amount)
 
+plusDouble :: Integer -> Integer -> Integer
 plusDouble = \ x -> \ y -> x + double y
+
+-- Eine geometrische Figur ("Shape") ist eins der folgenden:
+-- - ein Kreis - ODER-
+-- - ein Quadrat -ODER-
+-- - eine Überlagerung zweier geometrischer Figuren
+
+-- 1. Datenanalyse + Datentypdefinition(en)
+-- 2. Funktion, die feststellt, ob ein Punkt innerhalb
+--    einer Figur liegt
