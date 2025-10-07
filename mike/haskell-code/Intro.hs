@@ -154,6 +154,13 @@ feedAnimal (MkParrot sentence weight) amount =
 
 feedAnimal' :: (Animal, Weight) -> Animal
 
+-- Tupel
+tuple :: (Animal, Integer)
+tuple = (dillo1, 2)
+
+-- >>> feedAnimal' tuple
+-- MkDillo {dilloLiveness = Alive, dilloWeight = 12}
+
 -- >>> feedAnimal'(dillo1, 2)
 -- MkDillo {dilloLiveness = Alive, dilloWeight = 12}
 feedAnimal'(MkDillo liveness weight, amount) =
