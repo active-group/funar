@@ -131,6 +131,9 @@ parrot2 = MkParrot "Tschüss!" 2
 -- Tier überfahren
 runOverAnimal :: Animal -> Animal
 
--- eine Gleichung pro Fall, jede Gleichung muß Konstruktor enthalten
+-- >>> runOverAnimal dillo1
+-- MkDillo {dilloLiveness = Dead, dilloWeight = 10}
+-- >>> runOverAnimal parrot1
+-- MkParrot "" 1
 runOverAnimal (MkDillo liveness weight) = MkDillo Dead weight
 runOverAnimal (MkParrot sentence weight) = MkParrot "" weight
