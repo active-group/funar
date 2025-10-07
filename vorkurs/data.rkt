@@ -371,3 +371,13 @@
 ; 1. Funktion, die alle Tiere in einer Liste überfährt
 ; 2. Funktion, die alle Zahlen in einer Liste um 1 erhöht
 ; 3. Abstraktion über #1 und #2, mit passender Signatur
+
+(: list-map ((%a -> %b) (list-of %a) -> (list-of %b)))
+
+(define list-map
+  (lambda (f list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cons (f (first list))
+             (list-map f (rest list)))))))
