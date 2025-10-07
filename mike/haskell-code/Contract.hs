@@ -60,6 +60,7 @@ data Contract =
   | Later Date Contract -- "closure of operations"
 --  | Direction Direction Contract
   | Reverse Contract
+  | Combine Contract Contract
   deriving Show
 
 -- "Ich bekomme 1€ jetzt."
