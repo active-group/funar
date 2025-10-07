@@ -8,6 +8,8 @@ Vorgehensweise:
 - einfaches Beispiel abfragen
   "Ich bekomme am 24.12.2025 100€."
   zero-coupon bond / Zero-Bond
+
+- Beispiel zerlegen in "atomare Bestandteile" / "Ideen"
 -}
 
 data Currency = EUR | USD | GBP | YEN
@@ -24,9 +26,14 @@ today = MkDate "2025-10-07"
 -- >>> xmas2025 > today
 -- True
 
+{-
 data Contract =
     ZeroCouponBond Date Amount Currency
-    deriving Show
+  | Call
+  | Put
+  | Future
+  deriving Show
 
 zcb1 :: Contract
 zcb1 = ZeroCouponBond xmas2025 100 EUR
+-}
