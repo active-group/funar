@@ -35,3 +35,16 @@
        (cons
         (first list)
         (append-element (rest list) element))))))
+
+(: rev2 ((list-of %a) (list-of %a) -> (list-of %a)))
+
+(check-expect (rev2 (list 1 2 3 4) empty)
+              (list 4 3 2 1))
+
+(define rev2
+  (lambda (list acc) ; Akkumulator, Zwischenergebnis
+    (cond
+      ((empty? list) acc)
+      ((cons? list)
+       (rev2 (rest list)
+             (cons (first list) acc))))))
