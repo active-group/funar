@@ -19,6 +19,10 @@ Vorgehensweise:
   "Ich bekomme 1€ jetzt."
   ... jetzt auch mit Betrag:
   "Ich bekomme 50€ jetzt."
+
+- Nächstes Beispiel:
+  Currency Swap / FxSwap
+  "Ich bekomme am 24.12.2025 100€ und zahle 80GBP."
 -}
 
 data Currency = EUR | USD | GBP | YEN
@@ -50,7 +54,7 @@ zcb1 = ZeroCouponBond xmas2025 100 EUR
 data Contract =
     One Currency
   | Scale Amount Contract
-  | Later Date Contract
+  | Later Date Contract -- "closure of operations"
   deriving Show
 
 -- "Ich bekomme 1€ jetzt."
@@ -72,3 +76,6 @@ zcb1 = Later xmas2025 (Scale 100 (One EUR))
 zeroCouponBond :: Date -> Amount -> Currency -> Contract
 zeroCouponBond date amount currency =
     Later date (Scale amount (One currency))
+
+zcb1' :: Contract
+zcb1' = zeroCouponBond xmas2025 100 EUR
