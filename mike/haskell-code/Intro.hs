@@ -177,6 +177,16 @@ swap :: (a -> b -> c) -> (b -> a -> c)
 -- swap f = \ b -> \ a -> f a b
 swap f b a = f a b
 
+-- eingebaut als uncurry
+entschönfinkeln :: (a -> b -> c) -> ((a, b) -> c)
+entschönfinkeln f = \ (a, b) -> f a b
+
+-- >>> entschönfinkeln feedAnimal (dillo1, 2)
+-- MkDillo {dilloLiveness = Alive, dilloWeight = 12}
+
+-- eingebaut als curry
+schönfinkeln :: ((a, b) -> c) -> (a -> b -> c)
+schönfinkeln f = \ a -> \ b -> f (a, b)
 
 feedAnimalR :: Weight -> Animal -> Animal
 feedAnimalR amount (MkDillo liveness weight) =
