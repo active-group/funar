@@ -139,9 +139,17 @@ runOverAnimal (MkDillo liveness weight) = MkDillo Dead weight
 runOverAnimal (MkParrot sentence weight) = MkParrot "" weight
 
 -- Tier füttern
+
+-- >>> feedAnimal dillo1 2
+-- MkDillo {dilloLiveness = Alive, dilloWeight = 12}
+
+-- alle Funktion 1 Input, 1 Output
+feedAnimal :: Animal -> (Weight -> Animal)
 feedAnimal (MkDillo liveness weight) amount =
     case liveness of
         Alive -> MkDillo liveness (weight + amount)
         Dead -> MkDillo Dead weight
 feedAnimal (MkParrot sentence weight) amount =
     MkParrot sentence (weight + amount)
+
+plusDouble = \ x -> \ y -> x + double y
