@@ -116,6 +116,7 @@ data Payment =
     MkPayment Date Direction Amount Currency
     deriving Show
 
+-- >>> meaning c9 (MkDate "2025-12-01")
 c9 = Scale 100 (Combine (One EUR) (Later xmas2025 (One EUR)))
 
 -- Semantik
