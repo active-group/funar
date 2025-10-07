@@ -116,6 +116,8 @@ data Payment =
     MkPayment Date Direction Amount Currency
     deriving Show
 
+c9 = Scale 100 (Combine (One EUR) (Later xmas2025 (One EUR)))
+
 -- Semantik
 -- Zahlungen bis zu Datum ("today")
 -- + "Residualvertrag"
