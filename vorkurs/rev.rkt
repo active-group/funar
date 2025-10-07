@@ -16,6 +16,9 @@
         (first list) ; 1
        )))))
 
+; Länge n
+; Laufzeit 1 + 2 + 3 ... (n-1) + n = (n+1)*n/2 = O(n^2)
+
 ; Element an eine Liste hängen
 (: append-element ((list-of %a) %a -> (list-of %a)))
 
