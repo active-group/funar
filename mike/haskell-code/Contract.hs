@@ -55,7 +55,8 @@ data Direction = Long | Short
   deriving Show
 
 data Contract =
-    One Currency
+    Zero
+  | One Currency
   | Scale Amount Contract
   | Later Date Contract -- "closure of operations"
 --  | Direction Direction Contract
