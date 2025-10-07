@@ -10,6 +10,7 @@ Vorgehensweise:
   zero-coupon bond / Zero-Bond
 
 - Beispiel zerlegen in "atomare Bestandteile" / "Ideen"
+  geht häufig entlang der Attribute
 -}
 
 data Currency = EUR | USD | GBP | YEN
