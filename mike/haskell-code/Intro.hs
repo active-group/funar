@@ -405,6 +405,34 @@ instance Semigroup [a] where
     op :: [a] -> [a] -> [a]
     op list1 list2 = list1 ++ list2
 
+-- Pfeil falschrum
+class Semigroup a => Monoid a where
+    -- op neutral x == op x neutral == x
+    neutral :: a
+
+instance Monoid [a] where
+    neutral :: [a]
+    neutral = []
+
+listOp :: Monoid a => [a] -> a
+listOp [] = neutral
+listOp (x:xs) = op x (listOp xs)
+
+-- >>> listOp [[1,2,3], [4,5,6], [7,8,9]]
+-- [1,2,3,4,5,6,7,8,9]
+
+
+
+-- Monoid:
+-- Halbgruppe +
+-- neutrales Element:
+-- neutral :: a
+-- 0 + x == x + 0 == x
+-- 1 * x == x * 1 == x
+-- op neutral x == op x neutral == x
+
+
+
 -- Kommen noch folgende Typklassen / mathematische Konzepte:
 -- - Halbgruppe
 -- - Monoid
