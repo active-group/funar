@@ -301,16 +301,29 @@ listSum :: [Integer] -> Integer
 listSum [] = 0
 listSum (first : rest) = first + listSum rest
 
-listMap :: (a -> b) -> [a] -> [b]
+type List a = [a]
+
+listMap ::     (a -> b) -> List     a -> List     b
+optionalMap :: (a -> b) -> Optional a -> Optional b
+
 listMap f [] = []
 listMap f (x:xs) = (f x) : (listMap f xs)
+
+-- benötigt wird: Typ mit Typparameter
+-- >>> :info Functor
+-- type Functor :: (* -> *) -> Constraint
+-- class Functor f where
+--   fmap :: (a -> b) -> f a -> f b
 
 data Optional a =
     Null
   | Result a
   deriving Show
 
-optionalMap :: (a -> b) -> Optional a -> Optional b
+instance Functor Optional where
+    fmap :: (a -> b) -> Optional a -> Optional b
+    fmap = optionalMap
+
 optionalMap f Null = Null
 optionalMap f (Result a) = Result (f a)
 
@@ -351,10 +364,14 @@ listIndex element [] = Null
 listIndex element (x:xs) =
     if element == x
     then Result 0
-    else case listIndex element xs of
+    else fmap (+1) -- (\index -> index+1)
+              (listIndex element xs)
+        
+        
+{- case listIndex element xs of
             Null -> Null
             Result index -> Result (index+1)
-
+-}
 
 -- >>> :info Num
 -- type Num :: * -> Constraint
