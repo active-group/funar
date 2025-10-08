@@ -390,6 +390,21 @@ listIndex element (x:xs) =
 
 -- a + (b + c) == (a + b) + c
 
+class Semigroup a where
+   -- op a (op b c) == op (op a b) c
+   op :: a -> a -> a
+
+instance Semigroup Shape where
+    op :: Shape -> Shape -> Shape
+    op = MkOverlap
+
+-- >>> op (MkCircle point1 5) (MkSquare point2 3)
+-- MkOverlap {shape1 = MkCircle {center = MkPoint 1.0 1.0, radius = 5.0}, shape2 = MkSquare {leftBottom = MkPoint 3.0 3.0, sideLength = 3.0}}
+
+instance Semigroup [a] where
+    op :: [a] -> [a] -> [a]
+    op list1 list2 = list1 ++ list2
+
 -- Kommen noch folgende Typklassen / mathematische Konzepte:
 -- - Halbgruppe
 -- - Monoid
