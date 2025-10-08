@@ -306,9 +306,27 @@ data Optional a =
 -- Index eines Elements in einer Liste finden
 
 -- Eq: Constraint
+-- Eq a bedeutet "Werte vom Typ a sind vergleichbar mit =="
+
+-- Eq ist ein Typklasse ~ Interface
+
+-- >>> :info Eq
+-- type Eq :: * -> Constraint
+-- class Eq a where
+--   (==) :: a -> a -> Bool
+--   (/=) :: a -> a -> Bool
 
 listIndex :: Eq a => a -> [a] -> Optional Integer
 -- -1, null, undefined, Exception
+
+-- >>> listIndex 3 [1, 2, 5, 7, 3, 0]
+-- Result 4
+-- >>> listIndex Snake [Dog, Cat, Dog, Snake, Dog]
+-- No instance for `Eq Pet' arising from a use of `listIndex'
+-- In the expression: listIndex Snake [Dog, Cat, Dog, Snake, Dog]
+-- In an equation for `it_anwNN':
+--     it_anwNN = listIndex Snake [Dog, Cat, Dog, Snake, Dog]
+
 listIndex element [] = Null
 listIndex element (x:xs) =
     if element == x
