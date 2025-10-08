@@ -1,3 +1,4 @@
+{-# LANGUAGE InstanceSigs #-}
 module Contract where
 
 {- vorweg: Vertrag zwischen zwei Parteien -}
@@ -138,6 +139,14 @@ later date contract = Later date contract
 scale :: Amount -> Contract -> Contract
 scale amount Zero = Zero
 scale amount contract = Scale amount contract
+
+instance Semigroup Contract where
+  (<>) :: Contract -> Contract -> Contract
+  (<>) = combine
+
+instance Monoid Contract where
+  mempty :: Contract
+  mempty = Zero
 
 -- >>> meaning c9 (MkDate "2025-12-01")
 -- ([MkPayment (MkDate "2025-12-01") Long 100.0 EUR],Scale 100.0 (Later (MkDate "2025-12-24") (One EUR)))
