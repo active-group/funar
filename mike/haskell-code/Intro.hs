@@ -1,6 +1,8 @@
 {-# LANGUAGE InstanceSigs #-}
 module Intro where
 
+import Prelude hiding (Semigroup, Monoid)
+
 x :: Integer
 x = 42
 
@@ -369,6 +371,24 @@ listIndex element (x:xs) =
 --   (>=) :: a -> a -> Bool
 --   max :: a -> a -> a
 --   min :: a -> a -> a
+
+-- binäre Kombinatoren:
+-- - +, * :: Integer -> Integer -> Integer
+-- - overlay :: Image -> Image -> Image
+-- - Overlap :: Shape -> Shape -> Shape
+-- - Combine :: Contract -> Contract -> Contract
+
+-- Typ + Operation(en) + Gleichungen
+
+-- Overlap a (Overlap b c) == Overlap (Overlap a b) c
+
+-- Halbgruppe / Semigroup
+-- Typ a
+-- op :: a -> a -> a
+-- Assoziativität:
+-- op a (op b c) == op (op a b) c
+
+-- a + (b + c) == (a + b) + c
 
 -- Kommen noch folgende Typklassen / mathematische Konzepte:
 -- - Halbgruppe
