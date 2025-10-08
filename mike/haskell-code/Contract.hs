@@ -140,10 +140,10 @@ scale amount Zero = Zero
 scale amount contract = Scale amount contract
 
 -- >>> meaning c9 (MkDate "2025-12-01")
--- ([MkPayment (MkDate "2025-12-01") Long 100.0 EUR],Scale 100.0 (Combine Zero (Later (MkDate "2025-12-24") (One EUR))))
+-- ([MkPayment (MkDate "2025-12-01") Long 100.0 EUR],Scale 100.0 (Later (MkDate "2025-12-24") (One EUR)))
 
 -- >>> meaning c9 (MkDate "2025-12-24")
--- ([MkPayment (MkDate "2025-12-24") Long 100.0 EUR,MkPayment (MkDate "2025-12-24") Long 100.0 EUR],Scale 100.0 Zero)
+-- ([MkPayment (MkDate "2025-12-24") Long 100.0 EUR,MkPayment (MkDate "2025-12-24") Long 100.0 EUR],Zero)
 
 c9 = Scale 100 (Combine (One EUR) (Later xmas2025 (One EUR)))
 
