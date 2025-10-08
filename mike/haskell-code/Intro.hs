@@ -298,9 +298,20 @@ listMap :: (a -> b) -> [a] -> [b]
 listMap f [] = []
 listMap f (x:xs) = (f x) : (listMap f xs)
 
-
+data Optional a =
+    Null
+  | Result a
+  deriving Show
 
 -- Index eines Elements in einer Liste finden
-listIndex :: a -> [a] -> Integer
-listIndex element [] = undefined
-listIndex element (x:xs) = undefined
+
+
+listIndex :: a -> [a] -> Optional Integer
+-- -1, null, undefined, Exception
+listIndex element [] = Null
+listIndex element (x:xs) =
+    if element == x
+    then Result 0
+    else case listIndex element xs of
+            Null -> Null
+            Result index -> Result (index+1)
