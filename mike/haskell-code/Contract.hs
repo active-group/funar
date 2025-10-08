@@ -125,7 +125,18 @@ invertPayment (MkPayment date Long amount currency) =
 invertPayment (MkPayment date Short amount currency) =
   MkPayment date Long amount currency
 
+-- "smart constructor"
+combine :: Contract -> Contract -> Contract
+combine Zero contract = contract
+combine contract Zero = contract
+combine contract1 contract2 = Combine contract1 contract1
+
 -- >>> meaning c9 (MkDate "2025-12-01")
+-- ([MkPayment (MkDate "2025-12-01") Long 100.0 EUR],Scale 100.0 (Combine Zero (Later (MkDate "2025-12-24") (One EUR))))
+
+-- >>> meaning c9 (MkDate "2025-12-24")
+-- ([MkPayment (MkDate "2025-12-24") Long 100.0 EUR,MkPayment (MkDate "2025-12-24") Long 100.0 EUR],Scale 100.0 (Combine Zero Zero))
+
 c9 = Scale 100 (Combine (One EUR) (Later xmas2025 (One EUR)))
 
 -- Semantik
@@ -143,7 +154,7 @@ meaning (Reverse contract) today =
 meaning (Later date contract) today =
   if today >= date
     then meaning contract today
-    else ([], Later date contract) -- WithDate date contract
+    else ([], Later date contract)
 meaning (Combine contract1 contract2) today =
   let (payments1, residualContract1) = meaning contract1 today
       (payments2, residualContract2) = meaning contract2 today
