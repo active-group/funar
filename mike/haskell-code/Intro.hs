@@ -421,7 +421,10 @@ listOp (x:xs) = op x (listOp xs)
 -- >>> listOp [[1,2,3], [4,5,6], [7,8,9]]
 -- [1,2,3,4,5,6,7,8,9]
 
-
+-- => ist Implikation
+instance (Semigroup a, Semigroup b) => Semigroup (a, b) where
+    op :: (a, b) -> (a, b) -> (a, b)
+    op (a1, b1) (a2, b2) = (op a1 a2, op b1 b2)
 
 -- Monoid:
 -- Halbgruppe +
