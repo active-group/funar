@@ -135,6 +135,10 @@ later :: Date -> Contract -> Contract
 later date Zero = Zero
 later date contract = Later date contract
 
+scale :: Amount -> Contract -> Contract
+scale amount Zero = Zero
+scale amount contract = Scale amount contract
+
 -- >>> meaning c9 (MkDate "2025-12-01")
 -- ([MkPayment (MkDate "2025-12-01") Long 100.0 EUR],Scale 100.0 (Combine Zero (Later (MkDate "2025-12-24") (One EUR))))
 
@@ -151,7 +155,7 @@ meaning Zero today = ([], Zero)
 meaning (One currency) today = ([MkPayment today Long 1 currency], Zero)
 meaning (Scale amount contract) today =
   let (payments, residualContract) = meaning contract today
-   in (map (scalePayment amount) payments, Scale amount residualContract)
+   in (map (scalePayment amount) payments, scale amount residualContract)
 meaning (Reverse contract) today =
   let (payments, residualContract) = meaning contract today
    in (map invertPayment payments, Reverse residualContract)
