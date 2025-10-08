@@ -309,6 +309,9 @@ data Optional a =
 -- Eq a bedeutet "Werte vom Typ a sind vergleichbar mit =="
 
 -- Eq ist ein Typklasse ~ Interface
+-- Implementierung einer Typklasse: "instance"
+
+-- Namen aus Sonderzeichen sind Infix
 
 -- >>> :info Eq
 -- type Eq :: * -> Constraint
@@ -326,6 +329,13 @@ listIndex :: Eq a => a -> [a] -> Optional Integer
 -- In the expression: listIndex Snake [Dog, Cat, Dog, Snake, Dog]
 -- In an equation for `it_anwNN':
 --     it_anwNN = listIndex Snake [Dog, Cat, Dog, Snake, Dog]
+
+instance Eq Pet where
+    (==) :: Pet -> Pet -> Bool
+    (==) Dog Dog = True
+    (==) Cat Cat = True
+    (==) Snake Snake = True  
+    (==) _ _ = False  
 
 listIndex element [] = Null
 listIndex element (x:xs) =
