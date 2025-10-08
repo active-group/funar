@@ -450,7 +450,7 @@ instance (Semigroup a) => Semigroup (Optional a) where
   op (Result a) Null = Result a
   op (Result a) (Result a') = Result (op a a')
 
-instance (Monid a) => Monoid (Optional a) where
+instance (Monoid a) => Monoid (Optional a) where
   neutral :: Optional a
   neutral = Null
 
