@@ -48,6 +48,17 @@ instance Functor Validated where
     fmap f (Invalid errors) = Invalid errors
     fmap f (Valid a) = Valid (f a)
 
+-- applikativer Funktor
+-- >>> :info Applicative
+-- type Applicative :: (* -> *) -> Constraint
+-- class Functor f => Applicative f where
+--   pure :: a -> f a
+--   (<*>) :: f (a -> b) -> f a -> f b
+
+instance Applicative Validated where
+    pure :: a -> Validated a
+    (<*>) :: Validated (a -> b) -> Validated a -> Validated b
+
 {-
 makeCar :: String -> String -> Integer -> Maybe Car
 makeCar manufacturer licensePlate seats =
