@@ -443,7 +443,9 @@ instance (Monoid a, Monoid b) => Monoid (a, b) where
 -- 1 * x == x * 1 == x
 -- op neutral x == op x neutral == x
 
+instance Semigroup (Optional a) where
 
+instance Monoid (Optional a) where
 
 -- Kommen noch folgende Typklassen / mathematische Konzepte:
 -- - Halbgruppe
