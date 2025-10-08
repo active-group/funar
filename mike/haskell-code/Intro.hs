@@ -426,6 +426,13 @@ instance (Semigroup a, Semigroup b) => Semigroup (a, b) where
     op :: (a, b) -> (a, b) -> (a, b)
     op (a1, b1) (a2, b2) = (op a1 a2, op b1 b2)
 
+-- >>> op ([1,2,3], [4,5,6]) ([7,8,9], [10,11])
+-- ([1,2,3,7,8,9],[4,5,6,10,11])
+
+instance (Monoid a, Monoid b) => Monoid (a, b) where
+    neutral :: (a, b)
+    neutral = (neutral, neutral)
+
 -- Monoid:
 -- Halbgruppe +
 -- neutrales Element:
