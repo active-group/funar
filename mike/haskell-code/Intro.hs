@@ -310,6 +310,10 @@ data Optional a =
   | Result a
   deriving Show
 
+optionalMap :: (a -> b) -> Optional a -> Optional b
+optionalMap f Null = Null
+optionalMap f (Result a) = Result (f a)
+
 -- eingebaut: data Maybe a = Nothing | Just a
 
 -- Index eines Elements in einer Liste finden
@@ -450,7 +454,7 @@ instance (Semigroup a) => Semigroup (Optional a) where
   op (Result a) Null = Result a
   op (Result a) (Result a') = Result (op a a')
 
-instance (Monoid a) => Monoid (Optional a) where
+instance Semigroup a => Monoid (Optional a) where
   neutral :: Optional a
   neutral = Null
 
