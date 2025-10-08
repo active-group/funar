@@ -57,7 +57,12 @@ instance Functor Validated where
 
 instance Applicative Validated where
     pure :: a -> Validated a
+    pure = Valid
     (<*>) :: Validated (a -> b) -> Validated a -> Validated b
+    (<*>) (Valid f) (Valid a) = Valid (f a)
+    (<*>) (Invalid ferrors) (Valid a) = Invalid ferrors
+    (<*>) (Valid f) (Invalid aerrors) = Invalid aerrors
+    (<*>) (Invalid ferrors) (Invalid aerrors) = Invalid (ferrors ++ aerrors)
 
 {-
 makeCar :: String -> String -> Integer -> Maybe Car
