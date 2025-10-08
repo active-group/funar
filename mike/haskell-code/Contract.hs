@@ -115,6 +115,15 @@ fxSwap date myAmount myCurrency yourAmount yourCurrency =
 data Payment =
     MkPayment Date Direction Amount Currency
     deriving Show
+scalePayment :: Amount -> Payment -> Payment
+scalePayment factor (MkPayment direction date amount currency) =
+  MkPayment direction date (factor * amount) currency
+
+invertPayment :: Payment -> Payment
+invertPayment (MkPayment date Long amount currency) =
+  MkPayment date Short amount currency
+invertPayment (MkPayment date Short amount currency) =
+  MkPayment date Long amount currency
 
 -- >>> meaning c9 (MkDate "2025-12-01")
 c9 = Scale 100 (Combine (One EUR) (Later xmas2025 (One EUR)))
@@ -123,3 +132,19 @@ c9 = Scale 100 (Combine (One EUR) (Later xmas2025 (One EUR)))
 -- Zahlungen bis zu Datum ("today")
 -- + "Residualvertrag"
 meaning :: Contract -> Date -> ([Payment], Contract)
+meaning Zero today = ([], Zero)
+meaning (One currency) today = ([MkPayment today Long 1 currency], Zero)
+meaning (Scale amount contract) today =
+  let (payments, residualContract) = meaning contract today
+   in (map (scalePayment amount) payments, Scale amount residualContract)
+meaning (Reverse contract) today =
+  let (payments, residualContract) = meaning contract today
+   in (map invertPayment payments, Reverse residualContract)
+meaning (Later date contract) today =
+  if today >= date
+    then meaning contract today
+    else ([], Later date contract) -- WithDate date contract
+meaning (Combine contract1 contract2) today =
+  let (payments1, residualContract1) = meaning contract1 today
+      (payments2, residualContract2) = meaning contract2 today
+  in (payments1 ++ payments2, Combine residualContract1 residualContract2)
