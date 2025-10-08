@@ -310,6 +310,8 @@ data Optional a =
   | Result a
   deriving Show
 
+-- eingebaut: data Maybe a = Nothing | Just a
+
 -- Index eines Elements in einer Liste finden
 
 -- Eq: Constraint
