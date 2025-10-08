@@ -369,3 +369,11 @@ listIndex element (x:xs) =
 --   (>=) :: a -> a -> Bool
 --   max :: a -> a -> a
 --   min :: a -> a -> a
+
+-- Kommen noch folgende Typklassen / mathematische Konzepte:
+-- - Halbgruppe
+-- - Monoid
+
+-- - Funktor
+-- - applikativer Funktor
+-- - Monade
