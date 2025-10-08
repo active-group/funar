@@ -1,3 +1,4 @@
+{-# LANGUAGE InstanceSigs #-}
 module Validation where
 
 -- Yaron Minsky:
@@ -24,6 +25,11 @@ makeLicenseplate text =
         then Valid (MkLicenseplate text)
         else Invalid ["wrong length for license plate"]
 
+-- vereinfacht:
+-- Validated SeatCount -> Validated Car
+
+
+makeSeatCount :: Integer -> Validated SeatCount
 makeSeatCount n =
     if n >= 2
     then Valid (MkSeatCount n)
@@ -35,6 +41,12 @@ makeSeatCount n =
 data Validated a =
     Valid a
   | Invalid [String] -- Fehlermeldung
+  deriving Show
+
+instance Functor Validated where
+    fmap :: (a -> b) -> Validated a -> Validated b
+    fmap f (Invalid errors) = Invalid errors
+    fmap f (Valid a) = Valid (f a)
 
 {-
 makeCar :: String -> String -> Integer -> Maybe Car
@@ -48,6 +60,7 @@ makeCar manufacturer licensePlate seats =
 
 -}
 
+{-
 makeCar :: String -> String -> Integer -> Validated Car
 makeCar manufacturer licensePlate seats =
   let l = length licensePlate
@@ -60,3 +73,25 @@ makeCar manufacturer licensePlate seats =
           if seats >= 2
           then Invalid ["license plate has wrong length"]
           else Invalid ["not enough seats", "license plate has wrong length"]
+-}
+
+{-
+makeCar :: String -> String -> Integer -> Validated Car
+makeCar manufacturer licensePlate seats =
+    case makeLicenseplate licensePlate of
+        Valid licensePlate ->
+            case makeSeatCount seats of
+                Valid seatCount ->
+                    Valid (MkCar (MkManufacturer manufacturer) licensePlate seatCount)
+                -- ...
+
+-}
+
+fmap2 :: (a -> b -> c) -> Validated a -> Validated b -> Validated c
+fmap2 = undefined
+
+makeCar :: String -> String -> Integer -> Validated Car
+makeCar  manufacturer licensePlate seats =
+    fmap2 (MkCar (MkManufacturer manufacturer))
+          (makeLicenseplate licensePlate)
+          (makeSeatCount seats)
