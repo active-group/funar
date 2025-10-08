@@ -131,11 +131,15 @@ combine Zero contract = contract
 combine contract Zero = contract
 combine contract1 contract2 = Combine contract1 contract1
 
+later :: Date -> Contract -> Contract
+later date Zero = Zero
+later date contract = Later date contract
+
 -- >>> meaning c9 (MkDate "2025-12-01")
 -- ([MkPayment (MkDate "2025-12-01") Long 100.0 EUR],Scale 100.0 (Combine Zero (Later (MkDate "2025-12-24") (One EUR))))
 
 -- >>> meaning c9 (MkDate "2025-12-24")
--- ([MkPayment (MkDate "2025-12-24") Long 100.0 EUR,MkPayment (MkDate "2025-12-24") Long 100.0 EUR],Scale 100.0 (Combine Zero Zero))
+-- ([MkPayment (MkDate "2025-12-24") Long 100.0 EUR,MkPayment (MkDate "2025-12-24") Long 100.0 EUR],Scale 100.0 Zero)
 
 c9 = Scale 100 (Combine (One EUR) (Later xmas2025 (One EUR)))
 
@@ -158,4 +162,4 @@ meaning (Later date contract) today =
 meaning (Combine contract1 contract2) today =
   let (payments1, residualContract1) = meaning contract1 today
       (payments2, residualContract2) = meaning contract2 today
-  in (payments1 ++ payments2, Combine residualContract1 residualContract2)
+  in (payments1 ++ payments2, combine residualContract1 residualContract2)
