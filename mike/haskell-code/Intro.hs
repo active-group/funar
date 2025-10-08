@@ -305,8 +305,9 @@ data Optional a =
 
 -- Index eines Elements in einer Liste finden
 
+-- Eq: Constraint
 
-listIndex :: a -> [a] -> Optional Integer
+listIndex :: Eq a => a -> [a] -> Optional Integer
 -- -1, null, undefined, Exception
 listIndex element [] = Null
 listIndex element (x:xs) =
