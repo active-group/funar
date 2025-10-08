@@ -325,10 +325,7 @@ listIndex :: Eq a => a -> [a] -> Optional Integer
 -- >>> listIndex 3 [1, 2, 5, 7, 3, 0]
 -- Result 4
 -- >>> listIndex Snake [Dog, Cat, Dog, Snake, Dog]
--- No instance for `Eq Pet' arising from a use of `listIndex'
--- In the expression: listIndex Snake [Dog, Cat, Dog, Snake, Dog]
--- In an equation for `it_anwNN':
---     it_anwNN = listIndex Snake [Dog, Cat, Dog, Snake, Dog]
+-- Result 3
 
 instance Eq Pet where
     (==) :: Pet -> Pet -> Bool
