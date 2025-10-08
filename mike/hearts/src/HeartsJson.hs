@@ -261,6 +261,8 @@ gameEventDecoder =
 gameEventsDecoder :: Decoder [GameEvent]
 gameEventsDecoder = Decode.list gameEventDecoder
 
+-- >>> encodeGameCommand (PlayCard (Cards.Player "Mike") (Cards.Card Cards.Hearts Cards.Two))
+-- Object (fromList [("contents",Array [String "Mike",Object (fromList [("rank",String "Two"),("suit",String "Hearts")])]),("tag",String "PlayCard")])
 encodeGameCommand :: GameCommand -> Json.Value
 encodeGameCommand command =
   case command of

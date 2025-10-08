@@ -38,6 +38,9 @@ allRanks = [Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten,
 data Card = Card { suit :: Suit, rank :: Rank }
   deriving (Show, Eq, Ord)
 
+-- data Maybe a = Nothing | Just a
+-- data Ordering = LT | EQ | GT
+
 -- | Eine Karte kann nur eine andere Karte gleicher Farbe nach Wert schlagen
 cardOrder :: Card -> Card -> Maybe Ordering
 cardOrder c1 c2 =
