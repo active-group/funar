@@ -160,7 +160,7 @@ c9 = Scale 100 (Combine (One EUR) (Later xmas2025 (One EUR)))
 -- Zahlungen bis zu Datum ("today")
 -- + "Residualvertrag"
 meaning :: Contract -> Date -> ([Payment], Contract)
-meaning Zero today = ([], Zero)
+meaning Zero today = mempty -- (mempty, mempty) -- ([], Zero)
 meaning (One currency) today = ([MkPayment today Long 1 currency], Zero)
 meaning (Scale amount contract) today =
   let (payments, residualContract) = meaning contract today
@@ -173,6 +173,12 @@ meaning (Later date contract) today =
     then meaning contract today
     else ([], Later date contract)
 meaning (Combine contract1 contract2) today =
-  let (payments1, residualContract1) = meaning contract1 today
-      (payments2, residualContract2) = meaning contract2 today
-  in (payments1 ++ payments2, combine residualContract1 residualContract2)
+  meaning contract1 today <> meaning contract2 today
+    
+-- meaning ist ein Monoidenhomomorphismus
+
+-- (payments1 <> payments2, residualContract1 <> residualContract2)
+
+--  let (payments1, residualContract1) = meaning contract1 today
+--      (payments2, residualContract2) = meaning contract2 today
+--  in (payments1 ++ payments2, combine residualContract1 residualContract2)
