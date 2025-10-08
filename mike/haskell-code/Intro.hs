@@ -31,6 +31,11 @@ data Pet =
   | Snake
   deriving Show -- "Zauberspruch"
 
+-- >>> :info Show
+-- type Show :: * -> Constraint
+-- class Show a where
+--   show :: a -> String
+
 -- Ist Haustier niedlich?
 isCute :: Pet -> Bool
 
@@ -235,7 +240,7 @@ plusDouble x y = x + double y
 --    einer Figur liegt
 
 data Point = MkPoint Double Double
-  deriving (Show)
+  deriving (Show, Eq)
 
 point1 :: Point
 point1 = MkPoint 1 1
@@ -341,3 +346,26 @@ listIndex element (x:xs) =
     else case listIndex element xs of
             Null -> Null
             Result index -> Result (index+1)
+
+
+-- >>> :info Num
+-- type Num :: * -> Constraint
+-- class Num a where
+--   (+) :: a -> a -> a
+--   (-) :: a -> a -> a
+--   (*) :: a -> a -> a
+--   negate :: a -> a
+--   abs :: a -> a
+--   signum :: a -> a
+--   fromInteger :: Integer -> a
+
+-- >>> :info Ord
+-- type Ord :: * -> Constraint
+-- class Eq a => Ord a where
+--   compare :: a -> a -> Ordering
+--   (<) :: a -> a -> Bool
+--   (<=) :: a -> a -> Bool
+--   (>) :: a -> a -> Bool
+--   (>=) :: a -> a -> Bool
+--   max :: a -> a -> a
+--   min :: a -> a -> a
