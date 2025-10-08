@@ -443,9 +443,16 @@ instance (Monoid a, Monoid b) => Monoid (a, b) where
 -- 1 * x == x * 1 == x
 -- op neutral x == op x neutral == x
 
-instance Semigroup (Optional a) where
+instance (Semigroup a) => Semigroup (Optional a) where
+  op :: Optional a -> Optional a -> Optional a
+  op Null Null = Null
+  op Null (Result a) = Result a
+  op (Result a) Null = Result a
+  op (Result a) (Result a') = Result (op a a')
 
-instance Monoid (Optional a) where
+instance (Monid a) => Monoid (Optional a) where
+  neutral :: Optional a
+  neutral = Null
 
 -- Kommen noch folgende Typklassen / mathematische Konzepte:
 -- - Halbgruppe
