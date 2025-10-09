@@ -112,3 +112,31 @@ runDB (Put key value callback) mp =
     let mp' = Map.insert key value mp
     in runDB (callback ()) mp'
 runDB (Return result) mp = (result, mp)
+
+data Entry = MkEntry Key Value
+
+instance FromRow Entry where
+    fromRow :: RowParser Entry
+    fromRow = MkEntry <$> field <*> field
+
+instance ToRow Entry where
+    toRow (MkEntry key value) = toRow (key, value)
+
+runDBSQLite :: DB a -> Connection -> IO a
+runDBSQLite (Get key callback) c =
+    do [entry] <- queryNamed c "SELECT key, value FROM entries WHERE key = :key" [":key" := key]
+       let (MkEntry _key value) = entry
+       runDBSQLite (callback value) c
+runDBSQLite (Put key value callback) c =
+    do execute c "REPLACE INTO entries (key, value) VALUES (?, ?)" (MkEntry key value)
+       runDBSQLite (callback ()) c
+runDBSQLite (Return result) c = return result
+
+execDB :: DB a -> IO a
+execDB program =
+    do c <- open "test.db"
+       execute_ c
+         "CREATE TABLE IF NOT EXISTS entries (key TEXT PRIMARY KEY, value INTEGER)"
+       result <- runDBSQLite program c
+       close c
+       return result
