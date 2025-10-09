@@ -1,8 +1,13 @@
 {-# LANGUAGE InstanceSigs #-}
+{-# LANGUAGE OverloadedStrings #-}
 module DB where
 
 import qualified Data.Map.Strict as Map
 import Data.Map.Strict (Map, (!))
+
+import Control.Applicative
+import Database.SQLite.Simple
+import Database.SQLite.Simple.FromRow
 
 {-
    put "Mike" 100
