@@ -49,6 +49,9 @@ data GameCommand =
 data Game a =
     RecordEvent GameEvent (() -> Game a)
   | IsPlayValid Player Card (Bool -> Game a)
+  | RoundOverTrick (Maybe (Trick, Player) -> Game a)
+  | PlayerAfter Player (Player -> Game a)
+  | GameOver (Maybe Player -> Game a)
   | Return a
 
 recordEventM :: GameEvent -> Game ()
@@ -56,6 +59,12 @@ recordEventM event = RecordEvent event Return
 
 isPlayValidM :: Player -> Card -> Game Bool
 isPlayValidM player card = IsPlayValid player card Return
+
+roundOverTrickM :: Game (Maybe (Trick, Player))
+roundOverTrickM = RoundOverTrick Return
+
+playerAfterM :: Player -> Game Player
+playerAfterM player = PlayerAfter player Return
 
 instance Functor Game where
 instance Applicative Game where
@@ -73,6 +82,15 @@ instance Monad Game where
     (>>=) (IsPlayValid player card callback) next =
         IsPlayValid player card (\valid ->
             callback valid >>= next)
+    (>>=) (RoundOverTrick cont) next =
+        RoundOverTrick ( \over ->
+          cont over >>= next)
+    (>>=) (PlayerAfter player cont) next =
+        PlayerAfter player ( \player ->
+          cont player >>= next)
+    (>>=) (GameOver cont) next =
+        GameOver ( \won ->
+          cont won >>= next)
 
 -- Just winner, wenn das Spiel vorbei
 -- muß Events generieren
