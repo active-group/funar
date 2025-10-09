@@ -100,23 +100,24 @@ encodeRank rank =
     )
 
 rankDecoder :: Decoder Cards.Rank
-rankDecoder = do
-  s <- Decode.string
-  case s of
-    "Two" -> return Cards.Two
-    "Three" -> return Cards.Three
-    "Four" -> return Cards.Four
-    "Five" -> return Cards.Five
-    "Six" -> return Cards.Six
-    "Seven" -> return Cards.Seven
-    "Eight" -> return Cards.Eight
-    "Nine" -> return Cards.Nine
-    "Ten" -> return Cards.Ten
-    "Jack" -> return Cards.Jack
-    "Queen" -> return Cards.Queen
-    "King" -> return Cards.King
-    "Ace" -> return Cards.Ace
-    s -> Decode.faild ("Not a rank: " <> s)
+rankDecoder = 
+  fmapFail (fmap (\s ->
+    case s of
+      "Two" -> Right Cards.Two
+      "Three" -> Right Cards.Three
+      "Four" -> Right Cards.Four
+      "Five" -> Right Cards.Five
+      "Six" -> Right Cards.Six
+      "Seven" -> Right Cards.Seven
+      "Eight" -> Right Cards.Eight
+      "Nine" -> Right Cards.Nine
+      "Ten" -> Right Cards.Ten
+      "Jack" -> Right Cards.Jack
+      "Queen" -> Right Cards.Queen
+      "King" -> Right Cards.King
+      "Ace" -> Right Cards.Ace
+      s -> Left ("Not a rank: " <> s))
+  Decode.string)
 
 -- | Karte codieren
 -- >>> Json.encode (encodeCard (Cards.Card Cards.Diamonds Cards.Queen))
