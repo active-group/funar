@@ -213,3 +213,8 @@ tableProcessEvent (TrickTaken player trick) state =
     }
 tableProcessEvent (IllegalCardAttempted player card) state = state
 tableProcessEvent (GameEnded player) state = state
+
+runTable :: Game a -> (TableState, [GameEvent]) -> (a, TableState, [GameEvent])
+--                                 ^^^^^^^^^^^ Akkumulator für Events (umgekehrte Reihenfolge)
+--                                                                 ^^^^^^^^^^ alle passierten Events, richtige Reihenfolge
+runTable = undefined
