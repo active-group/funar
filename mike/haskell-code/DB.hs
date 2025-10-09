@@ -1,3 +1,4 @@
+{-# LANGUAGE InstanceSigs #-}
 module DB where
 
 import qualified Data.Map.Strict as Map
@@ -48,6 +49,51 @@ get key = Get key Return
 
 put :: Key -> Value -> DB ()
 put key value = Put key value Return -- (\() -> Return ())
+
+splice :: DB a -> (a -> DB b) -> DB b
+splice (Get key callback) next =
+    Get key (\ value ->
+               splice (callback value) next)
+splice (Put key value callback) next =
+    Put key value (\ () ->
+                   splice (callback ()) next)
+splice (Return result) next = next result
+
+-- >>> runDB p1' Map.empty 
+-- ("201",fromList [("Mike",101)])
+
+p1' :: DB String
+p1' = splice (put "Mike" 100) (\() ->
+      splice (get "Mike") (\x ->
+      splice (put "Mike" (x+1)) (\() ->
+      splice (get "Mike") (\y ->
+      Return (show(x+y))))))
+
+-- >>> :info Monad
+-- type Monad :: (* -> *) -> Constraint
+-- class Applicative m => Monad m where
+--   (>>=) :: m a -> (a -> m b) -> m b
+--   return :: a ->
+
+instance Functor DB where
+
+instance Applicative DB where
+
+instance Monad DB where
+    -- "bind"
+    (>>=) :: DB a -> (a -> DB b) -> DB b
+    (>>=) = splice
+    return :: a -> DB a
+    return = Return
+
+-- >>> runDB p1'' Map.empty
+-- ("201",fromList [("Mike",101)])
+p1'' :: DB String
+p1'' = do put "Mike" 100
+          x <- get "Mike"
+          put "Mike" (x+1)
+          y <- get "Mike"
+          return (show (x+y))
 
 -- >>> runDB p1 Map.empty
 -- ("201",fromList [("Mike",101)])
