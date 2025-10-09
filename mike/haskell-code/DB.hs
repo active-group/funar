@@ -132,6 +132,9 @@ runDBSQLite (Put key value callback) c =
        runDBSQLite (callback ()) c
 runDBSQLite (Return result) c = return result
 
+-- >>> execDB p1'
+-- "201"
+
 execDB :: DB a -> IO a
 execDB program =
     do c <- open "test.db"
