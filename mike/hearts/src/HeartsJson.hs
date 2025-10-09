@@ -119,8 +119,8 @@ rankDecoder = do
     s -> Decode.faild ("Not a rank: " <> s)
 
 -- | Karte codieren
--- >>> encodeCard (Cards.Card Cards.Diamonds Cards.Queen)
--- Object (fromList [("rank",String "Queen"),("suit",String "Diamonds")])
+-- >>> Json.encode (encodeCard (Cards.Card Cards.Diamonds Cards.Queen))
+-- "{\"rank\":\"Queen\",\"suit\":\"Diamonds\"}"
 encodeCard :: Cards.Card -> Json.Value
 encodeCard (Cards.Card suit rank) =
   Json.object
@@ -157,10 +157,8 @@ encodeTrick trick =
     (Cards.trickToList trick)
 
 tuple2Decoder :: Decoder a -> Decoder b -> Decoder (a, b)
-tuple2Decoder first second = do
-  a <- Decode.index 0 first
-  b <- Decode.index 1 second
-  pure (a, b)
+tuple2Decoder first second =
+  (,) <$> Decode.index 0 first <*> Decode.index 1 second
 
 trickDecoder :: Decoder Cards.Trick
 trickDecoder = Cards.listToTrick <$> (Decode.list (tuple2Decoder playerDecoder cardDecoder))
