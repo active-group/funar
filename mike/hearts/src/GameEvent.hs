@@ -138,3 +138,5 @@ tableLoopM command =
        case maybeWinner of
         Nothing -> GetCommand tableLoopM
         Just winner -> return winner
+
+-- ---> Effekt-Libraries, "effect systems"
