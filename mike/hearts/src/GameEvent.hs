@@ -66,6 +66,9 @@ roundOverTrickM = RoundOverTrick Return
 playerAfterM :: Player -> Game Player
 playerAfterM player = PlayerAfter player Return
 
+gameOverM :: Game (Maybe Player)
+gameOverM = GameOver Return
+
 instance Functor Game where
 instance Applicative Game where
 
@@ -104,6 +107,23 @@ tableProcessCommand (PlayCard player card) =
     do valid <- isPlayValidM player card
        if valid
        then do recordEventM (LegalCardPlayed player card)
-               undefined
+               roundOverTrick <- roundOverTrickM
+               case roundOverTrick of
+                Just (trick, trickTaker) ->
+                 do recordEventM (TrickTaken trickTaker trick)
+                    over <- gameOverM
+                    case over of
+                        Just winner ->
+                          do recordEventM (GameEnded winner)
+                             return (Just winner)
+                        Nothing ->
+                         do recordEventM (PlayerTurnChanged trickTaker)
+                            return Nothing
+                Nothing ->
+                    do
+                    nextPlayer <- playerAfterM player
+                    recordEventM (PlayerTurnChanged nextPlayer)
+                    return Nothing
+
        else do recordEventM (IllegalCardAttempted player card)
                return Nothing
