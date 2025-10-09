@@ -43,3 +43,4 @@ data GameEvent
 data GameCommand =
     PlayCard Player Card
   | DealHands (Map Player Hand)
+  deriving (Show, Eq)
