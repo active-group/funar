@@ -103,9 +103,23 @@ makeCar manufacturer licensePlate seats =
 
 -}
 
-fmap2 :: (a -> b -> c) -> Validated a -> Validated b -> Validated c
-fmap2 = undefined
+-- (<*>) :: Validated (a -> b) -> Validated a -> Validated b
 
+fmap2 :: (a -> b -> c) -> Validated a -> Validated b -> Validated c
+-- fmap2 f va vb = ((pure f) <*> va) <*> vb
+-- fmap2 f va vb = pure f <*> va <*> vb
+-- fmap2 f va vb = fmap f va <*> vb
+-- <$> = fmap
+fmap2 f va vb = f <$> va <*> vb
+
+fmap3 :: Applicative f => (a1 -> a2 -> a3 -> b) -> f a1 -> f a2 -> f a3 -> f b
+fmap3 f va vb vc = f <$> va <*> vb <*> vc
+
+-- >>> makeCar "VW" "TÜ GV256E" 5
+-- Valid (MkCar {carManufacturer = MkManufacturer "VW", carLicensePlate = MkLicenseplate "T\220 GV256E", carSeats = MkSeatCount 5})
+
+-- >>> makeCar "VW" "T" 1
+-- Invalid ["wrong length for license plate","not enough seats"]
 makeCar :: String -> String -> Integer -> Validated Car
 makeCar  manufacturer licensePlate seats =
     fmap2 (MkCar (MkManufacturer manufacturer))
