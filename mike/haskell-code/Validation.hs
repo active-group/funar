@@ -54,6 +54,7 @@ instance Functor Validated where
 -- class Functor f => Applicative f where
 --   pure :: a -> f a
 --   (<*>) :: f (a -> b) -> f a -> f b
+--   fmap  ::   (a -> b) -> f a -> f b
 
 instance Applicative Validated where
     pure :: a -> Validated a
@@ -113,7 +114,7 @@ fmap2 :: (a -> b -> c) -> Validated a -> Validated b -> Validated c
 fmap2 f va vb = f <$> va <*> vb
 
 fmap3 :: Applicative f => (a1 -> a2 -> a3 -> b) -> f a1 -> f a2 -> f a3 -> f b
-fmap3 f va vb vc = f <$> va <*> vb <*> vc
+fmap3 f va vb vc = f <$> va <*> vb <*> vc -- f <$> va <*> vb <*> vc
 
 -- >>> makeCar "VW" "TÜ GV256E" 5
 -- Valid (MkCar {carManufacturer = MkManufacturer "VW", carLicensePlate = MkLicenseplate "T\220 GV256E", carSeats = MkSeatCount 5})
