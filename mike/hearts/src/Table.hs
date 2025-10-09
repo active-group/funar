@@ -217,4 +217,11 @@ tableProcessEvent (GameEnded player) state = state
 runTable :: Game a -> (TableState, [GameEvent]) -> (a, TableState, [GameEvent])
 --                                 ^^^^^^^^^^^ Akkumulator für Events (umgekehrte Reihenfolge)
 --                                                                 ^^^^^^^^^^ alle passierten Events, richtige Reihenfolge
-runTable = undefined
+runTable (IsPlayValid player card cont) (state, revents) =
+  runTable (cont (playValid state player card)) (state, revents)
+runTable (RoundOverTrick cont) (state, revents) =
+  runTable (cont (roundOverTrick state)) (state, revents)
+runTable (PlayerAfter player cont) (state, revents) =
+  runTable (cont (playerAfter state player)) (state, revents)
+runTable (GameOver cont) (state, revents) =
+  runTable (cont (gameOver state)) (state, revents)
