@@ -91,6 +91,12 @@ Falls Sie `nix` verwenden, dann ist `elm` bereits in der Entwicklungsumgebung
 - Sandy Maguire: [Algebra-Driven Design](https://leanpub.com/algebra-driven-design)
 - Michael Pilquist, Rúnar Bjarnason, and Paul Chiusano [Functional Programming in Scala](https://www.manning.com/books/functional-programming-in-scala-second-edition)
 - Scott Wlaschin: [Domain Modeling Made Functional](https://pragprog.com/titles/swdddf/domain-modeling-made-functional/)
+- [Blog-Post zu Summen und Produkten](https://funktionale-programmierung.de/2024/11/25/sums-products.html)
+- [Cats-Library für Scala](https://typelevel.org/cats/)
+- [David Parnas über Modularität](https://dl.acm.org/doi/10.1145/361598.361623)
+- [Haxl-Library für Parallelität mit Applicatives](https://github.com/facebook/Haxl)
+- [SQLite-Library](https://hackage.haskell.org/package/sqlite-simple)
+- [Haskell Copilot](https://hackage.haskell.org/package/copilot)
 
 <!-- Local Variables: -->
 <!-- fill-column: 80 -->
