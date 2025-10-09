@@ -101,7 +101,7 @@ encodeRank rank =
 
 rankDecoder :: Decoder Cards.Rank
 rankDecoder = 
-  fmapFail (fmap (\s ->
+  Decode.fmapFail (fmap (\s ->
     case s of
       "Two" -> Right Cards.Two
       "Three" -> Right Cards.Three
