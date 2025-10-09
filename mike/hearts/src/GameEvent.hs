@@ -95,6 +95,8 @@ instance Monad Game where
     (>>=) (GameOver cont) next =
         GameOver ( \won ->
           cont won >>= next)
+    (>>=) (GetCommand cont) next =
+        GetCommand (\command -> cont command >>= next)
 
 -- Just winner, wenn das Spiel vorbei
 -- muß Events generieren
@@ -134,6 +136,5 @@ tableLoopM :: GameCommand -> Game Player
 tableLoopM command =
     do maybeWinner <- tableProcessCommand command
        case maybeWinner of
-        Nothing -> do nextCommand <- undefined
-                      tableLoopM nextCommand
+        Nothing -> GetCommand tableLoopM
         Just winner -> return winner
