@@ -16,6 +16,9 @@ data DecodeError
   | Failure String Json.Value
   deriving (Show, Eq)
 
+-- data Either l r = Left l | Right r
+-- Left: Fehlerfall, Right: Erfolg / fertig
+
 newtype Decoder a = Decoder {runDecoder :: Json.Value -> Either DecodeError a}
 
 instance Functor Decoder where
@@ -105,3 +108,10 @@ field name decoder = Decoder (\json ->
 faild :: String -> Decoder a
 faild message = Decoder (\ json ->
   Left (Failure message json))
+
+fmapFail :: Decoder (Either String a) -> Decoder a
+fmapFail decoder = Decoder (\ json ->
+  case runDecoder decoder json of
+    Right (Left message) -> Left (Failure message json)
+    Right (Right result) -> Right result
+    Left errors -> Left errors)
