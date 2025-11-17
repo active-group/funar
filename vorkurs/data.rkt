@@ -366,3 +366,23 @@ Open/Closed Principle:
                  (extract-odds (rest list)))
            (extract-odds (rest list)))))))
               
+; Abstrahieren:
+; - letztes Mal kopieren
+; - umbenennen (an rekursive Aufrufe denken!)
+; - Unterschiede durch abstrakte Namen ersetzen
+; - Namen in lambda aufnehmen (an rekursive Aufrufe denken!)
+
+; (: even? (number -> boolean))
+
+; Funktion höherer Ordnung: >1 Pfeil
+(: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
+
+(define extract
+  (lambda (p? list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (if (p? (first list))
+           (cons (first list)
+                 (extract p? (rest list)))
+           (extract p? (rest list)))))))
