@@ -350,3 +350,5 @@ Open/Closed Principle:
        (* (first list)
           (list-product (rest list)))))))
 
+; Aus einer Liste die geraden Zahlen extrahieren
+
