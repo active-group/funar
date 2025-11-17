@@ -153,3 +153,22 @@
 
 (check-expect (run-over-dillo dillo1)
               (make-dillo #f 10))
+(check-expect (run-over-dillo dillo2)
+              dillo2)
+
+(check-property
+ (for-all ((d dillo))
+   (equal? (dillo-alive? (run-over-dillo d))
+           #f)))
+
+(check-property
+ (for-all ((d dillo))
+   (equal? (run-over-dillo d)
+           (make-dillo #f (dillo-weight d)))))
+           
+
+(define run-over-dillo
+  (lambda (dillo)
+    (make-dillo #f
+                (dillo-weight dillo))))
+    
