@@ -257,3 +257,12 @@
     (cond
       ((dillo? animal) (run-over-dillo animal))
       ((parrot? animal) (run-over-parrot animal)))))
+
+; Gewicht eines Tiers
+(: animal-weight (animal -> number))
+
+(define animal-weight
+  (lambda (animal)
+    (cond
+      ((dillo? animal) (dillo-weight animal))
+      ((parrot? animal) (parrot-weight animal)))))
