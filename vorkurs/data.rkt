@@ -127,7 +127,9 @@
                (remainder msm 60))))
 
 
-; Tiere auf dem texanischen Highway
+; Tier auf dem texanischen Highway ist eins der folgenden:
+; - Gürteltier -ODER-
+; - Papagei
 
 ; "Repräsention des Zustands des Gürteltiers zu einem bestimmten Zeitpunkt."
 
@@ -205,3 +207,25 @@
                    (+ (dillo-weight dillo) amount))
                   (else ; (not (dillo-alive? dillo))
                    (dillo-weight dillo))))))
+
+; Ein Papagei hat folgende Eigenschaften:
+; - Satz -UND-
+; - Gewicht
+(define-record parrot
+  make-parrot
+  (parrot-sentence string)
+  (parrot-weight number))
+
+(define parrot1 (make-parrot "Welcome!" 1))
+(define parrot2 (make-parrot "Auf Wiedersehen!" 2))
+
+; Papagei überfahren
+(: run-over-parrot (parrot -> parrot))
+
+(check-expect (run-over-parrot parrot1)
+              (make-parrot "" 1))
+
+(define run-over-parrot
+  (lambda (parrot)
+    (make-parrot "" (parrot-weight parrot))))
+  
