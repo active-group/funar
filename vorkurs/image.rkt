@@ -27,6 +27,14 @@
 ; - Unterschiede durch (abstrakte) Namen ersetzen
 ; - Namen aufnehmen in lambda
 
+; Konstruktionsanleitung
+; - Kurzbeschreibung (1 Zeile)
+; - Signatur(deklaration)
+
+; quadratisches Kachelmuster aus zwei Kacheln
+
+(: tile (image image -> image))
+
 (define tile
   (lambda (image1 image2)
     (above
