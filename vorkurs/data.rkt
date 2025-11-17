@@ -416,5 +416,19 @@ Open/Closed Principle:
        (cons (run-over-animal (first list))
              (run-over-animals (rest list)))))))
 
+; Liste inkrementieren
+(: inc-list ((list-of number) -> (list-of number)))
+
+(check-expect (inc-list list4)
+              (cons 7 (cons 8 (cons 3 (cons 6 empty)))))
+
+(define inc-list
+  (lambda (list)
+    (cond
+      ((empty? list) ...)
+      ((cons? list)
+       ... (first list) ...
+       ... (inc-list (rest list)) ...))))
+
 
                                      
