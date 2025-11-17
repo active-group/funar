@@ -427,8 +427,21 @@ Open/Closed Principle:
     (cond
       ((empty? list) empty)
       ((cons? list)
-       (cons (+ 1 (first list))
+       (cons (inc (first list))
              (inc-list (rest list)))))))
 
+(define inc
+  (lambda (x)
+    (+ 1 x)))
+
+(: list-map ((%a -> %b) (list-of %a) -> (list-of %b)))
+             
+(define list-map
+  (lambda (f list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cons (f (first list))
+             (list-map f (rest list)))))))
 
                                      
