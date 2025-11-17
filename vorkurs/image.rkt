@@ -32,3 +32,22 @@
     (above
      (beside image1 image2)
      (beside image2 image1))))
+
+(tile square1 star1)
+
+(define double
+  (lambda (x)
+    (* x 2)))
+#|
+// x steht für Speicherzelle, in der ein int steht
+class C {
+   static int m(int x) {
+      ... x ...
+      x = x + 1;
+      ... x ...
+   }
+   ... C.m(42) ....
+}
+
+
+|#
