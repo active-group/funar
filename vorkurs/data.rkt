@@ -383,6 +383,16 @@ Open/Closed Principle:
            (cons (first list)
                  (extract-odds (rest list)))
            (extract-odds (rest list)))))))
+
+(define extract-odds2
+  (lambda (list)
+    (list-fold empty
+               (lambda (first-list rec-result)
+                 (if (odd? first-list)
+                     (cons first-list
+                           rec-result)
+                     rec-result))
+               list)))
               
 ; Abstrahieren:
 ; - letztes Mal kopieren
