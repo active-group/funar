@@ -111,6 +111,10 @@
    (equal? (msm->time (msm t))
            t)))
 
+(check-property
+ (for-all ((minutes natural))
+   (equal? (msm (msm->time minutes))
+           minutes)))
 
 ; Schablone
 #;(define msm->time
