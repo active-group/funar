@@ -425,10 +425,10 @@ Open/Closed Principle:
 (define inc-list
   (lambda (list)
     (cond
-      ((empty? list) ...)
+      ((empty? list) empty)
       ((cons? list)
-       ... (first list) ...
-       ... (inc-list (rest list)) ...))))
+       (cons (+ 1 (first list))
+             (inc-list (rest list)))))))
 
 
                                      
