@@ -67,9 +67,14 @@
 
 (define-record time ; Signatur
   make-time ; Konstruktor
-  (time-hour hour)
+  (time-hour hour) ; Selektor, Getter-Funktionen
   (time-minute minute))
 
 (: make-time (hour minute -> time))
+(: time-hour (time -> hour))
+(: time-minute (time -> minute))
 
-
+; 11 Uhr 29 Minuten
+(define time1 (make-time 11 29))
+; 14:07
+(define time2 (make-time 14 07))
