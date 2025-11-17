@@ -38,6 +38,17 @@
 (define double
   (lambda (x)
     (* x 2)))
+
+(define mystery
+  (lambda (y)
+    (+ x y)))
+
+; Lambda-Kalkül
+
+; lexikalische / statische Bindung:
+; Vorkommen einer Variable: von innen nach außen suchen
+; erste Bindung (lambda oder define) ist zuständig
+
 #|
 // x steht für Speicherzelle, in der ein int steht
 class C {
