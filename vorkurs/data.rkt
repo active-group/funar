@@ -276,3 +276,62 @@ Open/Closed Principle:
     (cond
       ((dillo? animal) (dillo-weight animal))
       ((parrot? animal) (parrot-weight animal)))))
+
+
+; Liste ist eins der folgenden:
+; - die leere Liste   -ODER-
+; - eine Cons-Liste
+;   bestehend aus erstem Element und Rest-Liste
+;                                         ^^^^^ Selbstbezug
+(define list-of-numbers ; vorläufig
+  (signature (mixed empty-list
+                    cons-list)))
+
+; Singleton:
+; die leere Liste
+(define-singleton empty-list ; Signatur
+  empty ; Singleton
+  empty?) ; Prädikat
+
+;(: empty empty-list)
+
+; Cons-Liste besteht aus:
+; - erstes Element -UND-
+; - Rest-Liste
+(define-record cons-list
+  cons
+  cons?
+  (first number) ; vorläufig
+  (rest list-of-numbers))
+
+; 1elementige Liste: 5
+(define list1 (cons 5 empty))
+; 2elementige Liste: 2 5
+(define list2 (cons 2 (cons 5 empty)))
+; 3elementige Liste:   7 2 5
+(define list3 (cons 7 (cons 2 (cons 5 empty))))
+; 4elementige Liste: 6 7 2 5
+(define list4 (cons 6 list3))
+
+; Liste aufsummieren
+(: list-sum (list-of-numbers -> number))
+
+(check-expect (list-sum list4)
+              20)
+
+; Schablone
+#;(define list-sum
+  (lambda (list)
+    (cond
+      ((empty? list) ...)
+      ((cons? list)
+       ... (first list) ...
+       ... (list-sum (rest list)) ...)))) ; (rest list) steht nirgendwo sonst
+
+(define list-sum
+  (lambda (list)
+    (cond
+      ((empty? list) 0)
+      ((cons? list)
+       (+ (first list)
+          (list-sum (rest list)))))))
