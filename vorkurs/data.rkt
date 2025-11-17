@@ -125,3 +125,14 @@
   (lambda (msm)
     (make-time (quotient msm 60)
                (remainder msm 60))))
+
+
+; Tiere auf dem texanischen Highway
+
+; Gürteltier hat folgende Eigenschaften:
+; - lebendig oder tot?  -UND-
+; - Gewicht
+(define-record dillo
+  make-dillo
+  (dillo-alive? boolean)
+  (dillo-weight number))
