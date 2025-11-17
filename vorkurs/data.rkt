@@ -258,6 +258,16 @@
       ((dillo? animal) (run-over-dillo animal))
       ((parrot? animal) (run-over-parrot animal)))))
 
+#|
+Open/Closed Principle:
+- FP neue Fälle :-(
+- OOP neue Fälle :-)
+- FP neue Funktionen :-)
+- OOP neue Funktionen :-(
+
+- beides gut möglich? "Expression problem"
+|#
+
 ; Gewicht eines Tiers
 (: animal-weight (animal -> number))
 
