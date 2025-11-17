@@ -283,9 +283,10 @@ Open/Closed Principle:
 ; - eine Cons-Liste
 ;   bestehend aus erstem Element und Rest-Liste
 ;                                         ^^^^^ Selbstbezug
-(define list-of-numbers ; vorläufig
-  (signature (mixed empty-list
-                    cons-list)))
+(define list-of
+  (lambda (element)
+    (signature (mixed empty-list
+                      (cons-list-of element)))))
 
 ; Singleton:
 ; die leere Liste
@@ -298,11 +299,11 @@ Open/Closed Principle:
 ; Cons-Liste besteht aus:
 ; - erstes Element -UND-
 ; - Rest-Liste
-(define-record cons-list
+(define-record (cons-list-of element)
   cons
   cons?
-  (first number) ; vorläufig
-  (rest list-of-numbers))
+  (first element)
+  (rest (list-of element)))
 
 ; 1elementige Liste: 5
 (define list1 (cons 5 empty))
@@ -313,8 +314,10 @@ Open/Closed Principle:
 ; 4elementige Liste: 6 7 2 5
 (define list4 (cons 6 list3))
 
+(define list-of-numbers (signature (list-of number)))
+
 ; Liste aufsummieren
-(: list-sum (list-of-numbers -> number))
+(: list-sum ((list-of number) -> number))
 
 (check-expect (list-sum list4)
               20)
@@ -375,7 +378,9 @@ Open/Closed Principle:
 ; (: even? (number -> boolean))
 
 ; Funktion höherer Ordnung: >1 Pfeil
-(: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
+;(: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
+; %element: Signaturvariable
+(: extract ((%element -> boolean) (list-of %element) -> (list-of %element)))
 
 (define extract
   (lambda (p? list)
@@ -386,3 +391,31 @@ Open/Closed Principle:
            (cons (first list)
                  (extract p? (rest list)))
            (extract p? (rest list)))))))
+
+(define dillos
+  (cons dillo1 (cons dillo2 empty)))
+
+(define highway
+  (cons dillo1 (cons dillo2 (cons parrot1 (cons parrot2 empty)))))
+
+; Alle Tiere überfahren
+(: run-over-animals ((list-of animal) -> (list-of animal)))
+
+(check-expect (run-over-animals highway)
+              (cons (run-over-animal dillo1)
+                    (cons (run-over-animal dillo2)
+                          (cons (run-over-animal parrot1)
+                                (cons (run-over-animal parrot2)
+                                      empty)))))
+
+(define run-over-animals
+  (lambda (list)
+    (cond
+      ((empty? list) ...)
+      ((cons? list)
+       (first list)
+       (run-over-animals (rest list))
+       ...))))
+
+
+                                     
