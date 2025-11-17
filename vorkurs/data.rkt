@@ -105,6 +105,12 @@
 (check-expect (msm->time 689)
               time1)
 
+(check-property
+ (for-all ((t time))
+   (equal? (msm->time (msm t))
+           t)))
+
+
 ; Schablone
 #;(define msm->time
   (lambda (msm)
