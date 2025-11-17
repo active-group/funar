@@ -30,10 +30,16 @@
 ; Konstruktionsanleitung
 ; - Kurzbeschreibung (1 Zeile)
 ; - Signatur(deklaration)
+; - Beispiele/Tests
 
 ; quadratisches Kachelmuster aus zwei Kacheln
 
 (: tile (image image -> image))
+
+(check-expect (tile star1 circle1)
+              (above
+               (beside star1 circle1)
+               (beside circle1 star1)))
 
 (define tile
   (lambda (image1 image2)
@@ -41,7 +47,6 @@
      (beside image1 image2)
      (beside image2 image1))))
 
-(tile square1 star1)
 
 (define double
   (lambda (x)
