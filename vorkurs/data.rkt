@@ -353,6 +353,8 @@ Open/Closed Principle:
        (* (first list)
           (list-product (rest list)))))))
 
+(: list-fold (%b (%a %b -> %b) (list-of %a) -> %b))
+
 (check-expect (list-fold 0 + list4)
               20)
 (check-expect (list-fold 1 * list4)
