@@ -353,6 +353,19 @@ Open/Closed Principle:
        (* (first list)
           (list-product (rest list)))))))
 
+(check-expect (list-fold 0 + list4)
+              20)
+(check-expect (list-fold 1 * list4)
+              420)
+
+(define list-fold
+  (lambda (n o list)
+    (cond
+      ((empty? list) n)
+      ((cons? list)
+       (o (first list)
+          (list-fold n o (rest list)))))))
+
 ; Aus einer Liste die ungeraden Zahlen extrahieren
 (: extract-odds (list-of-numbers -> list-of-numbers))
 
