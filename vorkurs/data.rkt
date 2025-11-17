@@ -142,12 +142,14 @@
 ; - Gewicht
 (define-record dillo
   make-dillo
+  dillo? ; Prädikat
   (dillo-alive? boolean)
   (dillo-weight number))
 
 (: make-dillo (boolean number -> dillo))
 (: dillo-alive? (dillo -> boolean))
 (: dillo-weight (dillo -> number))
+(: dillo? (any -> boolean))
 
 ; lebendiges Gürteltier, 10kg
 (define dillo1 (make-dillo #t 10))
@@ -217,6 +219,7 @@
 ; - Gewicht
 (define-record parrot
   make-parrot
+  parrot?
   (parrot-sentence string)
   (parrot-weight number))
 
@@ -235,6 +238,7 @@
 
 
 ; Tier überfahren
+#|
 (: run-over-animal (animal -> animal))
 
 (check-expect (run-over-animal dillo1)
@@ -242,3 +246,9 @@
 (check-expect (run-over-animal parrot1)
               (run-over-parrot parrot1))
 
+(define run-over-animal
+  (lambda (animal)
+    (cond
+      (... ...)
+      (... ...))))
+|#
