@@ -135,8 +135,13 @@ feedAnimal (MkDillo liveness weight) amount =
 feedAnimal (MkParrot sentence weight) amount =
     MkParrot sentence (weight + amount)
 
-swap :: (Animal -> Weight -> Animal) -> (Weight -> Animal -> Animal)
-swap f =                               \ weight -> \ animal -> f animal weight
+-- swap :: (Animal -> Weight -> Animal) -> (Weight -> Animal -> Animal)
+-- >>> swap feedAnimal 5 dillo1
+-- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
+-- eingebaut als "flip"
+swap :: (a -> b -> c) -> (b -> a -> c) -- Typvariablen, kleingeschrieben
+-- swap f =                               \ b -> \ a -> f a b
+swap f b a = f a b
 
 feedAnimal' :: (Animal, Weight) -> Animal
 
@@ -148,6 +153,20 @@ feedAnimal'(MkDillo liveness weight, amount) =
     Dead -> MkDillo Dead weight
 feedAnimal'(MkParrot sentence weight, amount) =
   MkParrot sentence (weight + amount)
+
+-- Haskell B Curry ... "to curry"
+
+-- eingebaut als "uncurry"
+tuplify :: (a -> b -> c) -> ((a, b) -> c)
+-- tuplify f =                 \(a, b) -> f a b
+tuplify f (a, b) = f a b
+
+-- eingebaut als "curry"
+untuplify :: ((a, b) -> c) -> (a -> b -> c)
+-- untuplify f =                \ a -> \b -> f (a, b)
+untuplify f a b = f (a, b)
+
+
 
 -- Eine geometrische Figur ("Shape") ist eins der folgenden:
 -- - Kreis
