@@ -70,6 +70,10 @@ and Zero c = c
 and c Zero = c
 and c1 c2 = And c1 c2
 
+multiple :: Amount -> Contract -> Contract
+multiple _ Zero = Zero
+multiple factor c = Multiple factor c
+
 -- "Ich bekomme 1€ jetzt."
 c1 :: Contract
 c1 = One EUR
@@ -133,7 +137,7 @@ meaning Zero today = ([], Zero)
 meaning (One currency) today = ([MkPayment today Long 1 currency], Zero)
 meaning (Multiple amount contract) today =
   let (payments, residualContract) = meaning contract today
-   in (map (scalePayment amount) payments, Multiple amount residualContract)
+   in (map (scalePayment amount) payments, multiple amount residualContract)
 meaning (Shorten contract) today =
   let (payments, residualContract) = meaning contract today
    in (map invertPayment payments, Shorten residualContract)
@@ -147,7 +151,11 @@ meaning (And contract1 contract2) today =
    in (payments1 ++ payments2, and residualContract1 residualContract2)
 
 -- >>> meaning c9 (MkDate "2025-12-01")
--- ([MkPayment (MkDate "2025-12-01") Long 100.0 EUR],Multiple 100.0 (And Zero (Later (MkDate "2025-12-24") (One EUR))))
+-- ([MkPayment (MkDate "2025-12-01") Long 100.0 EUR],Multiple 100.0 (Later (MkDate "2025-12-24") (One EUR)))
+
+-- >>> meaning c9 xmas
+-- ([MkPayment (MkDate "2025-12-24") Long 100.0 EUR,MkPayment (MkDate "2025-12-24") Long 100.0 EUR],Zero)
+
 
 c9 :: Contract
 c9 = Multiple 100 (And (One EUR) (Later xmas (One EUR)))
