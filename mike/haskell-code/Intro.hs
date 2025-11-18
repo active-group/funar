@@ -224,3 +224,26 @@ within (MkSquare (MkPoint squareX squareY) sideLength) (MkPoint x y) =
         && ((y >= squareY) && (y <= rightTopY))
 within (MkOverlap shape1 shape2) point =
   within shape1 point || within shape2 point
+
+
+-- Liste
+-- - leere Liste    []
+-- - Cons-Liste      : (Infix)
+
+list1 :: [Integer]
+list1 = 7 : []
+
+list2 :: [Integer]
+list2 = 4 : 7 : []
+
+list3 :: [Integer]
+list3 = [5, 4, 7] -- syntaktischer Zucker
+
+list4 :: [Integer]
+list4 = 8 : list3
+
+listSum :: [Integer] -> Integer
+-- >>> listSum list4
+-- 24
+listSum [] = 0
+listSum (first:rest) = first + (listSum rest)
