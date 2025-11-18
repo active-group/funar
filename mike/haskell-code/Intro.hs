@@ -127,13 +127,16 @@ runOverAnimal (MkParrot _sentence weight) = MkParrot "" weight
 -- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
 -- >>> (feedAnimal dillo2) 5
 -- MkDillo {dilloLiveness = Dead, dilloWeight = 8}
-feedAnimal :: Animal -> (Weight -> Animal)
+feedAnimal :: Animal -> Weight -> Animal
 feedAnimal (MkDillo liveness weight) amount =
     case liveness of
         Alive -> MkDillo Alive (weight + amount)
         Dead -> MkDillo Dead weight
 feedAnimal (MkParrot sentence weight) amount =
     MkParrot sentence (weight + amount)
+
+swap :: (Animal -> Weight -> Animal) -> (Weight -> Animal -> Animal)
+swap f =                               \ weight -> \ animal -> f animal weight
 
 feedAnimal' :: (Animal, Weight) -> Animal
 
