@@ -18,7 +18,8 @@
                        (first list)))))) ; 1
 
 ; Liste der Länge n
-; Laufzeit 1 + 2 + 3 + ... + (n-1) + n = (n+1)*n/2 = O(n^2)
+; Laufzeit 1 + 2 + 3 + ... + (n-1) + n
+; = (n+1)*n/2 = (n*n + 1*n)/2 = 1/2n^2 + ... = O(n^2)
 ; 
 
 ; Element an eine Liste anhängen
@@ -52,3 +53,6 @@
              (cons (first list) acc))))))
 
 ; JVM-Bug: Auch tail calls verbrauchen Platz auf dem Stack
+
+; Bei JVM-Sprachen braucht man Spezialkonstrukte:
+; Clojure: loop, Scala: @tailrec, Kotlin: tailrec
