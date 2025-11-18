@@ -44,8 +44,7 @@
 (define rev2
   (lambda (list acc) ; acc: alle vorher "gesehenen" Elemente, umgedreht
     (cond
-      ((empty? list) ...)
+      ((empty? list) acc)
       ((cons? list)
-       ...
-       (first list)
-       (rev2 (rest list) ...)))))
+       (rev2 (rest list)
+             (cons (first list) acc))))))
