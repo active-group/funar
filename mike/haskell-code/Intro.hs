@@ -155,16 +155,17 @@ feedAnimal'(MkParrot sentence weight, amount) =
   MkParrot sentence (weight + amount)
 
 -- Haskell B Curry ... "to curry"
+-- Moses Schönfinkel
 
 -- eingebaut als "uncurry"
-tuplify :: (a -> b -> c) -> ((a, b) -> c)
+entschönfinkeln :: (a -> b -> c) -> ((a, b) -> c)
 -- tuplify f =                 \(a, b) -> f a b
-tuplify f (a, b) = f a b
+entschönfinkeln f (a, b) = f a b
 
 -- eingebaut als "curry"
-untuplify :: ((a, b) -> c) -> (a -> b -> c)
+schönfinkeln :: ((a, b) -> c) -> (a -> b -> c)
 -- untuplify f =                \ a -> \b -> f (a, b)
-untuplify f a b = f (a, b)
+schönfinkeln f a b = f (a, b)
 
 
 
