@@ -125,7 +125,7 @@ runOverAnimal (MkParrot _sentence weight) = MkParrot "" weight
 
 -- >>> feedAnimal dillo1 5
 -- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
--- >>> feedAnimal dillo2 5
+-- >>> (feedAnimal dillo2) 5
 -- MkDillo {dilloLiveness = Dead, dilloWeight = 8}
 feedAnimal :: Animal -> (Weight -> Animal)
 feedAnimal (MkDillo liveness weight) amount =
@@ -134,3 +134,12 @@ feedAnimal (MkDillo liveness weight) amount =
         Dead -> MkDillo Dead weight
 feedAnimal (MkParrot sentence weight) amount =
     MkParrot sentence (weight + amount)
+
+-- Eine geometrische Figur ("Shape") ist eins der folgenden:
+-- - Kreis
+-- - Quadrat
+-- - eine Überlagerung zweier geometrische Figuren
+
+-- 1. baue einen Datentyp für geometrische Figuren
+-- 2. schreibe eine Funktion, die feststellt,
+--    ob ein Punkt innerhalb einer Figur ist
