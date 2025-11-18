@@ -143,3 +143,5 @@ feedAnimal (MkParrot sentence weight) amount =
 -- 1. baue einen Datentyp für geometrische Figuren
 -- 2. schreibe eine Funktion, die feststellt,
 --    ob ein Punkt innerhalb einer Figur ist
+
+-- Typ: Double
