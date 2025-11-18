@@ -104,3 +104,10 @@ fxSwap1 = Later xmas (And (Multiple 100 (One EUR))
 
 fxSwap1' = And (zeroCouponBond xmas 100 EUR)
                (Shorten (zeroCouponBond xmas 90 GBP))
+
+data Payment = MkPayment Date Direction Amount Currency
+  deriving Show
+
+-- Bedeutung eines Vertrags
+-- "Zahlungen bis zum Datum (heute)" + Residualvertrag
+meaning :: Contract -> Date -> ([Payment], Contract)
