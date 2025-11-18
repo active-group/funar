@@ -118,3 +118,14 @@ runOverAnimal :: Animal -> Animal
 -- runOverAnimal (MkParrot sentence weight) = undefined
 runOverAnimal (MkDillo _liveness weight) = MkDillo Dead weight
 runOverAnimal (MkParrot _sentence weight) = MkParrot "" weight
+
+-- >>> feedAnimal dillo1 5
+-- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
+-- >>> feedAnimal dillo2 5
+-- MkDillo {dilloLiveness = Dead, dilloWeight = 8}
+feedAnimal (MkDillo liveness weight) amount =
+    case liveness of
+        Alive -> MkDillo Alive (weight + amount)
+        Dead -> MkDillo Dead weight
+feedAnimal (MkParrot sentence weight) amount =
+    MkParrot sentence (weight + amount)
