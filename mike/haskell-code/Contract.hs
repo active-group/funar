@@ -58,6 +58,7 @@ data Contract =
   | Later Date Contract
 --  | Flow Direction Contract
   | Shorten Contract
+  | And Contract Contract
   deriving Show
 
 -- "Ich bekomme 1€ jetzt."
@@ -95,3 +96,10 @@ zeroCouponBond date amount currency =
 
 zcb1' :: Contract
 zcb1' = zeroCouponBond xmas 100 EUR
+
+fxSwap1 :: Contract
+fxSwap1 = Later xmas (And (Multiple 100 (One EUR))
+                          (Shorten (Multiple 90 (One EUR))))
+
+fxSwap1' = And (zeroCouponBond xmas 100 EUR)
+               (Shorten (zeroCouponBond xmas 90 GBP))
