@@ -53,7 +53,8 @@ data Direction = Long | Short
   deriving Show
 
 data Contract =
-    One Currency
+    Zero
+  | One Currency
   | Multiple Amount Contract -- Selbstbezug ==> Kombinator
   | Later Date Contract
 --  | Flow Direction Contract
