@@ -46,6 +46,7 @@ zcb1 = ZeroCouponBond xmas 100 EUR
 data Contract =
     One Currency
   | Multiple Amount Contract -- Selbstbezug => Kombinator
+  | Later 
   deriving Show
 
 -- "Ich bekomme 1€ jetzt."
@@ -56,4 +57,6 @@ c1 = One EUR
 c2 :: Contract
 c2 = Multiple 100 (One EUR)
 
+-- "Ich bekomme 5000€ jetzt."
+c3 :: Contract
 c3 = Multiple 50 c2
