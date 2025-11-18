@@ -26,6 +26,10 @@ quadruple x =
 
 quadruple' x = double (double x)
 
+plusDouble :: Integer -> Integer -> Integer
+-- plusDouble = \ x -> \ y -> x + 2 * y
+plusDouble x y = x + 2 * y
+
 -- Haustier ist eins der folgenden:
 -- - Hund -ODER-
 -- - Katze -ODER-
@@ -123,6 +127,7 @@ runOverAnimal (MkParrot _sentence weight) = MkParrot "" weight
 -- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
 -- >>> feedAnimal dillo2 5
 -- MkDillo {dilloLiveness = Dead, dilloWeight = 8}
+feedAnimal :: Animal -> (Weight -> Animal)
 feedAnimal (MkDillo liveness weight) amount =
     case liveness of
         Alive -> MkDillo Alive (weight + amount)
