@@ -1,5 +1,7 @@
 module Contract where
 
+import Prelude hiding (and)
+
 {-
 Identifizieren, worum es geht - besondere "Dinge".
 
@@ -142,7 +144,7 @@ meaning (Later date contract) today =
 meaning (And contract1 contract2) today =
   let (payments1, residualContract1) = meaning contract1 today
       (payments2, residualContract2) = meaning contract2 today
-   in (payments1 ++ payments2, And residualContract1 residualContract2)
+   in (payments1 ++ payments2, and residualContract1 residualContract2)
 
 -- >>> meaning c9 (MkDate "2025-12-01")
 -- ([MkPayment (MkDate "2025-12-01") Long 100.0 EUR],Multiple 100.0 (And Zero (Later (MkDate "2025-12-24") (One EUR))))
