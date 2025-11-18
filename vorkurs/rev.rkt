@@ -20,3 +20,10 @@
 (check-expect (append-element (list 1 2 3) 4)
               (list 1 2 3 4))
 
+(define append-element
+  (lambda (list element)
+    (cond
+      ((empty? list) (cons element empty)) ; list ist anderweitig gebunden
+      ((cons? list)
+       (cons (first list)
+             (append-element (rest list) element))))))
