@@ -167,7 +167,15 @@ schönfinkeln :: ((a, b) -> c) -> (a -> b -> c)
 -- untuplify f =                \ a -> \b -> f (a, b)
 schönfinkeln f a b = f (a, b)
 
+-- Funktionskomposition
+-- eingebaut als .
+o :: (b -> c) -> (a -> b) -> (a -> c)
+o    f           g        = \ a -> f (g a) 
 
+foo :: Animal -> Animal
+-- >>> foo dillo1
+-- MkDillo {dilloLiveness = Dead, dilloWeight = 15}
+foo = runOverAnimal .  (flip feedAnimal 5)
 
 -- Eine geometrische Figur ("Shape") ist eins der folgenden:
 -- - Kreis
