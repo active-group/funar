@@ -242,8 +242,13 @@ list3 = [5, 4, 7] -- syntaktischer Zucker
 list4 :: [Integer]
 list4 = 8 : list3
 
+-- eingebaut als sum
 listSum :: [Integer] -> Integer
 -- >>> listSum list4
 -- 24
 listSum [] = 0
 listSum (first:rest) = first + (listSum rest)
+
+listMap :: (a -> b) -> [a] -> [b]
+listMap f [] = []
+listMap f (x:xs) =  (f x) : (listMap f xs)
