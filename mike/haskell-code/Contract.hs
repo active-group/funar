@@ -11,4 +11,7 @@ Identifizieren, worum es geht - besondere "Dinge".
 data Date = MkDate String -- YYYY-MM-DD
  deriving (Show, Eq, Ord)
 
+xmas :: Date
 xmas = MkDate "2025-12-24"
+easter :: Date
+easter = MkDate "2025-04-20"
