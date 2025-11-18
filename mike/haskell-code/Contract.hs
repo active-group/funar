@@ -110,4 +110,9 @@ data Payment = MkPayment Date Direction Amount Currency
 
 -- Bedeutung eines Vertrags
 -- "Zahlungen bis zum Datum (heute)" + Residualvertrag
-meaning :: Contract -> Date -> ([Payment], Contract)
+-- meaning :: Contract -> Date -> ([Payment], Contract)
+
+-- >>> meaning c9 (MkDate "2025-12-01")
+
+c9 :: Contract
+c9 = Multiple 100 (And (One EUR) (Later xmas (One EUR)))
