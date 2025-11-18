@@ -17,6 +17,12 @@ Identifizieren, worum es geht - besondere "Dinge".
 
    + "Vielfaches"
    "Ich bekomme jetzt 100€."
+
+3. Nächstes Beispiel, wh.
+   Currency-Swap
+   Weihnachten bekomme ich 100€ UND zahle 90GBP.
+
+fehlt: "und", "rein und raus"
 -}
 
 data Date = MkDate String -- YYYY-MM-DD
@@ -43,10 +49,15 @@ zcb1 :: Contract
 zcb1 = ZeroCouponBond xmas 100 EUR
 -}
 
+data Direction = Long | Short
+  deriving Show
+
 data Contract =
     One Currency
   | Multiple Amount Contract -- Selbstbezug ==> Kombinator
   | Later Date Contract
+--  | Flow Direction Contract
+  | Shorten Contract
   deriving Show
 
 -- "Ich bekomme 1€ jetzt."
@@ -61,9 +72,26 @@ c2 = Multiple 100 (One EUR)
 c3 :: Contract
 c3 = Multiple 50 c2
 
+-- "Ich zahle 5000€ jetzt."
+c4 :: Contract
+c4 = Shorten c3
+
+{-
+-- "Ich bekomme 5000€ jetzt"
+c5 :: Contract
+c5 = Flow Short c4
+
+-- "Ich bekomme 5000€ jetzt."
+c6 :: Contract
+c6 = Flow Long c3
+-}
+
 zcb1 :: Contract
 zcb1 = Later xmas (Multiple 100 (One EUR))
 
 zeroCouponBond :: Date -> Amount -> Currency -> Contract
 zeroCouponBond date amount currency =
   Later date (Multiple amount (One currency))
+
+zcb1' :: Contract
+zcb1' = zeroCouponBond xmas 100 EUR
