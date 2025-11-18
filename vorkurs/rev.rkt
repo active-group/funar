@@ -11,8 +11,15 @@
     (cond
       ((empty? list) empty)
       ((cons? list)
+       ; Kontext vom Aufruf (rev (rest list))
+       ; (append-element [] (first list))
+       ; (lambda (hole) (append-element hole (first list))) ; Continuation
        (append-element (rev (rest list)) ; 4 3 2
                        (first list)))))) ; 1
+
+; Liste der Länge n
+; Laufzeit 1 + 2 + 3 + ... + (n-1) + n = (n+1)*n/2 = O(n^2)
+; 
 
 ; Element an eine Liste anhängen
 (: append-element ((list-of %a) %a -> (list-of %a)))
@@ -27,3 +34,18 @@
       ((cons? list)
        (cons (first list)
              (append-element (rest list) element))))))
+
+; Liste umdrehen, Take #2
+(: rev2 ((list-of %a) (list-of %a) -> (list-of %a)))
+
+(check-expect (rev2 (list 1 2 3 4) empty)
+              (list 4 3 2 1))
+
+(define rev2
+  (lambda (list acc) ; acc: alle vorher "gesehenen" Elemente, umgedreht
+    (cond
+      ((empty? list) ...)
+      ((cons? list)
+       ...
+       (first list)
+       (rev2 (rest list) ...)))))
