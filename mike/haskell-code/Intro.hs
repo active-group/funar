@@ -373,3 +373,6 @@ class Semigroup a => Monoid a where
     -- combine neutral x == combine x neutral = x
     neutral :: a
 
+instance Monoid [a] where
+    neutral :: [a]
+    neutral = []
