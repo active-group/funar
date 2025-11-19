@@ -316,6 +316,36 @@ optionalMap :: (a -> b) -> Optional a -> Optional b
 optionalMap f Empty = Empty
 optionalMap f (Value a) = Value (f a)
 
+-- >>> :info Functor
+-- type Functor :: (* -> *) -> Constraint
+-- class Functor f where
+--   fmap :: (a -> b) -> f a -> f b
+
+-- optionalPlus :: Optional Integer -> Optional Integer -> Optional Integer
+-- optionalPlus = optionalMap2 (+)
+
+-- Vision: n-stelliges fmap
+
+-- >>> :info Applicative
+-- type Applicative :: (* -> *) -> Constraint
+-- class Functor f => Applicative f where
+--   pure :: a -> f a
+--   (<*>) :: f (a -> b) -> f a -> f b
+
+instance Applicative Optional where
+    pure :: a -> Optional a
+    pure a = Value a
+
+    (<*>) :: Optional (a -> b) -> Optional a -> Optional b
+    (<*>) Empty Empty = Empty
+    (<*>) (Value f) Empty = Empty
+    (<*>) Empty (Value a) = Empty
+    (<*>) (Value f) (Value a) = Value (f a)
+
+instance Functor Optional where
+    fmap :: (a -> b) -> Optional a -> Optional b
+    fmap = optionalMap
+
 -- Eq a: Constraint
 -- >>> :type (==)
 -- (==) :: Eq a => a -> a -> Bool
@@ -340,11 +370,14 @@ listIndex x [] = Empty
 listIndex x (y:ys) = 
     if x == y
     then Value 0
-    else
+    else 
+        -- optionalMap (\ x -> x + 1) (listIndex x ys)
+        optionalMap (+1) (listIndex x ys)
+        {-
         case listIndex x ys of
             Empty -> Empty
             Value index -> Value (index + 1)
-
+-}
 -- Algebra:
 
 -- Menge/Typ
