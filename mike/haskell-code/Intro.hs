@@ -45,6 +45,24 @@ data Pet =
 -- class Show a where
 --   show :: a -> String
 
+-- >>> :info Num
+-- type Num :: * -> Constraint
+-- class Num a where
+--   (+) :: a -> a -> a
+--   (-) :: a -> a -> a
+--   (*) :: a -> a -> a
+--   negate :: a -> a
+--   abs :: a -> a
+--   signum :: a -> a
+--   fromInteger :: Integer -> a
+--   {-# MINIMAL (+), (*), abs, signum, fromInteger, (negate | (-)) #-}
+--   	-- Defined in ‘GHC.Num’
+-- instance Num Double -- Defined in ‘GHC.Float’
+-- instance Num Float -- Defined in ‘GHC.Float’
+-- instance Num Int -- Defined in ‘GHC.Num’
+-- instance Num Integer -- Defined in ‘GHC.Num’
+-- instance Num Word -- Defined in ‘GHC.Num’
+
 instance Eq Pet where
     (==) :: Pet -> Pet -> Bool
     (==) Dog Dog = True
