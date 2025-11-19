@@ -86,6 +86,9 @@ p1'' =
        y <- get "Mike"
        return (show (x+y))
 
+-- >>> runDB p1 Map.empty
+-- ("201",fromList [("Mike",101)])
+
 runDB :: DB a -> Map Key Value -> (a, Map Key Value)
 runDB (Return result) db = (result, db)
 runDB (Get key callback) db =
