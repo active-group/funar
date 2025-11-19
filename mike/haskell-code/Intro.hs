@@ -301,6 +301,8 @@ sieve [] = []
 primes :: [Integer]
 primes = sieve (integersFrom 2)
 
+-- data Maybe a = Nothing | Just a
+
 data Optional a =
     Empty
   | Value a
