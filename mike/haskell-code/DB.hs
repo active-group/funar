@@ -128,6 +128,9 @@ runDBSQLite (Put key value callback) conn =
     do execute conn "REPLACE INTO entries (key,value) VALUES (?, ?)" (MkEntry key value)
        runDBSQLite (callback ()) conn
 
+-- >>> execDB p1''
+-- "201"
+
 execDB :: DB a -> IO a
 execDB program = do conn <- open "test.db"
                     execute_ conn "CREATE TABLE IF NOT EXISTS entries (key TEXT PRIMARY KEY, value INTEGER)"
