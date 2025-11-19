@@ -96,3 +96,9 @@ runDB (Get key callback) db =
 runDB (Put key value callback) db = 
     let db' = Map.insert key value db
     in runDB (callback ()) db'
+
+-- fmap ::       (a ->   b) -> f a -> f b
+-- (<*>) ::    f (a ->   b) -> f a -> f b
+-- flip (>>=) :: (a -> f b) -> f a -> f b
+
+-- (>>=) :: f a -> (a -> f b) -> f b
