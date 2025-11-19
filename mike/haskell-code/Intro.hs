@@ -398,3 +398,11 @@ instance (Semigroup a, Semigroup b) => Semigroup (a, b) where
 instance (Monoid a, Monoid b) => Monoid (a, b) where
     neutral :: (a, b)
     neutral = (neutral, neutral)
+
+instance Semigroup a => Semigroup (Optional a) where
+    combine :: Optional a -> Optional a -> Optional a
+    combine Empty Empty = Empty
+    combine (Value a) Empty = Value a
+    combine Empty (Value a) = Value a
+    combine (Value a) (Value a') = Value (combine a a')
+
