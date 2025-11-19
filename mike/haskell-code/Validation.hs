@@ -16,7 +16,11 @@ mkLicensePlate s =
     then Valid (MkLicensePlate s)
     else Invalid ["wrong length"]
 
-
+mkSeatCount :: Integer -> Validated SeatCount
+mkSeatCount n =
+    if n >= 2
+    then Valid (MkSeatCount n)
+    else Invalid ["wrong #seats"]
 
 data SeatCount = MkSeatCount Integer
   deriving Show
