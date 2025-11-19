@@ -1,3 +1,4 @@
+{-# LANGUAGE InstanceSigs #-}
 module Contract where
 
 import Prelude hiding (and)
@@ -73,6 +74,13 @@ and c1 c2 = And c1 c2
 multiple :: Amount -> Contract -> Contract
 multiple _ Zero = Zero
 multiple factor c = Multiple factor c
+
+instance Semigroup Contract where
+  (<>) :: Contract -> Contract -> Contract
+  (<>) = and
+
+instance Monoid Contract where
+  mempty = Zero
 
 -- "Ich bekomme 1€ jetzt."
 c1 :: Contract
