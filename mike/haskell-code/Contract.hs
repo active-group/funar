@@ -80,6 +80,7 @@ instance Semigroup Contract where
   (<>) = and
 
 instance Monoid Contract where
+  mempty :: Contract
   mempty = Zero
 
 -- "Ich bekomme 1€ jetzt."
