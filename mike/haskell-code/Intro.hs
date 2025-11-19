@@ -411,4 +411,6 @@ instance Semigroup a => Semigroup (Optional a) where
 instance Semigroup a => Monoid (Optional a) where
     neutral :: Optional a
     neutral = Empty
-
+ 
+-- >>> combine Empty (Empty :: Optional [Integer])
+-- Empty
