@@ -1,6 +1,8 @@
 {-# LANGUAGE InstanceSigs #-}
 module Intro where
 
+import Prelude hiding (Semigroup, Monoid)
+
 -- Kommentar
 
 x :: Integer
@@ -332,3 +334,26 @@ listIndex x (y:ys) =
         case listIndex x ys of
             Empty -> Empty
             Value index -> Value (index + 1)
+
+-- Algebra:
+
+-- Menge/Typ
+-- Operationen
+-- Gleichungen
+
+-- Magma
+-- Typ a
+-- combine :: a -> a -> a
+-- Gleichungen: nada
+
+-- x + y = y + x
+
+-- Assoziativität:
+-- x + (y + z) == (x + y) + z
+
+-- Halbgruppe:
+-- Magma +
+-- combine x (combine y z) == combine (combine x y) z
+
+class Semigroup a where
+    
