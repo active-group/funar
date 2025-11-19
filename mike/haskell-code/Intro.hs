@@ -278,6 +278,14 @@ data Optional a =
 -- >>> :type (==)
 -- (==) :: Eq a => a -> a -> Bool
 
+-- Typklasse ~ Interface
+
+-- >>> :info Eq
+-- type Eq :: * -> Constraint
+-- class Eq a where
+--   (==) :: a -> a -> Bool
+--   (/=) :: a -> a -> Bool
+
 -- Index eines Elements in einer Liste finden
 listIndex :: Eq a => a -> [a] -> Optional Integer
 
