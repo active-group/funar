@@ -356,4 +356,10 @@ listIndex x (y:ys) =
 -- combine x (combine y z) == combine (combine x y) z
 
 class Semigroup a where
-    
+  -- combine x (combine y z) == combine (combine x y) z
+  combine :: a -> a -> a
+
+instance Semigroup [a] where
+    combine :: [a] -> [a] -> [a]
+    combine = (++)
+
