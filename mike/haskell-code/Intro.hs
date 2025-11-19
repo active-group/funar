@@ -278,7 +278,8 @@ data Optional a =
 -- >>> :type (==)
 -- (==) :: Eq a => a -> a -> Bool
 
--- Typklasse ~ Interface
+-- type class / Typklasse ~ Interface
+-- instance ~ Implementierung
 
 -- >>> :info Eq
 -- type Eq :: * -> Constraint
@@ -291,6 +292,11 @@ listIndex :: Eq a => a -> [a] -> Optional Integer
 
 -- >>> listIndex 2 [9, 3, 4, 2, 0] 
 -- Value 3
+-- >>> listIndex Snake [Cat, Dog, Snake, Dog]
+-- No instance for `Eq Pet' arising from a use of `listIndex'
+-- In the expression: listIndex Snake [Cat, Dog, Snake, Dog]
+-- In an equation for `it_ahcH0':
+--     it_ahcH0 = listIndex Snake [Cat, Dog, Snake, Dog]
 listIndex x [] = Empty
 listIndex x (y:ys) = 
     if x == y
