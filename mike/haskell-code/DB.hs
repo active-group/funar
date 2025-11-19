@@ -2,7 +2,7 @@
 module DB where
 
 import qualified Data.Map.Strict as Map
-import Data.Map.Strict (Map)
+import Data.Map.Strict (Map, (!))
 
 {-
 put "Mike" 100
@@ -87,6 +87,9 @@ p1'' =
        return (show (x+y))
 
 runDB :: DB a -> Map Key Value -> (a, Map Key Value)
-runDB (Return result) db = undefined
-runDB (Get key callback) db = undefined
-runDB (Put key value callback) db = undefined
+runDB (Return result) db = (result, db)
+runDB (Get key callback) db =
+    runDB (callback (db ! key)) db
+runDB (Put key value callback) db = 
+    let db' = Map.insert key value db
+    in runDB (callback ()) db'
