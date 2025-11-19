@@ -406,3 +406,7 @@ instance Semigroup a => Semigroup (Optional a) where
     combine Empty (Value a) = Value a
     combine (Value a) (Value a') = Value (combine a a')
 
+instance Semigroup a => Monoid (Optional a) where
+    neutral :: Optional a
+    neutral = Empty
+
