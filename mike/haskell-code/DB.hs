@@ -108,3 +108,31 @@ runDB (Put key value callback) db =
 -- flip (>>=) :: (a -> f b) -> f a -> f b
 
 -- (>>=) :: f a -> (a -> f b) -> f b
+
+data Entry = MkEntry String Integer
+
+instance FromRow Entry where
+    fromRow :: RowParser Entry
+    fromRow = MkEntry <$> field <*> field
+
+instance ToRow Entry where
+    toRow :: Entry -> [SQLData]
+    toRow (MkEntry key value) = toRow (key, value)
+
+runDBSQLite :: DB a -> Connection -> IO a
+runDBSQLite (Return a) conn = return a
+runDBSQLite (Get key callback) conn = 
+    do [MkEntry key' value] <- queryNamed conn "SELECT key, value FROM entries WHERE key = :key" [":key" := key]
+       runDBSQLite (callback value) conn
+runDBSQLite (Put key value callback) conn =
+    do execute conn "REPLACE INTO entries (key,value) VALUES (?, ?)" (MkEntry key value)
+       runDBSQLite (callback ()) conn
+
+execDB :: DB a -> IO a
+execDB program = do conn <- open "test.db"
+                    execute_ conn "CREATE TABLE IF NOT EXISTS entries (key TEXT PRIMARY KEY, value INTEGER)"
+                    result <- runDBSQLite program conn
+                    close conn
+                    return result
+
+-- CREATE TABLE entries (key TEXT PRIMARY KEY, value INTEGER)
