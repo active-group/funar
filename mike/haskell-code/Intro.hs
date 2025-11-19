@@ -256,3 +256,6 @@ listMap f (x:xs) =  (f x) : (listMap f xs)
 
 integersFrom :: Integer -> [Integer]
 integersFrom n = n : integersFrom (n+1)
+
+strikeMultiples :: Integer -> [Integer] -> [Integer]
+strikeMultiples x list = filter (\y -> mod y x == 0) list
