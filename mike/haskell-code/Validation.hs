@@ -22,6 +22,13 @@ mkSeatCount n =
     then Valid (MkSeatCount n)
     else Invalid ["wrong #seats"]
 
+mkCar :: String -> Integer -> Validated Car
+mkCar l s = MkCar <$> mkLicensePlate l <*> mkSeatCount s
+
+-- >>> mkCar "F" 4
+-- Prelude.undefined
+
+
 data SeatCount = MkSeatCount Integer
   deriving Show
 
