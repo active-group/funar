@@ -86,6 +86,7 @@ p1'' =
        y <- get "Mike"
        return (show (x+y))
 
--- runDB :: DB a -> a
-
-foo = Map.
+runDB :: DB a -> Map Key Value -> (a, Map Key Value)
+runDB (Return result) db = undefined
+runDB (Get key callback) db = undefined
+runDB (Put key value callback) db = undefined
