@@ -266,4 +266,5 @@ sieve :: [Integer] -> [Integer]
 sieve (x:xs) = x : sieve (strikeMultiples x xs)
 sieve [] = []
 
+primes :: [Integer]
 primes = sieve (integersFrom 2)
