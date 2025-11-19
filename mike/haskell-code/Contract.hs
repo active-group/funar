@@ -142,7 +142,7 @@ invertPayment (MkPayment date Short amount currency) =
 -- Bedeutung eines Vertrags
 -- "Zahlungen bis zum Datum (heute)" + Residualvertrag
 meaning :: Contract -> Date -> ([Payment], Contract)
-meaning Zero today = ([], Zero)
+meaning Zero today = mempty -- (mempty, mempty) --  ([], Zero)
 meaning (One currency) today = ([MkPayment today Long 1 currency], Zero)
 meaning (Multiple amount contract) today =
   let (payments, residualContract) = meaning contract today
@@ -155,9 +155,14 @@ meaning (Later date contract) today =
     then meaning contract today
     else ([], Later date contract)
 meaning (And contract1 contract2) today =
-  let (payments1, residualContract1) = meaning contract1 today
-      (payments2, residualContract2) = meaning contract2 today
-   in (payments1 ++ payments2, and residualContract1 residualContract2)
+---  let (payments1, residualContract1) = meaning contract1 today
+--      (payments2, residualContract2) = meaning contract2 today
+--   in -- (payments1 ++ payments2, and residualContract1 residualContract2)
+      -- (payments1 <> payments2, residualContract1 <> residualContract2)
+--      (payments1, residualContract1) <> (payments2, residualContract2)
+   meaning contract1 today <> meaning contract2 today
+  
+-- Monoidenhomomorphismus
 
 -- >>> meaning c9 (MkDate "2025-12-01")
 -- ([MkPayment (MkDate "2025-12-01") Long 100.0 EUR],Multiple 100.0 (Later (MkDate "2025-12-24") (One EUR)))
