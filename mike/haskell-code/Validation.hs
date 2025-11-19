@@ -10,6 +10,14 @@ data Car = MkCar { licensePlate :: LicensePlate,
 data LicensePlate = MkLicensePlate String
   deriving Show
 
+mkLicensePlate :: String -> Validated LicensePlate
+mkLicensePlate s =
+    if length s >= 3 && length s <= 14
+    then Valid (MkLicensePlate s)
+    else Invalid ["wrong length"]
+
+
+
 data SeatCount = MkSeatCount Integer
   deriving Show
 
