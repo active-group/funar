@@ -40,6 +40,11 @@ data Pet =
   | Snake
   deriving Show
 
+-- >>> :info Show
+-- type Show :: * -> Constraint
+-- class Show a where
+--   show :: a -> String
+
 instance Eq Pet where
     (==) :: Pet -> Pet -> Bool
     (==) Dog Dog = True
