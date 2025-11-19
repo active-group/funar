@@ -268,3 +268,22 @@ sieve [] = []
 
 primes :: [Integer]
 primes = sieve (integersFrom 2)
+
+data Optional a =
+    Empty
+  | Value a
+  deriving Show
+
+-- Index eines Elements in einer Liste finden
+listIndex :: Eq a => a -> [a] -> Optional Integer
+
+-- >>> listIndex 2 [9, 3, 4, 2, 0] 
+-- Value 3
+listIndex x [] = Empty
+listIndex x (y:ys) = 
+    if x == y
+    then Value 0
+    else
+        case listIndex x ys of
+            Empty -> Empty
+            Value index -> Value (index + 1)
