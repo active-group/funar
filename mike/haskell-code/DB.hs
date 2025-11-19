@@ -44,3 +44,8 @@ put :: Key -> Value -> DB ()
 put key value = Put key value Return
 
 splice :: DB a -> (a -> DB b) -> DB b
+splice (Return a) next = next a
+splice (Get key callback) next =
+    Get key (\value -> splice (callback value) next)
+splice (Put key value callback) next =
+    Put key value (\() -> splice (callback ()) next)
