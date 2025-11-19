@@ -63,7 +63,7 @@ isCute Snake = False
 -- - lebendig oder tot    -UND-
 -- - Gewicht
 data Liveness = Alive | Dead
-  deriving Show
+  deriving (Show, Eq)
 
 -- Typalias
 type Weight = Integer
@@ -300,10 +300,7 @@ listIndex :: Eq a => a -> [a] -> Optional Integer
 -- >>> listIndex 2 [9, 3, 4, 2, 0] 
 -- Value 3
 -- >>> listIndex Snake [Cat, Dog, Snake, Dog]
--- No instance for `Eq Pet' arising from a use of `listIndex'
--- In the expression: listIndex Snake [Cat, Dog, Snake, Dog]
--- In an equation for `it_ahcH0':
---     it_ahcH0 = listIndex Snake [Cat, Dog, Snake, Dog]
+-- Value 2
 listIndex x [] = Empty
 listIndex x (y:ys) = 
     if x == y
