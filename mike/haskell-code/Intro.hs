@@ -258,4 +258,12 @@ integersFrom :: Integer -> [Integer]
 integersFrom n = n : integersFrom (n+1)
 
 strikeMultiples :: Integer -> [Integer] -> [Integer]
-strikeMultiples x list = filter (\y -> mod y x == 0) list
+-- >>> strikeMultiples 2 [2,3,4,5,6,7,8]
+-- [3,5,7]
+strikeMultiples x list = filter (\y -> mod y x /= 0) list
+
+sieve :: [Integer] -> [Integer]
+sieve (x:xs) = x : sieve (strikeMultiples x xs)
+sieve [] = []
+
+primes = sieve (integersFrom 2)
