@@ -26,8 +26,13 @@ mkCar :: String -> Integer -> Validated Car
 mkCar l s = MkCar <$> mkLicensePlate l <*> mkSeatCount s
 
 -- >>> mkCar "F" 4
--- Prelude.undefined
+-- Invalid ["wrong length"]
 
+-- >>> mkCar "TÜ GV 256E" 1
+-- Invalid ["wrong #seats"]
+
+-- >>> mkCar "F" 1
+-- Invalid ["wrong length","wrong #seats"]
 
 data SeatCount = MkSeatCount Integer
   deriving Show
@@ -39,8 +44,8 @@ data Validated a =
 
 instance Functor Validated where
     fmap :: (a -> b) -> Validated a -> Validated b
-    fmap f (Valid a) = undefined
-    fmap f (Invalid errors) = undefined
+    fmap f (Valid a) = Valid (f a)
+    fmap f (Invalid errors) = Invalid errors
 
 instance Applicative Validated where
     pure :: a -> Validated a
