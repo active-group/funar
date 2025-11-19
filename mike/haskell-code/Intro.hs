@@ -281,11 +281,6 @@ listSum :: [Integer] -> Integer
 listSum [] = 0
 listSum (first:rest) = first + (listSum rest)
 
--- eingebaut als map
-listMap :: (a -> b) -> [a] -> [b]
-listMap f [] = []
-listMap f (x:xs) =  (f x) : (listMap f xs)
-
 integersFrom :: Integer -> [Integer]
 integersFrom n = n : integersFrom (n+1)
 
@@ -307,6 +302,19 @@ data Optional a =
     Empty
   | Value a
   deriving Show
+
+-- eingebaut als map
+
+type List a = [a]
+
+-- listMap :: (a -> b) -> [a] -> [b]
+listMap :: (a -> b) -> List a -> List b
+listMap f [] = []
+listMap f (x : xs) = (f x) : (listMap f xs)
+
+optionalMap :: (a -> b) -> Optional a -> Optional b
+optionalMap f Empty = Empty
+optionalMap f (Value a) = Value (f a)
 
 -- Eq a: Constraint
 -- >>> :type (==)
