@@ -139,3 +139,7 @@ execDB program = do conn <- open "test.db"
                     return result
 
 -- CREATE TABLE entries (key TEXT PRIMARY KEY, value INTEGER)
+
+-- class Stream<A> {
+--    <B> Stream<B> flatMap(Function<A, Stream<B>> mapper)
+-- }
