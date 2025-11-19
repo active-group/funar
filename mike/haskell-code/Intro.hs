@@ -359,7 +359,17 @@ class Semigroup a where
   -- combine x (combine y z) == combine (combine x y) z
   combine :: a -> a -> a
 
+-- >>> combine [1,2,3] [4,5,6]
+-- [1,2,3,4,5,6]
 instance Semigroup [a] where
     combine :: [a] -> [a] -> [a]
     combine = (++)
+
+-- Halbgruppe +
+-- neutral :: a
+-- combine neutral x == combine x neutral = x
+
+class Semigroup a => Monoid a where
+    -- combine neutral x == combine x neutral = x
+    neutral :: a
 
