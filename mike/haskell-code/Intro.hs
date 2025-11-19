@@ -342,6 +342,12 @@ instance Applicative Optional where
     (<*>) Empty (Value a) = Empty
     (<*>) (Value f) (Value a) = Value (f a)
 
+-- optionalMap2 :: (a -> b -> c) -> Optional a -> Optional b -> Optional c
+optionalMap2 :: Applicative f => (a -> b -> c) -> f a -> f b -> f c
+-- optionalMap2 f oa ob = pure f <*> oa <*> ob 
+-- optionalMap2 f oa ob = (fmap f oa) <*> ob
+optionalMap2 f oa ob = f <$> oa <*> ob  -- (<$>) = fmap
+
 instance Functor Optional where
     fmap :: (a -> b) -> Optional a -> Optional b
     fmap = optionalMap
