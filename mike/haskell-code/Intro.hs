@@ -388,3 +388,13 @@ listFold n op (x:xs) = op x (listFold n op xs)
 -- [1,2,3,4,5,6,7,8,9]
 monoidFold :: Monoid a => [a] -> a
 monoidFold list = listFold neutral combine list
+
+-- >>> combine ([1,2,3], [4,5,6]) ([7,8,9], [10])
+-- ([1,2,3,7,8,9],[4,5,6,10])
+instance (Semigroup a, Semigroup b) => Semigroup (a, b) where
+    combine :: (a, b) -> (a, b) -> (a, b)
+    combine (a1, b1) (a2, b2) = (combine a1 a2, combine b1 b2)
+
+instance (Monoid a, Monoid b) => Monoid (a, b) where
+    neutral :: (a, b)
+    neutral = (neutral, neutral)
