@@ -384,5 +384,5 @@ listFold :: b -> (a -> b -> b) -> [a] -> b
 listFold n op [] = n
 listFold n op (x:xs) = op x (listFold n op xs)
 
-monoidFold :: Monoid b => [b] -> b
+monoidFold :: Monoid a => [a] -> a
 monoidFold list = listFold neutral combine list
