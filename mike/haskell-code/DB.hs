@@ -49,3 +49,12 @@ splice (Get key callback) next =
     Get key (\value -> splice (callback value) next)
 splice (Put key value callback) next =
     Put key value (\() -> splice (callback ()) next)
+
+p1' :: DB b
+p1' = splice (put "Mike" 100) (\() ->
+      splice (get "Mike") (\x ->
+      splice (put "Mike" (x+1)) (\() ->
+      splice (get "Mike") (\y ->
+      Return (show (x+y))))
+
+
