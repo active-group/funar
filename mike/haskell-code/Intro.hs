@@ -274,6 +274,10 @@ data Optional a =
   | Value a
   deriving Show
 
+-- Eq a: Constraint
+-- >>> :type (==)
+-- (==) :: Eq a => a -> a -> Bool
+
 -- Index eines Elements in einer Liste finden
 listIndex :: Eq a => a -> [a] -> Optional Integer
 
