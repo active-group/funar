@@ -379,3 +379,10 @@ class Semigroup a => Monoid a where
 instance Monoid [a] where
     neutral :: [a]
     neutral = []
+
+listFold :: b -> (a -> b -> b) -> [a] -> b
+listFold n op [] = n
+listFold n op (x:xs) = op x (listFold n op xs)
+
+monoidFold :: Monoid b => a -> [b] -> b
+monoidFold list = listFold neutral combine
