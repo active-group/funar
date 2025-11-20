@@ -85,4 +85,9 @@ tableProcessCommandM (DealHands hands) =
     in do mapM_ recordEventM events
           return Nothing -- Spiel noch nicht vorbei
 tableProcessCommandM (PlayCard player card) =
-    undefined
+    do valid <- isPlayCardValidM player card
+       if valid
+       then do recordEventM (LegalCardPlayed player card)
+               undefined
+       else do recordEventM (IllegalCardAttempted player card)
+               return Nothing
