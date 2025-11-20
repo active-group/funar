@@ -214,4 +214,20 @@ tableProcessEvent (TrickTaken player trick) state =
 tableProcessEvent (IllegalCardAttempted player card) state = state
 tableProcessEvent (GameEnded player) state = state
 
+-- Akkumulator umgekehrt, Ergebnis richtigrum
 runTable :: Game a -> (TableState, [GameEvent]) -> (a, TableState, [GameEvent])
+runTable (IsPlayCardValid player card callback) (state, revents) =
+  runTable (callback (playValid state player card)) (state, revents)
+runTable (RoundOverTrick callback) (state, revents) =
+  runTable (callback (roundOverTrick state)) (state, revents)
+runTable (PlayerAfter player callback) (state, revents) =
+  runTable (callback (playerAfter state player)) (state, revents) -- playerAfter state (currentPlayer state)
+runTable (GameOver callback) (state, revents) =
+  runTable (callback (gameOver state)) (state, revents)
+
+runTable (RecordEvent event callback) (state, revents) = 
+  runTable (callback ()) (tableProcessEvent event state, event : revents)
+runTable (GetCommand callback) (state, revents) =
+  (undefined, state, reverse revents)
+runTable (Return result) (state, revents) =
+  (result, state, reverse revents)
