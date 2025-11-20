@@ -53,10 +53,14 @@ data GameCommand
 -- Die Spiel-Monade
 data Game a =
     RecordEvent GameEvent (() -> Game a)
+  | IsPlayCardValid Player Card (Bool -> Game a)
   | Return a
 
 recordEventM :: GameEvent -> Game ()
 recordEventM event = RecordEvent event Return
+
+isPlayCardValidM :: Player -> Card -> Game Bool
+isPlayCardValidM player card = IsPlayCardValid player card Return
 
 instance Functor Game where
 
@@ -69,11 +73,16 @@ instance Monad Game where
     (>>=) (RecordEvent event callback) next =
         RecordEvent event (\() -> 
             callback () >>= next)
+    (>>=) (IsPlayCardValid player card callback) next =
+        IsPlayCardValid player card (\valid ->
+            callback valid >>= next)
     (>>=) (Return a) next = next a
 
 -- sagt, ob das Spiel vorbei ist und wer gewonnen hat
 tableProcessCommandM :: GameCommand -> Game (Maybe Player)
 tableProcessCommandM (DealHands hands) =
     let events = map (uncurry HandDealt) (Map.toList hands)
-    in undefined
-tableProcessCommandM (PlayCard player card) = undefined
+    in do mapM_ recordEventM events
+          return Nothing -- Spiel noch nicht vorbei
+tableProcessCommandM (PlayCard player card) =
+    undefined
