@@ -53,6 +53,7 @@ data GameCommand
 -- Die Spiel-Monade
 data Game a =
     RecordEvent GameEvent (() -> Game a)
+  | GetCommand (GameCommand -> Game a)
   | IsPlayCardValid Player Card (Bool -> Game a)
   | RoundOverTrick (Maybe (Trick, Player) -> Game a)
   | PlayerAfter Player (Player -> Game a)
@@ -85,6 +86,9 @@ instance Monad Game where
     (>>=) (RecordEvent event callback) next =
         RecordEvent event (\() -> 
             callback () >>= next)
+    (>>=) (GetCommand callback) next =
+        GetCommand (\command ->
+            callback command >>= next)
     (>>=) (IsPlayCardValid player card callback) next =
         IsPlayCardValid player card (\valid ->
             callback valid >>= next)
@@ -127,3 +131,10 @@ tableProcessCommandM (PlayCard player card) =
                    return Nothing
         else do recordEventM (IllegalCardAttempted player card)
                 return Nothing
+
+tableLoopM :: GameCommand -> Game Player
+tableLoopM command =
+    do maybeWinner <- tableProcessCommandM command
+       case maybeWinner of
+         Nothing -> GetCommand tableLoopM
+         Just winner -> return winner
