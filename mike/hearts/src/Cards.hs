@@ -39,7 +39,7 @@ data Card = Card { suit :: Suit, rank :: Rank }
   deriving (Show, Eq, Ord)
 
 -- | Eine Karte kann nur eine andere Karte gleicher Farbe nach Wert schlagen
-cardOrder :: Card -> Card -> Maybe Ordering
+cardOrder :: Card -> Card -> Maybe Ordering -- EQ, LT, GT
 cardOrder c1 c2 =
   if suit c1 == suit c2
     then Just (compare (rank c1) (rank c2))
