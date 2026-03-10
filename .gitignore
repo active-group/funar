@@ -1,0 +1,18 @@
+dist-newstyle/
+.direnv/
+
+# Default nix symlinks
+/result*
+
+.bloop/
+.bsp/
+.idea/
+.metals/
+target/
+
+*.aux
+*.log
+*.synctex.gz
+
+compiled/
+/hearts-frontend/hearts.js
