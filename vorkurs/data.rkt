@@ -367,6 +367,8 @@ class Dillo {
 (: extract ((%element -> boolean) (list-of %element) -> (list-of %element)))
 ; (: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
 
+; List<Integer>
+
 (check-expect (extract even? list4)
               (cons 4 (cons 2 empty)))
 (check-expect (extract odd? list4)
