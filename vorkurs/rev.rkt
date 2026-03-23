@@ -15,6 +15,12 @@
         (rev (rest list))
         (first list))))))
 
+; Gauß'sche Summenformel
+; Liste Länge n
+; 1 + 2 + ... + (n-1) + n
+; = (n+1)*n/2 = O(n^2)
+
+
 ; Element an eine Liste anhängen
 (: add-element ((list-of %a) %a -> (list-of %a)))
 
