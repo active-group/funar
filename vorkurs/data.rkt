@@ -320,4 +320,21 @@ class Dillo {
 ; 1 ist das neutrale Element von *
 ; x * 1 = 1 * x = x
 
-; Aus einer Liste die geraden Elemente extrahieren
+; Aus einer Liste die ungeraden Elemente extrahieren
+
+(: extract-odds (list-of-numbers -> list-of-numbers))
+
+(check-expect (extract-odds list4)
+              (cons 5 (cons 7 empty)))
+
+(define extract-odds
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (define f (first list))
+       (define r (extract-odds (rest list)))
+       (if (odd? f)
+           (cons f r)
+           r)))))
+              
