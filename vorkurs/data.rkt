@@ -103,3 +103,24 @@
 
 ; Aus den Minuten-seit-Mitternacht eine Uhrzeit machen
 
+; (: time-from-minutes (natural -> time))
+
+
+; Schablone für die Erzeugung zusammengesetzter Daten:
+; Konstruktor aufrufen
+
+; Tiere auf dem texanischen Highway
+
+; Gürteltier hat folgende Eigenschaften:
+; - lebendig oder tot?  -UND-
+; - Gewicht
+; zusammengesetzte Daten
+(define-record dillo
+  make-dillo
+  (dillo-alive? boolean)
+  (dillo-weight number))
+
+; lebendiges Gürteltier, 10kg
+(define dillo1 (make-dillo #t 10))
+; tot, 8kg
+(define dillo2 (make-dillo #f 8))
