@@ -409,3 +409,22 @@ class Dillo {
        (cons
         (run-over-animal (first list))
         (run-over-animals (rest list)))))))
+
+; Zahlen inkrementieren
+
+(: inc-numbers ((list-of number) -> (list-of number)))
+
+(check-expect (inc-numbers list4)
+              (cons 5 (cons 6 (cons 3 (cons 8 empty)))))
+
+(define inc-numbers
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cons
+        (inc (first list))
+        (inc-numbers (rest list)))))))
+
+(define inc
+  (lambda (x) (+ 1 x)))
