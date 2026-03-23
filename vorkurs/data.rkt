@@ -430,6 +430,10 @@ class Dillo {
   (lambda (x) (+ 1 x)))
 
 (: list-map ((%a -> %b) (list-of %a) -> (list-of %b)))
+
+; Java:
+; Stream<T> : <R> Stream<R> map(Function<? super T,? extends R> mapper)
+; Stream<A> : <B> Stream<B> map(A -> B mapper)
  
 (define list-map
   (lambda (f list)
