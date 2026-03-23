@@ -37,3 +37,12 @@
      (beside image2 image1))))
 
 (tile square1 circle1)
+
+#|
+class C {
+  static int m(int x) {
+     x = x + 1;
+     ... x ...
+  }
+}
+|#
