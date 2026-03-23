@@ -109,17 +109,27 @@
 ; Schablone für die Erzeugung zusammengesetzter Daten:
 ; Konstruktor aufrufen
 
-; Tiere auf dem texanischen Highway
+; Tier auf dem texanischen Highway
+; - Gürteltier -ODER-
+; - Papagei
+; Fallunterwscheidung, hier: gemischte Daten, Summe
+(define animal
+  (signature (mixed dillo
+                    parrot)))
+
 
 ; Gürteltier hat folgende Eigenschaften:
 ; - lebendig oder tot?  -UND-
 ; - Gewicht
 ; zusammengesetzte Daten
-(define-record dillo
-  make-dillo
-  (dillo-alive? boolean)
+(define-record dillo ; Signatur
+  make-dillo ; Konstruktor
+  dillo? ; Prädikat
+  (dillo-alive? boolean) ; Selektoren
   (dillo-weight number))
 
+(: dillo? (any -> boolean))
+               
 ; lebendiges Gürteltier, 10kg
 (define dillo1 (make-dillo #t 10))
 ; tot, 8kg
@@ -151,4 +161,163 @@ class Dillo {
     (make-dillo #f (dillo-weight dillo))))
 
 ; Gürteltier füttern, variable Futtermenge
+(: feed-dillo (dillo number -> dillo))
 
+(check-expect (feed-dillo dillo1 5)
+              (make-dillo #t 15))
+(check-expect (feed-dillo dillo2 5)
+              dillo2)
+
+#;(define feed-dillo
+  (lambda (dillo amount)
+    (make-dillo (dillo-alive? dillo)
+                (cond
+                  ((equal? (dillo-alive? dillo) #t)
+                   (+ (dillo-weight dillo)
+                      amount))
+                  ((equal? (dillo-alive? dillo) #f)
+                   (dillo-weight dillo))))))
+
+; (: x boolean)
+; (equal? x #t) = x
+
+(define feed-dillo
+  (lambda (dillo amount)
+    (define alive? (dillo-alive? dillo))
+    (define weight (dillo-weight dillo))
+    (make-dillo alive?
+                (if alive?
+                    (+ weight amount)
+                    weight)
+                #;(cond
+                  (alive? ; (equal? (dillo-alive? dillo) #t)
+                   (+ weight amount))
+                  (else
+                   weight)))))
+
+
+; Papagei hat folgende Eigenschaften
+; - Satz -UND-
+; - Gewicht
+(define-record parrot
+  make-parrot
+  parrot?
+  (parrot-sentence string)
+  (parrot-weight number))
+
+(define parrot1 (make-parrot "Welcome!" 1))
+(define parrot2 (make-parrot "Goodbye!" 2))
+
+; Papagei überfahren
+(: run-over-parrot (parrot -> parrot))
+
+(check-expect (run-over-parrot parrot1)
+              (make-parrot "" 1))
+
+(define run-over-parrot
+  (lambda (parrot)
+    (make-parrot ""
+                 (parrot-weight parrot))))
+
+
+; Tier überfahren
+(: run-over-animal (animal -> animal))
+
+(check-expect (run-over-animal dillo1)
+              (make-dillo #f 10))
+(check-expect (run-over-animal parrot1)
+              (make-parrot "" 1))
+
+(define run-over-animal
+  (lambda (animal)
+    (cond
+      ((dillo? animal) (run-over-dillo animal))
+      ((parrot? animal) (run-over-parrot animal)))))
+
+
+; Liste ist eins der folgenden:
+; - die leere Liste -ODER-
+; - eine Cons-Liste bestehend aus erstem Element und Rest-Liste
+;                                                         ^^^^^ Selbstbezug
+
+(define list-of-numbers
+  (signature (mixed empty-list
+                    cons-list)))
+
+(define-singleton empty-list ; Signatur
+  empty ; Singleton
+  empty?)  ; Prädikat
+
+;(: empty empty-list)
+(: empty? (any -> boolean))
+
+#|
+(define-record empty-list
+  make-empty
+  empty?)
+
+(define empty (make-empty))
+|#
+
+(define-record cons-list
+  cons
+  cons?
+  (first number)
+  (rest list-of-numbers))
+
+; 1elementigen Liste: 5
+(define list1 (cons 5 empty))
+; 2elementige Liste: 5 2
+(define list2 (cons 5 (cons 2 empty)))
+; 3elementige Liste: 5 2 7
+(define list3 (cons 5 (cons 2 (cons 7 empty))))
+; 4elementige Liste: 4 5 2 7
+; (define list4 (cons 4 (cons 5 (cons 2 (cons 7 empty)))))
+(define list4 (cons 4 list3))
+
+; Liste aufsummieren
+(: list-sum (list-of-numbers -> number))
+
+(check-expect (list-sum list4)
+              18)
+
+; Schablone:
+#;(define list-sum
+  (lambda (list)
+    (cond
+      ((empty? list) ...)
+      ((cons? list)
+       ...
+       (first list)
+       (list-sum (rest list))
+       ...))))
+
+(define list-sum
+  (lambda (list)
+    (cond
+      ((empty? list) 0)
+      ((cons? list)
+       (+ (first list)
+          (list-sum (rest list)))))))
+
+; 0 ist das neutrale Element von +
+; x + 0 = 0 + x = x
+
+; Liste aufmultiplizieren
+(: list-product (list-of-numbers -> number))
+
+(check-expect (list-product list4)
+              280)
+
+(define list-product
+  (lambda (list)
+    (cond
+      ((empty? list) 1)
+      ((cons? list)
+       (* (first list)
+          (list-product (rest list)))))))
+
+; 1 ist das neutrale Element von *
+; x * 1 = 1 * x = x
+
+; Aus einer Liste die geraden Elemente extrahieren
