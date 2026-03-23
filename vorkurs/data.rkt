@@ -332,6 +332,16 @@ class Dillo {
        (* (first list)
           (list-product (rest list)))))))
 
+(: list-fold ((%a %b -> %b) %b (list-of %a) -> %b))
+
+(define list-fold
+  (lambda (f neutral list)
+    (cond
+      ((empty? list) neutral)
+      ((cons? list)
+       (f (first list)
+          (list-fold f neutral (rest list)))))))
+
 ; 1 ist das neutrale Element von *
 ; x * 1 = 1 * x = x
 
@@ -409,6 +419,15 @@ class Dillo {
        (cons
         (run-over-animal (first list))
         (run-over-animals (rest list)))))))
+
+(define run-over-animals2
+  (lambda (list)
+    (list-fold (lambda (first-list rec-call-result)
+                 (cons
+                  (run-over-animal first-list)
+                  rec-call-result))
+               empty
+               list)))
 
 ; Zahlen inkrementieren
 
