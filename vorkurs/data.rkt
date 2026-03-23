@@ -404,9 +404,8 @@ class Dillo {
 (define run-over-animals
   (lambda (list)
     (cond
-      ((empty? list) ...)
+      ((empty? list) empty)
       ((cons? list)
-       ...
-       (first list)
-       (run-over-animals (rest list))
-       ...))))
+       (cons
+        (run-over-animal (first list))
+        (run-over-animals (rest list)))))))
