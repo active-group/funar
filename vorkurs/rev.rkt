@@ -11,7 +11,7 @@
     (cond
       ((empty? list) empty)
       ((cons? list)
-       (add-element
+       (add-element ; Kontext des rekursiven Aufrufs
         (rev (rest list))
         (first list))))))
 
