@@ -30,13 +30,27 @@
 ; - (das letzte Mal) kopieren
 ; - Unterschiede durch ("abstrakte") Namen
 ; - lambda-Ausdruck mit Namen als Parameter
+
+; Kurzbeschreibung:
+; quadratisches Kachelmuster erzeugen
+; Signatur-Deklaration
+(: tile (image image -> image))
+
+; Beispiele/Testfälle
+
+(check-expect (tile square1 circle1)
+              (above
+               (beside square1 circle1)
+               (beside circle1 square1)))
+
+
 (define tile
   (lambda (image1 image2)
     (above
      (beside image1 image2)
      (beside image2 image1))))
 
-(tile square1 circle1)
+
 
 #|
 class C {
