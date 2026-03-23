@@ -366,6 +366,7 @@ class Dillo {
 ; %element: Signaturvariable
 (: extract ((%element -> boolean) (list-of %element) -> (list-of %element)))
 ; (: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
+; eingebaut als "filter"
 
 ; List<Integer>
 
@@ -384,3 +385,28 @@ class Dillo {
        (if (p? f)
            (cons f r)
            r)))))
+
+(define highway (cons dillo1
+                      (cons dillo2
+                            (cons parrot1
+                                  (cons parrot2 empty)))))
+
+; Tiere überfahren
+(: run-over-animals ((list-of animal) -> (list-of animal)))
+
+(check-expect (run-over-animals highway)
+              (cons (run-over-animal dillo1)
+                    (cons (run-over-animal dillo2)
+                          (cons (run-over-animal parrot1)
+                                (cons (run-over-animal parrot2)
+                                      empty)))))
+
+(define run-over-animals
+  (lambda (list)
+    (cond
+      ((empty? list) ...)
+      ((cons? list)
+       ...
+       (first list)
+       (run-over-animals (rest list))
+       ...))))
