@@ -240,7 +240,13 @@ class Dillo {
 ; - eine Cons-Liste bestehend aus erstem Element und Rest-Liste
 ;                                                         ^^^^^ Selbstbezug
 
-(define list-of-numbers
+(define list-of
+  (lambda (element)
+    (signature (mixed empty-list
+                      (cons-list-of element)))))
+
+
+#;(define list-of-numbers
   (signature (mixed empty-list
                     cons-list)))
 
@@ -259,11 +265,18 @@ class Dillo {
 (define empty (make-empty))
 |#
 
-(define-record cons-list
+(define-record (cons-list-of element) ; macht lambda
   cons
   cons?
-  (first number)
-  (rest list-of-numbers))
+  (first element)
+  (rest (list-of element)))
+
+#;(define-record cons-list
+    cons
+    cons?
+    (first number)
+    (rest list-of-numbers))
+    
 
 ; 1elementigen Liste: 5
 (define list1 (cons 5 empty))
@@ -274,6 +287,8 @@ class Dillo {
 ; 4elementige Liste: 4 5 2 7
 ; (define list4 (cons 4 (cons 5 (cons 2 (cons 7 empty)))))
 (define list4 (cons 4 list3))
+
+(define list-of-numbers (signature (list-of number)))
 
 ; Liste aufsummieren
 (: list-sum (list-of-numbers -> number))
@@ -344,8 +359,13 @@ class Dillo {
 ; - Unterschiede durch abstrakte Namen ersetzen
 ; - Namen in lambda aufnehmen (an rekursive Aufrufe denken!)
 
+(define dillos
+  (cons dillo1 (cons dillo2 empty)))
+
 ; Elemente aus einer Liste extrahieren, die ein Kriterium erfüllen
-(: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
+; %element: Signaturvariable
+(: extract ((%element -> boolean) (list-of %element) -> (list-of %element)))
+; (: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
 
 (check-expect (extract even? list4)
               (cons 4 (cons 2 empty)))
