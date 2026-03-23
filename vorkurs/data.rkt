@@ -124,3 +124,24 @@
 (define dillo1 (make-dillo #t 10))
 ; tot, 8kg
 (define dillo2 (make-dillo #f 8))
+
+#|
+class Dillo {
+   bool alive;
+   void setAlive(bool alive) {
+      this.alive = alive;
+   }
+   void runOver() {
+      this.alive = false;
+   }
+}
+|#
+
+; Gürteltier überfahren
+(: run-over-dillo (dillo -> dillo))
+
+(check-expect (run-over-dillo dillo1)
+              (make-dillo #f 10))
+
+(check-expect (run-over-dillo dillo2)
+              dillo2)
