@@ -337,4 +337,28 @@ class Dillo {
        (if (odd? f)
            (cons f r)
            r)))))
-              
+
+; Abstrahieren:
+; - eine letzte Kopie
+; - umbenennen (an rekursive Aufrufe denken!)
+; - Unterschiede durch abstrakte Namen ersetzen
+; - Namen in lambda aufnehmen (an rekursive Aufrufe denken!)
+
+; Elemente aus einer Liste extrahieren, die ein Kriterium erfüllen
+(: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
+
+(check-expect (extract even? list4)
+              (cons 4 (cons 2 empty)))
+(check-expect (extract odd? list4)
+              (cons 5 (cons 7 empty)))
+
+(define extract
+  (lambda (p? list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (define f (first list))
+       (define r (extract p? (rest list)))
+       (if (p? f)
+           (cons f r)
+           r)))))
