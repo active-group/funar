@@ -166,3 +166,42 @@ feedAnimal'(MkParrot sentence weight, food) =
 -- 1. Datentyp zu dieser Datendefinition
 -- 2. Funktion, die feststellt, ob ein Punkt innerhalb einer
 --    geometrischen Figur ist
+
+data Point = MkPoint Double Double
+  deriving (Show, Eq)
+
+point1 :: Point
+point1 = MkPoint 1 1
+
+point2 :: Point
+point2 = MkPoint 3 3
+
+point3 :: Point
+point3 = MkPoint 10 4
+
+-- algebraischer Datentyp
+data Shape
+  = MkCircle {center :: Point, radius :: Double}
+  | MkSquare {leftBottom :: Point, sideLength :: Double}
+  | MkOverlap {shape1 :: Shape, shape2 :: Shape} -- Kombinator
+  deriving (Show)
+
+circle1 :: Shape
+circle1 = MkCircle (MkPoint 2 2) 2.0
+
+square1 :: Shape
+square1 = MkSquare (MkPoint 3 3) 4.0
+
+within :: Shape -> Point -> Bool
+within (MkCircle (MkPoint centerX centerY) radius) (MkPoint x y) =
+  let distanceX = (x - centerX) ^ 2
+      distanceY = (y - centerY) ^ 2
+      difference = sqrt (distanceX + distanceY)
+   in difference <= radius
+within (MkSquare (MkPoint squareX squareY) sideLength) (MkPoint x y) =
+  let rightTopX = squareX + sideLength
+      rightTopY = squareY + sideLength
+   in ((x >= squareX) && (x <= rightTopX))
+        && ((y >= squareY) && (y <= rightTopY))
+within (MkOverlap shape1 shape2) point =
+  within shape1 point || within shape2 point
