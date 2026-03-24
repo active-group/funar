@@ -273,7 +273,7 @@ listSum (first:rest) =
 data Optional a =
     None
   | Some a
-  deriving Show -- der Compiler macht eine Standard-Instanz
+  deriving (Eq, Show) -- der Compiler macht eine Standard-Instanz
 
 -- Index eines Listenelements
 -- Eq a: Constraint
