@@ -243,3 +243,7 @@ within (MkSquare (MkPoint squareX squareY) sideLength) (MkPoint x y) =
         && ((y >= squareY) && (y <= rightTopY))
 within (MkOverlap shape1 shape2) point =
   within shape1 point || within shape2 point
+
+data ListOf a =
+    Empty
+  | Cons a (ListOf a)
