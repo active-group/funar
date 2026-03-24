@@ -352,3 +352,7 @@ listIndex a (x:xs) =
 -- a + (b + c) == (a + b) + c
 -- Halbgruppe
 
+class Semigroup a where
+    -- combine a (combine b c) == combine (combine a b) c
+    combine :: a -> a -> a
+
