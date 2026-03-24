@@ -157,15 +157,20 @@ feedAnimal'(MkDillo liveness weight, food) =
 feedAnimal'(MkParrot sentence weight, food) =
     MkParrot sentence (weight + food)
 
+-- Haskell Curry -> "to curry"
+-- Moses Schönfinkel
+
+-- eingebaut als uncurry
 -- tuplify :: (Animal -> Weight -> Animal) -> ((Animal, Weight) -> Animal)
-tuplify :: (a -> b -> c) -> ((a, b) -> c) -- Typvariablen
+entschönfinkeln :: (a -> b -> c) -> ((a, b) -> c) -- Typvariablen
 -- tuplify f = \ (animal, weight) -> f animal weight
 -- tuplify f = \(a, b) -> f a b
-tuplify f (a, b) = f a b
+entschönfinkeln f (a, b) = f a b
 
-untuplify :: ((a, b) -> c) -> (a -> b -> c)
+-- eingebaut als curry
+schönfinkeln :: ((a, b) -> c) -> (a -> b -> c)
 -- untuplify f = \ a -> \ b -> f (a, b)
-untuplify f a b = f (a, b)
+schönfinkeln f a b = f (a, b)
 
 -- >>> tuplify feedAnimal (dillo1, 5)
 -- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
