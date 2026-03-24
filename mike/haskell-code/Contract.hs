@@ -49,6 +49,12 @@ data Contract =
   | And Contract Contract
   deriving Show
 
+-- "smart constructor"
+and :: Contract -> Contract -> Contract
+and contract Zero = contract
+and Zero contract = contract
+and contract1 contract2 = And contract1 contract2
+
 -- "Ich bekomme 1€ jetzt."
 c1 :: Contract
 c1 = One EUR
@@ -126,3 +132,4 @@ c6 :: Contract
 c6 = Many 100 (And (One EUR) (Later xmas (One EUR)))
 
 -- >>> meaning c6 (MkDate "2026-03-24")
+-- ([MkPayment (MkDate "2026-03-24") Long 100.0 EUR],Many 100.0 (And Zero (Later (MkDate "2026-12-24") (One EUR))))
