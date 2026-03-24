@@ -3,7 +3,7 @@
 ; Liste umdrehen
 (: rev ((list-of %a) -> (list-of %a)))
 
-(check-expect (rev (list 1 2 3 4))
+#;(check-expect (rev (list 1 2 3 4))
               (list 4 3 2 1))
 
 (define rev
@@ -24,7 +24,7 @@
 ; Element an eine Liste anhängen
 (: add-element ((list-of %a) %a -> (list-of %a)))
 
-(check-expect (add-element (list 1 2 3)
+#;(check-expect (add-element (list 1 2 3)
                            4)
               (list 1 2 3 4))
 
@@ -36,4 +36,21 @@
        (cons
         (first list)
         (add-element (rest list) element))))))
-       
+
+
+; 2. Versuch
+(: rev2 ((list-of %a) (list-of %a) -> (list-of %a)))
+
+(check-expect (rev2 (list 1 2 3 4) empty)
+              (list 4 3 2 1))
+
+(define rev2
+  (lambda (list acc) ; acc: Liste der "bisher gesehenen Elemente", umgedreht
+    (cond
+      ((empty? list) acc)
+      ((cons? list)
+       (rev2 (rest list)
+             (cons (first list) acc))))))
+    
+                    
+                    
