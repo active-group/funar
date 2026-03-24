@@ -389,5 +389,8 @@ concatenate :: Monoid a => [a] -> a
 
 -- >>> concatenate [[1,2,3], [4,5,6], [7,8,9]]
 -- [1,2,3,4,5,6,7,8,9]
+-- "monoidFold"
 concatenate [] = neutral
 concatenate (x:xs) = combine x (concatenate xs)
+
+
