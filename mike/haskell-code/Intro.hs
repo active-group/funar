@@ -52,3 +52,16 @@ isCute pet =
 isCute Dog = True
 isCute Cat = True
 isCute Snake = False
+
+-- Gürteltier hat:
+-- - lebendig -ODER- tot  -UND-
+-- - Gewicht
+data Liveness =
+    Alive | Dead
+    deriving Show
+
+type Weight = Integer -- Typsynonym
+
+data Dillo =
+    MkDillo { dilloLiveness :: Liveness,
+              dilloWeight :: Weight }
