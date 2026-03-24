@@ -379,3 +379,7 @@ instance Monoid [a] where
 instance (Semigroup b, Semigroup c) => Semigroup (b, c) where
     combine :: (b, c) -> (b, c) -> (b, c)
     combine (b1, c1) (b2, c2) = (combine b1 b2, combine c1 c2)
+
+instance (Monoid b, Monoid c) => Monoid (b, c) where
+    neutral :: (b, c)
+    neutral = (neutral, neutral)
