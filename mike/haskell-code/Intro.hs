@@ -69,3 +69,12 @@ data Dillo =
 dillo1 :: Dillo
 dillo1 = MkDillo { dilloLiveness = Alive, dilloWeight = 10 }
 
+-- totes Gürteltier, 8kg
+dillo2 :: Dillo
+dillo2 = MkDillo Dead 8 -- syntaktischer Zucker
+
+-- >>> dilloLiveness dillo1
+-- Alive
+-- >>> dilloWeight dillo1
+-- 10
+
