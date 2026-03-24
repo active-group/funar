@@ -82,3 +82,16 @@ c3' = Put c3
 
 -- "Ich bekomme jetzt 100€."
 -- c4' = Get c4
+
+-- Semantik / "Bedeutung"
+
+data Direction = Long | Short
+  deriving Show
+
+data Payment = MkPayment Date Direction Amount Currency
+  deriving Show
+
+-- Zahlungen bis zu einem Datum ("heute")
+-- + "Residualvertrag"
+meaning :: Contract -> Date -> ([Payment], Contract)
+
