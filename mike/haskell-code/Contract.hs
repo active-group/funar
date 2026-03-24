@@ -7,3 +7,16 @@ module Contract where
 
 
 -}
+
+data Date = MkDate String
+  deriving (Eq, Ord, Show)
+
+xmas :: Date
+xmas = MkDate "2026-12-24"
+
+data Currency = EUR | USD | CHF | YEN
+  deriving Show
+
+type Amount = Double
+
+
