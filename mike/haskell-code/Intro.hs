@@ -65,6 +65,7 @@ type Weight = Integer -- Typsynonym
 data Dillo =
     MkDillo { dilloLiveness :: Liveness,
               dilloWeight :: Weight }
+    deriving Show
 
 dillo1 :: Dillo
 dillo1 = MkDillo { dilloLiveness = Alive, dilloWeight = 10 }
@@ -72,6 +73,9 @@ dillo1 = MkDillo { dilloLiveness = Alive, dilloWeight = 10 }
 -- totes Gürteltier, 8kg
 dillo2 :: Dillo
 dillo2 = MkDillo Dead 8 -- syntaktischer Zucker
+
+-- >>> dillo2
+-- MkDillo {dilloLiveness = Dead, dilloWeight = 8}
 
 -- >>> dilloLiveness dillo1
 -- Alive
