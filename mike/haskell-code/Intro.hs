@@ -385,6 +385,9 @@ instance (Monoid b, Monoid c) => Monoid (b, c) where
     neutral :: (b, c)
     neutral = (neutral, neutral)
 
+instance Monoid (Optional a) where
+    -- ...
+
 concatenate :: Monoid a => [a] -> a
 
 -- >>> concatenate [[1,2,3], [4,5,6], [7,8,9]]
