@@ -141,6 +141,15 @@ feedAnimal (MkDillo liveness weight) food =
 feedAnimal (MkParrot sentence weight) food =
     MkParrot sentence (weight + food)
 
+-- >>> feedAnimal'(dillo1, 5)
+-- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
+
+-- Tupel
+-- >>> (dillo1, 5)
+-- (MkDillo {dilloLiveness = Alive, dilloWeight = 10},5)
+
+
+feedAnimal' :: (Animal, Weight) -> Animal
 feedAnimal'(MkDillo liveness weight, food) =
     case liveness of
         Alive -> MkDillo liveness (weight + food)
