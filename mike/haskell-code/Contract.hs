@@ -120,7 +120,7 @@ invertPayment (MkPayment date Short amount currency) =
 -- Zahlungen bis zu einem Datum ("heute")
 -- + "Residualvertrag"
 meaning :: Contract -> Date -> ([Payment], Contract)
-meaning Zero today = ([], Zero)
+meaning Zero today = mempty  -- ([], Zero)
 meaning (One currency) today = ([MkPayment today Long 1 currency], Zero)
 meaning (Many amount contract) today =
   let (payments, residualContract) = meaning contract today
@@ -133,9 +133,11 @@ meaning (Later date contract) today =
     then meaning contract today
     else ([], Later date contract)
 meaning (And contract1 contract2) today =
-  let (payments1, residualContract1) = meaning contract1 today
-      (payments2, residualContract2) = meaning contract2 today
-   in (payments1 ++ payments2, and residualContract1 residualContract2)
+--  let (payments1, residualContract1) = meaning contract1 today
+--      (payments2, residualContract2) = meaning contract2 today
+--   in (payments1 ++ payments2, and residualContract1 residualContract2)
+--   in (payments1, residualContract1) <> (payments2, residualContract2)
+   meaning contract1 today <> meaning contract2 today
 
 c6 :: Contract
 c6 = Many 100 (And (One EUR) (Later xmas (One EUR)))
