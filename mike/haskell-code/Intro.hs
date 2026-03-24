@@ -27,6 +27,7 @@ quadruple x =
 
 
 doublePlus :: Integer -> Integer -> Integer
+-- doublePlus x y = x * 2 + y
 doublePlus = \ x -> (\ y -> x * 2 + y)
 
 -- Ein Haustier ist eins der folgenden:
@@ -138,4 +139,11 @@ feedAnimal (MkDillo liveness weight) food =
         Alive -> MkDillo liveness (weight + food)
         Dead -> MkDillo liveness weight
 feedAnimal (MkParrot sentence weight) food =
+    MkParrot sentence (weight + food)
+
+feedAnimal'(MkDillo liveness weight, food) =
+    case liveness of
+        Alive -> MkDillo liveness (weight + food)
+        Dead -> MkDillo liveness weight
+feedAnimal'(MkParrot sentence weight, food) =
     MkParrot sentence (weight + food)
