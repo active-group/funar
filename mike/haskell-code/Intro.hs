@@ -385,8 +385,15 @@ instance (Monoid b, Monoid c) => Monoid (b, c) where
     neutral :: (b, c)
     neutral = (neutral, neutral)
 
-instance Monoid (Optional a) where
-    -- ...
+instance (Semigroup a) => Semigroup (Optional a) where
+  combine :: Optional a -> Optional a -> Optional a
+  combine x None = x
+  combine None x = x
+  combine (Some a) (Some a') = Some (combine a a')
+
+instance (Semigroup a) => Monoid (Optional a) where
+  neutral :: Optional a
+  neutral = None
 
 concatenate :: Monoid a => [a] -> a
 
