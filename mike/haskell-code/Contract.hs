@@ -77,8 +77,8 @@ c3' :: Contract
 c3' = Put c3
 
 -- "Ich bekomme jetzt 100€."
-c4 :: Contract
-c4 = Get (Many 100 (One EUR))
+-- c4 :: Contract
+-- c4 = Get (Many 100 (One EUR))
 
 -- "Ich bekomme jetzt 100€."
-c4' = Get c4
+-- c4' = Get c4
