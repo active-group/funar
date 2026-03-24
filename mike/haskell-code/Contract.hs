@@ -45,6 +45,7 @@ data Contract =
   | Later Date Contract
   | Put Contract
 --  | Get Contract
+  | And Contract Contract
   deriving Show
 
 -- "Ich bekomme 1€ jetzt."
