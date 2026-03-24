@@ -97,6 +97,10 @@ am Datum erkennbar sein.
 - Michael Pilquist, Rúnar Bjarnason, and Paul Chiusano [Functional Programming in Scala](https://www.manning.com/books/functional-programming-in-scala-second-edition)
 - Scott Wlaschin: [Domain Modeling Made Functional](https://pragprog.com/titles/swdddf/domain-modeling-made-functional/)
 
+# Referenzen
+
+- [Contracts-Beispiel in Java](https://github.com/active-group/asummit-2024)
+
 <!-- Local Variables: -->
 <!-- fill-column: 80 -->
 <!-- End: -->
