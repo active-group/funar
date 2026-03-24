@@ -133,7 +133,7 @@ runOverAnimal dillo@MkDillo {} = dillo { dilloLiveness = Dead }  -- Alias-Patter
 runOverAnimal (MkParrot sentence weight) = MkParrot "" weight
 
 -- Tier füttern
-feedAnimal :: Animal -> (Weight -> Animal)
+feedAnimal :: Animal -> Weight -> Animal
 feedAnimal (MkDillo liveness weight) food =
     case liveness of
         Alive -> MkDillo liveness (weight + food)
@@ -156,6 +156,14 @@ feedAnimal'(MkDillo liveness weight, food) =
         Dead -> MkDillo liveness weight
 feedAnimal'(MkParrot sentence weight, food) =
     MkParrot sentence (weight + food)
+
+-- tuplify :: (Animal -> Weight -> Animal) -> ((Animal, Weight) -> Animal)
+tuplify :: (a -> b -> c) -> ((a, b) -> c) -- Typvariablen
+-- tuplify f = \ (animal, weight) -> f animal weight
+tuplify f = \(a, b) -> f a b
+
+-- >>> tuplify feedAnimal (dillo1, 5)
+-- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
 
 -- Eine geometrische Figur ("Shape") ist eins der folgenden:
 -- - Kreis
