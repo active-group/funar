@@ -53,5 +53,5 @@
              (cons (first list) acc))))))
 
 ; JVM: tail calls verbrauchen auch Platz
-                    
+; Kotlin, Scala, Clojure: spezielle Konstrukture für endrekursive Funktionen             
                     
