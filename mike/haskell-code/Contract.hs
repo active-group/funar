@@ -37,9 +37,18 @@ zcb1 = ZeroCouponBond xmas 100 EUR
 
 data Contract =
     One Currency
-  | Many Amount Currency
+  | Many Amount Contract
+  | Later Date Contract
   deriving Show
 
 -- "Ich bekomme 1€ jetzt."
 c1 :: Contract
 c1 = One EUR
+
+-- "Ich bekomme 100€ jetzt."
+c2 :: Contract
+c2 = Many 100 (One EUR)
+
+-- "Ich bekomme 100€ am 24.12.2026."
+zcb1 :: Contract
+zcb1 = Later xmas (Many 100 (One EUR))
