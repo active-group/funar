@@ -10,6 +10,7 @@ y = x * 2
 -- Zahl verdoppeln
 double :: Integer -> Integer
 
+
 -- >>> double 21
 -- 42
 
@@ -23,6 +24,10 @@ quadruple :: Integer -> Integer
 quadruple x =
     let d = double x
     in double d
+
+
+doublePlus :: Integer -> Integer -> Integer
+doublePlus = \ x -> (\ y -> x * 2 + y)
 
 -- Ein Haustier ist eins der folgenden:
 -- - Hund -ODER-
