@@ -43,6 +43,8 @@ data Contract =
     One Currency
   | Many Amount Contract
   | Later Date Contract
+  | Put Contract
+--  | Get Contract
   deriving Show
 
 -- "Ich bekomme 1€ jetzt."
@@ -63,3 +65,18 @@ zeroCouponBond date amount currency =
 
 zcb1' :: Contract
 zcb1' = zeroCouponBond xmas 100 EUR
+
+-- "Ich bezahle jetzt 100€."
+c3 :: Contract
+c3 = Put (Many 100 (One EUR))
+
+-- "Ich bekomme 100€."
+c3' :: Contract
+c3' = Put c3
+
+-- "Ich bekomme jetzt 100€."
+c4 :: Contract
+c4 = Get (Many 100 (One EUR))
+
+-- "Ich bekomme jetzt 100€."
+c4' = Get c4
