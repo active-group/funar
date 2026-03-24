@@ -51,6 +51,7 @@
       ((cons? list)
        (rev2 (rest list) ; tail call
              (cons (first list) acc))))))
-    
+
+; JVM: tail calls verbrauchen auch Platz
                     
                     
