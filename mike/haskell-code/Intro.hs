@@ -307,10 +307,7 @@ listIndex :: Eq a => a -> [a] -> Optional Integer
 -- >>> listIndex 2 [1, 4, 3, 2, 5]
 -- Some 3
 -- >>> listIndex Snake [Dog, Cat, Dog, Snake, Dog, Cat]
--- No instance for `Eq Pet' arising from a use of `listIndex'
--- In the expression: listIndex Snake [Dog, Cat, Dog, Snake, Dog, Cat]
--- In an equation for `it_adk6q':
---     it_adk6q = listIndex Snake [Dog, Cat, Dog, Snake, Dog, Cat]
+-- Some 3
 
 listIndex a [] = None
 listIndex a (x:xs) =
