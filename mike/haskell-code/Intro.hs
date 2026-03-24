@@ -62,6 +62,7 @@ data Liveness =
 
 type Weight = Integer -- Typsynonym
 
+{-
 data Dillo =
     MkDillo { dilloLiveness :: Liveness,
               dilloWeight :: Weight }
@@ -95,3 +96,12 @@ runOverDillo :: Dillo -> Dillo
 -- runOverDillo (MkDillo _ weight) = MkDillo Dead weight
 -- functional update:
 runOverDillo dillo = dillo { dilloLiveness = Dead } -- "Kopie bis auf ..."
+-}
+
+-- Ein Tier ist eins der folgenden:
+-- - Gürteltier
+-- - Papagei
+data Animal =
+    MkDillo { dilloLiveness :: Liveness,
+              dilloWeight :: Weight }
+  | MkParrot String Weight
