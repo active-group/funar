@@ -9,7 +9,11 @@ module Contract where
   - Währung: "Ich bekomme 1€ jetzt."
   - Betrag: "Ich bekomme 100€ jetzt."
   - Später
+  dabei: Selbstbezüge
 
+- nächstes Beispiel:
+  Currency Swap
+  "Weihnachten bekomme ich 100€ und bezahle 100$."
 -}
 
 data Date = MkDate String
