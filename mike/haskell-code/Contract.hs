@@ -52,3 +52,10 @@ c2 = Many 100 (One EUR)
 -- "Ich bekomme 100€ am 24.12.2026."
 zcb1 :: Contract
 zcb1 = Later xmas (Many 100 (One EUR))
+
+zeroCouponBond :: Date -> Amount -> Currency -> Contract
+zeroCouponBond date amount currency =
+    Later date (Many amount (One currency))
+
+zcb1' :: Contract
+zcb1' = zeroCouponBond xmas 100 EUR
