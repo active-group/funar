@@ -341,3 +341,11 @@ listIndex a (x:xs) =
         case listIndex a xs of
             None -> None
             Some index -> Some (index + 1)
+
+-- Algebra
+-- Menge/Typ a
+-- Operation combine :: a -> a -> a
+-- Gleichung:
+-- Assoziativität
+-- combine a (combine b c) == combine (combine a b) c
+-- a + (b + c) == (a + b) + c
