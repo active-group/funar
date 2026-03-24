@@ -156,3 +156,13 @@ feedAnimal'(MkDillo liveness weight, food) =
         Dead -> MkDillo liveness weight
 feedAnimal'(MkParrot sentence weight, food) =
     MkParrot sentence (weight + food)
+
+-- Eine geometrische Figur ("Shape") ist eins der folgenden:
+-- - Kreis
+-- - Quadrat
+-- - Überlagerung zweier geometrischer Figuren
+
+-- Aufgabe:
+-- 1. Datentyp zu dieser Datendefinition
+-- 2. Funktion, die feststellt, ob ein Punkt innerhalb einer
+--    geometrischen Figur ist
