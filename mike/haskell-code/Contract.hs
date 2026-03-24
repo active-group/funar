@@ -91,10 +91,36 @@ data Direction = Long | Short
 data Payment = MkPayment Date Direction Amount Currency
   deriving Show
 
+scalePayment :: Amount -> Payment -> Payment
+scalePayment factor (MkPayment direction date amount currency) =
+  MkPayment direction date (factor * amount) currency
+
+invertPayment :: Payment -> Payment
+invertPayment (MkPayment date Long amount currency) =
+  MkPayment date Short amount currency
+invertPayment (MkPayment date Short amount currency) =
+  MkPayment date Long amount currency
+
+-- "Zahlungen bis zum Datum (heute)" + Residualvertrag
 -- Zahlungen bis zu einem Datum ("heute")
 -- + "Residualvertrag"
 meaning :: Contract -> Date -> ([Payment], Contract)
-meaning = undefined
+meaning Zero today = ([], Zero)
+meaning (One currency) today = ([MkPayment today Long 1 currency], Zero)
+meaning (Many amount contract) today =
+  let (payments, residualContract) = meaning contract today
+   in (map (scalePayment amount) payments, Many amount residualContract)
+meaning (Put contract) today =
+  let (payments, residualContract) = meaning contract today
+   in (map invertPayment payments, Put residualContract)
+meaning (Later date contract) today =
+  if today >= date
+    then meaning contract today
+    else ([], Later date contract)
+meaning (And contract1 contract2) today =
+  let (payments1, residualContract1) = meaning contract1 today
+      (payments2, residualContract2) = meaning contract2 today
+   in (payments1 ++ payments2, And residualContract1 residualContract2)
 
 c6 :: Contract
 c6 = Many 100 (And (One EUR) (Later xmas (One EUR)))
