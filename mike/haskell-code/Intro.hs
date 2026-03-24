@@ -289,6 +289,10 @@ data Optional a =
 -- instance Eq Integer -- Defined in ‘GHC.Num.Integer’
 -- instance Eq Bool -- Defined in ‘GHC.Classes’
 
+-- >>> :info Show
+-- type Show :: * -> Constraint
+-- class Show a where
+--   show :: a -> String
 
 
 listIndex :: Eq a => a -> [a] -> Optional Integer
