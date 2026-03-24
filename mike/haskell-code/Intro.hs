@@ -91,4 +91,7 @@ runOverDillo :: Dillo -> Dillo
 -- runOverDillo dillo = MkDillo { dilloLiveness = Dead, dilloWeight = dilloWeight dillo }
 -- runOverDillo dillo = MkDillo Dead (dilloWeight dillo)
 -- runOverDillo (MkDillo { dilloLiveness = _l, dilloWeight = w}) = MkDillo Dead w
-runOverDillo (MkDillo { dilloWeight = w}) = MkDillo Dead w
+-- runOverDillo (MkDillo { dilloWeight = w}) = MkDillo Dead w
+-- runOverDillo (MkDillo _ weight) = MkDillo Dead weight
+-- functional update:
+runOverDillo dillo = dillo { dilloLiveness = Dead } -- "Kopie bis auf ..."
