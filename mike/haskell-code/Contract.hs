@@ -40,7 +40,8 @@ zcb1 = ZeroCouponBond xmas 100 EUR
 -}
 
 data Contract =
-    One Currency
+    Zero
+  | One Currency
   | Many Amount Contract
   | Later Date Contract
   | Put Contract
