@@ -1,5 +1,6 @@
 {-# LANGUAGE InstanceSigs #-}
 module Intro where
+import Prelude hiding (Semigroup)
 
 x :: Integer
 x = 42
@@ -349,3 +350,5 @@ listIndex a (x:xs) =
 -- Assoziativität
 -- combine a (combine b c) == combine (combine a b) c
 -- a + (b + c) == (a + b) + c
+-- Halbgruppe
+
