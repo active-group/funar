@@ -10,7 +10,7 @@ y = x * 2
 -- Zahl verdoppeln
 double :: Integer -> Integer
 
--- >>> double 23
--- 46
+-- >>> double 21
+-- 42
 
 double = \ x -> x * 2
