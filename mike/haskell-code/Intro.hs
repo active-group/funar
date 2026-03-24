@@ -176,8 +176,21 @@ schönfinkeln f a b = f (a, b)
 swap :: (a -> b -> c) -> (b -> a -> c)
 swap    f =              \b -> \a -> f a b 
 
+-- Funktionskomposition
+-- eingebaut als . (Infix)
 o :: (b -> c) -> (a -> b) -> (a -> c)
-o    f           g =         \a -> f (g a)  
+o    f           g =         \a -> f (g a)
+
+(|>) :: (a -> b) -> (b -> c) -> (a -> c)
+--(|>) g f = \a -> f (g a) 
+(|>) = flip (.)
+
+foo :: Animal -> Animal
+foo = o runOverAnimal (swap feedAnimal 5)
+foo' = runOverAnimal . swap feedAnimal 5
+foo'' = runOverAnimal `o` (swap feedAnimal 5)
+foo''' = (.) runOverAnimal (swap feedAnimal 5)
+foo'''' = swap feedAnimal 5 |> runOverAnimal
 
 -- >>> tuplify feedAnimal (dillo1, 5)
 -- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
