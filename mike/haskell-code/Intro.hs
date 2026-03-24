@@ -247,3 +247,65 @@ within (MkOverlap shape1 shape2) point =
 data ListOf a =
     Empty
   | Cons a (ListOf a)
+
+-- leere Liste: []
+-- Cons:        :
+
+-- 1elementige Liste: 5
+list1 :: [Integer]
+list1 = 5 : []
+list2 :: [Integer]
+list2 = 2 : (5 : [])
+list3 :: [Integer]
+list3 = [7, 2, 5]  -- syntaktischer Zucker
+list4 :: [Integer]
+list4 = 4 : list3
+
+-- Liste aufsummieren
+listSum :: [Integer] -> Integer
+
+-- >>> listSum list4
+-- 18
+listSum [] = 0
+listSum (first:rest) =
+    first + (listSum rest)
+
+data Optional a =
+    None
+  | Some a
+  deriving Show
+
+-- Index eines Listenelements
+-- Eq a: Constraint
+
+-- Eq: Typklasse ~ "Interface"
+-- Implementierung: Instanz / "instance"
+
+-- >>> :info Eq
+-- type Eq :: * -> Constraint
+-- class Eq a where
+--   (==) :: a -> a -> Bool
+--   (/=) :: a -> a -> Bool
+-- instance Eq Integer -- Defined in ‘GHC.Num.Integer’
+-- instance Eq Bool -- Defined in ‘GHC.Classes’
+
+
+
+listIndex :: Eq a => a -> [a] -> Optional Integer
+
+-- >>> listIndex 2 [1, 4, 3, 2, 5]
+-- Some 3
+-- >>> listIndex Snake [Dog, Cat, Dog, Snake, Dog, Cat]
+-- No instance for `Eq Pet' arising from a use of `listIndex'
+-- In the expression: listIndex Snake [Dog, Cat, Dog, Snake, Dog, Cat]
+-- In an equation for `it_adk6q':
+--     it_adk6q = listIndex Snake [Dog, Cat, Dog, Snake, Dog, Cat]
+
+listIndex a [] = None
+listIndex a (x:xs) =
+    if a == x
+    then Some 0
+    else
+        case listIndex a xs of
+            None -> None
+            Some index -> Some (index + 1)
