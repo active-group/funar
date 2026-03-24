@@ -19,4 +19,8 @@ data Currency = EUR | USD | CHF | YEN
 
 type Amount = Double
 
+data Contract =
+    ZeroCouponBond Date Amount Currency
 
+zcb1 :: Contract
+zcb1 = ZeroCouponBond xmas 100 EUR
