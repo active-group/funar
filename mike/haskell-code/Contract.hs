@@ -5,6 +5,10 @@ module Contract where
   zero-coupon bond / Zero-Bond
   "Ich bekomme am 24.12.2026 100€."
 
+- Beispiel zerlegen in "atomare Bestandteile" / Bausteine
+  - Währung: "Ich bekomme 1€ jetzt."
+  - Betrag: "Ich bekomme 100€ jetzt."
+  - Später
 
 -}
 
@@ -19,8 +23,23 @@ data Currency = EUR | USD | CHF | YEN
 
 type Amount = Double
 
+{-
 data Contract =
     ZeroCouponBond Date Amount Currency
+  | Call
+  | Put
+  | FxSwap
+  | Everest
 
 zcb1 :: Contract
 zcb1 = ZeroCouponBond xmas 100 EUR
+-}
+
+data Contract =
+    One Currency
+  | Many Amount Currency
+  deriving Show
+
+-- "Ich bekomme 1€ jetzt."
+c1 :: Contract
+c1 = One EUR
