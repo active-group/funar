@@ -172,8 +172,13 @@ schönfinkeln :: ((a, b) -> c) -> (a -> b -> c)
 -- untuplify f = \ a -> \ b -> f (a, b)
 schönfinkeln f a b = f (a, b)
 
+-- eingebaut als flip
 swap :: (a -> b -> c) -> (b -> a -> c)
 swap    f =              \b -> \a -> f a b 
+
+o :: (b -> c) -> (a -> b) -> (a -> c)
+o    f           g =         \a -> f (g a)  
+
 -- >>> tuplify feedAnimal (dillo1, 5)
 -- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
 
