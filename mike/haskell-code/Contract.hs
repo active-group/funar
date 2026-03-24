@@ -94,4 +94,9 @@ data Payment = MkPayment Date Direction Amount Currency
 -- Zahlungen bis zu einem Datum ("heute")
 -- + "Residualvertrag"
 meaning :: Contract -> Date -> ([Payment], Contract)
+meaning = undefined
 
+c6 :: Contract
+c6 = Many 100 (And (One EUR) (Later xmas (One EUR)))
+
+-- >>> meaning c6 (MkDate "2026-03-24")
