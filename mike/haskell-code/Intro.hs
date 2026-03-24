@@ -101,7 +101,10 @@ runOverDillo dillo = dillo { dilloLiveness = Dead } -- "Kopie bis auf ..."
 -- Ein Tier ist eins der folgenden:
 -- - Gürteltier
 -- - Papagei
+-- algebraischer Datentyp
 data Animal =
     MkDillo { dilloLiveness :: Liveness,
               dilloWeight :: Weight }
   | MkParrot String Weight
+  deriving Show
+
