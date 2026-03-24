@@ -33,3 +33,22 @@ data Pet =
   | Cat
   | Snake
   deriving Show
+
+-- Ist Haustier niedlich?
+isCute :: Pet -> Bool
+
+-- >>> isCute Dog
+-- True
+-- >>> isCute Snake
+-- False
+{-
+isCute pet =
+    case pet of
+        Dog -> True
+        Cat -> True
+        Snake -> False
+-}
+-- 1 Gleichung pro Fall
+isCute Dog = True
+isCute Cat = True
+isCute Snake = False
