@@ -82,3 +82,7 @@ dillo2 = MkDillo Dead 8 -- syntaktischer Zucker
 -- >>> dilloWeight dillo1
 -- 10
 
+-- Gürteltier überfahren
+runOverDillo :: Dillo -> Dillo
+runOverDillo dillo =
+    MkDillo { dilloLiveness = Dead, dilloWeight = dilloWeight dillo }
