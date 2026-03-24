@@ -132,4 +132,4 @@ c6 :: Contract
 c6 = Many 100 (And (One EUR) (Later xmas (One EUR)))
 
 -- >>> meaning c6 (MkDate "2026-03-24")
--- ([MkPayment (MkDate "2026-03-24") Long 100.0 EUR],Many 100.0 (And Zero (Later (MkDate "2026-12-24") (One EUR))))
+-- ([MkPayment (MkDate "2026-03-24") Long 100.0 EUR],Many 100.0 (Later (MkDate "2026-12-24") (One EUR)))
