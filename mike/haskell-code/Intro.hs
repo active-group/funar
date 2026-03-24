@@ -1,6 +1,6 @@
 {-# LANGUAGE InstanceSigs #-}
 module Intro where
-import Prelude hiding (Semigroup)
+import Prelude hiding (Semigroup, Monoid)
 
 x :: Integer
 x = 42
@@ -352,7 +352,30 @@ listIndex a (x:xs) =
 -- a + (b + c) == (a + b) + c
 -- Halbgruppe
 
+-- Halbgruppe a + neutrales Element
+-- neutral :: a
+-- combine neutral x == combine x neutral == x
+-- Monoid
+
 class Semigroup a where
     -- combine a (combine b c) == combine (combine a b) c
     combine :: a -> a -> a
 
+instance Semigroup [a] where
+    combine :: [a] -> [a] -> [a]
+    combine a1 a2 = a1 ++ a2
+
+instance Semigroup Shape where
+    combine :: Shape -> Shape -> Shape
+    combine = MkOverlap
+
+class Semigroup a => Monoid a where
+    -- combine neutral x == combine x neutral == x
+    neutral :: a
+
+instance Monoid [a] where
+    neutral = []
+
+instance (Semigroup b, Semigroup c) => Semigroup (b, c) where
+    combine :: (b, c) -> (b, c) -> (b, c)
+    combine (b1, c1) (b2, c2) = (combine b1 b2, combine c1 c2)
