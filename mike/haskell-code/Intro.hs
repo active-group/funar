@@ -65,3 +65,7 @@ type Weight = Integer -- Typsynonym
 data Dillo =
     MkDillo { dilloLiveness :: Liveness,
               dilloWeight :: Weight }
+
+dillo1 :: Dillo
+dillo1 = MkDillo { dilloLiveness = Alive, dilloWeight = 10 }
+
