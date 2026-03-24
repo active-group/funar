@@ -374,6 +374,7 @@ class Semigroup a => Monoid a where
     neutral :: a
 
 instance Monoid [a] where
+    neutral :: [a]
     neutral = []
 
 instance (Semigroup b, Semigroup c) => Semigroup (b, c) where
@@ -383,3 +384,10 @@ instance (Semigroup b, Semigroup c) => Semigroup (b, c) where
 instance (Monoid b, Monoid c) => Monoid (b, c) where
     neutral :: (b, c)
     neutral = (neutral, neutral)
+
+concatenate :: Monoid a => [a] -> a
+
+-- >>> concatenate [[1,2,3], [4,5,6], [7,8,9]]
+-- [1,2,3,4,5,6,7,8,9]
+concatenate [] = neutral
+concatenate (x:xs) = combine x (concatenate xs)
