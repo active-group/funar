@@ -71,13 +71,27 @@ mkCar s n =
                 Nothing -> Nothing
         Nothing -> Nothing
 -}
+{-
     case (mkLicensePlate s, mkSeatCount n) of
         (Success licensePlate, Success seatCount) ->
             Success (MkCar licensePlate seatCount)
         (Failure errors, Success _) -> Failure errors
         (Success _, Failure errors) -> Failure errors
         (Failure errors1, Failure errors2) -> Failure (errors1 ++ errors2)
-
+-}
+    -- pure MkCar <*> mkLicensePlate s <*> mkSeatCount n
+    MkCar <$> mkLicensePlate s <*> mkSeatCount n
+    -- MkCar (MkLicensePlate s) (MkSeatCount n)
 -- Wunschliste:
 -- - Fehlermeldungen
 -- - n-stelliges fmap
+
+-- >>> mkCar "TÜ GV256E" 5
+-- Success (MkCar {licensePlate = MkLicensePlate "T\220 GV256E", seatCount = MkSeatCount 5})
+-- >>> mkCar "Einrad" 1
+-- Failure ["seat count too small"]
+-- >>> mkCar "T" 1
+-- Failure ["invalid license-plate length","seat count too small"]
+
+-- >>> :type (<$>)
+-- (<$>) :: Functor f => (a -> b) -> f a -> f b
