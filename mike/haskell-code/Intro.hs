@@ -293,6 +293,15 @@ optionalMap :: (a -> b) -> Optional a -> Optional b
 optionalMap f None = None
 optionalMap f (Some a) = Some (f a)
 
+-- >>> :info Functor
+-- type Functor :: (* -> *) -> Constraint
+-- class Functor f where
+--   fmap :: (a -> b) -> f a -> f b
+
+instance Functor Optional where
+    fmap :: (a -> b) -> Optional a -> Optional b
+    fmap = optionalMap
+
 -- Index eines Listenelements
 -- Eq a: Constraint
 
