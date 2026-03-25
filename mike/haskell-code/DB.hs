@@ -1,8 +1,13 @@
 {-# LANGUAGE InstanceSigs #-}
+{-# LANGUAGE OverloadedStrings #-}
 module DB where
 
 import qualified Data.Map.Strict as Map
 import Data.Map.Strict (Map, (!))
+
+import Control.Applicative
+import Database.SQLite.Simple
+import Database.SQLite.Simple.FromRow
 
 {-
 put "Mike" 100
@@ -100,3 +105,9 @@ executeDB (Put key value callback) mp =
     let updated = Map.insert key value mp
     in executeDB (callback ()) updated
 executeDB (Return result) mp = (result, mp)
+
+data Entry = MkEntry Key Value
+  deriving Show
+
+instance FromRow Entry where
+    fromRow = MkEntry <$> field <*> field
