@@ -283,6 +283,16 @@ data Optional a =
   | Some a
   deriving (Eq, Show) -- der Compiler macht eine Standard-Instanz
 
+type List a = [a]
+
+listMap :: (a -> b) -> List a -> List b
+listMap f [] = []
+listMap f (x:xs) = f x : listMap f xs
+
+optionalMap :: (a -> b) -> Optional a -> Optional b
+optionalMap f None = None
+optionalMap f (Some a) = Some (f a)
+
 -- Index eines Listenelements
 -- Eq a: Constraint
 
