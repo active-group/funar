@@ -302,6 +302,15 @@ instance Functor Optional where
     fmap :: (a -> b) -> Optional a -> Optional b
     fmap = optionalMap
 
+instance Applicative Optional where
+
+instance Monad Optional where
+    return :: a -> Optional a
+    return = Some
+    (>>=) :: Optional a -> (a -> Optional b) -> Optional b
+    (>>=) None next = None
+    (>>=) (Some a) next = next a
+
 -- Index eines Listenelements
 -- Eq a: Constraint
 
