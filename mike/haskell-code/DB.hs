@@ -37,7 +37,12 @@ p1 = Put "Mike" 100 (\() ->
      Get "Mike" (\y ->
      Return (show (x+y))))))
 
+-- DB-Programm ausführen
 executeDB :: DB a -> Map Key Value -> (a, Map Key Value)
+
+-- >>> executeDB p1 Map.empty
+-- ("201",fromList [("Mike",101)])
+
 executeDB (Get key callback) mp = 
     let value = mp ! key
     in executeDB (callback value) mp
