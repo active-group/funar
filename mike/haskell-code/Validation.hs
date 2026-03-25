@@ -44,3 +44,7 @@ mkCar s n =
         (Just licensePlate, Just seatCount) ->
             Just (MkCar licensePlate seatCount)
         _ -> Nothing
+
+-- Wunschliste:
+-- - Fehlermeldungen
+-- - n-stelliges fmap
