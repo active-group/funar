@@ -37,4 +37,11 @@ p1 = Put "Mike" 100 (\() ->
      Get "Mike" (\y ->
      Return (show (x+y))))))
 
-executeDB :: DB a -> Map Key Value -> a
+executeDB :: DB a -> Map Key Value -> (a, Map Key Value)
+executeDB (Get key callback) mp = 
+    let value = mp ! key
+    in executeDB (callback value) mp
+executeDB (Put key value callback) mp = 
+    let updated = Map.insert key value mp
+    in executeDB (callback ()) updated
+executeDB (Return result) mp = (result, mp)
