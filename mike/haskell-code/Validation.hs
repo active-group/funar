@@ -38,6 +38,15 @@ instance Functor Result where
 --   pure :: a -> f a
 --   (<*>) :: f (a -> b) -> f a -> f b
 
+instance Applicative Result where
+    pure :: a -> Result a
+    pure = Success
+    (<*>) :: Result (a -> b) -> Result a -> Result b
+    (<*>) (Success f) (Success a) = Success (f a)
+    (<*>) (Failure errors) (Success a) = Failure errors
+    (<*>) (Success f) (Failure errors) = Failure errors
+    (<*>) (Failure errors1) (Failure errors2) = Failure (errors1 ++ errors2)
+
 mkSeatCount :: Integer -> Result SeatCount
 mkSeatCount n =
     if n >= 2
