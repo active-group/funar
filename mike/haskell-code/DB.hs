@@ -110,4 +110,32 @@ data Entry = MkEntry Key Value
   deriving Show
 
 instance FromRow Entry where
+    fromRow :: RowParser Entry
     fromRow = MkEntry <$> field <*> field
+
+instance ToRow Entry where
+    toRow :: Entry -> [SQLData]
+    toRow (MkEntry key value) = toRow (key, value)
+
+executeDBSqLite :: DB a -> Connection-> IO a
+executeDBSqLite (Get key callback) conn = 
+    do [MkEntry key' value] <- queryNamed conn "SELECT key, value FROM entries WHERE key=:key"
+                                 [":key" := key]
+       executeDBSqLite (callback value) conn
+executeDBSqLite (Put key value callback) conn =
+    do execute conn "REPLACE INTO entries (key, value) VALUES (?, ?)" 
+        (MkEntry key value)
+       executeDBSqLite (callback ()) conn
+executeDBSqLite (Return result) conn = return result
+
+{-
+CREATE TABLE entries (key TEXT PRIMARY, value INTEGER)
+-}
+
+runDBSqLite :: DB a -> IO a
+runDBSqLite db =
+    do conn <- open "test.db"
+       execute_ conn "CREATE TABLE IF NOT EXISTS entries (key TEXT PRIMARY, value INTEGER)"
+       result <- executeDBSqLite db conn
+       close conn
+       return result
