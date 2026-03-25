@@ -34,7 +34,7 @@ mkLicensePlate s =
        then Success (MkLicensePlate s)
        else Failure ["invalid license-plate length"]
 
-mkCar :: String -> Integer -> Maybe Car
+mkCar :: String -> Integer -> Result Car
 mkCar s n =
     {-
     case mkLicensePlate s of
@@ -46,9 +46,11 @@ mkCar s n =
         Nothing -> Nothing
 -}
     case (mkLicensePlate s, mkSeatCount n) of
-        (Just licensePlate, Just seatCount) ->
-            Just (MkCar licensePlate seatCount)
-        _ -> Nothing
+        (Success licensePlate, Success seatCount) ->
+            Success (MkCar licensePlate seatCount)
+        (Failure errors, Success _) -> Failure errors
+        (Success _, Failure errors) -> Failure errors
+        (Failure errors1, Failure errors2) -> Failure (errors1 ++ errors2)
 
 -- Wunschliste:
 -- - Fehlermeldungen
