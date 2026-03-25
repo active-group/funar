@@ -135,7 +135,7 @@ CREATE TABLE entries (key TEXT PRIMARY, value INTEGER)
 runDBSqLite :: DB a -> IO a
 
 -- >>> runDBSqLite p1
--- SQLite3 returned ErrorError while attempting to perform prepare "CREATE TABLE IF NOT EXISTS entries (key TEXT PRIMARY, value INTEGER)": near ",": syntax error
+-- "201"
 
 runDBSqLite db =
     do conn <- open "test.db"
