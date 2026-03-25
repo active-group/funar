@@ -357,10 +357,13 @@ listIndex a [] = None
 listIndex a (x:xs) =
     if a == x
     then Some 0
-    else
+    else -- fmap (\index -> index + 1) (listIndex a xs) 
+      fmap (+1) (listIndex a xs)
+        {-
         case listIndex a xs of
             None -> None
             Some index -> Some (index + 1)
+        -}
 
 -- Algebra
 -- Menge/Typ a
