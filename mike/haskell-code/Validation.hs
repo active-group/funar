@@ -17,7 +17,7 @@ data Car = MkCar { licensePlate :: LicensePlate,
     deriving Show
 
 data Result a =
-    Sucess a
+    Success a
   | Failure [String] -- Fehlermeldungen
 
 mkSeatCount :: Integer -> Maybe SeatCount
