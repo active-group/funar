@@ -19,19 +19,20 @@ data Car = MkCar { licensePlate :: LicensePlate,
 data Result a =
     Success a
   | Failure [String] -- Fehlermeldungen
+  deriving Show
 
-mkSeatCount :: Integer -> Maybe SeatCount
+mkSeatCount :: Integer -> Result SeatCount
 mkSeatCount n =
     if n >= 2
-    then Just (MkSeatCount n)
-    else Nothing
+    then Success (MkSeatCount n)
+    else Failure ["seat count too small"]
 
-mkLicensePlate :: String -> Maybe LicensePlate
+mkLicensePlate :: String -> Result LicensePlate
 mkLicensePlate s =
     let l = length s
     in if l >= 2 && l <= 14
-       then Just (MkLicensePlate s)
-       else Nothing
+       then Success (MkLicensePlate s)
+       else Failure ["invalid license-plate length"]
 
 mkCar :: String -> Integer -> Maybe Car
 mkCar s n =
