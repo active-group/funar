@@ -1,3 +1,4 @@
+{-# LANGUAGE InstanceSigs #-}
 module GameEvent where
 
 import Cards
@@ -43,3 +44,44 @@ data GameCommand
   = DealHands (Map Player Hand)
   | PlayCard Player Card
   deriving (Show, Eq)
+
+-- Spielablauf
+data Game a 
+    = RecordEvent GameEvent (() -> Game a)
+    | IsValid Player Card (Bool -> Game a)
+    | Return a
+
+recordEventM :: GameEvent -> Game ()
+recordEventM event = RecordEvent event Return
+
+isValidM :: Player -> Card -> Game Bool
+isValidM player card = IsValid player card Return
+
+instance Functor Game where
+
+instance Applicative Game where
+
+instance Monad Game where
+    return :: a -> Game a
+    return = Return
+    (>>=) :: Game a -> (a -> Game b) -> Game b
+    (>>=) (RecordEvent event callback) next =
+        RecordEvent event (\() -> callback () >>= next)
+    (>>=) (IsValid player card callback) next =
+        IsValid player card (\valid -> callback valid >>= next)
+    (>>=) (Return result) next = next result
+
+tableProcessCommandM :: GameCommand -> Game (Maybe Player) -- wenn Spiel vorbei
+tableProcessCommandM (DealHands hands) = 
+    let pairs = Map.toList hands
+        events = fmap (uncurry HandDealt) pairs 
+    in do mapM_ recordEventM events
+          return Nothing
+tableProcessCommandM (PlayCard player card) = 
+--    recordEventM (IllegalCardAttempted player card)
+--      >>= (\() -> return Nothing)
+    do valid <- isValidM player card
+       if valid
+       then undefined
+       else do recordEventM (IllegalCardAttempted player card)
+               return Nothing
