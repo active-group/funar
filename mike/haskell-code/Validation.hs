@@ -1,3 +1,4 @@
+{-# LANGUAGE InstanceSigs #-}
 module Validation where
 
 -- "Make illegal states unrepresentable." -- Yaron Minsky
@@ -25,6 +26,17 @@ data Result a =
 mapResult :: (a -> b) -> Result a -> Result b
 mapResult f (Success a) = Success (f a)
 mapResult f (Failure errors) = Failure errors
+
+instance Functor Result where
+    fmap :: (a -> b) -> Result a -> Result b
+    fmap = mapResult
+
+-- applikativer Funktor
+-- >>> :info Applicative
+-- type Applicative :: (* -> *) -> Constraint
+-- class Functor f => Applicative f where
+--   pure :: a -> f a
+--   (<*>) :: f (a -> b) -> f a -> f b
 
 mkSeatCount :: Integer -> Result SeatCount
 mkSeatCount n =
