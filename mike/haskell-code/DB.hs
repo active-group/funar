@@ -50,6 +50,11 @@ splice (Return result) next = next result
 --   (>>=) :: m a -> (a -> m b) -> m b
 --   return :: a -> m a
 
+-- fmap       ::    (a ->  b) -> f a -> f b
+-- (<*>)      :: f (a ->   b) -> f a -> f b
+-- flip (>>=) ::   (a -> f b) -> f a -> f b
+
+
 instance Functor DB where
 
 instance Applicative DB where
