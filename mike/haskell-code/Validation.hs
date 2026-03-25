@@ -16,6 +16,10 @@ data Car = MkCar { licensePlate :: LicensePlate,
                    seatCount :: SeatCount }
     deriving Show
 
+data Result a =
+    Sucess a
+  | Failure [String] -- Fehlermeldungen
+
 mkSeatCount :: Integer -> Maybe SeatCount
 mkSeatCount n =
     if n >= 2
