@@ -21,6 +21,11 @@ data Result a =
   | Failure [String] -- Fehlermeldungen
   deriving Show
 
+-- weil Typparameter
+mapResult :: (a -> b) -> Result a -> Result b
+mapResult f (Success a) = Success (f a)
+mapResult f (Failure errors) = Failure errors
+
 mkSeatCount :: Integer -> Result SeatCount
 mkSeatCount n =
     if n >= 2
