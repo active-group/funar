@@ -150,6 +150,10 @@ class Dillo {
 ; Gürteltier überfahren
 (: run-over-dillo (dillo -> dillo))
 
+(check-property
+ (for-all ((d dillo))
+   (not (dillo-alive? (run-over-dillo2 d)))))
+
 (check-expect (run-over-dillo dillo1)
               (make-dillo #f 10))
 
@@ -159,6 +163,14 @@ class Dillo {
 (define run-over-dillo
   (lambda (dillo)
     (make-dillo #f (dillo-weight dillo))))
+
+
+(define run-over-dillo2
+  (lambda (dillo)
+    (if (> (dillo-weight dillo) 10)
+        dillo
+        (make-dillo #f (dillo-weight dillo)))))
+
 
 ; Gürteltier füttern, variable Futtermenge
 (: feed-dillo (dillo number -> dillo))
