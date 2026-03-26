@@ -218,7 +218,7 @@ tableProcessEvent (GameEnded player) state = state
 runTable :: Game a -> (TableState, [GameEvent]) -> 
 --                                 ^^^^^^^^^^^ Akkumulator, umgekehrt 
    (Either (GameCommand -> Game a) a, TableState, [GameEvent])
---                                            richtige Reihenfolge ^^^^^^^^^^^
+--                           richtige Reihenfolge ^^^^^^^^^^^
 runTable (IsValid player card cont) s@(state, _) =
   runTable (cont (playValid state player card)) s
 runTable (RoundOverTrick cont) s@(state, _) =
