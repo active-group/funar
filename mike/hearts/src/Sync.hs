@@ -54,6 +54,10 @@ gameLoop (player1, playerIO1) (player2, playerIO2) (player3, playerIO3) (player4
     let hands = Map.fromList (zip players (map makeHand (distribute (length players) shuffledDeck)))
     loop [DealHands hands]
 
+deckToDealHands players deck =
+   DealHands (Map.fromList (zip players (map makeHand (distribute (length players) deck))))
+
+
 -- | Steht in den Events, wer gewonnen hat?
 -- >>> let mike = Player "Mike"
 -- >>> let peter = Player "Peter"
