@@ -97,6 +97,7 @@ am Datum erkennbar sein.
 - Michael Pilquist, Rúnar Bjarnason, and Paul Chiusano [Functional Programming in Scala](https://www.manning.com/books/functional-programming-in-scala-second-edition)
 - Scott Wlaschin: [Domain Modeling Made Functional](https://pragprog.com/titles/swdddf/domain-modeling-made-functional/)
 - MichaelSperber, Stefan Wehr: [Datenmodellierung mit Summen und Produkten ](https://funktionale-programmierung.de/2024/11/25/sums-products.html)
+- Marius Eriksen: [Your Server as a Function](https://monkey.org/~marius/funsrv.pdf)
 
 # Referenzen
 
