@@ -104,6 +104,7 @@ tableProcessCommandM (PlayCard player card) =
     do valid <- isValidM player card
        if valid
        then do
+        recordEventM (LegalCardPlayed player card)
         roundOverTrick <- roundOverTrickM
         case roundOverTrick of
           Just (trick, trickTaker) ->
