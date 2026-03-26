@@ -434,4 +434,11 @@ concatenate :: Monoid a => [a] -> a
 concatenate [] = neutral
 concatenate (x:xs) = combine x (concatenate xs)
 
+-- >>> (,) 1 2
+-- (1,2)
 
+-- >>> flip (,) 1 2
+-- (2,1)
+
+-- >>> uncurry (flip (,)) (1,2)
+-- (2,1)
