@@ -215,6 +215,24 @@ tableProcessEvent (IllegalCardAttempted player card) state = state
 tableProcessEvent (GameEnded player) state = state
 
 
-runTable :: Game a -> (TableState, [GameEvent]) -> (a, TableState, [GameEvent])
+runTable :: Game a -> (TableState, [GameEvent]) -> 
 --                                 ^^^^^^^^^^^ Akkumulator, umgekehrt 
---                                            richtige Reihenfolge ^^^^^^^^^^^ 
+   (Either (GameCommand -> Game a) a, TableState, [GameEvent])
+--                                            richtige Reihenfolge ^^^^^^^^^^^
+runTable (IsValid player card cont) s@(state, _) =
+  runTable (cont (playValid state player card)) s
+runTable (RoundOverTrick cont) s@(state, _) =
+  runTable (cont (roundOverTrick state)) s
+runTable (PlayerAfter player cont) s@(state, _) =
+  runTable (cont (playerAfter state player)) s
+runTable (GameOver cont) s@(state, _) =
+  runTable (cont (gameOver state)) s
+runTable (RecordEvent event cont) (state, revEvents) =
+  runTable (cont ()) (tableProcessEvent event state, event:revEvents)
+runTable (Return result) (state, revEvents) =
+  (Right result, state, reverse revEvents)
+runTable (GetCommand cont) (state, revEvents) =
+  (Left cont, state, reverse revEvents)
+
+-- Right: erfolgreich fertig
+-- data Either l r = Left l | Right r
