@@ -1,0 +1,10 @@
+{
+    "targets": {
+        "My target name": {
+            "inputs": [
+                "src/HeartsFrontend.elm"
+            ],
+            "output": "hearts.js"
+        }
+    }
+}
