@@ -28,6 +28,12 @@
 ; - replace differences by (abstract) names
 ; - put the names in a lambda -> function
 
+; short description:
+; create square tile pattern from 2 images
+
+; signature
+(: tile (image image -> image))
+
 (define tile
   (lambda (image1 image2)
     (above
