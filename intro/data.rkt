@@ -290,3 +290,5 @@
            (cons (first list)
                  (extract p? (rest list)))
            (extract p? (rest list)))))))
+
+(define dillos (cons dillo1 (cons dillo2 empty)))
