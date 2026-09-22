@@ -70,7 +70,11 @@
                (remainder minutes 60))))
                              
 
-; Animals on the Texas highway
+; Animal on the Texas highway:
+; - armadillo  OR
+; - parrot
+; mixed data
+(define animal (signature (mixed dillo parrot)))
 
 ; Armadillo has the following attributes:
 ; - alive OR dead?     AND
