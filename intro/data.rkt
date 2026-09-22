@@ -23,3 +23,12 @@
       ((equal? pet "dog") #t)
       ((equal? pet "cat") #t)
       ((equal? pet "snake") #f))))
+
+; Time consists of / has the following attributes:
+; - hour     AND
+; - minute
+; compound data
+(define-record time
+  make-time
+  (time-hour natural)
+  (time-hour natural))
