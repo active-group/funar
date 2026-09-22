@@ -255,3 +255,5 @@
       ((cons? list)
        (* (first list)
           (list-product (rest list)))))))
+
+; extract all even elements from a list
