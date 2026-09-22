@@ -297,3 +297,14 @@
            (extract p? (rest list)))))))
 
 (define dillos (cons dillo1 (cons dillo2 empty)))
+
+(: list-fold (number (number number -> number) (list-of number)
+                     -> number))
+
+(define list-fold
+  (lambda (e o list)
+    (cond
+      ((empty? list) e)
+      ((cons? list)
+       (o (first list)
+          (list-fold e o (rest list)))))))
