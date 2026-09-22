@@ -116,12 +116,29 @@
 (check-expect (feed-dillo dillo2 5)
               dillo2)
 
-(define feed-dillo
+#;(define feed-dillo
   (lambda (dillo amount)
     (cond
-      ((equal? (dillo-alive? dillo) #t)
+      ((dillo-alive? dillo)
        (make-dillo #t (+ (dillo-weight dillo) amount)))
-      ((equal? (dillo-alive? dillo) #f)
+      ((not (dillo-alive? dillo))
+       dillo))))
+
+#;(define feed-dillo
+  (lambda (dillo amount)
+    (if (dillo-alive? dillo)
+        (make-dillo #t (+ (dillo-weight dillo) amount))
+        dillo)
+    #;(cond
+      ((dillo-alive? dillo)
+       (make-dillo #t (+ (dillo-weight dillo) amount)))
+      (else
        dillo))))
 
 
+(define feed-dillo
+  (lambda (dillo amount)
+    (make-dillo (dillo-alive? dillo)
+                (if (dillo-alive? dillo)
+                    (+ amount (dillo-weight dillo))
+                    (dillo-weight dillo)))))
