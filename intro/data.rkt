@@ -69,3 +69,21 @@
     (make-time (remainder (quotient minutes 60) 24)
                (remainder minutes 60))))
                              
+
+; Animals on the Texas highway
+
+; Armadillo has the following attributes:
+; - alive OR dead?     AND
+; - weight
+(define-record dillo
+  make-dillo
+  (dillo-alive? boolean)
+  (dillo-weight number))
+
+(: make-dillo (boolean number -> dillo))
+
+; live armadillo, 10kg
+(define dillo1 (make-dillo #t 10))
+; dead armadillo, 8kg
+(define dillo2 (make-dillo #f 8))
+
