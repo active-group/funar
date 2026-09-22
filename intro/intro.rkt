@@ -38,6 +38,7 @@
                (beside star1 circle1)
                (beside circle1 star1)))
 
+; definition
 (define tile
   (lambda (image1 image2)
     (above
