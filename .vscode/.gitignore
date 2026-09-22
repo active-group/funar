@@ -1,0 +1,8 @@
+# Ignore everything
+*
+
+# Except for this file
+!.gitignore
+
+# Other exceptions
+!settings.json
