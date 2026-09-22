@@ -171,4 +171,12 @@
 (define run-over-parrot
   (lambda (parrot)
     (make-parrot "" (parrot-weight parrot))))
+
+; run over an animal
+(: run-over-animal (animal -> animal))
+
+(check-expect (run-over-animal dillo1)
+              (make-dillo #f 10))
+(check-expect (run-over-animal parrot1)
+              (make-parrot "" 1))
   
