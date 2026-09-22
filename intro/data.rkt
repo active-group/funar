@@ -51,3 +51,5 @@
     (+ (* 60 (time-hour time))
        (time-minute time))))
 
+; compute time from the minutes since midnight
+
