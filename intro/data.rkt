@@ -95,10 +95,16 @@
 (check-expect (run-over-dillo dillo2)
               dillo2)
 
+(define weight 15)
+
 (define run-over-dillo
   (lambda (dillo)
+    (define weight (dillo-weight dillo))
     (make-dillo #f
-                (dillo-weight dillo))))
+                weight)))
 
+; static lexical scope:
+; from the use of a name, search outwards
+; the first define or lambda is the corresponding binding
 
 
