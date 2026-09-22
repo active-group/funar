@@ -144,3 +144,13 @@
                 (if alive?
                     (+ amount weight)
                     weight))))
+
+; Parrot has the following attributes:
+; - sentence  AND
+; - weight
+; compound data
+(define-record parrot
+  make-parrot
+  (parrot-sentence string)
+  (parrot-weight number))
+
