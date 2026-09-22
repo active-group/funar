@@ -30,7 +30,13 @@
 ; compound data
 (define-record time ; signature
   make-time ; constructor
-  (time-hour natural) ; selector / natural number
+  (time-hour natural) ; selector / signature: natural number
   (time-minute natural))
 
+; 11:44
 (define time1 (make-time 11 44))
+; 15:12
+(define time2 (make-time 15 12))
+
+; minutes since midmight
+
