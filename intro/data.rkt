@@ -28,7 +28,7 @@
 ; - hour     AND
 ; - minute
 ; compound data
-(define-record time
-  make-time
+(define-record time ; signature
+  make-time ; constructor
   (time-hour natural)
   (time-minute natural))
