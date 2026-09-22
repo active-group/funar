@@ -188,3 +188,22 @@
     (cond
       ((dillo? animal) (run-over-dillo animal))
       ((parrot? animal) (run-over-parrot animal)))))
+
+; A list is one of the following:
+; - the empty list  OR
+; - a cons list consisting of the first element AND a rest list
+;                                                          ^^^^ self-reference
+
+(define list-of-numbers
+  (signature (mixed empty-list cons-list)))
+
+; start with lists of numbers
+(define-singleton empty-list ; signature
+  empty ; singleton
+  empty?) ; predicate
+
+(define-record cons-list
+  cons
+  cons?
+  (first number)
+  (rest list-of-numbers))
