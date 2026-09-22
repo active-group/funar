@@ -256,4 +256,37 @@
        (* (first list)
           (list-product (rest list)))))))
 
-; extract all even elements from a list
+; extract all odd elements from a list
+
+(: extract-odd (list-of-numbers -> list-of-numbers))
+
+(check-expect (extract-odd list4)
+              (cons 5 (cons 7 empty)))
+
+(define extract-odd
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (if (odd? (first list))
+           (cons (first list)
+                 (extract-odd (rest list)))
+           (extract-odd (rest list)))))))
+
+; abstraction:
+; - copy (one last time)
+; - rename (don't forget recursive calls)
+; - replace differences by abstract names
+; - put new names in a lambda (don't forget the recursive calls)
+
+(: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
+
+(define extract
+  (lambda (p? list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (if (p? (first list))
+           (cons (first list)
+                 (extract p? (rest list)))
+           (extract p? (rest list)))))))
