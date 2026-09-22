@@ -241,3 +241,17 @@
       ((cons? list)
        (+ (first list)
           (list-sum (rest list)))))))
+
+; multiply all the numbers in a list
+(: list-product (list-of-numbers -> number))
+
+(check-expect (list-product list4)
+              1120)
+
+(define list-product
+  (lambda (list)
+    (cond
+      ((empty? list) 1)
+      ((cons? list)
+       (* (first list)
+          (list-product (rest list)))))))
