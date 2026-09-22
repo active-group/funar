@@ -38,5 +38,16 @@
 ; 15:12
 (define time2 (make-time 15 12))
 
-; minutes since midmight
+; minutes since midnight
+(: minutes-since-midnight (time -> natural))
+
+(check-expect (minutes-since-midnight time1)
+              704)
+(check-expect (minutes-since-midnight time2)
+              912)
+
+(define minutes-since-midnight
+  (lambda (time)
+    (+ (* 60 (time-hour time))
+       (time-minute time))))
 
