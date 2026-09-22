@@ -221,9 +221,10 @@
 (: list-sum (list-of-numbers -> number))
 
 (check-expect (list-sum list4)
-              26)
+              24)
 
-(define list-sum
+; template
+#;(define list-sum
   (lambda (list)
     (cond
       ((empty? list) ...)
@@ -232,3 +233,11 @@
        (first list)
        (list-sum (rest list))
        ...))))
+
+(define list-sum
+  (lambda (list)
+    (cond
+      ((empty? list) 0) ; identity for sum
+      ((cons? list)
+       (+ (first list)
+          (list-sum (rest list)))))))
