@@ -107,4 +107,5 @@
 ; from the use of a name, search outwards
 ; the first define or lambda is the corresponding binding
 
+; feed an armadillo, by a variable amount
 
