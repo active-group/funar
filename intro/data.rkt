@@ -138,7 +138,9 @@
 
 (define feed-dillo
   (lambda (dillo amount)
-    (make-dillo (dillo-alive? dillo)
-                (if (dillo-alive? dillo)
-                    (+ amount (dillo-weight dillo))
-                    (dillo-weight dillo)))))
+    (define alive? (dillo-alive? dillo))
+    (define weight (dillo-weight dillo))
+    (make-dillo alive?
+                (if alive?
+                    (+ amount weight)
+                    weight))))
