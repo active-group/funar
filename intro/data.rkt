@@ -194,19 +194,21 @@
 ; - a cons list consisting of the first element AND a rest list
 ;                                                          ^^^^ self-reference
 
-(define list-of-numbers
-  (signature (mixed empty-list cons-list)))
+(define list-of
+  (lambda (item)
+    (signature (mixed empty-list
+                      (cons-list-of item)))))
 
 ; start with lists of numbers
 (define-singleton empty-list ; signature
   empty ; singleton
   empty?) ; predicate
 
-(define-record cons-list
+(define-record (cons-list-of item)
   cons
   cons?
-  (first number)
-  (rest list-of-numbers))
+  (first item)
+  (rest (list-of item)))
 
 ; 1-element list: 5
 (define list1 (cons 5 empty))
@@ -217,8 +219,10 @@
 ; 4-element list: 4 5 8 7
 (define list4 (cons 4 list3))
 
+(define list-of-numbers (signature (list-of number)))
+
 ; add elements of a list
-(: list-sum (list-of-numbers -> number))
+(: list-sum ((list-of number) -> number))
 
 (check-expect (list-sum list4)
               24)
@@ -279,7 +283,8 @@
 ; - replace differences by abstract names
 ; - put new names in a lambda (don't forget the recursive calls)
 
-(: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
+; %item: signature variable
+(: extract ((%item -> boolean) (list-of %item) -> (list-of %item)))
 
 (define extract
   (lambda (p? list)
