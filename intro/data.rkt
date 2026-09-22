@@ -30,8 +30,12 @@
 ; compound data
 (define-record time ; signature
   make-time ; constructor
-  (time-hour natural) ; selector / signature: natural number
-  (time-minute natural))
+  (time-hour (integer-from-to 0 23)) ; selector / signature: natural number
+  (time-minute (integer-from-to 0 59)))
+
+(: make-time (natural natural -> time))
+(: time-hour (time -> natural))
+(: time-minute (time -> natural))
 
 ; 11:44
 (define time1 (make-time 11 44))
@@ -53,3 +57,15 @@
 
 ; compute time from the minutes since midnight
 
+(: msm->time (natural -> time))
+
+(check-expect (msm->time 704)
+              time1)
+(check-expect (msm->time 912)
+              time2)
+
+(define msm->time
+  (lambda (minutes)
+    (make-time (remainder (quotient minutes 60) 24)
+               (remainder minutes 60))))
+                             
