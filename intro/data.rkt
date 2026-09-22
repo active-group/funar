@@ -81,10 +81,12 @@
 ; - weight
 (define-record dillo
   make-dillo
+  dillo? ; predicate
   (dillo-alive? boolean)
   (dillo-weight number))
 
 (: make-dillo (boolean number -> dillo))
+(: dillo? (any -> boolean))
 
 ; live armadillo, 10kg
 (define dillo1 (make-dillo #t 10))
@@ -155,6 +157,7 @@
 ; compound data
 (define-record parrot
   make-parrot
+  parrot?
   (parrot-sentence string)
   (parrot-weight number))
 
@@ -172,6 +175,7 @@
   (lambda (parrot)
     (make-parrot "" (parrot-weight parrot))))
 
+#|
 ; run over an animal
 (: run-over-animal (animal -> animal))
 
@@ -179,4 +183,10 @@
               (make-dillo #f 10))
 (check-expect (run-over-animal parrot1)
               (make-parrot "" 1))
-  
+
+(define run-over-animal
+  (lambda (animal)
+    (cond
+      (... ...)
+      (... ...))))
+|#
