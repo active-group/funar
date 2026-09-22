@@ -31,4 +31,4 @@
 (define-record time
   make-time
   (time-hour natural)
-  (time-hour natural))
+  (time-minute natural))
