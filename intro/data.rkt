@@ -158,5 +158,13 @@
 (define parrot1 (make-parrot "welcome!" 1))
 (define parrot2 (make-parrot "Good riddance!" 2))
 
+; run over a parrot
+(: run-over-parrot (parrot -> parrot))
 
+(check-expect (run-over-parrot parrot1)
+              (make-parrot "" 1))
+
+(define run-over-parrot
+  (lambda (parrot)
+    (make-parrot "" (parrot-weight parrot))))
   
