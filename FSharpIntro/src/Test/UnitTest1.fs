@@ -45,4 +45,4 @@ let Setup () =
 
 [<Test>]
 let Test1 () =
-    Assert.AreEqual(true, isCute(Dog))
+    Assert.AreEqual(true, isCute Dog)
