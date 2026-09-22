@@ -109,3 +109,19 @@
 
 ; feed an armadillo, by a variable amount
 
+(: feed-dillo (dillo number -> dillo))
+
+(check-expect (feed-dillo dillo1 5)
+              (make-dillo #t 15))
+(check-expect (feed-dillo dillo2 5)
+              dillo2)
+
+(define feed-dillo
+  (lambda (dillo amount)
+    (cond
+      ((equal? (dillo-alive? dillo) #t)
+       (make-dillo #t (+ (dillo-weight dillo) amount)))
+      ((equal? (dillo-alive? dillo) #f)
+       dillo))))
+
+
