@@ -207,3 +207,28 @@
   cons?
   (first number)
   (rest list-of-numbers))
+
+; 1-element list: 5
+(define list1 (cons 5 empty))
+; 2-element list: 5 8
+(define list2 (cons 5 (cons 8 empty)))
+; 3-element list: 5 8 7
+(define list3         (cons 5 (cons 8 (cons 7 empty))))
+; 4-element list: 4 5 8 7
+(define list4 (cons 4 list3))
+
+; add elements of a list
+(: list-sum (list-of-numbers -> number))
+
+(check-expect (list-sum list4)
+              26)
+
+(define list-sum
+  (lambda (list)
+    (cond
+      ((empty? list) ...)
+      ((cons? list)
+       ...
+       (first list)
+       (list-sum (rest list))
+       ...))))
