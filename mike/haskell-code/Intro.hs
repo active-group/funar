@@ -163,7 +163,8 @@ tuplify :: (a -> b -> c) -> ((a, b) -> c)
 tuplify f (a, b) = f a b
 
 detuplify :: ((a, b) -> c) -> (a -> b -> c)
-detuplify f = \ a -> \ b -> f (a, b)
+-- detuplify f = \ a -> \ b -> f (a, b)
+detuplify f a b = f (a, b)
 
 double :: Integer -> Integer
 -- double x = x * 2
