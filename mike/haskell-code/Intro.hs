@@ -38,6 +38,10 @@ isCute pet =
         Snake -> False
 -}
 
+-- An animal (on the Texas highway) is one the following:
+-- - armadillo  OR
+-- - parrot
+
 -- Armadillo has the following attributes:
 -- - alive or dead   AND
 -- - weight
@@ -48,6 +52,21 @@ data Liveness = Alive | Dead
 -- type alias
 type Weight = Integer
 
+data Animal = 
+    MkDillo { dilloLiveness :: Liveness,
+              dilloWeight :: Weight }
+  | MkParrot String Weight
+  deriving Show
+
+dillo1 :: Animal
+dillo1 = MkDillo { dilloLiveness = Alive, dilloWeight = 10 }
+dillo2 :: Animal
+dillo2 = MkDillo Dead 8
+
+parrot1 = MkParrot "welcome!" 1
+parrot2 = MkParrot "good riddance!" 2
+
+{-
 data Dillo = MkDillo { dilloLiveness :: Liveness,
                        dilloWeight :: Weight }
     deriving Show
@@ -76,5 +95,11 @@ runOverDillo :: Dillo -> Dillo
 --    MkDillo { dilloLiveness = Dead, dilloWeight = dilloWeight dillo }
 -- runOverDillo dillo = MkDillo Dead (dilloWeight dillo)
 --            MkDillo { dilloLiveness = Alive, dilloWeight = 10}
-runOverDillo (MkDillo { dilloLiveness = l,     dilloWeight = w}) =
-    MkDillo Dead w
+-- runOverDillo (MkDillo { dilloLiveness = l,     dilloWeight = w}) =
+--    MkDillo Dead w
+-- runOverDillo (MkDillo {dilloWeight = w}) = MkDillo Dead w
+-- runOverDillo (MkDillo _ w) = MkDillo Dead w
+-- functional update
+runOverDillo dillo = dillo { dilloLiveness = Dead }
+
+-}
