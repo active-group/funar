@@ -235,3 +235,12 @@ within (MkSquare (MkPoint squareX squareY) sideLength) (MkPoint x y) =
 within (MkOverlap shape1 shape2) point =
   within shape1 point || within shape2 point
 
+-- A list is one of the following:
+-- - the empty list []
+-- - a cons list of first element and rest list   :
+
+-- 1-element list 5
+list1 :: [Integer]
+list1 = 5 : []
+-- 2-element list 8 5
+list2 = 8 : (5 : [])
