@@ -11,7 +11,7 @@
     (cond
       ((empty? list) empty)
       ((cons? list)
-       (add-to-list
+       (add-to-list ; context
         (rev (rest list))
         (first list))))))
 
