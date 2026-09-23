@@ -142,7 +142,10 @@ double = \ x -> x * 2
 
 doublePlus :: Integer -> Integer -> Integer
 -- doublePlus x y = x * 2 + y
-doublePlus = \ x -> \ y -> x * 2 + y
+-- doublePlus = \ x -> \ y -> x * 2 + y
+doublePlus x y =
+    let d = x * 2
+    in d + y
 
 -- A shape is one of the following:
 -- - circle
