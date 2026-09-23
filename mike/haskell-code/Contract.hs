@@ -136,7 +136,7 @@ c10 = Many 100 (Composite (One EUR)
                           (Later xmas (One EUR)))
 
 -- >>> semantics c11 (MkDate "2026-09-23")
--- ([MkPayment (MkDate "2026-09-23") Outgoing 100.0 EUR],Many 100.0 (Composite (Deposit Zero) (Later (MkDate "2026-12-24") (One EUR))))
+-- ([MkPayment (MkDate "2026-09-23") Outgoing 100.0 EUR],Many 100.0 (Later (MkDate "2026-12-24") (One EUR)))
 c11 =
   Many
     100
