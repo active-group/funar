@@ -117,6 +117,14 @@ runOverAnimal (MkDillo liveness weight) = MkDillo Dead weight
 runOverAnimal (MkParrot sentence weight) = MkParrot "" weight
 
 -- feed animal
+
+-- >>> feedAnimal dillo1 5
+-- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
+-- >>> feedAnimal dillo2 5
+-- MkDillo {dilloLiveness = Dead, dilloWeight = 8}
+-- >>> (feedAnimal parrot1) 5
+-- MkParrot "welcome!" 6
+feedAnimal :: Animal -> (Weight -> Animal)
 feedAnimal (MkDillo liveness weight) amount = 
     case liveness of
         Alive -> MkDillo liveness (weight + amount)
@@ -124,3 +132,11 @@ feedAnimal (MkDillo liveness weight) amount =
 feedAnimal (MkParrot sentence weight) amount =
     MkParrot sentence (weight + amount)
 
+double :: Integer -> Integer
+-- double x = x * 2
+-- syntactic sugar:
+double = \ x -> x * 2
+
+doublePlus :: Integer -> Integer -> Integer
+-- doublePlus x y = x * 2 + y
+doublePlus = \ x -> \ y -> x * 2 + y
