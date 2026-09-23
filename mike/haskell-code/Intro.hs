@@ -309,8 +309,8 @@ listIndex (x:xs) e =
 
 -- >>> :info Eq
 -- type Eq :: * -> Constraint
--- type class:
+-- type class ... "interface"
 -- class Eq a where
---   (==) :: a -> a -> Bool
+--   (==) :: a -> a -> Bool -- method
 --   (/=) :: a -> a -> Bool
 -- instance Eq Integer -- Defined in ‘GHC.Num.Integer’
