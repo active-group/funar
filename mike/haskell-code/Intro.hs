@@ -132,6 +132,8 @@ feedAnimal (MkDillo liveness weight) amount =
 feedAnimal (MkParrot sentence weight) amount =
     MkParrot sentence (weight + amount)
 
+feedAnimal' weight animal = feedAnimal animal weight
+
 double :: Integer -> Integer
 -- double x = x * 2
 -- syntactic sugar:
