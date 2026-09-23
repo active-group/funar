@@ -197,5 +197,5 @@ within (MkSquare (MkPoint squareX squareY) sideLength) (MkPoint x y) =
       rightTopY = squareY + sideLength
    in ((x >= squareX) && (x <= rightTopX))
         && ((y >= squareY) && (y <= rightTopY))
-within overlap@(MkOverlap shape1 shape2) point =
+within (MkOverlap shape1 shape2) point =
   within shape1 point || within shape2 point
