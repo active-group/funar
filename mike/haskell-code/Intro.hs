@@ -44,3 +44,10 @@ isCute pet =
 
 data Liveness = Alive | Dead
   deriving Show
+
+-- type alias
+type Weight = Integer
+
+data Dillo = MkDillo { dilloLiveness :: Liveness,
+                       dilloWeight :: Weight }
+    deriving Show
