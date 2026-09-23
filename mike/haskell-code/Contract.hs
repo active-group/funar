@@ -43,6 +43,10 @@ composite Zero c = c
 composite c Zero = c
 composite c1 c2 = Composite c1 c2
 
+deposit :: Contract -> Contract
+deposit Zero = Zero
+deposit c = Deposit c
+
 -- "I get 1€ now."
 c1 :: Contract
 c1 = One EUR
@@ -115,7 +119,7 @@ semantics (Many amount contract) today =
    in (map (scalePayment amount) payments, Many amount residualContract)
 semantics (Deposit contract) today =
   let (payments, residualContract) = semantics contract today
-   in (map invertPayment payments, Deposit residualContract)
+   in (map invertPayment payments, deposit residualContract)
 semantics (Later date contract) today =
   if today >= date
     then semantics contract today
@@ -123,10 +127,21 @@ semantics (Later date contract) today =
 semantics (Composite contract1 contract2) today =
   let (payments1, residualContract1) = semantics contract1 today
       (payments2, residualContract2) = semantics contract2 today
-   in (payments1 ++ payments2, Composite residualContract1 residualContract2)
+   in (payments1 ++ payments2, composite residualContract1 residualContract2)
 
 
 -- >>> semantics c10 (MkDate "2026-09-23")
--- ([MkPayment (MkDate "2026-09-23") Incoming 100.0 EUR],Many 100.0 (Composite Zero (Later (MkDate "2026-12-24") (One EUR))))
+-- ([MkPayment (MkDate "2026-09-23") Incoming 100.0 EUR],Many 100.0 (Later (MkDate "2026-12-24") (One EUR)))
 c10 = Many 100 (Composite (One EUR)
                           (Later xmas (One EUR)))
+
+-- >>> semantics c11 (MkDate "2026-09-23")
+-- ([MkPayment (MkDate "2026-09-23") Outgoing 100.0 EUR],Many 100.0 (Composite (Deposit Zero) (Later (MkDate "2026-12-24") (One EUR))))
+c11 =
+  Many
+    100
+    ( Composite
+        (Deposit (One EUR))
+        (Later xmas (One EUR))
+    )
+
