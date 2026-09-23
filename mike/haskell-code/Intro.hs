@@ -289,6 +289,7 @@ data Optional a =
   deriving Show
 
 -- find the index of an element in a list
+-- Eq a: constraint
 listIndex :: Eq a => [a] -> a -> Optional Integer
 
 -- >>> listIndex [0, 8, 7, 2, 3] 7
