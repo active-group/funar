@@ -140,7 +140,9 @@ feedAnimal' weight animal = feedAnimal animal weight
 -- swap :: (Animal -> Weight -> Animal) -> (Weight -> Animal -> Animal)
 -- swap f = \ weight -> \ animal -> f animal weight
 swap :: (a -> b -> c) -> (b -> a -> c)
-swap f = \b -> \a -> f a b
+-- swap f = \b -> \a -> f a b
+swap f b a = f a b
+-- built-in as flip
 
 -- >>> swap feedAnimal 5 dillo1
 -- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
