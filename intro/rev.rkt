@@ -20,4 +20,12 @@
 
 (check-expect (add-to-list (list 1 2 3) 4)
               (list 1 2 3 4))
+
+(define add-to-list
+  (lambda (list element)
+    (cond
+      ((empty? list) (cons element empty))
+      ((cons? list)
+       (cons (first list)
+             (add-to-list (rest list) element))))))
                    
