@@ -138,6 +138,9 @@ feedAnimal' :: Weight -> Animal -> Animal
 feedAnimal' weight animal = feedAnimal animal weight
 
 feedAnimal'' :: (Animal, Weight) -> Animal
+
+-- >>> feedAnimal''(dillo1, 5)
+-- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
 feedAnimal''(MkDillo liveness weight, amount) =
   case liveness of
     Alive -> MkDillo liveness (weight + amount)
