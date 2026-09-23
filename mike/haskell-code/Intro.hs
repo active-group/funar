@@ -65,3 +65,8 @@ dillo2 = MkDillo Alive 8
 -- Alive
 -- >>> dilloWeight dillo2
 -- 8
+
+-- run over an armadillo
+runOverDillo :: Dillo -> Dillo
+runOverDillo dillo =
+    MkDillo { dilloLiveness = Dead, dilloWeight = dilloWeight dillo }
