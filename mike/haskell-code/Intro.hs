@@ -275,5 +275,10 @@ integersFrom :: Integer -> [Integer]
 integersFrom n = n : integersFrom (n+1)
 
 sieve :: [Integer] -> [Integer]
+-- >>> sieve [2..15]
+-- [2,3,5,7,11,13]
 sieve [] = []
-sieve (x:xs) = x : filter (\y -> mod y x /= 0) xs
+sieve (x:xs) = x : sieve (filter (\y -> mod y x /= 0) xs)
+
+primes :: [Integer]
+primes = sieve (integersFrom 2)
