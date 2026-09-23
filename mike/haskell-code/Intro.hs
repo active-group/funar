@@ -56,7 +56,7 @@ dillo1 :: Dillo
 dillo1 = MkDillo { dilloLiveness = Alive, dilloWeight = 10 }
 
 dillo2 :: Dillo
-dillo2 = MkDillo Alive 10
+dillo2 = MkDillo Alive 8
 
 -- >>> dillo1
 -- MkDillo {dilloLiveness = Alive, dilloWeight = 10}
