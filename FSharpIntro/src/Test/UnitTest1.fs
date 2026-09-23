@@ -39,6 +39,19 @@ let runOverAnimal (animal: Animal): Animal =
     | MkDillo dillo -> MkDillo (runOverDillo dillo)
     | MkParrot parrot -> MkParrot (runOverParrot parrot)
 
+// A list is one the following:
+// - the empty list []      OR
+// - a cons list ...   ::
+let rec listSum (list: list<int>): int =
+    match list with
+    | [] -> 0
+    | (first :: rest) -> first + listSum rest
+
+let rec listFold e o list =
+    match list with
+    | [] -> e
+    | (first :: rest) -> o first (listFold e o rest)
+
 [<SetUp>]
 let Setup () =
     ()
