@@ -243,4 +243,26 @@ within (MkOverlap shape1 shape2) point =
 list1 :: [Integer]
 list1 = 5 : []
 -- 2-element list 8 5
+list2 :: [Integer]
 list2 = 8 : (5 : [])
+
+-- 3-element list 8 5 4 
+list3 :: [Integer]
+list3 = [8, 5, 4]
+
+-- 4-element list 7 8 5 4
+list4 :: [Integer]
+list4 = 7 : list3
+
+-- add the elements of a list
+listSum :: [Integer] -> Integer
+
+-- >>> listSum list4
+-- 24
+listSum [] = 0
+listSum (x:xs) = x  + listSum xs
+-- listSum = \ list ->
+--    case list of
+--        [] -> 0
+--        (x:xs) -> x + listSum xs
+
