@@ -171,6 +171,18 @@ detuplify f a b = f (a, b)
 schönfinkeln :: ((a, b) -> c) -> (a -> b -> c)
 schönfinkeln f a b = f (a, b)
 
+-- function composition
+compose :: (b -> c) -> (a -> b) -> (a -> c)
+compose f g = \ a -> f (g a)
+-- built-in as .
+
+foo :: Animal -> Animal
+-- >>> foo dillo1
+-- MkDillo {dilloLiveness = Dead, dilloWeight = 15}
+foo = runOverAnimal . ((swap feedAnimal) 5)
+
+
+
 double :: Integer -> Integer
 -- double x = x * 2
 -- syntactic sugar:
@@ -222,3 +234,4 @@ within (MkSquare (MkPoint squareX squareY) sideLength) (MkPoint x y) =
         && ((y >= squareY) && (y <= rightTopY))
 within (MkOverlap shape1 shape2) point =
   within shape1 point || within shape2 point
+
