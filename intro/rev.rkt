@@ -42,5 +42,5 @@
     (cond
       ((empty? list) acc)
       ((cons? list)
-       (rev2 (rest list) ; tail call
+       (rev2 (rest list) ; tail call (no context)
              (cons (first list) acc))))))
