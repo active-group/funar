@@ -37,3 +37,10 @@ isCute pet =
         Cat -> True
         Snake -> False
 -}
+
+-- Armadillo has the following attributes:
+-- - alive or dead   AND
+-- - weight
+
+data Liveness = Alive | Dead
+  deriving Show
