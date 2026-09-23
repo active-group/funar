@@ -294,6 +294,11 @@ listIndex :: Eq a => [a] -> a -> Optional Integer
 
 -- >>> listIndex [0, 8, 7, 2, 3] 7
 -- Result 2
+-- >>> listIndex [Dog, Cat, Cat, Snake, Cat] Snake
+-- No instance for `Eq Pet' arising from a use of `listIndex'
+-- In the expression: listIndex [Dog, Cat, Cat, Snake, Cat] Snake
+-- In an equation for `it_ad75G':
+--     it_ad75G = listIndex [Dog, Cat, Cat, Snake, Cat] Snake
 listIndex [] e = Null
 listIndex (x:xs) e = 
     if e == x
@@ -301,3 +306,11 @@ listIndex (x:xs) e =
     else case listIndex xs e of
            Null -> Null
            Result index -> Result (index+1)
+
+-- >>> :info Eq
+-- type Eq :: * -> Constraint
+-- type class:
+-- class Eq a where
+--   (==) :: a -> a -> Bool
+--   (/=) :: a -> a -> Bool
+-- instance Eq Integer -- Defined in ‘GHC.Num.Integer’
