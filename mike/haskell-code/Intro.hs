@@ -293,7 +293,7 @@ primes = sieve (integersFrom 2)
 data Optional a =
     Null
   | Result a
-  deriving Show
+  deriving (Eq, Show)
 
 -- find the index of an element in a list
 -- Eq a: constraint
@@ -318,3 +318,8 @@ listIndex (x:xs) e =
 --   (==) :: a -> a -> Bool -- method
 --   (/=) :: a -> a -> Bool
 -- instance Eq Integer -- Defined in ‘GHC.Num.Integer’
+
+-- >>> :info Show
+-- type Show :: * -> Constraint
+-- class Show a where
+--   show :: a -> String
