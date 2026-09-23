@@ -299,7 +299,7 @@
 (define dillos (cons dillo1 (cons dillo2 empty)))
 
 ;(: list-fold (%item2 (%item1 %item2 -> %item2) (list-of %item1) -> %item2))
-(: list-fold (%b (%a %b -> %b) (list-of %a) -> %b))
+(: list-fold (%a (%b %a -> %a) (list-of %b) -> %a))
 
 (define list-fold
   (lambda (e o list)
