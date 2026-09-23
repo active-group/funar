@@ -77,6 +77,18 @@ c8 = Deposit (Deposit (One EUR))
 c9 = Later xmas (Composite (Many 100 (One EUR))
                            (Deposit (Many 100 (One GBP))))
 
+fxSwap :: Date -> Amount -> Currency -> Amount -> Currency -> Contract
 fxSwap date amount1 currency1 amount2 currency2 =
     Composite (zeroCouponBond date amount1 currency1)
               (Deposit (zeroCouponBond date amount2 currency2))
+
+
+data Direction = Incoming | Outgoing
+  deriving Show
+
+data Payment = MkPayment Date Direction Amount Currency
+  deriving Show
+
+-- all payments until date (today)
+-- returns payments, residual contract
+semantics :: Contract -> Date -> ([Payment], Contract)
