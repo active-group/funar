@@ -116,5 +116,11 @@ runOverAnimal :: Animal -> Animal
 runOverAnimal (MkDillo liveness weight) = MkDillo Dead weight
 runOverAnimal (MkParrot sentence weight) = MkParrot "" weight
 
-
+-- feed animal
+feedAnimal (MkDillo liveness weight) amount = 
+    case liveness of
+        Alive -> MkDillo liveness (weight + amount)
+        Dead -> MkDillo liveness weight
+feedAnimal (MkParrot sentence weight) amount =
+    MkParrot sentence (weight + amount)
 
