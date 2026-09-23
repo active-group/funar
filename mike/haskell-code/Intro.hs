@@ -105,3 +105,16 @@ runOverDillo :: Dillo -> Dillo
 runOverDillo dillo = dillo { dilloLiveness = Dead }
 
 -}
+
+runOverAnimal :: Animal -> Animal
+
+-- >>> runOverAnimal dillo1
+-- MkDillo {dilloLiveness = Dead, dilloWeight = 10}
+-- >>> runOverAnimal parrot1
+-- MkParrot "" 1
+
+runOverAnimal (MkDillo liveness weight) = MkDillo Dead weight
+runOverAnimal (MkParrot sentence weight) = MkParrot "" weight
+
+
+
