@@ -29,7 +29,8 @@ data Contract =
 -}
 
 data Contract =
-    One Currency
+    Zero
+  | One Currency
   | Many Amount Contract -- Currency
   | Later Date Contract
   | Composite Contract Contract
