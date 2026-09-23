@@ -270,3 +270,6 @@ listSum (x:xs) = x  + listSum xs
 listMap :: (a -> b) -> [a] -> [b]
 listMap f [] = []
 listMap f (a:as) = (f a) : (listMap f as)
+
+integersFrom :: Integer -> [Integer]
+integersFrom n = n : integersFrom (n+1)
