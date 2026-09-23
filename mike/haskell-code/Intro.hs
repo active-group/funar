@@ -282,3 +282,21 @@ sieve (x:xs) = x : sieve (filter (\y -> mod y x /= 0) xs)
 
 primes :: [Integer]
 primes = sieve (integersFrom 2)
+
+data Optional a =
+    Null
+  | Result a
+  deriving Show
+
+-- find the index of an element in a list
+listIndex :: Eq a => [a] -> a -> Optional Integer
+
+-- >>> listIndex [0, 8, 7, 2, 3] 7
+-- Result 2
+listIndex [] e = Null
+listIndex (x:xs) e = 
+    if e == x
+    then Result 0
+    else case listIndex xs e of
+           Null -> Null
+           Result index -> Result (index+1)
