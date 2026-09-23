@@ -273,3 +273,7 @@ listMap f (a:as) = (f a) : (listMap f as)
 
 integersFrom :: Integer -> [Integer]
 integersFrom n = n : integersFrom (n+1)
+
+sieve :: [Integer] -> [Integer]
+sieve [] = []
+sieve (x:xs) = x : filter (\y -> mod y x /= 0) xs
