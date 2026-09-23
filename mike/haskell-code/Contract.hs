@@ -90,5 +90,9 @@ data Payment = MkPayment Date Direction Amount Currency
   deriving Show
 
 -- all payments until date (today)
--- returns payments, residual contract
+-- returns payments, residual contract after the payments
 semantics :: Contract -> Date -> ([Payment], Contract)
+
+-- >>> semantics c10 (MkDate "2026-09-23")
+c10 = Many 100 (Composite (One EUR)
+                          (Later xmas (One EUR)))
