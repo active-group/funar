@@ -127,13 +127,23 @@ runOverAnimal (MkParrot sentence weight) = MkParrot "" weight
 feedAnimal :: Animal -> (Weight -> Animal)
 feedAnimal (MkDillo liveness weight) amount = 
     case liveness of
-        Alive -> MkDillo liveness (weight + amount)
-        Dead -> MkDillo liveness weight
+       Alive -> MkDillo liveness (weight + amount)
+       Dead -> MkDillo liveness weight
+-- feedAnimal (MkDillo Alive weight) amount = MkDillo Alive (weight + amount)
+-- feedAnimal (MkDillo Dead weight) amount = MkDillo Dead weight
 feedAnimal (MkParrot sentence weight) amount =
     MkParrot sentence (weight + amount)
 
 feedAnimal' :: Weight -> Animal -> Animal
 feedAnimal' weight animal = feedAnimal animal weight
+
+feedAnimal'' :: (Animal, Weight) -> Animal
+feedAnimal''(MkDillo liveness weight, amount) =
+  case liveness of
+    Alive -> MkDillo liveness (weight + amount)
+    Dead -> MkDillo liveness weight
+feedAnimal''(MkParrot sentence weight, amount) =
+  MkParrot sentence (weight + amount)
 
 double :: Integer -> Integer
 -- double x = x * 2
