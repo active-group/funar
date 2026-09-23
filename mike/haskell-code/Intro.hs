@@ -266,3 +266,7 @@ listSum (x:xs) = x  + listSum xs
 --        [] -> 0
 --        (x:xs) -> x + listSum xs
 
+-- built-in as map
+listMap :: (a -> b) -> [a] -> [b]
+listMap f [] = []
+listMap f (a:as) = (f a) : (listMap f as)
