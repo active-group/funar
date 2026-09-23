@@ -132,6 +132,7 @@ feedAnimal (MkDillo liveness weight) amount =
 feedAnimal (MkParrot sentence weight) amount =
     MkParrot sentence (weight + amount)
 
+feedAnimal' :: Weight -> Animal -> Animal
 feedAnimal' weight animal = feedAnimal animal weight
 
 double :: Integer -> Integer
@@ -142,3 +143,12 @@ double = \ x -> x * 2
 doublePlus :: Integer -> Integer -> Integer
 -- doublePlus x y = x * 2 + y
 doublePlus = \ x -> \ y -> x * 2 + y
+
+-- A shape is one of the following:
+-- - circle
+-- - square
+-- - an overlay of two shapes
+
+-- 1. write a datatype
+-- 2. write a function that, given a point,
+--    determines whether it is inside the shape or not
