@@ -158,6 +158,13 @@ feedAnimal''(MkDillo liveness weight, amount) =
 feedAnimal''(MkParrot sentence weight, amount) =
   MkParrot sentence (weight + amount)
 
+tuplify :: (a -> b -> c) -> ((a, b) -> c)
+-- tuplify f = \ (a, b) -> f a b
+tuplify f (a, b) = f a b
+
+detuplify :: ((a, b) -> c) -> (a -> b -> c)
+detuplify f = \ a -> \ b -> f (a, b)
+
 double :: Integer -> Integer
 -- double x = x * 2
 -- syntactic sugar:
