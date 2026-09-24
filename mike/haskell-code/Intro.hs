@@ -414,3 +414,6 @@ monoidFold = listFold mempty (<>)
 
 -- instance (Monoid a, Monoid b) => Monoid (a, b) where
 --    mempty = (mempty, mempty)
+
+instance Monoid (Optional a) where 
+    

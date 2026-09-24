@@ -136,6 +136,7 @@ semantics (Composite contract1 contract2) today =
 --   in (payments1 ++ payments2, composite residualContract1 residualContract2)
   semantics contract1 today  <> semantics contract2 today
 
+-- monoid homomorphism
 
 -- >>> semantics c10 (MkDate "2026-09-23")
 -- ([MkPayment (MkDate "2026-09-23") Incoming 100.0 EUR],Many 100.0 (Later (MkDate "2026-12-24") (One EUR)))
