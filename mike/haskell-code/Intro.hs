@@ -269,6 +269,21 @@ listMap :: (a -> b) -> [a] -> [b]
 listMap f [] = []
 listMap f (a:as) = (f a) : (listMap f as)
 
+optionalMap :: (a -> b) -> Optional a -> Optional b
+optionalMap f Null = Null
+optionalMap f (Result a) = (Result (f a))
+
+-- >>> :info Functor
+-- type Functor :: (* -> *) -> Constraint
+-- class Functor f where
+--   fmap :: (a -> b) -> f a -> f b
+
+instance Functor Optional where
+    fmap :: (a -> b) -> Optional a -> Optional b
+    fmap = optionalMap
+
+-- data Maybe a = Nothing | Just a
+
 integersFrom :: Integer -> [Integer]
 integersFrom n = n : integersFrom (n+1)
 
@@ -415,5 +430,13 @@ monoidFold = listFold mempty (<>)
 -- instance (Monoid a, Monoid b) => Monoid (a, b) where
 --    mempty = (mempty, mempty)
 
-instance Monoid (Optional a) where 
-    
+instance Semigroup x => Semigroup (Optional x) where
+    (<>) :: Optional x -> Optional x -> Optional x
+    (<>) Null Null = Null
+    (<>) Null (Result x) = Result x
+    (<>) (Result x) Null = Result x
+    (<>) (Result x1) (Result x2) = Result (x1 <> x2)
+
+instance Semigroup x => Monoid (Optional x) where 
+    mempty :: Optional x
+    mempty = Null
