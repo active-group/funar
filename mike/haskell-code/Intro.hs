@@ -228,6 +228,8 @@ circle1 = MkCircle (MkPoint 2 2) 2.0
 
 square1 = MkSquare (MkPoint 3 3) 4.0
 
+overlap1 = circle1 <> square1
+
 within :: Shape -> Point -> Bool
 within (MkCircle (MkPoint centerX centerY) radius) (MkPoint x y) =
   let distanceX = (x - centerX) ^ 2
