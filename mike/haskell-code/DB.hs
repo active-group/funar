@@ -40,6 +40,10 @@ p1 = Put "Mike" 100 (\() ->
      Return (show (x+y))))))
 
 runDB :: DB a -> Map Key Value -> (a, Map Key Value)
+
+-- >>> runDB p1 Map.empty
+-- ("201",fromList [("Mike",101)])
+
 runDB (Get key cont) mp = 
     let value = mp ! key
     in runDB (cont value) mp
