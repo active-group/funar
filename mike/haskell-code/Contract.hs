@@ -112,6 +112,9 @@ invertPayment (MkPayment date Outgoing amount currency) =
 instance Semigroup Contract where
     (<>) = composite
 
+instance Monoid Contract where
+    mempty = Zero
+    
 -- all payments until date (today)
 -- returns payments, residual contract after the payments
 semantics :: Contract -> Date -> ([Payment], Contract)

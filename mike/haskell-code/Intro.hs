@@ -387,3 +387,21 @@ instance Semigroup Shape where
 -- type Monoid :: * -> Constraint
 -- class Semigroup a => Monoid a where
 --   mempty :: a
+
+-- instance Monoid [a] where
+--    mempty = []
+
+data Additive = MkAdditive Integer
+  deriving Show
+
+instance Semigroup Additive where
+    (<>) (MkAdditive n1) (MkAdditive n2) = MkAdditive (n1 + n2) 
+
+instance Monoid Additive where
+    mempty = MkAdditive 0
+
+listCombine :: Monoid a => [a] -> a
+listCombine [] = mempty
+listCombine (x:xs) = x <> listCombine xs
+
+listCombine (map MkAdditive [1,2,3,4,5])
