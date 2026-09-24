@@ -369,3 +369,16 @@ listIndex (x:xs) e =
 instance Semigroup Shape where
     (<>) :: Shape -> Shape -> Shape
     (<>) = MkOverlap
+
+-- instance Semigroup [a] where
+--     (<>) = (++)
+
+-- >>> [1,2,3] <> [4,5,6]
+-- [1,2,3,4,5,6]
+
+-- semigroup a / <> +
+-- identity :: a
+-- identity <> x == x <> identity == x
+-- 0 + x == x + 0 == x
+-- 1 * x == x * 1 == x
+-- monoid
