@@ -400,8 +400,9 @@ instance Semigroup Additive where
 instance Monoid Additive where
     mempty = MkAdditive 0
 
-listCombine :: Monoid a => [a] -> a
-listCombine [] = mempty
-listCombine (x:xs) = x <> listCombine xs
+monoidFold :: Monoid a => [a] -> a
+monoidFold [] = mempty
+monoidFold (x:xs) = x <> monoidFold xs
 
-listCombine (map MkAdditive [1,2,3,4,5])
+-- >>> listCombine (map MkAdditive [1,2,3,4,5])
+-- MkAdditive 15
