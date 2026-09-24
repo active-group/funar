@@ -117,13 +117,13 @@ semantics (One currency) today = ([MkPayment today Incoming 1 currency], Zero)
 semantics (Many amount contract) today =
   let (payments, residualContract) = semantics contract today
    in (map (scalePayment amount) payments, Many amount residualContract)
-semantics (Deposit contract) today =
-  let (payments, residualContract) = semantics contract today
-   in (map invertPayment payments, deposit residualContract)
 semantics (Later date contract) today =
   if today >= date
     then semantics contract today
     else ([], Later date contract)
+semantics (Deposit contract) today =
+  let (payments, residualContract) = semantics contract today
+   in (map invertPayment payments, deposit residualContract)
 semantics (Composite contract1 contract2) today =
   let (payments1, residualContract1) = semantics contract1 today
       (payments2, residualContract2) = semantics contract2 today
