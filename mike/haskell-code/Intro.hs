@@ -263,17 +263,6 @@ list3 = [8, 5, 4]
 list4 :: [Integer]
 list4 = 7 : list3
 
--- add the elements of a list
-listSum :: [Integer] -> Integer
-
--- >>> listSum list4
--- 24
-listSum [] = 0
-listSum (x:xs) = x  + listSum xs
--- listSum = \ list ->
---    case list of
---        [] -> 0
---        (x:xs) -> x + listSum xs
 
 -- built-in as map
 listMap :: (a -> b) -> [a] -> [b]
@@ -400,9 +389,28 @@ instance Semigroup Additive where
 instance Monoid Additive where
     mempty = MkAdditive 0
 
+-- add the elements of a list
+listSum :: [Integer] -> Integer
+-- >>> listSum list4
+-- 24
+listSum [] = 0
+listSum (x : xs) = x + listSum xs
+
+listFold e o [] = e
+-- listFold e o (x : xs) = o x (listFold e o xs)
+listFold e o (x : xs) = x `o` (listFold e o xs)
+
 monoidFold :: Monoid a => [a] -> a
-monoidFold [] = mempty
-monoidFold (x:xs) = x <> monoidFold xs
+monoidFold = listFold mempty (<>)
+-- monoidFold [] = mempty
+-- monoidFold (x:xs) = x <> monoidFold xs
 
 -- >>> listCombine (map MkAdditive [1,2,3,4,5])
 -- MkAdditive 15
+
+-- instance (Semigroup a, Semigroup b) => Semigroup (a, b) where
+--    (<>) :: (a, b) -> (a, b) -> (a, b)
+--    (<>) (a1, b1) (a2, b2) = (a1 <> a2, b1 <> b2)
+
+-- instance (Monoid a, Monoid b) => Monoid (a, b) where
+--    mempty = (mempty, mempty)
