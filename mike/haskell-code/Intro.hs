@@ -345,3 +345,25 @@ listIndex (x:xs) e =
 --   abs :: a -> a
 --   signum :: a -> a
 --   fromInteger :: Integer -> a
+
+-- type (set) + operation(s) + equations/laws
+-- a
+-- op :: a -> a -> a
+-- op a (op b c) == op (op a b) c
+-- semigroup
+
+-- a * (b * c) = (a * b) * c  -- associativity
+
+-- (*) :: Integer -> Integer -> Integer
+-- overlay :: Image -> Image -> Image
+-- shapeOverlap :: Shape -> Shape -> Shape
+-- Composite :: Contract -> Contract -> Contract
+
+-- >>> :info Semigroup
+-- type Semigroup :: * -> Constraint
+-- class Semigroup a where
+--   (<>) :: a -> a -> a
+
+instance Semigroup Shape where
+    (<>) :: Shape -> Shape -> Shape
+    (<>) = MkOverlap
