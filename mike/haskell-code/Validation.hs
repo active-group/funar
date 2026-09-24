@@ -1,7 +1,7 @@
 module Validation where
 
 data Validation a =
-    Sucess a
+    Success a
   | Failure [String]
   deriving Show
 
