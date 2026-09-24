@@ -60,6 +60,11 @@ checkRating s = if length s /= 5
                 then Nothing
                 else Just s
 
+-- >>> mkMovie "Eraserhead" 2 "*****"
+-- Just (MkMovie {title = "Eraserhead", price = 2, rating = "*****"})
+-- >>> mkMovie "" 200 "-"
+-- Nothing
+
 mkMovie :: String -> Integer -> String -> Maybe Movie
 mkMovie title price rating =
 --   "MkMovie (checkTitle title) (checkPrice price) (checkRating rating)"
