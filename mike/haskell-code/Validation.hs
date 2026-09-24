@@ -1,5 +1,10 @@
 module Validation where
 
+data Validation a =
+    Sucess a
+  | Failure [String]
+  deriving Show
+
 -- "Make illegal states unpresentable." -- Yaron Minsky
 
 data SimpleMovie = MkSimpleMovie { simpleTitle :: String }
