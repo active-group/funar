@@ -39,6 +39,19 @@ p1 = Put "Mike" 100 (\() ->
      Get "Mike" (\y ->
      Return (show (x+y))))))
 
+get :: Key -> DB Value
+get key = Get key Return
+
+put :: Key -> Value -> DB ()
+put key value = Put key value Return
+
+splice :: DB a -> (a -> DB b) -> DB b
+splice (Get key cont) next =
+    Get key (\value -> splice (cont value) next)
+splice (Put key value cont) next =
+    Put key value (\() -> splice (cont ()) next)
+splice (Return result) next = next result
+
 runDB :: DB a -> Map Key Value -> (a, Map Key Value)
 
 -- >>> runDB p1 Map.empty
