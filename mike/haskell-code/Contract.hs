@@ -109,6 +109,9 @@ invertPayment (MkPayment date Incoming amount currency) =
 invertPayment (MkPayment date Outgoing amount currency) =
   MkPayment date Incoming amount currency
 
+instance Semigroup Contract where
+    (<>) = composite
+
 -- all payments until date (today)
 -- returns payments, residual contract after the payments
 semantics :: Contract -> Date -> ([Payment], Contract)

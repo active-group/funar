@@ -382,3 +382,8 @@ instance Semigroup Shape where
 -- 0 + x == x + 0 == x
 -- 1 * x == x * 1 == x
 -- monoid
+
+-- >>> :info Monoid
+-- type Monoid :: * -> Constraint
+-- class Semigroup a => Monoid a where
+--   mempty :: a
