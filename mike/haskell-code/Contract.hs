@@ -118,7 +118,7 @@ instance Monoid Contract where
 -- all payments until date (today)
 -- returns payments, residual contract after the payments
 semantics :: Contract -> Date -> ([Payment], Contract)
-semantics Zero today = ([], Zero)
+semantics Zero today = mempty -- ([], Zero)
 semantics (One currency) today = ([MkPayment today Incoming 1 currency], Zero)
 semantics (Many amount contract) today =
   let (payments, residualContract) = semantics contract today
@@ -131,9 +131,10 @@ semantics (Deposit contract) today =
   let (payments, residualContract) = semantics contract today
    in (map invertPayment payments, deposit residualContract)
 semantics (Composite contract1 contract2) today =
-  let (payments1, residualContract1) = semantics contract1 today
-      (payments2, residualContract2) = semantics contract2 today
-   in (payments1 ++ payments2, composite residualContract1 residualContract2)
+--  let (payments1, residualContract1) = semantics contract1 today
+--      (payments2, residualContract2) = semantics contract2 today
+--   in (payments1 ++ payments2, composite residualContract1 residualContract2)
+  semantics contract1 today  <> semantics contract2 today
 
 
 -- >>> semantics c10 (MkDate "2026-09-23")
