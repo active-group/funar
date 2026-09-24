@@ -5,7 +5,7 @@ data Validation a =
   | Failure [String]
   deriving Show
 
--- "Make illegal states unpresentable." -- Yaron Minsky
+-- "Make illegal states unrepresentable." -- Yaron Minsky
 
 data SimpleMovie = MkSimpleMovie { simpleTitle :: String }
   deriving Show
