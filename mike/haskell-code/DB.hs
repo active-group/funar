@@ -39,4 +39,11 @@ p1 = Put "Mike" 100 (\() ->
      Get "Mike" (\y ->
      Return (show (x+y))))))
 
-runDB :: DB a -> a
+runDB :: DB a -> Map Key Value -> (a, Map Key Value)
+runDB (Get key cont) mp = 
+    let value = mp ! key
+    in runDB (cont value) mp
+runDB (Put key value cont) mp =
+    let mpNew = Map.insert key value mp
+    in runDB (cont ()) mpNew
+runDB (Return result) mp = (result, mp)
