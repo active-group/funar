@@ -91,7 +91,8 @@ tableProcessCommandM (PlayCard player card) =
   -- check whether the card is legal
   do legal <- isCardLegalM player card
      if legal
-     then do roundOverTrick <- roundOverTrickM
+     then do recordEventM (LegalCardPlayed player card)
+             roundOverTrick <- roundOverTrickM
              case roundOverTrick of
               Nothing ->
                 do next <- playerAfterM player
