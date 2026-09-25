@@ -46,6 +46,15 @@ recordEventM event = RecordEvent event Return
 isCardLegalM :: Player -> Card -> Game Bool
 isCardLegalM player card = IsCardLegal player card Return
 
+roundOverTrickM :: Game (Maybe (Trick, Player))
+roundOverTrickM = RoundOverTrick Return
+
+playerAfterM :: Player -> Game Player
+playerAfterM player = PlayerAfter player Return
+gameOverM :: Game (Maybe Player)
+
+gameOverM = GameOver Return
+
 instance Functor Game where
 
 instance Applicative Game where
@@ -59,6 +68,12 @@ instance Monad Game where
     RecordEvent event (\() -> cont () >>= next)
   (>>=) (IsCardLegal player card cont) next =
     IsCardLegal player card (\legal -> cont legal >>= next)
+  (>>=) (RoundOverTrick cont) next =
+    RoundOverTrick (\stuff -> cont stuff >>= next)
+  (>>=) (PlayerAfter player cont) next =
+    PlayerAfter player (\player -> cont player >>= next)
+  (>>=) (GameOver cont) next =
+    GameOver (\winner -> cont winner >>= next)
 
 -- player is the player who won if the game is over
 tableProcessCommandM :: GameCommand -> Game (Maybe Player)
@@ -73,6 +88,21 @@ tableProcessCommandM (PlayCard player card) =
   -- check whether the card is legal
   do legal <- isCardLegalM player card
      if legal
-     then do _
+     then do roundOverTrick <- roundOverTrickM
+             case roundOverTrick of
+              Nothing ->
+                do next <- playerAfterM player
+                   recordEventM (PlayerTurnChanged next)
+                   return Nothing
+              Just (trick, trickTaker) ->
+                do recordEventM (TrickTaken trickTaker trick)
+                   over <- gameOverM
+                   case over of
+                    Nothing -> 
+                      do recordEventM (PlayerTurnChanged trickTaker)
+                         return Nothing
+                    Just winner ->
+                      do recordEventM (GameEnded winner)
+                         return (Just winner)
      else do recordEventM (IllegalCardAttempted player card)
              return Nothing
