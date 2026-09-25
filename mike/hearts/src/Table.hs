@@ -205,13 +205,23 @@ tableProcessEvent (TrickTaken player trick) state =
 tableProcessEvent (IllegalCardAttempted player card) state = state
 tableProcessEvent (GameEnded player) state = state
 
-runTable :: Game a -> (TableState, [GameEvent]) -> (a, TableState, [GameEvent]) -- <- correc order
+-- data Either a b = Left a | Right b
+-- Left: "failure", Right: "done"
+runTable :: Game a -> (TableState, [GameEvent]) ->
+  (Either (GameCommand -> Game a) a, TableState, [GameEvent]) -- <- correc order
 --                                  ^^^ Acccumulator, reverse order
 runTable (RecordEvent event cont) (state, rEvents) =
   let newState = tableProcessEvent event state
   in runTable (cont ()) (newState, event : rEvents)
-runTable (IsCardLegal player card cont) (state, rEvents) = _
-runTable (RoundOverTrick cont) (state, rEvents) = _
-runTable (PlayerAfter player cont) (state, rEvents) = _
-runTable (GameOver cont) (state, rEvents) = _
-runTable (Return result) (state, rEvents) = _
+runTable (IsCardLegal player card cont) s@(state, _) =
+  runTable (cont (playValid state player card)) s
+runTable (RoundOverTrick cont) s@(state, _) =
+  runTable (cont (roundOverTrick state)) s
+runTable (PlayerAfter player cont) s@(state, _) =
+  runTable (cont (playerAfter state player)) s
+runTable (GameOver cont) s@(state, _) =
+  runTable (cont (gameOver state)) s
+runTable (GetCommand cont) (state, rEvents) = 
+  (Left cont, state, reverse rEvents)
+runTable (Return result) (state, rEvents) =
+  (Right result, state, reverse rEvents)
