@@ -38,6 +38,7 @@ data Game a =
   | RoundOverTrick (Maybe (Trick, Player) -> Game a)
   | PlayerAfter Player (Player -> Game a)
   | GameOver (Maybe Player -> Game a)
+  | GetCommand (GameCommand -> Game a)
   | Return a
 
 recordEventM :: GameEvent -> Game ()
@@ -74,6 +75,8 @@ instance Monad Game where
     PlayerAfter player (\player -> cont player >>= next)
   (>>=) (GameOver cont) next =
     GameOver (\winner -> cont winner >>= next)
+  (>>=) (GetCommand cont) next =
+    GetCommand (\command -> cont command >>= next)
 
 -- player is the player who won if the game is over
 tableProcessCommandM :: GameCommand -> Game (Maybe Player)
@@ -106,3 +109,10 @@ tableProcessCommandM (PlayCard player card) =
                          return (Just winner)
      else do recordEventM (IllegalCardAttempted player card)
              return Nothing
+
+tableLoopM :: GameCommand -> Game Player
+tableLoopM command =
+  do maybeWinner <- tableProcessCommandM command
+     case maybeWinner of
+      Nothing -> GetCommand tableLoopM
+      Just winner -> return winner
