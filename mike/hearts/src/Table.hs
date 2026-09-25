@@ -204,3 +204,10 @@ tableProcessEvent (TrickTaken player trick) state =
   }
 tableProcessEvent (IllegalCardAttempted player card) state = state
 tableProcessEvent (GameEnded player) state = state
+
+runTable :: Game a -> (TableState, [GameEvent]) -> (a, TableState, [GameEvent]) -- <- correc order
+--                                  ^^^ Acccumulator, reverse order
+runTable (RecordEvent event cont) (state, rEvents) =
+  let newState = tableProcessEvent event state
+  in runTable (cont ()) (newState, event : rEvents)
+runTable (IsCardLegal player card cont) (state, rEvents) = _
