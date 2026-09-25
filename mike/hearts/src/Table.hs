@@ -10,9 +10,6 @@ import Data.Set (Set)
 import qualified Data.Map.Strict as Map
 import Data.Map.Strict (Map, (!))
 
-import qualified Data.Stream as Stream
-import Data.Stream (Stream)
-
 import Cards
 import GameEvent
 
@@ -36,7 +33,7 @@ type PlayerPiles = Map Player Pile
 data TableState =
   TableState
   { tableStatePlayers :: [Player],
-    tableStateCurrentPlayer :: Player, -- unendliche Liste
+    tableStateCurrentPlayer :: Player,
     tableStateHands   :: PlayerHands,
     tableStatePiles  :: PlayerPiles,
     tableStateTrick   :: Trick
