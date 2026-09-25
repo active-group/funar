@@ -21,3 +21,5 @@ compiled/
 /hearts-frontend/hearts.js
 
 .fake
+
+node_modules/
