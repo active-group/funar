@@ -211,3 +211,7 @@ runTable (RecordEvent event cont) (state, rEvents) =
   let newState = tableProcessEvent event state
   in runTable (cont ()) (newState, event : rEvents)
 runTable (IsCardLegal player card cont) (state, rEvents) = _
+runTable (RoundOverTrick cont) (state, rEvents) = _
+runTable (PlayerAfter player cont) (state, rEvents) = _
+runTable (GameOver cont) (state, rEvents) = _
+runTable (Return result) (state, rEvents) = _
