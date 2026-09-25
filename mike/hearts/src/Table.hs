@@ -14,7 +14,6 @@ import Cards
 import GameEvent
 
 import Debug.Trace (trace)
-import System.Random (RandomGen(next))
 
 -- | Wert einer Karte
 cardScore :: Card -> Integer
