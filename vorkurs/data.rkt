@@ -145,3 +145,48 @@ class Dillo {
 |#
 
 ; Gürteltier füttern, Futtermenge variabel, totes Gürteltier nimmt nicht zu
+
+; Gürteltier futtern, totes Gürteltier nimmt nicht zu
+(: feed-dillo (dillo number -> dillo))
+
+(check-expect (feed-dillo dillo1 3)
+              (make-dillo #t 13))
+(check-expect (feed-dillo dillo2 5)
+              (make-dillo #f 8))
+
+#;(define feed-dillo
+  (lambda (dillo food-weight)
+    (cond
+      ((equal? (dillo-alive? dillo) #t)
+       (make-dillo #t
+                   (+ (dillo-weight dillo)
+                      food-weight)))
+      ((equal? (dillo-alive? dillo) #f)
+       dillo))))
+
+#;(define feed-dillo
+  (lambda (dillo food-weight)
+    (cond
+      ((dillo-alive? dillo)
+       (make-dillo #t
+                   (+ (dillo-weight dillo)
+                      food-weight)))
+      (else   ; (not (dillo-alive? dillo))
+       dillo))))
+
+#;(define feed-dillo
+  (lambda (dillo food-weight)
+    (if (dillo-alive? dillo)
+        (make-dillo #t
+                    (+ (dillo-weight dillo)
+                       food-weight))
+        dillo)))
+
+(define feed-dillo
+  (lambda (dillo food-weight)
+    (make-dillo (dillo-alive? dillo)
+                (if (dillo-alive? dillo)
+                    (+ (dillo-weight dillo) food-weight)
+                    (dillo-weight dillo)))))
+
+    
