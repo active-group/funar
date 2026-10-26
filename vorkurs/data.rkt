@@ -250,8 +250,13 @@ class Dillo {
 ; - eine Cons-Liste aus erstem Element und Rest-Liste
 ;                                               ^^^^^ Selbstbezug
 
-(define list-of-numbers
+#;(define list-of-numbers
   (signature (mixed empty-list cons-list)))
+
+(define list-of
+  (lambda (element) ; Signatur der Elemente
+    (signature (mixed empty-list
+                      (cons-list-of element)))))
 
 (define-singleton empty-list ; Signatur
   empty ; die leere Liste (Singleton)
@@ -260,11 +265,11 @@ class Dillo {
 ; Eine Cons-Liste besteht aus:
 ; - erstes Element UND
 ; - Rest-Liste
-(define-record cons-list
+(define-record (cons-list-of element) ; macht im Hintergrund ein (lambda (element) ...)
   cons
   cons?
-  (first number)
-  (rest list-of-numbers))
+  (first element)
+  (rest (list-of element)))
 
 ; 1elementige Liste: 5
 (define list1 (cons 5 empty))
