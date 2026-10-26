@@ -184,9 +184,11 @@ class Dillo {
 
 (define feed-dillo
   (lambda (dillo food-weight)
-    (make-dillo (dillo-alive? dillo)
-                (if (dillo-alive? dillo)
-                    (+ (dillo-weight dillo) food-weight)
-                    (dillo-weight dillo)))))
+    (define alive? (dillo-alive? dillo))
+    (define weight (dillo-weight dillo))
+    (make-dillo alive?
+                (if alive?
+                    (+ weight food-weight)
+                    weight))))
 
     
