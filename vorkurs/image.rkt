@@ -29,6 +29,12 @@
 
 ; Konstruktionsanleitung / design recipes
 
+; Kurzbeschreibung:
+; quadratisches Kachelmuster aus zwei Bildern berechnen
+
+; Signatur
+(: tile (image image -> image))
+
 (define tile
   (lambda (image1 image2)
     (above
