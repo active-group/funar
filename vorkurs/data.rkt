@@ -86,7 +86,7 @@
 
 (: msm-to-time (natural -> time))
 
-(check-expect (msm->time 664) time1)
+(check-expect (msm-to-time 664) time1)
 
 ; Schablone
 
