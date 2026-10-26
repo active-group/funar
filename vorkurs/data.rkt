@@ -258,7 +258,7 @@ class Dillo {
   empty?) ; Prädikat
 
 ; Eine Cons-Liste besteht aus:
-; - erstes Element
+; - erstes Element UND
 ; - Rest-Liste
 (define-record cons-list
   cons
@@ -282,9 +282,40 @@ class Dillo {
 (check-expect (list-sum list4)
               22)
 
+
+; Schablone
+#;(define list-sum
+  (lambda (list)
+    (cond
+      ((empty? list) ...)
+      ((cons? list)
+       ...
+       (first list)
+       (list-sum (rest list))
+       ...
+       ))))
+
 (define list-sum
   (lambda (list)
-    ...))
+    (cond
+      ((empty? list) 0)
+      ((cons? list)
+       (+ (first list)
+          (list-sum (rest list)))))))
 
+; Liste aufmultiplizieren
+(: list-product (list-of-numbers -> number))
 
- 
+(check-expect (list-product list4)
+              560)
+
+(define list-product
+  (lambda (list)
+    (cond
+      ((empty? list) 1)
+      ((cons? list)
+       (* (first list)
+          (list-product (rest list)))))))
+   
+
+; Aus einer Liste die geraden Zahlen extrahieren
