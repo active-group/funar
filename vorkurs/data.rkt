@@ -56,10 +56,27 @@
 (: time-hour (time -> natural))
 (: time-minute (time -> natural))
 
-
-
 ; 11 Uhr 4 Minuten
 (define time1 (make-time 11 04))
 ; 15:13 Uhr
 (define time2 (make-time 15 13))
 
+; Minuten seit Mitternacht
+(: minutes-since-midnight (time -> natural))
+
+(check-expect (minutes-since-midnight time1)
+              664)
+(check-expect (minutes-since-midnight time2)
+              913)
+
+; Schablone
+#;(define minutes-since-midnight
+  (lambda (time)
+    ... (time-hour time) ...
+    ... (time-minute time) ...))
+
+
+(define minutes-since-midnight
+  (lambda (time)
+    (+ (* 60 (time-hour time))
+       (time-minute time))))
