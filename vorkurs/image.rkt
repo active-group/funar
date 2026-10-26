@@ -32,8 +32,13 @@
 ; Kurzbeschreibung:
 ; quadratisches Kachelmuster aus zwei Bildern berechnen
 
-; Signatur
+; Signaturdeklaration
 (: tile (image image -> image))
+
+; Beispiel/Testfall
+(check-expect (tile circle1 star1)
+              (above (beside circle1 star1)
+                     (beside star1 circle1)))
 
 (define tile
   (lambda (image1 image2)
@@ -41,7 +46,7 @@
      (beside image1 image2)
      (beside image2 image1))))
 
-(tile circle1 star1)
+
 
 
 #|
