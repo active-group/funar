@@ -318,4 +318,42 @@ class Dillo {
           (list-product (rest list)))))))
    
 
-; Aus einer Liste die geraden Zahlen extrahieren
+; Aus einer Liste die ungeraden Zahlen extrahieren
+(: extract-odds (list-of-numbers -> list-of-numbers))
+
+(check-expect (extract-odds list4)
+              (cons 7 (cons 5 empty)))
+
+(define extract-odds
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (if (odd? (first list))
+           (cons (first list)
+                 (extract-odds (rest list)))
+           (extract-odds (rest list)))))))
+
+; Abstraktion:
+; - 2 ähnliche/verwandte Stücken Code
+
+; - kopieren (ein letztes Mal) & umbenennen; aufpassen bei den rekursiven Aufrufen
+; - Unterschiede durch (abstrakte) Namen ersetzen
+; - Namen in Lambda-Ausdruck aufnehmen; rekursive Aufrufe mitnehmen
+
+(: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
+
+(check-expect (extract even? list4)
+              (cons 2 (cons 8 empty)))
+(check-expect (extract odd? list4)
+              (cons 7 (cons 5 empty)))
+
+(define extract
+  (lambda (p? list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (if (p? (first list))
+           (cons (first list)
+                 (extract p? (rest list)))
+           (extract p? (rest list)))))))
