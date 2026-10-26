@@ -105,6 +105,7 @@
 ; Gürteltier hat folgende Eigenschaften:
 ; - lebendig oder tot  -UND-
 ; - Gewicht
+; Zustand des Gürteltiers zu einem bestimmten Zeitpunkt
 (define-record dillo
   make-dillo
   (dillo-alive? boolean)
