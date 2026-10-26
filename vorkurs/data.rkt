@@ -224,7 +224,6 @@ class Dillo {
 (define animal
   (signature (mixed dillo parrot)))
 
-#|
 ; Tier überfahren
 (: run-over-animal (animal -> animal))
 
@@ -233,11 +232,17 @@ class Dillo {
 (check-expect (run-over-animal parrot1)
               (make-parrot "" 1))
 
+; Schablone
+#;(define run-over-animal
+  (lambda (animal)
+    (cond
+      ((dillo? animal) ...)
+      ((parrot? animal) ...))))
+
 (define run-over-animal
   (lambda (animal)
     (cond
-      (... ...)
-      (... ...))))
+      ((dillo? animal) (run-over-dillo animal))
+      ((parrot? animal) (run-over-parrot animal)))))
 
-|#
  
