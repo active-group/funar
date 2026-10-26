@@ -49,10 +49,12 @@
 ; zusammengesetzte Daten / Produkt
 (define-record time ; Signatur
   make-time ; Konstruktor
-  (time-hour natural)
+  (time-hour natural) ; Selektor, "Getter-Funktion"
   (time-minute natural))
 
 (: make-time (natural natural -> time))
+(: time-hour (time -> natural))
+(: time-minute (time -> natural))
 
 
 
