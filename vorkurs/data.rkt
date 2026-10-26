@@ -108,12 +108,14 @@
 ; Zustand des Gürteltiers zu einem bestimmten Zeitpunkt
 (define-record dillo
   make-dillo
+  dillo? ; Prädikat
   (dillo-alive? boolean)
   (dillo-weight number))
 
 (: make-dillo (boolean number -> dillo))
 (: dillo-alive? (dillo -> boolean))
 (: dillo-weight (dillo -> number))
+(: dillo? (any -> boolean))
 
 ; lebendiges Gürteltier, 10kg
 (define dillo1 (make-dillo #t 10))
@@ -214,6 +216,27 @@ class Dillo {
   (lambda (parrot)
     (make-parrot "" (parrot-weight parrot))))
 
+; Tier (auf dem texanischen Highway) ist eins der folgenden:
+; - Gürteltier ODER
+; - Papagei
+; Fallunterscheidung, hier gemischte Daten, Summe
+(define animal
+  (signature (mixed dillo parrot)))
 
+#|
+; Tier überfahren
+(: run-over-animal (animal -> animal))
 
-    
+(check-expect (run-over-animal dillo1)
+              (make-dillo #f 10))
+(check-expect (run-over-animal parrot1)
+              (make-parrot "" 1))
+
+(define run-over-animal
+  (lambda (animal)
+    (cond
+      (... ...)
+      (... ...))))
+
+|#
+ 
