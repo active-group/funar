@@ -282,7 +282,7 @@ class Dillo {
 (define list4 (cons 7 list3))
 
 ; Liste aufsummieren
-(: list-sum (list-of-numbers -> number))
+(: list-sum ((list-of number) -> number))
 
 (check-expect (list-sum list4)
               22)
