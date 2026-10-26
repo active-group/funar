@@ -281,6 +281,8 @@ class Dillo {
 ;(define list4 (cons 7 (cons 2 (cons 5 (cons 8 empty)))))
 (define list4 (cons 7 list3))
 
+(define list-of-numbers (signature (list-of number)))
+
 ; Liste aufsummieren
 (: list-sum ((list-of number) -> number))
 
