@@ -408,7 +408,9 @@ class Dillo {
 
 (define inc (lambda (x) (+ 1 x)))
 
-(: map-list ((%element -> %element) (list-of %element) -> (list-of %element)))
+;(: map-list ((%element1 -> %element2) (list-of %element1) -> (list-of %element2)))
+
+(: map-list ((%a -> %b) (list-of %a) -> (list-of %b)))
 
 (define map-list
   (lambda (f list)
