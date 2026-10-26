@@ -348,7 +348,9 @@ class Dillo {
 ; - Unterschiede durch (abstrakte) Namen ersetzen
 ; - Namen in Lambda-Ausdruck aufnehmen; rekursive Aufrufe mitnehmen
 
-(: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
+;(: extract ((number -> boolean) list-of-numbers -> list-of-numbers))
+; %element: Signaturvariable; bei jedem Aufruf andere Signatur
+(: extract ((%element -> boolean) (list-of %element) -> (list-of %element)))
 
 (check-expect (extract even? list4)
               (cons 2 (cons 8 empty)))
@@ -365,4 +367,5 @@ class Dillo {
                  (extract p? (rest list)))
            (extract p? (rest list)))))))
 
+(: dillos (list-of dillo))
 (define dillos (cons dillo1 (cons dillo2 empty)))
