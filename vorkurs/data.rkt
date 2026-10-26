@@ -423,7 +423,13 @@ class Dillo {
 
 (: list-fold ((%a %b -> %b) %b (list-of %a) -> %b))
 
-
+(check-expect (list-fold (lambda (first-list rec-result)
+                           (if (odd? first-list)
+                               (cons first-list
+                                     rec-result)
+                               rec-result))
+                         empty list4)
+              (cons 7 (cons 5 empty)))
 
 (define list-fold
   (lambda (f e list)
