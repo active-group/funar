@@ -407,3 +407,14 @@ class Dillo {
         (inc-list (rest list)))))))
 
 (define inc (lambda (x) (+ 1 x)))
+
+(: map-list ((%element -> %element) (list-of %element) -> (list-of %element)))
+
+(define map-list
+  (lambda (f list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cons
+        (f (first list))
+        (map-list f (rest list)))))))
