@@ -132,7 +132,7 @@
 (define run-over-dillo
   (lambda (dillo)
     (make-dillo #f (dillo-weight dillo))))
-    
+
 
 #| OO
 class Dillo {
@@ -143,3 +143,5 @@ class Dillo {
   }
 
 |#
+
+; Gürteltier füttern, Futtermenge variabel, totes Gürteltier nimmt nicht zu
