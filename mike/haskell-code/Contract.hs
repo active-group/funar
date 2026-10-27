@@ -44,6 +44,7 @@ data Contract =
     One Currency
   | Value Amount Contract
   | Later Date Contract
+  | Sell Contract
   deriving Show
 
 -- "Ich bekomme 1€ jetzt."
@@ -69,3 +70,6 @@ zeroCouponBond date amount currency =
 
 zcb1 :: Contract
 zcb1 = zeroCouponBond xmas 100 EUR
+
+-- "Ich zahle Weihnachten 100$"
+c5 = Sell (Later xmas (Value 100 (One USD)))
