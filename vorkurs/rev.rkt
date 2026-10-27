@@ -16,6 +16,10 @@
         (first list) ; 1
        )))))
 
+; Laufzeit für Liste der Länge n:
+; 1 + 2 + 3 + ... + (n-1) + n = (n + 1) + (n + 1) ... = (n+1)*n/2
+; = O(n^2)
+
 ; Element an eine Liste anhängen
 (: add-to-list ((list-of %a) %a -> (list-of %a)))
 
@@ -30,4 +34,17 @@
        (cons
         (first list)
         (add-to-list (rest list) element))))))
-                   
+
+(: rev2 ((list-of %a) (list-of %a) -> (list-of %a)))
+
+(check-expect (rev2 (list 1 2 3 4) empty)
+              (list 4 3 2 1))
+
+(define rev2
+  (lambda (list acc) ; Akkumulator, "bisher gesehene Elemente, umgedreht
+    (cond
+      ((empty? list) acc)
+      ((cons? list)
+       (rev2 (rest list)
+             (cons (first list) acc))))))
+                  
