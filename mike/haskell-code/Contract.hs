@@ -7,22 +7,27 @@ module Contract where
 
 -}
 
-data Date = MkDate String  -- ISO-Format: YYYY-MM-DD
-  deriving Show
+type Date = String  -- ISO-Format: YYYY-MM-DD
+
+xmas :: Date
+xmas = "2026-12-24"
 
 isBefore :: Date -> Date -> Bool
-isBefore (MkDate s1) (MkDate s2) = s1 <= s2
+isBefore s1 s2 = s1 <= s2
 
 type Amount = Double
 
 data Currency = EUR | GBP | USD | YEN
   deriving Show
 
+{}
 data Contract =
     ZeroCouponBond Date Amount Currency
+  | Put
+  | Call 
+  | Future
+  | Everest
 
-xmas :: Date
-xmas = MkDate "2026-12-24"
 
 zcb1 :: Contract
 zcb1 = ZeroCouponBond xmas 100 EUR
