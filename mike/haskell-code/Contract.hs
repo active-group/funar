@@ -55,3 +55,12 @@ c2 = Value 100 (One EUR)
 -- "Ich bekomme Weihnachten 100€."
 c3 :: Contract
 c3 = Later xmas (Value 100 (One EUR))
+
+
+-- "Ich bekomme Weihnachten 1€."
+c4 :: Contract
+c4 = Later xmas (One EUR)
+
+zeroCouponBond :: Date -> Amount -> Currency -> Contract
+zeroCouponBond date amount currency =
+    Later date (Value amount (One currency))
