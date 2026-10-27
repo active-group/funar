@@ -82,3 +82,5 @@ c5' = Sell (zeroCouponBond xmas 100 USD)
 
 fxSwap1 = Later xmas (Combi (Value 100 (One EUR))
                             (Sell (Value 100 (One USD))))
+
+c6 = Sell c5
