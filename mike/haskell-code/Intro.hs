@@ -121,5 +121,5 @@ runOverAnimal (MkParrot sentence weight) = MkParrot "" weight
 feedAnimal (MkDillo liveness weight) foodAmount =
     case liveness of
         Alive -> MkDillo Alive (weight + foodAmount)
-        Dead -> _
+        Dead -> MkDillo Dead weight
 feedAnimal (MkParrot sentence weight) foodAmount = _
