@@ -15,5 +15,18 @@ y = x * 2
 -- - Katze
 -- - Schlange
 data Pet = Dog | Cat | Snake -- Aufzählung
+  deriving Show
 
 -- Ist Haustier niedlich?
+isCute :: Pet -> Bool
+
+-- >>> isCute Cat
+-- True
+-- >>> isCute Snake
+-- False
+
+isCute pet =
+    case pet of
+        Dog -> True
+        Cat -> True
+        Snake -> False
