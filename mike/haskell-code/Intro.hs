@@ -15,4 +15,4 @@ y = x * 2
 -- - Katze
 -- - Schlange
 data Pet = Dog | Cat | Snake -- Aufzählung
-  deriving Show
+ deriving Show
