@@ -163,6 +163,7 @@ feedAnimal' foodAmount (MkParrot sentence weight)  =
 -- ob ein Punkt innerhalb oder außerhalb einer Figur liegt
 
 data Point = MkPoint Double Double
+  deriving Show
 
 point1 = MkPoint 1 1
 
@@ -175,12 +176,13 @@ data Shape
   = MkCircle {center :: Point, radius :: Double}
   | MkSquare {leftBottom :: Point, sideLength :: Double}
   | MkOverlap {shape1 :: Shape, shape2 :: Shape}
+  deriving Show
 
 circle1 = MkCircle (MkPoint 2 2) 2.0
 
 square1 = MkSquare (MkPoint 3 3) 4.0
 
-overlap1 = circle1 <> square1
+overlap1 = MkOverlap circle1 square1
 
 within :: Shape -> Point -> Bool
 within (MkCircle (MkPoint centerX centerY) radius) (MkPoint x y) =
@@ -195,3 +197,28 @@ within (MkSquare (MkPoint squareX squareY) sideLength) (MkPoint x y) =
         && ((y >= squareY) && (y <= rightTopY))
 within (MkOverlap shape1 shape2) point =
   within shape1 point || within shape2 point
+
+-- Namen aus Sonderzeichen sind implizit infix
+
+-- Eine Liste ist eins der folgenden:
+-- - die leere Liste                                   []  ODER
+-- - eine Cons-Liste aus erstem Element und Rest-Liste  :
+
+-- 1elementige Liste: 5
+list1 :: [Integer]
+list1 = 5 : []  -- (cons 5 empty)
+-- 2elementige Liste: 2 5
+list2 :: [Integer]
+list2 = 2 : (5 : [])
+list3 :: [Integer]
+list3 = [2, 5, 8]
+list4 :: [Integer]
+list4 = 7 : list3
+
+listSum :: [Integer] -> Integer
+
+-- >>> listSum list4
+-- 22
+listSum [] = 0
+-- listSum (first:rest) =  first + listSum rest
+listSum (x:xs) = x + listSum xs
