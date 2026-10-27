@@ -116,3 +116,7 @@ runOverAnimal :: Animal -> Animal
 -- 1 Gleichung pro Fall, muß jeweils Konstruktor
 runOverAnimal (MkDillo liveness weight) = MkDillo Dead weight
 runOverAnimal (MkParrot sentence weight) = MkParrot "" weight
+
+-- Tier füttern
+feedAnimal (MkDillo liveness weight) foodAmount = _
+feedAnimal (MkParrot sentence weight) foodAmount = _
