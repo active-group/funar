@@ -226,3 +226,8 @@ listSum (x:xs) = x + listSum xs
 listMap :: (a -> b) -> [a] -> [b]
 listMap f [] = []
 listMap f (x:xs) = (f x) : (listMap f xs)
+
+addTriple :: (Integer, Integer, Integer) -> Integer
+addTriple triple =
+    let (a, b, c) = triple
+    in a + b + c
