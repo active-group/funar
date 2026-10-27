@@ -122,4 +122,4 @@ feedAnimal dillo@(MkDillo liveness weight) foodAmount = -- Alias-Pattern
     case liveness of
         Alive -> MkDillo Alive (weight + foodAmount)
         Dead -> dillo -- MkDillo Dead weight
-feedAnimal (MkParrot sentence weight) foodAmount = _
+feedAnimal (MkParrot sentence weight) foodAmount = MkParrot "" weight
