@@ -104,3 +104,9 @@ parrot1 = MkParrot "welcome!" 1
 
 parrot2 :: Animal
 parrot2 = MkParrot "au revoir!" 2
+
+-- Tier überfahren
+runOverAnimal :: Animal -> Animal
+-- 1 Gleichung pro Fall, muß jeweils Konstruktor
+runOverAnimal (MkDillo liveness weight) = _
+runOverAnimal (MkParrot sentence weight) = _
