@@ -20,7 +20,7 @@ type Amount = Double
 data Currency = EUR | GBP | USD | YEN
   deriving Show
 
-{}
+{-
 data Contract =
     ZeroCouponBond Date Amount Currency
   | Put
@@ -28,6 +28,6 @@ data Contract =
   | Future
   | Everest
 
-
 zcb1 :: Contract
 zcb1 = ZeroCouponBond xmas 100 EUR
+-}
