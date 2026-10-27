@@ -25,8 +25,15 @@ isCute :: Pet -> Bool
 -- >>> isCute Snake
 -- False
 
+{-
 isCute pet =
     case pet of
         Dog -> True
         Cat -> True
         Snake -> False
+-}
+
+-- eine Gleichung pro Fall
+isCute Dog = True
+isCute Cat = True
+isCute Snake = False
