@@ -37,3 +37,10 @@ isCute pet =
 isCute Dog = True
 isCute Cat = True
 isCute Snake = False
+
+-- Gürteltier hat folgende Eigenschaften:
+-- - lebendig oder tot
+-- - Gewicht
+
+data Liveness = Alive | Dead
+  deriving Show
