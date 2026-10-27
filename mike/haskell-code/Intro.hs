@@ -152,3 +152,12 @@ feedAnimal' foodAmount dillo@(MkDillo liveness weight) =
     Dead -> dillo -- MkDillo Dead weight
 feedAnimal' foodAmount (MkParrot sentence weight)  =
   MkParrot sentence (weight + foodAmount)
+
+-- Eine (geometrische) Figur ist eins der folgenden:
+-- - Kreis ODER
+-- - Quadrat ODER
+-- - Zusammenlegung von zwei Figuren
+
+-- 1. Datentyp für Figuren
+-- 2. eine Funktion, die feststellt, 
+-- ob ein Punkt innerhalb oder außerhalb einer Figur liegt
