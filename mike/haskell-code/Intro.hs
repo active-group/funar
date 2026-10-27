@@ -7,6 +7,10 @@ x = 43
 y :: Integer
 y = x * 2
 
+double :: Integer -> Integer
+-- double x = x * 2
+double = \ x -> x * 2
+
 -- >>> y
 -- 84
 
