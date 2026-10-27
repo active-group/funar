@@ -307,7 +307,7 @@ class Dillo {
     (cond
       ((empty? list) 0)
       ((cons? list)
-       (+ (first list)
+       (+ (first list) ; Kontext des rekursiven Aufrufs
           (list-sum (rest list)))))))
 
 ; Liste aufmultiplizieren
