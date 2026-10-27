@@ -51,3 +51,7 @@ c1 = One EUR
 -- "Ich bekomme 100€ jetzt."
 c2 :: Contract
 c2 = Value 100 (One EUR)
+
+-- "Ich bekomme Weihnachten 100€."
+c3 :: Contract
+c3 = Later xmas (Value 100 (One EUR))
