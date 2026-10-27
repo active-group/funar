@@ -65,4 +65,4 @@ dillo2 = MkDillo Dead 8
 
 -- Gürteltier überfahren
 runOverDillo :: Dillo -> Dillo
-runOverDillo dillo = _
+runOverDillo dillo = undefined
