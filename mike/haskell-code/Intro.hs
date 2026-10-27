@@ -2,7 +2,7 @@
 module Intro where
 
 x :: Integer
-x = 42
+x = 43
 
 y :: Integer
 y = x * 2
