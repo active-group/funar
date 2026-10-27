@@ -62,3 +62,7 @@ dillo1 = MkDillo { dilloLiveness = Alive,
 -- totes Gürteltier, 8kg
 dillo2 :: Dillo
 dillo2 = MkDillo Dead 8
+
+-- Gürteltier überfahren
+runOverDillo :: Dillo -> Dillo
+runOverDillo dillo = _
