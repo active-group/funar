@@ -93,5 +93,5 @@ data Payment = MkPayment Date Direction Amount Currency
   deriving Show
 
 -- Datum: "heute", Zahlungen bis heute
-
+-- zurückgegeben wird der "Residualvertrag"
 semantics :: Contract -> Date -> ([Payment], Contract)
