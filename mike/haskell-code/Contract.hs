@@ -11,6 +11,8 @@ module Contract where
   - Betrag
   - Später/Datum
 
+- Currency-Swap:
+  Weihnachten bekomme ich 100€ und zahle 100$.
 -}
 
 type Date = String  -- ISO-Format: YYYY-MM-DD
@@ -64,3 +66,6 @@ c4 = Later xmas (One EUR)
 zeroCouponBond :: Date -> Amount -> Currency -> Contract
 zeroCouponBond date amount currency =
     Later date (Value amount (One currency))
+
+zcb1 :: Contract
+zcb1 = zeroCouponBond xmas 100 EUR
