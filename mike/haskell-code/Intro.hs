@@ -44,3 +44,6 @@ isCute Snake = False
 
 data Liveness = Alive | Dead
   deriving Show
+
+-- Typalias
+type Weight = Integer
