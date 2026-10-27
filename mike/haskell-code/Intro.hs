@@ -228,6 +228,10 @@ listMap f [] = []
 listMap f (x:xs) = (f x) : (listMap f xs)
 
 addTriple :: (Integer, Integer, Integer) -> Integer
+
+-- >>> addTriple (1,2,3)
+-- 6
+
 addTriple triple =
     let (a, b, c) = triple
     in a + b + c
