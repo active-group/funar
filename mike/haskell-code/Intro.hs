@@ -118,5 +118,8 @@ runOverAnimal (MkDillo liveness weight) = MkDillo Dead weight
 runOverAnimal (MkParrot sentence weight) = MkParrot "" weight
 
 -- Tier füttern
-feedAnimal (MkDillo liveness weight) foodAmount = _
+feedAnimal (MkDillo liveness weight) foodAmount =
+    case liveness of
+        Alive -> MkDillo Alive (weight + foodAmount)
+        Dead -> _
 feedAnimal (MkParrot sentence weight) foodAmount = _
