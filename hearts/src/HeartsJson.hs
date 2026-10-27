@@ -192,8 +192,8 @@ encodeGameEvent gameEvent =
       encodeConstructor1 "PlayerTurnChanged" (encodePlayer player)
     LegalCardPlayed player card ->
       encodeConstructor2 "LegalCardPlayed" (encodePlayer player) (encodeCard card)
-    IllegalCardAttempted player card ->
-      encodeConstructor2 "IllegalCardAttempted" (encodePlayer player) (encodeCard card)
+    InvalidCardAttempted player card ->
+      encodeConstructor2 "InvalidCardAttempted" (encodePlayer player) (encodeCard card)
     GameEnded player ->
       encodeConstructor1 "GameEnded" (encodePlayer player)
     HandDealt player hand ->
@@ -229,7 +229,7 @@ trickTakenDecoder :: Decoder GameEvent
 trickTakenDecoder = constructor2Decoder playerDecoder trickDecoder TrickTaken
 
 illegalCardPlayedDecoder :: Decoder GameEvent
-illegalCardPlayedDecoder = constructor2Decoder playerDecoder cardDecoder IllegalCardAttempted
+illegalCardPlayedDecoder = constructor2Decoder playerDecoder cardDecoder InvalidCardAttempted
 
 gameEndedDecoder :: Decoder GameEvent
 gameEndedDecoder = constructor1Decoder playerDecoder GameEnded
@@ -248,7 +248,7 @@ gameEventDataTable =
       ("PlayerTurnChanged", playerTurnChangedDecoder),
       ("LegalCardPlayed", legalCardPlayedDecoder),
       ("TrickTaken", trickTakenDecoder),
-      ("IllegalCardAttempted", illegalCardPlayedDecoder),
+      ("InvalidCardAttempted", illegalCardPlayedDecoder),
       ("GameEnded", gameEndedDecoder)
     ]
 
