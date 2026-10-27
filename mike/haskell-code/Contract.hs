@@ -40,7 +40,14 @@ zcb1 = ZeroCouponBond xmas 100 EUR
 
 data Contract =
     One Currency
-    deriving Show
+  | Value Amount Contract
+  | Later Date Contract
+  deriving Show
 
 -- "Ich bekomme 1€ jetzt."
+c1 :: Contract
 c1 = One EUR
+
+-- "Ich bekomme 100€ jetzt."
+c2 :: Contract
+c2 = Value 100 (One EUR)
