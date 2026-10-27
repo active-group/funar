@@ -65,4 +65,5 @@ dillo2 = MkDillo Dead 8
 
 -- Gürteltier überfahren
 runOverDillo :: Dillo -> Dillo
-runOverDillo dillo = undefined
+runOverDillo dillo = 
+    MkDillo {dilloLiveness = Dead, dilloWeight = dilloWeight dillo}
