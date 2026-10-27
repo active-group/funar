@@ -11,6 +11,11 @@ double :: Integer -> Integer
 -- double x = x * 2
 double = \ x -> x * 2
 
+-- doublePlus x y = x * 2 + y
+doublePlus :: Integer -> Integer -> Integer
+doublePlus = \ x -> \ y -> x * 2 + y
+
+
 -- >>> y
 -- 84
 
