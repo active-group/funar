@@ -85,3 +85,13 @@ fxSwap1 = Later xmas (Combi (Value 100 (One EUR))
 
 -- "Ich bekomme Weihnachten 100$."
 c6 = Sell c5
+
+data Direction = Incoming | Outgoing
+  deriving Show
+
+data Payment = MkPayment Date Direction Amount Currency
+  deriving Show
+
+-- Datum: "heute", Zahlungen bis heute
+
+semantics :: Contract -> Date -> ([Payment], Contract)
