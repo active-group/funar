@@ -127,10 +127,10 @@ semantics (Sell contract) today =
 semantics (Combi contract1 contract2) today =
   let (payments1, residualContract1) = semantics contract1 today
       (payments2, residualContract2) = semantics contract2 today
-  in (payments1 ++ payments2, Combi residualContract1 residualContract2)
+  in (payments1 ++ payments2, combi residualContract1 residualContract2)
 
 -- >>> semantics c10 "2026-10-28"
--- ([MkPayment "2026-10-28" Incoming 100.0 EUR],Value 100.0 (Combi Zero (Later "2026-12-24" (One EUR))))
+-- ([MkPayment "2026-10-28" Incoming 100.0 EUR],Value 100.0 (Later "2026-12-24" (One EUR)))
 
 c10 :: Contract
 c10 =
