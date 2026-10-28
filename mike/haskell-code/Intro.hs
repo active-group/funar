@@ -297,6 +297,15 @@ optionalMap :: (a -> b) -> Optional a -> Optional b
 optionalMap f Null = Null
 optionalMap f (Result a) = Result (f a)
 
+-- >>> :info Functor
+-- type Functor :: (* -> *) -> Constraint
+-- class Functor f where
+--   fmap :: (a -> b) -> f a -> f b
+
+instance Functor Optional where
+    fmap :: (a -> b) -> Optional a -> Optional b
+    fmap = optionalMap
+
 instance Semigroup b => Semigroup (Optional b) where
   op :: Optional b -> Optional b -> Optional b
   op Null Null = Null
