@@ -357,3 +357,6 @@ instance (Semigroup b, Semigroup c) => Semigroup (b, c) where
 instance (Monoid b, Monoid c) => Monoid (b, c) where
     neutral :: (b, c)
     neutral = (neutral, neutral)
+
+-- >>> op ([1,2,3], [4,5,6]) ([7,8,9], [10, 11])
+-- ([1,2,3,7,8,9],[4,5,6,10,11])
