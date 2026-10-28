@@ -50,6 +50,12 @@ data Contract =
   | Combi Contract Contract
   deriving Show
 
+-- smart constructor
+combi :: Contract -> Contract -> Contract
+combi Zero c = c
+combi c Zero = c
+combi c1 c2 = Combi c1 c2
+
 -- "Ich bekomme 1€ jetzt."
 c1 :: Contract
 c1 = One EUR
