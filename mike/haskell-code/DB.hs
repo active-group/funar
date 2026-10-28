@@ -46,5 +46,6 @@ put key value = Put key value Return
 splice :: DB a -> (a -> DB b) -> DB b
 splice (Get key cont) next = 
     Get key (\value -> splice (cont value) next)
-splice (Put key value cont) next = _
+splice (Put key value cont) next = 
+    Put key value (\() -> splice (cont ()) next)
 splice (Return result) next = next result
