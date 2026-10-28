@@ -271,6 +271,17 @@ listIndex e (x:xs) =
 -- class Eq a where
 --   (==) :: a -> a -> Bool
 
+-- >>> :info Ord
+-- type Ord :: * -> Constraint
+-- class Eq a => Ord a where
+--   compare :: a -> a -> Ordering
+--   (<) :: a -> a -> Bool
+--   (<=) :: a -> a -> Bool
+--   (>) :: a -> a -> Bool
+--   (>=) :: a -> a -> Bool
+--   max :: a -> a -> a
+--   min :: a -> a -> a
+
 -- Typklasse: Interface
 -- Instanz: Implementierung
 
@@ -284,10 +295,3 @@ listIndex e (x:xs) =
 --   abs :: a -> a
 --   signum :: a -> a
 --   fromInteger :: Integer -> a
---   {-# MINIMAL (+), (*), abs, signum, fromInteger, (negate | (-)) #-}
---   	-- Defined in ‘GHC.Internal.Num’
--- instance Num Double -- Defined in ‘GHC.Internal.Float’
--- instance Num Float -- Defined in ‘GHC.Internal.Float’
--- instance Num Int -- Defined in ‘GHC.Internal.Num’
--- instance Num Integer -- Defined in ‘GHC.Internal.Num’
--- instance Num Word -- Defined in ‘GHC.Internal.Num’
