@@ -235,3 +235,22 @@ addTriple :: (Integer, Integer, Integer) -> Integer
 addTriple triple =
     let (a, b, c) = triple
     in a + b + c
+
+data Optional a =
+    Null
+  | Result a
+  deriving Show
+
+-- Index eines Elements in einer Liste finden
+listIndex :: a -> [a] -> Optional Integer
+
+-- >>> listIndex 4 [7, 3, 4, 9]
+-- 2
+
+listIndex e [] = Null
+listIndex e (x:xs) =
+    if e == x 
+    then Result 0
+    else case listIndex e xs of
+           Null -> Null
+           Result index -> Result (index + 1)
