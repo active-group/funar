@@ -321,9 +321,12 @@ listIndex e [] = Null
 listIndex e (x:xs) =
     if e == x 
     then Result 0
-    else case listIndex e xs of
+--    else optionalMap (\ index -> index + 1) (listIndex e xs)
+    else optionalMap (+1) (listIndex e xs)
+
+        {- case listIndex e xs of
            Null -> Null
-           Result index -> Result (index + 1)
+           Result index -> Result (index + 1) -}
 
 -- >>> :info Eq
 -- type Eq :: * -> Constraint
