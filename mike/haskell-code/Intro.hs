@@ -158,7 +158,8 @@ feedAnimal (MkParrot sentence weight) foodAmount =
 -- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
 
 swap :: (a -> b -> c) -> (b -> a -> c)
-swap f = \ b -> \ a -> f a b
+-- swap f = \ b -> \ a -> f a b
+swap f b a = f a b
 
 
 
@@ -170,6 +171,25 @@ feedAnimal' foodAmount dillo@(MkDillo liveness weight) =
     Dead -> dillo -- MkDillo Dead weight
 feedAnimal' foodAmount (MkParrot sentence weight)  =
   MkParrot sentence (weight + foodAmount)
+
+feedAnimal'' :: (Weight, Animal) -> Animal
+feedAnimal''(foodAmount, dillo@(MkDillo liveness weight)) =
+  -- Alias-Pattern
+  case liveness of
+    Alive -> MkDillo Alive (weight + foodAmount)
+    Dead -> dillo -- MkDillo Dead weight
+feedAnimal''(foodAmount, MkParrot sentence weight) =
+  MkParrot sentence (weight + foodAmount)
+
+tuplify :: (a -> b -> c) -> ((a, b) -> c)
+
+-- >>> tuplify feedAnimal(dillo1, 5)
+-- MkDillo {dilloLiveness = Alive, dilloWeight = 15}
+
+tuplify f = \ (a, b) -> f a b
+
+untuplify :: ((a, b) -> c) -> (a -> b -> c)
+untuplify f = \ a -> \ b -> f (a, b)
 
 -- Eine (geometrische) Figur ist eins der folgenden:
 -- - Kreis ODER
