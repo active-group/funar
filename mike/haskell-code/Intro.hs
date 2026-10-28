@@ -275,10 +275,6 @@ listSum [] = 0
 -- listSum (first:rest) =  first + listSum rest
 listSum (x:xs) = x + listSum xs
 
-listMap :: (a -> b) -> [a] -> [b]
-listMap f [] = []
-listMap f (x:xs) = (f x) : (listMap f xs)
-
 addTriple :: (Integer, Integer, Integer) -> Integer
 
 -- >>> addTriple (1,2,3)
@@ -292,6 +288,14 @@ data Optional a =
     Null
   | Result a
   deriving Show
+
+listMap :: (a -> b) -> [a] -> [b]
+listMap f [] = []
+listMap f (x : xs) = (f x) : (listMap f xs)
+
+optionalMap :: (a -> b) -> Optional a -> Optional b
+optionalMap f Null = Null
+optionalMap f (Result a) = Result (f a)
 
 instance Semigroup b => Semigroup (Optional b) where
   op :: Optional b -> Optional b -> Optional b
