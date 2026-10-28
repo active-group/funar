@@ -310,3 +310,33 @@ listIndex e (x:xs) =
 -- Assoziativität
 -- Halbgruppe
 -- op a (op b c) = op (op a b) c
+
+class Semigroup a where
+    -- op a (op b c) = op (op a b) c
+    op :: a -> a -> a
+
+instance Semigroup [b] where
+    op :: [b] -> [b] -> [b]
+    op = (++)
+
+-- >>> op [1,2,3] [4,5,6]
+-- [1,2,3,4,5,6]
+
+-- Halbgruppe
+-- + neutrales Element
+-- neutral :: a
+-- op neutral x = op x neutral = x
+-- Monoid
+class Semigroup a => Monoid a where
+    -- op neutral x = op x neutral = x
+    neutral :: a
+
+instance Monoid [b] where
+    neutral :: [b]
+    neutral = []
+
+listFold :: (a -> b -> b) -> b -> [a] -> b
+listFold f n [] = n
+listFold f n (x:xs) = f x (listFold f n xs)
+
+monoidFold list = listFold op neutral
