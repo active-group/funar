@@ -26,6 +26,14 @@ doublePlus = \ x -> \ y -> x * 2 + y
 data Pet = Dog | Cat | Snake -- Aufzählung
   deriving Show
 
+instance Eq Pet where
+    (==) :: Pet -> Pet -> Bool
+    (==) Dog Dog = True
+    (==) Cat Cat = True
+    (==) Snake Snake = True
+    (==) _ _ = False
+
+
 -- Ist Haustier niedlich?
 isCute :: Pet -> Bool
 
