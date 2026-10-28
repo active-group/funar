@@ -1,4 +1,8 @@
+{-# LANGUAGE InstanceSigs #-}
 module DB where
+
+import qualified Data.Map as Map
+import Data.Map (Map, (!))
 
 {-
 put "Mike" 100
@@ -50,9 +54,34 @@ splice (Put key value cont) next =
     Put key value (\() -> splice (cont ()) next)
 splice (Return result) next = next result
 
+-- >>> :info Monad
+-- type Monad :: (* -> *) -> Constraint
+-- class Applicative m => Monad m where
+--   (>>=) :: m a -> (a -> m b) -> m b
+--   return :: a -> m a
+
+instance Functor DB where
+
+instance Applicative DB where
+
+instance Monad DB where
+    (>>=) :: DB a -> (a -> DB b) -> DB b
+    (>>=) = splice
+    return :: a -> DB a
+    return = Return
+
 p1' :: DB String
 p1' = splice (put "Mike" 100) (\() ->
       splice (get "Mike") (\x ->
       splice (put "Mike" (x+1)) (\() ->
       splice (get "Mike") (\y ->
       Return (show (x+y))))))
+
+p1'' :: DB String
+p1'' = do put "Mike" 100
+          x <- get "Mike"
+          put "Mike" (x+1)
+          y <- get "Mike"
+          return (show (x+y))
+
+runDB :: DB a -> Map Key Value -> a
