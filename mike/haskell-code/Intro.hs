@@ -262,3 +262,4 @@ listIndex e (x:xs) =
 --   (==) :: a -> a -> Bool
 
 -- Typklasse: Interface
+-- Instanz: Implementierung
