@@ -40,6 +40,7 @@ zcb1 :: Contract
 zcb1 = ZeroCouponBond xmas 100 EUR
 -}
 
+-- algebraischer Datentyp
 data Contract =
     Zero
   | One Currency
@@ -109,15 +110,27 @@ semantics Zero today = ([], Zero)
 semantics (One currency) today = ([MkPayment today Incoming 1 currency], Zero)
 semantics (Value amount contract) today =
   let (payments, residualContract) = semantics contract today
-   in (map (scalePayment amount) payments, residualContract)
+   in (map (scalePayment amount) payments, Value amount residualContract)
 semantics (Later date contract) today =
   if today >= date
     then semantics contract today
     else ([], Later date contract)
 semantics (Sell contract) today =
   let (payments, residualContract) = semantics contract today
-   in (map invertPayment payments, residualContract)
+   in (map invertPayment payments, Sell residualContract)
 semantics (Combi contract1 contract2) today =
   let (payments1, residualContract1) = semantics contract1 today
       (payments2, residualContract2) = semantics contract2 today
   in (payments1 ++ payments2, Combi residualContract1 residualContract2)
+
+-- >>> semantics c10 "2026-10-28"
+-- ([MkPayment "2026-10-28" Incoming 100.0 EUR],Value 100.0 (Combi Zero (Later "2026-12-24" (One EUR))))
+
+c10 :: Contract
+c10 =
+  Value
+    100
+    ( Combi
+        (One EUR)
+        (Later xmas (One EUR))
+    )
