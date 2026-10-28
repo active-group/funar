@@ -331,7 +331,7 @@ listIndex e (x:xs) =
     if e == x 
     then Result 0
 --    else optionalMap (\ index -> index + 1) (listIndex e xs)
-    else optionalMap (+1) (listIndex e xs)
+    else fmap (+1) (listIndex e xs)
 
         {- case listIndex e xs of
            Null -> Null
