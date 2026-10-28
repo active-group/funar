@@ -45,7 +45,7 @@ mkCar :: String -> Integer -> Validated Car
 -- Valid (MkCar {licensePlate = "D-2412", seatCount = 4})
 -- >>> mkCar "D" 1
 -- Invalid ["wrong length of license plate","not enough seats"]
-mkCar l n = validatedMap2 MkCar (validateLicensePlate l) (validateSeatCount n)
+mkCar l n = MkCar <$> validateLicensePlate l <*> validateSeatCount n
 
 {-
     if n < 2
@@ -58,13 +58,21 @@ mkCar l n = validatedMap2 MkCar (validateLicensePlate l) (validateSeatCount n)
 -}
 
 -- validatedMap2 :: (a -> b -> c) -> Validated a -> Validated b -> Validated c
-validatedMap2 f va vb = pure f <*> va <*>
+validatedMap2 :: Applicative f => (a -> b -> c) -> f a -> f b -> f c
+-- validatedMap2 f va vb = pure f <*> va <*> vb
+
+-- (<$>) = fmap
+validatedMap2 f va vb = f <$> va <*> vb
+
 {-
 validatedMap2 f (Valid a) (Valid b) = Valid (f a b)
 validatedMap2 f (Invalid errors) (Valid b) = Invalid errors
 validatedMap2 f (Invalid errorsa) (Invalid errorsb) = Invalid (errorsa ++ errorsb)
 validatedMap2 f (Valid a) (Invalid errors) = Invalid errors
 -}
+
+fmap3 :: Applicative f => (a -> b -> c -> d) -> f a -> f b -> f c -> f d
+fmap3 f fa fb fc = pure f <*> fa <*> fb <*> fc
 
 data Car1 = MkCar1 { licensePlate1 :: String }
   deriving Show
