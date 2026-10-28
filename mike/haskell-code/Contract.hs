@@ -121,7 +121,7 @@ invertPayment (MkPayment date Outgoing amount currency) =
 -- Datum: "heute", Zahlungen bis heute
 -- zurückgegeben wird der "Residualvertrag"
 semantics :: Contract -> Date -> ([Payment], Contract)
-semantics Zero today = ([], Zero)
+semantics Zero today = ([], Zero) -- ([], Zero)
 semantics (One currency) today = ([MkPayment today Incoming 1 currency], Zero)
 semantics (Value amount contract) today =
   let (payments, residualContract) = semantics contract today
@@ -134,9 +134,16 @@ semantics (Sell contract) today =
   let (payments, residualContract) = semantics contract today
    in (map invertPayment payments, Sell residualContract)
 semantics (Combi contract1 contract2) today =
-  let (payments1, residualContract1) = semantics contract1 today
-      (payments2, residualContract2) = semantics contract2 today
-  in (payments1 ++ payments2, combi residualContract1 residualContract2)
+--  let (payments1, residualContract1) = semantics contract1 today
+--      (payments2, residualContract2) = semantics contract2 today
+--  in -- (payments1 <> payments2, residualContract1 <> residualContract2)
+     -- (payments1, residualContract1) <> (payments2, residualContract2)
+     semantics contract1 today <> semantics contract2 today
+
+-- semantics (Combi contract1 contract2) today =
+---  let (payments1, residualContract1) = semantics contract1 today
+--       (payments2, residualContract2) = semantics contract2 today
+--    in (payments1 ++ payments2, combi residualContract1 residualContract2)
 
 -- >>> semantics c10 "2026-10-28"
 -- ([MkPayment "2026-10-28" Incoming 100.0 EUR],Value 100.0 (Later "2026-12-24" (One EUR)))
