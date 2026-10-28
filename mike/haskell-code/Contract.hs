@@ -1,3 +1,4 @@
+{-# LANGUAGE InstanceSigs #-}
 module Contract where
 
 {-
@@ -55,6 +56,14 @@ combi :: Contract -> Contract -> Contract
 combi Zero c = c
 combi c Zero = c
 combi c1 c2 = Combi c1 c2
+
+instance Semigroup Contract where
+    (<>) :: Contract -> Contract -> Contract
+    (<>) = combi
+
+instance Monoid Contract where
+    mempty :: Contract
+    mempty = Zero
 
 -- "Ich bekomme 1€ jetzt."
 c1 :: Contract
