@@ -250,9 +250,16 @@ data Optional a =
   | Result a
   deriving Show
 
-instance Semigroup (Optional b) where
+instance Semigroup b => Semigroup (Optional b) where
+  op :: Optional b -> Optional b -> Optional b
+  op Null Null = Null
+  op (Result b) Null = Result b
+  op Null (Result b) = Result b
+  op (Result b1) (Result b2) = Result (op b1 b2)
 
-instance Monoid (Optional b) where
+instance Semigroup b => Monoid (Optional b) where
+  neutral :: Optional b
+  neutral = Null
 
 -- Index eines Elements in einer Liste finden
 -- Eq a: Constraint
