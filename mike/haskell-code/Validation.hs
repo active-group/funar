@@ -17,9 +17,25 @@ instance Functor Validated where
     fmap f (Valid a) = Valid (f a)
     fmap f (Invalid errors) = Invalid errors
 
+-- >>> :info Applicative
+-- type Applicative :: (* -> *) -> Constraint
+-- class Functor f => Applicative f where
+--   pure :: a -> f a
+--   (<*>) :: f (a -> b) -> f a -> f b
+
+
 -- data Maybe a = Nothing | Just a
 mkCar :: String -> Integer -> Validated Car
-mkCar l n =
+
+-- >>> mkCar "D" 4
+-- Invalid ["wrong length of license plate"]
+-- >>> mkCar "D-2412" 4
+-- Valid (MkCar {licensePlate = "D-2412", seatCount = 4})
+-- >>> mkCar "D" 1
+-- Invalid ["wrong length of license plate","not enough seats"]
+mkCar l n = validatedMap2 MkCar (validateLicensePlate l) (validateSeatCount n)
+
+{-
     if n < 2
     then if length l <= 2 || length l > 14
          then Invalid ["not enough seats", "wrong length of license plate"]
@@ -27,6 +43,13 @@ mkCar l n =
     else if length l <= 2 || length l > 14
     then Invalid ["wrong length of license plate"]
     else Valid (MkCar l n)
+-}
+
+validatedMap2 :: (a -> b -> c) -> Validated a -> Validated b -> Validated c
+validatedMap2 f (Valid a) (Valid b) = Valid (f a b)
+validatedMap2 f (Invalid errors) (Valid b) = Invalid errors
+validatedMap2 f (Invalid errorsa) (Invalid errorsb) = Invalid (errorsa ++ errorsb)
+validatedMap2 f (Valid a) (Invalid errors) = Invalid errors
 
 data Car1 = MkCar1 { licensePlate1 :: String }
   deriving Show
