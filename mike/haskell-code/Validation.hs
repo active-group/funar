@@ -57,11 +57,14 @@ mkCar l n = validatedMap2 MkCar (validateLicensePlate l) (validateSeatCount n)
     else Valid (MkCar l n)
 -}
 
-validatedMap2 :: (a -> b -> c) -> Validated a -> Validated b -> Validated c
+-- validatedMap2 :: (a -> b -> c) -> Validated a -> Validated b -> Validated c
+validatedMap2 f va vb = pure f <*> va <*>
+{-
 validatedMap2 f (Valid a) (Valid b) = Valid (f a b)
 validatedMap2 f (Invalid errors) (Valid b) = Invalid errors
 validatedMap2 f (Invalid errorsa) (Invalid errorsb) = Invalid (errorsa ++ errorsb)
 validatedMap2 f (Valid a) (Invalid errors) = Invalid errors
+-}
 
 data Car1 = MkCar1 { licensePlate1 :: String }
   deriving Show
@@ -73,7 +76,9 @@ validateLicensePlate l =
     else Valid l
 
 mkCar1 :: String -> Validated Car1
-mkCar1 l = fmap MkCar1 (validateLicensePlate l)
+-- mkCar1 l = fmap MkCar1 (validateLicensePlate l)
+mkCar1 l = pure MkCar1 <*> (validateLicensePlate l)
+
 
 validateSeatCount :: Integer -> Validated Integer
 validateSeatCount n =
