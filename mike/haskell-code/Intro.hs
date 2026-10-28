@@ -190,8 +190,20 @@ tuplify :: (a -> b -> c) -> ((a, b) -> c)
 tuplify f = \ (a, b) -> f a b
 
 -- eingebaut als curry
-untuplify :: ((a, b) -> c) -> (a -> b -> c)
-untuplify f = \ a -> \ b -> f (a, b)
+schönfinkeln :: ((a, b) -> c) -> (a -> b -> c)
+schönfinkeln f = \ a -> \ b -> f (a, b)
+
+-- Funktionskomposition, eingebaut als .
+o :: (b -> c) -> (a -> b) -> (a -> c)
+o f g = \ a -> f (g a)
+
+foo :: Animal -> Animal
+
+-- >>> foo dillo1
+-- MkDillo {dilloLiveness = Dead, dilloWeight = 15}
+foo = runOverAnimal . swap feedAnimal 5
+
+
 
 -- Eine (geometrische) Figur ist eins der folgenden:
 -- - Kreis ODER
