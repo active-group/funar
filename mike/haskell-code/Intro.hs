@@ -250,6 +250,10 @@ data Optional a =
   | Result a
   deriving Show
 
+instance Semigroup (Optional b) where
+
+instance Monoid (Optional b) where
+
 -- Index eines Elements in einer Liste finden
 -- Eq a: Constraint
 listIndex :: Eq a => a -> [a] -> Optional Integer
@@ -360,3 +364,16 @@ instance (Monoid b, Monoid c) => Monoid (b, c) where
 
 -- >>> op ([1,2,3], [4,5,6]) ([7,8,9], [10, 11])
 -- ([1,2,3,7,8,9],[4,5,6,10,11])
+
+data Additive = MkAdditive Integer
+  deriving Show
+
+instance Semigroup Additive where
+    op :: Additive -> Additive -> Additive
+    op (MkAdditive x) (MkAdditive y) = MkAdditive (x + y)
+
+data Multiplicative = MkMultiplicative Integer
+
+instance Semigroup Multiplicative where
+    op :: Multiplicative -> Multiplicative -> Multiplicative
+    op (MkMultiplicative x) (MkMultiplicative y) = MkMultiplicative (x*y)
