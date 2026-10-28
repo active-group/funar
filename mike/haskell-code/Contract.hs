@@ -121,7 +121,7 @@ invertPayment (MkPayment date Outgoing amount currency) =
 -- Datum: "heute", Zahlungen bis heute
 -- zurückgegeben wird der "Residualvertrag"
 semantics :: Contract -> Date -> ([Payment], Contract)
-semantics Zero today = ([], Zero) -- ([], Zero)
+semantics Zero today = mempty -- ([], Zero)
 semantics (One currency) today = ([MkPayment today Incoming 1 currency], Zero)
 semantics (Value amount contract) today =
   let (payments, residualContract) = semantics contract today
