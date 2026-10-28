@@ -20,3 +20,12 @@ mkCar l n =
     else if length l <= 2 || length l > 14
     then Invalid ["wrong length of license plate"]
     else Valid (MkCar l n)
+
+data Car1 = MkCar1 { licensePlate1 :: String }
+  deriving Show
+
+validateLicensePlate :: String -> Validated String
+validateLicensePlate l =
+    if length l <= 2 || length l > 14
+    then Invalid ["wrong length of license plate"]
+    else Valid l
