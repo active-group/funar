@@ -36,3 +36,12 @@ validateLicensePlate l =
     if length l <= 2 || length l > 14
     then Invalid ["wrong length of license plate"]
     else Valid l
+
+mkCar1 :: String -> Validated Car1
+mkCar1 l = fmap MkCar1 (validateLicensePlate l)
+
+validateSeatCount :: Integer -> Validated Integer
+validateSeatCount n =
+    if n < 2
+    then Invalid ["not enough seats"]
+    else Valid n
