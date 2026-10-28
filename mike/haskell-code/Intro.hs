@@ -242,10 +242,11 @@ data Optional a =
   deriving Show
 
 -- Index eines Elements in einer Liste finden
-listIndex :: a -> [a] -> Optional Integer
+-- Eq a: Constraint
+listIndex :: Eq a => a -> [a] -> Optional Integer
 
 -- >>> listIndex 4 [7, 3, 4, 9]
--- 2
+-- Result 2
 
 listIndex e [] = Null
 listIndex e (x:xs) =
@@ -254,3 +255,10 @@ listIndex e (x:xs) =
     else case listIndex e xs of
            Null -> Null
            Result index -> Result (index + 1)
+
+-- >>> :info Eq
+-- type Eq :: * -> Constraint
+-- class Eq a where
+--   (==) :: a -> a -> Bool
+
+-- Typklasse: Interface
