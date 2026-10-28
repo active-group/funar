@@ -144,7 +144,7 @@ runOverAnimal (MkParrot sentence weight) = MkParrot "" weight
 -- >>> feedAnimal parrot1 5
 -- MkParrot "welcome!" 6
 
-feedAnimal :: Animal -> (Weight -> Animal)
+feedAnimal :: Animal -> Weight -> Animal
 feedAnimal dillo@(MkDillo liveness weight) foodAmount = -- Alias-Pattern
     case liveness of
         Alive -> MkDillo Alive (weight + foodAmount)
@@ -152,6 +152,8 @@ feedAnimal dillo@(MkDillo liveness weight) foodAmount = -- Alias-Pattern
 feedAnimal (MkParrot sentence weight) foodAmount = 
     MkParrot sentence (weight + foodAmount)
 
+swap :: (Animal -> Weight -> Animal) -> (Weight -> Animal -> Animal)
+swap f = \ weight -> \ animal -> f animal weight
 
 feedAnimal' :: Weight -> Animal -> Animal
 feedAnimal' foodAmount dillo@(MkDillo liveness weight) =
