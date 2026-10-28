@@ -181,6 +181,7 @@ feedAnimal''(foodAmount, dillo@(MkDillo liveness weight)) =
 feedAnimal''(foodAmount, MkParrot sentence weight) =
   MkParrot sentence (weight + foodAmount)
 
+-- eingebaut als uncurry
 tuplify :: (a -> b -> c) -> ((a, b) -> c)
 
 -- >>> tuplify feedAnimal(dillo1, 5)
@@ -188,6 +189,7 @@ tuplify :: (a -> b -> c) -> ((a, b) -> c)
 
 tuplify f = \ (a, b) -> f a b
 
+-- eingebaut als curry
 untuplify :: ((a, b) -> c) -> (a -> b -> c)
 untuplify f = \ a -> \ b -> f (a, b)
 
