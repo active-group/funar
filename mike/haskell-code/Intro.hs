@@ -273,3 +273,21 @@ listIndex e (x:xs) =
 
 -- Typklasse: Interface
 -- Instanz: Implementierung
+
+-- >>> :info Num
+-- type Num :: * -> Constraint
+-- class Num a where
+--   (+) :: a -> a -> a
+--   (-) :: a -> a -> a
+--   (*) :: a -> a -> a
+--   negate :: a -> a
+--   abs :: a -> a
+--   signum :: a -> a
+--   fromInteger :: Integer -> a
+--   {-# MINIMAL (+), (*), abs, signum, fromInteger, (negate | (-)) #-}
+--   	-- Defined in ‘GHC.Internal.Num’
+-- instance Num Double -- Defined in ‘GHC.Internal.Float’
+-- instance Num Float -- Defined in ‘GHC.Internal.Float’
+-- instance Num Int -- Defined in ‘GHC.Internal.Num’
+-- instance Num Integer -- Defined in ‘GHC.Internal.Num’
+-- instance Num Word -- Defined in ‘GHC.Internal.Num’
