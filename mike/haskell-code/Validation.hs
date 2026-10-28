@@ -26,7 +26,9 @@ instance Functor Validated where
 --   fmap  ::   (a -> b) -> f a -> f b
 
 instance Applicative Validated where
-
+    pure :: a -> Validated a
+    
+    (<*>) :: Validated (a -> b) -> Validated a -> Validated b
 
 -- data Maybe a = Nothing | Just a
 mkCar :: String -> Integer -> Validated Car
