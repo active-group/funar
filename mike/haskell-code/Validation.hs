@@ -1,3 +1,4 @@
+{-# LANGUAGE InstanceSigs #-}
 module Validation where
 
 -- "Make illegal states unrepresentable." -- Yaron Minsky
@@ -9,6 +10,12 @@ data Car = MkCar { licensePlate :: String,
 data Validated a =
     Valid a
   | Invalid [String]
+  deriving Show
+
+instance Functor Validated where
+    fmap :: (a -> b) -> Validated a -> Validated b
+    fmap f (Valid a) = Valid (f a)
+    fmap f (Invalid errors) = Invalid errors
 
 -- data Maybe a = Nothing | Just a
 mkCar :: String -> Integer -> Validated Car
