@@ -1,5 +1,6 @@
 {-# LANGUAGE InstanceSigs #-}
 module Intro where
+import Prelude hiding (Semigroup, Monoid)
 
 x :: Integer
 x = 43
@@ -295,3 +296,17 @@ listIndex e (x:xs) =
 --   abs :: a -> a
 --   signum :: a -> a
 --   fromInteger :: Integer -> a
+
+-- Algebra:
+-- - Menge/Typ
+-- - Operation(en)
+-- - Gesetze / Gleichungen
+
+-- Magma
+-- Typ a
+-- op :: a -> a -> a
+
+-- Magma +
+-- Assoziativität
+-- Halbgruppe
+-- op a (op b c) = op (op a b) c
