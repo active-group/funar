@@ -13,6 +13,7 @@ library
                      , TableIO
                      , Sync
                      , Free
+                     , ChooserPlayer
                      , StatePlayer
                      , StateTtyPlayer
                      , Shuffle
