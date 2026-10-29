@@ -217,3 +217,10 @@ runTable (GameOver cont) (state, revents) = _
 runTable (PlayerAfter player cont) (state, revents) = _
 runTable (Return result) (state, revents) =
   (result, state, reverse revents)
+
+roundOverTrick' :: TableState -> Maybe (Player, Trick)
+roundOverTrick' tableState =
+  fmap exchange (roundOverTrick tableState)
+
+exchange :: (b, a) -> (a, b)
+exchange (a, b) = (b, a)
