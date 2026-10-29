@@ -213,8 +213,11 @@ runTable (RecordEvent event cont) (state, revents) =
 runTable (GetCommand cont) (state, revents) = _
 runTable (RoundOverTrick cont) (state, revents) =
   runTable (cont (roundOverTrick state)) (state, revents)
-runTable (GameOver cont) (state, revents) = _
-runTable (PlayerAfter player cont) (state, revents) = _
+runTable (GameOver cont) (state, revents) =
+  runTable (cont (gameOver state)) (state, revents)
+runTable (PlayerAfter player cont) (state, revents) =
+  let p = currentPlayer state
+  in runTable (cont (playerAfter state player)) (state, revents)
 runTable (Return result) (state, revents) =
   (result, state, reverse revents)
 
