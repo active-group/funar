@@ -61,7 +61,7 @@ isCute Snake = False
 -- - Gewicht
 
 data Liveness = Alive | Dead
-  deriving Show
+  deriving (Eq, Ord, Show)
 
 -- Typalias
 type Weight = Integer
