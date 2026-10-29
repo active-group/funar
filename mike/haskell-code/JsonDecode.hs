@@ -65,14 +65,14 @@ integer = Decoder (\json ->
                 _ -> Left (Failure "number expected" json))
 
 bool :: Decoder Bool
-bool = _
+bool = undefined
 
 list :: Decoder a -> Decoder [a]
 
 -- >>> runDecoder (list string) (Array [String "foo", String "bar", String "baz"])
 -- Right ["foo","bar","baz"]
 -- >>> runDecoder (list string) (Array [String "foo", Number 42, String "baz"])
--- Left (Failure "string expected" (Number 42.0))
+-- Left (InArray 1 (Failure "string expected" (Number 42.0)))
 
 
 list (Decoder decodeElement) = Decoder (\json ->
