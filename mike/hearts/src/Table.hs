@@ -179,3 +179,14 @@ addTrickToPile playerPiles player trick =
 
 dealHand :: Player -> Hand -> PlayerHands -> PlayerHands
 dealHand player hand hands = Map.insert player hand hands
+
+tableProcessEvent :: GameEvent -> TableState -> TableState
+tableProcessEvent (HandDealt player hand) state =
+  state { -- functional update
+    tableStateHands = dealHand player hand (tableStateHands state)
+  }
+tableProcessEvent (PlayerTurnChanged player) state = _
+tableProcessEvent (LegalCardPlayed player card) state = _
+tableProcessEvent (TrickTaken player trick) state = _
+tableProcessEvent (InvalidCardAttempted player card) state = _
+tableProcessEvent (GameEnded player) state = _
