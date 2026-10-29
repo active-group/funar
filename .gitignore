@@ -18,5 +18,6 @@ target/
 
 compiled/
 /hearts-frontend/hearts.js
+node_modules/
 .vscode/
 
