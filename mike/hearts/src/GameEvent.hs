@@ -70,5 +70,6 @@ tableProcessCommandM (DealHands hands) =
     let pairs = Map.toList hands
         events = map (uncurry HandDealt) pairs
         ms = map recordEventM events
-    in _
+    in do sequence_ ms
+          return Nothing -- das Spiel ist noch nicht vorbei
 tableProcessCommandM (PlayCard player card) = _ 
