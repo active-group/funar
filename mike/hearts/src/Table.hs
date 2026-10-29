@@ -201,3 +201,19 @@ tableProcessEvent (TrickTaken player trick) state =
   }
 tableProcessEvent (InvalidCardAttempted player card) state = state
 tableProcessEvent (GameEnded player) state = state
+
+--                                 Akkumulator, umgekehrte Reihenfolge
+runTable :: Game a -> (TableState, [GameEvent]) -> 
+   (a, TableState, [GameEvent])  -- Ergebnis: richtige Reihenfolge
+runTable (IsPlayValid player card cont) (state, revents) =
+  runTable (cont (playValid state player card)) (state, revents)
+runTable (RecordEvent event cont) (state, revents) =
+  let state' = tableProcessEvent event state
+  in runTable (cont ()) (state', event:revents)
+runTable (GetCommand cont) (state, revents) = _
+runTable (RoundOverTrick cont) (state, revents) =
+  runTable (cont (roundOverTrick state)) (state, revents)
+runTable (GameOver cont) (state, revents) = _
+runTable (PlayerAfter player cont) (state, revents) = _
+runTable (Return result) (state, revents) =
+  (result, state, reverse revents)
