@@ -49,10 +49,14 @@ data GameCommand =
 -- Spielablauf
 data Game a =
     RecordEvent GameEvent (() -> Game a)
+  | IsPlayValid Player Card (Bool -> Game a)
   | Return a
 
 recordEventM :: GameEvent -> Game ()
 recordEventM event = RecordEvent event Return
+
+isPlayValidM :: Player -> Card -> Game Bool
+isPlayValidM player card = IsPlayValid player card Return
 
 instance Functor Game where
 
@@ -60,6 +64,11 @@ instance Applicative Game where
 
 instance Monad Game where
     (>>=) :: Game a -> (a -> Game b) -> Game b
+    (>>=) (RecordEvent event cont) next =
+        RecordEvent event (\x -> 
+            cont x >>= next)
+    (>>=) (IsPlayValid player valid cont) next =
+        IsPlayValid player valid (\x -> cont x >>= next)
     (>>=) (Return result) next = next result
     return :: a -> Game a
     return = Return
@@ -72,4 +81,10 @@ tableProcessCommandM (DealHands hands) =
         ms = map recordEventM events
     in do sequence_ ms
           return Nothing -- das Spiel ist noch nicht vorbei
-tableProcessCommandM (PlayCard player card) = _ 
+tableProcessCommandM (PlayCard player card) =
+    do isValid <- isPlayValidM player card
+       if isValid
+       then do recordEventM (LegalCardPlayed player card)
+               _
+       else do recordEventM (InvalidCardAttempted player card)
+               return Nothing
