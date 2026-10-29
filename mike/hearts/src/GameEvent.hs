@@ -67,8 +67,8 @@ instance Monad Game where
     (>>=) (RecordEvent event cont) next =
         RecordEvent event (\x -> 
             cont x >>= next)
-    (>>=) (IsPlayValid player valid cont) next =
-        IsPlayValid player valid (\x -> cont x >>= next)
+    (>>=) (IsPlayValid player card cont) next =
+        IsPlayValid player card (\x -> cont x >>= next)
     (>>=) (Return result) next = next result
     return :: a -> Game a
     return = Return
