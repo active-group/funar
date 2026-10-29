@@ -185,8 +185,19 @@ tableProcessEvent (HandDealt player hand) state =
   state { -- functional update
     tableStateHands = dealHand player hand (tableStateHands state)
   }
-tableProcessEvent (PlayerTurnChanged player) state = _
-tableProcessEvent (LegalCardPlayed player card) state = _
-tableProcessEvent (TrickTaken player trick) state = _
-tableProcessEvent (InvalidCardAttempted player card) state = _
-tableProcessEvent (GameEnded player) state = _
+tableProcessEvent (PlayerTurnChanged player) state =
+  state {
+    tableStateCurrentPlayer = player
+  }
+tableProcessEvent (LegalCardPlayed player card) state =
+  state {
+    tableStateHands = playCard (tableStateHands state) player card,
+    tableStateTrick = addToTrick player card (tableStateTrick state)
+  }
+tableProcessEvent (TrickTaken player trick) state =
+  state {
+    tableStatePiles = addTrickToPile (tableStatePiles state) player trick,
+    tableStateTrick = emptyTrick
+  }
+tableProcessEvent (InvalidCardAttempted player card) state = state
+tableProcessEvent (GameEnded player) state = state
