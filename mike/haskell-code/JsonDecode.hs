@@ -79,6 +79,10 @@ list (Decoder decodeElement) = Decoder (\json ->
     case json of
         Array elements ->
             traverse (\(index, element) ->
-                       decodeElement element)
+                       mapLeft (InArray index) (decodeElement element))
               (zip [0..] elements)
         _ -> Left (Failure "array expected" json))
+
+mapLeft :: (a -> h) -> Either a b -> Either h b
+mapLeft f (Left a) = Left (f a)
+mapLeft f (Right b) = Right b
