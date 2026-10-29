@@ -49,6 +49,8 @@ cartesianProduct list1 list2 =
 -- >>> length deck
 -- 52
 deck :: [Card]
+-- Card :: Suit -> Rank -> Card
+--    ... :: (Suit, Rank) -> Card
 deck = map (uncurry Card) (cartesianProduct allSuits allRanks)
 
 -- | Karten, die jemand auf der Hand hält
